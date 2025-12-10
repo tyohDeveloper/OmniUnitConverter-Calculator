@@ -1,6 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
-export function useFlashFlag(duration: number = 300): [boolean, () => void] {
+export type FlashFlagTuple = [boolean, () => void];
+
+export function useFlashFlag(duration: number = 300): FlashFlagTuple {
   const [isFlashing, setIsFlashing] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -26,21 +28,21 @@ export function useFlashFlag(duration: number = 300): [boolean, () => void] {
 }
 
 export interface FlashFlags {
-  copyResult: [boolean, () => void];
-  copyCalc: [boolean, () => void];
-  calcField1: [boolean, () => void];
-  calcField2: [boolean, () => void];
-  calcField3: [boolean, () => void];
-  fromBaseFactor: [boolean, () => void];
-  fromSIBase: [boolean, () => void];
-  toBaseFactor: [boolean, () => void];
-  toSIBase: [boolean, () => void];
-  conversionRatio: [boolean, () => void];
-  rpnField1: [boolean, () => void];
-  rpnField2: [boolean, () => void];
-  rpnField3: [boolean, () => void];
-  rpnResult: [boolean, () => void];
-  directCopy: [boolean, () => void];
+  copyResult: FlashFlagTuple;
+  copyCalc: FlashFlagTuple;
+  calcField1: FlashFlagTuple;
+  calcField2: FlashFlagTuple;
+  calcField3: FlashFlagTuple;
+  fromBaseFactor: FlashFlagTuple;
+  fromSIBase: FlashFlagTuple;
+  toBaseFactor: FlashFlagTuple;
+  toSIBase: FlashFlagTuple;
+  conversionRatio: FlashFlagTuple;
+  rpnField1: FlashFlagTuple;
+  rpnField2: FlashFlagTuple;
+  rpnField3: FlashFlagTuple;
+  rpnResult: FlashFlagTuple;
+  directCopy: FlashFlagTuple;
 }
 
 export function useAllFlashFlags(duration: number = 300): FlashFlags {
