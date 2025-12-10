@@ -162,10 +162,10 @@ export default function UnitConverter() {
   // NOTE: Symbols (m, ft, kg) and prefixes (k, M, G) are NEVER translated - they always remain in Latin/ISO SI
   const t = (key: string): string => {
     // Check UI_TRANSLATIONS from localization.ts first
-    if (UI_UNIT_TRANSLATIONS[key]) {
-      const result = getTranslationFromRecord(UI_UNIT_TRANSLATIONS[key], language);
+    if (UI_TRANSLATIONS[key]) {
+      const result = getTranslationFromRecord(UI_TRANSLATIONS[key], language);
       if (result) return result;
-      return UI_UNIT_TRANSLATIONS[key].en || key;
+      return UI_TRANSLATIONS[key].en || key;
     }
     // Fall back to component-local TRANSLATIONS
     if (UNIT_TRANSLATIONS[key]) {
@@ -197,8 +197,8 @@ export default function UnitConverter() {
     }
     
     // Then check UNIT_NAME_TRANSLATIONS from localization.ts (for all unit names including math functions)
-    if (UNIT_NAME_UNIT_TRANSLATIONS[unitName]) {
-      const trans = UNIT_NAME_UNIT_TRANSLATIONS[unitName];
+    if (UNIT_NAME_TRANSLATIONS[unitName]) {
+      const trans = UNIT_NAME_TRANSLATIONS[unitName];
       const langKey = language as SupportedLanguage;
       if (langKey === 'en' || langKey === 'en-us') {
         return trans.en || unitName;
