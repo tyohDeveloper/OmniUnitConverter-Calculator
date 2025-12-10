@@ -1,3 +1,5 @@
+import { NON_SI_UNITS_CATALOG } from './units/shared-types';
+
 export interface DimensionalFormula {
   length?: number;
   mass?: number;
@@ -794,4 +796,162 @@ export const normalizeDimensions = (dims: DimensionalFormula): string => {
   }
   
   return parts.join('⋅') || formatDimensions(dims);
+};
+
+// Alternative representation for calculator result display
+export interface AlternativeRepresentation {
+  displaySymbol: string;
+  category: string | null;
+  unitId: string | null;
+  isHybrid: boolean;
+  components: {
+    derivedUnit?: DerivedUnitInfo;
+    remainingDimensions?: DimensionalFormula;
+  };
+}
+
+// Generate alternative representations for complex dimensions
+// Ordering: (1) Normalized SI unit, (2) Bare base units, (3) SI units alphabetically, (4) Non-SI units alphabetically
+// SI and non-SI units are never mixed in the same expression
+export const generateAlternativeRepresentations = (dimensions: DimensionalFormula): AlternativeRepresentation[] => {
+  const alternatives: AlternativeRepresentation[] = [];
+  const seenSymbols = new Set<string>();
+  
+  // 1. First: Normalized SI unit (using greedy decomposition into derived units)
+  const normalizedSymbol = normalizeDimensions(dimensions);
+  if (normalizedSymbol) {
+    alternatives.push({
+      displaySymbol: normalizedSymbol,
+      category: null,
+      unitId: null,
+      isHybrid: false,
+      components: {}
+    });
+    seenSymbols.add(normalizedSymbol);
+  }
+  
+  // 2. Second: Bare base units representation (if different from normalized)
+  const rawSymbol = formatDimensions(dimensions);
+  if (rawSymbol && !seenSymbols.has(rawSymbol)) {
+    alternatives.push({
+      displaySymbol: rawSymbol,
+      category: null,
+      unitId: null,
+      isHybrid: false,
+      components: {}
+    });
+    seenSymbols.add(rawSymbol);
+  }
+  
+  // 3. Third: SI derived units that exactly match, sorted alphabetically
+  const siExactMatches: AlternativeRepresentation[] = [];
+  for (const derivedUnit of SI_DERIVED_UNITS) {
+    if (dimensionsEqual(derivedUnit.dimensions, dimensions) && !seenSymbols.has(derivedUnit.symbol)) {
+      siExactMatches.push({
+        displaySymbol: derivedUnit.symbol,
+        category: derivedUnit.category,
+        unitId: derivedUnit.unitId,
+        isHybrid: false,
+        components: { derivedUnit }
+      });
+      seenSymbols.add(derivedUnit.symbol);
+    }
+  }
+  // Sort SI matches alphabetically
+  siExactMatches.sort((a, b) => a.displaySymbol.localeCompare(b.displaySymbol));
+  alternatives.push(...siExactMatches);
+  
+  // 4. Fourth: SI hybrid representations (derived unit + base units), sorted alphabetically
+  const siHybrids: AlternativeRepresentation[] = [];
+  for (const derivedUnit of SI_DERIVED_UNITS) {
+    if (canFactorOut(dimensions, derivedUnit)) {
+      const remaining = subtractDimensions(dimensions, derivedUnit.dimensions);
+      
+      // Verify remaining dimensions don't introduce new dimensional types
+      if (!hasOnlyOriginalDimensions(dimensions, remaining)) {
+        continue;
+      }
+      
+      // For SINGLE-dimension derived units (rad, sr), skip if remaining has same dimension
+      // This prevents "rad⋅rad⁻²" instead of properly combined "rad⁻¹"
+      // Multi-dimension units (W, J, N) are fine since remaining produces different symbols
+      const derivedDimCount = Object.keys(derivedUnit.dimensions).filter(
+        k => derivedUnit.dimensions[k as keyof DimensionalFormula] !== 0
+      ).length;
+      
+      if (derivedDimCount === 1) {
+        const derivedDimKey = Object.keys(derivedUnit.dimensions).find(
+          k => derivedUnit.dimensions[k as keyof DimensionalFormula] !== 0
+        ) as keyof DimensionalFormula;
+        if (remaining[derivedDimKey] !== undefined && remaining[derivedDimKey] !== 0) {
+          continue; // Skip - would create duplicate like rad⋅rad⁻²
+        }
+      }
+      
+      // Only create hybrid if there's something remaining
+      if (Object.keys(remaining).length > 0) {
+        const positiveRemaining: DimensionalFormula = {};
+        const negativeRemaining: DimensionalFormula = {};
+        
+        for (const [dim, exp] of Object.entries(remaining)) {
+          if (exp > 0) {
+            positiveRemaining[dim as keyof DimensionalFormula] = exp;
+          } else if (exp < 0) {
+            negativeRemaining[dim as keyof DimensionalFormula] = exp;
+          }
+        }
+        
+        // Build hybrid symbol: positive_remaining, derived_unit, negative_remaining
+        const parts: string[] = [];
+        if (Object.keys(positiveRemaining).length > 0) {
+          parts.push(formatDimensions(positiveRemaining));
+        }
+        parts.push(derivedUnit.symbol);
+        if (Object.keys(negativeRemaining).length > 0) {
+          parts.push(formatDimensions(negativeRemaining));
+        }
+        
+        const hybridSymbol = parts.join('⋅');
+        
+        // Validate: reject if duplicate base units detected
+        if (!seenSymbols.has(hybridSymbol) && isValidSymbolRepresentation(hybridSymbol)) {
+          siHybrids.push({
+            displaySymbol: hybridSymbol,
+            category: null,
+            unitId: null,
+            isHybrid: true,
+            components: {
+              derivedUnit,
+              remainingDimensions: remaining
+            }
+          });
+          seenSymbols.add(hybridSymbol);
+        }
+      }
+    }
+  }
+  // Sort SI hybrids alphabetically
+  siHybrids.sort((a, b) => a.displaySymbol.localeCompare(b.displaySymbol));
+  alternatives.push(...siHybrids);
+  
+  // 5. Fifth: Non-SI units that exactly match, sorted alphabetically
+  // Note: Non-SI units are never mixed with SI in hybrid representations
+  const nonSIExactMatches: AlternativeRepresentation[] = [];
+  for (const nonSIUnit of NON_SI_UNITS_CATALOG) {
+    if (dimensionsEqual(nonSIUnit.dimensions, dimensions) && !seenSymbols.has(nonSIUnit.symbol)) {
+      nonSIExactMatches.push({
+        displaySymbol: nonSIUnit.symbol,
+        category: nonSIUnit.category,
+        unitId: nonSIUnit.unitId,
+        isHybrid: false,
+        components: { derivedUnit: nonSIUnit }
+      });
+      seenSymbols.add(nonSIUnit.symbol);
+    }
+  }
+  // Sort non-SI matches alphabetically
+  nonSIExactMatches.sort((a, b) => a.displaySymbol.localeCompare(b.displaySymbol));
+  alternatives.push(...nonSIExactMatches);
+  
+  return alternatives;
 };
