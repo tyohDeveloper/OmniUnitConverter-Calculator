@@ -12,6 +12,9 @@ import {
   EXCLUDED_CROSS_DOMAIN_CATEGORIES, PREFERRED_REPRESENTATIONS, PreferredRepresentation,
   getDimensionSignature
 } from '@/lib/units/shared-types';
+import { 
+  formatDimensions, toSuperscript, multiplyDimensions, divideDimensions 
+} from '@/lib/calculator';
 import { PREFIX_EXPONENTS, GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit as normalizeMassUnitHelper } from '@/lib/units/helpers';
 import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
 import { useAllFlashFlags } from '@/components/unit-converter/hooks/useFlashFlag';
@@ -1939,87 +1942,6 @@ export default function UnitConverter() {
     
     // Convert: value is in category base, divide by SI unit's factor to get SI base
     return value / siBaseUnit.factor;
-  };
-
-  // Helper: Multiply dimensional formulas
-  const multiplyDimensions = (d1: DimensionalFormula, d2: DimensionalFormula): DimensionalFormula => {
-    const result: DimensionalFormula = { ...d1 };
-    for (const [dim, exp] of Object.entries(d2)) {
-      const key = dim as keyof DimensionalFormula;
-      result[key] = (result[key] || 0) + exp;
-      if (result[key] === 0) delete result[key];
-    }
-    return result;
-  };
-
-  // Helper: Divide dimensional formulas
-  const divideDimensions = (d1: DimensionalFormula, d2: DimensionalFormula): DimensionalFormula => {
-    const result: DimensionalFormula = { ...d1 };
-    for (const [dim, exp] of Object.entries(d2)) {
-      const key = dim as keyof DimensionalFormula;
-      result[key] = (result[key] || 0) - exp;
-      if (result[key] === 0) delete result[key];
-    }
-    return result;
-  };
-
-  // Helper: Convert number to superscript
-  const superscripts: Record<string, string> = {
-    '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-    '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-    '-': '⁻'
-  };
-
-  const toSuperscript = (num: number): string => {
-    return num.toString().split('').map(c => superscripts[c] || c).join('');
-  };
-
-  // Helper: Format dimensional formula as unit string
-  // Order: mass, length, luminous intensity, electric current, temperature, amount of substance, time
-  // Positive exponents first, then negative exponents, both in the same order
-  const formatDimensions = (dims: DimensionalFormula): string => {
-    const dimSymbols: Record<keyof DimensionalFormula, string> = {
-      time: 's',
-      length: 'm',
-      mass: 'kg',
-      current: 'A',
-      temperature: 'K',
-      amount: 'mol',
-      intensity: 'cd',
-      angle: 'rad',
-      solid_angle: 'sr'
-    };
-
-    // Define the standard order for base units
-    // Order: kg → m → cd → A → K → mol → s → rad → sr
-    // (mass, length, luminous intensity, electric current, temperature, amount, time, then supplementary)
-    const dimensionOrder: (keyof DimensionalFormula)[] = [
-      'mass', 'length', 'intensity', 'current', 'temperature', 'amount', 'time', 'angle', 'solid_angle'
-    ];
-
-    const positiveParts: string[] = [];
-    const negativeParts: string[] = [];
-
-    // Iterate in the specified order, separating positive and negative exponents
-    for (const dim of dimensionOrder) {
-      const exp = dims[dim];
-      if (exp === undefined || exp === 0) continue;
-      
-      const symbol = dimSymbols[dim];
-
-      if (exp > 0) {
-        if (exp === 1) {
-          positiveParts.push(symbol);
-        } else {
-          positiveParts.push(symbol + toSuperscript(exp));
-        }
-      } else {
-        negativeParts.push(symbol + toSuperscript(exp));
-      }
-    }
-
-    // Combine: positive exponents first, then negative exponents
-    return [...positiveParts, ...negativeParts].join('⋅');
   };
 
   // Alias for backward compatibility with factorization code
