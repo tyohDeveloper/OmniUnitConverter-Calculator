@@ -62,7 +62,7 @@ The codebase is organized for multi-person development collaboration:
 - `index.ts` - Central export aggregator for all unit-related code
 
 **Components (`client/src/components/`)**:
-- `unit-converter.tsx` - Main converter with Converter, Custom, and Calculator tabs (~6299 lines)
+- `unit-converter.tsx` - Main converter with Converter, Custom, and Calculator tabs (~6278 lines)
 - `unit-converter/hooks/` - Custom hooks for state management:
   - `useRpnStack.ts` - RPN calculator stack state with operations (push, drop, swap, undo, lastX) - **INTEGRATED**
   - `useFlashFlag.ts` - Reusable hook for copy feedback flash animations - **INTEGRATED** (useAllFlashFlags)
@@ -70,6 +70,7 @@ The codebase is organized for multi-person development collaboration:
   - `useCalculatorState.ts` - Calculator mode state (available, wraps calc values/operators/result state)
 - `unit-converter/context/` - React context for tab extraction (foundation):
   - `ConverterContext.tsx` - Wraps all state hooks (useConverterState, useCalculatorState, useRpnStack, useAllFlashFlags) for future tab component extraction. Requires memoization and effect orchestration for production use.
+- `unit-converter/constants.ts` - Layout constants (FIELD_HEIGHT, CommonFieldWidth, etc.) and ISO_LANGUAGES array
 - `help-section.tsx` - Help documentation component
 - `ui/` - shadcn/ui component library
 
