@@ -21,7 +21,14 @@ import {
   generateSIRepresentations as generateSIRepresentationsLib,
   isDimensionEmpty, SIRepresentation
 } from '@/lib/calculator';
-import { PREFIX_EXPONENTS, GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit as normalizeMassUnitHelper } from '@/lib/units/helpers';
+import { 
+  PREFIX_EXPONENTS, GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, 
+  normalizeMassUnit as normalizeMassUnitHelper, EXPONENT_TO_PREFIX,
+  normalizeMassValue as normalizeMassValueLib,
+  normalizeMassDisplay as normalizeMassDisplayLib,
+  applyPrefixToKgUnit as applyPrefixToKgUnitLib,
+  applyRegionalSpelling as applyRegionalSpellingLib
+} from '@/lib/units/helpers';
 import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
 import { useAllFlashFlags } from '@/components/unit-converter/hooks/useFlashFlag';
 import { Card } from '@/components/ui/card';
@@ -135,217 +142,20 @@ export default function UnitConverter() {
   // Language state (ISO 639-1 codes)
   const [language, setLanguage] = useState<SupportedLanguage>('en');
   
-  // Helper: Apply regional spelling variations (ONLY for English language)
-  // This function should ONLY be called when the language is English
-  // Handles: meter/metre, liter/litre, gasoline/petrol, kerosene/paraffin
-  const applyRegionalSpelling = (unitName: string): string => {
-    // Only apply regional spelling variations for English variants
-    // For all other languages, use their own translations directly
-    if (language !== 'en' && language !== 'en-us') {
-      return unitName;
-    }
-    
-    // en-us (US English): Use US terms, remove UK alternatives in parentheses
-    if (language === 'en-us') {
-      return unitName
-        // Remove UK alternatives in parentheses for fuel types
-        .replace(/\s*\(Petrol\)/g, '')      // "Gasoline (Petrol)" → "Gasoline"
-        .replace(/\s*\(Paraffin\)/g, '');   // "Kerosene (Paraffin)" → "Kerosene"
-    }
-    
-    // en (British English): Use UK terms, apply UK spelling
-    return unitName
-      // Replace US terms with UK equivalents
-      .replace(/Gasoline\s*\(Petrol\)/g, 'Petrol')      // "Gasoline (Petrol)" → "Petrol"
-      .replace(/Kerosene\s*\(Paraffin\)/g, 'Paraffin')  // "Kerosene (Paraffin)" → "Paraffin"
-      .replace(/Gasoline/g, 'Petrol')                    // Standalone "Gasoline" → "Petrol"
-      .replace(/Kerosene/g, 'Paraffin')                  // Standalone "Kerosene" → "Paraffin"
-      // UK spelling variations
-      .replace(/Meter/g, 'Metre')
-      .replace(/meter/g, 'metre')
-      .replace(/Liter/g, 'Litre')
-      .replace(/liter/g, 'litre');
-  };
-
-  // Reverse map: exponent to prefix id (used locally for mass normalization display)
-  const EXPONENT_TO_PREFIX: { [key: number]: string } = {
-    24: 'yotta', 21: 'zetta', 18: 'exa', 15: 'peta', 12: 'tera',
-    9: 'giga', 6: 'mega', 3: 'kilo', 0: 'none', 
-    [-2]: 'centi', [-3]: 'milli', [-6]: 'micro', [-9]: 'nano', [-12]: 'pico',
-    [-15]: 'femto', [-18]: 'atto', [-21]: 'zepto', [-24]: 'yocto'
-  };
-
-  // Local wrapper for normalizeMassUnit from helpers
+  // Wrappers for extracted helper functions
+  const applyRegionalSpelling = (unitName: string): string => applyRegionalSpellingLib(unitName, language);
   const normalizeMassUnit = normalizeMassUnitHelper;
-
-  // Helper: Automatically normalize mass values to the best gram-based representation
-  // Given a value in kg, finds the best prefix for grams and returns normalized display
-  // E.g., 1000 kg -> 1 Mg, 1 kg -> 1 kg, 0.001 kg -> 1 g
-  // Prefixes don't stack: we convert to grams first, then find best prefix
-  const normalizeMassValue = (valueInKg: number): { 
-    value: number; 
-    unitSymbol: string; 
-    prefixSymbol: string;
-    prefixId: string;
-  } => {
-    // Convert kg to grams
-    const valueInGrams = valueInKg * 1000;
-    const absGrams = Math.abs(valueInGrams);
-    
-    // Find the best prefix for the gram value
-    // We want to find the largest prefix that gives us a value >= 1
-    const prefixOrder = [
-      { id: 'yotta', exp: 24 }, { id: 'zetta', exp: 21 }, { id: 'exa', exp: 18 },
-      { id: 'peta', exp: 15 }, { id: 'tera', exp: 12 }, { id: 'giga', exp: 9 },
-      { id: 'mega', exp: 6 }, { id: 'kilo', exp: 3 }, { id: 'none', exp: 0 },
-      { id: 'milli', exp: -3 }, { id: 'micro', exp: -6 }, { id: 'nano', exp: -9 },
-      { id: 'pico', exp: -12 }, { id: 'femto', exp: -15 }, { id: 'atto', exp: -18 },
-      { id: 'zepto', exp: -21 }, { id: 'yocto', exp: -24 }
-    ];
-    
-    let bestPrefix = { id: 'none', exp: 0 };
-    for (const p of prefixOrder) {
-      const factor = Math.pow(10, p.exp);
-      if (absGrams >= factor) {
-        bestPrefix = p;
-        break;
-      }
-    }
-    
-    // Special case: if the best prefix is 'kilo', show as kg instead of kg
-    if (bestPrefix.id === 'kilo') {
-      return {
-        value: valueInKg,
-        unitSymbol: 'kg',
-        prefixSymbol: '',
-        prefixId: 'none'
-      };
-    }
-    
-    const prefixData = PREFIXES.find(p => p.id === bestPrefix.id) || PREFIXES.find(p => p.id === 'none')!;
-    const displayValue = valueInGrams / prefixData.factor;
-    
-    return {
-      value: displayValue,
-      unitSymbol: 'g',
-      prefixSymbol: prefixData.symbol,
-      prefixId: bestPrefix.id
-    };
+  const normalizeMassValue = normalizeMassValueLib;
+  const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
+  
+  // Helper to get unit info for mass display normalization
+  const getMassUnitInfo = (unitId: string) => {
+    const cat = CONVERSION_DATA.find(c => c.id === 'mass');
+    const unit = cat?.units.find(u => u.id === unitId);
+    return unit ? { factor: unit.factor, symbol: unit.symbol, allowPrefixes: unit.allowPrefixes || false } : undefined;
   };
-
-  // Helper: Normalize mass display for calculator results with user-selected prefix
-  // When user manually selects a prefix for kg, normalize appropriately
-  const normalizeMassDisplay = (valueInKg: number, currentPrefix: string, unitId: string | null): { 
-    value: number; 
-    unitSymbol: string; 
-    prefixSymbol: string;
-    normalizedPrefix: string;
-    normalizedUnit: string;
-    shouldNormalize: boolean;
-  } => {
-    // Only apply to mass category with kg or base SI unit (null means kg)
-    const isKgUnit = unitId === 'kg' || unitId === null;
-    
-    if (!isKgUnit) {
-      // For non-kg units in mass, just return as-is
-      const prefixData = PREFIXES.find(p => p.id === currentPrefix) || PREFIXES.find(p => p.id === 'none')!;
-      const cat = CONVERSION_DATA.find(c => c.id === 'mass');
-      const unit = cat?.units.find(u => u.id === unitId);
-      return {
-        value: unit ? valueInKg / (unit.factor * (unit.allowPrefixes ? prefixData.factor : 1)) : valueInKg,
-        unitSymbol: unit?.symbol || 'kg',
-        prefixSymbol: unit?.allowPrefixes ? prefixData.symbol : '',
-        normalizedPrefix: currentPrefix,
-        normalizedUnit: unitId || 'kg',
-        shouldNormalize: false
-      };
-    }
-    
-    // For kg: only normalize when prefix is NOT 'none' and NOT 'kilo'
-    // 'none' and 'kilo' represent the base kg unit (kilo-gram)
-    if (currentPrefix !== 'none' && currentPrefix !== 'kilo') {
-      const prefixExp = PREFIX_EXPONENTS[currentPrefix] || 0;
-      const combinedExp = prefixExp + 3; // kg = 10^3 g
-      
-      const newPrefix = EXPONENT_TO_PREFIX[combinedExp];
-      if (newPrefix) {
-        const newPrefixData = PREFIXES.find(p => p.id === newPrefix) || PREFIXES.find(p => p.id === 'none')!;
-        // Convert kg to grams, then apply the new prefix
-        const valueInGrams = valueInKg * 1000;
-        const displayValue = valueInGrams / newPrefixData.factor;
-        return {
-          value: displayValue,
-          unitSymbol: 'g',
-          prefixSymbol: newPrefixData.symbol,
-          normalizedPrefix: newPrefix,
-          normalizedUnit: 'g',
-          shouldNormalize: true
-        };
-      }
-    }
-    
-    // No normalization needed - show as kg
-    // For 'kilo' prefix, treat as no prefix since kg = kilo-gram
-    const prefixData = PREFIXES.find(p => p.id === currentPrefix) || PREFIXES.find(p => p.id === 'none')!;
-    return {
-      value: currentPrefix === 'kilo' ? valueInKg : valueInKg / prefixData.factor,
-      unitSymbol: 'kg',
-      prefixSymbol: currentPrefix === 'kilo' ? '' : prefixData.symbol,
-      normalizedPrefix: currentPrefix === 'kilo' ? 'none' : currentPrefix,
-      normalizedUnit: 'kg',
-      shouldNormalize: false
-    };
-  };
-
-  // Helper: Transform unit symbol by applying prefix to kg
-  // The "k" in "kg" is treated as a swappable prefix:
-  // - kg + milli → mg (k replaced by m)
-  // - kg + mega → Mg (k replaced by M)  
-  // - mg + kilo → kg (m replaced by k, displayed as bare kg)
-  // Returns: { displaySymbol, effectiveFactor }
-  const applyPrefixToKgUnit = (
-    unitSymbol: string, 
-    prefixId: string
-  ): { displaySymbol: string; effectivePrefixFactor: number; showPrefix: boolean } => {
-    const containsKg = unitSymbol.includes('kg');
-    
-    if (!containsKg) {
-      // No kg in symbol - apply prefix normally
-      const prefixData = PREFIXES.find(p => p.id === prefixId) || PREFIXES.find(p => p.id === 'none')!;
-      return {
-        displaySymbol: unitSymbol,
-        effectivePrefixFactor: prefixData.factor,
-        showPrefix: prefixId !== 'none'
-      };
-    }
-    
-    // Unit contains kg - handle prefix swapping
-    if (prefixId === 'none' || prefixId === 'kilo') {
-      // No prefix or kilo selected - show as bare kg
-      return {
-        displaySymbol: unitSymbol,
-        effectivePrefixFactor: 1,
-        showPrefix: false
-      };
-    }
-    
-    // Other prefix selected - swap k with new prefix symbol
-    // kg → {prefix}g (e.g., kg → mg, kg → Mg)
-    const prefixData = PREFIXES.find(p => p.id === prefixId) || PREFIXES.find(p => p.id === 'none')!;
-    const transformedSymbol = unitSymbol.replace(/kg/g, prefixData.symbol + 'g');
-    
-    // The effective factor accounts for the prefix swap:
-    // Original kg = 10^3 g, new prefix has factor prefixData.factor
-    // So: value_in_kg * 1000 / prefixData.factor = value_in_new_prefix_grams
-    // effectivePrefixFactor = 1000 / prefixData.factor relative to kg
-    const effectivePrefixFactor = 1000 / prefixData.factor;
-    
-    return {
-      displaySymbol: transformedSymbol,
-      effectivePrefixFactor,
-      showPrefix: false // prefix is already embedded in the symbol
-    };
-  };
+  const normalizeMassDisplay = (valueInKg: number, currentPrefix: string, unitId: string | null) => 
+    normalizeMassDisplayLib(valueInKg, currentPrefix, unitId, getMassUnitInfo);
 
   // Translations for multiple languages
   // Supported languages: en (English), ar (Arabic), de (German), es (Spanish), fr (French), 
