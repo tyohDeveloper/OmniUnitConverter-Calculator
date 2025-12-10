@@ -13,7 +13,9 @@ import {
   getDimensionSignature
 } from '@/lib/units/shared-types';
 import { 
-  formatDimensions, toSuperscript, multiplyDimensions, divideDimensions 
+  formatDimensions, toSuperscript, multiplyDimensions, divideDimensions,
+  dimensionsEqual, isDimensionless, findCrossDomainMatches,
+  isValidSymbolRepresentation, countUnits
 } from '@/lib/calculator';
 import { PREFIX_EXPONENTS, GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit as normalizeMassUnitHelper } from '@/lib/units/helpers';
 import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
@@ -102,33 +104,6 @@ export default function UnitConverter() {
   // Backward compatibility alias - types and catalogs imported from shared-types
   const DERIVED_UNITS_CATALOG = SI_DERIVED_UNITS;
 
-  // Find all categories that have matching dimensions (cross-domain recognition)
-  // Returns array of category names from other domains that share the same dimensions
-  const findCrossDomainMatches = (dimensions: DimensionalFormula, _currentCategory?: string): string[] => {
-    const matches: string[] = [];
-    
-    // Skip if dimensions are empty (dimensionless)
-    if (Object.keys(dimensions).length === 0) return matches;
-    
-    for (const [catId, info] of Object.entries(CATEGORY_DIMENSIONS)) {
-      // Skip base quantities (they ARE the base dimensions, not derived quantities)
-      if (info.isBase) continue;
-      
-      // Skip archaic, specialty, and other excluded categories
-      if (EXCLUDED_CROSS_DOMAIN_CATEGORIES.includes(catId)) continue;
-      
-      // Skip dimensionless categories
-      if (Object.keys(info.dimensions).length === 0) continue;
-      
-      // Check if dimensions match exactly
-      if (dimensionsEqual(dimensions, info.dimensions)) {
-        matches.push(info.name);
-      }
-    }
-    
-    return matches;
-  };
-
   // Alternative unit representation
   interface AlternativeRepresentation {
     displaySymbol: string;         // How to display, e.g., "m⋅J" or "kg⋅m³⋅s⁻²"
@@ -154,7 +129,7 @@ export default function UnitConverter() {
   const [numberFormat, setNumberFormat] = useState<NumberFormat>('uk');
   
   // Language state (ISO 639-1 codes)
-  const [language, setLanguage] = useState<string>('en');
+  const [language, setLanguage] = useState<SupportedLanguage>('en');
   
   // Helper: Apply regional spelling variations (ONLY for English language)
   // This function should ONLY be called when the language is English
@@ -2458,30 +2433,6 @@ export default function UnitConverter() {
     }
   };
 
-  // Helper: Compare two dimensional formulas
-  const dimensionsEqual = (d1: DimensionalFormula, d2: DimensionalFormula): boolean => {
-    const keys1 = Object.keys(d1) as (keyof DimensionalFormula)[];
-    const keys2 = Object.keys(d2) as (keyof DimensionalFormula)[];
-    
-    if (keys1.length !== keys2.length) return false;
-    
-    for (const key of keys1) {
-      if (d1[key] !== d2[key]) return false;
-    }
-    
-    return true;
-  };
-
-  // Helper: Check if dimensions are dimensionless (empty or all zeros)
-  const isDimensionless = (d: DimensionalFormula): boolean => {
-    if (Object.keys(d).length === 0) return true;
-    // Also check if all dimension values are zero
-    for (const exp of Object.values(d)) {
-      if (exp !== 0) return false;
-    }
-    return true;
-  };
-
   // Helper: Check if addition/subtraction is valid between two values
   const canAddSubtract = (v1: CalcValue | null, v2: CalcValue | null): boolean => {
     if (!v1 || !v2) return false;
@@ -2870,38 +2821,6 @@ export default function UnitConverter() {
     'λ',    // photon wavelength
   ]);
 
-  // Validation: Check if a symbol string has duplicate base units (e.g., "rad⋅rad⁻²")
-  // Returns true if valid (no duplicates), false if invalid
-  const isValidSymbolRepresentation = (symbol: string): boolean => {
-    if (!symbol || symbol === '1') return true;
-    
-    // Base unit patterns to detect (without exponents)
-    const baseUnitPatterns = ['kg', 'm', 's', 'A', 'K', 'mol', 'cd', 'rad', 'sr'];
-    
-    // Split by multiplication dot
-    const parts = symbol.split('⋅');
-    
-    // Extract base unit from each part (strip exponents)
-    const extractBaseUnit = (part: string): string => {
-      // Remove superscript characters (exponents)
-      return part.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]/g, '');
-    };
-    
-    const baseUnitsFound: string[] = [];
-    for (const part of parts) {
-      const baseUnit = extractBaseUnit(part);
-      // Only track base units (not derived units like W, J, N)
-      if (baseUnitPatterns.includes(baseUnit)) {
-        if (baseUnitsFound.includes(baseUnit)) {
-          return false; // Duplicate base unit found
-        }
-        baseUnitsFound.push(baseUnit);
-      }
-    }
-    
-    return true;
-  };
-
   // Generate all SI representations for given dimensions
   // Key constraint: Only ONE derived unit per composition (plus base units)
   // This prevents nonsensical combinations like Hz×Hz or kg⋅Gy for energy
@@ -2959,12 +2878,6 @@ export default function UnitConverter() {
         depth: 0
       });
     }
-    
-    // Helper: Count units in expression (parts separated by ⋅)
-    const countUnits = (symbol: string): number => {
-      if (!symbol || symbol === '1') return 0;
-      return symbol.split('⋅').length;
-    };
     
     // Helper: Sum of absolute exponents in expression
     const sumAbsExponents = (symbol: string): number => {
