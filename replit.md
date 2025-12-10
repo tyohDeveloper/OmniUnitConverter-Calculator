@@ -49,7 +49,7 @@ The codebase is organized for multi-person development collaboration:
 
 **Core Libraries (`client/src/lib/`)**:
 - `conversion-data.ts` - Unit definitions, conversion functions, and parsing logic (~2140 lines)
-- `calculator.ts` - Calculator-specific logic (~669 lines): dimensional analysis, formatting (formatDimensions, toSuperscript), operations (multiplyDimensions, divideDimensions), helpers (dimensionsEqual, isDimensionless, findCrossDomainMatches, isValidSymbolRepresentation, countUnits, findDerivedUnitPower, canAddSubtract, canFactorOut, hasOnlyOriginalDimensions), SI representation generation (generateSIRepresentations, formatSIComposition, sumAbsExponents), types (CalcValue, DimensionalFormula)
+- `calculator.ts` - Calculator-specific logic (~957 lines): dimensional analysis, formatting (formatDimensions, toSuperscript), operations (multiplyDimensions, divideDimensions), helpers (dimensionsEqual, isDimensionless, findCrossDomainMatches, isValidSymbolRepresentation, countUnits, findDerivedUnitPower, canAddSubtract, canFactorOut, hasOnlyOriginalDimensions), SI representation generation (generateSIRepresentations, formatSIComposition, sumAbsExponents), normalization (normalizeDimensions, NORMALIZABLE_DERIVED_UNITS, canApplyDerivedUnit, subtractDerivedUnit), alternative representations (generateAlternativeRepresentations, AlternativeRepresentation), types (CalcValue, DimensionalFormula)
 - `formatting.ts` - Number formatting utilities (~232 lines): separators, precision, Arabic numerals, toTitleCase, parseNumberWithFormat, formatNumberWithFormat
 - `localization.ts` - Translation data for 12 languages
 - `test-utils.ts` - Testing helpers
@@ -62,7 +62,7 @@ The codebase is organized for multi-person development collaboration:
 - `index.ts` - Central export aggregator for all unit-related code
 
 **Components (`client/src/components/`)**:
-- `unit-converter.tsx` - Main converter with Converter, Custom, and Calculator tabs (~5296 lines, down from 6278 original - 982 lines saved, 15.6% reduction)
+- `unit-converter.tsx` - Main converter with Converter, Custom, and Calculator tabs (~5005 lines, down from 6278 original - 1273 lines saved, 20.3% reduction)
 - `unit-converter/components/` - Shared UI components:
   - `CalculatorFieldDisplay.tsx` - Reusable calculator field display component with animation support (~78 lines)
 - `unit-converter/hooks/` - Custom hooks for state management:
