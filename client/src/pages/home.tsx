@@ -1,6 +1,6 @@
 import UnitConverter from '@/components/unit-converter';
 
-const APP_VERSION = '3.0.0';
+const APP_VERSION = '3.1.0.0';
 
 export default function Home() {
   return (
