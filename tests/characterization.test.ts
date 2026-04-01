@@ -16,13 +16,13 @@ import {
   formatNumberWithSeparators,
 } from '../client/src/lib/formatting';
 import {
-  dimensionsEqual,
   getDimensionSignature,
   CATEGORY_DIMENSIONS,
   EXCLUDED_CROSS_DOMAIN_CATEGORIES,
   PREFERRED_REPRESENTATIONS,
 } from '../client/src/lib/units/shared-types';
 import {
+  dimensionsEqual,
   multiplyDimensions,
   divideDimensions,
   subtractDimensions,

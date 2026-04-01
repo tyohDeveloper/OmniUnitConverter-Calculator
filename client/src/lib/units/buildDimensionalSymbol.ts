@@ -14,26 +14,21 @@ const SUPERSCRIPTS: Record<string, string> = {
 const toSuperscript = (n: number): string =>
   String(n).split('').map(c => SUPERSCRIPTS[c] || c).join('');
 
+const termSymbol = (dim: string, exp: number): string => {
+  const symbol = SI_SYMBOLS[dim as keyof DimensionalFormula] || dim;
+  return exp === 1 ? symbol : `${symbol}${toSuperscript(exp)}`;
+};
+
 export const buildDimensionalSymbol = (dims: DimensionalFormula): string => {
   const positiveTerms = Object.entries(dims)
     .filter(([_, exp]) => exp !== undefined && exp > 0)
     .sort(([a], [b]) => a.localeCompare(b));
-
   const negativeTerms = Object.entries(dims)
     .filter(([_, exp]) => exp !== undefined && exp < 0)
     .sort(([a], [b]) => a.localeCompare(b));
-
-  const parts: string[] = [];
-
-  for (const [dim, exp] of positiveTerms) {
-    const symbol = SI_SYMBOLS[dim as keyof DimensionalFormula] || dim;
-    parts.push(exp === 1 ? symbol : `${symbol}${toSuperscript(exp!)}`);
-  }
-
-  for (const [dim, exp] of negativeTerms) {
-    const symbol = SI_SYMBOLS[dim as keyof DimensionalFormula] || dim;
-    parts.push(`${symbol}${toSuperscript(exp!)}`);
-  }
-
+  const parts = [
+    ...positiveTerms.map(([dim, exp]) => termSymbol(dim, exp!)),
+    ...negativeTerms.map(([dim, exp]) => termSymbol(dim, exp!)),
+  ];
   return parts.join('⋅');
 };

@@ -1,5 +1,9 @@
 import { PREFIXES } from './prefixes';
 
+function findPrefix(prefixId: string) {
+  return PREFIXES.find(p => p.id === prefixId) || PREFIXES.find(p => p.id === 'none')!;
+}
+
 export const applyPrefixToKgUnit = (
   unitSymbol: string,
   prefixId: string
@@ -7,7 +11,7 @@ export const applyPrefixToKgUnit = (
   const containsKg = unitSymbol.includes('kg');
 
   if (!containsKg) {
-    const prefixData = PREFIXES.find(p => p.id === prefixId) || PREFIXES.find(p => p.id === 'none')!;
+    const prefixData = findPrefix(prefixId);
     return { displaySymbol: unitSymbol, effectivePrefixFactor: prefixData.factor, showPrefix: prefixId !== 'none' };
   }
 
@@ -15,9 +19,7 @@ export const applyPrefixToKgUnit = (
     return { displaySymbol: unitSymbol, effectivePrefixFactor: 1, showPrefix: false };
   }
 
-  const prefixData = PREFIXES.find(p => p.id === prefixId) || PREFIXES.find(p => p.id === 'none')!;
+  const prefixData = findPrefix(prefixId);
   const transformedSymbol = unitSymbol.replace(/kg/g, prefixData.symbol + 'g');
-  const effectivePrefixFactor = 1000 / prefixData.factor;
-
-  return { displaySymbol: transformedSymbol, effectivePrefixFactor, showPrefix: false };
+  return { displaySymbol: transformedSymbol, effectivePrefixFactor: 1000 / prefixData.factor, showPrefix: false };
 };

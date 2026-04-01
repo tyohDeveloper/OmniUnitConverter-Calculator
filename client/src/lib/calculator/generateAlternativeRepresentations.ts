@@ -10,33 +10,24 @@ import { subtractDimensions } from './subtractDimensions';
 import { isValidSymbolRepresentation } from './isValidSymbolRepresentation';
 import { SI_DERIVED_UNITS } from './siDerivedUnits';
 
-export const generateAlternativeRepresentations = (
-  dimensions: DimensionalFormula
-): AlternativeRepresentation[] => {
+function makeEntry(symbol: string): AlternativeRepresentation {
+  return { displaySymbol: symbol, category: null, unitId: null, isHybrid: false, components: {} };
+}
+
+function addBaseSymbols(dimensions: DimensionalFormula, alternatives: AlternativeRepresentation[], seen: Set<string>): void {
+  const normalized = normalizeDimensions(dimensions);
+  if (normalized) { alternatives.push(makeEntry(normalized)); seen.add(normalized); }
+  const raw = formatDimensions(dimensions);
+  if (raw && !seen.has(raw)) { alternatives.push(makeEntry(raw)); seen.add(raw); }
+}
+
+export const generateAlternativeRepresentations = (dimensions: DimensionalFormula): AlternativeRepresentation[] => {
   const alternatives: AlternativeRepresentation[] = [];
   const seenSymbols = new Set<string>();
-
-  const normalizedSymbol = normalizeDimensions(dimensions);
-  if (normalizedSymbol) {
-    alternatives.push({ displaySymbol: normalizedSymbol, category: null, unitId: null, isHybrid: false, components: {} });
-    seenSymbols.add(normalizedSymbol);
-  }
-
-  const rawSymbol = formatDimensions(dimensions);
-  if (rawSymbol && !seenSymbols.has(rawSymbol)) {
-    alternatives.push({ displaySymbol: rawSymbol, category: null, unitId: null, isHybrid: false, components: {} });
-    seenSymbols.add(rawSymbol);
-  }
-
-  const siExact = buildSIExactMatches(dimensions, seenSymbols);
-  alternatives.push(...siExact);
-
-  const siHybrids = buildSIHybrids(dimensions, seenSymbols);
-  alternatives.push(...siHybrids);
-
-  const nonSIExact = buildNonSIExactMatches(dimensions, seenSymbols);
-  alternatives.push(...nonSIExact);
-
+  addBaseSymbols(dimensions, alternatives, seenSymbols);
+  alternatives.push(...buildSIExactMatches(dimensions, seenSymbols));
+  alternatives.push(...buildSIHybrids(dimensions, seenSymbols));
+  alternatives.push(...buildNonSIExactMatches(dimensions, seenSymbols));
   return alternatives;
 };
 
@@ -61,39 +52,35 @@ function buildSIExactMatches(
   return matches;
 }
 
+function isValidHybridCandidate(
+  dimensions: DimensionalFormula,
+  derivedUnit: (typeof SI_DERIVED_UNITS)[number]
+): { valid: boolean; remaining: DimensionalFormula } {
+  if (!canFactorOut(dimensions, derivedUnit)) return { valid: false, remaining: {} };
+  const remaining = subtractDimensions(dimensions, derivedUnit.dimensions);
+  if (!hasOnlyOriginalDimensions(dimensions, remaining)) return { valid: false, remaining };
+  const derivedDimKeys = Object.keys(derivedUnit.dimensions).filter(
+    k => derivedUnit.dimensions[k as keyof DimensionalFormula] !== 0
+  );
+  if (derivedDimKeys.length === 1) {
+    const key = derivedDimKeys[0] as keyof DimensionalFormula;
+    if (remaining[key] !== undefined && remaining[key] !== 0) return { valid: false, remaining };
+  }
+  if (Object.keys(remaining).length === 0) return { valid: false, remaining };
+  return { valid: true, remaining };
+}
+
 function buildSIHybrids(
   dimensions: DimensionalFormula,
   seenSymbols: Set<string>
 ): AlternativeRepresentation[] {
   const hybrids: AlternativeRepresentation[] = [];
   for (const derivedUnit of SI_DERIVED_UNITS) {
-    if (!canFactorOut(dimensions, derivedUnit)) continue;
-
-    const remaining = subtractDimensions(dimensions, derivedUnit.dimensions);
-    if (!hasOnlyOriginalDimensions(dimensions, remaining)) continue;
-
-    const derivedDimCount = Object.keys(derivedUnit.dimensions).filter(
-      k => derivedUnit.dimensions[k as keyof DimensionalFormula] !== 0
-    ).length;
-
-    if (derivedDimCount === 1) {
-      const derivedDimKey = Object.keys(derivedUnit.dimensions).find(
-        k => derivedUnit.dimensions[k as keyof DimensionalFormula] !== 0
-      ) as keyof DimensionalFormula;
-      if (remaining[derivedDimKey] !== undefined && remaining[derivedDimKey] !== 0) continue;
-    }
-
-    if (Object.keys(remaining).length === 0) continue;
-
+    const { valid, remaining } = isValidHybridCandidate(dimensions, derivedUnit);
+    if (!valid) continue;
     const hybridSymbol = buildHybridSymbol(derivedUnit.symbol, remaining);
     if (!seenSymbols.has(hybridSymbol) && isValidSymbolRepresentation(hybridSymbol)) {
-      hybrids.push({
-        displaySymbol: hybridSymbol,
-        category: null,
-        unitId: null,
-        isHybrid: true,
-        components: { derivedUnit, remainingDimensions: remaining }
-      });
+      hybrids.push({ displaySymbol: hybridSymbol, category: null, unitId: null, isHybrid: true, components: { derivedUnit, remainingDimensions: remaining } });
       seenSymbols.add(hybridSymbol);
     }
   }

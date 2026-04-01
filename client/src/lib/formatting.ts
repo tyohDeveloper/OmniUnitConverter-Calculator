@@ -37,32 +37,24 @@ export const toLatinNumerals = (str: string): string => {
   return str.split('').map(c => latinMap[c] || c).join('');
 };
 
-export const roundToNearestEven = (num: number, precision: number): number => {
-  const absNum = Math.abs(num);
-  if (absNum > 1e15 || (absNum < 1e-15 && absNum > 0)) {
-    if (precision === 0) {
-      return Math.round(num);
-    }
-  }
-  
-  const multiplier = Math.pow(10, precision);
-  const scaled = num * multiplier;
-  
+const roundScaled = (scaled: number, multiplier: number): number => {
   const nearestInt = Math.round(scaled);
-  const diff = Math.abs(scaled - nearestInt);
-  
-  if (diff < 1e-10) {
-    return nearestInt / multiplier;
-  }
-  
+  if (Math.abs(scaled - nearestInt) < 1e-10) return nearestInt / multiplier;
   const floor = Math.floor(scaled);
   const fraction = scaled - floor;
-  
   if (Math.abs(fraction - 0.5) < 1e-10) {
     return (floor % 2 === 0 ? floor : floor + 1) / multiplier;
-  } else {
-    return Math.round(scaled) / multiplier;
   }
+  return Math.round(scaled) / multiplier;
+};
+
+export const roundToNearestEven = (num: number, precision: number): number => {
+  const absNum = Math.abs(num);
+  if ((absNum > 1e15 || (absNum < 1e-15 && absNum > 0)) && precision === 0) {
+    return Math.round(num);
+  }
+  const multiplier = Math.pow(10, precision);
+  return roundScaled(num * multiplier, multiplier);
 };
 
 export const toFixedBanker = (num: number, precision: number): string => {
@@ -98,40 +90,32 @@ export const cleanNumber = (num: number, precision: number): string => {
   return cleaned;
 };
 
+const applyThousandsSeparator = (integer: string, formatKey: NumberFormat, format: NumberFormatConfig): string => {
+  if (!format.thousands) return integer;
+  if (formatKey === 'south-asian') {
+    const reversed = integer.split('').reverse().join('');
+    let result = '';
+    for (let i = 0; i < reversed.length; i++) {
+      if (i === 3 || (i > 3 && (i - 3) % 2 === 0)) result += format.thousands;
+      result += reversed[i];
+    }
+    return result.split('').reverse().join('');
+  }
+  if (format.myriad) return integer.replace(/\B(?=(\d{4})+(?!\d))/g, format.thousands);
+  return integer.replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands);
+};
+
 export const formatNumberWithSeparators = (
-  num: number, 
-  precision: number, 
+  num: number,
+  precision: number,
   formatKey: NumberFormat
 ): string => {
   const format = NUMBER_FORMATS[formatKey];
   const cleaned = cleanNumber(num, precision);
   const [integer, decimal] = cleaned.split('.');
-  
-  let formattedInteger = integer;
-  if (format.thousands) {
-    if (formatKey === 'south-asian') {
-      const reversed = integer.split('').reverse().join('');
-      let result = '';
-      for (let i = 0; i < reversed.length; i++) {
-        if (i === 3 || (i > 3 && (i - 3) % 2 === 0)) {
-          result += format.thousands;
-        }
-        result += reversed[i];
-      }
-      formattedInteger = result.split('').reverse().join('');
-    } else if (format.myriad) {
-      formattedInteger = integer.replace(/\B(?=(\d{4})+(?!\d))/g, format.thousands);
-    } else {
-      formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands);
-    }
-  }
-  
+  const formattedInteger = applyThousandsSeparator(integer, formatKey, format);
   let result = decimal ? `${formattedInteger}${format.decimal}${decimal}` : formattedInteger;
-  
-  if (format.useArabicNumerals) {
-    result = toArabicNumerals(result);
-  }
-  
+  if (format.useArabicNumerals) result = toArabicNumerals(result);
   return result;
 };
 
@@ -189,45 +173,11 @@ export const parseNumberWithFormat = (str: string, formatKey: NumberFormat): num
 
 // Format a number with a specific format (adds separators and converts numerals)
 export const formatNumberWithFormat = (num: number, formatKey: NumberFormat): string => {
-  const format = NUMBER_FORMATS[formatKey];
-  
-  // Handle special cases
   if (isNaN(num) || !isFinite(num)) return '';
-  
-  // Get the string representation
-  const numStr = num.toString();
-  const [integer, decimal] = numStr.split('.');
-  
-  // Add thousands separator if format has one
-  let formattedInteger = integer;
-  if (format.thousands) {
-    if (formatKey === 'south-asian') {
-      // Indian numbering system: 3-2-2 grouping (e.g., 12,34,56,789)
-      const reversed = integer.split('').reverse().join('');
-      let result = '';
-      for (let i = 0; i < reversed.length; i++) {
-        if (i === 3 || (i > 3 && (i - 3) % 2 === 0)) {
-          result += format.thousands;
-        }
-        result += reversed[i];
-      }
-      formattedInteger = result.split('').reverse().join('');
-    } else if (format.myriad) {
-      // Myriad grouping: 4-4-4 grouping (e.g., 1,2345,6789)
-      formattedInteger = integer.replace(/\B(?=(\d{4})+(?!\d))/g, format.thousands);
-    } else {
-      // Standard 3-3-3 grouping
-      formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands);
-    }
-  }
-  
-  // Combine with decimal part
+  const format = NUMBER_FORMATS[formatKey];
+  const [integer, decimal] = num.toString().split('.');
+  const formattedInteger = applyThousandsSeparator(integer, formatKey, format);
   let result = decimal ? `${formattedInteger}${format.decimal}${decimal}` : formattedInteger;
-  
-  // Convert to Arabic numerals if needed
-  if (format.useArabicNumerals) {
-    result = toArabicNumerals(result);
-  }
-  
+  if (format.useArabicNumerals) result = toArabicNumerals(result);
   return result;
 };

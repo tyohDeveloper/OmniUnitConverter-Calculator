@@ -9,25 +9,21 @@ const PREFIX_ORDER = [
   { id: 'zepto', exp: -21 }, { id: 'yocto', exp: -24 }
 ];
 
-export const normalizeMassValue = (valueInKg: number): {
-  value: number;
-  unitSymbol: string;
-  prefixSymbol: string;
-  prefixId: string;
-} => {
-  const valueInGrams = valueInKg * 1000;
-  const absGrams = Math.abs(valueInGrams);
+type MassResult = { value: number; unitSymbol: string; prefixSymbol: string; prefixId: string };
 
-  let bestPrefix = { id: 'none', exp: 0 };
+const findMassPrefix = (absGrams: number): { id: string; exp: number } => {
   for (const p of PREFIX_ORDER) {
-    const factor = Math.pow(10, p.exp);
-    if (absGrams >= factor) { bestPrefix = p; break; }
+    if (absGrams >= Math.pow(10, p.exp)) return p;
   }
+  return { id: 'none', exp: 0 };
+};
 
+export const normalizeMassValue = (valueInKg: number): MassResult => {
+  const valueInGrams = valueInKg * 1000;
+  const bestPrefix = findMassPrefix(Math.abs(valueInGrams));
   if (bestPrefix.id === 'kilo') {
     return { value: valueInKg, unitSymbol: 'kg', prefixSymbol: '', prefixId: 'none' };
   }
-
   const prefixData = PREFIXES.find(p => p.id === bestPrefix.id) || PREFIXES.find(p => p.id === 'none')!;
   return {
     value: valueInGrams / prefixData.factor,
