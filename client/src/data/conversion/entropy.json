@@ -1,0 +1,33 @@
+{
+  "id": "entropy",
+  "name": "Entropy",
+  "baseUnit": "joule/kelvin",
+  "baseSISymbol": "J⋅K⁻¹",
+  "units": [
+    {
+      "id": "jk",
+      "name": "Joule/Kelvin",
+      "symbol": "J⋅K⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "calk",
+      "name": "Calorie/Kelvin",
+      "symbol": "cal⋅K⁻¹",
+      "factor": 4.184
+    },
+    {
+      "id": "kjk",
+      "name": "Kilojoule/Kelvin",
+      "symbol": "kJ⋅K⁻¹",
+      "factor": 1000
+    },
+    {
+      "id": "kcalk",
+      "name": "Kilocalorie/Kelvin",
+      "symbol": "kcal⋅K⁻¹",
+      "factor": 4184
+    }
+  ]
+}

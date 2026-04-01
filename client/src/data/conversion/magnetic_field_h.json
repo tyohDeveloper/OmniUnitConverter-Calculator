@@ -1,0 +1,28 @@
+{
+  "id": "magnetic_field_h",
+  "name": "Magnetic Field Strength (H)",
+  "baseUnit": "a_per_m",
+  "baseSISymbol": "A⋅m⁻¹",
+  "units": [
+    {
+      "id": "a_per_m",
+      "name": "Ampere per Meter",
+      "symbol": "A⋅m⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "oersted",
+      "name": "Oersted",
+      "symbol": "Oe",
+      "factor": 79.5774715,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ka_per_m",
+      "name": "Kiloampere per Meter",
+      "symbol": "kA⋅m⁻¹",
+      "factor": 1000
+    }
+  ]
+}

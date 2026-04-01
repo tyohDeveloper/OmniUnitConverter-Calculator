@@ -1,0 +1,21 @@
+{
+  "id": "equivalent_dose",
+  "name": "Equivalent Radiation Dose",
+  "baseUnit": "sievert",
+  "baseSISymbol": "m²⋅s⁻²",
+  "units": [
+    {
+      "id": "sv",
+      "name": "Sievert",
+      "symbol": "Sv",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "rem",
+      "name": "Rem",
+      "symbol": "rem",
+      "factor": 0.01
+    }
+  ]
+}

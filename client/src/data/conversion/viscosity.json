@@ -1,0 +1,28 @@
+{
+  "id": "viscosity",
+  "name": "Viscosity (Dynamic)",
+  "baseUnit": "pascal-second",
+  "baseSISymbol": "kg⋅m⁻¹⋅s⁻¹",
+  "units": [
+    {
+      "id": "pas",
+      "name": "Pascal-second",
+      "symbol": "Pa·s",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "cp",
+      "name": "Centipoise",
+      "symbol": "cP",
+      "factor": 0.001
+    },
+    {
+      "id": "poise",
+      "name": "Poise",
+      "symbol": "Po",
+      "factor": 0.1,
+      "allowPrefixes": true
+    }
+  ]
+}

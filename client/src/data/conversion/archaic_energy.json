@@ -1,0 +1,40 @@
+{
+  "id": "archaic_energy",
+  "name": "Archaic Energy",
+  "baseUnit": "joule",
+  "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "units": [
+    {
+      "id": "j",
+      "name": "Joule",
+      "symbol": "J",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "erg",
+      "name": "Erg (CGS)",
+      "symbol": "erg",
+      "factor": 1e-7,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ft_lbf",
+      "name": "Foot-pound Force",
+      "symbol": "ft⋅lbf",
+      "factor": 1.3558179483
+    },
+    {
+      "id": "thermie",
+      "name": "Thermie",
+      "symbol": "th",
+      "factor": 4186800
+    },
+    {
+      "id": "quad",
+      "name": "Quad",
+      "symbol": "quad",
+      "factor": 1055000000000000000
+    }
+  ]
+}

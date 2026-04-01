@@ -1,0 +1,21 @@
+{
+  "id": "amount",
+  "name": "Amount of Substance",
+  "baseUnit": "mole",
+  "baseSISymbol": "mol",
+  "units": [
+    {
+      "id": "mol",
+      "name": "Mole",
+      "symbol": "mol",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "lbmol",
+      "name": "Pound-mole",
+      "symbol": "lb-mol",
+      "factor": 453.59237
+    }
+  ]
+}

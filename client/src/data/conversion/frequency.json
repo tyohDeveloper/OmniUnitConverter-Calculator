@@ -1,0 +1,45 @@
+{
+  "id": "frequency",
+  "name": "Frequency",
+  "baseUnit": "hertz",
+  "baseSISymbol": "s⁻¹",
+  "units": [
+    {
+      "id": "hz",
+      "name": "Hertz",
+      "symbol": "Hz",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "per_hour",
+      "name": "Per Hour",
+      "symbol": "h⁻¹",
+      "factor": 0.0002777777777777778
+    },
+    {
+      "id": "per_min",
+      "name": "Per Minute",
+      "symbol": "min⁻¹",
+      "factor": 0.016666666666666666
+    },
+    {
+      "id": "rpm",
+      "name": "Revolutions/Minute",
+      "symbol": "rpm",
+      "factor": 0.016666666666666666
+    },
+    {
+      "id": "rad_s",
+      "name": "Radians/Second",
+      "symbol": "rad⋅s⁻¹",
+      "factor": 0.15915494309189535
+    },
+    {
+      "id": "rps",
+      "name": "Revolutions/Second",
+      "symbol": "rps",
+      "factor": 1
+    }
+  ]
+}

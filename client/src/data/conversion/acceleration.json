@@ -1,0 +1,33 @@
+{
+  "id": "acceleration",
+  "name": "Acceleration",
+  "baseUnit": "meter/sq second",
+  "baseSISymbol": "m⋅s⁻²",
+  "units": [
+    {
+      "id": "mps2",
+      "name": "Meter/sq sec",
+      "symbol": "m⋅s⁻²",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "gal",
+      "name": "Gal",
+      "symbol": "Gal",
+      "factor": 0.01
+    },
+    {
+      "id": "ftps2",
+      "name": "Foot/sq sec",
+      "symbol": "ft⋅s⁻²",
+      "factor": 0.3048
+    },
+    {
+      "id": "g",
+      "name": "g-force",
+      "symbol": "g-force",
+      "factor": 9.80665
+    }
+  ]
+}

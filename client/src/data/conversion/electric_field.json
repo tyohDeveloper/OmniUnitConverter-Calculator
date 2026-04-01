@@ -1,0 +1,39 @@
+{
+  "id": "electric_field",
+  "name": "Electric Field Strength",
+  "baseUnit": "v_per_m",
+  "baseSISymbol": "V⋅m⁻¹",
+  "units": [
+    {
+      "id": "v_per_m",
+      "name": "Volt per Meter",
+      "symbol": "V⋅m⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "v_per_cm",
+      "name": "Volt per Centimeter",
+      "symbol": "V⋅cm⁻¹",
+      "factor": 100
+    },
+    {
+      "id": "kv_per_m",
+      "name": "Kilovolt per Meter",
+      "symbol": "kV⋅m⁻¹",
+      "factor": 1000
+    },
+    {
+      "id": "statv_per_cm",
+      "name": "Statvolt per Centimeter",
+      "symbol": "statV⋅cm⁻¹",
+      "factor": 29979.2458
+    },
+    {
+      "id": "kv_per_cm",
+      "name": "Kilovolt per Centimeter",
+      "symbol": "kV⋅cm⁻¹",
+      "factor": 100000
+    }
+  ]
+}

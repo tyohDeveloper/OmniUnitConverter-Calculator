@@ -1,0 +1,46 @@
+{
+  "id": "pressure",
+  "name": "Pressure",
+  "baseUnit": "pascal",
+  "baseSISymbol": "kg⋅m⁻¹⋅s⁻²",
+  "units": [
+    {
+      "id": "pa",
+      "name": "Pascal",
+      "symbol": "Pa",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "torr",
+      "name": "Torr",
+      "symbol": "Torr",
+      "factor": 133.322
+    },
+    {
+      "id": "mmhg",
+      "name": "mmHg (Blood)",
+      "symbol": "mmHg",
+      "factor": 133.322
+    },
+    {
+      "id": "psi",
+      "name": "PSI",
+      "symbol": "psi",
+      "factor": 6894.76
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "symbol": "bar",
+      "factor": 100000,
+      "allowPrefixes": true
+    },
+    {
+      "id": "atm",
+      "name": "Atmosphere",
+      "symbol": "atm",
+      "factor": 101325
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "magnetic_density",
+  "name": "Magnetic Flux Density",
+  "baseUnit": "tesla",
+  "baseSISymbol": "kg⋅s⁻²⋅A⁻¹",
+  "units": [
+    {
+      "id": "t",
+      "name": "Tesla",
+      "symbol": "T",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "g",
+      "name": "Gauss",
+      "symbol": "G",
+      "factor": 0.0001,
+      "allowPrefixes": true
+    }
+  ]
+}

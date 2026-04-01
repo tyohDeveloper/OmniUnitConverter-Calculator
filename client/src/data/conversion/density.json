@@ -1,0 +1,33 @@
+{
+  "id": "density",
+  "name": "Density",
+  "baseUnit": "kg/m³",
+  "baseSISymbol": "kg⋅m⁻³",
+  "units": [
+    {
+      "id": "kgm3",
+      "name": "kg/m³",
+      "symbol": "kg⋅m⁻³",
+      "factor": 1
+    },
+    {
+      "id": "gm3",
+      "name": "g/m³",
+      "symbol": "g⋅m⁻³",
+      "factor": 0.001,
+      "allowPrefixes": true
+    },
+    {
+      "id": "lbft3",
+      "name": "lb/ft³",
+      "symbol": "lb⋅ft⁻³",
+      "factor": 16.0185
+    },
+    {
+      "id": "gcm3",
+      "name": "g/cm³",
+      "symbol": "g⋅cm⁻³",
+      "factor": 1000
+    }
+  ]
+}

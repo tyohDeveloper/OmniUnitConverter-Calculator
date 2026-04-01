@@ -1,0 +1,28 @@
+{
+  "id": "inductance",
+  "name": "Inductance",
+  "baseUnit": "henry",
+  "baseSISymbol": "kg⋅m²⋅s⁻²⋅A⁻²",
+  "units": [
+    {
+      "id": "h",
+      "name": "Henry",
+      "symbol": "H",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "abh",
+      "name": "Abhenry",
+      "symbol": "abH",
+      "factor": 1e-9,
+      "allowPrefixes": true
+    },
+    {
+      "id": "stath",
+      "name": "Stathenry",
+      "symbol": "statH",
+      "factor": 898755178736.8176
+    }
+  ]
+}

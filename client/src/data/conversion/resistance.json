@@ -1,0 +1,15 @@
+{
+  "id": "resistance",
+  "name": "Resistance",
+  "baseUnit": "ohm",
+  "baseSISymbol": "kg⋅m²⋅s⁻³⋅A⁻²",
+  "units": [
+    {
+      "id": "ohm",
+      "name": "Ohm",
+      "symbol": "Ω",
+      "factor": 1,
+      "allowPrefixes": true
+    }
+  ]
+}

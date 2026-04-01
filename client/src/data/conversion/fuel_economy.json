@@ -1,0 +1,50 @@
+{
+  "id": "fuel_economy",
+  "name": "Fuel Economy",
+  "baseUnit": "kilometer/liter",
+  "baseSISymbol": "km⋅L⁻¹",
+  "units": [
+    {
+      "id": "km_l",
+      "name": "Kilometers/Liter",
+      "symbol": "km⋅L⁻¹",
+      "factor": 1
+    },
+    {
+      "id": "km_gal_us",
+      "name": "Kilometers/Gallon (US)",
+      "symbol": "km⋅gal⁻¹",
+      "factor": 0.264172
+    },
+    {
+      "id": "mpg_imp",
+      "name": "Miles/Gallon (Imp)",
+      "symbol": "mpg (Imp)",
+      "factor": 0.354006
+    },
+    {
+      "id": "mpg_us",
+      "name": "Miles/Gallon (US)",
+      "symbol": "mpg (US)",
+      "factor": 0.425144
+    },
+    {
+      "id": "mi_l",
+      "name": "Miles/Liter",
+      "symbol": "mi⋅L⁻¹",
+      "factor": 1.60934
+    },
+    {
+      "id": "km_kwh",
+      "name": "Kilometers/kWh (EV)",
+      "symbol": "km⋅kWh⁻¹",
+      "factor": 9.5
+    },
+    {
+      "id": "mi_kwh",
+      "name": "Miles/kWh (EV)",
+      "symbol": "mi⋅kWh⁻¹",
+      "factor": 15.29
+    }
+  ]
+}

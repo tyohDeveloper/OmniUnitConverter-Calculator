@@ -1,0 +1,33 @@
+{
+  "id": "angular_velocity",
+  "name": "Angular Velocity",
+  "baseUnit": "radian/second",
+  "baseSISymbol": "rad⋅s⁻¹",
+  "units": [
+    {
+      "id": "rad_s",
+      "name": "Radian/Second",
+      "symbol": "rad⋅s⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "deg_s",
+      "name": "Degree/Second",
+      "symbol": "°⋅s⁻¹",
+      "factor": 0.017453292519943295
+    },
+    {
+      "id": "rpm",
+      "name": "Revolutions/Minute",
+      "symbol": "rpm",
+      "factor": 0.10471975511965977
+    },
+    {
+      "id": "rps",
+      "name": "Revolutions/Second",
+      "symbol": "rps",
+      "factor": 6.283185307179586
+    }
+  ]
+}

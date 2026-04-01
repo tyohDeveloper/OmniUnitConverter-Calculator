@@ -1,0 +1,142 @@
+{
+  "id": "shipping",
+  "name": "Shipping Containers",
+  "baseUnit": "metre",
+  "baseSISymbol": "m",
+  "units": [
+    {
+      "id": "m",
+      "name": "Meter",
+      "symbol": "m",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "angstrom",
+      "name": "Angstrom",
+      "symbol": "Å",
+      "factor": 1e-10
+    },
+    {
+      "id": "in",
+      "name": "Inch",
+      "symbol": "in",
+      "factor": 0.0254
+    },
+    {
+      "id": "link",
+      "name": "Link (Gunter)",
+      "symbol": "li",
+      "factor": 0.201168
+    },
+    {
+      "id": "ft",
+      "name": "Foot",
+      "symbol": "ft",
+      "factor": 0.3048,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ft_in",
+      "name": "Foot:Inch",
+      "symbol": "ft:in",
+      "factor": 0.3048
+    },
+    {
+      "id": "yd",
+      "name": "Yard",
+      "symbol": "yd",
+      "factor": 0.9144
+    },
+    {
+      "id": "fathom",
+      "name": "Fathom",
+      "symbol": "ftm",
+      "factor": 1.8288
+    },
+    {
+      "id": "teu_w",
+      "name": "TEU Width",
+      "symbol": "TEU-W",
+      "factor": 2.4384
+    },
+    {
+      "id": "deu_w",
+      "name": "DEU Width",
+      "symbol": "DEU-W",
+      "factor": 2.4384
+    },
+    {
+      "id": "teu_h",
+      "name": "TEU Height",
+      "symbol": "TEU-H",
+      "factor": 2.5908
+    },
+    {
+      "id": "deu_h",
+      "name": "DEU Height",
+      "symbol": "DEU-H",
+      "factor": 2.5908
+    },
+    {
+      "id": "rod",
+      "name": "Rod",
+      "symbol": "rd",
+      "factor": 5.0292
+    },
+    {
+      "id": "teu",
+      "name": "TEU (20ft Container)",
+      "symbol": "TEU",
+      "factor": 6.096
+    },
+    {
+      "id": "deu",
+      "name": "DEU (40ft Container)",
+      "symbol": "DEU",
+      "factor": 12.192
+    },
+    {
+      "id": "chain",
+      "name": "Chain",
+      "symbol": "ch",
+      "factor": 20.1168
+    },
+    {
+      "id": "furlong",
+      "name": "Furlong",
+      "symbol": "fur",
+      "factor": 201.168
+    },
+    {
+      "id": "mi",
+      "name": "Mile",
+      "symbol": "mi",
+      "factor": 1609.344
+    },
+    {
+      "id": "nmi",
+      "name": "Nautical Mile",
+      "symbol": "nmi",
+      "factor": 1852
+    },
+    {
+      "id": "au",
+      "name": "Astronomical Unit",
+      "symbol": "AU",
+      "factor": 149600000000
+    },
+    {
+      "id": "ly",
+      "name": "Light Year",
+      "symbol": "ly",
+      "factor": 9461000000000000
+    },
+    {
+      "id": "parsec",
+      "name": "Parsec",
+      "symbol": "parsec",
+      "factor": 30857000000000000
+    }
+  ]
+}

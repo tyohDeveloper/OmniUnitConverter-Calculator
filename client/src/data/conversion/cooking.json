@@ -1,0 +1,154 @@
+{
+  "id": "cooking",
+  "name": "Cooking Measures",
+  "baseUnit": "milliliter",
+  "baseSISymbol": "mL",
+  "units": [
+    {
+      "id": "ml",
+      "name": "Milliliter",
+      "symbol": "mL",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "drop",
+      "name": "Drop",
+      "symbol": "drop",
+      "factor": 0.05
+    },
+    {
+      "id": "pinch",
+      "name": "Pinch",
+      "symbol": "pinch",
+      "factor": 0.3
+    },
+    {
+      "id": "dash",
+      "name": "Dash",
+      "symbol": "dash",
+      "factor": 0.6
+    },
+    {
+      "id": "tsp_us",
+      "name": "Teaspoon (US)",
+      "symbol": "tsp (US)",
+      "factor": 4.92892
+    },
+    {
+      "id": "tsp_metric",
+      "name": "Teaspoon (Metric)",
+      "symbol": "tsp (M)",
+      "factor": 5
+    },
+    {
+      "id": "tsp_uk",
+      "name": "Teaspoon (UK)",
+      "symbol": "tsp (imp)",
+      "factor": 5.91939
+    },
+    {
+      "id": "dsp",
+      "name": "Dessertspoon",
+      "symbol": "dsp",
+      "factor": 10
+    },
+    {
+      "id": "tbsp_us",
+      "name": "Tablespoon (US)",
+      "symbol": "tbsp (US)",
+      "factor": 14.7868
+    },
+    {
+      "id": "tbsp_metric",
+      "name": "Tablespoon (Metric)",
+      "symbol": "tbsp (M)",
+      "factor": 15
+    },
+    {
+      "id": "tbsp_uk",
+      "name": "Tablespoon (UK)",
+      "symbol": "tbsp (imp)",
+      "factor": 17.7582
+    },
+    {
+      "id": "fl_oz_uk",
+      "name": "Fluid Ounce (UK)",
+      "symbol": "fl oz (imp)",
+      "factor": 28.4131
+    },
+    {
+      "id": "fl_oz_us",
+      "name": "Fluid Ounce (US)",
+      "symbol": "fl oz (US)",
+      "factor": 29.5735
+    },
+    {
+      "id": "shot",
+      "name": "Shot (US)",
+      "symbol": "shot",
+      "factor": 44.3603
+    },
+    {
+      "id": "jigger",
+      "name": "Jigger",
+      "symbol": "jigger",
+      "factor": 44.3603
+    },
+    {
+      "id": "cup_jp",
+      "name": "Cup (Japan)",
+      "symbol": "cp (JP)",
+      "factor": 200
+    },
+    {
+      "id": "cup_us",
+      "name": "Cup (US)",
+      "symbol": "cp (US)",
+      "factor": 236.588
+    },
+    {
+      "id": "cup_metric",
+      "name": "Cup (Metric)",
+      "symbol": "cp (M)",
+      "factor": 250
+    },
+    {
+      "id": "cup_uk",
+      "name": "Cup (UK)",
+      "symbol": "cp (imp)",
+      "factor": 284.131
+    },
+    {
+      "id": "pt_us",
+      "name": "Pint (US)",
+      "symbol": "pt (US)",
+      "factor": 473.176
+    },
+    {
+      "id": "pt_uk",
+      "name": "Pint (UK)",
+      "symbol": "pt (imp)",
+      "factor": 568.261
+    },
+    {
+      "id": "qt_us",
+      "name": "Quart (US)",
+      "symbol": "qt (US)",
+      "factor": 946.353
+    },
+    {
+      "id": "l",
+      "name": "Liter",
+      "symbol": "L",
+      "factor": 1000,
+      "allowPrefixes": true
+    },
+    {
+      "id": "gal_us",
+      "name": "Gallon (US)",
+      "symbol": "gal (US)",
+      "factor": 3785.411784
+    }
+  ]
+}

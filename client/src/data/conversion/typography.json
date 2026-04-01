@@ -1,0 +1,81 @@
+{
+  "id": "typography",
+  "name": "Typography",
+  "baseUnit": "meter",
+  "baseSISymbol": "m",
+  "units": [
+    {
+      "id": "m",
+      "name": "Meter",
+      "symbol": "m",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "twip",
+      "name": "Twip",
+      "symbol": "twip",
+      "factor": 0.000017639
+    },
+    {
+      "id": "px",
+      "name": "Pixel (96 PPI)",
+      "symbol": "px",
+      "factor": 0.000264583
+    },
+    {
+      "id": "pt_trad",
+      "name": "Point (Traditional)",
+      "symbol": "pt (trad)",
+      "factor": 0.000351459
+    },
+    {
+      "id": "pt",
+      "name": "Point (Desktop)",
+      "symbol": "pt (CSS)",
+      "factor": 0.0003527778
+    },
+    {
+      "id": "mm",
+      "name": "Millimeter",
+      "symbol": "mm",
+      "factor": 0.001
+    },
+    {
+      "id": "pc_trad",
+      "name": "Pica (Traditional)",
+      "symbol": "pc (trad)",
+      "factor": 0.0042175
+    },
+    {
+      "id": "pc",
+      "name": "Pica",
+      "symbol": "pc (CSS)",
+      "factor": 0.0042333
+    },
+    {
+      "id": "em",
+      "name": "Em (16px ref)",
+      "symbol": "em",
+      "factor": 0.0042333
+    },
+    {
+      "id": "cicero",
+      "name": "Cicero",
+      "symbol": "cicero",
+      "factor": 0.004512
+    },
+    {
+      "id": "in",
+      "name": "Inch",
+      "symbol": "in",
+      "factor": 0.0254
+    },
+    {
+      "id": "ft",
+      "name": "Foot",
+      "symbol": "ft",
+      "factor": 0.3048
+    }
+  ]
+}

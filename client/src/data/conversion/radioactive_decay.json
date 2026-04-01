@@ -1,0 +1,109 @@
+{
+  "id": "radioactive_decay",
+  "name": "Radioactive Decay",
+  "baseUnit": "per_second",
+  "baseSISymbol": "s⁻¹",
+  "units": [
+    {
+      "id": "per_s",
+      "name": "Per Second (λ)",
+      "symbol": "s⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "per_min",
+      "name": "Per Minute (λ)",
+      "symbol": "min⁻¹",
+      "factor": 0.016666666666666666
+    },
+    {
+      "id": "per_hr",
+      "name": "Per Hour (λ)",
+      "symbol": "h⁻¹",
+      "factor": 0.0002777777777777778
+    },
+    {
+      "id": "per_day",
+      "name": "Per Day (λ)",
+      "symbol": "d⁻¹",
+      "factor": 0.000011574074074074073
+    },
+    {
+      "id": "per_year",
+      "name": "Per Year (λ)",
+      "symbol": "y⁻¹",
+      "factor": 3.168808781402895e-8
+    },
+    {
+      "id": "half_s",
+      "name": "Half-life (seconds)",
+      "symbol": "t½(s)",
+      "factor": 0.693147180559945,
+      "isInverse": true
+    },
+    {
+      "id": "half_min",
+      "name": "Half-life (minutes)",
+      "symbol": "t½(min)",
+      "factor": 41.588830833596695,
+      "isInverse": true
+    },
+    {
+      "id": "half_hr",
+      "name": "Half-life (hours)",
+      "symbol": "t½(h)",
+      "factor": 2495.3298500158016,
+      "isInverse": true
+    },
+    {
+      "id": "half_day",
+      "name": "Half-life (days)",
+      "symbol": "t½(d)",
+      "factor": 59887.91640037925,
+      "isInverse": true
+    },
+    {
+      "id": "half_year",
+      "name": "Half-life (years)",
+      "symbol": "t½(y)",
+      "factor": 21874061.46523852,
+      "isInverse": true
+    },
+    {
+      "id": "tau_s",
+      "name": "Mean Lifetime (seconds)",
+      "symbol": "τ (s)",
+      "factor": 1,
+      "isInverse": true
+    },
+    {
+      "id": "tau_min",
+      "name": "Mean Lifetime (minutes)",
+      "symbol": "τ (min)",
+      "factor": 60,
+      "isInverse": true
+    },
+    {
+      "id": "tau_hr",
+      "name": "Mean Lifetime (hours)",
+      "symbol": "τ (h)",
+      "factor": 3600,
+      "isInverse": true
+    },
+    {
+      "id": "tau_day",
+      "name": "Mean Lifetime (days)",
+      "symbol": "τ (d)",
+      "factor": 86400,
+      "isInverse": true
+    },
+    {
+      "id": "tau_year",
+      "name": "Mean Lifetime (years)",
+      "symbol": "τ (y)",
+      "factor": 31557600,
+      "isInverse": true
+    }
+  ]
+}

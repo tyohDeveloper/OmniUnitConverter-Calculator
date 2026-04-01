@@ -1,0 +1,76 @@
+{
+  "id": "length",
+  "name": "Length",
+  "baseUnit": "meter",
+  "baseSISymbol": "m",
+  "units": [
+    {
+      "id": "m",
+      "name": "Meter",
+      "symbol": "m",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "angstrom",
+      "name": "Angstrom",
+      "symbol": "Å",
+      "factor": 1e-10
+    },
+    {
+      "id": "in",
+      "name": "Inch",
+      "symbol": "in",
+      "factor": 0.0254
+    },
+    {
+      "id": "ft",
+      "name": "Foot",
+      "symbol": "ft",
+      "factor": 0.3048,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ft_in",
+      "name": "Foot:Inch",
+      "symbol": "ft:in",
+      "factor": 0.3048
+    },
+    {
+      "id": "yd",
+      "name": "Yard",
+      "symbol": "yd",
+      "factor": 0.9144
+    },
+    {
+      "id": "mi",
+      "name": "Mile",
+      "symbol": "mi",
+      "factor": 1609.344
+    },
+    {
+      "id": "nmi",
+      "name": "Nautical Mile",
+      "symbol": "nmi",
+      "factor": 1852
+    },
+    {
+      "id": "au",
+      "name": "Astronomical Unit",
+      "symbol": "AU",
+      "factor": 149600000000
+    },
+    {
+      "id": "ly",
+      "name": "Light Year",
+      "symbol": "ly",
+      "factor": 9461000000000000
+    },
+    {
+      "id": "parsec",
+      "name": "Parsec",
+      "symbol": "parsec",
+      "factor": 30857000000000000
+    }
+  ]
+}

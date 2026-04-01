@@ -1,0 +1,76 @@
+{
+  "id": "energy",
+  "name": "Energy",
+  "baseUnit": "joule",
+  "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "units": [
+    {
+      "id": "j",
+      "name": "Joule",
+      "symbol": "J",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ev",
+      "name": "Electronvolt",
+      "symbol": "eV",
+      "factor": 1.602176634e-19,
+      "allowPrefixes": true
+    },
+    {
+      "id": "cal",
+      "name": "Calorie",
+      "symbol": "cal",
+      "factor": 4.184
+    },
+    {
+      "id": "btu",
+      "name": "BTU",
+      "symbol": "BTU",
+      "factor": 1055.06
+    },
+    {
+      "id": "wh",
+      "name": "Watt-hour",
+      "symbol": "Wh",
+      "factor": 3600
+    },
+    {
+      "id": "kcal",
+      "name": "Kilocalorie",
+      "symbol": "kcal",
+      "factor": 4184
+    },
+    {
+      "id": "kwh",
+      "name": "Kilowatt-hour",
+      "symbol": "kWh",
+      "factor": 3600000
+    },
+    {
+      "id": "therm",
+      "name": "Therm",
+      "symbol": "therm",
+      "factor": 105506000
+    },
+    {
+      "id": "tnt",
+      "name": "Ton of TNT",
+      "symbol": "tTNT",
+      "factor": 4184000000
+    },
+    {
+      "id": "boe",
+      "name": "Barrel of Oil Equivalent",
+      "symbol": "BOE",
+      "factor": 6100000000
+    },
+    {
+      "id": "tce",
+      "name": "Ton of Coal Equivalent",
+      "symbol": "TCE",
+      "factor": 29300000000
+    }
+  ]
+}

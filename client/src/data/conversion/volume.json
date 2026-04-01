@@ -1,0 +1,154 @@
+{
+  "id": "volume",
+  "name": "Volume",
+  "baseUnit": "cubic meter",
+  "baseSISymbol": "m³",
+  "units": [
+    {
+      "id": "m3",
+      "name": "Cubic Meter",
+      "symbol": "m³",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "tsp",
+      "name": "Teaspoon (US)",
+      "symbol": "tsp (US)",
+      "factor": 0.00000492892
+    },
+    {
+      "id": "tsp_imp",
+      "name": "Teaspoon (Imp)",
+      "symbol": "tsp (imp)",
+      "factor": 0.00000591939
+    },
+    {
+      "id": "tbsp",
+      "name": "Tablespoon (US)",
+      "symbol": "tbsp (US)",
+      "factor": 0.0000147868
+    },
+    {
+      "id": "tbsp_imp",
+      "name": "Tablespoon (Imp)",
+      "symbol": "tbsp (imp)",
+      "factor": 0.0000177582
+    },
+    {
+      "id": "floz_imp",
+      "name": "Fluid Ounce (Imp)",
+      "symbol": "fl oz (imp)",
+      "factor": 0.0000284130625
+    },
+    {
+      "id": "floz",
+      "name": "Fluid Ounce (US)",
+      "symbol": "fl oz (US)",
+      "factor": 0.0000295735
+    },
+    {
+      "id": "cup",
+      "name": "Cup (US)",
+      "symbol": "cp (US)",
+      "factor": 0.000236588
+    },
+    {
+      "id": "pt",
+      "name": "Pint (US Fluid)",
+      "symbol": "pt (US)",
+      "factor": 0.000473176
+    },
+    {
+      "id": "pt_dry",
+      "name": "Pint (US Dry)",
+      "symbol": "dry pt",
+      "factor": 0.00055061
+    },
+    {
+      "id": "pt_imp",
+      "name": "Pint (Imp)",
+      "symbol": "pt (imp)",
+      "factor": 0.00056826125
+    },
+    {
+      "id": "qt",
+      "name": "Quart (US Fluid)",
+      "symbol": "qt (US)",
+      "factor": 0.000946353
+    },
+    {
+      "id": "l",
+      "name": "Liter",
+      "symbol": "L",
+      "factor": 0.001,
+      "allowPrefixes": true
+    },
+    {
+      "id": "qt_dry",
+      "name": "Quart (US Dry)",
+      "symbol": "dry qt",
+      "factor": 0.00110122
+    },
+    {
+      "id": "qt_imp",
+      "name": "Quart (Imp)",
+      "symbol": "qt (imp)",
+      "factor": 0.0011365225
+    },
+    {
+      "id": "gal",
+      "name": "Gallon (US)",
+      "symbol": "gal (US)",
+      "factor": 0.003785411784
+    },
+    {
+      "id": "gal_imp",
+      "name": "Gallon (Imp)",
+      "symbol": "gal (imp)",
+      "factor": 0.00454609
+    },
+    {
+      "id": "pk",
+      "name": "Peck (US)",
+      "symbol": "pk",
+      "factor": 0.00880977
+    },
+    {
+      "id": "ft3",
+      "name": "Cubic Foot",
+      "symbol": "ft³",
+      "factor": 0.0283168
+    },
+    {
+      "id": "bu",
+      "name": "Bushel (US)",
+      "symbol": "bu",
+      "factor": 0.0352391
+    },
+    {
+      "id": "bbl",
+      "name": "Barrel (Oil)",
+      "symbol": "bbl",
+      "factor": 0.158987
+    },
+    {
+      "id": "yd3",
+      "name": "Cubic Yard",
+      "symbol": "yd³",
+      "factor": 0.764555
+    },
+    {
+      "id": "ac_ft",
+      "name": "Acre-foot",
+      "symbol": "ac⋅ft",
+      "factor": 1233.48184
+    },
+    {
+      "id": "mi3",
+      "name": "Cubic Mile",
+      "symbol": "mi³",
+      "factor": 4168180000
+    }
+  ]
+}

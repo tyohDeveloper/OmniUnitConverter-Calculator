@@ -1,0 +1,27 @@
+{
+  "id": "acoustic_impedance",
+  "name": "Acoustic Impedance",
+  "baseUnit": "rayl",
+  "baseSISymbol": "Pa⋅s⋅m⁻¹",
+  "units": [
+    {
+      "id": "rayl",
+      "name": "Rayl",
+      "symbol": "rayl",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "pa_s_per_m",
+      "name": "Pascal-second per Meter",
+      "symbol": "Pa⋅s⋅m⁻¹",
+      "factor": 1
+    },
+    {
+      "id": "mrayl",
+      "name": "Megarayl",
+      "symbol": "MRayl",
+      "factor": 1000000
+    }
+  ]
+}

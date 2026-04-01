@@ -1,0 +1,52 @@
+{
+  "id": "torque",
+  "name": "Torque",
+  "baseUnit": "newton meter",
+  "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "units": [
+    {
+      "id": "nm",
+      "name": "Newton-meter",
+      "symbol": "N⋅m",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "dyncm",
+      "name": "Dyne-centimeter",
+      "symbol": "dyn⋅cm",
+      "factor": 1e-7,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ozin",
+      "name": "Ounce-inch",
+      "symbol": "oz⋅in",
+      "factor": 0.00706155
+    },
+    {
+      "id": "kgfcm",
+      "name": "Kilogram-force centimeter",
+      "symbol": "kgf⋅cm",
+      "factor": 0.0980665
+    },
+    {
+      "id": "inlb",
+      "name": "Inch-pound",
+      "symbol": "in⋅lb",
+      "factor": 0.112985
+    },
+    {
+      "id": "ftlb",
+      "name": "Foot-pound",
+      "symbol": "ft⋅lb",
+      "factor": 1.35582
+    },
+    {
+      "id": "kgfm",
+      "name": "Kilogram-force meter",
+      "symbol": "kgf⋅m",
+      "factor": 9.80665
+    }
+  ]
+}

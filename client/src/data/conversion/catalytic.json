@@ -1,0 +1,21 @@
+{
+  "id": "catalytic",
+  "name": "Catalytic Activity",
+  "baseUnit": "katal",
+  "baseSISymbol": "mol⋅s⁻¹",
+  "units": [
+    {
+      "id": "kat",
+      "name": "Katal",
+      "symbol": "kat",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "u",
+      "name": "Enzyme Unit",
+      "symbol": "U",
+      "factor": 1.667e-8
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "solid_angle",
+  "name": "Solid Angle",
+  "baseUnit": "steradian",
+  "baseSISymbol": "sr",
+  "units": [
+    {
+      "id": "sr",
+      "name": "Steradian",
+      "symbol": "sr",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "sqdeg",
+      "name": "Square Degree",
+      "symbol": "deg²",
+      "factor": 0.0003046
+    },
+    {
+      "id": "sp",
+      "name": "Spat",
+      "symbol": "sp",
+      "factor": 12.566370614359172
+    }
+  ]
+}

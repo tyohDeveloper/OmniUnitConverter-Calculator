@@ -1,0 +1,22 @@
+{
+  "id": "data",
+  "name": "Data/Information",
+  "baseUnit": "byte",
+  "baseSISymbol": "B",
+  "units": [
+    {
+      "id": "b",
+      "name": "Byte",
+      "symbol": "B",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "bit",
+      "name": "Bit",
+      "symbol": "bit",
+      "factor": 0.125,
+      "allowPrefixes": true
+    }
+  ]
+}

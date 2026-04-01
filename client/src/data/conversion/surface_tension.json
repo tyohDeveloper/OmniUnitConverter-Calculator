@@ -1,0 +1,21 @@
+{
+  "id": "surface_tension",
+  "name": "Surface Tension",
+  "baseUnit": "newton/meter",
+  "baseSISymbol": "kg⋅s⁻²",
+  "units": [
+    {
+      "id": "nm",
+      "name": "Newton/meter",
+      "symbol": "N⋅m⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "dynecm",
+      "name": "Dyne/centimeter",
+      "symbol": "dyn⋅cm⁻¹",
+      "factor": 0.001
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "force",
+  "name": "Force",
+  "baseUnit": "newton",
+  "baseSISymbol": "kg⋅m⋅s⁻²",
+  "units": [
+    {
+      "id": "n",
+      "name": "Newton",
+      "symbol": "N",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "dyn",
+      "name": "Dyne",
+      "symbol": "dyn",
+      "factor": 0.00001,
+      "allowPrefixes": true
+    },
+    {
+      "id": "lbf",
+      "name": "Pound-force",
+      "symbol": "lbf",
+      "factor": 4.44822
+    },
+    {
+      "id": "kgf",
+      "name": "Kilogram-force",
+      "symbol": "kgf",
+      "factor": 9.80665
+    },
+    {
+      "id": "kip",
+      "name": "Kip",
+      "symbol": "kip",
+      "factor": 4448.22
+    }
+  ]
+}

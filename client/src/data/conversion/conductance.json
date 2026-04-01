@@ -1,0 +1,21 @@
+{
+  "id": "conductance",
+  "name": "Conductance",
+  "baseUnit": "siemens",
+  "baseSISymbol": "kg⁻¹⋅m⁻²⋅s³⋅A²",
+  "units": [
+    {
+      "id": "s",
+      "name": "Siemens",
+      "symbol": "S",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "mho",
+      "name": "Mho",
+      "symbol": "℧",
+      "factor": 1
+    }
+  ]
+}

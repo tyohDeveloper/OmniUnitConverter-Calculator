@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
-import { UNIT_TRANSLATIONS } from '@/lib/unit-translations';
 import { 
   fixPrecision, toArabicNumerals, toLatinNumerals, roundToNearestEven, 
   toFixedBanker, toTitleCase, NUMBER_FORMATS, type NumberFormat,
@@ -167,21 +166,11 @@ export default function UnitConverter() {
       if (result) return result;
       return UI_TRANSLATIONS[key].en || key;
     }
-    // Fall back to component-local TRANSLATIONS
-    if (UNIT_TRANSLATIONS[key]) {
-      const trans = UNIT_TRANSLATIONS[key];
-      if ((language === 'en' || language === 'en-us') && trans.en) return trans.en;
-      if (language === 'de' && trans.de) return trans.de;
-      if (language === 'es' && trans.es) return trans.es;
-      if (language === 'fr' && trans.fr) return trans.fr;
-      if (language === 'it' && trans.it) return trans.it;
-      if (language === 'pt' && trans.pt) return trans.pt;
-      if (language === 'ko' && trans.ko) return trans.ko;
-      if (language === 'ru' && trans.ru) return trans.ru;
-      if (language === 'zh' && trans.zh) return trans.zh;
-      if (language === 'ja' && trans.ja) return trans.ja;
-      if (language === 'ar' && trans.ar) return trans.ar;
-      return trans.en || key;
+    // Fall back to UNIT_NAME_TRANSLATIONS (covers unit names, category names, and other labels)
+    if (UNIT_NAME_TRANSLATIONS[key]) {
+      const result = getTranslationFromRecord(UNIT_NAME_TRANSLATIONS[key], language);
+      if (result) return result;
+      return UNIT_NAME_TRANSLATIONS[key].en || key;
     }
     return key;
   };

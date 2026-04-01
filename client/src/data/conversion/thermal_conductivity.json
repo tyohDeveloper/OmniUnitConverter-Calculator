@@ -1,0 +1,27 @@
+{
+  "id": "thermal_conductivity",
+  "name": "Thermal Conductivity",
+  "baseUnit": "watt/meter-kelvin",
+  "baseSISymbol": "W⋅m⁻¹⋅K⁻¹",
+  "units": [
+    {
+      "id": "wmk",
+      "name": "W/(m⋅K)",
+      "symbol": "W⋅m⁻¹⋅K⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "btu_hftf",
+      "name": "BTU/(h⋅ft⋅°F)",
+      "symbol": "BTU⋅h⁻¹⋅ft⁻¹⋅°F⁻¹",
+      "factor": 1.73073
+    },
+    {
+      "id": "cal_scmC",
+      "name": "cal/(s⋅cm⋅°C)",
+      "symbol": "cal⋅s⁻¹⋅cm⁻¹⋅°C⁻¹",
+      "factor": 418.4
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "luminous_flux",
+  "name": "Luminous Flux (Human)",
+  "baseUnit": "lumen",
+  "baseSISymbol": "cd⋅sr",
+  "units": [
+    {
+      "id": "lm",
+      "name": "Lumen",
+      "symbol": "lm",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "cdsr",
+      "name": "Candela-Steradian",
+      "symbol": "cd⋅sr",
+      "factor": 1
+    },
+    {
+      "id": "talbot",
+      "name": "Talbot",
+      "symbol": "T (lum)",
+      "factor": 1,
+      "description": "Lumen-second (photographic)"
+    },
+    {
+      "id": "candlepower",
+      "name": "Candlepower (spherical)",
+      "symbol": "cp",
+      "factor": 12.566370614359172
+    }
+  ]
+}

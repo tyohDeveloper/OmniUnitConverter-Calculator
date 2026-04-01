@@ -1,0 +1,45 @@
+{
+  "id": "speed",
+  "name": "Speed",
+  "baseUnit": "meter/second",
+  "baseSISymbol": "m⋅s⁻¹",
+  "units": [
+    {
+      "id": "mps",
+      "name": "Meter/Second",
+      "symbol": "m⋅s⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "kmh",
+      "name": "Kilometer/Hour",
+      "symbol": "km⋅h⁻¹",
+      "factor": 0.2777777777777778
+    },
+    {
+      "id": "mph",
+      "name": "Mile/Hour",
+      "symbol": "mph",
+      "factor": 0.44704
+    },
+    {
+      "id": "kn",
+      "name": "Knot",
+      "symbol": "kn",
+      "factor": 0.514444
+    },
+    {
+      "id": "mach",
+      "name": "Mach",
+      "symbol": "Ma",
+      "factor": 343
+    },
+    {
+      "id": "c",
+      "name": "Speed of Light",
+      "symbol": "c",
+      "factor": 299792458
+    }
+  ]
+}

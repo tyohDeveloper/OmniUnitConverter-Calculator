@@ -1,0 +1,37 @@
+{
+  "id": "photon",
+  "name": "Photon/Light",
+  "baseUnit": "electronvolt",
+  "baseSISymbol": "eV",
+  "units": [
+    {
+      "id": "eV",
+      "name": "Electronvolt",
+      "symbol": "eV",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "J_photon",
+      "name": "Joule",
+      "symbol": "J",
+      "factor": 6241509074000000000,
+      "allowPrefixes": true
+    },
+    {
+      "id": "nu",
+      "name": "Frequency (ν)",
+      "symbol": "ν",
+      "factor": 4.135667696e-15,
+      "allowPrefixes": true
+    },
+    {
+      "id": "lambda",
+      "name": "Wavelength (λ)",
+      "symbol": "λ",
+      "factor": 0.000001239841984,
+      "allowPrefixes": true,
+      "isInverse": true
+    }
+  ]
+}

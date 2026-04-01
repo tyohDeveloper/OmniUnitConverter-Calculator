@@ -1,0 +1,39 @@
+{
+  "id": "momentum",
+  "name": "Momentum",
+  "baseUnit": "kilogram meter/second",
+  "baseSISymbol": "kg⋅m⋅s⁻¹",
+  "units": [
+    {
+      "id": "kgms",
+      "name": "kg⋅m/s",
+      "symbol": "kg⋅m⋅s⁻¹",
+      "factor": 1
+    },
+    {
+      "id": "gms",
+      "name": "g⋅m/s",
+      "symbol": "g⋅m⋅s⁻¹",
+      "factor": 0.001,
+      "allowPrefixes": true
+    },
+    {
+      "id": "lbfts",
+      "name": "lb⋅ft/s",
+      "symbol": "lb⋅ft⋅s⁻¹",
+      "factor": 0.138255
+    },
+    {
+      "id": "ns",
+      "name": "Newton-second",
+      "symbol": "N⋅s",
+      "factor": 1
+    },
+    {
+      "id": "slugfts",
+      "name": "slug⋅ft/s",
+      "symbol": "slug⋅ft⋅s⁻¹",
+      "factor": 4.44822
+    }
+  ]
+}

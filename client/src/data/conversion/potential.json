@@ -1,0 +1,22 @@
+{
+  "id": "potential",
+  "name": "Electric Potential",
+  "baseUnit": "volt",
+  "baseSISymbol": "kg⋅m²⋅s⁻³⋅A⁻¹",
+  "units": [
+    {
+      "id": "v",
+      "name": "Volt",
+      "symbol": "V",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "statv",
+      "name": "Statvolt",
+      "symbol": "statV",
+      "factor": 299.792,
+      "allowPrefixes": true
+    }
+  ]
+}

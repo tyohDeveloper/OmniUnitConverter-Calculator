@@ -1,0 +1,27 @@
+{
+  "id": "sound_intensity",
+  "name": "Sound Intensity",
+  "baseUnit": "w_per_m2",
+  "baseSISymbol": "W⋅m⁻²",
+  "units": [
+    {
+      "id": "w_per_m2",
+      "name": "Watt per Square Meter",
+      "symbol": "W⋅m⁻²",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "i0",
+      "name": "Reference Intensity (I₀)",
+      "symbol": "I₀",
+      "factor": 1e-12
+    },
+    {
+      "id": "w_per_cm2",
+      "name": "Watt per Square Centimeter",
+      "symbol": "W⋅cm⁻²",
+      "factor": 10000
+    }
+  ]
+}

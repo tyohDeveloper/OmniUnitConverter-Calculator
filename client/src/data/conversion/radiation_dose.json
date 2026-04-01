@@ -1,0 +1,21 @@
+{
+  "id": "radiation_dose",
+  "name": "Absorbed Radiation Dose",
+  "baseUnit": "gray",
+  "baseSISymbol": "m²⋅s⁻²",
+  "units": [
+    {
+      "id": "gy",
+      "name": "Gray",
+      "symbol": "Gy",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "rad",
+      "name": "Rad (CGS)",
+      "symbol": "Rad",
+      "factor": 0.01
+    }
+  ]
+}

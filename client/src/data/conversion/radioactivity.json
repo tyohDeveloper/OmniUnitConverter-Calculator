@@ -1,0 +1,27 @@
+{
+  "id": "radioactivity",
+  "name": "Radioactivity",
+  "baseUnit": "becquerel",
+  "baseSISymbol": "s⁻¹",
+  "units": [
+    {
+      "id": "bq",
+      "name": "Becquerel",
+      "symbol": "Bq",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "rd",
+      "name": "Rutherford",
+      "symbol": "Rd",
+      "factor": 1000000
+    },
+    {
+      "id": "ci",
+      "name": "Curie",
+      "symbol": "Ci",
+      "factor": 37000000000
+    }
+  ]
+}

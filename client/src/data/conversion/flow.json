@@ -1,0 +1,153 @@
+{
+  "id": "flow",
+  "name": "Flow Rate (Volumetric)",
+  "baseUnit": "cubic metre/second",
+  "baseSISymbol": "m³⋅s⁻¹",
+  "units": [
+    {
+      "id": "m3s",
+      "name": "Cubic Metre/second",
+      "symbol": "m³⋅s⁻¹",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "cm3h",
+      "name": "Cubic Centimetre/hour",
+      "symbol": "cm³⋅h⁻¹",
+      "factor": 2.7777777777777777e-10
+    },
+    {
+      "id": "cm3min",
+      "name": "Cubic Centimetre/minute",
+      "symbol": "cm³⋅min⁻¹",
+      "factor": 1.6666666666666667e-8
+    },
+    {
+      "id": "gald",
+      "name": "US Gallon/day",
+      "symbol": "gal⋅d⁻¹",
+      "factor": 4.381263638888889e-8
+    },
+    {
+      "id": "lh",
+      "name": "Liter/hour",
+      "symbol": "L⋅h⁻¹",
+      "factor": 2.7777777777777776e-7
+    },
+    {
+      "id": "cm3s",
+      "name": "Cubic Centimetre/second",
+      "symbol": "cm³⋅s⁻¹",
+      "factor": 0.000001
+    },
+    {
+      "id": "galh",
+      "name": "US Gallon/hour",
+      "symbol": "gal⋅h⁻¹",
+      "factor": 0.0000010515032733333334
+    },
+    {
+      "id": "impgalh",
+      "name": "Imperial Gallon/hour",
+      "symbol": "Imp gal⋅h⁻¹",
+      "factor": 0.0000012628027777777779
+    },
+    {
+      "id": "bbld",
+      "name": "Barrel/day",
+      "symbol": "bbl⋅d⁻¹",
+      "factor": 0.0000018401307291666666
+    },
+    {
+      "id": "ft3h",
+      "name": "Cubic Foot/hour",
+      "symbol": "ft³⋅h⁻¹",
+      "factor": 0.000007865777777777777
+    },
+    {
+      "id": "lmin",
+      "name": "Liter/minute",
+      "symbol": "L⋅min⁻¹",
+      "factor": 0.000016666666666666667
+    },
+    {
+      "id": "bblh",
+      "name": "Barrel/hour",
+      "symbol": "bbl⋅h⁻¹",
+      "factor": 0.0000441631375
+    },
+    {
+      "id": "gpm",
+      "name": "US Gallon/minute",
+      "symbol": "GPM",
+      "factor": 0.0000630901964
+    },
+    {
+      "id": "impgalmin",
+      "name": "Imperial Gallon/minute",
+      "symbol": "Imp gal⋅min⁻¹",
+      "factor": 0.00007576816666666667
+    },
+    {
+      "id": "m3h",
+      "name": "Cubic Metre/hour",
+      "symbol": "m³⋅h⁻¹",
+      "factor": 0.0002777777777777778
+    },
+    {
+      "id": "cfm",
+      "name": "Cubic Foot/minute",
+      "symbol": "CFM",
+      "factor": 0.00047194666666666664
+    },
+    {
+      "id": "ls",
+      "name": "Liter/second",
+      "symbol": "L⋅s⁻¹",
+      "factor": 0.001
+    },
+    {
+      "id": "bblmin",
+      "name": "Barrel/minute",
+      "symbol": "bbl⋅min⁻¹",
+      "factor": 0.00264978825
+    },
+    {
+      "id": "gals",
+      "name": "US Gallon/second",
+      "symbol": "gal⋅s⁻¹",
+      "factor": 0.003785411784
+    },
+    {
+      "id": "impgals",
+      "name": "Imperial Gallon/second",
+      "symbol": "Imp gal⋅s⁻¹",
+      "factor": 0.00454609
+    },
+    {
+      "id": "m3min",
+      "name": "Cubic Metre/minute",
+      "symbol": "m³⋅min⁻¹",
+      "factor": 0.016666666666666666
+    },
+    {
+      "id": "ft3s",
+      "name": "Cubic Foot/second",
+      "symbol": "ft³⋅s⁻¹",
+      "factor": 0.0283168
+    },
+    {
+      "id": "bbls",
+      "name": "Barrel/second",
+      "symbol": "bbl⋅s⁻¹",
+      "factor": 0.158987295
+    },
+    {
+      "id": "sv",
+      "name": "Sverdrup",
+      "symbol": "Sv (flow)",
+      "factor": 1000000
+    }
+  ]
+}

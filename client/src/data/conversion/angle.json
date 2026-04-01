@@ -1,0 +1,45 @@
+{
+  "id": "angle",
+  "name": "Plane Angle",
+  "baseUnit": "radian",
+  "baseSISymbol": "rad",
+  "units": [
+    {
+      "id": "rad",
+      "name": "Radian",
+      "symbol": "rad",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "arcsec",
+      "name": "Arcsecond",
+      "symbol": "″",
+      "factor": 0.00000484813681109536
+    },
+    {
+      "id": "arcmin",
+      "name": "Arcminute",
+      "symbol": "′",
+      "factor": 0.0002908882086657216
+    },
+    {
+      "id": "grad",
+      "name": "Gradian",
+      "symbol": "grad",
+      "factor": 0.015707963267948967
+    },
+    {
+      "id": "deg",
+      "name": "Degree",
+      "symbol": "°",
+      "factor": 0.017453292519943295
+    },
+    {
+      "id": "deg_dms",
+      "name": "Degree (DMS)",
+      "symbol": "° ′ ″",
+      "factor": 0.017453292519943295
+    }
+  ]
+}

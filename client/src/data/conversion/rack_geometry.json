@@ -1,0 +1,130 @@
+{
+  "id": "rack_geometry",
+  "name": "Rack Geometry",
+  "baseUnit": "metre",
+  "baseSISymbol": "m",
+  "units": [
+    {
+      "id": "m",
+      "name": "Meter",
+      "symbol": "m",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "angstrom",
+      "name": "Angstrom",
+      "symbol": "Å",
+      "factor": 1e-10
+    },
+    {
+      "id": "in",
+      "name": "Inch",
+      "symbol": "in",
+      "factor": 0.0254
+    },
+    {
+      "id": "u",
+      "name": "Rack Unit Height",
+      "symbol": "RU",
+      "factor": 0.044449999999999996
+    },
+    {
+      "id": "u2",
+      "name": "2U Height",
+      "symbol": "2U",
+      "factor": 0.08889999999999999
+    },
+    {
+      "id": "u4",
+      "name": "4U Height",
+      "symbol": "4U",
+      "factor": 0.17779999999999999
+    },
+    {
+      "id": "ft",
+      "name": "Foot",
+      "symbol": "ft",
+      "factor": 0.3048,
+      "allowPrefixes": true
+    },
+    {
+      "id": "ft_in",
+      "name": "Foot:Inch",
+      "symbol": "ft:in",
+      "factor": 0.3048
+    },
+    {
+      "id": "rack_12u",
+      "name": "Quarter Rack (12U)",
+      "symbol": "12U",
+      "factor": 0.5334
+    },
+    {
+      "id": "u_width",
+      "name": "U Width (19\")",
+      "symbol": "U-W",
+      "factor": 0.4826
+    },
+    {
+      "id": "cabinet_width",
+      "name": "Cabinet Width (24\")",
+      "symbol": "Cab-W",
+      "factor": 0.6095999999999999
+    },
+    {
+      "id": "yd",
+      "name": "Yard",
+      "symbol": "yd",
+      "factor": 0.9144
+    },
+    {
+      "id": "rack_24u",
+      "name": "Half Rack (24U)",
+      "symbol": "24U",
+      "factor": 1.0668
+    },
+    {
+      "id": "fathom",
+      "name": "Fathom",
+      "symbol": "ftm",
+      "factor": 1.8288
+    },
+    {
+      "id": "rack_42u",
+      "name": "Full Rack (42U)",
+      "symbol": "42U",
+      "factor": 1.8669
+    },
+    {
+      "id": "mi",
+      "name": "Mile",
+      "symbol": "mi",
+      "factor": 1609.344
+    },
+    {
+      "id": "nmi",
+      "name": "Nautical Mile",
+      "symbol": "nmi",
+      "factor": 1852
+    },
+    {
+      "id": "au",
+      "name": "Astronomical Unit",
+      "symbol": "AU",
+      "factor": 149600000000
+    },
+    {
+      "id": "ly",
+      "name": "Light Year",
+      "symbol": "ly",
+      "factor": 9461000000000000
+    },
+    {
+      "id": "parsec",
+      "name": "Parsec",
+      "symbol": "parsec",
+      "factor": 30857000000000000
+    }
+  ]
+}

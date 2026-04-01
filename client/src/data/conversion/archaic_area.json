@@ -1,0 +1,141 @@
+{
+  "id": "archaic_area",
+  "name": "Archaic Area",
+  "baseUnit": "square metre",
+  "baseSISymbol": "m²",
+  "units": [
+    {
+      "id": "m2",
+      "name": "Square Metre",
+      "symbol": "m²",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "danchi_ma",
+      "name": "Danchi-ma (Japan)",
+      "symbol": "danchi",
+      "factor": 1.445
+    },
+    {
+      "id": "edoma",
+      "name": "Edoma/Kantō-ma (Japan)",
+      "symbol": "edoma",
+      "factor": 1.5488
+    },
+    {
+      "id": "jo_tatami",
+      "name": "Jō/Tatami (Japan)",
+      "symbol": "jo",
+      "factor": 1.62
+    },
+    {
+      "id": "chukyoma",
+      "name": "Chūkyō-ma (Japan)",
+      "symbol": "chukyoma",
+      "factor": 1.6562
+    },
+    {
+      "id": "kyoma",
+      "name": "Kyōma (Japan)",
+      "symbol": "kyoma",
+      "factor": 1.8241
+    },
+    {
+      "id": "pyeong_kr",
+      "name": "Pyeong (Korea)",
+      "symbol": "pyeong",
+      "factor": 3.3058
+    },
+    {
+      "id": "tsubo_jp",
+      "name": "Tsubo (Japan)",
+      "symbol": "tsubo",
+      "factor": 3.306
+    },
+    {
+      "id": "se_kr",
+      "name": "Se (Korea)",
+      "symbol": "se",
+      "factor": 99.174
+    },
+    {
+      "id": "qirat_eg",
+      "name": "Qirat (Egypt)",
+      "symbol": "qirat",
+      "factor": 175.03
+    },
+    {
+      "id": "mu_cn",
+      "name": "Mu (China)",
+      "symbol": "mu",
+      "factor": 666.67
+    },
+    {
+      "id": "tan_jp",
+      "name": "Tan (Japan)",
+      "symbol": "tan",
+      "factor": 991.7
+    },
+    {
+      "id": "dunam_il",
+      "name": "Dunam (Israel)",
+      "symbol": "dunam",
+      "factor": 1000
+    },
+    {
+      "id": "jerib",
+      "name": "Jerib (Middle East)",
+      "symbol": "jerib",
+      "factor": 2000
+    },
+    {
+      "id": "morgen",
+      "name": "Morgen (German)",
+      "symbol": "morgen",
+      "factor": 2500
+    },
+    {
+      "id": "bigha",
+      "name": "Bigha (South Asia)",
+      "symbol": "bigha",
+      "factor": 2529
+    },
+    {
+      "id": "feddan_eg",
+      "name": "Feddan (Egypt)",
+      "symbol": "feddan",
+      "factor": 4200.833
+    },
+    {
+      "id": "cho_jp",
+      "name": "Chō (Japan)",
+      "symbol": "cho",
+      "factor": 9917.36
+    },
+    {
+      "id": "desyatina",
+      "name": "Desyatina (Russia)",
+      "symbol": "desyatina",
+      "factor": 10925
+    },
+    {
+      "id": "qing_cn",
+      "name": "Qing (China)",
+      "symbol": "qing",
+      "factor": 66666.67
+    },
+    {
+      "id": "section_us",
+      "name": "Section (US)",
+      "symbol": "section",
+      "factor": 2589988
+    },
+    {
+      "id": "township_us",
+      "name": "Township (US)",
+      "symbol": "twp",
+      "factor": 93239571
+    }
+  ]
+}

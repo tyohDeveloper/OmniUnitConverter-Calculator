@@ -1,0 +1,184 @@
+{
+  "id": "archaic_volume",
+  "name": "Archaic Volume",
+  "baseUnit": "litre",
+  "baseSISymbol": "L",
+  "units": [
+    {
+      "id": "l",
+      "name": "Litre",
+      "symbol": "L",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "minim",
+      "name": "Minim (US)",
+      "symbol": "minim",
+      "factor": 0.0000616115
+    },
+    {
+      "id": "ml",
+      "name": "Millilitre",
+      "symbol": "mL",
+      "factor": 0.001
+    },
+    {
+      "id": "fl_scruple",
+      "name": "Fluid Scruple",
+      "symbol": "fl s",
+      "factor": 0.00123223
+    },
+    {
+      "id": "fl_dram",
+      "name": "Fluid Dram",
+      "symbol": "fl dr",
+      "factor": 0.00369669
+    },
+    {
+      "id": "teaspoon",
+      "name": "Teaspoon (US)",
+      "symbol": "tsp (US)",
+      "factor": 0.00492892
+    },
+    {
+      "id": "tablespoon",
+      "name": "Tablespoon (US)",
+      "symbol": "tbsp (US)",
+      "factor": 0.0147868
+    },
+    {
+      "id": "apoth_oz",
+      "name": "Apothecary Ounce",
+      "symbol": "fl oz ap",
+      "factor": 0.0295735
+    },
+    {
+      "id": "jigger",
+      "name": "Jigger",
+      "symbol": "jigger",
+      "factor": 0.044355
+    },
+    {
+      "id": "gill_us",
+      "name": "Gill (US)",
+      "symbol": "gi",
+      "factor": 0.118294
+    },
+    {
+      "id": "gill_imp",
+      "name": "Gill (Imperial)",
+      "symbol": "gi Imp",
+      "factor": 0.142065
+    },
+    {
+      "id": "hop_kr",
+      "name": "Hop (Korea)",
+      "symbol": "hop",
+      "factor": 0.18039
+    },
+    {
+      "id": "go_jp",
+      "name": "Go (Japan)",
+      "symbol": "go",
+      "factor": 0.18039
+    },
+    {
+      "id": "cup_us",
+      "name": "Cup (US)",
+      "symbol": "cp (US)",
+      "factor": 0.236588
+    },
+    {
+      "id": "sheng_cn",
+      "name": "Sheng (China)",
+      "symbol": "sheng",
+      "factor": 1.0355
+    },
+    {
+      "id": "sho_jp",
+      "name": "Sho (Japan)",
+      "symbol": "sho",
+      "factor": 1.8039
+    },
+    {
+      "id": "doe_kr",
+      "name": "Doe (Korea)",
+      "symbol": "doe",
+      "factor": 1.8039
+    },
+    {
+      "id": "peck_us",
+      "name": "Peck (US)",
+      "symbol": "pk",
+      "factor": 8.80977
+    },
+    {
+      "id": "dou_cn",
+      "name": "Dou (China)",
+      "symbol": "dou",
+      "factor": 10.355
+    },
+    {
+      "id": "to_jp",
+      "name": "To (Japan)",
+      "symbol": "to",
+      "factor": 18.039
+    },
+    {
+      "id": "mal_kr",
+      "name": "Mal (Korea)",
+      "symbol": "mal",
+      "factor": 18.039
+    },
+    {
+      "id": "amphora",
+      "name": "Amphora (Greek)",
+      "symbol": "amphora",
+      "factor": 26.026
+    },
+    {
+      "id": "bushel_us",
+      "name": "Bushel (US)",
+      "symbol": "bu",
+      "factor": 35.2391
+    },
+    {
+      "id": "firkin",
+      "name": "Firkin",
+      "symbol": "firkin",
+      "factor": 40.9148
+    },
+    {
+      "id": "dan_vol_cn",
+      "name": "Dan (China volume)",
+      "symbol": "dan-v",
+      "factor": 103.55
+    },
+    {
+      "id": "koku_jp",
+      "name": "Koku (Japan)",
+      "symbol": "koku",
+      "factor": 180.39
+    },
+    {
+      "id": "hogshead",
+      "name": "Hogshead",
+      "symbol": "hhd",
+      "factor": 238.481
+    },
+    {
+      "id": "m3",
+      "name": "Cubic Metre",
+      "symbol": "m³",
+      "factor": 1000,
+      "allowPrefixes": true
+    },
+    {
+      "id": "cord_us",
+      "name": "Cord (US)",
+      "symbol": "cord",
+      "factor": 3624.56
+    }
+  ]
+}

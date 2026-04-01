@@ -1,0 +1,33 @@
+{
+  "id": "charge",
+  "name": "Electric Charge",
+  "baseUnit": "coulomb",
+  "baseSISymbol": "A⋅s",
+  "units": [
+    {
+      "id": "c",
+      "name": "Coulomb",
+      "symbol": "C",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "mah",
+      "name": "Milliamp-hour",
+      "symbol": "mAh",
+      "factor": 3.6
+    },
+    {
+      "id": "ah",
+      "name": "Ampere-hour",
+      "symbol": "Ah",
+      "factor": 3600
+    },
+    {
+      "id": "faraday",
+      "name": "Faraday",
+      "symbol": "F (charge)",
+      "factor": 96485
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "current",
+  "name": "Electric Current",
+  "baseUnit": "ampere",
+  "baseSISymbol": "A",
+  "units": [
+    {
+      "id": "a",
+      "name": "Ampere",
+      "symbol": "A",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "statA",
+      "name": "Statampere",
+      "symbol": "statA",
+      "factor": 3.33564e-10,
+      "allowPrefixes": true
+    },
+    {
+      "id": "biot",
+      "name": "Biot (abampere)",
+      "symbol": "Bi",
+      "factor": 10,
+      "allowPrefixes": true
+    }
+  ]
+}

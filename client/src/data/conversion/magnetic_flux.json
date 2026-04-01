@@ -1,0 +1,22 @@
+{
+  "id": "magnetic_flux",
+  "name": "Magnetic Flux",
+  "baseUnit": "weber",
+  "baseSISymbol": "kg⋅m²⋅s⁻²⋅A⁻¹",
+  "units": [
+    {
+      "id": "wb",
+      "name": "Weber",
+      "symbol": "Wb",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "mx",
+      "name": "Maxwell",
+      "symbol": "Mx",
+      "factor": 1e-8,
+      "allowPrefixes": true
+    }
+  ]
+}

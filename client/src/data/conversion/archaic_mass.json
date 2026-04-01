@@ -1,0 +1,183 @@
+{
+  "id": "archaic_mass",
+  "name": "Archaic Mass",
+  "baseUnit": "kilogram",
+  "baseSISymbol": "kg",
+  "units": [
+    {
+      "id": "kg",
+      "name": "Kilogram",
+      "symbol": "kg",
+      "factor": 1
+    },
+    {
+      "id": "grain",
+      "name": "Grain",
+      "symbol": "gr",
+      "factor": 0.00006479891
+    },
+    {
+      "id": "ratti",
+      "name": "Ratti (South Asia)",
+      "symbol": "ratti",
+      "factor": 0.0001215
+    },
+    {
+      "id": "carat",
+      "name": "Carat (Metric)",
+      "symbol": "ct",
+      "factor": 0.0002
+    },
+    {
+      "id": "fun_jp",
+      "name": "Fun (Japan)",
+      "symbol": "fun",
+      "factor": 0.000375
+    },
+    {
+      "id": "g",
+      "name": "Gram",
+      "symbol": "g",
+      "factor": 0.001,
+      "allowPrefixes": true
+    },
+    {
+      "id": "scruple",
+      "name": "Scruple (Apothecary)",
+      "symbol": "s ap",
+      "factor": 0.001296
+    },
+    {
+      "id": "pennyweight",
+      "name": "Pennyweight",
+      "symbol": "dwt",
+      "factor": 0.00155517
+    },
+    {
+      "id": "dram",
+      "name": "Dram",
+      "symbol": "dr",
+      "factor": 0.001771845
+    },
+    {
+      "id": "momme_jp",
+      "name": "Momme (Japan)",
+      "symbol": "momme",
+      "factor": 0.00375
+    },
+    {
+      "id": "don_kr",
+      "name": "Don (Korea)",
+      "symbol": "don",
+      "factor": 0.00375
+    },
+    {
+      "id": "mace_cn",
+      "name": "Mace (China, PRC)",
+      "symbol": "mace",
+      "factor": 0.005
+    },
+    {
+      "id": "tola",
+      "name": "Tola (South Asia)",
+      "symbol": "tola",
+      "factor": 0.0116638
+    },
+    {
+      "id": "baht_th",
+      "name": "Baht (Thailand)",
+      "symbol": "baht",
+      "factor": 0.015244
+    },
+    {
+      "id": "troy_oz",
+      "name": "Troy Ounce",
+      "symbol": "oz t",
+      "factor": 0.0311034768
+    },
+    {
+      "id": "ryo_jp",
+      "name": "Ryō (Japan)",
+      "symbol": "ryo",
+      "factor": 0.0375
+    },
+    {
+      "id": "tael_cn",
+      "name": "Tael (China, PRC)",
+      "symbol": "tael",
+      "factor": 0.05
+    },
+    {
+      "id": "troy_lb",
+      "name": "Troy Pound",
+      "symbol": "lb t",
+      "factor": 0.3732417
+    },
+    {
+      "id": "pfund_de",
+      "name": "Pfund (German)",
+      "symbol": "pfund",
+      "factor": 0.4677
+    },
+    {
+      "id": "livre_fr",
+      "name": "Livre (French)",
+      "symbol": "livre",
+      "factor": 0.4895
+    },
+    {
+      "id": "jin_cn",
+      "name": "Jin (China, PRC)",
+      "symbol": "jin",
+      "factor": 0.5
+    },
+    {
+      "id": "geun_kr",
+      "name": "Geun (Korea)",
+      "symbol": "geun",
+      "factor": 0.6
+    },
+    {
+      "id": "catty_hk",
+      "name": "Catty (HK/Traditional)",
+      "symbol": "catty",
+      "factor": 0.60478982
+    },
+    {
+      "id": "seer",
+      "name": "Seer (South Asia)",
+      "symbol": "seer",
+      "factor": 0.9331
+    },
+    {
+      "id": "kan_jp",
+      "name": "Kan (Japan)",
+      "symbol": "kan",
+      "factor": 3.75
+    },
+    {
+      "id": "stone_uk",
+      "name": "Stone (UK)",
+      "symbol": "st",
+      "factor": 6.35029
+    },
+    {
+      "id": "maund",
+      "name": "Maund (South Asia)",
+      "symbol": "maund",
+      "factor": 37.324
+    },
+    {
+      "id": "dan_cn",
+      "name": "Dan (China, PRC)",
+      "symbol": "dan",
+      "factor": 50
+    },
+    {
+      "id": "picul_hk",
+      "name": "Picul (HK/Traditional)",
+      "symbol": "picul",
+      "factor": 60.478982
+    }
+  ]
+}

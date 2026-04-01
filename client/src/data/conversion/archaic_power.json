@@ -1,0 +1,33 @@
+{
+  "id": "archaic_power",
+  "name": "Archaic Power",
+  "baseUnit": "watt",
+  "baseSISymbol": "kg⋅m²⋅s⁻³",
+  "units": [
+    {
+      "id": "w",
+      "name": "Watt",
+      "symbol": "W",
+      "factor": 1,
+      "allowPrefixes": true
+    },
+    {
+      "id": "erg_s",
+      "name": "Erg per Second",
+      "symbol": "erg⋅s⁻¹",
+      "factor": 1e-7
+    },
+    {
+      "id": "ft_lbf_s",
+      "name": "Foot-pound per Second",
+      "symbol": "ft⋅lbf⋅s⁻¹",
+      "factor": 1.3558179483
+    },
+    {
+      "id": "boiler_hp",
+      "name": "Boiler Horsepower",
+      "symbol": "hp (boiler)",
+      "factor": 9810.55
+    }
+  ]
+}
