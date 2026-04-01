@@ -62,8 +62,13 @@ The codebase is organized for multi-person development collaboration:
 - `helpers.ts` - Pure helper functions (~456 lines): mass normalization, dimensional analysis, cross-domain matching, regional spelling, prefix constants, findBestPrefix
 - `index.ts` - Central export aggregator for all unit-related code
 
+**Feature: Unit Converter (`client/src/features/unit-converter/`)**:
+- `app/UnitConverterApp.tsx` - Thin controller: all business logic, state, and event handlers; renders pane components via props
+- `components/ConverterPane.tsx` - Converter card JSX (From/To inputs, prefix selectors, swap, comparison mode)
+- `components/DirectPane.tsx` - Custom SI base unit entry card (value input, dimension grid, copy/paste)
+- `components/CalculatorPane.tsx` - Calculator card (simple 3-field mode + RPN 4-level stack mode, all button grids)
+
 **Components (`client/src/components/`)**:
-- `unit-converter.tsx` - Main converter with Converter, Custom, and Calculator tabs (~3861 lines, down from 6278 original - 2417 lines saved, 38.5% reduction)
 - `unit-converter/components/` - Shared UI components:
   - `CalculatorFieldDisplay.tsx` - Reusable calculator field display component with animation support (~78 lines)
 - `unit-converter/hooks/` - Custom hooks for state management:
