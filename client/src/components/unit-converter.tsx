@@ -221,6 +221,16 @@ export default function UnitConverter() {
     }
   }, [numberFormat]);
 
+  // RTL support: set dir/lang attributes on document root when language changes
+  React.useEffect(() => {
+    const isRtl = language === 'ar';
+    document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', language);
+    return () => {
+      document.documentElement.setAttribute('dir', 'ltr');
+    };
+  }, [language]);
+
   const CATEGORY_GROUPS = [
     {
       name: "Base Quantities",
@@ -2101,7 +2111,7 @@ export default function UnitConverter() {
     <div className="w-full max-w-[1400px] mx-auto p-4 md:px-8 md:pb-8 md:pt-1 grid md:grid-cols-[260px_1fr] gap-8">
       
       {/* Sidebar */}
-      <nav className={`space-y-2 h-fit sticky top-0 pr-2 -mt-1 transition-opacity ${activeTab === 'custom' ? 'opacity-40 pointer-events-none' : ''}`}>
+      <nav className={`space-y-2 h-fit sticky top-0 pe-2 -mt-1 transition-opacity ${activeTab === 'custom' ? 'opacity-40 pointer-events-none' : ''}`}>
         {CATEGORY_GROUPS.map((group) => (
           <div key={group.name} className="space-y-1">
             <h2 className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 px-2 font-bold">{t(group.name)}</h2>
@@ -2115,7 +2125,7 @@ export default function UnitConverter() {
                     key={cat.id}
                     onClick={() => { setActiveCategory(cat.id as UnitCategory); setInputValue('1'); }}
                     disabled={activeTab === 'custom'}
-                    className={`w-full text-left px-3 py-[1px] rounded-sm text-xs font-medium transition-all duration-200 border-l-2 flex items-center justify-between group ${
+                    className={`w-full text-start px-3 py-[1px] rounded-sm text-xs font-medium transition-all duration-200 border-s-2 flex items-center justify-between group ${
                       isSelected 
                         ? 'border-accent text-accent' 
                         : 'hover:bg-muted/50 border-transparent text-muted-foreground hover:text-foreground'
@@ -2184,14 +2194,14 @@ export default function UnitConverter() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="uk" className="text-xs">English</SelectItem>
-                  <SelectItem value="europe-latin" className="text-xs">World</SelectItem>
-                  <SelectItem value="period" className="text-xs">Period</SelectItem>
-                  <SelectItem value="comma" className="text-xs">Comma</SelectItem>
+                  <SelectItem value="uk" className="text-xs">{t('num-format-english')}</SelectItem>
+                  <SelectItem value="europe-latin" className="text-xs">{t('num-format-world')}</SelectItem>
+                  <SelectItem value="period" className="text-xs">{t('num-format-period')}</SelectItem>
+                  <SelectItem value="comma" className="text-xs">{t('num-format-comma')}</SelectItem>
                   <SelectItem value="arabic" className="text-xs">العربية</SelectItem>
-                  <SelectItem value="east-asian" className="text-xs">East Asian</SelectItem>
-                  <SelectItem value="south-asian" className="text-xs">South Asian (Indian)</SelectItem>
-                  <SelectItem value="swiss" className="text-xs">Swiss</SelectItem>
+                  <SelectItem value="east-asian" className="text-xs">{t('num-format-east-asian')}</SelectItem>
+                  <SelectItem value="south-asian" className="text-xs">{t('num-format-south-asian')}</SelectItem>
+                  <SelectItem value="swiss" className="text-xs">{t('num-format-swiss')}</SelectItem>
                 </SelectContent>
               </Select>
               <Select 
@@ -2257,7 +2267,7 @@ export default function UnitConverter() {
                     onKeyDown={handleInputKeyDown}
                     onBlur={handleInputBlur}
                     tabIndex={1}
-                    className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-left"
+                    className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-start"
                     style={{ height: FIELD_HEIGHT, fontSize: '0.875rem', width: CommonFieldWidth }}
                     placeholder={getPlaceholder()}
                     {...testId('input-value')}
@@ -2302,7 +2312,7 @@ export default function UnitConverter() {
                             <span className="font-bold">{u.symbol}</span>
                           ) : (
                             <>
-                              <span className="font-bold mr-2">{u.symbol}</span>
+                              <span className="font-bold me-2">{u.symbol}</span>
                               <span className="opacity-70">{translateUnitName(u.name)}</span>
                             </>
                           )}
@@ -2409,7 +2419,7 @@ export default function UnitConverter() {
                 {/* Row 1: Result, Prefix, Unit Selector */}
                 <div className="flex gap-2">
                   <motion.div 
-                    className={`px-4 bg-background/50 border border-border rounded-md flex items-center overflow-x-auto text-left justify-start select-none ${result !== null ? 'cursor-pointer hover:bg-background/70 active:bg-background/90' : ''}`}
+                    className={`px-4 bg-background/50 border border-border rounded-md flex items-center overflow-x-auto text-start justify-start select-none ${result !== null ? 'cursor-pointer hover:bg-background/70 active:bg-background/90' : ''}`}
                     style={{ height: FIELD_HEIGHT, width: CommonFieldWidth, pointerEvents: 'auto' }}
                     onClick={() => result !== null && copyResult()}
                     animate={{
@@ -2462,7 +2472,7 @@ export default function UnitConverter() {
                             <span className="font-bold">{u.symbol}</span>
                           ) : (
                             <>
-                              <span className="font-bold mr-2">{u.symbol}</span>
+                              <span className="font-bold me-2">{u.symbol}</span>
                               <span className="opacity-70">{translateUnitName(u.name)}</span>
                             </>
                           )}
@@ -2719,7 +2729,7 @@ export default function UnitConverter() {
                       e.currentTarget.blur(); // Triggers onBlur handler
                     }
                   }}
-                  className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-left"
+                  className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-start"
                   style={{ height: FIELD_HEIGHT, fontSize: '0.875rem', width: CommonFieldWidth }}
                   placeholder="0"
                   {...testId('custom-input-value')}
@@ -3284,7 +3294,7 @@ export default function UnitConverter() {
                       <span className="text-sm font-mono text-primary font-bold truncate">
                         {display?.formattedValue || ''}
                       </span>
-                      <span className="text-xs font-mono text-muted-foreground ml-2 shrink-0">
+                      <span className="text-xs font-mono text-muted-foreground ms-2 shrink-0">
                         {display?.unitSymbol || ''}
                       </span>
                     </>
@@ -3330,14 +3340,14 @@ export default function UnitConverter() {
                         onValueChange={(val) => { setSelectedAlternative(parseInt(val)); setResultPrefix('none'); }}
                       >
                         <SelectTrigger className="h-10 flex-1 min-w-0 text-xs">
-                          <SelectValue placeholder="Select SI representation" />
+                          <SelectValue placeholder={t('Select SI representation')} />
                         </SelectTrigger>
                         <SelectContent className="max-h-[50vh]">
                           {siReps.map((rep, index) => (
                             <SelectItem key={index} value={index.toString()} className="text-xs font-mono">
                               <span className="font-bold">{rep.displaySymbol}</span>
                               {rep.crossDomainMatches && rep.crossDomainMatches.length > 0 && (
-                                <span className="ml-2 text-muted-foreground font-normal">
+                                <span className="ms-2 text-muted-foreground font-normal">
                                   ({rep.crossDomainMatches.join(', ')})
                                 </span>
                               )}
@@ -3434,14 +3444,14 @@ export default function UnitConverter() {
               />
               {/* Power/Root/Exp/Log buttons for s.3 row (8 buttons) */}
               {(() => {
-                const s3Buttons: Array<{ label: string; shiftLabel: string; op?: RpnUnaryOp; shiftOp?: RpnUnaryOp; binaryOp?: RpnBinaryOp } | { label: string; shiftLabel: string; isConstant: true; value: number; shiftValue: number }> = [
+                const s3Buttons: Array<{ label: string; shiftLabel: string; op?: RpnUnaryOp; shiftOp?: RpnUnaryOp; binaryOp?: RpnBinaryOp; tooltip?: string; shiftTooltip?: string } | { label: string; shiftLabel: string; isConstant: true; value: number; shiftValue: number; tooltip?: string; shiftTooltip?: string }> = [
                   { label: 'x²ᵤ', shiftLabel: '√ᵤ', op: 'square', shiftOp: 'sqrt' },
                   { label: '1/x', shiftLabel: 'yˣ', op: 'recip', binaryOp: 'pow' },
-                  { label: '+/−', shiftLabel: 'ABS', op: 'neg', shiftOp: 'abs' },
+                  { label: '+/−', shiftLabel: 'ABS', op: 'neg', shiftOp: 'abs', tooltip: t('rpn-tooltip-negate'), shiftTooltip: t('rpn-tooltip-abs') },
                   { label: 'eˣ', shiftLabel: 'ln', op: 'exp', shiftOp: 'ln' },
                   { label: '10ˣ', shiftLabel: 'log₁₀', op: 'pow10', shiftOp: 'log10' },
                   { label: '2ˣ', shiftLabel: 'log₂', op: 'pow2', shiftOp: 'log2' },
-                  { label: 'rnd', shiftLabel: 'trunc', op: 'rnd', shiftOp: 'trunc' },
+                  { label: 'rnd', shiftLabel: 'trunc', op: 'rnd', shiftOp: 'trunc', tooltip: t('rpn-tooltip-rnd'), shiftTooltip: t('rpn-tooltip-trunc') },
                   { label: 'π', shiftLabel: 'π⁻¹', isConstant: true, value: Math.PI, shiftValue: 1/Math.PI },
                 ];
                 return s3Buttons.map((btn, i) => {
@@ -3454,7 +3464,8 @@ export default function UnitConverter() {
                   const isDisabled = currentBinaryOp 
                     ? !canApplyRpnBinary(currentBinaryOp)
                     : (hasOp && !rpnStack[3]);
-                  return (
+                  const tooltipText = shiftActive ? btn.shiftTooltip : btn.tooltip;
+                  const buttonEl = (
                     <Button 
                       key={`s3-btn-${i}`} 
                       variant="ghost" 
@@ -3478,6 +3489,15 @@ export default function UnitConverter() {
                       {shiftActive ? btn.shiftLabel : btn.label}
                     </Button>
                   );
+                  if (tooltipText) {
+                    return (
+                      <Tooltip key={`s3-btn-${i}`}>
+                        <TooltipTrigger asChild>{React.cloneElement(buttonEl, { key: undefined })}</TooltipTrigger>
+                        <TooltipContent>{tooltipText}</TooltipContent>
+                      </Tooltip>
+                    );
+                  }
+                  return buttonEl;
                 });
               })()}
             </div>
@@ -3553,26 +3573,36 @@ export default function UnitConverter() {
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
               />
-              {/* Binary operation buttons for y row: 1-2=Enter/Drop (double width), 3=undo/undo, 4-7=×/÷/+/−, 8=LASTx/x⇆y */}
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className={`text-xs font-mono w-full border !border-border/30 ${shiftActive && !rpnStack[3] ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
-                style={{ gridColumn: 'span 2' }}
-                disabled={shiftActive && !rpnStack[3]}
-                onClick={() => shiftActive ? dropRpnStack() : pushToRpnStack()}
-              >
-                {shiftActive ? 'drop↓' : 'enter↑'}
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className={`text-xs font-mono w-full border !border-border/30 ${shiftActive ? 'text-foreground hover:text-accent' : (!previousRpnStack.some(v => v !== null) ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent')}`}
-                disabled={!shiftActive && !previousRpnStack.some(v => v !== null)}
-                onClick={() => shiftActive ? pullFromPane() : undoRpnStack()}
-              >
-                {shiftActive ? 'Pull' : 'undo'}
-              </Button>
+              {/* Binary operation buttons for y row: 1-2=ENTER/DROP (double width), 3=UNDO/PULL, 4-7=×/÷/+/−, 8=LASTx/SWAP */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className={`text-xs font-mono w-full border !border-border/30 ${shiftActive && !rpnStack[3] ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
+                    style={{ gridColumn: 'span 2' }}
+                    disabled={shiftActive && !rpnStack[3]}
+                    onClick={() => shiftActive ? dropRpnStack() : pushToRpnStack()}
+                  >
+                    {shiftActive ? 'DROP' : 'ENTER'}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{shiftActive ? t('rpn-tooltip-drop') : t('rpn-tooltip-enter')}</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className={`text-xs font-mono w-full border !border-border/30 ${shiftActive ? 'text-foreground hover:text-accent' : (!previousRpnStack.some(v => v !== null) ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent')}`}
+                    disabled={!shiftActive && !previousRpnStack.some(v => v !== null)}
+                    onClick={() => shiftActive ? pullFromPane() : undoRpnStack()}
+                  >
+                    {shiftActive ? 'PULL' : 'UNDO'}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{shiftActive ? t('rpn-tooltip-pull') : t('rpn-tooltip-undo')}</TooltipContent>
+              </Tooltip>
               {(() => {
                 const yBinaryButtons: Array<{ label: string; shiftLabel: string; op: RpnBinaryOp; shiftOp: RpnBinaryOp }> = [
                   { label: '×ᵤ', shiftLabel: '×', op: 'mulUnit', shiftOp: 'mul' },
@@ -3597,14 +3627,19 @@ export default function UnitConverter() {
                   );
                 });
               })()}
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="text-xs font-mono w-full border !border-border/30 text-foreground hover:text-accent"
-                onClick={() => shiftActive ? swapRpnXY() : recallLastX()}
-              >
-                {shiftActive ? 'x⇆y' : 'Last x'}
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-xs font-mono w-full border !border-border/30 text-foreground hover:text-accent"
+                    onClick={() => shiftActive ? swapRpnXY() : recallLastX()}
+                  >
+                    {shiftActive ? 'SWAP' : 'LASTx'}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{shiftActive ? t('rpn-tooltip-swap') : t('rpn-tooltip-lastx')}</TooltipContent>
+              </Tooltip>
             </div>
 
             {/* x field (result) with prefix and unit dropdowns - editable with parseUnitText */}
@@ -3663,7 +3698,7 @@ export default function UnitConverter() {
                   }}
                   className="px-3 bg-muted/20 border border-accent rounded-md text-sm font-mono text-primary font-bold"
                   style={{ height: FIELD_HEIGHT }}
-                  placeholder="Enter value or 'value unit'"
+                  placeholder={t("Enter value or 'value unit'")}
                 />
               ) : (
                 <motion.div 
@@ -3690,7 +3725,7 @@ export default function UnitConverter() {
                         <span className="text-sm font-mono text-primary font-bold truncate">
                           {display?.formattedValue || ''}
                         </span>
-                        <span className="text-xs font-mono text-muted-foreground ml-2 shrink-0">
+                        <span className="text-xs font-mono text-muted-foreground ms-2 shrink-0">
                           {display?.unitSymbol || ''}
                         </span>
                       </>
@@ -3724,14 +3759,14 @@ export default function UnitConverter() {
                         onValueChange={(val) => { setRpnSelectedAlternative(parseInt(val)); setRpnResultPrefix('none'); }}
                       >
                         <SelectTrigger className="h-10 text-xs">
-                          <SelectValue placeholder="Select SI representation" />
+                          <SelectValue placeholder={t('Select SI representation')} />
                         </SelectTrigger>
                         <SelectContent className="max-h-[50vh]">
                           {siReps.map((rep, index) => (
                             <SelectItem key={index} value={index.toString()} className="text-xs font-mono">
                               <span className="font-bold">{rep.displaySymbol}</span>
                               {rep.crossDomainMatches && rep.crossDomainMatches.length > 0 && (
-                                <span className="ml-2 text-muted-foreground font-normal">
+                                <span className="ms-2 text-muted-foreground font-normal">
                                   ({rep.crossDomainMatches.join(', ')})
                                 </span>
                               )}
@@ -3826,16 +3861,21 @@ export default function UnitConverter() {
                 </Button>
               </div>
               {/* Column 2: Shift - left-aligned with key grid */}
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShiftActive(!shiftActive)}
-                className={`text-xs font-mono border !border-border/30 ${shiftActive ? 'bg-accent !text-accent-foreground' : 'text-foreground hover:text-accent'}`}
-                data-testid="button-shift"
-                aria-pressed={shiftActive}
-              >
-                {shiftActive ? 'SHIFT' : 'Shift'}
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => setShiftActive(!shiftActive)}
+                    className={`text-xs font-mono border !border-border/30 ${shiftActive ? 'bg-accent !text-accent-foreground' : 'text-foreground hover:text-accent'}`}
+                    data-testid="button-shift"
+                    aria-pressed={shiftActive}
+                  >
+                    SHIFT
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{t('rpn-tooltip-shift')}</TooltipContent>
+              </Tooltip>
               {/* Spacer columns 3-8 */}
               <span style={{ gridColumn: 'span 6' }}></span>
               {/* Column 9: Copy - far right */}
@@ -3855,7 +3895,7 @@ export default function UnitConverter() {
         </Card>
 
         {/* Help Pane */}
-        <HelpSection t={t} />
+        <HelpSection t={t} language={language} />
       </div>
     </div>
   );

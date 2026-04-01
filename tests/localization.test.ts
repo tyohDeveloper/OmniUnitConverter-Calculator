@@ -14,9 +14,12 @@ describe('Language Localization', () => {
   describe('UI Element Translations', () => {
     it('should have translations for all supported languages', () => {
       const requiredLanguages: SupportedLanguage[] = ['en', 'ar'];
+      // help-machine-translated intentionally has en: '' (notice only shown for non-English locales)
+      const intentionallyEmptyForEn = new Set(['help-machine-translated']);
       
       for (const key of Object.keys(UI_TRANSLATIONS)) {
         for (const lang of requiredLanguages) {
+          if (lang === 'en' && intentionallyEmptyForEn.has(key)) continue;
           const translation = translate(key, lang, UI_TRANSLATIONS);
           expect(translation).toBeTruthy();
           expect(translation).not.toBe('');
@@ -310,10 +313,58 @@ describe('Language Localization', () => {
     });
 
     it('should have English and Arabic translations for all UI elements', () => {
+      // help-machine-translated intentionally has en: '' (notice only shown for non-English locales)
+      const intentionallyEmptyForEn = new Set(['help-machine-translated']);
       for (const key of Object.keys(UI_TRANSLATIONS)) {
         const trans = UI_TRANSLATIONS[key];
-        expect(trans.en).toBeTruthy();
+        if (!intentionallyEmptyForEn.has(key)) {
+          expect(trans.en).toBeTruthy();
+        }
         expect(trans.ar).toBeTruthy();
+      }
+    });
+
+    it('should have help section keys present in UI_TRANSLATIONS', () => {
+      const helpKeys = [
+        'help-para-1', 'help-para-2', 'help-para-3', 'help-para-4', 'help-para-5',
+        'help-github-note', 'help-llm-note', 'help-machine-translated',
+        'Number formatting',
+      ];
+      for (const key of helpKeys) {
+        expect(UI_TRANSLATIONS[key]).toBeDefined();
+      }
+    });
+
+    it('help-machine-translated should be empty for English', () => {
+      expect(translate('help-machine-translated', 'en', UI_TRANSLATIONS)).toBe('');
+    });
+
+    it('help-machine-translated should be non-empty for all non-English languages', () => {
+      const nonEnglishLangs: SupportedLanguage[] = ['ar', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'zh', 'ja', 'ko'];
+      for (const lang of nonEnglishLangs) {
+        const val = translate('help-machine-translated', lang, UI_TRANSLATIONS);
+        expect(val).toBeTruthy();
+        expect(val).not.toBe('');
+      }
+    });
+
+    it('help para keys should have non-empty translations in all languages', () => {
+      const paraKeys = ['help-para-1', 'help-para-2', 'help-para-3', 'help-para-4', 'help-para-5'];
+      const langs: SupportedLanguage[] = ['en', 'ar', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'zh', 'ja', 'ko'];
+      for (const key of paraKeys) {
+        for (const lang of langs) {
+          const val = translate(key, lang, UI_TRANSLATIONS);
+          expect(val).toBeTruthy();
+          expect(val.length).toBeGreaterThan(10);
+        }
+      }
+    });
+
+    it('Number formatting key should have non-empty translations in all languages', () => {
+      const langs: SupportedLanguage[] = ['en', 'ar', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'zh', 'ja', 'ko'];
+      for (const lang of langs) {
+        const val = translate('Number formatting', lang, UI_TRANSLATIONS);
+        expect(val).toBeTruthy();
       }
     });
 
