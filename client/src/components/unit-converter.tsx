@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
@@ -34,7 +34,9 @@ import {
   findBestPrefix
 } from '@/lib/units/helpers';
 import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
-import { useAllFlashFlags } from '@/components/unit-converter/hooks/useFlashFlag';
+import { useConverterState } from '@/components/unit-converter/hooks/useConverterState';
+import { useCalculatorState } from '@/components/unit-converter/hooks/useCalculatorState';
+import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -52,20 +54,62 @@ import {
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
 
 export default function UnitConverter() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [activeCategory, setActiveCategory] = useState<UnitCategory>('length');
-  const [fromUnit, setFromUnit] = useState<string>('');
-  const [toUnit, setToUnit] = useState<string>('');
-  const [fromPrefix, setFromPrefix] = useState<string>('none');
-  const [toPrefix, setToPrefix] = useState<string>('none');
-  const [inputValue, setInputValue] = useState<string>('1');
-  const [result, setResult] = useState<number | null>(null);
-  const [precision, setPrecision] = useState<number>(4);
-  const [calculatorPrecision, setCalculatorPrecision] = useState<number>(4);
-  const [comparisonMode, setComparisonMode] = useState<boolean>(false);
-  
-  // Flash flags for copy feedback animations (using consolidated hook)
-  const flash = useAllFlashFlags(300);
+  // Converter state via context-backed hook
+  const {
+    inputRef,
+    activeCategory, setActiveCategory,
+    fromUnit, setFromUnit,
+    toUnit, setToUnit,
+    fromPrefix, setFromPrefix,
+    toPrefix, setToPrefix,
+    inputValue, setInputValue,
+    result, setResult,
+    precision, setPrecision,
+    comparisonMode, setComparisonMode,
+  } = useConverterState();
+
+  // Calculator state via context-backed hook
+  const {
+    calculatorMode, setCalculatorMode,
+    shiftActive, setShiftActive,
+    calculatorPrecision, setCalculatorPrecision,
+    calcValues, setCalcValues,
+    calcOp1, setCalcOp1,
+    calcOp2, setCalcOp2,
+    resultUnit, setResultUnit,
+    resultCategory, setResultCategory,
+    resultPrefix, setResultPrefix,
+    selectedAlternative, setSelectedAlternative,
+  } = useCalculatorState();
+
+  // RPN stack via context-backed hook
+  const {
+    rpnStack, setRpnStack, previousRpnStack, setPreviousRpnStack,
+    lastX, setLastX, rpnResultPrefix, setRpnResultPrefix,
+    rpnSelectedAlternative, setRpnSelectedAlternative,
+    rpnXEditing, setRpnXEditing, rpnXEditValue, setRpnXEditValue,
+    saveAndUpdateStack, pushValue: rpnPushValue, dropValue: rpnDropValue,
+    swapXY: rpnSwapXY, clearStack: rpnClearStack, undoStack: rpnUndoStack,
+    recallLastX: rpnRecallLastX
+  } = useRpnStack();
+
+  // UI prefs via context
+  const { state: ctxState, dispatch: ctxDispatch, flash } = useConverterContext();
+  const activeTab = ctxState.uiPrefs.activeTab;
+  const setActiveTab = (v: string) => ctxDispatch({ domain: 'uiPrefs', type: 'SET_ACTIVE_TAB', payload: v });
+  const numberFormat = ctxState.uiPrefs.numberFormat;
+  const setNumberFormat = (v: NumberFormat) => ctxDispatch({ domain: 'uiPrefs', type: 'SET_NUMBER_FORMAT', payload: v });
+  const language = ctxState.uiPrefs.language as SupportedLanguage;
+  const setLanguage = (v: string) => ctxDispatch({ domain: 'uiPrefs', type: 'SET_LANGUAGE', payload: v });
+  const directValue = ctxState.uiPrefs.directValue;
+  const setDirectValue = (v: string) => ctxDispatch({ domain: 'uiPrefs', type: 'SET_DIRECT_VALUE', payload: v });
+  const directExponents = ctxState.uiPrefs.directExponents;
+  const setDirectExponents = (v: Record<string, number> | ((prev: Record<string, number>) => Record<string, number>)) =>
+    typeof v === 'function'
+      ? ctxDispatch({ domain: 'uiPrefs', type: 'UPDATE_DIRECT_EXPONENTS', payload: v })
+      : ctxDispatch({ domain: 'uiPrefs', type: 'SET_DIRECT_EXPONENTS', payload: v });
+
+  // Flash flags for copy feedback animations
   const [flashCopyResult, triggerFlashCopyResult] = flash.copyResult;
   const [flashCopyCalc, triggerFlashCopyCalc] = flash.copyCalc;
   const [flashCalcField1, triggerFlashCalcField1] = flash.calcField1;
@@ -81,58 +125,9 @@ export default function UnitConverter() {
   const [flashRpnField3, triggerFlashRpnField3] = flash.rpnField3;
   const [flashRpnResult, triggerFlashRpnResult] = flash.rpnResult;
   const [flashDirectCopy, triggerFlashDirectCopy] = flash.directCopy;
-  
-  // Calculator mode state ('simple' | 'rpn')
-  const [calculatorMode, setCalculatorMode] = useState<'simple' | 'rpn'>('rpn');
-  const [shiftActive, setShiftActive] = useState(false);
-  
-  // RPN calculator state (using consolidated hook)
-  const rpn = useRpnStack();
-  const {
-    rpnStack, setRpnStack, previousRpnStack, setPreviousRpnStack,
-    lastX, setLastX, rpnResultPrefix, setRpnResultPrefix,
-    rpnSelectedAlternative, setRpnSelectedAlternative,
-    rpnXEditing, setRpnXEditing, rpnXEditValue, setRpnXEditValue,
-    saveAndUpdateStack, pushValue: rpnPushValue, dropValue: rpnDropValue,
-    swapXY: rpnSwapXY, clearStack: rpnClearStack, undoStack: rpnUndoStack,
-    recallLastX: rpnRecallLastX
-  } = rpn;
-  
-  // Tab state
-  const [activeTab, setActiveTab] = useState<string>('converter');
-  
-  // Direct tab state - exponents for each SI base unit
-  // Values: 0 = not used, 1-5 = positive exponents, -1 to -5 = negative exponents
-  const [directValue, setDirectValue] = useState<string>('1');
-  const [directExponents, setDirectExponents] = useState<Record<string, number>>({
-    m: 0,    // length (meter)
-    kg: 0,   // mass (kilogram)
-    s: 0,    // time (second)
-    A: 0,    // current (ampere)
-    K: 0,    // temperature (kelvin)
-    mol: 0,  // amount (mole)
-    cd: 0,   // intensity (candela)
-    rad: 0,  // angle (radian)
-    sr: 0    // solid angle (steradian)
-  });
 
   // Backward compatibility alias - types and catalogs imported from shared-types
   const DERIVED_UNITS_CATALOG = SI_DERIVED_UNITS;
-
-  // Calculator state
-  const [calcValues, setCalcValues] = useState<Array<CalcValue | null>>([null, null, null, null]);
-  const [calcOp1, setCalcOp1] = useState<'+' | '-' | '*' | '/' | null>(null);
-  const [calcOp2, setCalcOp2] = useState<'+' | '-' | '*' | '/' | null>(null);
-  const [resultUnit, setResultUnit] = useState<string | null>(null);
-  const [resultCategory, setResultCategory] = useState<UnitCategory | null>(null);
-  const [resultPrefix, setResultPrefix] = useState<string>('none');
-  const [selectedAlternative, setSelectedAlternative] = useState<number>(0); // Index of selected alternative representation
-
-  // Number format state
-  const [numberFormat, setNumberFormat] = useState<NumberFormat>('uk');
-  
-  // Language state (ISO 639-1 codes)
-  const [language, setLanguage] = useState<SupportedLanguage>('en');
   
   // Wrappers for extracted helper functions
   const applyRegionalSpelling = (unitName: string): string => applyRegionalSpellingLib(unitName, language);

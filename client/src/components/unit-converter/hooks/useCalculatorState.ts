@@ -1,63 +1,56 @@
-import { useState } from 'react';
 import type { CalcValue } from '@/lib/units/shared-types';
 import type { UnitCategory } from '@/lib/units/types';
+import { useConverterContext } from '../context/ConverterContext';
 
 export interface UseCalculatorStateReturn {
   calculatorMode: 'simple' | 'rpn';
-  setCalculatorMode: React.Dispatch<React.SetStateAction<'simple' | 'rpn'>>;
+  setCalculatorMode: (value: 'simple' | 'rpn') => void;
   shiftActive: boolean;
-  setShiftActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setShiftActive: (value: boolean) => void;
   calculatorPrecision: number;
-  setCalculatorPrecision: React.Dispatch<React.SetStateAction<number>>;
+  setCalculatorPrecision: (value: number) => void;
   calcValues: Array<CalcValue | null>;
-  setCalcValues: React.Dispatch<React.SetStateAction<Array<CalcValue | null>>>;
+  setCalcValues: (value: Array<CalcValue | null> | ((prev: Array<CalcValue | null>) => Array<CalcValue | null>)) => void;
   calcOp1: '+' | '-' | '*' | '/' | null;
-  setCalcOp1: React.Dispatch<React.SetStateAction<'+' | '-' | '*' | '/' | null>>;
+  setCalcOp1: (value: '+' | '-' | '*' | '/' | null) => void;
   calcOp2: '+' | '-' | '*' | '/' | null;
-  setCalcOp2: React.Dispatch<React.SetStateAction<'+' | '-' | '*' | '/' | null>>;
+  setCalcOp2: (value: '+' | '-' | '*' | '/' | null) => void;
   resultUnit: string | null;
-  setResultUnit: React.Dispatch<React.SetStateAction<string | null>>;
+  setResultUnit: (value: string | null) => void;
   resultCategory: UnitCategory | null;
-  setResultCategory: React.Dispatch<React.SetStateAction<UnitCategory | null>>;
+  setResultCategory: (value: UnitCategory | null) => void;
   resultPrefix: string;
-  setResultPrefix: React.Dispatch<React.SetStateAction<string>>;
+  setResultPrefix: (value: string) => void;
   selectedAlternative: number;
-  setSelectedAlternative: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedAlternative: (value: number) => void;
 }
 
 export function useCalculatorState(): UseCalculatorStateReturn {
-  const [calculatorMode, setCalculatorMode] = useState<'simple' | 'rpn'>('rpn');
-  const [shiftActive, setShiftActive] = useState(false);
-  const [calculatorPrecision, setCalculatorPrecision] = useState<number>(4);
-  
-  const [calcValues, setCalcValues] = useState<Array<CalcValue | null>>([null, null, null, null]);
-  const [calcOp1, setCalcOp1] = useState<'+' | '-' | '*' | '/' | null>(null);
-  const [calcOp2, setCalcOp2] = useState<'+' | '-' | '*' | '/' | null>(null);
-  const [resultUnit, setResultUnit] = useState<string | null>(null);
-  const [resultCategory, setResultCategory] = useState<UnitCategory | null>(null);
-  const [resultPrefix, setResultPrefix] = useState<string>('none');
-  const [selectedAlternative, setSelectedAlternative] = useState<number>(0);
+  const { state, dispatch } = useConverterContext();
+  const s = state.calculator;
 
   return {
-    calculatorMode,
-    setCalculatorMode,
-    shiftActive,
-    setShiftActive,
-    calculatorPrecision,
-    setCalculatorPrecision,
-    calcValues,
-    setCalcValues,
-    calcOp1,
-    setCalcOp1,
-    calcOp2,
-    setCalcOp2,
-    resultUnit,
-    setResultUnit,
-    resultCategory,
-    setResultCategory,
-    resultPrefix,
-    setResultPrefix,
-    selectedAlternative,
-    setSelectedAlternative,
+    calculatorMode: s.calculatorMode,
+    setCalculatorMode: (v) => dispatch({ domain: 'calculator', type: 'SET_CALCULATOR_MODE', payload: v }),
+    shiftActive: s.shiftActive,
+    setShiftActive: (v) => dispatch({ domain: 'calculator', type: 'SET_SHIFT_ACTIVE', payload: v }),
+    calculatorPrecision: s.calculatorPrecision,
+    setCalculatorPrecision: (v) => dispatch({ domain: 'calculator', type: 'SET_CALCULATOR_PRECISION', payload: v }),
+    calcValues: s.calcValues,
+    setCalcValues: (v) => typeof v === 'function'
+      ? dispatch({ domain: 'calculator', type: 'UPDATE_CALC_VALUES', payload: v })
+      : dispatch({ domain: 'calculator', type: 'SET_CALC_VALUES', payload: v }),
+    calcOp1: s.calcOp1,
+    setCalcOp1: (v) => dispatch({ domain: 'calculator', type: 'SET_CALC_OP1', payload: v }),
+    calcOp2: s.calcOp2,
+    setCalcOp2: (v) => dispatch({ domain: 'calculator', type: 'SET_CALC_OP2', payload: v }),
+    resultUnit: s.resultUnit,
+    setResultUnit: (v) => dispatch({ domain: 'calculator', type: 'SET_RESULT_UNIT', payload: v }),
+    resultCategory: s.resultCategory,
+    setResultCategory: (v) => dispatch({ domain: 'calculator', type: 'SET_RESULT_CATEGORY', payload: v }),
+    resultPrefix: s.resultPrefix,
+    setResultPrefix: (v) => dispatch({ domain: 'calculator', type: 'SET_RESULT_PREFIX', payload: v }),
+    selectedAlternative: s.selectedAlternative,
+    setSelectedAlternative: (v) => dispatch({ domain: 'calculator', type: 'SET_SELECTED_ALTERNATIVE', payload: v }),
   };
 }

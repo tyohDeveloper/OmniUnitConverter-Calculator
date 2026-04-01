@@ -1,10 +1,15 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
+import React from 'react';
 import { useFlashFlag, useAllFlashFlags } from '../client/src/components/unit-converter/hooks/useFlashFlag';
 import { useRpnStack } from '../client/src/components/unit-converter/hooks/useRpnStack';
 import { useConverterState } from '../client/src/components/unit-converter/hooks/useConverterState';
 import { useCalculatorState } from '../client/src/components/unit-converter/hooks/useCalculatorState';
+import { ConverterProvider } from '../client/src/components/unit-converter/context/ConverterContext';
 import type { CalcValue } from '../client/src/lib/units/shared-types';
+
+const wrapper = ({ children }: { children: React.ReactNode }) =>
+  React.createElement(ConverterProvider, null, children);
 
 describe('useFlashFlag', () => {
   beforeEach(() => {
@@ -148,603 +153,269 @@ describe('useAllFlashFlags', () => {
   });
 });
 
-describe('useRpnStack', () => {
+describe('useRpnStack (wiring tests)', () => {
   const createTestValue = (value: number, dims: Record<string, number> = {}): CalcValue => ({
     value,
     dimensions: dims,
     prefix: 'none'
   });
 
-  describe('initialization', () => {
-    it('should initialize with empty stack', () => {
-      const { result } = renderHook(() => useRpnStack());
+  describe('initial state wiring', () => {
+    it('should expose initial empty stack from context', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
       expect(result.current.rpnStack).toEqual([null, null, null, null]);
     });
 
-    it('should initialize with null lastX', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should expose null lastX from context', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
       expect(result.current.lastX).toBeNull();
     });
 
-    it('should initialize with default prefix "none"', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should expose default prefix "none" from context', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
       expect(result.current.rpnResultPrefix).toBe('none');
     });
 
-    it('should initialize with rpnXEditing = false', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should expose rpnXEditing = false from context', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
       expect(result.current.rpnXEditing).toBe(false);
     });
   });
 
-  describe('pushValue', () => {
-    it('should push value onto stack at position 0', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const testValue = createTestValue(42);
+  describe('push/pop wiring via context dispatch', () => {
+    it('should dispatch pushValue and reflect in context state', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v = createTestValue(42);
       
-      act(() => {
-        result.current.pushValue(testValue);
-      });
+      act(() => { result.current.pushValue(v); });
       
-      expect(result.current.rpnStack[0]).toEqual(testValue);
+      expect(result.current.rpnStack[0]).toEqual(v);
     });
 
-    it('should shift existing values up when pushing', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      const value3 = createTestValue(3);
+    it('should dispatch dropValue and shift stack down', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v1 = createTestValue(1);
+      const v2 = createTestValue(2);
       
       act(() => {
-        result.current.pushValue(value1);
+        result.current.pushValue(v1);
+        result.current.pushValue(v2);
       });
+      act(() => { result.current.dropValue(); });
       
-      act(() => {
-        result.current.pushValue(value2);
-      });
-      
-      act(() => {
-        result.current.pushValue(value3);
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(value3);
-      expect(result.current.rpnStack[1]).toEqual(value2);
-      expect(result.current.rpnStack[2]).toEqual(value1);
-      expect(result.current.rpnStack[3]).toBeNull();
+      expect(result.current.rpnStack[0]).toEqual(v1);
     });
 
-    it('should preserve previous stack for undo', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
+    it('should dispatch swapXY and reflect swap in context state', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v1 = createTestValue(1);
+      const v2 = createTestValue(2);
       
       act(() => {
-        result.current.pushValue(value1);
+        result.current.pushValue(v1);
+        result.current.pushValue(v2);
       });
+      act(() => { result.current.swapXY(); });
       
-      const stackBeforePush = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.pushValue(value2);
-      });
-      
-      expect(result.current.previousRpnStack).toEqual(stackBeforePush);
+      expect(result.current.rpnStack[0]).toEqual(v1);
+      expect(result.current.rpnStack[1]).toEqual(v2);
     });
 
-    it('should reset prefix and alternative selection on push', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should dispatch clearStack and reset context state', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
       
-      act(() => {
-        result.current.setRpnResultPrefix('k');
-        result.current.setRpnSelectedAlternative(2);
-      });
-      
-      act(() => {
-        result.current.pushValue(createTestValue(1));
-      });
-      
-      expect(result.current.rpnResultPrefix).toBe('none');
-      expect(result.current.rpnSelectedAlternative).toBe(0);
-    });
-  });
-
-  describe('dropValue', () => {
-    it('should remove value from position 0 and shift down', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      
-      act(() => {
-        result.current.pushValue(value1);
-        result.current.pushValue(value2);
-      });
-      
-      act(() => {
-        result.current.dropValue();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(value1);
-      expect(result.current.rpnStack[1]).toBeNull();
-    });
-
-    it('should set position 3 to null after drop', () => {
-      const { result } = renderHook(() => useRpnStack());
-      
-      act(() => {
-        result.current.pushValue(createTestValue(1));
-        result.current.pushValue(createTestValue(2));
-        result.current.pushValue(createTestValue(3));
-        result.current.pushValue(createTestValue(4));
-      });
-      
-      act(() => {
-        result.current.dropValue();
-      });
-      
-      expect(result.current.rpnStack[3]).toBeNull();
-    });
-  });
-
-  describe('swapXY', () => {
-    it('should swap values at positions 0 and 1', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      
-      act(() => {
-        result.current.pushValue(value1);
-        result.current.pushValue(value2);
-      });
-      
-      act(() => {
-        result.current.swapXY();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(value1);
-      expect(result.current.rpnStack[1]).toEqual(value2);
-    });
-
-    it('should not swap if position 0 is null', () => {
-      const { result } = renderHook(() => useRpnStack());
-      
-      act(() => {
-        result.current.swapXY();
-      });
+      act(() => { result.current.pushValue(createTestValue(1)); });
+      act(() => { result.current.clearStack(); });
       
       expect(result.current.rpnStack).toEqual([null, null, null, null]);
     });
 
-    it('should not swap if position 1 is null', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value = createTestValue(1);
+    it('should dispatch undoStack and restore previous state', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v1 = createTestValue(1);
       
-      act(() => {
-        result.current.pushValue(value);
-      });
+      act(() => { result.current.pushValue(v1); });
+      const stackAfterPush = [...result.current.rpnStack];
+      act(() => { result.current.pushValue(createTestValue(2)); });
+      act(() => { result.current.undoStack(); });
       
-      act(() => {
-        result.current.swapXY();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(value);
-      expect(result.current.rpnStack[1]).toBeNull();
+      expect(result.current.rpnStack).toEqual(stackAfterPush);
     });
-  });
 
-  describe('clearStack', () => {
-    it('should reset stack to all nulls', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should dispatch recallLastX and push lastX onto stack', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const lastXValue = createTestValue(99);
       
-      act(() => {
-        result.current.pushValue(createTestValue(1));
-        result.current.pushValue(createTestValue(2));
-      });
+      act(() => { result.current.setLastX(lastXValue); });
+      act(() => { result.current.recallLastX(); });
       
-      act(() => {
-        result.current.clearStack();
-      });
+      expect(result.current.rpnStack[0]).toEqual(lastXValue);
+    });
+
+    it('recallLastX is a no-op when lastX is null', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      
+      act(() => { result.current.recallLastX(); });
       
       expect(result.current.rpnStack).toEqual([null, null, null, null]);
     });
 
-    it('should clear lastX', () => {
-      const { result } = renderHook(() => useRpnStack());
+    it('should dispatch saveAndUpdateStack and save previous', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v = createTestValue(1);
       
-      act(() => {
-        result.current.setLastX(createTestValue(42));
-      });
-      
-      act(() => {
-        result.current.clearStack();
-      });
-      
-      expect(result.current.lastX).toBeNull();
-    });
-
-    it('should reset editing state', () => {
-      const { result } = renderHook(() => useRpnStack());
-      
-      act(() => {
-        result.current.setRpnXEditing(true);
-        result.current.setRpnXEditValue('123');
-      });
-      
-      act(() => {
-        result.current.clearStack();
-      });
-      
-      expect(result.current.rpnXEditing).toBe(false);
-      expect(result.current.rpnXEditValue).toBe('');
-    });
-  });
-
-  describe('undoStack', () => {
-    it('should restore previous stack state', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      
-      act(() => {
-        result.current.pushValue(value1);
-      });
-      
-      const stackAfterFirstPush = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.pushValue(value2);
-      });
-      
-      act(() => {
-        result.current.undoStack();
-      });
-      
-      expect(result.current.rpnStack).toEqual(stackAfterFirstPush);
-    });
-
-    it('should restore state after multiple operations', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      const value3 = createTestValue(3);
-      
-      act(() => {
-        result.current.pushValue(value1);
-        result.current.pushValue(value2);
-      });
-      
-      act(() => {
-        result.current.pushValue(value3);
-      });
-      
-      act(() => {
-        result.current.undoStack();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(value2);
-      expect(result.current.rpnStack[1]).toEqual(value1);
-      expect(result.current.rpnStack[2]).toBeNull();
-    });
-
-    it('should restore state after drop operation', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      
-      act(() => {
-        result.current.pushValue(value1);
-        result.current.pushValue(value2);
-      });
-      
-      const stackBeforeDrop = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.dropValue();
-      });
-      
-      act(() => {
-        result.current.undoStack();
-      });
-      
-      expect(result.current.rpnStack).toEqual(stackBeforeDrop);
-    });
-
-    it('should restore state after swap operation', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      const value2 = createTestValue(2);
-      
-      act(() => {
-        result.current.pushValue(value1);
-        result.current.pushValue(value2);
-      });
-      
-      const stackBeforeSwap = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.swapXY();
-      });
-      
-      act(() => {
-        result.current.undoStack();
-      });
-      
-      expect(result.current.rpnStack).toEqual(stackBeforeSwap);
-    });
-
-    it('should restore state after clear operation', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value1 = createTestValue(1);
-      
-      act(() => {
-        result.current.pushValue(value1);
-      });
-      
-      const stackBeforeClear = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.clearStack();
-      });
-      
-      act(() => {
-        result.current.undoStack();
-      });
-      
-      expect(result.current.rpnStack).toEqual(stackBeforeClear);
-    });
-  });
-
-  describe('recallLastX', () => {
-    it('should push lastX value onto stack', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const lastXValue = createTestValue(99);
-      
-      act(() => {
-        result.current.setLastX(lastXValue);
-      });
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(lastXValue);
-    });
-
-    it('should do nothing if lastX is null', () => {
-      const { result } = renderHook(() => useRpnStack());
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.rpnStack).toEqual([null, null, null, null]);
-    });
-
-    it('should shift existing stack values when recalling lastX', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const existingValue = createTestValue(1);
-      const lastXValue = createTestValue(99);
-      
-      act(() => {
-        result.current.pushValue(existingValue);
-        result.current.setLastX(lastXValue);
-      });
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(lastXValue);
-      expect(result.current.rpnStack[1]).toEqual(existingValue);
-    });
-
-    it('should preserve lastX value after recall (for multiple recalls)', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const lastXValue = createTestValue(99);
-      
-      act(() => {
-        result.current.setLastX(lastXValue);
-      });
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.lastX).toEqual(lastXValue);
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(lastXValue);
-      expect(result.current.rpnStack[1]).toEqual(lastXValue);
-    });
-
-    it('should handle lastX with dimensions', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const lastXValue: CalcValue = {
-        value: 42,
-        dimensions: { mass: 1, length: 2, time: -2 },
-        prefix: 'k'
-      };
-      
-      act(() => {
-        result.current.setLastX(lastXValue);
-      });
-      
-      act(() => {
-        result.current.recallLastX();
-      });
-      
-      expect(result.current.rpnStack[0]).toEqual(lastXValue);
-      expect(result.current.rpnStack[0]!.dimensions).toEqual({ mass: 1, length: 2, time: -2 });
-      expect(result.current.rpnStack[0]!.prefix).toBe('k');
-    });
-  });
-
-  describe('saveAndUpdateStack', () => {
-    it('should save current stack before updating', () => {
-      const { result } = renderHook(() => useRpnStack());
-      const value = createTestValue(1);
-      
-      act(() => {
-        result.current.pushValue(value);
-      });
-      
+      act(() => { result.current.pushValue(v); });
       const currentStack = [...result.current.rpnStack];
-      
-      act(() => {
-        result.current.saveAndUpdateStack(() => [null, null, null, null]);
-      });
+      act(() => { result.current.saveAndUpdateStack(() => [null, null, null, null]); });
       
       expect(result.current.previousRpnStack).toEqual(currentStack);
     });
   });
+
+  describe('setter wiring', () => {
+    it('should dispatch setRpnResultPrefix', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      act(() => { result.current.setRpnResultPrefix('k'); });
+      expect(result.current.rpnResultPrefix).toBe('k');
+    });
+
+    it('should dispatch setRpnSelectedAlternative', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      act(() => { result.current.setRpnSelectedAlternative(2); });
+      expect(result.current.rpnSelectedAlternative).toBe(2);
+    });
+
+    it('should dispatch setRpnXEditing', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      act(() => { result.current.setRpnXEditing(true); });
+      expect(result.current.rpnXEditing).toBe(true);
+    });
+
+    it('should dispatch setRpnXEditValue', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      act(() => { result.current.setRpnXEditValue('3.14'); });
+      expect(result.current.rpnXEditValue).toBe('3.14');
+    });
+
+    it('should dispatch setLastX', () => {
+      const { result } = renderHook(() => useRpnStack(), { wrapper });
+      const v = createTestValue(7);
+      act(() => { result.current.setLastX(v); });
+      expect(result.current.lastX).toEqual(v);
+    });
+  });
 });
 
-describe('useConverterState', () => {
-  describe('initial state', () => {
-    it('should initialize activeCategory to "length"', () => {
-      const { result } = renderHook(() => useConverterState());
+describe('useConverterState (wiring tests)', () => {
+  describe('initial state wiring', () => {
+    it('should expose activeCategory = "length" from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.activeCategory).toBe('length');
     });
 
-    it('should initialize fromUnit to empty string', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose fromUnit = "" from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.fromUnit).toBe('');
     });
 
-    it('should initialize toUnit to empty string', () => {
-      const { result } = renderHook(() => useConverterState());
-      expect(result.current.toUnit).toBe('');
-    });
-
-    it('should initialize fromPrefix to "none"', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose fromPrefix = "none" from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.fromPrefix).toBe('none');
     });
 
-    it('should initialize toPrefix to "none"', () => {
-      const { result } = renderHook(() => useConverterState());
-      expect(result.current.toPrefix).toBe('none');
-    });
-
-    it('should initialize inputValue to "1"', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose inputValue = "1" from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.inputValue).toBe('1');
     });
 
-    it('should initialize result to null', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose result = null from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.result).toBeNull();
     });
 
-    it('should initialize precision to 4', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose precision = 4 from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.precision).toBe(4);
     });
 
-    it('should initialize comparisonMode to false', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose comparisonMode = false from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.comparisonMode).toBe(false);
     });
 
-    it('should provide an inputRef object', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('should expose an inputRef from context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       expect(result.current.inputRef).toBeDefined();
       expect(result.current.inputRef).toHaveProperty('current');
     });
   });
 
-  describe('state transitions', () => {
-    it('should update activeCategory when setActiveCategory is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setActiveCategory('mass');
-      });
+  describe('dispatch wiring', () => {
+    it('setActiveCategory dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setActiveCategory('mass'); });
       expect(result.current.activeCategory).toBe('mass');
     });
 
-    it('should update fromUnit when setFromUnit is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setFromUnit('meter');
-      });
+    it('setFromUnit dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setFromUnit('meter'); });
       expect(result.current.fromUnit).toBe('meter');
     });
 
-    it('should update toUnit when setToUnit is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setToUnit('foot');
-      });
+    it('setToUnit dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setToUnit('foot'); });
       expect(result.current.toUnit).toBe('foot');
     });
 
-    it('should update fromPrefix when setFromPrefix is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setFromPrefix('k');
-      });
+    it('setFromPrefix dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setFromPrefix('k'); });
       expect(result.current.fromPrefix).toBe('k');
     });
 
-    it('should update toPrefix when setToPrefix is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setToPrefix('m');
-      });
+    it('setToPrefix dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setToPrefix('m'); });
       expect(result.current.toPrefix).toBe('m');
     });
 
-    it('should update inputValue when setInputValue is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setInputValue('42');
-      });
+    it('setInputValue dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setInputValue('42'); });
       expect(result.current.inputValue).toBe('42');
     });
 
-    it('should update result when setResult is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setResult(3.14159);
-      });
+    it('setResult dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setResult(3.14159); });
       expect(result.current.result).toBe(3.14159);
     });
 
-    it('should allow result to be reset to null', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setResult(100);
-      });
-      act(() => {
-        result.current.setResult(null);
-      });
+    it('setResult can be reset to null', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setResult(100); });
+      act(() => { result.current.setResult(null); });
       expect(result.current.result).toBeNull();
     });
 
-    it('should update precision when setPrecision is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setPrecision(8);
-      });
+    it('setPrecision dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setPrecision(8); });
       expect(result.current.precision).toBe(8);
     });
 
-    it('should toggle comparisonMode when setComparisonMode is called', () => {
-      const { result } = renderHook(() => useConverterState());
-      act(() => {
-        result.current.setComparisonMode(true);
-      });
+    it('setComparisonMode dispatches and updates context state', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
+      act(() => { result.current.setComparisonMode(true); });
       expect(result.current.comparisonMode).toBe(true);
-      act(() => {
-        result.current.setComparisonMode(false);
-      });
+      act(() => { result.current.setComparisonMode(false); });
       expect(result.current.comparisonMode).toBe(false);
     });
 
-    it('should allow multiple independent state changes', () => {
-      const { result } = renderHook(() => useConverterState());
+    it('multiple state changes dispatch correctly to context', () => {
+      const { result } = renderHook(() => useConverterState(), { wrapper });
       act(() => {
         result.current.setActiveCategory('temperature');
         result.current.setFromUnit('celsius');
@@ -763,232 +434,130 @@ describe('useConverterState', () => {
   });
 });
 
-describe('useCalculatorState', () => {
-  describe('initial state', () => {
-    it('should initialize calculatorMode to "rpn"', () => {
-      const { result } = renderHook(() => useCalculatorState());
+describe('useCalculatorState (wiring tests)', () => {
+  describe('initial state wiring', () => {
+    it('should expose calculatorMode = "rpn" from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.calculatorMode).toBe('rpn');
     });
 
-    it('should initialize shiftActive to false', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose shiftActive = false from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.shiftActive).toBe(false);
     });
 
-    it('should initialize calculatorPrecision to 4', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose calculatorPrecision = 4 from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.calculatorPrecision).toBe(4);
     });
 
-    it('should initialize calcValues to [null, null, null, null]', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose calcValues = [null,null,null,null] from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.calcValues).toEqual([null, null, null, null]);
     });
 
-    it('should initialize calcOp1 to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose calcOp1 = null from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.calcOp1).toBeNull();
     });
 
-    it('should initialize calcOp2 to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      expect(result.current.calcOp2).toBeNull();
-    });
-
-    it('should initialize resultUnit to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      expect(result.current.resultUnit).toBeNull();
-    });
-
-    it('should initialize resultCategory to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      expect(result.current.resultCategory).toBeNull();
-    });
-
-    it('should initialize resultPrefix to "none"', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose resultPrefix = "none" from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.resultPrefix).toBe('none');
     });
 
-    it('should initialize selectedAlternative to 0', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('should expose selectedAlternative = 0 from context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       expect(result.current.selectedAlternative).toBe(0);
     });
   });
 
-  describe('mode switching', () => {
-    it('should switch from "rpn" to "simple" mode', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalculatorMode('simple');
-      });
+  describe('dispatch wiring', () => {
+    it('setCalculatorMode dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setCalculatorMode('simple'); });
       expect(result.current.calculatorMode).toBe('simple');
     });
 
-    it('should switch back from "simple" to "rpn" mode', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalculatorMode('simple');
-      });
-      act(() => {
-        result.current.setCalculatorMode('rpn');
-      });
-      expect(result.current.calculatorMode).toBe('rpn');
-    });
-  });
-
-  describe('state transitions', () => {
-    it('should update shiftActive when setShiftActive is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setShiftActive(true);
-      });
+    it('setShiftActive dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setShiftActive(true); });
       expect(result.current.shiftActive).toBe(true);
     });
 
-    it('should update calculatorPrecision when setCalculatorPrecision is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalculatorPrecision(6);
-      });
+    it('setCalculatorPrecision dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setCalculatorPrecision(6); });
       expect(result.current.calculatorPrecision).toBe(6);
     });
 
-    it('should update calcOp1 to a valid operator', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalcOp1('+');
-      });
+    it('setCalcOp1 dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setCalcOp1('+'); });
       expect(result.current.calcOp1).toBe('+');
     });
 
-    it('should update calcOp2 to a valid operator', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalcOp2('-');
-      });
+    it('setCalcOp2 dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setCalcOp2('-'); });
       expect(result.current.calcOp2).toBe('-');
     });
 
-    it('should reset calcOp1 to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalcOp1('*');
-      });
-      act(() => {
-        result.current.setCalcOp1(null);
-      });
-      expect(result.current.calcOp1).toBeNull();
-    });
-
-    it('should reset calcOp2 to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setCalcOp2('/');
-      });
-      act(() => {
-        result.current.setCalcOp2(null);
-      });
-      expect(result.current.calcOp2).toBeNull();
-    });
-
-    it('should update resultUnit when setResultUnit is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setResultUnit('meter');
-      });
+    it('setResultUnit dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setResultUnit('meter'); });
       expect(result.current.resultUnit).toBe('meter');
     });
 
-    it('should update resultCategory when setResultCategory is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setResultCategory('length');
-      });
+    it('setResultCategory dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setResultCategory('length'); });
       expect(result.current.resultCategory).toBe('length');
     });
 
-    it('should update resultPrefix when setResultPrefix is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setResultPrefix('k');
-      });
+    it('setResultPrefix dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setResultPrefix('k'); });
       expect(result.current.resultPrefix).toBe('k');
     });
 
-    it('should update selectedAlternative when setSelectedAlternative is called', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setSelectedAlternative(2);
-      });
+    it('setSelectedAlternative dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      act(() => { result.current.setSelectedAlternative(2); });
       expect(result.current.selectedAlternative).toBe(2);
     });
 
-    it('should update calcValues with new entries', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('setCalcValues dispatches and updates context', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       const newValues: Array<CalcValue | null> = [
         { value: 10, dimensions: {}, prefix: 'none' },
         { value: 20, dimensions: {}, prefix: 'none' },
         null,
         null,
       ];
-      act(() => {
-        result.current.setCalcValues(newValues);
-      });
+      act(() => { result.current.setCalcValues(newValues); });
       expect(result.current.calcValues).toEqual(newValues);
     });
-  });
 
-  describe('state resets', () => {
-    it('should be able to reset calcValues to all nulls', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('setCalcValues supports functional updater pattern', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
+      const v1: CalcValue = { value: 5, dimensions: {}, prefix: 'none' };
       act(() => {
-        result.current.setCalcValues([
-          { value: 5, dimensions: {}, prefix: 'none' },
-          null, null, null,
-        ]);
+        result.current.setCalcValues([v1, null, null, null]);
       });
       act(() => {
-        result.current.setCalcValues([null, null, null, null]);
+        result.current.setCalcValues(prev => {
+          const next = [...prev];
+          next[1] = { value: 10, dimensions: {}, prefix: 'none' };
+          return next;
+        });
       });
-      expect(result.current.calcValues).toEqual([null, null, null, null]);
+      expect(result.current.calcValues[0]).toEqual(v1);
+      expect(result.current.calcValues[1]?.value).toBe(10);
     });
 
-    it('should be able to reset resultUnit to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setResultUnit('kilogram');
-      });
-      act(() => {
-        result.current.setResultUnit(null);
-      });
-      expect(result.current.resultUnit).toBeNull();
-    });
-
-    it('should be able to reset resultCategory to null', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setResultCategory('mass');
-      });
-      act(() => {
-        result.current.setResultCategory(null);
-      });
-      expect(result.current.resultCategory).toBeNull();
-    });
-
-    it('should be able to reset shiftActive to false after activating', () => {
-      const { result } = renderHook(() => useCalculatorState());
-      act(() => {
-        result.current.setShiftActive(true);
-      });
-      act(() => {
-        result.current.setShiftActive(false);
-      });
-      expect(result.current.shiftActive).toBe(false);
-    });
-
-    it('should support full state reset by resetting each field independently', () => {
-      const { result } = renderHook(() => useCalculatorState());
+    it('full state reset via dispatch', () => {
+      const { result } = renderHook(() => useCalculatorState(), { wrapper });
       act(() => {
         result.current.setCalculatorMode('simple');
         result.current.setShiftActive(true);

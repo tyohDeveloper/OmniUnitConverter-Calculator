@@ -1,59 +1,52 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import type { UnitCategory } from '@/lib/units/types';
+import { useConverterContext } from '../context/ConverterContext';
 
 export interface UseConverterStateReturn {
   inputRef: React.RefObject<HTMLInputElement | null>;
   activeCategory: UnitCategory;
-  setActiveCategory: React.Dispatch<React.SetStateAction<UnitCategory>>;
+  setActiveCategory: (value: UnitCategory) => void;
   fromUnit: string;
-  setFromUnit: React.Dispatch<React.SetStateAction<string>>;
+  setFromUnit: (value: string) => void;
   toUnit: string;
-  setToUnit: React.Dispatch<React.SetStateAction<string>>;
+  setToUnit: (value: string) => void;
   fromPrefix: string;
-  setFromPrefix: React.Dispatch<React.SetStateAction<string>>;
+  setFromPrefix: (value: string) => void;
   toPrefix: string;
-  setToPrefix: React.Dispatch<React.SetStateAction<string>>;
+  setToPrefix: (value: string) => void;
   inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  setInputValue: (value: string) => void;
   result: number | null;
-  setResult: React.Dispatch<React.SetStateAction<number | null>>;
+  setResult: (value: number | null) => void;
   precision: number;
-  setPrecision: React.Dispatch<React.SetStateAction<number>>;
+  setPrecision: (value: number) => void;
   comparisonMode: boolean;
-  setComparisonMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setComparisonMode: (value: boolean) => void;
 }
 
 export function useConverterState(): UseConverterStateReturn {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [activeCategory, setActiveCategory] = useState<UnitCategory>('length');
-  const [fromUnit, setFromUnit] = useState<string>('');
-  const [toUnit, setToUnit] = useState<string>('');
-  const [fromPrefix, setFromPrefix] = useState<string>('none');
-  const [toPrefix, setToPrefix] = useState<string>('none');
-  const [inputValue, setInputValue] = useState<string>('1');
-  const [result, setResult] = useState<number | null>(null);
-  const [precision, setPrecision] = useState<number>(4);
-  const [comparisonMode, setComparisonMode] = useState<boolean>(false);
+  const { state, dispatch, inputRef } = useConverterContext();
+  const s = state.converter;
 
   return {
     inputRef,
-    activeCategory,
-    setActiveCategory,
-    fromUnit,
-    setFromUnit,
-    toUnit,
-    setToUnit,
-    fromPrefix,
-    setFromPrefix,
-    toPrefix,
-    setToPrefix,
-    inputValue,
-    setInputValue,
-    result,
-    setResult,
-    precision,
-    setPrecision,
-    comparisonMode,
-    setComparisonMode,
+    activeCategory: s.activeCategory,
+    setActiveCategory: (v) => dispatch({ domain: 'converter', type: 'SET_ACTIVE_CATEGORY', payload: v }),
+    fromUnit: s.fromUnit,
+    setFromUnit: (v) => dispatch({ domain: 'converter', type: 'SET_FROM_UNIT', payload: v }),
+    toUnit: s.toUnit,
+    setToUnit: (v) => dispatch({ domain: 'converter', type: 'SET_TO_UNIT', payload: v }),
+    fromPrefix: s.fromPrefix,
+    setFromPrefix: (v) => dispatch({ domain: 'converter', type: 'SET_FROM_PREFIX', payload: v }),
+    toPrefix: s.toPrefix,
+    setToPrefix: (v) => dispatch({ domain: 'converter', type: 'SET_TO_PREFIX', payload: v }),
+    inputValue: s.inputValue,
+    setInputValue: (v) => dispatch({ domain: 'converter', type: 'SET_INPUT_VALUE', payload: v }),
+    result: s.result,
+    setResult: (v) => dispatch({ domain: 'converter', type: 'SET_RESULT', payload: v }),
+    precision: s.precision,
+    setPrecision: (v) => dispatch({ domain: 'converter', type: 'SET_PRECISION', payload: v }),
+    comparisonMode: s.comparisonMode,
+    setComparisonMode: (v) => dispatch({ domain: 'converter', type: 'SET_COMPARISON_MODE', payload: v }),
   };
 }

@@ -1,40 +1,28 @@
-import React, { createContext, useContext, useState, type ReactNode } from 'react';
-import type { NumberFormat } from '@/lib/formatting';
-import { useConverterState, type UseConverterStateReturn } from '../hooks/useConverterState';
-import { useCalculatorState, type UseCalculatorStateReturn } from '../hooks/useCalculatorState';
-import { useRpnStack, type UseRpnStackReturn } from '../hooks/useRpnStack';
+import React, { createContext, useContext, useReducer, useRef, type ReactNode } from 'react';
+import { converterReducer, converterInitialState, type ConverterState, type ConverterAction } from '../state/converterReducer';
+import { calculatorReducer, calculatorInitialState, type CalculatorState, type CalculatorAction } from '../state/calculatorReducer';
+import { rpnReducer, rpnInitialState, type RpnState, type RpnAction } from '../state/rpnReducer';
+import { uiPrefsReducer, uiPrefsInitialState, type UiPrefsState, type UiPrefsAction } from '../state/uiPrefsReducer';
 import { useAllFlashFlags, type FlashFlags } from '../hooks/useFlashFlag';
 
+export type AppAction =
+  | ({ domain: 'converter' } & ConverterAction)
+  | ({ domain: 'calculator' } & CalculatorAction)
+  | ({ domain: 'rpn' } & RpnAction)
+  | ({ domain: 'uiPrefs' } & UiPrefsAction);
+
+export interface AppState {
+  converter: ConverterState;
+  calculator: CalculatorState;
+  rpn: RpnState;
+  uiPrefs: UiPrefsState;
+}
+
 export interface ConverterContextValue {
-  // Converter state (from useConverterState hook)
-  converter: UseConverterStateReturn;
-  
-  // Calculator state (from useCalculatorState hook)
-  calculator: UseCalculatorStateReturn;
-  
-  // RPN stack (from useRpnStack hook)
-  rpn: UseRpnStackReturn;
-  
-  // Flash flags (from useAllFlashFlags hook)
+  state: AppState;
+  dispatch: React.Dispatch<AppAction>;
   flash: FlashFlags;
-  
-  // Tab state
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-  
-  // Number format state
-  numberFormat: NumberFormat;
-  setNumberFormat: React.Dispatch<React.SetStateAction<NumberFormat>>;
-  
-  // Language state
-  language: string;
-  setLanguage: React.Dispatch<React.SetStateAction<string>>;
-  
-  // Direct tab state
-  directValue: string;
-  setDirectValue: React.Dispatch<React.SetStateAction<string>>;
-  directExponents: Record<string, number>;
-  setDirectExponents: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 const ConverterContext = createContext<ConverterContextValue | null>(null);
@@ -47,57 +35,50 @@ export function useConverterContext(): ConverterContextValue {
   return context;
 }
 
+const initialState: AppState = {
+  converter: converterInitialState,
+  calculator: calculatorInitialState,
+  rpn: rpnInitialState,
+  uiPrefs: uiPrefsInitialState,
+};
+
+function appReducer(state: AppState, action: AppAction): AppState {
+  switch (action.domain) {
+    case 'converter': {
+      const { domain: _d, ...converterAction } = action;
+      return { ...state, converter: converterReducer(state.converter, converterAction as ConverterAction) };
+    }
+    case 'calculator': {
+      const { domain: _d, ...calculatorAction } = action;
+      return { ...state, calculator: calculatorReducer(state.calculator, calculatorAction as CalculatorAction) };
+    }
+    case 'rpn': {
+      const { domain: _d, ...rpnAction } = action;
+      return { ...state, rpn: rpnReducer(state.rpn, rpnAction as RpnAction) };
+    }
+    case 'uiPrefs': {
+      const { domain: _d, ...uiPrefsAction } = action;
+      return { ...state, uiPrefs: uiPrefsReducer(state.uiPrefs, uiPrefsAction as UiPrefsAction) };
+    }
+  }
+}
+
 interface ConverterProviderProps {
   children: ReactNode;
 }
 
 export function ConverterProvider({ children }: ConverterProviderProps) {
-  // Use existing hooks for state management
-  const converter = useConverterState();
-  const calculator = useCalculatorState();
-  const rpn = useRpnStack();
+  const [state, dispatch] = useReducer(appReducer, initialState);
   const flash = useAllFlashFlags(300);
-  
-  // Tab state
-  const [activeTab, setActiveTab] = useState<string>('converter');
-  
-  // Number format state
-  const [numberFormat, setNumberFormat] = useState<NumberFormat>('uk');
-  
-  // Language state
-  const [language, setLanguage] = useState<string>('en');
-  
-  // Direct tab state
-  const [directValue, setDirectValue] = useState<string>('1');
-  const [directExponents, setDirectExponents] = useState<Record<string, number>>({
-    m: 0,
-    kg: 0,
-    s: 0,
-    A: 0,
-    K: 0,
-    mol: 0,
-    cd: 0,
-    rad: 0,
-    sr: 0
-  });
-  
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const value: ConverterContextValue = {
-    converter,
-    calculator,
-    rpn,
+    state,
+    dispatch,
     flash,
-    activeTab,
-    setActiveTab,
-    numberFormat,
-    setNumberFormat,
-    language,
-    setLanguage,
-    directValue,
-    setDirectValue,
-    directExponents,
-    setDirectExponents,
+    inputRef,
   };
-  
+
   return (
     <ConverterContext.Provider value={value}>
       {children}
