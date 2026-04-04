@@ -85,3 +85,48 @@ export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
   'typography', 'cooking', 'beer_wine_volume', 'fuel', 'fuel_economy', 'lightbulb', 'rack_geometry', 'shipping',
   'data', 'math'
 ];
+
+export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [
+  'radioactivity', 'radioactive_decay',
+  'radiation_dose', 'absorbed_dose', 'equivalent_dose',
+  'cross_section',
+  'photon',
+  'sound_pressure',
+  'sound_intensity',
+  'acoustic_impedance',
+  'refractive_power',
+  'fuel',
+];
+
+export const ALL_EXCLUDED_CATEGORIES = [
+  ...EXCLUDED_CROSS_DOMAIN_CATEGORIES,
+  ...EXCLUDED_DOMAIN_ALIAS_CATEGORIES,
+];
+
+export function getMatchingPhysicalQuantities(dimensions: DimensionalFormula): string[] {
+  const keys = Object.keys(dimensions) as (keyof DimensionalFormula)[];
+  const hasNonZero = keys.some(k => (dimensions[k] ?? 0) !== 0);
+  if (!hasNonZero) return [];
+
+  const results: string[] = [];
+  for (const [categoryKey, info] of Object.entries(CATEGORY_DIMENSIONS)) {
+    if (ALL_EXCLUDED_CATEGORIES.includes(categoryKey)) continue;
+
+    const catDims = info.dimensions;
+    const allKeys = Array.from(new Set([
+      ...Object.keys(dimensions),
+      ...Object.keys(catDims),
+    ])) as (keyof DimensionalFormula)[];
+
+    let match = true;
+    for (const k of allKeys) {
+      const a = (dimensions as Record<string, number>)[k] ?? 0;
+      const b = (catDims as Record<string, number>)[k] ?? 0;
+      if (a !== b) { match = false; break; }
+    }
+
+    if (match) results.push(info.name);
+  }
+
+  return results;
+}

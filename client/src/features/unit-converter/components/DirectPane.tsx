@@ -9,6 +9,7 @@ import { ClipboardPaste, Copy } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import type { NumberFormat } from '@/lib/formatting';
+import { getMatchingPhysicalQuantities } from '@/lib/units/categoryDimensions';
 
 interface DirectPaneProps {
   activeTab: string;
@@ -48,6 +49,10 @@ export function DirectPane({
   const clearExponents = () => setDirectExponents({
     m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0
   });
+
+  const currentDimensions = buildDirectDimensions();
+  const matchingQuantities = getMatchingPhysicalQuantities(currentDimensions);
+  const physicalQuantityLabel = matchingQuantities.length > 0 ? matchingQuantities.join(' / ') : null;
 
   const handleCopyAndPush = () => {
     const numValue = parseNumberWithFormat(directValue);
@@ -187,6 +192,14 @@ export function DirectPane({
                 );
               })()}
             </motion.div>
+            {physicalQuantityLabel && (
+              <span
+                className="text-xs font-mono text-accent"
+                {...testId('custom-physical-quantity-label')}
+              >
+                {physicalQuantityLabel}
+              </span>
+            )}
           </div>
 
           {/* Paste button aligned far right */}
