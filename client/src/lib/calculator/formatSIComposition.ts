@@ -17,9 +17,9 @@ export const formatSIComposition = (
 ): string => {
   const { pos, neg } = splitSignedDims(remainingDims);
   const parts: string[] = [];
+  parts.push(...derivedSymbols);
   const positiveBase = formatDimensions(pos);
   if (positiveBase) parts.push(positiveBase);
-  parts.push(...derivedSymbols);
   const negativeBase = formatDimensions(neg);
   if (negativeBase) parts.push(negativeBase);
   return parts.join('⋅');

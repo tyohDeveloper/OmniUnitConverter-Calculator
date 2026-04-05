@@ -429,3 +429,27 @@ describe('applyRpnBinary', () => {
     expect(result?.value).toBe(7);
   });
 });
+
+// ── formatSIComposition ───────────────────────────────────────────────────────
+
+describe('formatSIComposition', () => {
+  it('places derived symbol before remaining positive base dimension', () => {
+    expect(formatSIComposition(['N'], { length: 1 })).toBe('N⋅m');
+  });
+
+  it('places derived symbol before multiple remaining positive base dimensions', () => {
+    expect(formatSIComposition(['N'], { length: 1, mass: 1 })).toBe('N⋅kg⋅m');
+  });
+
+  it('places derived symbol before negative base dimensions', () => {
+    expect(formatSIComposition(['W'], { length: -2 })).toBe('W⋅m⁻²');
+  });
+
+  it('renders derived symbol alone when no remaining dimensions', () => {
+    expect(formatSIComposition(['N'], {})).toBe('N');
+  });
+
+  it('places derived symbol before both positive and negative remaining dims', () => {
+    expect(formatSIComposition(['Pa'], { length: 1, time: -1 })).toBe('Pa⋅m⋅s⁻¹');
+  });
+});
