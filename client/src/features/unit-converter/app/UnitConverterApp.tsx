@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
@@ -47,6 +47,8 @@ import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
 import { useAllFlashFlags } from '@/components/unit-converter/hooks/useFlashFlag';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { ClipboardPaste } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import HelpSection from '@/components/help-section';
 import {
@@ -102,6 +104,11 @@ export default function UnitConverterApp() {
   } = rpn;
 
   const [activeTab, setActiveTab] = useState<string>('converter');
+
+  const [converterPasteStatus, setConverterPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
+  const [customPasteStatus, setCustomPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
+  const converterPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const customPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [directValue, setDirectValue] = useState<string>('1');
   const [directExponents, setDirectExponents] = useState<Record<string, number>>({
@@ -458,6 +465,13 @@ export default function UnitConverterApp() {
     setToUnit(tempUnit); setToPrefix(tempPrefix);
   };
 
+  useEffect(() => {
+    return () => {
+      if (converterPasteTimerRef.current) clearTimeout(converterPasteTimerRef.current);
+      if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
+    };
+  }, []);
+
   const handleConverterSmartPaste = async (): Promise<'ok' | 'unrecognised' | 'unavailable'> => {
     try {
       const text = await navigator.clipboard.readText();
@@ -475,6 +489,54 @@ export default function UnitConverterApp() {
       return 'unavailable';
     }
   };
+
+  const handleConverterSmartPasteClick = useCallback(async () => {
+    const status = await handleConverterSmartPaste();
+    if (status !== 'ok') {
+      setConverterPasteStatus(status);
+      if (converterPasteTimerRef.current) clearTimeout(converterPasteTimerRef.current);
+      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), 2000);
+    } else {
+      setConverterPasteStatus('idle');
+    }
+  }, []);
+
+  const handleCustomSmartPasteClick = useCallback(async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text) {
+        setCustomPasteStatus('unrecognised');
+        if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
+        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 2000);
+        return;
+      }
+      const parsed = parseUnitText(text);
+      setDirectValue(parsed.value.toString());
+      const newExponents: Record<string, number> = {
+        m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0
+      };
+      if (parsed.dimensions.length) newExponents.m = parsed.dimensions.length;
+      if (parsed.dimensions.mass) newExponents.kg = parsed.dimensions.mass;
+      if (parsed.dimensions.time) newExponents.s = parsed.dimensions.time;
+      if (parsed.dimensions.current) newExponents.A = parsed.dimensions.current;
+      if (parsed.dimensions.temperature) newExponents.K = parsed.dimensions.temperature;
+      if (parsed.dimensions.amount) newExponents.mol = parsed.dimensions.amount;
+      if (parsed.dimensions.intensity) newExponents.cd = parsed.dimensions.intensity;
+      if (parsed.dimensions.angle) newExponents.rad = parsed.dimensions.angle;
+      if (parsed.dimensions.solid_angle) newExponents.sr = parsed.dimensions.solid_angle;
+      const hasOutOfRange = Object.values(newExponents).some(exp => exp < -5 || exp > 5);
+      if (hasOutOfRange) {
+        setDirectExponents({ m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0 });
+      } else {
+        setDirectExponents(newExponents);
+      }
+      setCustomPasteStatus('idle');
+    } catch {
+      setCustomPasteStatus('unavailable');
+      if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
+      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 2000);
+    }
+  }, []);
 
   const formatForClipboard = (num: number, precisionValue: number): string => {
     const format = NUMBER_FORMATS[numberFormat];
@@ -1183,6 +1245,42 @@ export default function UnitConverterApp() {
           )}
         </div>
 
+        {/* Smart Paste row - shown between title and pane for active tab */}
+        {activeTab === 'converter' && (
+          <div className="flex justify-end">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleConverterSmartPasteClick}
+              className={`text-xs gap-2 border !border-border/30 ${converterPasteStatus === 'unrecognised' || converterPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+              style={{ height: FIELD_HEIGHT }}
+              {...testId('button-smart-paste')}
+            >
+              <ClipboardPaste className="w-3 h-3" />
+              <span>
+                {converterPasteStatus === 'unrecognised' ? t('Not recognised') : converterPasteStatus === 'unavailable' ? t('Unavailable') : t('Paste')}
+              </span>
+            </Button>
+          </div>
+        )}
+        {activeTab === 'custom' && (
+          <div className="flex justify-end">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleCustomSmartPasteClick}
+              className={`text-xs gap-2 border !border-border/30 ${customPasteStatus === 'unrecognised' || customPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+              style={{ height: FIELD_HEIGHT }}
+              {...testId('button-custom-smart-paste')}
+            >
+              <ClipboardPaste className="w-3 h-3" />
+              <span>
+                {customPasteStatus === 'unrecognised' ? t('Not recognised') : customPasteStatus === 'unavailable' ? t('Unavailable') : t('Paste')}
+              </span>
+            </Button>
+          </div>
+        )}
+
         {/* Fixed-height content container */}
         <div className="grid">
           <ConverterPane
@@ -1223,7 +1321,6 @@ export default function UnitConverterApp() {
             handleInputBlur={handleInputBlur}
             refocusInput={refocusInput}
             normalizeMassUnit={normalizeMassUnit}
-            onSmartPaste={handleConverterSmartPaste}
             t={t}
             translateUnitName={translateUnitName}
             formatFactor={formatFactor}

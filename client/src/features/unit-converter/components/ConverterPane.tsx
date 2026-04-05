@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { ArrowRightLeft, ClipboardPaste, Copy, Info } from 'lucide-react';
+import { ArrowRightLeft, Copy, Info } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
@@ -53,7 +53,6 @@ interface ConverterPaneProps {
   handleInputBlur: () => void;
   refocusInput: () => void;
   normalizeMassUnit: (unit: string, prefix: string) => { unit: string; prefix: string };
-  onSmartPaste: () => Promise<'ok' | 'unrecognised' | 'unavailable'>;
   t: (key: string) => string;
   translateUnitName: (name: string) => string;
   formatFactor: (f: number) => string;
@@ -103,7 +102,6 @@ export function ConverterPane({
   handleInputBlur,
   refocusInput,
   normalizeMassUnit,
-  onSmartPaste,
   t,
   translateUnitName,
   formatFactor,
@@ -114,9 +112,6 @@ export function ConverterPane({
   getCategoryDimensions,
   formatNumberWithSeparators,
 }: ConverterPaneProps) {
-  const [pasteStatus, setPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
-  const pasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => { if (pasteTimerRef.current) clearTimeout(pasteTimerRef.current); }, []);
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
   const filteredUnits = getFilteredSortedUnits(activeCategory);
   const toFilteredUnits = activeCategory === 'math'
@@ -127,17 +122,6 @@ export function ConverterPane({
   const toUnitData = categoryData.units.find(u => u.id === toUnit);
   const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
   const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-
-  const handleSmartPasteClick = useCallback(async () => {
-    const result = await onSmartPaste();
-    if (result === 'ok') {
-      setPasteStatus('idle');
-    } else {
-      setPasteStatus(result);
-      if (pasteTimerRef.current) clearTimeout(pasteTimerRef.current);
-      pasteTimerRef.current = setTimeout(() => setPasteStatus('idle'), 2000);
-    }
-  }, [onSmartPaste]);
 
   return (
     <Card
@@ -218,7 +202,7 @@ export function ConverterPane({
               </Select>
             </div>
 
-            {/* Row 2: Base Factor, Spacer, SI Base Units + Smart Paste */}
+            {/* Row 2: Base Factor, Spacer, SI Base Units */}
             <div className="flex gap-2">
               <motion.div
                 className={`px-3 rounded bg-muted/20 border border-border/50 select-none flex flex-col justify-center ${fromUnitData ? 'cursor-pointer hover:bg-muted/40 active:bg-muted/60' : ''}`}
@@ -251,19 +235,6 @@ export function ConverterPane({
                   {formatDimensions(getCategoryDimensions(activeCategory)) || '-'}
                 </div>
               </motion.div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleSmartPasteClick}
-                className={`text-xs gap-2 border !border-border/30 shrink-0 ${pasteStatus === 'unrecognised' || pasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
-                style={{ height: FIELD_HEIGHT }}
-                {...testId('button-smart-paste')}
-              >
-                <ClipboardPaste className="w-3 h-3" />
-                <span>
-                  {pasteStatus === 'unrecognised' ? t('Not recognised') : pasteStatus === 'unavailable' ? t('Unavailable') : t('Paste')}
-                </span>
-              </Button>
             </div>
           </div>
 
