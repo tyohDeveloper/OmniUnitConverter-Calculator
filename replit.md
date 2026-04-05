@@ -1,7 +1,7 @@
 # OmniUnit - Universal Converter
 
 ## Overview
-OmniUnit is a comprehensive, frontend-only web application built with React and TypeScript, designed to be a universal unit conversion tool. It features a "scientific archival" aesthetic and supports a vast array of measurement systems including SI, Imperial, US Customary, Archaic, and specialized industrial units. The application aims to produce a single, standalone HTML file for easy distribution, focusing on accuracy, extensive unit coverage, and a highly usable interface. Key capabilities include unit-aware calculations, RPN mode, cross-domain dimensional analysis, and multilingual support. Version v3.2.0.0.
+OmniUnit is a comprehensive, frontend-only web application built with React and TypeScript, designed to be a universal unit conversion tool. It features a "scientific archival" aesthetic and supports a vast array of measurement systems including SI, Imperial, US Customary, Archaic, and specialized industrial units. The application aims to produce a single, standalone HTML file for easy distribution, focusing on accuracy, extensive unit coverage, and a highly usable interface. Key capabilities include unit-aware calculations, RPN mode, cross-domain dimensional analysis, and multilingual support. Version v3.2.1.0.
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language
