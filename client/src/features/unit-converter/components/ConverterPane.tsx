@@ -184,7 +184,7 @@ export function ConverterPane({
                 <SelectTrigger tabIndex={2} className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
                   <SelectValue placeholder={t('Prefix')} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[50vh]">
+                <SelectContent position="item-aligned" className="max-h-[50vh]">
                   {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
                     <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
                       {p.symbol || '-'}
@@ -201,7 +201,7 @@ export function ConverterPane({
                 <SelectTrigger tabIndex={3} className="flex-1 min-w-0 bg-background/30 border-border font-medium" style={{ height: FIELD_HEIGHT }}>
                   <SelectValue placeholder={t('Unit')} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[50vh]">
+                <SelectContent position="item-aligned" className="max-h-[50vh]">
                   {filteredUnits.map((u) => (
                     <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
                       {u.symbol === u.name ? (
@@ -361,7 +361,7 @@ export function ConverterPane({
                 <SelectTrigger className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
                   <SelectValue placeholder={t('Prefix')} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[50vh]">
+                <SelectContent position="item-aligned" className="max-h-[50vh]">
                   {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
                     <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
                       {p.symbol || '-'}
@@ -374,7 +374,7 @@ export function ConverterPane({
                 <SelectTrigger className="flex-1 min-w-0 bg-background/30 border-border font-medium" style={{ height: FIELD_HEIGHT }}>
                   <SelectValue placeholder={t('Unit')} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[50vh]">
+                <SelectContent position="item-aligned" className="max-h-[50vh]">
                   {toFilteredUnits.map((u) => (
                     <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
                       {u.symbol === u.name ? (
