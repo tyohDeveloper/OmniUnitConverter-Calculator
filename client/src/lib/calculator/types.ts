@@ -6,6 +6,7 @@ export type { DimensionalFormula, DerivedUnitInfo };
 export interface CalcValue {
   value: number;
   dimensions: DimensionalFormula;
+  sourceCategory?: string;
 }
 
 export interface CategoryDimensionInfo {

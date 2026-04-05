@@ -1,7 +1,7 @@
 {
   "id": "frequency",
   "name": "Frequency",
-  "baseUnit": "hertz",
+  "baseUnit": "per_second",
   "baseSISymbol": "s⁻¹",
   "units": [
     {
@@ -9,6 +9,24 @@
       "name": "Per Second",
       "symbol": "s⁻¹",
       "factor": 1
+    },
+    {
+      "id": "per_year",
+      "name": "Per Year",
+      "symbol": "y⁻¹",
+      "factor": 3.1688087814028954e-8
+    },
+    {
+      "id": "per_week",
+      "name": "Per Week",
+      "symbol": "wk⁻¹",
+      "factor": 1.6534391534391534e-6
+    },
+    {
+      "id": "per_day",
+      "name": "Per Day",
+      "symbol": "d⁻¹",
+      "factor": 0.000011574074074074073
     },
     {
       "id": "per_hour",

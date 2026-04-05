@@ -4,4 +4,5 @@ export interface CalcValue {
   value: number;
   dimensions: DimensionalFormula;
   prefix: string;
+  sourceCategory?: string;
 }

@@ -95,5 +95,10 @@ export const applyRpnUnary = (x: CalcValue, op: RpnUnaryOp, precision: number = 
   if (!result || result === 'unhandled') return null;
   const dims = result.dims;
   for (const [dim, exp] of Object.entries(dims)) { if (exp === 0) delete dims[dim]; }
-  return { value: result.value, dimensions: dims as DimensionalFormula };
+  const preserveCategory = op === 'neg' || op === 'abs';
+  return {
+    value: result.value,
+    dimensions: dims as DimensionalFormula,
+    ...(preserveCategory && x.sourceCategory ? { sourceCategory: x.sourceCategory } : {}),
+  };
 };

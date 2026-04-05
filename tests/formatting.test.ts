@@ -608,28 +608,35 @@ describe('Radioactive Decay Category', () => {
     expect(decayCategory).toBeDefined();
   });
 
-  it('should have decay constant, half-life, and mean lifetime units', () => {
-    expect(decayCategory?.units.some((u) => u.id === 'per_s')).toBe(true);
+  it('should have per-day decay constant, half-life, and mean lifetime units', () => {
+    expect(decayCategory?.units.some((u) => u.id === 'per_day')).toBe(true);
     expect(decayCategory?.units.some((u) => u.id === 'half_s')).toBe(true);
     expect(decayCategory?.units.some((u) => u.id === 'tau_s')).toBe(true);
   });
 
-  it('should convert decay constant to half-life correctly (t½ = ln(2)/λ)', () => {
-    // λ = 1 s⁻¹ → t½ = ln(2) ≈ 0.693 s
-    const result = convert(1, 'per_s', 'half_s', 'radioactive_decay');
-    expect(result).toBeCloseTo(0.693147, 4);
+  it('should not contain per_s, per_min, per_hr, or per_year units', () => {
+    expect(decayCategory?.units.some((u) => u.id === 'per_s')).toBe(false);
+    expect(decayCategory?.units.some((u) => u.id === 'per_min')).toBe(false);
+    expect(decayCategory?.units.some((u) => u.id === 'per_hr')).toBe(false);
+    expect(decayCategory?.units.some((u) => u.id === 'per_year')).toBe(false);
   });
 
-  it('should convert decay constant to mean lifetime correctly (τ = 1/λ)', () => {
-    // λ = 1 s⁻¹ → τ = 1 s
-    const result = convert(1, 'per_s', 'tau_s', 'radioactive_decay');
-    expect(result).toBeCloseTo(1, 6);
+  it('should convert decay constant (per day) to half-life correctly (t½ = ln(2)/λ)', () => {
+    // λ = 1 d⁻¹ → t½ = ln(2) days ≈ 0.693 days = 59887.9 seconds
+    const result = convert(1, 'per_day', 'half_s', 'radioactive_decay');
+    expect(result).toBeCloseTo(59887.916, 1);
   });
 
-  it('should convert half-life to decay constant correctly', () => {
-    // t½ = 1 s → λ = ln(2) ≈ 0.693 s⁻¹
-    const result = convert(1, 'half_s', 'per_s', 'radioactive_decay');
-    expect(result).toBeCloseTo(0.693147, 4);
+  it('should convert decay constant (per day) to mean lifetime correctly (τ = 1/λ)', () => {
+    // λ = 1 d⁻¹ → τ = 1 day = 86400 seconds
+    const result = convert(1, 'per_day', 'tau_s', 'radioactive_decay');
+    expect(result).toBeCloseTo(86400, 1);
+  });
+
+  it('should convert half-life to decay constant (per day) correctly', () => {
+    // t½ = ln(2) days = 59887.9 s → λ = 1 d⁻¹
+    const result = convert(59887.916, 'half_s', 'per_day', 'radioactive_decay');
+    expect(result).toBeCloseTo(1, 3);
   });
 });
 

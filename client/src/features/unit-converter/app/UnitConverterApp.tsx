@@ -298,7 +298,7 @@ export default function UnitConverterApp() {
 
       if (calculatorMode === 'rpn' && rpnStack[3]) {
         const val = rpnStack[3];
-        const siReps = generateSIRepresentations(val.dimensions);
+        const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
         const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
         const kgResult = applyPrefixToKgUnit(currentSymbol, rpnResultPrefix);
         const displayValue = val.value / kgResult.effectivePrefixFactor;
@@ -316,7 +316,7 @@ export default function UnitConverterApp() {
 
       if (calculatorMode === 'simple' && calcValues[3]) {
         const val = calcValues[3];
-        const siReps = generateSIRepresentations(val.dimensions);
+        const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
         const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
         const kgResult = applyPrefixToKgUnit(currentSymbol, resultPrefix);
         const displayValue = val.value / kgResult.effectivePrefixFactor;
@@ -634,7 +634,7 @@ export default function UnitConverterApp() {
       navigator.clipboard.writeText(textToCopy);
       triggerFlashCopyResult();
       const siBaseValue = valueToCopy;
-      const newEntry = { value: siBaseValue, dimensions: getCategoryDimensions(activeCategory), prefix: 'none' as string };
+      const newEntry = { value: siBaseValue, dimensions: getCategoryDimensions(activeCategory), prefix: 'none' as string, sourceCategory: activeCategory };
       if (calculatorMode === 'rpn') {
         saveRpnStackForUndo();
         setRpnStack(prev => {
@@ -692,8 +692,8 @@ export default function UnitConverterApp() {
     }
   };
 
-  const generateSIRepresentations = (dimensions: DimensionalFormula): SIRepresentation[] => {
-    return generateSIRepresentationsLib(dimensions, getDimensionSignature, PREFERRED_REPRESENTATIONS);
+  const generateSIRepresentations = (dimensions: DimensionalFormula, sourceCategory?: string): SIRepresentation[] => {
+    return generateSIRepresentationsLib(dimensions, getDimensionSignature, PREFERRED_REPRESENTATIONS, sourceCategory);
   };
 
   useEffect(() => {
@@ -787,7 +787,7 @@ export default function UnitConverterApp() {
     let newEntry: CalcValue | null = null;
     if (activeTab === 'converter') {
       if (result !== null && toUnitData) {
-        newEntry = { value: result * toUnitData.factor * (toPrefixData?.factor || 1), dimensions: getCategoryDimensions(activeCategory), prefix: 'none' };
+        newEntry = { value: result * toUnitData.factor * (toPrefixData?.factor || 1), dimensions: getCategoryDimensions(activeCategory), prefix: 'none', sourceCategory: activeCategory };
       }
     } else if (activeTab === 'custom') {
       const numValue = parseNumberWithFormat(directValue);
@@ -859,7 +859,9 @@ export default function UnitConverterApp() {
       default: return;
     }
     for (const [d, e] of Object.entries(newDimensions)) { if (e === 0) delete newDimensions[d]; }
-    setRpnStack(prev => { const ns = [...prev]; ns[3] = { value: newValue!, dimensions: newDimensions, prefix: 'none' }; return ns; });
+    const preserveCat = op === 'neg' || op === 'abs';
+    const newEntry: CalcValue = { value: newValue!, dimensions: newDimensions, prefix: 'none', ...(preserveCat && x.sourceCategory ? { sourceCategory: x.sourceCategory } : {}) };
+    setRpnStack(prev => { const ns = [...prev]; ns[3] = newEntry; return ns; });
     setRpnResultPrefix('none'); setRpnSelectedAlternative(0); triggerFlashRpnResult();
   };
 
@@ -929,7 +931,7 @@ export default function UnitConverterApp() {
   const getRpnResultDisplay = () => {
     if (!rpnStack[3]) return null;
     const val = rpnStack[3];
-    const siReps = generateSIRepresentations(val.dimensions);
+    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
     const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
     if (currentSymbol === '1' || !currentSymbol) return { formattedValue: formatNumberWithSeparators(val.value, calculatorPrecision), unitSymbol: '' };
     const kgResult = applyPrefixToKgUnit(currentSymbol, rpnResultPrefix);
@@ -985,7 +987,7 @@ export default function UnitConverterApp() {
   const getCalcResultDisplay = () => {
     if (!calcValues[3]) return null;
     const val = calcValues[3];
-    const siReps = generateSIRepresentations(val.dimensions);
+    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
     const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
     const kgResult = applyPrefixToKgUnit(currentSymbol, resultPrefix);
     const displayValue = val.value / kgResult.effectivePrefixFactor;

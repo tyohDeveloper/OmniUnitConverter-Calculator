@@ -1,39 +1,14 @@
 {
   "id": "radioactive_decay",
   "name": "Radioactive Decay",
-  "baseUnit": "per_second",
+  "baseUnit": "per_day",
   "baseSISymbol": "s⁻¹",
   "units": [
-    {
-      "id": "per_s",
-      "name": "Per Second (λ)",
-      "symbol": "s⁻¹",
-      "factor": 1,
-      "allowPrefixes": true
-    },
-    {
-      "id": "per_min",
-      "name": "Per Minute (λ)",
-      "symbol": "min⁻¹",
-      "factor": 0.016666666666666666
-    },
-    {
-      "id": "per_hr",
-      "name": "Per Hour (λ)",
-      "symbol": "h⁻¹",
-      "factor": 0.0002777777777777778
-    },
     {
       "id": "per_day",
       "name": "Per Day (λ)",
       "symbol": "d⁻¹",
       "factor": 0.000011574074074074073
-    },
-    {
-      "id": "per_year",
-      "name": "Per Year (λ)",
-      "symbol": "y⁻¹",
-      "factor": 3.168808781402895e-8
     },
     {
       "id": "half_s",

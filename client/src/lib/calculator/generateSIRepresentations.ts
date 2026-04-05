@@ -22,6 +22,8 @@ const EXCLUDED_DROPDOWN_CATEGORIES = new Set([
   'cooking', 'typography',
 ]);
 
+const ANGULAR_SYMBOL_PATTERN = /\brad\b|rpm|rps/;
+
 function dimensionsMatch(a: DimensionalFormula, b: DimensionalFormula): boolean {
   const allKeys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)])) as (keyof DimensionalFormula)[];
   for (const k of allKeys) {
@@ -34,11 +36,13 @@ function dimensionsMatch(a: DimensionalFormula, b: DimensionalFormula): boolean 
 
 function collectCategoryUnits(
   categoryData: (typeof CONVERSION_DATA)[number],
-  seenSymbols: Set<string>
+  seenSymbols: Set<string>,
+  suppressAngular: boolean
 ): SIRepresentation[] {
   const result: SIRepresentation[] = [];
   for (const unit of categoryData.units) {
     if (unit.mathFunction || seenSymbols.has(unit.symbol)) continue;
+    if (suppressAngular && ANGULAR_SYMBOL_PATTERN.test(unit.symbol)) continue;
     seenSymbols.add(unit.symbol);
     result.push({ displaySymbol: unit.symbol, derivedUnits: [], depth: 2 });
   }
@@ -47,15 +51,18 @@ function collectCategoryUnits(
 
 function buildCategoryUnitsForDropdown(
   dimensions: DimensionalFormula,
-  seenSymbols: Set<string>
+  seenSymbols: Set<string>,
+  sourceCategory?: string
 ): SIRepresentation[] {
+  const suppressAngular = !(dimensions as Record<string, number>)['angle'];
   const result: SIRepresentation[] = [];
   for (const categoryData of CONVERSION_DATA) {
     const catId = categoryData.id;
     if (EXCLUDED_DROPDOWN_CATEGORIES.has(catId)) continue;
     const catDimInfo = CATEGORY_DIMENSIONS[catId];
     if (!catDimInfo || !dimensionsMatch(dimensions, catDimInfo.dimensions)) continue;
-    result.push(...collectCategoryUnits(categoryData, seenSymbols));
+    if (sourceCategory && catId !== sourceCategory) continue;
+    result.push(...collectCategoryUnits(categoryData, seenSymbols, suppressAngular));
   }
   return result;
 }
@@ -88,7 +95,8 @@ const CATEGORY_DEFAULT_SYMBOLS: Record<string, string> = {
 export const generateSIRepresentations = (
   dimensions: DimensionalFormula,
   _getDimensionSignature?: (dims: DimensionalFormula) => string,
-  _PREFERRED?: Record<string, { displaySymbol: string; isSI: boolean }>
+  _PREFERRED?: Record<string, { displaySymbol: string; isSI: boolean }>,
+  sourceCategory?: string
 ): SIRepresentation[] => {
   if (isDimensionEmpty(dimensions)) {
     return [{ displaySymbol: '1', derivedUnits: [], depth: 0 }];
@@ -166,7 +174,7 @@ export const generateSIRepresentations = (
   }
 
   const allSeenSymbols = new Set(filteredRepresentations.map(r => r.displaySymbol));
-  const categoryUnits = buildCategoryUnitsForDropdown(dimensions, allSeenSymbols);
+  const categoryUnits = buildCategoryUnitsForDropdown(dimensions, allSeenSymbols, sourceCategory);
   if (crossMatches.length > 0) {
     for (const rep of categoryUnits) rep.crossDomainMatches = crossMatches;
   }

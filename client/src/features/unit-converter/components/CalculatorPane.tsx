@@ -92,7 +92,7 @@ interface CalculatorPaneProps {
   saveRpnStackForUndo: () => void;
   getRpnResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
   getCalcResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
-  generateSIRepresentations: (dimensions: DimensionalFormula) => Array<{ displaySymbol: string; crossDomainMatches?: string[] }>;
+  generateSIRepresentations: (dimensions: DimensionalFormula, sourceCategory?: string) => Array<{ displaySymbol: string; crossDomainMatches?: string[] }>;
   applyPrefixToKgUnit: (symbol: string, prefixId: string) => { displaySymbol: string; showPrefix: boolean; effectivePrefixFactor: number };
   formatNumberWithSeparators: (num: number, precision: number) => string;
   t: (key: string) => string;
@@ -546,7 +546,7 @@ export function CalculatorPane({
               </motion.div>
               {calcValues[3] && !isDimensionEmpty(calcValues[3].dimensions) ? (
                 (() => {
-                  const siReps = generateSIRepresentations(calcValues[3]!.dimensions);
+                  const siReps = generateSIRepresentations(calcValues[3]!.dimensions, calcValues[3]!.sourceCategory);
                   const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(calcValues[3]!.dimensions);
                   return (
                     <>
@@ -968,7 +968,7 @@ export function CalculatorPane({
               )}
               {rpnStack[3] && !isDimensionEmpty(rpnStack[3].dimensions) ? (
                 (() => {
-                  const siReps = generateSIRepresentations(rpnStack[3]!.dimensions);
+                  const siReps = generateSIRepresentations(rpnStack[3]!.dimensions, rpnStack[3]!.sourceCategory);
                   const currentAltSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || '';
                   const prefixEnabled = isSymbolSI(currentAltSymbol);
                   return (
