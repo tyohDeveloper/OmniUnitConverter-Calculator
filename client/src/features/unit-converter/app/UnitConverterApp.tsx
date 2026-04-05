@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
 import {
@@ -510,7 +510,7 @@ export default function UnitConverterApp() {
     if (status !== 'ok') {
       setConverterPasteStatus(status);
       if (converterPasteTimerRef.current) clearTimeout(converterPasteTimerRef.current);
-      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), 2000);
+      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), 3000);
     } else {
       setConverterPasteStatus('idle');
     }
@@ -522,7 +522,7 @@ export default function UnitConverterApp() {
       if (!text) {
         setCustomPasteStatus('unrecognised');
         if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 2000);
+        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 3000);
         return;
       }
       const parsed = parseUnitText(text);
@@ -574,7 +574,7 @@ export default function UnitConverterApp() {
     } catch {
       setCustomPasteStatus('unavailable');
       if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 2000);
+      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 3000);
     }
   }, []);
 
@@ -1274,19 +1274,38 @@ export default function UnitConverterApp() {
                 <p className="text-muted-foreground text-sm font-mono">
                   {t('Base unit:')} <span className="text-primary">{translateUnitName(toTitleCase(categoryData.baseUnit))}</span>
                 </p>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleConverterSmartPasteClick}
-                  className={`text-xs gap-2 border !border-border/30 ${converterPasteStatus === 'unrecognised' || converterPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
-                  style={{ height: FIELD_HEIGHT }}
-                  {...testId('button-smart-paste')}
-                >
-                  <ClipboardPaste className="w-3 h-3" />
-                  <span>
-                    {converterPasteStatus === 'unrecognised' ? t('Not recognised') : converterPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
-                  </span>
-                </Button>
+                <div className="flex flex-col items-end gap-0.5">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleConverterSmartPasteClick}
+                    className={`text-xs gap-2 border !border-border/30 ${converterPasteStatus === 'unrecognised' || converterPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                    style={{ height: FIELD_HEIGHT }}
+                    {...testId('button-smart-paste')}
+                  >
+                    <ClipboardPaste className="w-3 h-3" />
+                    <span>
+                      {converterPasteStatus === 'unrecognised' ? t('Not recognised') : converterPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
+                    </span>
+                  </Button>
+                  <AnimatePresence>
+                    {converterPasteStatus !== 'idle' && (
+                      <motion.p
+                        key="converter-paste-notice"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.15 }}
+                        className="text-xs text-destructive text-right leading-tight"
+                        {...testId('text-converter-paste-notice')}
+                      >
+                        {converterPasteStatus === 'unavailable'
+                          ? t("Clipboard unavailable — paste manually")
+                          : t("Couldn't recognise a unit — try Custom Entry")}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           )}
@@ -1297,19 +1316,38 @@ export default function UnitConverterApp() {
                 <p className="text-muted-foreground text-sm font-mono">
                   {t('Build dimensional units from SI base units')}
                 </p>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleCustomSmartPasteClick}
-                  className={`text-xs gap-2 border !border-border/30 ${customPasteStatus === 'unrecognised' || customPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
-                  style={{ height: FIELD_HEIGHT }}
-                  {...testId('button-custom-smart-paste')}
-                >
-                  <ClipboardPaste className="w-3 h-3" />
-                  <span>
-                    {customPasteStatus === 'unrecognised' ? t('Not recognised') : customPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
-                  </span>
-                </Button>
+                <div className="flex flex-col items-end gap-0.5">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleCustomSmartPasteClick}
+                    className={`text-xs gap-2 border !border-border/30 ${customPasteStatus === 'unrecognised' || customPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                    style={{ height: FIELD_HEIGHT }}
+                    {...testId('button-custom-smart-paste')}
+                  >
+                    <ClipboardPaste className="w-3 h-3" />
+                    <span>
+                      {customPasteStatus === 'unrecognised' ? t('Not recognised') : customPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
+                    </span>
+                  </Button>
+                  <AnimatePresence>
+                    {customPasteStatus !== 'idle' && (
+                      <motion.p
+                        key="custom-paste-notice"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.15 }}
+                        className="text-xs text-destructive text-right leading-tight"
+                        {...testId('text-custom-paste-notice')}
+                      >
+                        {customPasteStatus === 'unavailable'
+                          ? t("Clipboard unavailable — paste manually")
+                          : t("Couldn't recognise a unit — enter dimensions manually")}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           )}

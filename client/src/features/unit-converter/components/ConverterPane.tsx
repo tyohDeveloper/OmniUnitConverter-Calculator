@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
@@ -114,13 +114,22 @@ export function ConverterPane({
   formatNumberWithSeparators,
   onSmartPaste,
 }: ConverterPaneProps) {
-  const [smartPasteUnrecognised, setSmartPasteUnrecognised] = useState(false);
+  const [smartPasteStatus, setSmartPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
+  const smartPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (smartPasteTimerRef.current) clearTimeout(smartPasteTimerRef.current);
+  }, []);
 
   const handleSmartPasteClick = async () => {
     const status = await onSmartPaste();
     if (status !== 'ok') {
-      setSmartPasteUnrecognised(true);
-      setTimeout(() => setSmartPasteUnrecognised(false), 2000);
+      setSmartPasteStatus(status);
+      if (smartPasteTimerRef.current) clearTimeout(smartPasteTimerRef.current);
+      smartPasteTimerRef.current = setTimeout(() => setSmartPasteStatus('idle'), 3000);
+    } else {
+      if (smartPasteTimerRef.current) clearTimeout(smartPasteTimerRef.current);
+      setSmartPasteStatus('idle');
     }
   };
 
@@ -444,17 +453,34 @@ export function ConverterPane({
               )}
             </div>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 items-end">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleSmartPasteClick}
-                className={`text-xs gap-2 border !border-border/30 ${smartPasteUnrecognised ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                className={`text-xs gap-2 border !border-border/30 ${smartPasteStatus !== 'idle' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
                 {...testId('button-smart-paste')}
               >
                 <ClipboardPaste className="w-3 h-3" />
-                {smartPasteUnrecognised ? t('Not recognised') : t('Smart Paste')}
+                {smartPasteStatus === 'unrecognised' ? t('Not recognised') : smartPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
               </Button>
+              <AnimatePresence>
+                {smartPasteStatus !== 'idle' && (
+                  <motion.p
+                    key="smart-paste-notice"
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.15 }}
+                    className="text-xs text-destructive text-right leading-tight"
+                    {...testId('text-smart-paste-notice')}
+                  >
+                    {smartPasteStatus === 'unavailable'
+                      ? t("Clipboard unavailable — paste manually")
+                      : t("Couldn't recognise a unit — try Custom Entry")}
+                  </motion.p>
+                )}
+              </AnimatePresence>
               <Button
                 variant="ghost"
                 size="sm"
