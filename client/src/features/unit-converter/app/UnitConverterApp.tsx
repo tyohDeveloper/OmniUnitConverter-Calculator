@@ -262,25 +262,6 @@ export default function UnitConverterApp() {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
   };
 
-  const handleConverterSmartPaste = async (): Promise<boolean> => {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text) return false;
-      const parsed = parseUnitText(text);
-      if (parsed.categoryId && parsed.unitId) {
-        setActiveCategory(parsed.categoryId);
-        setFromUnit(parsed.unitId);
-        setFromPrefix(parsed.prefixId);
-        setInputValue(parsed.originalValue.toString());
-        return true;
-      }
-      setInputValue(parsed.originalValue.toString());
-      return false;
-    } catch {
-      return false;
-    }
-  };
-
   const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
   const toUnitData = categoryData.units.find(u => u.id === toUnit);
   const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
@@ -1249,56 +1230,50 @@ export default function UnitConverterApp() {
           {activeTab === 'converter' && (
             <div className="mt-2">
               <h1 className="text-3xl font-bold text-foreground tracking-tight">{t(categoryData.name)}</h1>
-              <p className="text-muted-foreground text-sm font-mono mt-1">
-                {t('Base unit:')} <span className="text-primary">{translateUnitName(toTitleCase(categoryData.baseUnit))}</span>
-              </p>
+              <div className="flex items-center justify-between mt-1">
+                <p className="text-muted-foreground text-sm font-mono">
+                  {t('Base unit:')} <span className="text-primary">{translateUnitName(toTitleCase(categoryData.baseUnit))}</span>
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleConverterSmartPasteClick}
+                  className={`text-xs gap-2 border !border-border/30 ${converterPasteStatus === 'unrecognised' || converterPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                  style={{ height: FIELD_HEIGHT }}
+                  {...testId('button-smart-paste')}
+                >
+                  <ClipboardPaste className="w-3 h-3" />
+                  <span>
+                    {converterPasteStatus === 'unrecognised' ? t('Not recognised') : converterPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
+                  </span>
+                </Button>
+              </div>
             </div>
           )}
           {activeTab === 'custom' && (
             <div className="mt-2">
               <h1 className="text-3xl font-bold text-foreground tracking-tight">{t('Custom Entry')}</h1>
-              <p className="text-muted-foreground text-sm font-mono mt-1">
-                {t('Build dimensional units from SI base units')}
-              </p>
+              <div className="flex items-center justify-between mt-1">
+                <p className="text-muted-foreground text-sm font-mono">
+                  {t('Build dimensional units from SI base units')}
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCustomSmartPasteClick}
+                  className={`text-xs gap-2 border !border-border/30 ${customPasteStatus === 'unrecognised' || customPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                  style={{ height: FIELD_HEIGHT }}
+                  {...testId('button-custom-smart-paste')}
+                >
+                  <ClipboardPaste className="w-3 h-3" />
+                  <span>
+                    {customPasteStatus === 'unrecognised' ? t('Not recognised') : customPasteStatus === 'unavailable' ? t('Unavailable') : t('Smart Paste')}
+                  </span>
+                </Button>
+              </div>
             </div>
           )}
         </div>
-
-        {/* Smart Paste row - shown between title and pane for active tab */}
-        {activeTab === 'converter' && (
-          <div className="flex justify-end">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleConverterSmartPasteClick}
-              className={`text-xs gap-2 border !border-border/30 ${converterPasteStatus === 'unrecognised' || converterPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
-              style={{ height: FIELD_HEIGHT }}
-              {...testId('button-smart-paste')}
-            >
-              <ClipboardPaste className="w-3 h-3" />
-              <span>
-                {converterPasteStatus === 'unrecognised' ? t('Not recognised') : converterPasteStatus === 'unavailable' ? t('Unavailable') : t('Paste')}
-              </span>
-            </Button>
-          </div>
-        )}
-        {activeTab === 'custom' && (
-          <div className="flex justify-end">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleCustomSmartPasteClick}
-              className={`text-xs gap-2 border !border-border/30 ${customPasteStatus === 'unrecognised' || customPasteStatus === 'unavailable' ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
-              style={{ height: FIELD_HEIGHT }}
-              {...testId('button-custom-smart-paste')}
-            >
-              <ClipboardPaste className="w-3 h-3" />
-              <span>
-                {customPasteStatus === 'unrecognised' ? t('Not recognised') : customPasteStatus === 'unavailable' ? t('Unavailable') : t('Paste')}
-              </span>
-            </Button>
-          </div>
-        )}
 
         {/* Fixed-height content container */}
         <div className="grid">

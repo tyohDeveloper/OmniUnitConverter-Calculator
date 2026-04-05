@@ -162,8 +162,32 @@ export function DirectPane({
             </motion.div>
           </div>
 
-          {/* Clear button aligned with entry line */}
-          <div className="flex-1 flex justify-end">
+          {/* Copy button inline with result */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleCopyAndPush}
+            className="text-xs hover:text-accent gap-2 border !border-border/30"
+            style={{ height: FIELD_HEIGHT }}
+          >
+            <Copy className="w-3 h-3" />
+            <motion.span
+              animate={{
+                opacity: flashDirectCopy ? [1, 0.3, 1] : 1,
+                scale: flashDirectCopy ? [1, 1.1, 1] : 1
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              {t('Copy')}
+            </motion.span>
+          </Button>
+
+        </div>
+
+        {/* Unit selector grid */}
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between mb-2">
+            <Label className="text-xs font-mono uppercase text-muted-foreground">{t('Dimensions')}</Label>
             <Button
               variant="ghost"
               size="sm"
@@ -171,16 +195,8 @@ export function DirectPane({
               className="text-xs hover:text-accent border !border-border/30"
               style={{ height: FIELD_HEIGHT }}
             >
-              {t('Clear')}
+              {t('Clear Dimensions')}
             </Button>
-          </div>
-
-        </div>
-
-        {/* Unit selector grid */}
-        <div className="flex flex-col gap-1">
-          <div className="mb-2">
-            <Label className="text-xs font-mono uppercase text-muted-foreground">{t('Dimensions')}</Label>
           </div>
           {([
             { unit: 'm', quantity: 'Length' },
@@ -238,26 +254,6 @@ export function DirectPane({
           </div>
         )}
 
-        {/* Copy button at bottom, aligned far right */}
-        <div className="flex justify-end mt-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleCopyAndPush}
-            className="text-xs hover:text-accent gap-2 border !border-border/30"
-          >
-            <Copy className="w-3 h-3" />
-            <motion.span
-              animate={{
-                opacity: flashDirectCopy ? [1, 0.3, 1] : 1,
-                scale: flashDirectCopy ? [1, 1.1, 1] : 1
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              {t('Copy')}
-            </motion.span>
-          </Button>
-        </div>
       </div>
     </Card>
   );

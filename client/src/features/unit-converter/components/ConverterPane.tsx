@@ -62,7 +62,7 @@ interface ConverterPaneProps {
   getPlaceholder: () => string;
   getCategoryDimensions: (category: UnitCategory) => { [key: string]: number };
   formatNumberWithSeparators: (num: number, precision: number) => string;
-  onSmartPaste: () => Promise<boolean>;
+  onSmartPaste: () => Promise<'ok' | 'unrecognised' | 'unavailable'>;
 }
 
 export function ConverterPane({
@@ -117,8 +117,8 @@ export function ConverterPane({
   const [smartPasteUnrecognised, setSmartPasteUnrecognised] = useState(false);
 
   const handleSmartPasteClick = async () => {
-    const recognised = await onSmartPaste();
-    if (!recognised) {
+    const status = await onSmartPaste();
+    if (status !== 'ok') {
       setSmartPasteUnrecognised(true);
       setTimeout(() => setSmartPasteUnrecognised(false), 2000);
     }
