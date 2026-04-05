@@ -5,11 +5,10 @@
   "baseSISymbol": "s⁻¹",
   "units": [
     {
-      "id": "hz",
-      "name": "Hertz",
-      "symbol": "Hz",
-      "factor": 1,
-      "allowPrefixes": true
+      "id": "per_second",
+      "name": "Per Second",
+      "symbol": "s⁻¹",
+      "factor": 1
     },
     {
       "id": "per_hour",
@@ -34,6 +33,13 @@
       "name": "Radians/Second",
       "symbol": "rad⋅s⁻¹",
       "factor": 0.15915494309189535
+    },
+    {
+      "id": "hz",
+      "name": "Hertz",
+      "symbol": "Hz",
+      "factor": 1,
+      "allowPrefixes": true
     },
     {
       "id": "rps",
