@@ -17,9 +17,10 @@ interface HelpSectionProps {
 }
 
 export default function HelpSection({ t, language }: HelpSectionProps) {
-  const machineTranslatedNotice = language !== 'en' && language !== 'en-us'
-    ? t('help-machine-translated')
-    : '';
+  const machineTranslatedNotice =
+    language !== "en" && language !== "en-us"
+      ? t("help-machine-translated")
+      : "";
 
   return (
     <Card className="w-full p-6 bg-card border-border/50">
@@ -34,16 +35,16 @@ export default function HelpSection({ t, language }: HelpSectionProps) {
             </p>
           )}
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>{t('help-para-1')}</p>
-            <p>{t('help-para-2')}</p>
-            <p>{t('help-para-3')}</p>
-            <p>{t('help-para-4')}</p>
-            <p>{t('help-para-5')}</p>
-            <p>{t('help-github-note')}</p>
+            <p>{t("help-para-1")}</p>
+            <p>{t("help-para-2")}</p>
+            <p>{t("help-para-3")}</p>
+            <p>{t("help-para-4")}</p>
+            <p>{t("help-para-5")}</p>
+            <p>{t("help-github-note")}</p>
             <p className="text-xs text-muted-foreground/70">
               GitHub:{" "}
               <a
-                href="https://github.com/tyohDeveloper/New-units"
+                href="https://github.com/tyohDeveloper/OmniUnitConverter-Calculator"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:text-foreground"
@@ -51,7 +52,9 @@ export default function HelpSection({ t, language }: HelpSectionProps) {
                 https://github.com/tyohDeveloper/New-units
               </a>
             </p>
-            <p className="text-xs text-muted-foreground/70">{t('help-llm-note')}</p>
+            <p className="text-xs text-muted-foreground/70">
+              {t("help-llm-note")}
+            </p>
           </div>
         </div>
         <div className="border-t border-border/30 pt-4">
