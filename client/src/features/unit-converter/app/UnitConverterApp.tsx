@@ -44,6 +44,7 @@ import { GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit as norm
 import { normalizeMassValue as normalizeMassValueLib } from '@/lib/units/normalizeMassValue';
 import { normalizeMassDisplay as normalizeMassDisplayLib } from '@/lib/units/normalizeMassDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { siToDisplay as siToDisplayLib } from '@/lib/calculator/siToDisplay';
 import { useRpnStack } from '@/components/unit-converter/hooks/useRpnStack';
 import { useAllFlashFlags } from '@/components/unit-converter/hooks/useFlashFlag';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -932,7 +933,7 @@ export default function UnitConverterApp() {
     const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
     if (currentSymbol === '1' || !currentSymbol) return { formattedValue: formatNumberWithSeparators(val.value, calculatorPrecision), unitSymbol: '' };
     const kgResult = applyPrefixToKgUnit(currentSymbol, rpnResultPrefix);
-    const displayValue = val.value / kgResult.effectivePrefixFactor;
+    const displayValue = siToDisplayLib(val.value, currentSymbol, rpnResultPrefix);
     const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
     const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
     const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { parseUnitText, PREFIXES } from '@/lib/conversion-data';
+import { displayToSI } from '@/lib/calculator/displayToSI';
+import { siToDisplay } from '@/lib/calculator/siToDisplay';
+import { isSymbolSI } from '@/lib/calculator/isSymbolSI';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
@@ -159,6 +162,66 @@ export function CalculatorPane({
   formatNumberWithSeparators,
   t,
 }: CalculatorPaneProps) {
+  // Ref for the X edit input, used to restore focus after the prefix/alt
+  // dropdowns are interacted with while edit mode is active.
+  const rpnXInputRef = useRef<HTMLInputElement>(null);
+  // When true, the next onBlur from the X input should be suppressed because
+  // the user clicked one of the adjacent selector controls.
+  const suppressXBlurRef = useRef(false);
+
+  // Track previous rpnResultPrefix and rpnSelectedAlternative so we can
+  // re-express the typed value when the user changes them while editing.
+  const prevRpnDisplayRef = useRef<{ prefix: string; alt: number } | null>(null);
+
+  useEffect(() => {
+    const prev = prevRpnDisplayRef.current;
+    prevRpnDisplayRef.current = { prefix: rpnResultPrefix, alt: rpnSelectedAlternative };
+
+    // Only re-express when the user is actively editing the X field.
+    if (!rpnXEditing || !rpnXEditValue.trim()) return;
+    // Need a previous state to compare.
+    if (!prev) return;
+    // Only act when prefix or alt changed.
+    if (prev.prefix === rpnResultPrefix && prev.alt === rpnSelectedAlternative) return;
+    // Need X stack value with dimensions to compute factor.
+    if (!rpnStack[3] || !rpnStack[3].dimensions) return;
+
+    // Skip DMS and ft-in special composite formats — re-expression doesn't
+    // apply cleanly to them.
+    //   DMS:   ° followed by a digit (e.g. "1°30'") or contains ′ / ″
+    //   ft-in: ' followed by a digit (e.g. "5'6\"")
+    // Temperature unit suffixes like "°C" or "°F" are NOT matched because
+    // ° is followed by a letter there.
+    const rawText = rpnXEditValue.trim();
+    if (/°\d|[′″]|'\d/.test(rawText)) return;
+
+    // Require a leading numeric token — rejects non-numeric input ("abc", empty, etc.).
+    // Handles optional sign, group separators (commas), decimal point, and exponent.
+    const numericMatch = rawText.match(/^-?(\d[\d,]*\.?\d*|\d*\.\d+)([eE][+-]?\d+)?/);
+    if (!numericMatch) return;
+    const typedNumber = parseFloat(numericMatch[0].replace(/,/g, ''));
+    if (isNaN(typedNumber) || !isFinite(typedNumber)) return;
+
+    const siReps = generateSIRepresentations(rpnStack[3].dimensions);
+    const oldSymbol = siReps[prev.alt]?.displaySymbol || formatDimensions(rpnStack[3].dimensions);
+    const newSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(rpnStack[3].dimensions);
+    if (!oldSymbol || !newSymbol) return;
+
+    // Convert: typedNumber in old context → SI → new display value
+    const siValue = displayToSI(typedNumber, oldSymbol, prev.prefix);
+    const newDisplayValue = siToDisplay(siValue, newSymbol, rpnResultPrefix);
+    if (!isFinite(newDisplayValue)) return;
+
+    // Compute the new unit symbol (for display in the edit field, so commit can parse it).
+    const kgResult = applyPrefixToKgUnit(newSymbol, rpnResultPrefix);
+    const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
+    const prefixSym = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
+    const newUnitSymbol = prefixSym + kgResult.displaySymbol;
+
+    const newNumber = parseFloat(newDisplayValue.toPrecision(15));
+    setRpnXEditValue(newUnitSymbol ? `${newNumber} ${newUnitSymbol}` : String(newNumber));
+  }, [rpnResultPrefix, rpnSelectedAlternative]);
+
   return (
     <Card className="w-full p-6 bg-card border-border/50">
       {/* Simple Calculator Header */}
@@ -816,6 +879,7 @@ export function CalculatorPane({
             >
               {rpnXEditing ? (
                 <input
+                  ref={rpnXInputRef}
                   type="text"
                   autoFocus
                   data-testid="rpn-x-input"
@@ -823,6 +887,10 @@ export function CalculatorPane({
                   onFocus={(e) => e.target.select()}
                   onChange={(e) => setRpnXEditValue(e.target.value)}
                   onBlur={() => {
+                    // Suppress commit when the user clicked one of the adjacent
+                    // prefix/alt selectors — the selector interaction clears this flag
+                    // and restores focus to the input.
+                    if (suppressXBlurRef.current) return;
                     if (rpnXEditValue.trim()) {
                       const parsed = parseUnitText(rpnXEditValue);
                       const dims: Record<string, number> = {};
@@ -901,16 +969,40 @@ export function CalculatorPane({
               {rpnStack[3] && !isDimensionEmpty(rpnStack[3].dimensions) ? (
                 (() => {
                   const siReps = generateSIRepresentations(rpnStack[3]!.dimensions);
+                  const currentAltSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || '';
+                  const prefixEnabled = isSymbolSI(currentAltSymbol);
                   return (
                     <>
                       <Select
                         value={rpnResultPrefix}
-                        onValueChange={(val) => setRpnResultPrefix(val)}
+                        disabled={!prefixEnabled}
+                        onValueChange={(val) => {
+                          setRpnResultPrefix(val);
+                          suppressXBlurRef.current = false;
+                          if (rpnXEditing) requestAnimationFrame(() => rpnXInputRef.current?.focus());
+                        }}
                       >
-                        <SelectTrigger className="h-10 text-xs">
+                        <SelectTrigger
+                          className={`h-10 text-xs${!prefixEnabled ? ' opacity-40 cursor-not-allowed' : ''}`}
+                          onMouseDown={(e) => {
+                            if (rpnXEditing && prefixEnabled) {
+                              e.preventDefault();
+                              suppressXBlurRef.current = true;
+                            }
+                          }}
+                        >
                           <SelectValue placeholder={t('Prefix')} />
                         </SelectTrigger>
-                        <SelectContent className="max-h-[50vh]">
+                        <SelectContent
+                          className="max-h-[50vh]"
+                          onCloseAutoFocus={(e) => {
+                            if (rpnXEditing) {
+                              e.preventDefault();
+                              suppressXBlurRef.current = false;
+                              rpnXInputRef.current?.focus();
+                            }
+                          }}
+                        >
                           {PREFIXES.map((p) => (
                             <SelectItem key={p.id} value={p.id} className="text-xs font-mono">
                               {p.symbol || '-'}
@@ -920,12 +1012,34 @@ export function CalculatorPane({
                       </Select>
                       <Select
                         value={rpnSelectedAlternative.toString()}
-                        onValueChange={(val) => { setRpnSelectedAlternative(parseInt(val)); setRpnResultPrefix('none'); }}
+                        onValueChange={(val) => {
+                          setRpnSelectedAlternative(parseInt(val));
+                          setRpnResultPrefix('none');
+                          suppressXBlurRef.current = false;
+                          if (rpnXEditing) requestAnimationFrame(() => rpnXInputRef.current?.focus());
+                        }}
                       >
-                        <SelectTrigger className="h-10 text-xs">
+                        <SelectTrigger
+                          className="h-10 text-xs"
+                          onMouseDown={(e) => {
+                            if (rpnXEditing) {
+                              e.preventDefault();
+                              suppressXBlurRef.current = true;
+                            }
+                          }}
+                        >
                           <SelectValue placeholder={t('Select SI representation')} />
                         </SelectTrigger>
-                        <SelectContent className="max-h-[50vh]">
+                        <SelectContent
+                          className="max-h-[50vh]"
+                          onCloseAutoFocus={(e) => {
+                            if (rpnXEditing) {
+                              e.preventDefault();
+                              suppressXBlurRef.current = false;
+                              rpnXInputRef.current?.focus();
+                            }
+                          }}
+                        >
                           {siReps.map((rep, index) => (
                             <SelectItem key={index} value={index.toString()} className="text-xs font-mono">
                               <span className="font-bold">{rep.displaySymbol}</span>
