@@ -530,7 +530,9 @@ export function ConverterPane({
                             key={unit.id}
                             className="flex justify-between items-center px-2 py-1 rounded hover:bg-muted/20 cursor-pointer select-none"
                             onClick={() => {
-                              navigator.clipboard.writeText(`${displayValue.toFixed(precision)}`);
+                              setToUnit(unit.id);
+                              setToPrefix('none');
+                              setComparisonMode(false);
                             }}
                             data-testid={`comparison-row-${unit.id}`}
                           >
