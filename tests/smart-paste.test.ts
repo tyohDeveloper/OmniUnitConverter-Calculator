@@ -441,6 +441,34 @@ describe('Smart Paste - Special Cases', () => {
       expect(result.unitId).toBe('minim');
     });
   });
+
+  describe('Symbol Priority — base unit wins over secondary unit', () => {
+    it('should route "eV" to photon energy, not plain energy', () => {
+      const result = parseUnitText('23 eV');
+      expect(result.categoryId).toBe('photon');
+      expect(result.unitId).toBe('eV');
+    });
+
+    it('should route "23eV" (no space) to photon energy', () => {
+      const result = parseUnitText('23eV');
+      expect(result.categoryId).toBe('photon');
+      expect(result.unitId).toBe('eV');
+    });
+
+    it('should route "eV" with prefix (keV) to photon energy with kilo prefix', () => {
+      const result = parseUnitText('5 keV');
+      expect(result.categoryId).toBe('photon');
+      expect(result.prefixId).toBe('kilo');
+    });
+  });
+
+  describe('Symbol Priority — archaic length wins over shipping for "li"', () => {
+    it('should route "li" to archaic_length, not shipping', () => {
+      const result = parseUnitText('7 li');
+      expect(result.categoryId).toBe('archaic_length');
+      expect(result.unitId).toBe('link');
+    });
+  });
 });
 
 describe('Symbol Priority — Base Unit Wins', () => {

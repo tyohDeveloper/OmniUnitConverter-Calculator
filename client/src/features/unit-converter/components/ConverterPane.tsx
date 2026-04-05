@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { ArrowRightLeft, Copy, Info } from 'lucide-react';
+import { ArrowRightLeft, ClipboardPaste, Copy, Info } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
@@ -62,6 +62,7 @@ interface ConverterPaneProps {
   getPlaceholder: () => string;
   getCategoryDimensions: (category: UnitCategory) => { [key: string]: number };
   formatNumberWithSeparators: (num: number, precision: number) => string;
+  onSmartPaste: () => Promise<boolean>;
 }
 
 export function ConverterPane({
@@ -111,7 +112,18 @@ export function ConverterPane({
   getPlaceholder,
   getCategoryDimensions,
   formatNumberWithSeparators,
+  onSmartPaste,
 }: ConverterPaneProps) {
+  const [smartPasteUnrecognised, setSmartPasteUnrecognised] = useState(false);
+
+  const handleSmartPasteClick = async () => {
+    const recognised = await onSmartPaste();
+    if (!recognised) {
+      setSmartPasteUnrecognised(true);
+      setTimeout(() => setSmartPasteUnrecognised(false), 2000);
+    }
+  };
+
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
   const filteredUnits = getFilteredSortedUnits(activeCategory);
   const toFilteredUnits = activeCategory === 'math'
@@ -432,25 +444,37 @@ export function ConverterPane({
               )}
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => { copyResult(); refocusInput(); }}
-              onBlur={refocusInput}
-              tabIndex={5}
-              className="text-xs hover:text-accent gap-2 border !border-border/30"
-            >
-              <Copy className="w-3 h-3" />
-              <motion.span
-                animate={{
-                  opacity: flashCopyResult ? [1, 0.3, 1] : 1,
-                  scale: flashCopyResult ? [1, 1.1, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
+            <div className="flex flex-col gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleSmartPasteClick}
+                className={`text-xs gap-2 border !border-border/30 ${smartPasteUnrecognised ? 'text-destructive hover:text-destructive' : 'hover:text-accent'}`}
+                {...testId('button-smart-paste')}
               >
-                {t('Copy')}
-              </motion.span>
-            </Button>
+                <ClipboardPaste className="w-3 h-3" />
+                {smartPasteUnrecognised ? t('Not recognised') : t('Smart Paste')}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => { copyResult(); refocusInput(); }}
+                onBlur={refocusInput}
+                tabIndex={5}
+                className="text-xs hover:text-accent gap-2 border !border-border/30"
+              >
+                <Copy className="w-3 h-3" />
+                <motion.span
+                  animate={{
+                    opacity: flashCopyResult ? [1, 0.3, 1] : 1,
+                    scale: flashCopyResult ? [1, 1.1, 1] : 1
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {t('Copy')}
+                </motion.span>
+              </Button>
+            </div>
           </div>
 
           {/* Comparison Mode Panel */}

@@ -262,6 +262,25 @@ export default function UnitConverterApp() {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
   };
 
+  const handleConverterSmartPaste = async (): Promise<boolean> => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text) return false;
+      const parsed = parseUnitText(text);
+      if (parsed.categoryId && parsed.unitId) {
+        setActiveCategory(parsed.categoryId);
+        setFromUnit(parsed.unitId);
+        setFromPrefix(parsed.prefixId);
+        setInputValue(parsed.originalValue.toString());
+        return true;
+      }
+      setInputValue(parsed.originalValue.toString());
+      return false;
+    } catch {
+      return false;
+    }
+  };
+
   const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
   const toUnitData = categoryData.units.find(u => u.id === toUnit);
   const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
@@ -1330,6 +1349,7 @@ export default function UnitConverterApp() {
             getPlaceholder={getPlaceholder}
             getCategoryDimensions={getCategoryDimensions}
             formatNumberWithSeparators={formatNumberWithSeparators}
+            onSmartPaste={handleConverterSmartPaste}
           />
 
           <DirectPane
