@@ -169,7 +169,17 @@ export function DirectPane({
 
           {/* Result display */}
           <div className="flex flex-col gap-2">
-            <Label className="text-xs font-mono uppercase text-muted-foreground">{t('Result')}</Label>
+            <div className="flex items-center gap-2">
+              <Label className="text-xs font-mono uppercase text-muted-foreground">{t('Result')}</Label>
+              {physicalQuantityLabel && (
+                <span
+                  className="text-xs font-mono text-accent"
+                  {...testId('custom-physical-quantity-label')}
+                >
+                  {physicalQuantityLabel}
+                </span>
+              )}
+            </div>
             <motion.div
               className="px-4 bg-background/50 border border-border rounded-md font-mono text-primary cursor-pointer hover:bg-background/70 flex items-center justify-between gap-4"
               style={{ height: FIELD_HEIGHT, minWidth: CommonFieldWidth }}
@@ -192,14 +202,6 @@ export function DirectPane({
                 );
               })()}
             </motion.div>
-            {physicalQuantityLabel && (
-              <span
-                className="text-xs font-mono text-accent"
-                {...testId('custom-physical-quantity-label')}
-              >
-                {physicalQuantityLabel}
-              </span>
-            )}
           </div>
 
           {/* Paste button aligned far right */}
