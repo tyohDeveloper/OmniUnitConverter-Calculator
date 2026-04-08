@@ -9,20 +9,23 @@
       "name": "Pascal-second",
       "symbol": "Pa·s",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cp",
       "name": "Centipoise",
       "symbol": "cP",
-      "factor": 0.001
+      "factor": 0.001,
+      "unitType": "SI_BASE"
     },
     {
       "id": "poise",
       "name": "Poise",
       "symbol": "Po",
       "factor": 0.1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

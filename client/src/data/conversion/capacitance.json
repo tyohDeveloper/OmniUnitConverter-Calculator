@@ -9,21 +9,24 @@
       "name": "Farad",
       "symbol": "F",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "statf",
       "name": "Statfarad",
       "symbol": "statF",
       "factor": 1.11265e-12,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "abf",
       "name": "Abfarad",
       "symbol": "abF",
       "factor": 1e-9,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

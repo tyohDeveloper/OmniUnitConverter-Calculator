@@ -9,14 +9,16 @@
       "name": "Byte",
       "symbol": "B",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "bit",
       "name": "Bit",
       "symbol": "bit",
       "factor": 0.125,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

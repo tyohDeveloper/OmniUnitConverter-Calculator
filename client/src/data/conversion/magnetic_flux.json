@@ -9,14 +9,16 @@
       "name": "Weber",
       "symbol": "Wb",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mx",
       "name": "Maxwell",
       "symbol": "Mx",
       "factor": 1e-8,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

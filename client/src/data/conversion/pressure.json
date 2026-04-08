@@ -9,38 +9,44 @@
       "name": "Pascal",
       "symbol": "Pa",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "torr",
       "name": "Torr",
       "symbol": "Torr",
-      "factor": 133.322
+      "factor": 133.322,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mmhg",
       "name": "mmHg (Blood)",
       "symbol": "mmHg",
-      "factor": 133.322
+      "factor": 133.322,
+      "unitType": "SI_BASE"
     },
     {
       "id": "psi",
       "name": "PSI",
       "symbol": "psi",
-      "factor": 6894.76
+      "factor": 6894.76,
+      "unitType": "US_COMMON"
     },
     {
       "id": "bar",
       "name": "Bar",
       "symbol": "bar",
       "factor": 100000,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "atm",
       "name": "Atmosphere",
       "symbol": "atm",
-      "factor": 101325
+      "factor": 101325,
+      "unitType": "SI_BASE"
     }
   ]
 }

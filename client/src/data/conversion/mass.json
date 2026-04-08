@@ -8,75 +8,87 @@
       "id": "kg",
       "name": "Kilogram",
       "symbol": "kg",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ev_c2",
       "name": "Electronvolt/c²",
       "symbol": "eV⋅c⁻²",
       "factor": 1.78266192e-36,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mcg",
       "name": "Microgram",
       "symbol": "mcg",
-      "factor": 1e-9
+      "factor": 1e-9,
+      "unitType": "SI_BASE"
     },
     {
       "id": "g",
       "name": "Gram",
       "symbol": "g",
       "factor": 0.001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "oz",
       "name": "Ounce",
       "symbol": "oz",
-      "factor": 0.028349523125
+      "factor": 0.028349523125,
+      "unitType": "US_COMMON"
     },
     {
       "id": "oz_t",
       "name": "Troy Ounce",
       "symbol": "oz t",
-      "factor": 0.0311034768
+      "factor": 0.0311034768,
+      "unitType": "US_COMMON"
     },
     {
       "id": "lb",
       "name": "Pound",
       "symbol": "lb",
-      "factor": 0.45359237
+      "factor": 0.45359237,
+      "unitType": "US_COMMON"
     },
     {
       "id": "st",
       "name": "Stone",
       "symbol": "st",
-      "factor": 6.35029318
+      "factor": 6.35029318,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "slug",
       "name": "Slug",
       "symbol": "slug",
-      "factor": 14.5939
+      "factor": 14.5939,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ton_us",
       "name": "Short Ton (US)",
       "symbol": "ton (US)",
-      "factor": 907.185
+      "factor": 907.185,
+      "unitType": "US_COMMON"
     },
     {
       "id": "t",
       "name": "Tonne",
       "symbol": "t",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ton_uk",
       "name": "Long Ton (UK)",
       "symbol": "ton (imp)",
-      "factor": 1016.05
+      "factor": 1016.05,
+      "unitType": "IMPERIAL"
     }
   ]
 }

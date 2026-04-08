@@ -9,122 +9,142 @@
       "name": "Meter",
       "symbol": "m",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "angstrom",
       "name": "Angstrom",
       "symbol": "Å",
-      "factor": 1e-10
+      "factor": 1e-10,
+      "unitType": "SI_BASE"
     },
     {
       "id": "in",
       "name": "Inch",
       "symbol": "in",
-      "factor": 0.0254
+      "factor": 0.0254,
+      "unitType": "US_COMMON"
     },
     {
       "id": "u",
       "name": "Rack Unit Height",
       "symbol": "RU",
-      "factor": 0.044449999999999996
+      "factor": 0.044449999999999996,
+      "unitType": "SI_BASE"
     },
     {
       "id": "u2",
       "name": "2U Height",
       "symbol": "2U",
-      "factor": 0.08889999999999999
+      "factor": 0.08889999999999999,
+      "unitType": "SI_BASE"
     },
     {
       "id": "u4",
       "name": "4U Height",
       "symbol": "4U",
-      "factor": 0.17779999999999999
+      "factor": 0.17779999999999999,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ft",
       "name": "Foot",
       "symbol": "ft",
       "factor": 0.3048,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ft_in",
       "name": "Foot & Inch",
       "symbol": "ft'in\"",
-      "factor": 0.3048
+      "factor": 0.3048,
+      "unitType": "US_COMMON"
     },
     {
       "id": "rack_12u",
       "name": "Quarter Rack (12U)",
       "symbol": "12U",
-      "factor": 0.5334
+      "factor": 0.5334,
+      "unitType": "SI_BASE"
     },
     {
       "id": "u_width",
       "name": "U Width (19\")",
       "symbol": "U-W",
-      "factor": 0.4826
+      "factor": 0.4826,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cabinet_width",
       "name": "Cabinet Width (24\")",
       "symbol": "Cab-W",
-      "factor": 0.6095999999999999
+      "factor": 0.6095999999999999,
+      "unitType": "SI_BASE"
     },
     {
       "id": "yd",
       "name": "Yard",
       "symbol": "yd",
-      "factor": 0.9144
+      "factor": 0.9144,
+      "unitType": "US_COMMON"
     },
     {
       "id": "rack_24u",
       "name": "Half Rack (24U)",
       "symbol": "24U",
-      "factor": 1.0668
+      "factor": 1.0668,
+      "unitType": "SI_BASE"
     },
     {
       "id": "fathom",
       "name": "Fathom",
       "symbol": "ftm",
-      "factor": 1.8288
+      "factor": 1.8288,
+      "unitType": "US_COMMON"
     },
     {
       "id": "rack_42u",
       "name": "Full Rack (42U)",
       "symbol": "42U",
-      "factor": 1.8669
+      "factor": 1.8669,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mi",
       "name": "Mile",
       "symbol": "mi",
-      "factor": 1609.344
+      "factor": 1609.344,
+      "unitType": "US_COMMON"
     },
     {
       "id": "nmi",
       "name": "Nautical Mile",
       "symbol": "nmi",
-      "factor": 1852
+      "factor": 1852,
+      "unitType": "SI_BASE"
     },
     {
       "id": "au",
       "name": "Astronomical Unit",
       "symbol": "AU",
-      "factor": 149600000000
+      "factor": 149600000000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ly",
       "name": "Light Year",
       "symbol": "ly",
-      "factor": 9461000000000000
+      "factor": 9461000000000000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "parsec",
       "name": "Parsec",
       "symbol": "parsec",
-      "factor": 30857000000000000
+      "factor": 30857000000000000,
+      "unitType": "SI_BASE"
     }
   ]
 }

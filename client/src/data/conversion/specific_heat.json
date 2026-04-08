@@ -8,32 +8,37 @@
       "id": "jkgk",
       "name": "J/(kg⋅K)",
       "symbol": "J⋅kg⁻¹⋅K⁻¹",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "jgk",
       "name": "J/(g⋅K)",
       "symbol": "J⋅g⁻¹⋅K⁻¹",
       "factor": 1000,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kjkgk",
       "name": "kJ/(kg⋅K)",
       "symbol": "kJ⋅kg⁻¹⋅K⁻¹",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cal_gC",
       "name": "cal/(g⋅°C)",
       "symbol": "cal⋅g⁻¹⋅°C⁻¹",
-      "factor": 4184
+      "factor": 4184,
+      "unitType": "SI_BASE"
     },
     {
       "id": "btu_lbF",
       "name": "BTU/(lb⋅°F)",
       "symbol": "BTU⋅lb⁻¹⋅°F⁻¹",
-      "factor": 4186.8
+      "factor": 4186.8,
+      "unitType": "US_COMMON"
     }
   ]
 }

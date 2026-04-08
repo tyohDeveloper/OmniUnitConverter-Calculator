@@ -8,43 +8,50 @@
       "id": "km_l",
       "name": "Kilometers/Liter",
       "symbol": "km⋅L⁻¹",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "km_gal_us",
       "name": "Kilometers/Gallon (US)",
       "symbol": "km⋅gal⁻¹",
-      "factor": 0.264172
+      "factor": 0.264172,
+      "unitType": "US_COMMON"
     },
     {
       "id": "mpg_imp",
       "name": "Miles/Gallon (Imp)",
       "symbol": "mpg (Imp)",
-      "factor": 0.354006
+      "factor": 0.354006,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "mpg_us",
       "name": "Miles/Gallon (US)",
       "symbol": "mpg (US)",
-      "factor": 0.425144
+      "factor": 0.425144,
+      "unitType": "US_COMMON"
     },
     {
       "id": "mi_l",
       "name": "Miles/Liter",
       "symbol": "mi⋅L⁻¹",
-      "factor": 1.60934
+      "factor": 1.60934,
+      "unitType": "US_COMMON"
     },
     {
       "id": "km_kwh",
       "name": "Kilometers/kWh (EV)",
       "symbol": "km⋅kWh⁻¹",
-      "factor": 9.5
+      "factor": 9.5,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mi_kwh",
       "name": "Miles/kWh (EV)",
       "symbol": "mi⋅kWh⁻¹",
-      "factor": 15.29
+      "factor": 15.29,
+      "unitType": "US_COMMON"
     }
   ]
 }

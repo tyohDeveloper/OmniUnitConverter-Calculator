@@ -9,14 +9,16 @@
       "name": "Tesla",
       "symbol": "T",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "g",
       "name": "Gauss",
       "symbol": "G",
       "factor": 0.0001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

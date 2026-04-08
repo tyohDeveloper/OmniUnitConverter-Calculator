@@ -9,13 +9,15 @@
       "name": "Gray",
       "symbol": "Gy",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "rad",
       "name": "Rad (CGS)",
       "symbol": "Rad",
-      "factor": 0.01
+      "factor": 0.01,
+      "unitType": "SI_BASE"
     }
   ]
 }

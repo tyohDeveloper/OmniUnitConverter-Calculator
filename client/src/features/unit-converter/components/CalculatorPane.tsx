@@ -15,6 +15,7 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { Copy, ClipboardPaste } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
@@ -49,6 +50,7 @@ interface CalculatorPaneProps {
   rpnSelectedAlternative: number;
   rpnXEditing: boolean;
   rpnXEditValue: string;
+  preserveSourceUnit: boolean;
   flashCalcField1: boolean;
   flashCalcField2: boolean;
   flashCalcField3: boolean;
@@ -86,6 +88,7 @@ interface CalculatorPaneProps {
   dropRpnStack: () => void;
   undoRpnStack: () => void;
   pullFromPane: () => void;
+  pasteToRpnStack: () => Promise<void>;
   swapRpnXY: () => void;
   recallLastX: () => void;
   pushRpnConstant: (value: number) => void;
@@ -96,6 +99,7 @@ interface CalculatorPaneProps {
   applyPrefixToKgUnit: (symbol: string, prefixId: string) => { displaySymbol: string; showPrefix: boolean; effectivePrefixFactor: number };
   formatNumberWithSeparators: (num: number, precision: number) => string;
   t: (key: string) => string;
+  togglePreserveSourceUnit: () => void;
 }
 
 export function CalculatorPane({
@@ -114,6 +118,7 @@ export function CalculatorPane({
   rpnSelectedAlternative,
   rpnXEditing,
   rpnXEditValue,
+  preserveSourceUnit,
   flashCalcField1,
   flashCalcField2,
   flashCalcField3,
@@ -151,6 +156,7 @@ export function CalculatorPane({
   dropRpnStack,
   undoRpnStack,
   pullFromPane,
+  pasteToRpnStack,
   swapRpnXY,
   recallLastX,
   pushRpnConstant,
@@ -161,6 +167,7 @@ export function CalculatorPane({
   applyPrefixToKgUnit,
   formatNumberWithSeparators,
   t,
+  togglePreserveSourceUnit,
 }: CalculatorPaneProps) {
   // Ref for the X edit input, used to restore focus after the prefix/alt
   // dropdowns are interacted with while edit mode is active.
@@ -228,7 +235,7 @@ export function CalculatorPane({
       {calculatorMode === 'simple' && (
         <div
           className="grid gap-2 mb-4 items-center"
-          style={{ gridTemplateColumns: `${CommonFieldWidth} ${OperatorBtnWidth} ${OperatorBtnWidth} ${OperatorBtnWidth} ${OperatorBtnWidth} ${ClearBtnWidth}` }}
+          style={{ gridTemplateColumns: `${CommonFieldWidth} repeat(8, ${RpnBtnWidth})` }}
         >
           <div className="flex items-center justify-between" style={{ width: CommonFieldWidth, maxWidth: CommonFieldWidth }}>
             <Label
@@ -263,14 +270,24 @@ export function CalculatorPane({
             onClick={clearCalculator}
             data-testid="button-clear-calculator"
             className="text-xs text-foreground hover:text-accent border !border-border/30"
-            style={{ justifySelf: 'start' }}
+            style={{ gridColumn: 'span 2' }}
           >
             {t('Clear calculator')}
           </Button>
-          <div />
-          <div />
-          <div />
-          <div />
+          <div style={{ gridColumn: 'span 6' }} className="flex items-center gap-2 pl-1">
+            <Switch
+              id="simple-preserve-source-unit"
+              data-testid="button-simple-preserve-source-unit"
+              checked={preserveSourceUnit}
+              onCheckedChange={() => togglePreserveSourceUnit()}
+            />
+            <label
+              htmlFor="simple-preserve-source-unit"
+              className="text-xs text-muted-foreground cursor-pointer select-none"
+            >
+              {t('Keep source units')}
+            </label>
+          </div>
         </div>
       )}
 
@@ -313,57 +330,27 @@ export function CalculatorPane({
             onClick={clearRpnStack}
             data-testid="button-clear-rpn"
             className="text-xs text-foreground hover:text-accent border !border-border/30"
-            style={{ justifySelf: 'start' }}
+            style={{ gridColumn: 'span 2' }}
           >
             {t('Clear calculator')}
           </Button>
-          <span style={{ gridColumn: 'span 6' }}></span>
-          <Button
-            variant="ghost"
-            size="sm"
-            data-testid="button-rpn-paste"
-            onClick={async () => {
-              try {
-                const text = await navigator.clipboard.readText();
-                if (!text) return;
-                const parsed = parseUnitText(text);
-                const dims: Record<string, number> = {};
-                if (parsed.dimensions.length) dims.length = parsed.dimensions.length;
-                if (parsed.dimensions.mass) dims.mass = parsed.dimensions.mass;
-                if (parsed.dimensions.time) dims.time = parsed.dimensions.time;
-                if (parsed.dimensions.current) dims.current = parsed.dimensions.current;
-                if (parsed.dimensions.temperature) dims.temperature = parsed.dimensions.temperature;
-                if (parsed.dimensions.amount) dims.amount = parsed.dimensions.amount;
-                if (parsed.dimensions.intensity) dims.intensity = parsed.dimensions.intensity;
-                if (parsed.dimensions.angle) dims.angle = parsed.dimensions.angle;
-                if (parsed.dimensions.solid_angle) dims.solid_angle = parsed.dimensions.solid_angle;
-
-                const newEntry = {
-                  value: parsed.value,
-                  dimensions: dims,
-                  prefix: parsed.prefixId || 'none'
-                };
-
-                saveRpnStackForUndo();
-                setRpnStack(prev => {
-                  const newStack = [...prev];
-                  newStack[0] = prev[1];
-                  newStack[1] = prev[2];
-                  newStack[2] = prev[3];
-                  newStack[3] = newEntry;
-                  return newStack;
-                });
-                setRpnResultPrefix('none');
-                setRpnSelectedAlternative(0);
-              } catch (err) {
-                console.error('Failed to read clipboard:', err);
-              }
-            }}
-            className="text-xs text-foreground hover:text-accent gap-2 border !border-border/30"
+          <div
+            style={{ gridColumn: 'span 6' }}
+            className="flex items-center gap-2 pl-1"
           >
-            <ClipboardPaste className="w-3 h-3" />
-            {t('Paste')}
-          </Button>
+            <Switch
+              id="rpn-preserve-source-unit"
+              data-testid="button-rpn-preserve-source-unit"
+              checked={preserveSourceUnit}
+              onCheckedChange={() => togglePreserveSourceUnit()}
+            />
+            <label
+              htmlFor="rpn-preserve-source-unit"
+              className="text-xs text-muted-foreground cursor-pointer select-none"
+            >
+              {t('Keep source units')}
+            </label>
+          </div>
         </div>
       )}
 
@@ -386,6 +373,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="calc-field-1"
+                preserveSourceUnit={preserveSourceUnit}
               />
               <div style={{ visibility: 'hidden' }} />
               <div style={{ visibility: 'hidden' }} />
@@ -417,6 +405,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="calc-field-2"
+                preserveSourceUnit={preserveSourceUnit}
               />
               <Button
                 variant="ghost"
@@ -484,6 +473,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="calc-field-3"
+                preserveSourceUnit={preserveSourceUnit}
               />
               <Button
                 variant="ghost"
@@ -551,7 +541,11 @@ export function CalculatorPane({
                 transition={{ duration: 0.3 }}
               >
                 {(() => {
-                  const display = getCalcResultDisplay();
+                  const cv = calcValues[3];
+                  const useSource = cv?.originalUnit != null && cv?.originalValue != null;
+                  const display = useSource
+                    ? { formattedValue: formatNumberWithSeparators(cv!.originalValue!, calculatorPrecision), unitSymbol: cv!.originalUnit! }
+                    : getCalcResultDisplay();
                   return (
                     <>
                       <span className="text-sm font-mono text-primary font-bold truncate">
@@ -697,6 +691,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="rpn-field-s3"
+                preserveSourceUnit={preserveSourceUnit}
               />
               {(() => {
                 const s3Buttons: Array<{ id: string; shiftId?: string; label: string; shiftLabel: string; op?: RpnUnaryOp; shiftOp?: RpnUnaryOp; binaryOp?: RpnBinaryOp; tooltip?: string; shiftTooltip?: string } | { id: string; shiftId?: string; label: string; shiftLabel: string; isConstant: true; value: number; shiftValue: number; tooltip?: string; shiftTooltip?: string }> = [
@@ -772,6 +767,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="rpn-field-s2"
+                preserveSourceUnit={preserveSourceUnit}
               />
               {(() => {
                 const s2Buttons: Array<{ id: string; shiftId?: string; label: string; shiftLabel: string; op: RpnUnaryOp; shiftOp: RpnUnaryOp } | { id: string; shiftId?: string; label: string; shiftLabel: string; isConstant: true; value: number; shiftValue: number }> = [
@@ -831,6 +827,7 @@ export function CalculatorPane({
                 formatNumberWithSeparators={formatNumberWithSeparators}
                 precision={calculatorPrecision}
                 testId="rpn-field-y"
+                preserveSourceUnit={preserveSourceUnit}
               />
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -984,13 +981,20 @@ export function CalculatorPane({
                   transition={{ duration: 0.3 }}
                 >
                   {(() => {
-                    const display = getRpnResultDisplay();
+                    const xVal = rpnStack[3];
+                    // X register always shows source/selected unit — it is the
+                    // active editing register and always reflects the chosen unit.
+                    // preserveSourceUnit only controls the stacked (Y/Z/T) registers.
+                    const useSource = xVal?.originalUnit != null && xVal?.originalValue != null;
+                    const display = useSource
+                      ? { formattedValue: formatNumberWithSeparators(xVal!.originalValue!, calculatorPrecision), unitSymbol: xVal!.originalUnit! }
+                      : getRpnResultDisplay();
                     return (
                       <>
-                        <span className="text-sm font-mono text-primary font-bold truncate">
+                        <span className="text-sm font-mono text-primary font-bold truncate" data-testid="text-rpn-x-value">
                           {display?.formattedValue || ''}
                         </span>
-                        <span className="text-xs font-mono text-muted-foreground ms-2 shrink-0">
+                        <span className="text-xs font-mono text-muted-foreground ms-2 shrink-0" data-testid="text-rpn-x-unit">
                           {display?.unitSymbol || ''}
                         </span>
                       </>
@@ -1047,7 +1051,6 @@ export function CalculatorPane({
                         value={rpnSelectedAlternative.toString()}
                         onValueChange={(val) => {
                           setRpnSelectedAlternative(parseInt(val));
-                          setRpnResultPrefix('none');
                           suppressXBlurRef.current = false;
                           if (rpnXEditing) requestAnimationFrame(() => rpnXInputRef.current?.focus());
                         }}
@@ -1188,7 +1191,18 @@ export function CalculatorPane({
                 </TooltipTrigger>
                 <TooltipContent>{t('rpn-tooltip-shift')}</TooltipContent>
               </Tooltip>
-              <span style={{ gridColumn: 'span 6' }}></span>
+              <span style={{ gridColumn: 'span 4' }}></span>
+              <Button
+                variant="ghost"
+                size="sm"
+                data-testid="button-rpn-paste"
+                onClick={() => pasteToRpnStack()}
+                className="text-xs text-foreground hover:text-accent gap-1 border !border-border/30"
+                style={{ gridColumn: 'span 2' }}
+              >
+                <ClipboardPaste className="w-3 h-3" />
+                {t('Smart Paste')}
+              </Button>
               <Button
                 variant="ghost"
                 size="sm"

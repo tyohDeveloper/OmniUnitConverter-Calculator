@@ -9,49 +9,57 @@
       "name": "Square Meter",
       "symbol": "m²",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "barn",
       "name": "Barn",
       "symbol": "b",
-      "factor": 1e-28
+      "factor": 1e-28,
+      "unitType": "SI_BASE"
     },
     {
       "id": "sqin",
       "name": "Square Inch",
       "symbol": "in²",
-      "factor": 0.00064516
+      "factor": 0.00064516,
+      "unitType": "US_COMMON"
     },
     {
       "id": "sqft",
       "name": "Square Foot",
       "symbol": "ft²",
-      "factor": 0.092903
+      "factor": 0.092903,
+      "unitType": "US_COMMON"
     },
     {
       "id": "sqyd",
       "name": "Square Yard",
       "symbol": "yd²",
-      "factor": 0.836127
+      "factor": 0.836127,
+      "unitType": "US_COMMON"
     },
     {
       "id": "acre",
       "name": "Acre",
       "symbol": "ac",
-      "factor": 4046.86
+      "factor": 4046.86,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ha",
       "name": "Hectare",
       "symbol": "ha",
-      "factor": 10000
+      "factor": 10000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "sqmi",
       "name": "Square Mile",
       "symbol": "mi²",
-      "factor": 2590000
+      "factor": 2590000,
+      "unitType": "US_COMMON"
     }
   ]
 }

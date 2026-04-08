@@ -9,7 +9,8 @@
       "name": "Ohm",
       "symbol": "Ω",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

@@ -9,13 +9,15 @@
       "name": "Siemens",
       "symbol": "S",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mho",
       "name": "Mho",
       "symbol": "℧",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     }
   ]
 }

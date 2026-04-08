@@ -9,25 +9,29 @@
       "name": "Lux",
       "symbol": "lx",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "nox",
       "name": "Nox",
       "symbol": "nox",
-      "factor": 0.001
+      "factor": 0.001,
+      "unitType": "SI_BASE"
     },
     {
       "id": "fc",
       "name": "Foot-candle",
       "symbol": "fc",
-      "factor": 10.7639
+      "factor": 10.7639,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ph",
       "name": "Phot",
       "symbol": "ph",
-      "factor": 10000
+      "factor": 10000,
+      "unitType": "SI_BASE"
     }
   ]
 }

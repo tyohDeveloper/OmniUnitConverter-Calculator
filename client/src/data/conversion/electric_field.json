@@ -9,31 +9,36 @@
       "name": "Volt per Meter",
       "symbol": "V⋅m⁻¹",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "v_per_cm",
       "name": "Volt per Centimeter",
       "symbol": "V⋅cm⁻¹",
-      "factor": 100
+      "factor": 100,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kv_per_m",
       "name": "Kilovolt per Meter",
       "symbol": "kV⋅m⁻¹",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "statv_per_cm",
       "name": "Statvolt per Centimeter",
       "symbol": "statV⋅cm⁻¹",
-      "factor": 29979.2458
+      "factor": 29979.2458,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kv_per_cm",
       "name": "Kilovolt per Centimeter",
       "symbol": "kV⋅cm⁻¹",
-      "factor": 100000
+      "factor": 100000,
+      "unitType": "SI_BASE"
     }
   ]
 }

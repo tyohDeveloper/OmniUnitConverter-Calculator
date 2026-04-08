@@ -9,21 +9,24 @@
       "name": "Electronvolt",
       "symbol": "eV",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "J_photon",
       "name": "Joule",
       "symbol": "J",
       "factor": 6241509074000000000,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "nu",
       "name": "Frequency (ν)",
       "symbol": "ν",
       "factor": 4.135667696e-15,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "lambda",
@@ -31,7 +34,8 @@
       "symbol": "λ",
       "factor": 0.000001239841984,
       "allowPrefixes": true,
-      "isInverse": true
+      "isInverse": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

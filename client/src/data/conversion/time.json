@@ -9,55 +9,64 @@
       "name": "Second",
       "symbol": "s",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "shake",
       "name": "Shake",
       "symbol": "shake",
-      "factor": 1e-8
+      "factor": 1e-8,
+      "unitType": "SI_BASE"
     },
     {
       "id": "min",
       "name": "Minute",
       "symbol": "min",
-      "factor": 60
+      "factor": 60,
+      "unitType": "SI_BASE"
     },
     {
       "id": "h",
       "name": "Hour",
       "symbol": "h",
-      "factor": 3600
+      "factor": 3600,
+      "unitType": "SI_BASE"
     },
     {
       "id": "d_sid",
       "name": "Sidereal Day",
       "symbol": "d (sid)",
-      "factor": 86164.0905
+      "factor": 86164.0905,
+      "unitType": "SI_BASE"
     },
     {
       "id": "d",
       "name": "Day",
       "symbol": "d",
-      "factor": 86400
+      "factor": 86400,
+      "unitType": "SI_BASE"
     },
     {
       "id": "wk",
       "name": "Week",
       "symbol": "wk",
-      "factor": 604800
+      "factor": 604800,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mo",
       "name": "Month (Avg)",
       "symbol": "mo",
-      "factor": 2628000
+      "factor": 2628000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "y",
       "name": "Year",
       "symbol": "yr",
-      "factor": 31540000
+      "factor": 31540000,
+      "unitType": "SI_BASE"
     }
   ]
 }

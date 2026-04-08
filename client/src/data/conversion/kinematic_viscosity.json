@@ -9,26 +9,30 @@
       "name": "Square Meter per Second",
       "symbol": "m²⋅s⁻¹",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "centistokes",
       "name": "Centistokes",
       "symbol": "cSt",
-      "factor": 0.000001
+      "factor": 0.000001,
+      "unitType": "SI_BASE"
     },
     {
       "id": "stokes",
       "name": "Stokes",
       "symbol": "St",
       "factor": 0.0001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ft2_per_s",
       "name": "Square Foot per Second",
       "symbol": "ft²⋅s⁻¹",
-      "factor": 0.09290304
+      "factor": 0.09290304,
+      "unitType": "US_COMMON"
     }
   ]
 }

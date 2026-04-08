@@ -1,0 +1,7 @@
+export enum UnitType {
+  SI_BASE = 'SI_BASE',
+  US_COMMON = 'US_COMMON',
+  US_COMMON_FLUID = 'US_COMMON_FLUID',
+  US_COMMON_DRY = 'US_COMMON_DRY',
+  IMPERIAL = 'IMPERIAL',
+}

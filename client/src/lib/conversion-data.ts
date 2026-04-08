@@ -247,6 +247,7 @@ export interface UnitDefinition {
   allowPrefixes?: boolean;
   mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4'; // For math function units
   isInverse?: boolean; // For photon wavelength: E = constant/λ (inverse relationship)
+  unitType?: import('./units/unitType').UnitType;
 }
 
 export interface CategoryDefinition {
@@ -272,6 +273,7 @@ type RawCategoryJson = {
     allowPrefixes?: boolean;
     mathFunction?: string;
     isInverse?: boolean;
+    unitType?: string;
   }>;
 };
 

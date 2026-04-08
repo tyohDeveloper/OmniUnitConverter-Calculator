@@ -9,25 +9,29 @@
       "name": "Watt",
       "symbol": "W",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "erg_s",
       "name": "Erg per Second",
       "symbol": "erg⋅s⁻¹",
-      "factor": 1e-7
+      "factor": 1e-7,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ft_lbf_s",
       "name": "Foot-pound per Second",
       "symbol": "ft⋅lbf⋅s⁻¹",
-      "factor": 1.3558179483
+      "factor": 1.3558179483,
+      "unitType": "US_COMMON"
     },
     {
       "id": "boiler_hp",
       "name": "Boiler Horsepower",
       "symbol": "hp (boiler)",
-      "factor": 9810.55
+      "factor": 9810.55,
+      "unitType": "US_COMMON"
     }
   ]
 }

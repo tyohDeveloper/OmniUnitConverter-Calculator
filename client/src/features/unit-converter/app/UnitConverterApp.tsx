@@ -10,6 +10,7 @@ import {
 } from '@/lib/formatting';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
+import { UnitType } from '@/lib/units/unitType';
 import type { DerivedUnitInfo } from '@/lib/units/derivedUnitInfo';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { NON_SI_UNITS_CATALOG } from '@/lib/units/nonSiUnitsCatalog';
@@ -97,6 +98,7 @@ export default function UnitConverterApp() {
 
   const [calculatorMode, setCalculatorMode] = useState<'simple' | 'rpn'>('rpn');
   const [shiftActive, setShiftActive] = useState(false);
+  const [preserveSourceUnit, setPreserveSourceUnit] = useState(true);
 
   const rpn = useRpnStack();
   const {
@@ -634,7 +636,18 @@ export default function UnitConverterApp() {
       navigator.clipboard.writeText(textToCopy);
       triggerFlashCopyResult();
       const siBaseValue = valueToCopy;
-      const newEntry = { value: siBaseValue, dimensions: getCategoryDimensions(activeCategory), prefix: 'none' as string, sourceCategory: activeCategory };
+      const categoryDef = CONVERSION_DATA.find(c => c.id === activeCategory);
+      const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData?.id !== 'none') ? (toPrefixData?.symbol || '') : '';
+      const newEntry: CalcValue = {
+        value: siBaseValue,
+        dimensions: getCategoryDimensions(activeCategory),
+        prefix: 'none',
+        sourceCategory: activeCategory,
+        siUnit: categoryDef?.baseSISymbol,
+        originalUnit: toUnit !== 'deg_dms' && toUnit !== 'ft_in' ? toPfxSymbol + toUnitData.symbol : undefined,
+        originalValue: toUnit !== 'deg_dms' && toUnit !== 'ft_in' ? result : undefined,
+        unitType: toUnitData.unitType,
+      };
       if (calculatorMode === 'rpn') {
         saveRpnStackForUndo();
         setRpnStack(prev => {
@@ -642,7 +655,16 @@ export default function UnitConverterApp() {
           newStack[0] = prev[1]; newStack[1] = prev[2]; newStack[2] = prev[3]; newStack[3] = newEntry;
           return newStack;
         });
-        setRpnResultPrefix('none'); setRpnSelectedAlternative(0); triggerFlashRpnResult();
+        // Auto-select the SI representation that matches the TO unit
+        let autoAlt = 0;
+        let autoPrefix = 'none';
+        const siReps = generateSIRepresentations(newEntry.dimensions, activeCategory);
+        const matchIdx = siReps.findIndex(rep => rep.displaySymbol === toUnitData.symbol);
+        if (matchIdx >= 0) {
+          autoAlt = matchIdx;
+          autoPrefix = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.id : 'none';
+        }
+        setRpnResultPrefix(autoPrefix); setRpnSelectedAlternative(autoAlt); triggerFlashRpnResult();
       } else {
         const firstEmptyIndex = calcValues.findIndex((v, i) => i < 3 && v === null);
         if (firstEmptyIndex !== -1) {
@@ -787,7 +809,19 @@ export default function UnitConverterApp() {
     let newEntry: CalcValue | null = null;
     if (activeTab === 'converter') {
       if (result !== null && toUnitData) {
-        newEntry = { value: result * toUnitData.factor * (toPrefixData?.factor || 1), dimensions: getCategoryDimensions(activeCategory), prefix: 'none', sourceCategory: activeCategory };
+        const siValue = result * toUnitData.factor * (toPrefixData?.factor || 1);
+        const categoryDef = CONVERSION_DATA.find(c => c.id === activeCategory);
+        const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.symbol : '';
+        newEntry = {
+          value: siValue,
+          dimensions: getCategoryDimensions(activeCategory),
+          prefix: 'none',
+          sourceCategory: activeCategory,
+          siUnit: categoryDef?.baseSISymbol,
+          originalUnit: toPfxSymbol + toUnitData.symbol,
+          originalValue: result,
+          unitType: toUnitData.unitType,
+        };
       }
     } else if (activeTab === 'custom') {
       const numValue = parseNumberWithFormat(directValue);
@@ -798,7 +832,81 @@ export default function UnitConverterApp() {
     if (!newEntry) return;
     saveRpnStackForUndo();
     setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry; return ns; });
-    setRpnResultPrefix('none'); setRpnSelectedAlternative(0); triggerFlashRpnResult();
+    let autoAlt = 0;
+    let autoPrefix = 'none';
+    if (activeTab === 'converter' && toUnitData && newEntry) {
+      const siReps = generateSIRepresentations(newEntry.dimensions, activeCategory);
+      const matchIdx = siReps.findIndex(rep => rep.displaySymbol === toUnitData.symbol);
+      if (matchIdx >= 0) {
+        autoAlt = matchIdx;
+        autoPrefix = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.id : 'none';
+      }
+    }
+    setRpnResultPrefix(autoPrefix);
+    setRpnSelectedAlternative(autoAlt);
+    triggerFlashRpnResult();
+  };
+
+  const pasteToRpnStack = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text) return;
+      const parsed = parseUnitText(text);
+      const dims: DimensionalFormula = {};
+      const dimKeys = ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity', 'angle', 'solid_angle'] as const;
+      for (const key of dimKeys) {
+        if (parsed.dimensions[key]) dims[key] = parsed.dimensions[key];
+      }
+      let sourceCategory: string | undefined;
+      let siUnit: string | undefined;
+      let originalUnit: string | undefined;
+      let unitType: UnitType | undefined;
+      if (parsed.categoryId) {
+        sourceCategory = parsed.categoryId;
+        const categoryDef = CONVERSION_DATA.find(c => c.id === parsed.categoryId);
+        siUnit = categoryDef?.baseSISymbol;
+        if (parsed.unitId && categoryDef) {
+          const unitDef = categoryDef.units.find(u => u.id === parsed.unitId);
+          if (unitDef) {
+            const prefixDef = PREFIXES.find(p => p.id === parsed.prefixId);
+            const prefixSymbol = (unitDef.allowPrefixes && prefixDef && prefixDef.id !== 'none') ? prefixDef.symbol : '';
+            originalUnit = prefixSymbol + unitDef.symbol;
+            unitType = unitDef.unitType;
+          }
+        }
+      }
+      const newEntry: CalcValue = {
+        value: parsed.value,
+        dimensions: dims,
+        prefix: parsed.prefixId || 'none',
+        sourceCategory,
+        siUnit,
+        originalUnit,
+        originalValue: parsed.originalValue,
+        unitType,
+      };
+      saveRpnStackForUndo();
+      setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry; return ns; });
+      let autoAlt = 0;
+      let autoPrefix = 'none';
+      if (parsed.categoryId && parsed.unitId) {
+        const categoryDef = CONVERSION_DATA.find(c => c.id === parsed.categoryId);
+        const unitDef = categoryDef?.units.find(u => u.id === parsed.unitId);
+        if (unitDef) {
+          const siReps = generateSIRepresentations(dims, parsed.categoryId);
+          const matchIdx = siReps.findIndex(rep => rep.displaySymbol === unitDef.symbol);
+          if (matchIdx >= 0) {
+            autoAlt = matchIdx;
+            const prefixDef = PREFIXES.find(p => p.id === parsed.prefixId);
+            autoPrefix = (unitDef.allowPrefixes && prefixDef && prefixDef.id !== 'none') ? prefixDef.id : 'none';
+          }
+        }
+      }
+      setRpnResultPrefix(autoPrefix);
+      setRpnSelectedAlternative(autoAlt);
+    } catch (err) {
+      console.error('Failed to read clipboard:', err);
+    }
   };
 
   type RpnUnaryOp =
@@ -940,6 +1048,52 @@ export default function UnitConverterApp() {
     const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
     const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
     return { formattedValue, unitSymbol: prefixSymbol + kgResult.displaySymbol };
+  };
+
+  const computeXOriginMeta = (altIndex: number, prefix: string): { originalUnit: string; originalValue: number; unitType: UnitType; sourceCategory: string | undefined } | null => {
+    const val = rpnStack[3];
+    if (!val) return null;
+    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
+    const rep = siReps[altIndex];
+    const symbol = rep?.displaySymbol || formatDimensions(val.dimensions);
+    if (!symbol || symbol === '1') return null;
+    const kgResult = applyPrefixToKgUnit(symbol, prefix);
+    const displayValue = siToDisplayLib(val.value, symbol, prefix);
+    const prefixData = PREFIXES.find(p => p.id === prefix);
+    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
+    const primaryDerivedUnit = rep?.derivedUnits?.[0];
+    const derivedUnitInfo = primaryDerivedUnit ? SI_DERIVED_UNITS.find(u => u.symbol === primaryDerivedUnit) : undefined;
+    const sourceCategory = derivedUnitInfo?.category ?? val.sourceCategory;
+    return { originalUnit: prefixSymbol + kgResult.displaySymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
+  };
+
+  const setRpnSelectedAlternativeAndMeta = (altIndex: number) => {
+    setRpnSelectedAlternative(altIndex);
+    setRpnResultPrefix('none');
+    const meta = computeXOriginMeta(altIndex, 'none');
+    if (meta && rpnStack[3]) {
+      setRpnStack(prev => {
+        const ns = [...prev];
+        if (ns[3]) {
+          ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
+        }
+        return ns;
+      });
+    }
+  };
+
+  const setRpnResultPrefixAndMeta = (prefix: string) => {
+    setRpnResultPrefix(prefix);
+    const meta = computeXOriginMeta(rpnSelectedAlternative, prefix);
+    if (meta && rpnStack[3]) {
+      setRpnStack(prev => {
+        const ns = [...prev];
+        if (ns[3]) {
+          ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
+        }
+        return ns;
+      });
+    }
   };
 
   const copyRpnResult = () => {
@@ -1480,8 +1634,10 @@ export default function UnitConverterApp() {
           setCalcOp2={setCalcOp2}
           setResultPrefix={setResultPrefix}
           setSelectedAlternative={setSelectedAlternative}
-          setRpnResultPrefix={setRpnResultPrefix}
-          setRpnSelectedAlternative={setRpnSelectedAlternative}
+          setRpnResultPrefix={setRpnResultPrefixAndMeta}
+          setRpnSelectedAlternative={setRpnSelectedAlternativeAndMeta}
+          preserveSourceUnit={preserveSourceUnit}
+          togglePreserveSourceUnit={() => setPreserveSourceUnit(v => !v)}
           setRpnXEditing={setRpnXEditing}
           setRpnXEditValue={setRpnXEditValue}
           setRpnStack={setRpnStack}
@@ -1503,6 +1659,7 @@ export default function UnitConverterApp() {
           dropRpnStack={dropRpnStack}
           undoRpnStack={undoRpnStack}
           pullFromPane={pullFromPane}
+          pasteToRpnStack={pasteToRpnStack}
           swapRpnXY={swapRpnXY}
           recallLastX={recallLastX}
           pushRpnConstant={pushRpnConstant}

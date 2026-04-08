@@ -10,28 +10,32 @@
       "symbol": "K",
       "factor": 1,
       "offset": 0,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "c",
       "name": "Celsius",
       "symbol": "°C",
       "factor": 1,
-      "offset": 273.15
+      "offset": 273.15,
+      "unitType": "SI_BASE"
     },
     {
       "id": "f",
       "name": "Fahrenheit",
       "symbol": "°F",
       "factor": 0.5555555555555556,
-      "offset": 459.67
+      "offset": 459.67,
+      "unitType": "US_COMMON"
     },
     {
       "id": "r",
       "name": "Rankine",
       "symbol": "°R",
       "factor": 0.5555555555555556,
-      "offset": 0
+      "offset": 0,
+      "unitType": "US_COMMON"
     }
   ]
 }

@@ -9,19 +9,22 @@
       "name": "W/(m⋅K)",
       "symbol": "W⋅m⁻¹⋅K⁻¹",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "btu_hftf",
       "name": "BTU/(h⋅ft⋅°F)",
       "symbol": "BTU⋅h⁻¹⋅ft⁻¹⋅°F⁻¹",
-      "factor": 1.73073
+      "factor": 1.73073,
+      "unitType": "US_COMMON"
     },
     {
       "id": "cal_scmC",
       "name": "cal/(s⋅cm⋅°C)",
       "symbol": "cal⋅s⁻¹⋅cm⁻¹⋅°C⁻¹",
-      "factor": 418.4
+      "factor": 418.4,
+      "unitType": "SI_BASE"
     }
   ]
 }

@@ -8,50 +8,58 @@
       "id": "kgm2s",
       "name": "kg⋅m²/s",
       "symbol": "kg⋅m²⋅s⁻¹",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "hbar",
       "name": "Reduced Planck constant",
       "symbol": "ℏ",
-      "factor": 1.054571817e-34
+      "factor": 1.054571817e-34,
+      "unitType": "SI_BASE"
     },
     {
       "id": "gcm2s",
       "name": "g⋅cm²/s",
       "symbol": "g⋅cm²⋅s⁻¹",
-      "factor": 1e-7
+      "factor": 1e-7,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ozin2s",
       "name": "oz⋅in²/s",
       "symbol": "oz⋅in²⋅s⁻¹",
-      "factor": 0.00001829
+      "factor": 0.00001829,
+      "unitType": "US_COMMON"
     },
     {
       "id": "gm2s",
       "name": "g⋅m²/s",
       "symbol": "g⋅m²⋅s⁻¹",
       "factor": 0.001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "lbft2s",
       "name": "lb⋅ft²/s",
       "symbol": "lb⋅ft²⋅s⁻¹",
-      "factor": 0.0421401
+      "factor": 0.0421401,
+      "unitType": "US_COMMON"
     },
     {
       "id": "js",
       "name": "Joule-second",
       "symbol": "J⋅s",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "slugft2s",
       "name": "slug⋅ft²/s",
       "symbol": "slug⋅ft²⋅s⁻¹",
-      "factor": 1.35582
+      "factor": 1.35582,
+      "unitType": "US_COMMON"
     }
   ]
 }

@@ -9,20 +9,23 @@
       "name": "Henry",
       "symbol": "H",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "abh",
       "name": "Abhenry",
       "symbol": "abH",
       "factor": 1e-9,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "stath",
       "name": "Stathenry",
       "symbol": "statH",
-      "factor": 898755178736.8176
+      "factor": 898755178736.8176,
+      "unitType": "SI_BASE"
     }
   ]
 }

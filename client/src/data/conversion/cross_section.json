@@ -9,25 +9,29 @@
       "name": "Barn",
       "symbol": "b",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "fm2",
       "name": "Square Femtometer",
       "symbol": "fm²",
-      "factor": 0.01
+      "factor": 0.01,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cm2_cs",
       "name": "Square Centimeter",
       "symbol": "cm²",
-      "factor": 1e+24
+      "factor": 1e+24,
+      "unitType": "SI_BASE"
     },
     {
       "id": "m2_cs",
       "name": "Square Meter",
       "symbol": "m²",
-      "factor": 1e+28
+      "factor": 1e+28,
+      "unitType": "SI_BASE"
     }
   ]
 }

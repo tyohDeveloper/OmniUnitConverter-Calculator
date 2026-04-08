@@ -12,6 +12,7 @@ export interface CalculatorState {
   resultCategory: UnitCategory | null;
   resultPrefix: string;
   selectedAlternative: number;
+  preserveSourceUnit: boolean;
 }
 
 export const calculatorInitialState: CalculatorState = {
@@ -25,6 +26,7 @@ export const calculatorInitialState: CalculatorState = {
   resultCategory: null,
   resultPrefix: 'none',
   selectedAlternative: 0,
+  preserveSourceUnit: false,
 };
 
 export type CalculatorAction =
@@ -38,7 +40,8 @@ export type CalculatorAction =
   | { type: 'SET_RESULT_UNIT'; payload: string | null }
   | { type: 'SET_RESULT_CATEGORY'; payload: UnitCategory | null }
   | { type: 'SET_RESULT_PREFIX'; payload: string }
-  | { type: 'SET_SELECTED_ALTERNATIVE'; payload: number };
+  | { type: 'SET_SELECTED_ALTERNATIVE'; payload: number }
+  | { type: 'TOGGLE_PRESERVE_SOURCE_UNIT' };
 
 export function calculatorReducer(state: CalculatorState, action: CalculatorAction): CalculatorState {
   switch (action.type) {
@@ -64,6 +67,8 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
       return { ...state, resultPrefix: action.payload };
     case 'SET_SELECTED_ALTERNATIVE':
       return { ...state, selectedAlternative: action.payload };
+    case 'TOGGLE_PRESERVE_SOURCE_UNIT':
+      return { ...state, preserveSourceUnit: !state.preserveSourceUnit };
     default:
       return state;
   }

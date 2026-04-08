@@ -9,19 +9,22 @@
       "name": "Steradian",
       "symbol": "sr",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "sqdeg",
       "name": "Square Degree",
       "symbol": "deg²",
-      "factor": 0.0003046
+      "factor": 0.0003046,
+      "unitType": "SI_BASE"
     },
     {
       "id": "sp",
       "name": "Spat",
       "symbol": "sp",
-      "factor": 12.566370614359172
+      "factor": 12.566370614359172,
+      "unitType": "SI_BASE"
     }
   ]
 }

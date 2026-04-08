@@ -9,73 +9,85 @@
       "name": "Meter",
       "symbol": "m",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "twip",
       "name": "Twip",
       "symbol": "twip",
-      "factor": 0.000017639
+      "factor": 0.000017639,
+      "unitType": "US_COMMON"
     },
     {
       "id": "px",
       "name": "Pixel (96 PPI)",
       "symbol": "px",
-      "factor": 0.000264583
+      "factor": 0.000264583,
+      "unitType": "SI_BASE"
     },
     {
       "id": "pt_trad",
       "name": "Point (Traditional)",
       "symbol": "pt (trad)",
-      "factor": 0.000351459
+      "factor": 0.000351459,
+      "unitType": "US_COMMON"
     },
     {
       "id": "pt",
       "name": "Point (Desktop)",
       "symbol": "pt (CSS)",
-      "factor": 0.0003527778
+      "factor": 0.0003527778,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mm",
       "name": "Millimeter",
       "symbol": "mm",
-      "factor": 0.001
+      "factor": 0.001,
+      "unitType": "SI_BASE"
     },
     {
       "id": "pc_trad",
       "name": "Pica (Traditional)",
       "symbol": "pc (trad)",
-      "factor": 0.0042175
+      "factor": 0.0042175,
+      "unitType": "US_COMMON"
     },
     {
       "id": "pc",
       "name": "Pica",
       "symbol": "pc (CSS)",
-      "factor": 0.0042333
+      "factor": 0.0042333,
+      "unitType": "SI_BASE"
     },
     {
       "id": "em",
       "name": "Em (16px ref)",
       "symbol": "em",
-      "factor": 0.0042333
+      "factor": 0.0042333,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cicero",
       "name": "Cicero",
       "symbol": "cicero",
-      "factor": 0.004512
+      "factor": 0.004512,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "in",
       "name": "Inch",
       "symbol": "in",
-      "factor": 0.0254
+      "factor": 0.0254,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ft",
       "name": "Foot",
       "symbol": "ft",
-      "factor": 0.3048
+      "factor": 0.3048,
+      "unitType": "US_COMMON"
     }
   ]
 }

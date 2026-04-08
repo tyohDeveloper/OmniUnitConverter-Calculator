@@ -9,25 +9,29 @@
       "name": "Joule/Kelvin",
       "symbol": "J⋅K⁻¹",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "calk",
       "name": "Calorie/Kelvin",
       "symbol": "cal⋅K⁻¹",
-      "factor": 4.184
+      "factor": 4.184,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kjk",
       "name": "Kilojoule/Kelvin",
       "symbol": "kJ⋅K⁻¹",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kcalk",
       "name": "Kilocalorie/Kelvin",
       "symbol": "kcal⋅K⁻¹",
-      "factor": 4184
+      "factor": 4184,
+      "unitType": "SI_BASE"
     }
   ]
 }

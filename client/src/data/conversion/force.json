@@ -9,32 +9,37 @@
       "name": "Newton",
       "symbol": "N",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "dyn",
       "name": "Dyne",
       "symbol": "dyn",
       "factor": 0.00001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "lbf",
       "name": "Pound-force",
       "symbol": "lbf",
-      "factor": 4.44822
+      "factor": 4.44822,
+      "unitType": "US_COMMON"
     },
     {
       "id": "kgf",
       "name": "Kilogram-force",
       "symbol": "kgf",
-      "factor": 9.80665
+      "factor": 9.80665,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kip",
       "name": "Kip",
       "symbol": "kip",
-      "factor": 4448.22
+      "factor": 4448.22,
+      "unitType": "US_COMMON"
     }
   ]
 }

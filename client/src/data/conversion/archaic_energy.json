@@ -9,32 +9,37 @@
       "name": "Joule",
       "symbol": "J",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "erg",
       "name": "Erg (CGS)",
       "symbol": "erg",
       "factor": 1e-7,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ft_lbf",
       "name": "Foot-pound Force",
       "symbol": "ft⋅lbf",
-      "factor": 1.3558179483
+      "factor": 1.3558179483,
+      "unitType": "US_COMMON"
     },
     {
       "id": "thermie",
       "name": "Thermie",
       "symbol": "th",
-      "factor": 4186800
+      "factor": 4186800,
+      "unitType": "SI_BASE"
     },
     {
       "id": "quad",
       "name": "Quad",
       "symbol": "quad",
-      "factor": 1055000000000000000
+      "factor": 1055000000000000000,
+      "unitType": "US_COMMON"
     }
   ]
 }

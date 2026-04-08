@@ -9,13 +9,15 @@
       "name": "Mole",
       "symbol": "mol",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "lbmol",
       "name": "Pound-mole",
       "symbol": "lb-mol",
-      "factor": 453.59237
+      "factor": 453.59237,
+      "unitType": "US_COMMON"
     }
   ]
 }

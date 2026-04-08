@@ -21,6 +21,7 @@ interface CalculatorFieldDisplayProps {
   width?: string;
   className?: string;
   testId?: string;
+  preserveSourceUnit?: boolean;
 }
 
 export function CalculatorFieldDisplay({
@@ -35,6 +36,7 @@ export function CalculatorFieldDisplay({
   width,
   className = '',
   testId,
+  preserveSourceUnit = false,
 }: CalculatorFieldDisplayProps) {
   const baseClass = isResult 
     ? 'px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between select-none'
@@ -46,7 +48,15 @@ export function CalculatorFieldDisplay({
         : 'cursor-pointer hover:bg-accent/10 active:bg-accent/20 hover:border-l-accent hover:border-l-2 hover:shadow-sm transition-all duration-150')
     : '';
 
+  const useSourceDisplay = preserveSourceUnit && value?.originalUnit != null && value?.originalValue != null;
+
   const displayData = value ? (() => {
+    if (useSourceDisplay) {
+      return {
+        formattedValue: formatNumberWithSeparators(value.originalValue!, precision),
+        unitSymbol: value.originalUnit!,
+      };
+    }
     const baseUnitSymbol = formatDimensions(value.dimensions);
     const kgResult = applyPrefixToKgUnit(baseUnitSymbol, value.prefix);
     const displayValue = value.value / kgResult.effectivePrefixFactor;

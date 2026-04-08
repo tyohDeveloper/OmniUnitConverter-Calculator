@@ -9,13 +9,15 @@
       "name": "Katal",
       "symbol": "kat",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "u",
       "name": "Enzyme Unit",
       "symbol": "U",
-      "factor": 1.667e-8
+      "factor": 1.667e-8,
+      "unitType": "SI_BASE"
     }
   ]
 }

@@ -9,19 +9,22 @@
       "name": "Becquerel",
       "symbol": "Bq",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "rd",
       "name": "Rutherford",
       "symbol": "Rd",
-      "factor": 1000000
+      "factor": 1000000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ci",
       "name": "Curie",
       "symbol": "Ci",
-      "factor": 37000000000
+      "factor": 37000000000,
+      "unitType": "SI_BASE"
     }
   ]
 }

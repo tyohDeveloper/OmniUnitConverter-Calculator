@@ -8,26 +8,30 @@
       "id": "kgm3",
       "name": "kg/m³",
       "symbol": "kg⋅m⁻³",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "gm3",
       "name": "g/m³",
       "symbol": "g⋅m⁻³",
       "factor": 0.001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "lbft3",
       "name": "lb/ft³",
       "symbol": "lb⋅ft⁻³",
-      "factor": 16.0185
+      "factor": 16.0185,
+      "unitType": "US_COMMON"
     },
     {
       "id": "gcm3",
       "name": "g/cm³",
       "symbol": "g⋅cm⁻³",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     }
   ]
 }

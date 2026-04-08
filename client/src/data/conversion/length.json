@@ -9,68 +9,79 @@
       "name": "Meter",
       "symbol": "m",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "angstrom",
       "name": "Angstrom",
       "symbol": "Å",
-      "factor": 1e-10
+      "factor": 1e-10,
+      "unitType": "SI_BASE"
     },
     {
       "id": "in",
       "name": "Inch",
       "symbol": "in",
-      "factor": 0.0254
+      "factor": 0.0254,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ft",
       "name": "Foot",
       "symbol": "ft",
       "factor": 0.3048,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ft_in",
       "name": "Foot & Inch",
       "symbol": "ft'in\"",
-      "factor": 0.3048
+      "factor": 0.3048,
+      "unitType": "US_COMMON"
     },
     {
       "id": "yd",
       "name": "Yard",
       "symbol": "yd",
-      "factor": 0.9144
+      "factor": 0.9144,
+      "unitType": "US_COMMON"
     },
     {
       "id": "mi",
       "name": "Mile",
       "symbol": "mi",
-      "factor": 1609.344
+      "factor": 1609.344,
+      "unitType": "US_COMMON"
     },
     {
       "id": "nmi",
       "name": "Nautical Mile",
       "symbol": "nmi",
-      "factor": 1852
+      "factor": 1852,
+      "unitType": "SI_BASE"
     },
     {
       "id": "au",
       "name": "Astronomical Unit",
       "symbol": "AU",
-      "factor": 149600000000
+      "factor": 149600000000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ly",
       "name": "Light Year",
       "symbol": "ly",
-      "factor": 9461000000000000
+      "factor": 9461000000000000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "parsec",
       "name": "Parsec",
       "symbol": "parsec",
-      "factor": 30857000000000000
+      "factor": 30857000000000000,
+      "unitType": "SI_BASE"
     }
   ]
 }

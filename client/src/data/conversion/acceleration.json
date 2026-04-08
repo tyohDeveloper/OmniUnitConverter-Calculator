@@ -9,25 +9,29 @@
       "name": "Meter/sq sec",
       "symbol": "m⋅s⁻²",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "gal",
       "name": "Gal",
       "symbol": "Gal",
-      "factor": 0.01
+      "factor": 0.01,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ftps2",
       "name": "Foot/sq sec",
       "symbol": "ft⋅s⁻²",
-      "factor": 0.3048
+      "factor": 0.3048,
+      "unitType": "US_COMMON"
     },
     {
       "id": "g",
       "name": "g-force",
       "symbol": "g-force",
-      "factor": 9.80665
+      "factor": 9.80665,
+      "unitType": "US_COMMON"
     }
   ]
 }

@@ -8,13 +8,15 @@
       "id": "m-1",
       "name": "Reciprocal Meter",
       "symbol": "m⁻¹",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "d",
       "name": "Diopter",
       "symbol": "D",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     }
   ]
 }

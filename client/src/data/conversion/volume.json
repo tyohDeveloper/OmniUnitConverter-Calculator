@@ -9,146 +9,170 @@
       "name": "Cubic Meter",
       "symbol": "m³",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "tsp",
       "name": "Teaspoon (US)",
       "symbol": "tsp (US)",
-      "factor": 0.00000492892
+      "factor": 0.00000492892,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "tsp_imp",
       "name": "Teaspoon (Imp)",
       "symbol": "tsp (imp)",
-      "factor": 0.00000591939
+      "factor": 0.00000591939,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "tbsp",
       "name": "Tablespoon (US)",
       "symbol": "tbsp (US)",
-      "factor": 0.0000147868
+      "factor": 0.0000147868,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "tbsp_imp",
       "name": "Tablespoon (Imp)",
       "symbol": "tbsp (imp)",
-      "factor": 0.0000177582
+      "factor": 0.0000177582,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "floz_imp",
       "name": "Fluid Ounce (Imp)",
       "symbol": "fl oz (imp)",
-      "factor": 0.0000284130625
+      "factor": 0.0000284130625,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "floz",
       "name": "Fluid Ounce (US)",
       "symbol": "fl oz (US)",
-      "factor": 0.0000295735
+      "factor": 0.0000295735,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "cup",
       "name": "Cup (US)",
       "symbol": "cp (US)",
-      "factor": 0.000236588
+      "factor": 0.000236588,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "pt",
       "name": "Pint (US Fluid)",
       "symbol": "pt (US)",
-      "factor": 0.000473176
+      "factor": 0.000473176,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "pt_dry",
       "name": "Pint (US Dry)",
       "symbol": "dry pt",
-      "factor": 0.00055061
+      "factor": 0.00055061,
+      "unitType": "US_COMMON_DRY"
     },
     {
       "id": "pt_imp",
       "name": "Pint (Imp)",
       "symbol": "pt (imp)",
-      "factor": 0.00056826125
+      "factor": 0.00056826125,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "qt",
       "name": "Quart (US Fluid)",
       "symbol": "qt (US)",
-      "factor": 0.000946353
+      "factor": 0.000946353,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "l",
       "name": "Liter",
       "symbol": "L",
       "factor": 0.001,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "qt_dry",
       "name": "Quart (US Dry)",
       "symbol": "dry qt",
-      "factor": 0.00110122
+      "factor": 0.00110122,
+      "unitType": "US_COMMON_DRY"
     },
     {
       "id": "qt_imp",
       "name": "Quart (Imp)",
       "symbol": "qt (imp)",
-      "factor": 0.0011365225
+      "factor": 0.0011365225,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "gal",
       "name": "Gallon (US)",
       "symbol": "gal (US)",
-      "factor": 0.003785411784
+      "factor": 0.003785411784,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "gal_imp",
       "name": "Gallon (Imp)",
       "symbol": "gal (imp)",
-      "factor": 0.00454609
+      "factor": 0.00454609,
+      "unitType": "IMPERIAL"
     },
     {
       "id": "pk",
       "name": "Peck (US)",
       "symbol": "pk",
-      "factor": 0.00880977
+      "factor": 0.00880977,
+      "unitType": "US_COMMON_DRY"
     },
     {
       "id": "ft3",
       "name": "Cubic Foot",
       "symbol": "ft³",
-      "factor": 0.0283168
+      "factor": 0.0283168,
+      "unitType": "US_COMMON"
     },
     {
       "id": "bu",
       "name": "Bushel (US)",
       "symbol": "bu",
-      "factor": 0.0352391
+      "factor": 0.0352391,
+      "unitType": "US_COMMON_DRY"
     },
     {
       "id": "bbl",
       "name": "Barrel (Oil)",
       "symbol": "bbl",
-      "factor": 0.158987
+      "factor": 0.158987,
+      "unitType": "US_COMMON_FLUID"
     },
     {
       "id": "yd3",
       "name": "Cubic Yard",
       "symbol": "yd³",
-      "factor": 0.764555
+      "factor": 0.764555,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ac_ft",
       "name": "Acre-foot",
       "symbol": "ac⋅ft",
-      "factor": 1233.48184
+      "factor": 1233.48184,
+      "unitType": "US_COMMON"
     },
     {
       "id": "mi3",
       "name": "Cubic Mile",
       "symbol": "mi³",
-      "factor": 4168180000
+      "factor": 4168180000,
+      "unitType": "US_COMMON"
     }
   ]
 }

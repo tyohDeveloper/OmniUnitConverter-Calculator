@@ -9,133 +9,155 @@
       "name": "Square Metre",
       "symbol": "m²",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "danchi_ma",
       "name": "Danchi-ma (Japan)",
       "symbol": "danchi",
-      "factor": 1.445
+      "factor": 1.445,
+      "unitType": "SI_BASE"
     },
     {
       "id": "edoma",
       "name": "Edoma/Kantō-ma (Japan)",
       "symbol": "edoma",
-      "factor": 1.5488
+      "factor": 1.5488,
+      "unitType": "SI_BASE"
     },
     {
       "id": "jo_tatami",
       "name": "Jō/Tatami (Japan)",
       "symbol": "jo",
-      "factor": 1.62
+      "factor": 1.62,
+      "unitType": "SI_BASE"
     },
     {
       "id": "chukyoma",
       "name": "Chūkyō-ma (Japan)",
       "symbol": "chukyoma",
-      "factor": 1.6562
+      "factor": 1.6562,
+      "unitType": "SI_BASE"
     },
     {
       "id": "kyoma",
       "name": "Kyōma (Japan)",
       "symbol": "kyoma",
-      "factor": 1.8241
+      "factor": 1.8241,
+      "unitType": "SI_BASE"
     },
     {
       "id": "pyeong_kr",
       "name": "Pyeong (Korea)",
       "symbol": "pyeong",
-      "factor": 3.3058
+      "factor": 3.3058,
+      "unitType": "SI_BASE"
     },
     {
       "id": "tsubo_jp",
       "name": "Tsubo (Japan)",
       "symbol": "tsubo",
-      "factor": 3.306
+      "factor": 3.306,
+      "unitType": "SI_BASE"
     },
     {
       "id": "se_kr",
       "name": "Se (Korea)",
       "symbol": "se",
-      "factor": 99.174
+      "factor": 99.174,
+      "unitType": "SI_BASE"
     },
     {
       "id": "qirat_eg",
       "name": "Qirat (Egypt)",
       "symbol": "qirat",
-      "factor": 175.03
+      "factor": 175.03,
+      "unitType": "SI_BASE"
     },
     {
       "id": "mu_cn",
       "name": "Mu (China)",
       "symbol": "mu",
-      "factor": 666.67
+      "factor": 666.67,
+      "unitType": "SI_BASE"
     },
     {
       "id": "tan_jp",
       "name": "Tan (Japan)",
       "symbol": "tan",
-      "factor": 991.7
+      "factor": 991.7,
+      "unitType": "SI_BASE"
     },
     {
       "id": "dunam_il",
       "name": "Dunam (Israel)",
       "symbol": "dunam",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "jerib",
       "name": "Jerib (Middle East)",
       "symbol": "jerib",
-      "factor": 2000
+      "factor": 2000,
+      "unitType": "SI_BASE"
     },
     {
       "id": "morgen",
       "name": "Morgen (German)",
       "symbol": "morgen",
-      "factor": 2500
+      "factor": 2500,
+      "unitType": "SI_BASE"
     },
     {
       "id": "bigha",
       "name": "Bigha (South Asia)",
       "symbol": "bigha",
-      "factor": 2529
+      "factor": 2529,
+      "unitType": "SI_BASE"
     },
     {
       "id": "feddan_eg",
       "name": "Feddan (Egypt)",
       "symbol": "feddan",
-      "factor": 4200.833
+      "factor": 4200.833,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cho_jp",
       "name": "Chō (Japan)",
       "symbol": "cho",
-      "factor": 9917.36
+      "factor": 9917.36,
+      "unitType": "SI_BASE"
     },
     {
       "id": "desyatina",
       "name": "Desyatina (Russia)",
       "symbol": "desyatina",
-      "factor": 10925
+      "factor": 10925,
+      "unitType": "SI_BASE"
     },
     {
       "id": "qing_cn",
       "name": "Qing (China)",
       "symbol": "qing",
-      "factor": 66666.67
+      "factor": 66666.67,
+      "unitType": "SI_BASE"
     },
     {
       "id": "section_us",
       "name": "Section (US)",
       "symbol": "section",
-      "factor": 2589988
+      "factor": 2589988,
+      "unitType": "US_COMMON"
     },
     {
       "id": "township_us",
       "name": "Township (US)",
       "symbol": "twp",
-      "factor": 93239571
+      "factor": 93239571,
+      "unitType": "US_COMMON"
     }
   ]
 }

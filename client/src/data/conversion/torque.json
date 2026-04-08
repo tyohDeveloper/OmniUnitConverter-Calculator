@@ -9,44 +9,51 @@
       "name": "Newton-meter",
       "symbol": "N⋅m",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "dyncm",
       "name": "Dyne-centimeter",
       "symbol": "dyn⋅cm",
       "factor": 1e-7,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ozin",
       "name": "Ounce-inch",
       "symbol": "oz⋅in",
-      "factor": 0.00706155
+      "factor": 0.00706155,
+      "unitType": "US_COMMON"
     },
     {
       "id": "kgfcm",
       "name": "Kilogram-force centimeter",
       "symbol": "kgf⋅cm",
-      "factor": 0.0980665
+      "factor": 0.0980665,
+      "unitType": "SI_BASE"
     },
     {
       "id": "inlb",
       "name": "Inch-pound",
       "symbol": "in⋅lb",
-      "factor": 0.112985
+      "factor": 0.112985,
+      "unitType": "US_COMMON"
     },
     {
       "id": "ftlb",
       "name": "Foot-pound",
       "symbol": "ft⋅lb",
-      "factor": 1.35582
+      "factor": 1.35582,
+      "unitType": "US_COMMON"
     },
     {
       "id": "kgfm",
       "name": "Kilogram-force meter",
       "symbol": "kgf⋅m",
-      "factor": 9.80665
+      "factor": 9.80665,
+      "unitType": "SI_BASE"
     }
   ]
 }

@@ -9,14 +9,16 @@
       "name": "Volt",
       "symbol": "V",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "statv",
       "name": "Statvolt",
       "symbol": "statV",
       "factor": 299.792,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     }
   ]
 }

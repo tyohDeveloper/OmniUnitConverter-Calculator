@@ -9,26 +9,30 @@
       "name": "Lumen",
       "symbol": "lm",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cdsr",
       "name": "Candela-Steradian",
       "symbol": "cd⋅sr",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "talbot",
       "name": "Talbot",
       "symbol": "T (lum)",
       "factor": 1,
-      "description": "Lumen-second (photographic)"
+      "description": "Lumen-second (photographic)",
+      "unitType": "SI_BASE"
     },
     {
       "id": "candlepower",
       "name": "Candlepower (spherical)",
       "symbol": "cp",
-      "factor": 12.566370614359172
+      "factor": 12.566370614359172,
+      "unitType": "US_COMMON"
     }
   ]
 }

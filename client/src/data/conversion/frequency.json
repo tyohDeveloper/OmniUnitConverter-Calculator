@@ -8,62 +8,72 @@
       "id": "per_second",
       "name": "Per Second",
       "symbol": "s⁻¹",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     },
     {
       "id": "per_year",
       "name": "Per Year",
       "symbol": "y⁻¹",
-      "factor": 3.1688087814028954e-8
+      "factor": 3.1688087814028954e-8,
+      "unitType": "SI_BASE"
     },
     {
       "id": "per_week",
       "name": "Per Week",
       "symbol": "wk⁻¹",
-      "factor": 1.6534391534391534e-6
+      "factor": 0.0000016534391534391533,
+      "unitType": "SI_BASE"
     },
     {
       "id": "per_day",
       "name": "Per Day",
       "symbol": "d⁻¹",
-      "factor": 0.000011574074074074073
+      "factor": 0.000011574074074074073,
+      "unitType": "SI_BASE"
     },
     {
       "id": "per_hour",
       "name": "Per Hour",
       "symbol": "h⁻¹",
-      "factor": 0.0002777777777777778
+      "factor": 0.0002777777777777778,
+      "unitType": "SI_BASE"
     },
     {
       "id": "per_min",
       "name": "Per Minute",
       "symbol": "min⁻¹",
-      "factor": 0.016666666666666666
+      "factor": 0.016666666666666666,
+      "unitType": "SI_BASE"
     },
     {
       "id": "rpm",
       "name": "Revolutions/Minute",
       "symbol": "rpm",
-      "factor": 0.016666666666666666
+      "factor": 0.016666666666666666,
+      "unitType": "US_COMMON"
     },
     {
       "id": "rad_s",
       "name": "Radians/Second",
       "symbol": "rad⋅s⁻¹",
-      "factor": 0.15915494309189535
+      "factor": 0.15915494309189535,
+      "unitType": "SI_BASE"
     },
     {
       "id": "hz",
       "name": "Hertz",
       "symbol": "Hz",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "rps",
       "name": "Revolutions/Second",
       "symbol": "rps",
-      "factor": 1
+      "factor": 1,
+      "unitType": "SI_BASE"
     }
   ]
 }

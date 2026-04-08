@@ -9,20 +9,23 @@
       "name": "Ampere per Meter",
       "symbol": "A⋅m⁻¹",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "oersted",
       "name": "Oersted",
       "symbol": "Oe",
       "factor": 79.5774715,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "ka_per_m",
       "name": "Kiloampere per Meter",
       "symbol": "kA⋅m⁻¹",
-      "factor": 1000
+      "factor": 1000,
+      "unitType": "SI_BASE"
     }
   ]
 }

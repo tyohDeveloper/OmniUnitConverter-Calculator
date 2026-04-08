@@ -9,19 +9,22 @@
       "name": "Candela",
       "symbol": "cd",
       "factor": 1,
-      "allowPrefixes": true
+      "allowPrefixes": true,
+      "unitType": "SI_BASE"
     },
     {
       "id": "hk",
       "name": "Hefnerkerze",
       "symbol": "HK",
-      "factor": 0.903
+      "factor": 0.903,
+      "unitType": "SI_BASE"
     },
     {
       "id": "cp",
       "name": "Candlepower",
       "symbol": "cp",
-      "factor": 0.981
+      "factor": 0.981,
+      "unitType": "SI_BASE"
     }
   ]
 }
