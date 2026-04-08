@@ -511,11 +511,11 @@ export function ConverterPane({
                             }}
                             data-testid={`comparison-row-${unit.id}`}
                           >
-                            <span className="text-xs text-muted-foreground font-mono w-12 shrink-0">
+                            <span className="text-xs text-muted-foreground font-mono w-24 shrink-0">
                               {displaySymbol}
                             </span>
                             <span className="text-xs text-muted-foreground flex-1 truncate px-1" data-testid={`comparison-name-${unit.id}`}>
-                              {unit.name}
+                              {translateUnitName(unit.name)}
                             </span>
                             <span className="text-sm font-mono text-foreground shrink-0">
                               {formatNumberWithSeparators(displayValue, precision)}
