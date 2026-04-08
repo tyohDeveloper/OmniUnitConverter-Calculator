@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
 import {
-  fixPrecision, toArabicNumerals, toLatinNumerals, roundToNearestEven,
-  toFixedBanker, toTitleCase, NUMBER_FORMATS, type NumberFormat,
+  fixPrecision, toArabicNumerals, toLatinNumerals, toJapaneseNumerals, toKoreanNumerals,
+  toCJKMyriadString, getTraditionalConfig, roundToNearestEven,
+  toFixedBanker, toTitleCase, NUMBER_FORMATS, cleanNumber, type NumberFormat,
   parseNumberWithFormat as parseNumberWithSpecificFormat,
   formatNumberWithFormat as formatNumberWithSpecificFormat,
   formatFtIn as formatFtInLib
@@ -590,7 +591,9 @@ export default function UnitConverterApp() {
   }, []);
 
   const formatForClipboard = (num: number, precisionValue: number): string => {
-    const format = NUMBER_FORMATS[numberFormat];
+    const format = numberFormat === 'traditional'
+      ? getTraditionalConfig(language)
+      : NUMBER_FORMATS[numberFormat];
     const fixed = fixPrecision(num);
     if (fixed === 0) return format.useArabicNumerals ? '٠' : '0';
     const absNum = Math.abs(fixed);
@@ -1165,7 +1168,9 @@ export default function UnitConverterApp() {
     const prefixData = PREFIXES.find(p => p.id === val.prefix);
     const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
     const unitSymbol = prefixSymbol + kgResult.displaySymbol;
-    const format = NUMBER_FORMATS[numberFormat];
+    const format = numberFormat === 'traditional'
+      ? getTraditionalConfig(language)
+      : NUMBER_FORMATS[numberFormat];
     const valueStr = cleanNumber(displayValue, calculatorPrecision);
     const formattedStr = format.decimal !== '.' ? valueStr.replace('.', format.decimal) : valueStr;
     navigator.clipboard.writeText(unitSymbol ? `${formattedStr} ${unitSymbol}` : formattedStr);
@@ -1175,8 +1180,16 @@ export default function UnitConverterApp() {
   };
 
   const formatNumberWithSeparators = (num: number, precision: number): string => {
-    const format = NUMBER_FORMATS[numberFormat];
-    if (num === 0) return format.useArabicNumerals ? '٠' : '0';
+    const format = numberFormat === 'traditional'
+      ? getTraditionalConfig(language)
+      : NUMBER_FORMATS[numberFormat];
+    if (num === 0) {
+      if (format.traditionalScript) {
+        const toNumerals = format.traditionalScript === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
+        return toNumerals('0');
+      }
+      return format.useArabicNumerals ? '٠' : '0';
+    }
     const absNum = Math.abs(num);
     if (absNum < 1e-12 || absNum >= 1e15) {
       const expStr = num.toExponential(Math.min(precision, 10));
@@ -1184,6 +1197,17 @@ export default function UnitConverterApp() {
     }
     const cleaned = cleanNumber(num, precision);
     const [integer, decimal] = cleaned.split('.');
+
+    if (format.traditionalScript) {
+      const script = format.traditionalScript;
+      const cjkInteger = toCJKMyriadString(integer, script);
+      if (decimal) {
+        const toNumerals = script === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
+        return `${cjkInteger}${format.decimal}${toNumerals(decimal)}`;
+      }
+      return cjkInteger;
+    }
+
     let formattedInteger = integer;
     if (format.thousands) {
       if (numberFormat === 'south-asian') {
@@ -1206,7 +1230,9 @@ export default function UnitConverterApp() {
   };
 
   const formatFactor = (f: number) => {
-    const format = NUMBER_FORMATS[numberFormat];
+    const format = numberFormat === 'traditional'
+      ? getTraditionalConfig(language)
+      : NUMBER_FORMATS[numberFormat];
     if (f === 1) return format.useArabicNumerals ? '١' : '1';
     if (f >= 1e9 || f <= 1e-8) {
       const expStr = f.toExponential(7);
@@ -1218,8 +1244,16 @@ export default function UnitConverterApp() {
   };
 
   const formatResultValue = (num: number, precisionValue: number): string => {
-    const format = NUMBER_FORMATS[numberFormat];
-    if (num === 0) return format.useArabicNumerals ? '٠' : '0';
+    const format = numberFormat === 'traditional'
+      ? getTraditionalConfig(language)
+      : NUMBER_FORMATS[numberFormat];
+    if (num === 0) {
+      if (format.traditionalScript) {
+        const toNumerals = format.traditionalScript === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
+        return toNumerals('0');
+      }
+      return format.useArabicNumerals ? '٠' : '0';
+    }
     const absNum = Math.abs(num);
     if (absNum < 1e-12 || absNum >= 1e15) {
       const expStr = num.toExponential(Math.min(precisionValue, 10));
@@ -1412,10 +1446,10 @@ export default function UnitConverterApp() {
                   <SelectItem value="europe-latin" className="text-xs">{t('num-format-world')}</SelectItem>
                   <SelectItem value="period" className="text-xs">{t('num-format-period')}</SelectItem>
                   <SelectItem value="comma" className="text-xs">{t('num-format-comma')}</SelectItem>
-                  <SelectItem value="arabic" className="text-xs">العربية</SelectItem>
                   <SelectItem value="east-asian" className="text-xs">{t('num-format-east-asian')}</SelectItem>
                   <SelectItem value="south-asian" className="text-xs">{t('num-format-south-asian')}</SelectItem>
                   <SelectItem value="swiss" className="text-xs">{t('num-format-swiss')}</SelectItem>
+                  <SelectItem value="traditional" className="text-xs">{t('num-format-traditional')}</SelectItem>
                 </SelectContent>
               </Select>
               <Select

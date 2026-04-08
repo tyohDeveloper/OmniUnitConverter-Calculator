@@ -322,6 +322,18 @@ describe('characterization: formatNumberWithSeparators()', () => {
   it('formats integer with UK style (no decimal)', () => {
     expect(formatNumberWithSeparators(1000, 0, 'uk')).toBe('1,000');
   });
+
+  it('formats with traditional+de (dot thousands, comma decimal)', () => {
+    expect(formatNumberWithSeparators(1234567.89, 2, 'traditional', 'de')).toBe('1.234.567,89');
+  });
+
+  it('formats with traditional+ar (Eastern Arabic numerals)', () => {
+    expect(formatNumberWithSeparators(1234, 0, 'traditional', 'ar')).toBe('١,٢٣٤');
+  });
+
+  it('formats with traditional+ja (CJK myriad grouping)', () => {
+    expect(formatNumberWithSeparators(10000, 0, 'traditional', 'ja')).toBe('一万');
+  });
 });
 
 // ---------------------------------------------------------------------------

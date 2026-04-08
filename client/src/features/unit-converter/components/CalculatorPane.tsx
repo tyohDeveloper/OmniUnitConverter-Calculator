@@ -9,7 +9,6 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { isDimensionEmpty } from '@/lib/calculator/isDimensionEmpty';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
-import { toArabicNumerals, NUMBER_FORMATS } from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/formatting';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -257,7 +256,7 @@ export function CalculatorPane({
                 <SelectContent align="end">
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(p => (
                     <SelectItem key={p} value={p.toString()} className="text-xs">
-                      {numberFormat === 'arabic' ? toArabicNumerals(p.toString()) : p}
+                      {p}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -317,7 +316,7 @@ export function CalculatorPane({
                 <SelectContent align="end">
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(p => (
                     <SelectItem key={p} value={p.toString()} className="text-xs">
-                      {numberFormat === 'arabic' ? toArabicNumerals(p.toString()) : p}
+                      {p}
                     </SelectItem>
                   ))}
                 </SelectContent>

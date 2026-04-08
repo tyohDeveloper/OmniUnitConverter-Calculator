@@ -1156,6 +1156,19 @@
     "ja": "スイス",
     "ko": "스위스"
   },
+  "num-format-traditional": {
+    "en": "Traditional",
+    "ar": "تقليدي",
+    "de": "Traditionell",
+    "es": "Tradicional",
+    "fr": "Traditionnel",
+    "it": "Tradizionale",
+    "pt": "Tradicional",
+    "ru": "Традиционный",
+    "zh": "传统",
+    "ja": "伝統的",
+    "ko": "전통"
+  },
   "rpn-tooltip-enter": {
     "en": "Push x onto stack (Enter)",
     "ar": "ادفع x إلى المكدس (إدخال)",

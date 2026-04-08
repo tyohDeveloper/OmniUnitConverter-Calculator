@@ -3,8 +3,8 @@ export type NumberFormat =
   | 'south-asian'
   | 'europe-latin' 
   | 'swiss'
-  | 'arabic'
   | 'arabic-latin'
   | 'east-asian'
   | 'period' 
-  | 'comma';
+  | 'comma'
+  | 'traditional';

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
-import { toArabicNumerals, NUMBER_FORMATS, type NumberFormat } from '@/lib/formatting';
+import { NUMBER_FORMATS, type NumberFormat } from '@/lib/formatting';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { Card } from '@/components/ui/card';
@@ -277,7 +277,7 @@ export function ConverterPane({
                   <SelectContent align="end">
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(n => (
                       <SelectItem key={n} value={n.toString()} className="text-xs">
-                        {numberFormat === 'arabic' ? toArabicNumerals(n.toString()) : n}
+                        {n}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -421,7 +421,7 @@ export function ConverterPane({
                 >
                   <div className="text-xs font-mono text-muted-foreground flex gap-2 items-center">
                     <span className="text-foreground font-bold">
-                      {NUMBER_FORMATS[numberFormat].useArabicNumerals ? '١' : '1'} {fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
+                      {formatResultValue(1, 0)} {fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
                     </span>
                     <span>=</span>
                     <span className="text-foreground font-bold">

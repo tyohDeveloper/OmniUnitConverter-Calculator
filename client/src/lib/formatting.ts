@@ -1,4 +1,5 @@
 import type { NumberFormat } from './units/numberFormat';
+import type { SupportedLanguage } from './localization';
 export type { NumberFormat };
 
 export interface NumberFormatConfig {
@@ -7,6 +8,7 @@ export interface NumberFormatConfig {
   decimal: string;
   useArabicNumerals?: boolean;
   myriad?: boolean;
+  traditionalScript?: 'ja' | 'ko' | 'zh';
 }
 
 export const NUMBER_FORMATS: Record<NumberFormat, NumberFormatConfig> = {
@@ -14,12 +16,30 @@ export const NUMBER_FORMATS: Record<NumberFormat, NumberFormatConfig> = {
   'south-asian': { name: 'South Asian (Indian)', thousands: ',', decimal: '.' },
   'europe-latin': { name: 'World', thousands: ' ', decimal: ',' },
   'swiss': { name: 'Swiss', thousands: "'", decimal: '.' },
-  'arabic': { name: 'Arabic', thousands: ',', decimal: '.', useArabicNumerals: true },
   'arabic-latin': { name: 'Arabic (Latin)', thousands: ',', decimal: '.' },
   'east-asian': { name: 'East Asian', thousands: ',', decimal: '.', myriad: true },
   'period': { name: 'Period', thousands: '', decimal: '.' },
   'comma': { name: 'Comma', thousands: '', decimal: ',' },
+  'traditional': { name: 'Traditional', thousands: ',', decimal: '.' },
 };
+
+const TRADITIONAL_CONFIGS: Partial<Record<SupportedLanguage, NumberFormatConfig>> = {
+  ar: { name: 'Traditional', thousands: ',', decimal: '.', useArabicNumerals: true },
+  de: { name: 'Traditional', thousands: '.', decimal: ',' },
+  es: { name: 'Traditional', thousands: '.', decimal: ',' },
+  it: { name: 'Traditional', thousands: '.', decimal: ',' },
+  pt: { name: 'Traditional', thousands: '.', decimal: ',' },
+  fr: { name: 'Traditional', thousands: '\u202F', decimal: ',' },
+  ru: { name: 'Traditional', thousands: '\u00A0', decimal: ',' },
+  ja: { name: 'Traditional', thousands: '', decimal: '.', myriad: true, traditionalScript: 'ja' },
+  ko: { name: 'Traditional', thousands: '', decimal: '.', myriad: true, traditionalScript: 'ko' },
+  zh: { name: 'Traditional', thousands: '', decimal: '.', myriad: true, traditionalScript: 'zh' },
+};
+
+const TRADITIONAL_DEFAULT: NumberFormatConfig = { name: 'Traditional', thousands: ',', decimal: '.' };
+
+export const getTraditionalConfig = (locale: SupportedLanguage): NumberFormatConfig =>
+  TRADITIONAL_CONFIGS[locale] ?? TRADITIONAL_DEFAULT;
 
 export const toArabicNumerals = (str: string): string => {
   const arabicMap: Record<string, string> = {
@@ -27,6 +47,56 @@ export const toArabicNumerals = (str: string): string => {
     '5': '٥', '6': '٦', '7': '٧', '8': '٨', '9': '٩'
   };
   return str.split('').map(c => arabicMap[c] || c).join('');
+};
+
+export const toJapaneseNumerals = (str: string): string => {
+  const map: Record<string, string> = {
+    '0': '〇', '1': '一', '2': '二', '3': '三', '4': '四',
+    '5': '五', '6': '六', '7': '七', '8': '八', '9': '九'
+  };
+  return str.split('').map(c => map[c] || c).join('');
+};
+
+export const toKoreanNumerals = (str: string): string => {
+  const map: Record<string, string> = {
+    '0': '공', '1': '일', '2': '이', '3': '삼', '4': '사',
+    '5': '오', '6': '육', '7': '칠', '8': '팔', '9': '구'
+  };
+  return str.split('').map(c => map[c] || c).join('');
+};
+
+const splitMyriadGroups = (absStr: string): string[] => {
+  const groups: string[] = [];
+  let s = absStr;
+  while (s.length > 0) {
+    groups.unshift(s.slice(-4));
+    s = s.slice(0, -4);
+  }
+  return groups;
+};
+
+const CJK_UNITS: Record<'ja' | 'ko' | 'zh', string[]> = {
+  ko: ['', '만', '억', '조'],
+  zh: ['', '万', '亿', '兆'],
+  ja: ['', '万', '億', '兆'],
+};
+
+export const toCJKMyriadString = (integerStr: string, script: 'ja' | 'ko' | 'zh'): string => {
+  const units = CJK_UNITS[script];
+  const toNumerals = script === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
+  const absStr = integerStr.replace(/^-/, '');
+  const sign = integerStr.startsWith('-') ? '-' : '';
+  const groups = splitMyriadGroups(absStr);
+  const parts: string[] = [];
+  for (let i = 0; i < groups.length; i++) {
+    const g = groups[i];
+    const unitIndex = groups.length - 1 - i;
+    if (parseInt(g, 10) === 0) continue;
+    const unitMarker = unitIndex < units.length ? units[unitIndex] : '';
+    parts.push(toNumerals(g) + unitMarker);
+  }
+  if (parts.length === 0) return toNumerals('0');
+  return sign + parts.join('');
 };
 
 export const toLatinNumerals = (str: string): string => {
@@ -114,14 +184,26 @@ const applyThousandsSeparator = (integer: string, formatKey: NumberFormat, forma
   return integer.replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands);
 };
 
+const formatCJK = (integer: string, decimal: string | undefined, format: NumberFormatConfig): string => {
+  const script = format.traditionalScript!;
+  const cjkInteger = toCJKMyriadString(integer, script);
+  if (!decimal) return cjkInteger;
+  const toNumerals = script === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
+  return `${cjkInteger}${format.decimal}${toNumerals(decimal)}`;
+};
+
 export const formatNumberWithSeparators = (
   num: number,
   precision: number,
-  formatKey: NumberFormat
+  formatKey: NumberFormat,
+  locale?: SupportedLanguage
 ): string => {
-  const format = NUMBER_FORMATS[formatKey];
+  const format = formatKey === 'traditional' && locale
+    ? getTraditionalConfig(locale)
+    : NUMBER_FORMATS[formatKey];
   const cleaned = cleanNumber(num, precision);
   const [integer, decimal] = cleaned.split('.');
+  if (format.traditionalScript) return formatCJK(integer, decimal, format);
   const formattedInteger = applyThousandsSeparator(integer, formatKey, format);
   let result = decimal ? `${formattedInteger}${format.decimal}${decimal}` : formattedInteger;
   if (format.useArabicNumerals) result = toArabicNumerals(result);
@@ -168,7 +250,6 @@ export const parseNumberWithFormat = (str: string, formatKey: NumberFormat): num
   // Always convert Arabic numerals to Latin first (in case input has them)
   let cleaned = toLatinNumerals(str);
   const format = NUMBER_FORMATS[formatKey];
-  
   // Remove thousands separator
   if (format.thousands) {
     cleaned = cleaned.split(format.thousands).join('');

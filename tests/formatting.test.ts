@@ -9,6 +9,9 @@ import {
   formatForClipboard,
   toArabicNumerals,
   toLatinNumerals,
+  toJapaneseNumerals,
+  toKoreanNumerals,
+  toCJKMyriadString,
   NUMBER_FORMATS,
   formatFtIn,
   type NumberFormat
@@ -217,14 +220,50 @@ describe('Digit Grouping Separators', () => {
     });
   });
 
-  describe('Arabic format (with Arabic numerals)', () => {
-    it('should convert digits to Arabic numerals', () => {
-      expect(formatNumberWithSeparators(123, 0, 'arabic')).toBe('١٢٣');
+  describe('Traditional format (locale-tied)', () => {
+    it('should format with ar locale (Eastern Arabic numerals)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'ar');
+      expect(result).toBe('١,٢٣٤,٥٦٧.٨٩');
     });
 
-    it('should format 1234567 with Arabic numerals and commas', () => {
-      const result = formatNumberWithSeparators(1234567, 0, 'arabic');
-      expect(result).toBe('١,٢٣٤,٥٦٧');
+    it('should format with en locale (same as English)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'en');
+      expect(result).toBe('1,234,567.89');
+    });
+
+    it('should format with de locale (dot thousands, comma decimal)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'de');
+      expect(result).toBe('1.234.567,89');
+    });
+
+    it('should format with fr locale (narrow non-breaking space thousands, comma decimal)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'fr');
+      expect(result).toBe('1\u202F234\u202F567,89');
+    });
+
+    it('should format with ru locale (non-breaking space thousands, comma decimal)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'ru');
+      expect(result).toBe('1\u00A0234\u00A0567,89');
+    });
+
+    it('should format with ja locale (myriad CJK)', () => {
+      const result = formatNumberWithSeparators(1234567, 0, 'traditional', 'ja');
+      expect(result).toBe('一二三万四五六七');
+    });
+
+    it('should format with ko locale (myriad CJK)', () => {
+      const result = formatNumberWithSeparators(1234567, 0, 'traditional', 'ko');
+      expect(result).toBe('일이삼만사오육칠');
+    });
+
+    it('should format with zh locale (myriad CJK)', () => {
+      const result = formatNumberWithSeparators(1234567, 0, 'traditional', 'zh');
+      expect(result).toBe('一二三万四五六七');
+    });
+
+    it('should format with es locale (dot thousands, comma decimal)', () => {
+      const result = formatNumberWithSeparators(1234567.89, 2, 'traditional', 'es');
+      expect(result).toBe('1.234.567,89');
     });
   });
 
@@ -256,10 +295,6 @@ describe('stripSeparators', () => {
 
   it('should remove European separators and convert decimal', () => {
     expect(stripSeparators('1 234 567,89', 'europe-latin')).toBe('1234567.89');
-  });
-
-  it('should convert Arabic numerals to Latin', () => {
-    expect(stripSeparators('١,٢٣٤,٥٦٧', 'arabic')).toBe('1234567');
   });
 
   it('should remove Swiss apostrophe separators', () => {
@@ -310,6 +345,44 @@ describe('Arabic Numeral Conversion', () => {
   it('should preserve non-digit characters', () => {
     expect(toArabicNumerals('1,234.56')).toBe('١,٢٣٤.٥٦');
     expect(toLatinNumerals('١,٢٣٤.٥٦')).toBe('1,234.56');
+  });
+});
+
+describe('CJK Numeral Conversion', () => {
+  it('toJapaneseNumerals converts 0-9 to Japanese', () => {
+    expect(toJapaneseNumerals('0123456789')).toBe('〇一二三四五六七八九');
+  });
+
+  it('toKoreanNumerals converts 0-9 to Sino-Korean', () => {
+    expect(toKoreanNumerals('0123456789')).toBe('공일이삼사오육칠팔구');
+  });
+
+  it('toCJKMyriadString formats 1234567 in ja', () => {
+    expect(toCJKMyriadString('1234567', 'ja')).toBe('一二三万四五六七');
+  });
+
+  it('toCJKMyriadString formats 1234567 in ko', () => {
+    expect(toCJKMyriadString('1234567', 'ko')).toBe('일이삼만사오육칠');
+  });
+
+  it('toCJKMyriadString formats 1234567 in zh', () => {
+    expect(toCJKMyriadString('1234567', 'zh')).toBe('一二三万四五六七');
+  });
+
+  it('toCJKMyriadString handles 0', () => {
+    expect(toCJKMyriadString('0', 'ja')).toBe('〇');
+  });
+
+  it('toCJKMyriadString uses 亿 (simplified) for zh at 10^8', () => {
+    expect(toCJKMyriadString('100000000', 'zh')).toBe('一亿');
+  });
+
+  it('toCJKMyriadString uses 億 (traditional) for ja at 10^8', () => {
+    expect(toCJKMyriadString('100000000', 'ja')).toBe('一億');
+  });
+
+  it('toCJKMyriadString formats 123456789 in zh (uses 亿 unit)', () => {
+    expect(toCJKMyriadString('123456789', 'zh')).toBe('一亿二三四五万六七八九');
   });
 });
 
