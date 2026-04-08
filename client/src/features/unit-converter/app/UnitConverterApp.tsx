@@ -186,15 +186,11 @@ export default function UnitConverterApp() {
   };
 
   React.useEffect(() => {
-    if (language === 'ar') setNumberFormat('arabic');
-  }, [language]);
-
-  React.useEffect(() => {
-    const isRtl = numberFormat === 'arabic';
+    const isRtl = language === 'ar';
     document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', language);
     return () => { document.documentElement.setAttribute('dir', 'ltr'); };
-  }, [language, numberFormat]);
+  }, [language]);
 
   const CATEGORY_GROUPS = [
     { name: "Base Quantities", categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },

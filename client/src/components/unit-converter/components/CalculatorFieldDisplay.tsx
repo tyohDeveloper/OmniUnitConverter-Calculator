@@ -22,6 +22,7 @@ interface CalculatorFieldDisplayProps {
   className?: string;
   testId?: string;
   preserveSourceUnit?: boolean;
+  useLatinNumerals?: boolean;
 }
 
 export function CalculatorFieldDisplay({
@@ -37,6 +38,7 @@ export function CalculatorFieldDisplay({
   className = '',
   testId,
   preserveSourceUnit = false,
+  useLatinNumerals = false,
 }: CalculatorFieldDisplayProps) {
   const baseClass = isResult 
     ? 'px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between select-none'
@@ -80,7 +82,7 @@ export function CalculatorFieldDisplay({
       transition={{ duration: 0.3 }}
       data-testid={testId}
     >
-      <span className={`text-sm font-mono truncate ${isResult ? 'text-primary font-bold' : 'text-foreground'}`}>
+      <span className={`text-sm font-mono truncate ${isResult ? 'text-primary font-bold' : 'text-foreground'}`} dir={useLatinNumerals ? 'ltr' : undefined}>
         {displayData?.formattedValue || ''}
       </span>
       <span className="text-xs font-mono text-muted-foreground ml-2 shrink-0">
