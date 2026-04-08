@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, UnitCategory, convert, PREFIXES, ALL_PREFIXES, Prefix, findOptimalPrefix, parseUnitText, ParsedUnitResult, getFilteredSortedUnits } from '@/lib/conversion-data';
-import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage, type Translation } from '@/lib/localization';
+import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS, type SupportedLanguage } from '@/lib/localization';
 import {
   fixPrecision, toArabicNumerals, toLatinNumerals, toJapaneseNumerals, toKoreanNumerals,
   toCJKMyriadString, getTraditionalConfig, roundToNearestEven,
@@ -150,40 +150,14 @@ export default function UnitConverterApp() {
   const normalizeMassDisplay = (valueInKg: number, currentPrefix: string, unitId: string | null) =>
     normalizeMassDisplayLib(valueInKg, currentPrefix, unitId, getMassUnitInfo);
 
-  const getTranslationFromRecord = (trans: Translation, lang: SupportedLanguage): string | undefined => {
-    if (lang === 'en-us') return trans['en-us'] ?? trans.en;
-    if (lang === 'en') return trans.en;
-    const langValue = trans[lang as keyof Translation];
-    return langValue as string | undefined;
-  };
-
   const t = (key: string): string => {
-    if (UI_TRANSLATIONS[key]) {
-      const result = getTranslationFromRecord(UI_TRANSLATIONS[key], language);
-      if (result) return result;
-      return UI_TRANSLATIONS[key].en || key;
-    }
-    if (UNIT_NAME_TRANSLATIONS[key]) {
-      const result = getTranslationFromRecord(UNIT_NAME_TRANSLATIONS[key], language);
-      if (result) return result;
-      return UNIT_NAME_TRANSLATIONS[key].en || key;
-    }
-    return key;
+    const val = UI_TRANSLATIONS[language]?.[key] ?? UNIT_NAME_TRANSLATIONS[language]?.[key];
+    if (val !== undefined) return val;
+    return UI_TRANSLATIONS['en']?.[key] ?? UNIT_NAME_TRANSLATIONS['en']?.[key] ?? key;
   };
 
   const translateUnitName = (unitName: string): string => {
-    const translated = t(unitName);
-    if (translated !== unitName) return translated;
-    if (UNIT_NAME_TRANSLATIONS[unitName]) {
-      const trans = UNIT_NAME_TRANSLATIONS[unitName];
-      const langKey = language as SupportedLanguage;
-      if (langKey === 'en-us') return trans['en-us'] ?? trans.en ?? unitName;
-      if (langKey === 'en') return trans.en || unitName;
-      const langValue = trans[langKey as keyof typeof trans];
-      if (langValue) return langValue as string;
-      return trans.en || unitName;
-    }
-    return unitName;
+    return t(unitName);
   };
 
   React.useEffect(() => {

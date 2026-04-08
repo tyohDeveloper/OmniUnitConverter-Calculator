@@ -15,21 +15,6 @@ export const SUPPORTED_LANGUAGES = [
 
 export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
 
-export interface Translation {
-  en: string;
-  'en-us'?: string;
-  ar: string;
-  de?: string;
-  es?: string;
-  fr?: string;
-  it?: string;
-  ja?: string;
-  ko?: string;
-  pt?: string;
-  ru?: string;
-  zh?: string;
-}
-
 export { UI_TRANSLATIONS } from './translateUi';
 export { UNIT_NAME_TRANSLATIONS } from './translateUnit';
 
@@ -47,21 +32,11 @@ export const SI_PREFIX_SYMBOLS = [
 ];
 
 export const translate = (
-  key: string, 
-  language: SupportedLanguage, 
-  translations: Record<string, Translation>
+  key: string,
+  language: SupportedLanguage,
+  translations: Record<string, Record<string, string>>
 ): string => {
-  if (!translations[key]) {
-    return key;
-  }
-  
-  const trans = translations[key];
-  
-  if (language === 'en-us') return trans['en-us'] ?? trans.en;
-  if (language === 'en') return trans.en;
-  
-  const langKey = language as keyof Translation;
-  if (trans[langKey]) return trans[langKey] as string;
-  
-  return trans.en || key;
+  const val = translations[language]?.[key];
+  if (val !== undefined) return val;
+  return translations['en']?.[key] ?? key;
 };

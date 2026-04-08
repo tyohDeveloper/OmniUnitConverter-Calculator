@@ -17,7 +17,7 @@ describe('Language Localization', () => {
       // help-machine-translated intentionally has en: '' (notice only shown for non-English locales)
       const intentionallyEmptyForEn = new Set(['help-machine-translated']);
       
-      for (const key of Object.keys(UI_TRANSLATIONS)) {
+      for (const key of Object.keys(UI_TRANSLATIONS['en'])) {
         for (const lang of requiredLanguages) {
           if (lang === 'en' && intentionallyEmptyForEn.has(key)) continue;
           const translation = translate(key, lang, UI_TRANSLATIONS);
@@ -315,12 +315,11 @@ describe('Language Localization', () => {
     it('should have English and Arabic translations for all UI elements', () => {
       // help-machine-translated intentionally has en: '' (notice only shown for non-English locales)
       const intentionallyEmptyForEn = new Set(['help-machine-translated']);
-      for (const key of Object.keys(UI_TRANSLATIONS)) {
-        const trans = UI_TRANSLATIONS[key];
+      for (const key of Object.keys(UI_TRANSLATIONS['en'])) {
         if (!intentionallyEmptyForEn.has(key)) {
-          expect(trans.en).toBeTruthy();
+          expect(UI_TRANSLATIONS['en'][key]).toBeTruthy();
         }
-        expect(trans.ar).toBeTruthy();
+        expect(UI_TRANSLATIONS['ar'][key]).toBeTruthy();
       }
     });
 
@@ -331,7 +330,7 @@ describe('Language Localization', () => {
         'Number formatting',
       ];
       for (const key of helpKeys) {
-        expect(UI_TRANSLATIONS[key]).toBeDefined();
+        expect(UI_TRANSLATIONS['en'][key]).toBeDefined();
       }
     });
 
@@ -369,10 +368,9 @@ describe('Language Localization', () => {
     });
 
     it('should have English and Arabic translations for all unit names', () => {
-      for (const key of Object.keys(UNIT_NAME_TRANSLATIONS)) {
-        const trans = UNIT_NAME_TRANSLATIONS[key];
-        expect(trans.en).toBeTruthy();
-        expect(trans.ar).toBeTruthy();
+      for (const key of Object.keys(UNIT_NAME_TRANSLATIONS['en'])) {
+        expect(UNIT_NAME_TRANSLATIONS['en'][key]).toBeTruthy();
+        expect(UNIT_NAME_TRANSLATIONS['ar'][key]).toBeTruthy();
       }
     });
 

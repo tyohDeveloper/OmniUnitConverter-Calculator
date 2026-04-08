@@ -6,13 +6,13 @@ const REQUIRED_LANGUAGES = ['en', 'ar', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pt'
 
 describe('JSON Integrity: ui-translations.json', () => {
   it('has at least 100 entries', () => {
-    expect(Object.keys(UI_TRANSLATIONS).length).toBeGreaterThanOrEqual(100);
+    expect(Object.keys(UI_TRANSLATIONS['en']).length).toBeGreaterThanOrEqual(100);
   });
 
   it('every entry has required en and ar fields as strings', () => {
-    for (const [key, trans] of Object.entries(UI_TRANSLATIONS)) {
-      expect(typeof trans.en, `key "${key}" en must be string`).toBe('string');
-      expect(typeof trans.ar, `key "${key}" ar must be string`).toBe('string');
+    for (const key of Object.keys(UI_TRANSLATIONS['en'])) {
+      expect(typeof UI_TRANSLATIONS['en'][key], `key "${key}" en must be string`).toBe('string');
+      expect(typeof UI_TRANSLATIONS['ar'][key], `key "${key}" ar must be string`).toBe('string');
     }
   });
 
@@ -21,7 +21,7 @@ describe('JSON Integrity: ui-translations.json', () => {
       'Base Quantities', 'Mechanics', 'Length', 'Mass', 'Time',
     ];
     for (const key of requiredKeys) {
-      expect(UI_TRANSLATIONS[key], `missing UI key "${key}"`).toBeDefined();
+      expect(UI_TRANSLATIONS['en'][key], `missing UI key "${key}"`).toBeDefined();
     }
   });
 
@@ -29,18 +29,18 @@ describe('JSON Integrity: ui-translations.json', () => {
     // Some labels (From, To, Compare All) live in UNIT_NAME_TRANSLATIONS after merge
     const appLabels = ['From', 'To', 'Compare All'];
     for (const key of appLabels) {
-      const found = UI_TRANSLATIONS[key] ?? UNIT_NAME_TRANSLATIONS[key];
+      const found = UI_TRANSLATIONS['en'][key] ?? UNIT_NAME_TRANSLATIONS['en'][key];
       expect(found, `missing app label "${key}" from both translation maps`).toBeDefined();
     }
   });
 
   it('round-trips through translate() for each language', () => {
     const key = 'Base Quantities';
-    const entry = UI_TRANSLATIONS[key];
-    expect(entry).toBeDefined();
+    const enValue = UI_TRANSLATIONS['en'][key];
+    expect(enValue).toBeDefined();
     for (const lang of REQUIRED_LANGUAGES) {
       if (lang === 'en') {
-        expect(translate(key, lang, UI_TRANSLATIONS)).toBe(entry.en);
+        expect(translate(key, lang, UI_TRANSLATIONS)).toBe(enValue);
       } else {
         const result = translate(key, lang, UI_TRANSLATIONS);
         expect(typeof result).toBe('string');
@@ -59,13 +59,13 @@ describe('JSON Integrity: ui-translations.json', () => {
 
 describe('JSON Integrity: unit-name-translations.json', () => {
   it('has at least 400 entries (original + merged UNIT_TRANSLATIONS)', () => {
-    expect(Object.keys(UNIT_NAME_TRANSLATIONS).length).toBeGreaterThanOrEqual(400);
+    expect(Object.keys(UNIT_NAME_TRANSLATIONS['en']).length).toBeGreaterThanOrEqual(400);
   });
 
   it('every entry has required en and ar fields', () => {
-    for (const [key, trans] of Object.entries(UNIT_NAME_TRANSLATIONS)) {
-      expect(trans.en, `key "${key}" missing en`).toBeTruthy();
-      expect(trans.ar, `key "${key}" missing ar`).toBeTruthy();
+    for (const key of Object.keys(UNIT_NAME_TRANSLATIONS['en'])) {
+      expect(UNIT_NAME_TRANSLATIONS['en'][key], `key "${key}" missing en`).toBeTruthy();
+      expect(UNIT_NAME_TRANSLATIONS['ar'][key], `key "${key}" missing ar`).toBeTruthy();
     }
   });
 
@@ -75,15 +75,15 @@ describe('JSON Integrity: unit-name-translations.json', () => {
       'Newton', 'Joule', 'Watt', 'Volt', 'Ohm',
     ];
     for (const key of requiredKeys) {
-      expect(UNIT_NAME_TRANSLATIONS[key], `missing unit name "${key}"`).toBeDefined();
+      expect(UNIT_NAME_TRANSLATIONS['en'][key], `missing unit name "${key}"`).toBeDefined();
     }
   });
 
   it('contains category/group names from merged UNIT_TRANSLATIONS', () => {
     const groupKeys = ['Base Quantities', 'Mechanics', 'Electricity & Magnetism'];
     for (const key of groupKeys) {
-      const entry = UNIT_NAME_TRANSLATIONS[key] ?? UI_TRANSLATIONS[key];
-      expect(entry, `missing group key "${key}" from either map`).toBeDefined();
+      const found = UNIT_NAME_TRANSLATIONS['en'][key] ?? UI_TRANSLATIONS['en'][key];
+      expect(found, `missing group key "${key}" from either map`).toBeDefined();
     }
   });
 
@@ -200,11 +200,9 @@ describe('JSON Integrity: cross-file consistency', () => {
     let checkedCount = 0;
     for (const cat of CONVERSION_DATA) {
       for (const unit of cat.units) {
-        const trans = UNIT_NAME_TRANSLATIONS[unit.name];
-        if (trans) {
-          // The English translation should match the unit name
-          // (some names may use different Unicode normalization; allow close matches)
-          expect(trans.en).toBeTruthy();
+        const enVal = UNIT_NAME_TRANSLATIONS['en']?.[unit.name];
+        if (enVal) {
+          expect(enVal).toBeTruthy();
           checkedCount++;
         }
       }
