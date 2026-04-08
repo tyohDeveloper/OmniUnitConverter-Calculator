@@ -6,7 +6,8 @@ import {
   fixPrecision, toArabicNumerals, toLatinNumerals, roundToNearestEven,
   toFixedBanker, toTitleCase, NUMBER_FORMATS, type NumberFormat,
   parseNumberWithFormat as parseNumberWithSpecificFormat,
-  formatNumberWithFormat as formatNumberWithSpecificFormat
+  formatNumberWithFormat as formatNumberWithSpecificFormat,
+  formatFtIn as formatFtInLib
 } from '@/lib/formatting';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
@@ -441,14 +442,7 @@ export default function UnitConverterApp() {
     return val;
   };
 
-  const formatFtIn = (decimalFeet: number): string => {
-    const sign = decimalFeet < 0 ? "-" : "";
-    const absVal = Math.abs(decimalFeet);
-    const ft = Math.floor(absVal);
-    const inches = (absVal - ft) * 12;
-    const inFixed = toFixedBanker(inches, precision);
-    return `${sign}${ft}'${inFixed}"`;
-  };
+  const formatFtIn = (decimalFeet: number): string => formatFtInLib(decimalFeet, precision);
 
   const parseFtIn = (ftIn: string): number => {
     const cleaned = ftIn.replace(/['"]/g, ':');

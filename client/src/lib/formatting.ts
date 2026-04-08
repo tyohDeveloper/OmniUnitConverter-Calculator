@@ -62,6 +62,15 @@ export const toFixedBanker = (num: number, precision: number): string => {
   return rounded.toFixed(precision);
 };
 
+export const formatFtIn = (decimalFeet: number, precision: number): string => {
+  const sign = decimalFeet < 0 ? "-" : "";
+  const absVal = Math.abs(decimalFeet);
+  const ft = Math.floor(absVal);
+  const inches = (absVal - ft) * 12;
+  const inFixed = toFixedBanker(inches, precision);
+  return `${sign}${ft}'${inFixed}"`;
+};
+
 export const fixPrecision = (num: number): number => {
   if (num === 0) return 0;
   if (!isFinite(num)) return num;

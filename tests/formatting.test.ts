@@ -10,6 +10,7 @@ import {
   toArabicNumerals,
   toLatinNumerals,
   NUMBER_FORMATS,
+  formatFtIn,
   type NumberFormat
 } from '../client/src/lib/formatting';
 import { findOptimalPrefix, PREFIXES, CONVERSION_DATA, convert } from '../client/src/lib/conversion-data';
@@ -743,6 +744,42 @@ describe('Electron Volt Conversions', () => {
 
     it('should allow SI prefixes', () => {
       expect(eV?.allowPrefixes).toBe(true);
+    });
+  });
+
+  describe('ft_in RTL bidi ordering', () => {
+    it('formatFtIn output should have feet before inches (tick before closing quote)', () => {
+      const result = formatFtIn(5 + 10 / 12, 4);
+      expect(result.indexOf("'")).toBeGreaterThan(-1);
+      expect(result.indexOf('"')).toBeGreaterThan(-1);
+      expect(result.indexOf("'")).toBeLessThan(result.indexOf('"'));
+    });
+
+    it('formatFtIn output for 5ft 10in should start with feet value and end with inches (feet-first)', () => {
+      const result = formatFtIn(5 + 10 / 12, 4);
+      expect(result.startsWith("5'")).toBe(true);
+      expect(result.endsWith('"')).toBe(true);
+    });
+
+    it('formatFtIn output for 0ft should still use feet-first format', () => {
+      const result = formatFtIn(0.5, 4);
+      expect(result.startsWith("0'")).toBe(true);
+      expect(result.endsWith('"')).toBe(true);
+    });
+
+    it('formatFtIn output for negative values should put sign before feet, feet before inches', () => {
+      const result = formatFtIn(-(5 + 10 / 12), 4);
+      expect(result.startsWith("-5'")).toBe(true);
+      expect(result.endsWith('"')).toBe(true);
+    });
+
+    it("ft'in\" placeholder string should have foot-tick before inch-quote (feet-first ordering)", () => {
+      const placeholder = "ft'in\"";
+      const tickIdx = placeholder.indexOf("'");
+      const quoteIdx = placeholder.indexOf('"');
+      expect(tickIdx).toBeGreaterThan(-1);
+      expect(quoteIdx).toBeGreaterThan(-1);
+      expect(tickIdx).toBeLessThan(quoteIdx);
     });
   });
 

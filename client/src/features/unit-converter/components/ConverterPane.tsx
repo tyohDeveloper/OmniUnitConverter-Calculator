@@ -151,6 +151,7 @@ export function ConverterPane({
                 className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-start"
                 style={{ height: FIELD_HEIGHT, fontSize: '0.875rem', width: CommonFieldWidth }}
                 placeholder={getPlaceholder()}
+                dir={fromUnit === 'ft_in' ? 'ltr' : undefined}
                 {...testId('input-value')}
               />
 
@@ -311,7 +312,7 @@ export function ConverterPane({
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <span className="font-mono text-primary whitespace-nowrap" style={{ fontSize: '0.875rem' }}>
+                <span className="font-mono text-primary whitespace-nowrap" style={{ fontSize: '0.875rem' }} dir={toUnit === 'ft_in' ? 'ltr' : undefined}>
                   {result !== null
                     ? (toUnit === 'deg_dms'
                         ? formatDMS(result)
@@ -420,11 +421,11 @@ export function ConverterPane({
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-xs font-mono text-muted-foreground flex gap-2 items-center">
-                    <span className="text-foreground font-bold">
+                    <span className="text-foreground font-bold" dir={fromUnit === 'ft_in' ? 'ltr' : undefined}>
                       {NUMBER_FORMATS[numberFormat].useArabicNumerals ? '١' : '1'} {fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
                     </span>
                     <span>=</span>
-                    <span className="text-foreground font-bold">
+                    <span className="text-foreground font-bold" dir={(toUnit === 'ft_in' || fromUnit === 'ft_in') ? 'ltr' : undefined}>
                       {toUnit === 'deg_dms'
                         ? formatDMS(convert(1, fromUnit, toUnit, activeCategory, fromPrefixData.factor, toPrefixData.factor))
                         : toUnit === 'ft_in'
