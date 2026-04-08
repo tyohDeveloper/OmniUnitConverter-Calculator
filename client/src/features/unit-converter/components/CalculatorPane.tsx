@@ -734,6 +734,7 @@ export function CalculatorPane({
                         } else if (currentOp) {
                           applyRpnUnary(currentOp);
                         }
+                        setShiftActive(false);
                       }}
                       disabled={isDisabled}
                     >
@@ -803,6 +804,7 @@ export function CalculatorPane({
                         } else if (currentOp) {
                           applyRpnUnary(currentOp);
                         }
+                        setShiftActive(false);
                       }}
                       disabled={isDisabled}
                     >
@@ -838,7 +840,7 @@ export function CalculatorPane({
                     className={`text-xs font-mono w-full border !border-border/30 ${shiftActive && !rpnStack[3] ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
                     style={{ gridColumn: 'span 2' }}
                     disabled={shiftActive && !rpnStack[3]}
-                    onClick={() => shiftActive ? dropRpnStack() : pushToRpnStack()}
+                    onClick={() => { shiftActive ? dropRpnStack() : pushToRpnStack(); setShiftActive(false); }}
                   >
                     {shiftActive ? 'DROP' : 'ENTER'}
                   </Button>
@@ -853,7 +855,7 @@ export function CalculatorPane({
                     data-testid={shiftActive ? 'button-rpn-pull' : 'button-rpn-undo'}
                     className={`text-xs font-mono w-full border !border-border/30 ${shiftActive ? 'text-foreground hover:text-accent' : (!previousRpnStack.some(v => v !== null) ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent')}`}
                     disabled={!shiftActive && !previousRpnStack.some(v => v !== null)}
-                    onClick={() => shiftActive ? pullFromPane() : undoRpnStack()}
+                    onClick={() => { shiftActive ? pullFromPane() : undoRpnStack(); setShiftActive(false); }}
                   >
                     {shiftActive ? 'PULL' : 'UNDO'}
                   </Button>
@@ -877,7 +879,7 @@ export function CalculatorPane({
                       size="sm"
                       data-testid={`button-rpn-${btn.id}`}
                       className={`text-xs font-mono w-full border !border-border/30 ${isDisabled ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
-                      onClick={() => applyRpnBinary(currentOp)}
+                      onClick={() => { applyRpnBinary(currentOp); setShiftActive(false); }}
                       disabled={isDisabled}
                     >
                       {shiftActive ? btn.shiftLabel : btn.label}
@@ -892,7 +894,7 @@ export function CalculatorPane({
                     size="sm"
                     data-testid={shiftActive ? 'button-rpn-swap' : 'button-rpn-lastx'}
                     className="text-xs font-mono w-full border !border-border/30 text-foreground hover:text-accent"
-                    onClick={() => shiftActive ? swapRpnXY() : recallLastX()}
+                    onClick={() => { shiftActive ? swapRpnXY() : recallLastX(); setShiftActive(false); }}
                   >
                     {shiftActive ? 'SWAP' : 'LASTx'}
                   </Button>
@@ -1151,6 +1153,7 @@ export function CalculatorPane({
                       newStack[3] = { ...prev[3]!, value: 0 };
                       return newStack;
                     });
+                    setShiftActive(false);
                   }}
                   className="text-xs text-foreground hover:text-accent border !border-border/30"
                 >
@@ -1170,6 +1173,7 @@ export function CalculatorPane({
                     });
                     setRpnResultPrefix('none');
                     setRpnSelectedAlternative(0);
+                    setShiftActive(false);
                   }}
                   className="text-xs text-foreground hover:text-accent border !border-border/30"
                 >
@@ -1196,7 +1200,7 @@ export function CalculatorPane({
                 variant="ghost"
                 size="sm"
                 data-testid="button-rpn-paste"
-                onClick={() => pasteToRpnStack()}
+                onClick={() => { pasteToRpnStack(); setShiftActive(false); }}
                 className="text-xs text-foreground hover:text-accent gap-1 border !border-border/30"
                 style={{ gridColumn: 'span 2' }}
               >
