@@ -182,7 +182,7 @@
     },
     {
       "id": "hand",
-      "name": "Hand (US)",
+      "name": "Hand",
       "symbol": "hh",
       "factor": 0.1016,
       "unitType": "US_COMMON"
@@ -196,14 +196,14 @@
     },
     {
       "id": "fathom",
-      "name": "Fathom (US)",
+      "name": "Fathom",
       "symbol": "ftm",
       "factor": 1.8288,
       "unitType": "US_COMMON"
     },
     {
       "id": "rod",
-      "name": "Rod/Pole/Perch (US)",
+      "name": "Rod/Pole/Perch",
       "symbol": "rd",
       "factor": 5.0292,
       "unitType": "US_COMMON"
@@ -217,14 +217,14 @@
     },
     {
       "id": "furlong",
-      "name": "Furlong (US)",
+      "name": "Furlong",
       "symbol": "fur",
       "factor": 201.168,
       "unitType": "US_COMMON"
     },
     {
       "id": "league",
-      "name": "League (US)",
+      "name": "League",
       "symbol": "lea",
       "factor": 4828.032,
       "unitType": "US_COMMON"

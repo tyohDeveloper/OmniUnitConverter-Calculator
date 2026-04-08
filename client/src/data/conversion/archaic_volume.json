@@ -126,7 +126,7 @@
     },
     {
       "id": "apoth_oz",
-      "name": "Apothecary Ounce (US)",
+      "name": "Fluid Ounce (Apothecaries')",
       "symbol": "fl oz ap",
       "factor": 0.0295735,
       "unitType": "US_COMMON"
@@ -182,7 +182,7 @@
     },
     {
       "id": "fl_scruple",
-      "name": "Fluid Scruple (Imperial)",
+      "name": "Fluid Scruple (Apothecaries')",
       "symbol": "fl s",
       "factor": 0.00123223,
       "unitType": "IMPERIAL"

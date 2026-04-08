@@ -161,7 +161,7 @@
     },
     {
       "id": "scruple",
-      "name": "Scruple (Apothecary)",
+      "name": "Scruple (Apothecaries')",
       "symbol": "s ap",
       "factor": 0.001296,
       "unitType": "IMPERIAL"
@@ -182,28 +182,35 @@
     },
     {
       "id": "grain",
-      "name": "Grain (US)",
+      "name": "Grain",
       "symbol": "gr",
       "factor": 0.00006479891,
       "unitType": "US_COMMON"
     },
     {
       "id": "dram",
-      "name": "Dram (US)",
+      "name": "Dram (Avoirdupois, US)",
       "symbol": "dr",
       "factor": 0.001771845,
       "unitType": "US_COMMON"
     },
     {
+      "id": "dram_ap",
+      "name": "Dram (Apothecaries')",
+      "symbol": "dr ap",
+      "factor": 0.0038879346,
+      "unitType": "IMPERIAL"
+    },
+    {
       "id": "troy_oz",
-      "name": "Troy Ounce (US)",
+      "name": "Troy Ounce",
       "symbol": "oz t",
       "factor": 0.0311034768,
       "unitType": "US_COMMON"
     },
     {
       "id": "troy_lb",
-      "name": "Troy Pound (US)",
+      "name": "Troy Pound",
       "symbol": "lb t",
       "factor": 0.3732417,
       "unitType": "US_COMMON"
