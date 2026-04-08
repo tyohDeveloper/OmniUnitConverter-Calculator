@@ -186,15 +186,15 @@ export default function UnitConverterApp() {
   };
 
   React.useEffect(() => {
-    if (numberFormat === 'arabic') setLanguage('ar');
-  }, [numberFormat]);
+    if (language === 'ar') setNumberFormat('arabic');
+  }, [language]);
 
   React.useEffect(() => {
-    const isRtl = language === 'ar';
+    const isRtl = numberFormat === 'arabic';
     document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', language);
     return () => { document.documentElement.setAttribute('dir', 'ltr'); };
-  }, [language]);
+  }, [language, numberFormat]);
 
   const CATEGORY_GROUPS = [
     { name: "Base Quantities", categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },
@@ -1403,7 +1403,6 @@ export default function UnitConverterApp() {
                 onValueChange={(val) => {
                   const newFormat = val as NumberFormat;
                   const oldFormat = numberFormat;
-                  if (oldFormat === 'arabic' && newFormat !== 'arabic') setLanguage('en');
                   reformatInputValue(oldFormat, newFormat);
                   setNumberFormat(newFormat);
                   refocusInput();
@@ -1425,10 +1424,9 @@ export default function UnitConverterApp() {
                 </SelectContent>
               </Select>
               <Select
-                value={numberFormat === 'arabic' ? '' : language}
+                value={language}
                 onValueChange={(val) => { setLanguage(val as SupportedLanguage); refocusInput(); }}
                 onOpenChange={(open) => { if (!open) refocusInput(); }}
-                disabled={numberFormat === 'arabic'}
               >
                 <SelectTrigger tabIndex={7} className="h-10 w-[75px] text-xs">
                   <SelectValue placeholder="" />
