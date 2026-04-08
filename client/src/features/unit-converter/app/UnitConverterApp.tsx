@@ -1249,15 +1249,17 @@ export default function UnitConverterApp() {
     const format = NUMBER_FORMATS[numberFormat];
     const decimalSep = format.decimal === '.' ? '\\.' : format.decimal === "'" ? "\\'" : format.decimal;
     const thousandsSep = format.thousands ? (format.thousands === ' ' ? '\\s' : format.thousands === "'" ? "\\'" : format.thousands) : '';
-    const isArabicFormat = numberFormat === 'arabic';
+    const isArabicFormat = format.useArabicNumerals ?? false;
     const digitPattern = isArabicFormat ? '0-9٠-٩' : '0-9';
     if (fromUnit === 'deg_dms' || fromUnit === 'ft_in') {
       const pattern = new RegExp(`[^${digitPattern}:\\-${decimalSep}${thousandsSep}'"']`, 'g');
-      setInputValue(value.replace(pattern, ''));
+      const filtered = value.replace(pattern, '');
+      setInputValue(isArabicFormat ? toArabicNumerals(filtered) : filtered);
       return;
     }
     const pattern = new RegExp(`[^${digitPattern}\\-${decimalSep}${thousandsSep}eE\\+]`, 'g');
-    setInputValue(value.replace(pattern, ''));
+    const filtered = value.replace(pattern, '');
+    setInputValue(isArabicFormat ? toArabicNumerals(filtered) : filtered);
   };
 
   const buildDirectUnitSymbol = (): string => {
