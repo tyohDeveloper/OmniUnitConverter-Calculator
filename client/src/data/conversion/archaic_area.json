@@ -48,17 +48,31 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "pyeong_kr",
-      "name": "Pyeong (Korea)",
-      "symbol": "pyeong",
-      "factor": 3.3058,
-      "unitType": "SI_BASE"
-    },
-    {
       "id": "tsubo_jp",
       "name": "Tsubo (Japan)",
       "symbol": "tsubo",
       "factor": 3.306,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "tan_jp",
+      "name": "Tan (Japan)",
+      "symbol": "tan",
+      "factor": 991.7,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "cho_jp",
+      "name": "Chō (Japan)",
+      "symbol": "cho",
+      "factor": 9917.36,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "pyeong_kr",
+      "name": "Pyeong (Korea)",
+      "symbol": "pyeong",
+      "factor": 3.3058,
       "unitType": "SI_BASE"
     },
     {
@@ -69,13 +83,6 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "qirat_eg",
-      "name": "Qirat (Egypt)",
-      "symbol": "qirat",
-      "factor": 175.03,
-      "unitType": "SI_BASE"
-    },
-    {
       "id": "mu_cn",
       "name": "Mu (China)",
       "symbol": "mu",
@@ -83,10 +90,31 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "tan_jp",
-      "name": "Tan (Japan)",
-      "symbol": "tan",
-      "factor": 991.7,
+      "id": "qing_cn",
+      "name": "Qing (China)",
+      "symbol": "qing",
+      "factor": 66666.67,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "bigha",
+      "name": "Bigha (South Asia)",
+      "symbol": "bigha",
+      "factor": 2529,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "qirat_eg",
+      "name": "Qirat (Egypt)",
+      "symbol": "qirat",
+      "factor": 175.03,
+      "unitType": "SI_BASE"
+    },
+    {
+      "id": "feddan_eg",
+      "name": "Feddan (Egypt)",
+      "symbol": "feddan",
+      "factor": 4200.833,
       "unitType": "SI_BASE"
     },
     {
@@ -111,38 +139,10 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "bigha",
-      "name": "Bigha (South Asia)",
-      "symbol": "bigha",
-      "factor": 2529,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "feddan_eg",
-      "name": "Feddan (Egypt)",
-      "symbol": "feddan",
-      "factor": 4200.833,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "cho_jp",
-      "name": "Chō (Japan)",
-      "symbol": "cho",
-      "factor": 9917.36,
-      "unitType": "SI_BASE"
-    },
-    {
       "id": "desyatina",
       "name": "Desyatina (Russia)",
       "symbol": "desyatina",
       "factor": 10925,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "qing_cn",
-      "name": "Qing (China)",
-      "symbol": "qing",
-      "factor": 66666.67,
       "unitType": "SI_BASE"
     },
     {

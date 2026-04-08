@@ -701,6 +701,7 @@ describe("Unit Ordering - SI Base First, Then Ascending Factor", () => {
   // - photon: inverse relationship (wavelength ↔ energy via E=hc/λ)
   // - rack_geometry: mixed length and special rack units
   // - shipping: mixed length and container units
+  // - archaic_area/length/mass/volume: units grouped by culture/region of origin
   const categoriesWithSpecialOrdering = [
     'lightbulb',
     'math', 
@@ -710,7 +711,11 @@ describe("Unit Ordering - SI Base First, Then Ascending Factor", () => {
     'shipping',
     'radioactive_decay',
     'fuel',
-    'photon'
+    'photon',
+    'archaic_area',
+    'archaic_length',
+    'archaic_mass',
+    'archaic_volume'
   ];
 
   // Helper: Find SI base unit by criteria (not by position)
