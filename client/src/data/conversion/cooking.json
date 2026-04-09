@@ -55,7 +55,7 @@
     },
     {
       "id": "tsp_uk",
-      "name": "Teaspoon (UK)",
+      "name": "Teaspoon (Imperial)",
       "symbol": "tsp (imp)",
       "factor": 5.91939,
       "unitType": "IMPERIAL",
@@ -87,7 +87,7 @@
     },
     {
       "id": "tbsp_uk",
-      "name": "Tablespoon (UK)",
+      "name": "Tablespoon (Imperial)",
       "symbol": "tbsp (imp)",
       "factor": 17.7582,
       "unitType": "IMPERIAL",
@@ -95,7 +95,7 @@
     },
     {
       "id": "fl_oz_uk",
-      "name": "Fluid Ounce (UK)",
+      "name": "Fluid Ounce (Imperial)",
       "symbol": "fl oz (imp)",
       "factor": 28.4131,
       "unitType": "IMPERIAL",
@@ -151,7 +151,7 @@
     },
     {
       "id": "cup_uk",
-      "name": "Cup (UK)",
+      "name": "Cup (Imperial)",
       "symbol": "cp (imp)",
       "factor": 284.131,
       "unitType": "IMPERIAL",
@@ -167,7 +167,7 @@
     },
     {
       "id": "pt_uk",
-      "name": "Pint (UK)",
+      "name": "Pint (Imperial)",
       "symbol": "pt (imp)",
       "factor": 568.261,
       "unitType": "IMPERIAL",

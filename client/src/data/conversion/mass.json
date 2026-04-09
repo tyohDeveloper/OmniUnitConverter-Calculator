@@ -104,7 +104,7 @@
     },
     {
       "id": "ton_uk",
-      "name": "Long Ton (UK)",
+      "name": "Long Ton (Imperial)",
       "symbol": "ton (imp)",
       "factor": 1016.05,
       "unitType": "IMPERIAL",
