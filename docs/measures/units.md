@@ -407,6 +407,46 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `lb⋅ft⋅s⁻¹` | lb⋅ft/s | Momentum | kg⋅m⋅s⁻¹ | 0.138255 |
 | `N⋅s` | Newton-second | Momentum | kg⋅m⋅s⁻¹ | 1 |
 | `slug⋅ft⋅s⁻¹` | slug⋅ft/s | Momentum | kg⋅m⋅s⁻¹ | 4.44822 |
+| `8×10` | 8×10 (US Photo) | Paper Sizes | m² | 0.051613 |
+| `A0` | A0 | Paper Sizes | m² | 0.999949 |
+| `A1` | A1 | Paper Sizes | m² | 0.499554 |
+| `A10` | A10 | Paper Sizes | m² | 9.62e-4 |
+| `A2` | A2 | Paper Sizes | m² | 0.24948 |
+| `A3` | A3 | Paper Sizes | m² | 0.12474 |
+| `A4` | A4 | Paper Sizes | m² | 0.06237 |
+| `A5` | A5 | Paper Sizes | m² | 0.03108 |
+| `A6` | A6 | Paper Sizes | m² | 0.01554 |
+| `A7` | A7 | Paper Sizes | m² | 0.00777 |
+| `A8` | A8 | Paper Sizes | m² | 0.003848 |
+| `A9` | A9 | Paper Sizes | m² | 0.001924 |
+| `ANSI C` | ANSI C | Paper Sizes | m² | 0.24129 |
+| `ANSI D` | ANSI D | Paper Sizes | m² | 0.482581 |
+| `ANSI E` | ANSI E | Paper Sizes | m² | 0.965161 |
+| `B0` | B0 | Paper Sizes | m² | 1.414 |
+| `B1` | B1 | Paper Sizes | m² | 0.707 |
+| `B10` | B10 | Paper Sizes | m² | 0.001364 |
+| `B2` | B2 | Paper Sizes | m² | 0.3535 |
+| `B3` | B3 | Paper Sizes | m² | 0.1765 |
+| `B4` | B4 | Paper Sizes | m² | 0.08825 |
+| `B5` | B5 | Paper Sizes | m² | 0.044 |
+| `B6` | B6 | Paper Sizes | m² | 0.022 |
+| `B7` | B7 | Paper Sizes | m² | 0.011 |
+| `B8` | B8 | Paper Sizes | m² | 0.005456 |
+| `B9` | B9 | Paper Sizes | m² | 0.002728 |
+| `Exec` | Executive | Paper Sizes | m² | 0.049094 |
+| `JIS B0` | JIS B0 | Paper Sizes | m² | 1.49968 |
+| `JIS B1` | JIS B1 | Paper Sizes | m² | 0.74984 |
+| `JIS B2` | JIS B2 | Paper Sizes | m² | 0.37492 |
+| `JIS B3` | JIS B3 | Paper Sizes | m² | 0.18746 |
+| `JIS B4` | JIS B4 | Paper Sizes | m² | 0.093548 |
+| `JIS B5` | JIS B5 | Paper Sizes | m² | 0.046774 |
+| `JIS B6` | JIS B6 | Paper Sizes | m² | 0.023296 |
+| `JIS B7` | JIS B7 | Paper Sizes | m² | 0.011648 |
+| `JIS B8` | JIS B8 | Paper Sizes | m² | 0.005824 |
+| `Legal` | Legal | Paper Sizes | m² | 0.076774 |
+| `Letter` | Letter | Paper Sizes | m² | 0.060322 |
+| `Statement` | Statement | Paper Sizes | m² | 0.030161 |
+| `Tabloid` | Tabloid | Paper Sizes | m² | 0.120645 |
 | `eV` | Electronvolt | Photon/Light | eV | 1 |
 | `J` | Joule | Photon/Light | eV | 6.241509074e+18 |
 | `λ` | Wavelength (λ) | Photon/Light | eV | 1.239841984e-6 |
@@ -517,8 +557,9 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `N⋅m` | Newton-metre | Torque | kg⋅m²⋅s⁻² | 1 |
 | `oz⋅in` | Ounce-inch | Torque | kg⋅m²⋅s⁻² | 0.00706155 |
 | `‴` | Ligne | Typography | m | 0.0022558 |
+| `ag` | Agate | Typography | m | 0.0018143 |
 | `cicero` | Cicero | Typography | m | 0.004512 |
-| `dd` | Didot Point | Typography | m | 3.76065e-4 |
+| `dd` | Didot | Typography | m | 3.76065e-4 |
 | `em` | Em (16px ref) | Typography | m | 0.0042333 |
 | `ft` | Foot | Typography | m | 0.3048 |
 | `in` | Inch | Typography | m | 0.0254 |

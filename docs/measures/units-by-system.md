@@ -159,6 +159,28 @@ One section per measurement system or tradition.
 | `kg⋅m⋅s⁻¹` | kg⋅m/s | 1 kg⋅m⋅s⁻¹ |
 | `g⋅m⋅s⁻¹` | g⋅m/s | 0.001 kg⋅m⋅s⁻¹ |
 | `N⋅s` | Newton-second | 1 kg⋅m⋅s⁻¹ |
+| `A0` | A0 | 0.999949 m² |
+| `A1` | A1 | 0.499554 m² |
+| `A2` | A2 | 0.24948 m² |
+| `A3` | A3 | 0.12474 m² |
+| `A4` | A4 | 0.06237 m² |
+| `A5` | A5 | 0.03108 m² |
+| `A6` | A6 | 0.01554 m² |
+| `A7` | A7 | 0.00777 m² |
+| `A8` | A8 | 0.003848 m² |
+| `A9` | A9 | 0.001924 m² |
+| `A10` | A10 | 9.62e-4 m² |
+| `B0` | B0 | 1.414 m² |
+| `B1` | B1 | 0.707 m² |
+| `B2` | B2 | 0.3535 m² |
+| `B3` | B3 | 0.1765 m² |
+| `B4` | B4 | 0.08825 m² |
+| `B5` | B5 | 0.044 m² |
+| `B6` | B6 | 0.022 m² |
+| `B7` | B7 | 0.011 m² |
+| `B8` | B8 | 0.005456 m² |
+| `B9` | B9 | 0.002728 m² |
+| `B10` | B10 | 0.001364 m² |
 | `eV` | Electronvolt | 1 eV |
 | `J` | Joule | 6.241509074e+18 eV |
 | `ν` | Frequency (ν) | 4.135667696e-15 eV |
@@ -313,6 +335,15 @@ One section per measurement system or tradition.
 | `ton (US)` | Short Ton (US) | 907.185 kg |
 | `lb⋅ft⋅s⁻¹` | lb⋅ft/s | 0.138255 kg⋅m⋅s⁻¹ |
 | `slug⋅ft⋅s⁻¹` | slug⋅ft/s | 4.44822 kg⋅m⋅s⁻¹ |
+| `Letter` | Letter | 0.060322 m² |
+| `Legal` | Legal | 0.076774 m² |
+| `Tabloid` | Tabloid | 0.120645 m² |
+| `Exec` | Executive | 0.049094 m² |
+| `Statement` | Statement | 0.030161 m² |
+| `8×10` | 8×10 (US Photo) | 0.051613 m² |
+| `ANSI C` | ANSI C | 0.24129 m² |
+| `ANSI D` | ANSI D | 0.482581 m² |
+| `ANSI E` | ANSI E | 0.965161 m² |
 | `BTU⋅h⁻¹` | BTU per Hour | 0.293071 kg⋅m²⋅s⁻³ |
 | `hp` | Horsepower (Mechanical) | 745.7 kg⋅m²⋅s⁻³ |
 | `TR` | Ton of Refrigeration | 3516.85 kg⋅m²⋅s⁻³ |
@@ -458,6 +489,7 @@ One section per measurement system or tradition.
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `pt (trad)` | Point (Traditional) | 3.51459e-4 m |
+| `ag` | Agate | 0.0018143 m |
 | `pc (trad)` | Pica (Traditional) | 0.0042175 m |
 
 ## French Traditional (Pied-du-Roi)
@@ -465,7 +497,7 @@ One section per measurement system or tradition.
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `livre` | Livre (French) | 0.4895 kg |
-| `dd` | Didot Point | 3.76065e-4 m |
+| `dd` | Didot | 3.76065e-4 m |
 | `‴` | Ligne | 0.0022558 m |
 | `cicero` | Cicero | 0.004512 m |
 
@@ -495,6 +527,15 @@ One section per measurement system or tradition.
 | `to` | To (Japan) | 18.039 L |
 | `koku` | Koku (Japan) | 180.39 L |
 | `cp (JP)` | Cup (Japan) | 200 mL |
+| `JIS B0` | JIS B0 | 1.49968 m² |
+| `JIS B1` | JIS B1 | 0.74984 m² |
+| `JIS B2` | JIS B2 | 0.37492 m² |
+| `JIS B3` | JIS B3 | 0.18746 m² |
+| `JIS B4` | JIS B4 | 0.093548 m² |
+| `JIS B5` | JIS B5 | 0.046774 m² |
+| `JIS B6` | JIS B6 | 0.023296 m² |
+| `JIS B7` | JIS B7 | 0.011648 m² |
+| `JIS B8` | JIS B8 | 0.005824 m² |
 
 ## Korean Traditional
 
