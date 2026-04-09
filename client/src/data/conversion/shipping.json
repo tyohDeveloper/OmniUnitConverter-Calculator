@@ -13,42 +13,6 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "angstrom",
-      "name": "Angstrom",
-      "symbol": "Å",
-      "factor": 1e-10,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "in",
-      "name": "Inch",
-      "symbol": "in",
-      "factor": 0.0254,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "link",
-      "name": "Link (Gunter)",
-      "symbol": "li",
-      "factor": 0.201168,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "ft",
-      "name": "Foot",
-      "symbol": "ft",
-      "factor": 0.3048,
-      "allowPrefixes": true,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "ft_in",
-      "name": "Foot & Inch",
-      "symbol": "ft'in\"",
-      "factor": 0.3048,
-      "unitType": "US_COMMON"
-    },
-    {
       "id": "yd",
       "name": "Yard",
       "symbol": "yd",
@@ -117,48 +81,6 @@
       "symbol": "ch",
       "factor": 20.1168,
       "unitType": "US_COMMON"
-    },
-    {
-      "id": "furlong",
-      "name": "Furlong",
-      "symbol": "fur",
-      "factor": 201.168,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "mi",
-      "name": "Mile",
-      "symbol": "mi",
-      "factor": 1609.344,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "nmi",
-      "name": "Nautical Mile",
-      "symbol": "nmi",
-      "factor": 1852,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "au",
-      "name": "Astronomical Unit",
-      "symbol": "AU",
-      "factor": 149600000000,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "ly",
-      "name": "Light Year",
-      "symbol": "ly",
-      "factor": 9461000000000000,
-      "unitType": "SI_BASE"
-    },
-    {
-      "id": "parsec",
-      "name": "Parsec",
-      "symbol": "parsec",
-      "factor": 30857000000000000,
-      "unitType": "SI_BASE"
     }
   ]
 }
