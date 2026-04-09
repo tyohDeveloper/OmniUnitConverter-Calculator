@@ -190,6 +190,9 @@ export default function UnitConverterApp() {
       } else if (activeCategory === 'temperature') {
         setFromUnit('k'); setToUnit('k');
         setFromPrefix('none'); setToPrefix('none');
+      } else if (activeCategory === 'volume') {
+        setFromUnit('l'); setToUnit('l');
+        setFromPrefix('none'); setToPrefix('none');
       } else if (activeCategory === 'capacitance') {
         setFromUnit('f'); setToUnit('f');
         setFromPrefix('none'); setToPrefix('none');
