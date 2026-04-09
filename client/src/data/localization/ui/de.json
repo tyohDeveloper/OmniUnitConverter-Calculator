@@ -133,5 +133,6 @@
   "help-para-5": "Die App ist eine einzelne, eigenständige .html-Datei. Sie verweist auf keine anderen Dateien und enthält keine Links. Sie können sie überall nutzen, wo ein Browser vorhanden ist, und es wird funktionieren. Kein Netzwerk oder Packaging nötig. Ich habe auch ein GitHub-Repository mit dem Projekt bereitgestellt. Es ist ein Standard-TypeScript/React-Projekt, auf Replit entwickelt, aber das ist keine Voraussetzung. Sie können die .html-Datei oder den Quellcode beliebig verwenden.",
   "help-github-note": "Dies ist der einzige Hyperlink bzw. externe Verweis in der .html-Distribution. Sie können darauf klicken oder nicht. Es ist nicht Teil der App.",
   "help-llm-note": "Hinweis: Diese App wurde größtenteils mithilfe eines KI-Assistenten erstellt. Sie wurde getestet und enthält Unit-Tests. Soweit ich weiß, sind die Umrechnungen korrekt — aber für kritische Anwendungen bitte selbst prüfen.",
-  "help-machine-translated": "(Dieser Text wurde maschinell übersetzt. Für den Originaltext wechseln Sie bitte zur Sprache «en».)"
+  "help-machine-translated": "(Dieser Text wurde maschinell übersetzt. Für den Originaltext wechseln Sie bitte zur Sprache «en».)",
+  "Paper Sizes": "Papierformate"
 }

@@ -171,7 +171,7 @@ export default function UnitConverterApp() {
     { name: "Electricity & Magnetism", categories: ['charge', 'potential', 'capacitance', 'resistance', 'conductance', 'inductance', 'magnetic_flux', 'magnetic_density', 'electric_field', 'magnetic_field_h'] },
     { name: "Radiation & Physics", categories: ['radioactivity', 'radiation_dose', 'equivalent_dose', 'radioactive_decay', 'cross_section', 'photon', 'catalytic', 'angle', 'solid_angle', 'sound_pressure', 'sound_intensity', 'acoustic_impedance'] },
     { name: "Human Response", categories: ['luminous_flux', 'illuminance', 'refractive_power'] },
-    { name: "Other", categories: ['math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb'] },
+    { name: "Other", categories: ['math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb', 'paper_sizes'] },
     { name: "Archaic & Regional", categories: ['archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power'] }
   ];
 
@@ -366,7 +366,7 @@ export default function UnitConverterApp() {
       fuel: { mass: 1, length: 2, time: -2 }, archaic_length: { length: 1 },
       archaic_mass: { mass: 1 }, archaic_volume: { length: 3 }, archaic_area: { length: 2 },
       archaic_energy: { mass: 1, length: 2, time: -2 }, archaic_power: { mass: 1, length: 2, time: -3 },
-      typography: { length: 1 }, cooking: { length: 3 }
+      typography: { length: 1 }, cooking: { length: 3 }, paper_sizes: { length: 2 }
     };
     return (dimensionMap[category] || {}) as { [key: string]: number };
   };

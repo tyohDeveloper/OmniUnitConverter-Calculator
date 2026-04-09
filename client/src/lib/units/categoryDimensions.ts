@@ -71,6 +71,7 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   archaic_power: { name: 'Archaic Power', dimensions: { mass: 1, length: 2, time: -3 }, isBase: false },
   typography: { name: 'Typography', dimensions: { length: 1 }, isBase: false },
   cooking: { name: 'Cooking Measures', dimensions: { length: 3 }, isBase: false },
+  paper_sizes: { name: 'Paper Sizes', dimensions: { length: 2 }, isBase: false },
   beer_wine_volume: { name: 'Beer & Wine Volume', dimensions: { length: 3 }, isBase: false },
   data: { name: 'Data/Information', dimensions: {}, isBase: false },
   fuel_economy: { name: 'Fuel Economy', dimensions: { length: -2 }, isBase: false },
@@ -83,7 +84,7 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
 export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
   'archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power',
   'typography', 'cooking', 'beer_wine_volume', 'fuel', 'fuel_economy', 'lightbulb', 'rack_geometry', 'shipping',
-  'data', 'math'
+  'data', 'math', 'paper_sizes'
 ];
 
 export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [

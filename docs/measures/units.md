@@ -192,28 +192,28 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `ppt` | Parts per Trillion | Concentration | mol⋅L⁻¹ | 1e-12 |
 | `℧` | Mho | Conductance | kg⁻¹⋅m⁻²⋅s³⋅A² | 1 |
 | `S` | Siemens | Conductance | kg⁻¹⋅m⁻²⋅s³⋅A² | 1 |
-| `cp (imp)` | Cup (UK) | Cooking Measures | mL | 284.131 |
+| `cp (imp)` | Cup (Imperial) | Cooking Measures | mL | 284.131 |
 | `cp (JP)` | Cup (Japan) | Cooking Measures | mL | 200 |
 | `cp (M)` | Cup (Metric) | Cooking Measures | mL | 250 |
 | `cp (US)` | Cup (US) | Cooking Measures | mL | 236.588 |
 | `dash` | Dash | Cooking Measures | mL | 0.6 |
 | `drop` | Drop | Cooking Measures | mL | 0.05 |
 | `dsp` | Dessertspoon | Cooking Measures | mL | 10 |
-| `fl oz (imp)` | Fluid Ounce (UK) | Cooking Measures | mL | 28.4131 |
+| `fl oz (imp)` | Fluid Ounce (Imperial) | Cooking Measures | mL | 28.4131 |
 | `fl oz (US)` | Fluid Ounce (US) | Cooking Measures | mL | 29.5735 |
 | `gal (US)` | Gallon (US) | Cooking Measures | mL | 3785.411784 |
 | `jigger` | Jigger | Cooking Measures | mL | 44.3603 |
 | `L` | Litre | Cooking Measures | mL | 1000 |
 | `mL` | Millilitre | Cooking Measures | mL | 1 |
 | `pinch` | Pinch | Cooking Measures | mL | 0.3 |
-| `pt (imp)` | Pint (UK) | Cooking Measures | mL | 568.261 |
+| `pt (imp)` | Pint (Imperial) | Cooking Measures | mL | 568.261 |
 | `pt (US)` | Pint (US) | Cooking Measures | mL | 473.176 |
 | `qt (US)` | Quart (US) | Cooking Measures | mL | 946.353 |
 | `shot` | Shot (US) | Cooking Measures | mL | 44.3603 |
-| `tbsp (imp)` | Tablespoon (UK) | Cooking Measures | mL | 17.7582 |
+| `tbsp (imp)` | Tablespoon (Imperial) | Cooking Measures | mL | 17.7582 |
 | `tbsp (M)` | Tablespoon (Metric) | Cooking Measures | mL | 15 |
 | `tbsp (US)` | Tablespoon (US) | Cooking Measures | mL | 14.7868 |
-| `tsp (imp)` | Teaspoon (UK) | Cooking Measures | mL | 5.91939 |
+| `tsp (imp)` | Teaspoon (Imperial) | Cooking Measures | mL | 5.91939 |
 | `tsp (M)` | Teaspoon (Metric) | Cooking Measures | mL | 5 |
 | `tsp (US)` | Teaspoon (US) | Cooking Measures | mL | 4.92892 |
 | `b` | Barn | Cross-Section | m² | 1 |
@@ -400,7 +400,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `slug` | Slug | Mass | kg | 14.5939 |
 | `st` | Stone | Mass | kg | 6.35029318 |
 | `t` | Tonne | Mass | kg | 1000 |
-| `ton (imp)` | Long Ton (UK) | Mass | kg | 1016.05 |
+| `ton (imp)` | Long Ton (Imperial) | Mass | kg | 1016.05 |
 | `ton (US)` | Short Ton (US) | Mass | kg | 907.185 |
 | `g⋅m⋅s⁻¹` | g⋅m/s | Momentum | kg⋅m⋅s⁻¹ | 0.001 |
 | `kg⋅m⋅s⁻¹` | kg⋅m/s | Momentum | kg⋅m⋅s⁻¹ | 1 |

@@ -133,5 +133,6 @@
   "help-para-5": "L'app è un singolo file .html autonomo. Non fa riferimento ad altri file e non ha link. Puoi portarlo ovunque ci sia un browser e funzionerà. Non è necessaria rete o packaging. Ho anche fornito un repository GitHub con il progetto. È un progetto TypeScript/React standard sviluppato su Replit, ma non è un requisito. Sei libero di usare il file .html o il codice sorgente come preferisci.",
   "help-github-note": "Questo è l'unico collegamento ipertestuale o riferimento esterno nella distribuzione .html. Puoi cliccarlo o ignorarlo. Non fa parte dell'app.",
   "help-llm-note": "Nota: Questa app è stata costruita in gran parte con l'aiuto di un assistente AI. È stata testata e include unit test. Per quanto ne so, le conversioni sono corrette, ma verificatelo autonomamente per applicazioni critiche.",
-  "help-machine-translated": "(Questo testo è stato tradotto automaticamente. Per il testo originale, passa alla lingua «en».)"
+  "help-machine-translated": "(Questo testo è stato tradotto automaticamente. Per il testo originale, passa alla lingua «en».)",
+  "Paper Sizes": "Formati carta"
 }

@@ -303,21 +303,21 @@ One section per measurement category. Each row shows how many base SI units one 
 | `dash` | Dash | 0.6 mL |
 | `tsp (US)` | Teaspoon (US) | 4.92892 mL |
 | `tsp (M)` | Teaspoon (Metric) | 5 mL |
-| `tsp (imp)` | Teaspoon (UK) | 5.91939 mL |
+| `tsp (imp)` | Teaspoon (Imperial) | 5.91939 mL |
 | `dsp` | Dessertspoon | 10 mL |
 | `tbsp (US)` | Tablespoon (US) | 14.7868 mL |
 | `tbsp (M)` | Tablespoon (Metric) | 15 mL |
-| `tbsp (imp)` | Tablespoon (UK) | 17.7582 mL |
-| `fl oz (imp)` | Fluid Ounce (UK) | 28.4131 mL |
+| `tbsp (imp)` | Tablespoon (Imperial) | 17.7582 mL |
+| `fl oz (imp)` | Fluid Ounce (Imperial) | 28.4131 mL |
 | `fl oz (US)` | Fluid Ounce (US) | 29.5735 mL |
 | `shot` | Shot (US) | 44.3603 mL |
 | `jigger` | Jigger | 44.3603 mL |
 | `cp (JP)` | Cup (Japan) | 200 mL |
 | `cp (US)` | Cup (US) | 236.588 mL |
 | `cp (M)` | Cup (Metric) | 250 mL |
-| `cp (imp)` | Cup (UK) | 284.131 mL |
+| `cp (imp)` | Cup (Imperial) | 284.131 mL |
 | `pt (US)` | Pint (US) | 473.176 mL |
-| `pt (imp)` | Pint (UK) | 568.261 mL |
+| `pt (imp)` | Pint (Imperial) | 568.261 mL |
 | `qt (US)` | Quart (US) | 946.353 mL |
 | `L` | Litre | 1000 mL |
 | `gal (US)` | Gallon (US) | 3785.411784 mL |
@@ -620,7 +620,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `slug` | Slug | 14.5939 kg |
 | `ton (US)` | Short Ton (US) | 907.185 kg |
 | `t` | Tonne | 1000 kg |
-| `ton (imp)` | Long Ton (UK) | 1016.05 kg |
+| `ton (imp)` | Long Ton (Imperial) | 1016.05 kg |
 
 ### Momentum
 

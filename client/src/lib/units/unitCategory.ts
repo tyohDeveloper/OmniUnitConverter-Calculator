@@ -70,4 +70,5 @@ export type UnitCategory =
   | "archaic_energy"
   | "archaic_power"
   | "typography"
-  | "cooking";
+  | "cooking"
+  | "paper_sizes";

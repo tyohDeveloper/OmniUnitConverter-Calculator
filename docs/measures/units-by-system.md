@@ -407,17 +407,17 @@ One section per measurement system or tradition.
 | `pt (imp)` | Pint (Imp) | 5.6826125e-4 m³ |
 | `qt (imp)` | Quart (Imp) | 0.0011365225 m³ |
 | `gal (imp)` | Gallon (Imp) | 0.00454609 m³ |
-| `tsp (imp)` | Teaspoon (UK) | 5.91939 mL |
-| `tbsp (imp)` | Tablespoon (UK) | 17.7582 mL |
-| `fl oz (imp)` | Fluid Ounce (UK) | 28.4131 mL |
-| `cp (imp)` | Cup (UK) | 284.131 mL |
-| `pt (imp)` | Pint (UK) | 568.261 mL |
+| `tsp (imp)` | Teaspoon (Imperial) | 5.91939 mL |
+| `tbsp (imp)` | Tablespoon (Imperial) | 17.7582 mL |
+| `fl oz (imp)` | Fluid Ounce (Imperial) | 28.4131 mL |
+| `cp (imp)` | Cup (Imperial) | 284.131 mL |
+| `pt (imp)` | Pint (Imperial) | 568.261 mL |
 | `Imp gal⋅h⁻¹` | Imperial Gallon/hour | 1.2628027777777779e-6 m³⋅s⁻¹ |
 | `Imp gal⋅min⁻¹` | Imperial Gallon/minute | 7.576816666666667e-5 m³⋅s⁻¹ |
 | `Imp gal⋅s⁻¹` | Imperial Gallon/second | 0.00454609 m³⋅s⁻¹ |
 | `mpg (Imp)` | Miles/Gallon (Imp) | 0.354006 km⋅L⁻¹ |
 | `st` | Stone | 6.35029318 kg |
-| `ton (imp)` | Long Ton (UK) | 1016.05 kg |
+| `ton (imp)` | Long Ton (Imperial) | 1016.05 kg |
 | `ftm` | Fathom | 1.8288 m |
 | `tsp (imp)` | Teaspoon (Imp) | 5.91939e-6 m³ |
 | `tbsp (imp)` | Tablespoon (Imp) | 1.77582e-5 m³ |

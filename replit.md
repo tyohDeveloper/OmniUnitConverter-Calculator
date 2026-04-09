@@ -13,11 +13,11 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 - **Framework & Build System**: React 19 with TypeScript, Vite for building, Wouter for routing, and vite-plugin-singlefile for single-HTML production.
 - **UI Component System**: shadcn/ui (New York variant) based on Radix UI, styled with Tailwind CSS v4, supporting theming via CSS variables.
 - **State Management**: `useReducer`-based state modules (converterReducer, calculatorReducer, rpnReducer, uiPrefsReducer) composed via `ConverterContext`, using a one-file-per-concern structure for actions and selectors.
-- **Conversion Logic**: Client-side engine with unit data organized in 69 per-category JSON files. Supports dimensional analysis, metric prefix handling, and a wide range of unit categories.
+- **Conversion Logic**: Client-side engine with unit data organized in 70 per-category JSON files. Supports dimensional analysis, metric prefix handling, and a wide range of unit categories.
 
 ### Key Design Decisions
 - **Calculator Modes**: Supports a standard calculator mode with three input fields and a result, and an RPN (Reverse Polish Notation) mode with a 4-level stack, both offering unit-aware operations. RPN includes HP-inspired functions and an undo mechanism.
-- **Unit Categories**: Extensive categories including Math, Fuel Energy, Main Energy, Main Power, Archaic & Regional units, Photon/Light, Typography, and Cooking Measures.
+- **Unit Categories**: Extensive categories including Math, Fuel Energy, Main Energy, Main Power, Archaic & Regional units, Photon/Light, Typography, Cooking Measures, and Paper Sizes (ISO A/B, US, JIS B series — area-based).
 - **Type Safety**: End-to-end TypeScript with strict mode and Zod for schema validation.
 - **SI Prefix Handling**: Intelligent prefixing, including special handling for kilogram (kg) vs. gram (g), binary prefixes for data, and auto-switching for complex kg-based SI units.
 - **Scientific Notation**: Automatic display and input support for very small or very large numbers.

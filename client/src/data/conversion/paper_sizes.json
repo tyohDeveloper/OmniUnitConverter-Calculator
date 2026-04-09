@@ -1,0 +1,328 @@
+{
+  "id": "paper_sizes",
+  "name": "Paper Sizes",
+  "baseUnit": "square meter",
+  "baseSISymbol": "m²",
+  "units": [
+    {
+      "id": "a0",
+      "name": "A0",
+      "symbol": "A0",
+      "factor": 0.999949,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a1",
+      "name": "A1",
+      "symbol": "A1",
+      "factor": 0.499554,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a2",
+      "name": "A2",
+      "symbol": "A2",
+      "factor": 0.249480,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a3",
+      "name": "A3",
+      "symbol": "A3",
+      "factor": 0.124740,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a4",
+      "name": "A4",
+      "symbol": "A4",
+      "factor": 0.062370,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a5",
+      "name": "A5",
+      "symbol": "A5",
+      "factor": 0.031080,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a6",
+      "name": "A6",
+      "symbol": "A6",
+      "factor": 0.015540,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a7",
+      "name": "A7",
+      "symbol": "A7",
+      "factor": 0.007770,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a8",
+      "name": "A8",
+      "symbol": "A8",
+      "factor": 0.003848,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a9",
+      "name": "A9",
+      "symbol": "A9",
+      "factor": 0.001924,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "a10",
+      "name": "A10",
+      "symbol": "A10",
+      "factor": 0.000962,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b0",
+      "name": "B0",
+      "symbol": "B0",
+      "factor": 1.414000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b1",
+      "name": "B1",
+      "symbol": "B1",
+      "factor": 0.707000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b2",
+      "name": "B2",
+      "symbol": "B2",
+      "factor": 0.353500,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b3",
+      "name": "B3",
+      "symbol": "B3",
+      "factor": 0.176500,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b4",
+      "name": "B4",
+      "symbol": "B4",
+      "factor": 0.088250,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b5",
+      "name": "B5",
+      "symbol": "B5",
+      "factor": 0.044000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b6",
+      "name": "B6",
+      "symbol": "B6",
+      "factor": 0.022000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b7",
+      "name": "B7",
+      "symbol": "B7",
+      "factor": 0.011000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b8",
+      "name": "B8",
+      "symbol": "B8",
+      "factor": 0.005456,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b9",
+      "name": "B9",
+      "symbol": "B9",
+      "factor": 0.002728,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "b10",
+      "name": "B10",
+      "symbol": "B10",
+      "factor": 0.001364,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "us_letter",
+      "name": "Letter",
+      "symbol": "Letter",
+      "factor": 0.060322,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "us_legal",
+      "name": "Legal",
+      "symbol": "Legal",
+      "factor": 0.076774,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "us_tabloid",
+      "name": "Tabloid",
+      "symbol": "Tabloid",
+      "factor": 0.120645,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "us_executive",
+      "name": "Executive",
+      "symbol": "Exec",
+      "factor": 0.049094,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "us_statement",
+      "name": "Statement",
+      "symbol": "Statement",
+      "factor": 0.030161,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "us_photo_8x10",
+      "name": "8×10 (US Photo)",
+      "symbol": "8×10",
+      "factor": 0.051613,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "ansi_c",
+      "name": "ANSI C",
+      "symbol": "ANSI C",
+      "factor": 0.241290,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "ansi_d",
+      "name": "ANSI D",
+      "symbol": "ANSI D",
+      "factor": 0.482581,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "ansi_e",
+      "name": "ANSI E",
+      "symbol": "ANSI E",
+      "factor": 0.965161,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "jis_b0",
+      "name": "JIS B0",
+      "symbol": "JIS B0",
+      "factor": 1.499680,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b1",
+      "name": "JIS B1",
+      "symbol": "JIS B1",
+      "factor": 0.749840,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b2",
+      "name": "JIS B2",
+      "symbol": "JIS B2",
+      "factor": 0.374920,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b3",
+      "name": "JIS B3",
+      "symbol": "JIS B3",
+      "factor": 0.187460,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b4",
+      "name": "JIS B4",
+      "symbol": "JIS B4",
+      "factor": 0.093548,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b5",
+      "name": "JIS B5",
+      "symbol": "JIS B5",
+      "factor": 0.046774,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b6",
+      "name": "JIS B6",
+      "symbol": "JIS B6",
+      "factor": 0.023296,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b7",
+      "name": "JIS B7",
+      "symbol": "JIS B7",
+      "factor": 0.011648,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "jis_b8",
+      "name": "JIS B8",
+      "symbol": "JIS B8",
+      "factor": 0.005824,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
+    }
+  ]
+}

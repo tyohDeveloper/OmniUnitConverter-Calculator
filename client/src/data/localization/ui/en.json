@@ -133,5 +133,6 @@
   "help-para-5": "The app is a single, standalone .html file. It references no other files and has no links. You can bring it anywhere you have a browser, and it will work. No network or packaging needed. I've also provided a GitHub repository with the project. It's a bog-standard TypeScript/React project. I built it on Replit, but that's not required. You're free to use the .html file or the source code any way you want.",
   "help-github-note": "This is the only hyperlink or external reference in the .html distribution. You can click on it or not. It's not part of the app.",
   "help-llm-note": "Note: I used an AI assistant to build most of this. It has been tested and includes unit tests. To the best of my knowledge the conversions are correct, but your mileage may vary.",
-  "help-machine-translated": ""
+  "help-machine-translated": "",
+  "Paper Sizes": "Paper Sizes"
 }
