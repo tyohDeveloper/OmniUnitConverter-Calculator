@@ -178,14 +178,14 @@
     {
       "id": "l_gasoline",
       "name": "Litre of Gasoline (Petrol)",
-      "symbol": "L (gas)",
+      "symbol": "L (petrol)",
       "factor": 34200000,
       "unitType": "SI_BASE"
     },
     {
       "id": "kg_gasoline",
       "name": "Kilogram of Gasoline (Petrol)",
-      "symbol": "kg (gas)",
+      "symbol": "kg (petrol)",
       "factor": 45300000,
       "unitType": "SI_BASE"
     },
