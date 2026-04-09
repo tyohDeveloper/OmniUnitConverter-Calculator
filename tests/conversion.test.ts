@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { CONVERSION_DATA, PREFIXES, UnitCategory } from "@/lib/conversion-data";
+import { CONVERSION_DATA, PREFIXES, convert, UnitCategory } from "@/lib/conversion-data";
 
 describe("Conversion Data", () => {
   describe("PREFIXES", () => {
@@ -962,5 +962,92 @@ describe("US/Imperial Precision (NIST Standards)", () => {
       expect(agate).toBeDefined();
       expect(agate?.factor).toBeCloseTo(0.0254 / 14, 6);
     });
+  });
+});
+
+describe("Fuel Energy - Kilotonne & Megatonne of TNT", () => {
+  const fuelCategory = CONVERSION_DATA.find((c) => c.id === "fuel");
+  const kiloPrefix = PREFIXES.find((p) => p.id === "kilo");
+  const megaPrefix = PREFIXES.find((p) => p.id === "mega");
+  const nonePrefix = PREFIXES.find((p) => p.id === "none");
+
+  it("fuel category exists", () => {
+    expect(fuelCategory).toBeDefined();
+  });
+
+  it("t_tnt unit exists in fuel category", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    expect(tTnt).toBeDefined();
+    expect(tTnt?.name).toBe("Tonne of TNT");
+    expect(tTnt?.symbol).toBe("t (TNT)");
+    expect(tTnt?.factor).toBe(4184000000);
+  });
+
+  it("t_tnt has allowPrefixes enabled", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    expect(tTnt?.allowPrefixes).toBe(true);
+  });
+
+  it("kilo and mega prefixes exist with correct factors", () => {
+    expect(kiloPrefix?.factor).toBe(1e3);
+    expect(megaPrefix?.factor).toBe(1e6);
+  });
+
+  it("1 kilotonne of TNT = 1000 tonnes of TNT in joules (4.184e12 J)", () => {
+    const jouleUnit = fuelCategory?.units.find((u) => u.id === "j");
+    expect(jouleUnit).toBeDefined();
+
+    const siValue = convert(1, "t_tnt", "j", "fuel" as UnitCategory, kiloPrefix!.factor, nonePrefix!.factor);
+    expect(siValue).toBeCloseTo(4.184e12, 0);
+  });
+
+  it("1 megatonne of TNT = 1e6 tonnes of TNT in joules (4.184e15 J)", () => {
+    const siValue = convert(1, "t_tnt", "j", "fuel" as UnitCategory, megaPrefix!.factor, nonePrefix!.factor);
+    expect(siValue).toBeCloseTo(4.184e15, 0);
+  });
+
+  it("1 kilotonne of TNT = 1000 tonnes of TNT", () => {
+    const result = convert(1, "t_tnt", "t_tnt", "fuel" as UnitCategory, kiloPrefix!.factor, nonePrefix!.factor);
+    expect(result).toBeCloseTo(1000, 6);
+  });
+
+  it("1 megatonne of TNT = 1e6 tonnes of TNT", () => {
+    const result = convert(1, "t_tnt", "t_tnt", "fuel" as UnitCategory, megaPrefix!.factor, nonePrefix!.factor);
+    expect(result).toBeCloseTo(1e6, 0);
+  });
+
+  it("1 megatonne of TNT = 1000 kilotonnes of TNT", () => {
+    const result = convert(1, "t_tnt", "t_tnt", "fuel" as UnitCategory, megaPrefix!.factor, kiloPrefix!.factor);
+    expect(result).toBeCloseTo(1000, 6);
+  });
+
+  it("kilotonne factor: kilo * 4184000000 = 4.184e12 J", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    const kilotonneJoules = kiloPrefix!.factor * tTnt!.factor;
+    expect(kilotonneJoules).toBeCloseTo(4.184e12, 0);
+  });
+
+  it("megatonne factor: mega * 4184000000 = 4.184e15 J", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    const megatonneJoules = megaPrefix!.factor * tTnt!.factor;
+    expect(megatonneJoules).toBeCloseTo(4.184e15, 0);
+  });
+
+  it("display symbol for kilotonne of TNT is 'kt (TNT)'", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    expect(tTnt).toBeDefined();
+    const prefixSymbol = kiloPrefix!.symbol;
+    const unitSymbol = tTnt!.symbol;
+    const displaySymbol = prefixSymbol + unitSymbol;
+    expect(displaySymbol).toBe("kt (TNT)");
+  });
+
+  it("display symbol for megatonne of TNT is 'Mt (TNT)'", () => {
+    const tTnt = fuelCategory?.units.find((u) => u.id === "t_tnt");
+    expect(tTnt).toBeDefined();
+    const prefixSymbol = megaPrefix!.symbol;
+    const unitSymbol = tTnt!.symbol;
+    const displaySymbol = prefixSymbol + unitSymbol;
+    expect(displaySymbol).toBe("Mt (TNT)");
   });
 });

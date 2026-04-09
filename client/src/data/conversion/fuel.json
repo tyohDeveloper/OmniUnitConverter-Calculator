@@ -324,6 +324,7 @@
       "name": "Tonne of TNT",
       "symbol": "t (TNT)",
       "factor": 4184000000,
+      "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "DOMAIN"
     },
