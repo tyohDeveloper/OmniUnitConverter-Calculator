@@ -175,14 +175,14 @@
     },
     {
       "id": "peck_us",
-      "name": "Peck (US)",
+      "name": "Peck",
       "symbol": "pk",
       "factor": 8.80977,
       "unitType": "US_COMMON_DRY"
     },
     {
       "id": "bushel_us",
-      "name": "Bushel (US)",
+      "name": "Bushel",
       "symbol": "bu",
       "factor": 35.2391,
       "unitType": "US_COMMON_DRY"
@@ -196,7 +196,7 @@
     },
     {
       "id": "cord_us",
-      "name": "Cord (US)",
+      "name": "Cord",
       "symbol": "cord",
       "factor": 3624.56,
       "unitType": "US_COMMON"
