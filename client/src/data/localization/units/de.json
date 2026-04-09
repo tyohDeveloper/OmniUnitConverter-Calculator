@@ -404,7 +404,6 @@
   "Gigabyte": "Gigabyte",
   "Terabyte": "Terabyte",
   "Point": "Punkt",
-  "Didot": "Didot",
   "Cicero": "Cicero",
   "Twip": "Twip",
   "Newton-meter": "Newtonmeter",
@@ -477,5 +476,8 @@
   "JIS B5": "JIS B5",
   "JIS B6": "JIS B6",
   "JIS B7": "JIS B7",
-  "JIS B8": "JIS B8"
+  "JIS B8": "JIS B8",
+  "Didot Point": "Didot",
+  "Ligne": "Ligne",
+  "Agate": "Agate"
 }

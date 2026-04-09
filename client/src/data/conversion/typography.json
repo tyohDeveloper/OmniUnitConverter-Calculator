@@ -62,6 +62,14 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "agate",
+      "name": "Agate",
+      "symbol": "ag",
+      "factor": 0.0018143,
+      "unitType": "US_COMMON",
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
+    },
+    {
       "id": "ligne",
       "name": "Ligne",
       "symbol": "‴",

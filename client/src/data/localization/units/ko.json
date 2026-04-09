@@ -404,7 +404,6 @@
   "Gigabyte": "기가바이트",
   "Terabyte": "테라바이트",
   "Point": "포인트",
-  "Didot": "디도",
   "Cicero": "시세로",
   "Twip": "트윕",
   "Newton-meter": "뉴턴미터",
@@ -477,5 +476,8 @@
   "JIS B5": "JIS B5",
   "JIS B6": "JIS B6",
   "JIS B7": "JIS B7",
-  "JIS B8": "JIS B8"
+  "JIS B8": "JIS B8",
+  "Didot Point": "디도",
+  "Ligne": "Ligne",
+  "Agate": "Agate"
 }

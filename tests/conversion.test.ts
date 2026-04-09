@@ -937,4 +937,30 @@ describe("US/Imperial Precision (NIST Standards)", () => {
       expect(gph?.factor).toBeCloseTo(exactGPH, 15);
     });
   });
+
+  describe("Typography Category", () => {
+    const typographyCategory = CONVERSION_DATA.find((c) => c.id === "typography");
+
+    it("typography category exists in CONVERSION_DATA", () => {
+      expect(typographyCategory).toBeDefined();
+    });
+
+    it("Ligne has correct factor (~2.2558 mm)", () => {
+      const ligne = typographyCategory?.units.find((u) => u.id === "ligne");
+      expect(ligne).toBeDefined();
+      expect(ligne?.factor).toBeCloseTo(0.0022558, 7);
+    });
+
+    it("Didot Point has correct factor (~0.376065 mm)", () => {
+      const didot = typographyCategory?.units.find((u) => u.id === "didot");
+      expect(didot).toBeDefined();
+      expect(didot?.factor).toBeCloseTo(0.000376065, 9);
+    });
+
+    it("Agate has correct factor (1/14 inch ≈ 1.8143 mm)", () => {
+      const agate = typographyCategory?.units.find((u) => u.id === "agate");
+      expect(agate).toBeDefined();
+      expect(agate?.factor).toBeCloseTo(0.0254 / 14, 6);
+    });
+  });
 });

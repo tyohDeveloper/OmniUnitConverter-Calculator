@@ -404,7 +404,6 @@
   "Gigabyte": "Гигабайт",
   "Terabyte": "Терабайт",
   "Point": "Пункт",
-  "Didot": "Дидо",
   "Cicero": "Цицеро",
   "Twip": "Твип",
   "Newton-meter": "Ньютон-метр",
@@ -477,5 +476,8 @@
   "JIS B5": "JIS B5",
   "JIS B6": "JIS B6",
   "JIS B7": "JIS B7",
-  "JIS B8": "JIS B8"
+  "JIS B8": "JIS B8",
+  "Didot Point": "Дидо",
+  "Ligne": "Ligne",
+  "Agate": "Agate"
 }

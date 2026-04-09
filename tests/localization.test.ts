@@ -156,6 +156,17 @@ describe('Language Localization', () => {
       expect(translate('Cooking Measures', 'ko', UI_TRANSLATIONS)).toBe('요리 계량');
     });
 
+    it('should have unit name entries for typography units across all locales', () => {
+      const typographyUnits = ['Ligne', 'Didot Point', 'Agate'];
+      const locales = ['en', 'en-us', 'de', 'fr', 'es', 'it', 'pt', 'ar', 'ru', 'ja', 'ko', 'zh'];
+      for (const unit of typographyUnits) {
+        for (const locale of locales) {
+          const entry = UNIT_NAME_TRANSLATIONS[locale]?.[unit];
+          expect(entry, `${unit} missing in ${locale}`).toBeTruthy();
+        }
+      }
+    });
+
     it('should translate fuel and economy categories', () => {
       expect(translate('Fuel Energy', 'de', UI_TRANSLATIONS)).toBe('Brennstoffenergie');
       expect(translate('Fuel Economy', 'ko', UI_TRANSLATIONS)).toBe('연비');
