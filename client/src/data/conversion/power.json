@@ -28,7 +28,7 @@
     },
     {
       "id": "hp",
-      "name": "Horsepower",
+      "name": "Horsepower (Mechanical)",
       "symbol": "hp",
       "factor": 745.7,
       "unitType": "US_COMMON"

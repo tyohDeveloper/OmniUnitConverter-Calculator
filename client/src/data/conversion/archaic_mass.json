@@ -161,7 +161,7 @@
     },
     {
       "id": "pennyweight",
-      "name": "Pennyweight (Imperial)",
+      "name": "Pennyweight (Troy)",
       "symbol": "dwt",
       "factor": 0.00155517,
       "unitType": "IMPERIAL"

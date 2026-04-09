@@ -29,7 +29,7 @@
     },
     {
       "id": "btu",
-      "name": "BTU",
+      "name": "BTU (IT)",
       "symbol": "BTU",
       "factor": 1055.06,
       "unitType": "US_COMMON"
@@ -57,9 +57,9 @@
     },
     {
       "id": "therm",
-      "name": "Therm",
+      "name": "Therm (US)",
       "symbol": "therm",
-      "factor": 105506000,
+      "factor": 105480400,
       "unitType": "US_COMMON"
     },
     {

@@ -463,9 +463,9 @@ describe("Energy & Power Categories", () => {
       expect(kwh?.factor).toBe(3.6e6);
     });
 
-    it("should have therm with correct factor (105.506 MJ)", () => {
+    it("should have therm with correct factor (105.4804 MJ US Therm)", () => {
       const therm = energyCategory?.units.find((u) => u.id === "therm");
-      expect(therm?.factor).toBeCloseTo(1.05506e8, -3);
+      expect(therm?.factor).toBeCloseTo(1.054804e8, -3);
     });
 
     it("should have barrel of oil equivalent with correct factor (6.1 GJ)", () => {
