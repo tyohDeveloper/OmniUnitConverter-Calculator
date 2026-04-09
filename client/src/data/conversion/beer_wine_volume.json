@@ -13,34 +13,6 @@
       "unitType": "SI_BASE"
     },
     {
-      "id": "tsp",
-      "name": "Teaspoon (US)",
-      "symbol": "tsp (US)",
-      "factor": 0.00000492892,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "tsp_imp",
-      "name": "Teaspoon (Imp)",
-      "symbol": "tsp (imp)",
-      "factor": 0.00000591939,
-      "unitType": "IMPERIAL"
-    },
-    {
-      "id": "tbsp",
-      "name": "Tablespoon (US)",
-      "symbol": "tbsp (US)",
-      "factor": 0.0000147868,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "tbsp_imp",
-      "name": "Tablespoon (Imp)",
-      "symbol": "tbsp (imp)",
-      "factor": 0.0000177582,
-      "unitType": "IMPERIAL"
-    },
-    {
       "id": "floz_imp",
       "name": "Fluid Ounce (Imp)",
       "symbol": "fl oz (imp)",
@@ -196,31 +168,10 @@
       "unitType": "US_COMMON"
     },
     {
-      "id": "bbl",
-      "name": "Barrel (Oil)",
-      "symbol": "bbl (oil)",
-      "factor": 0.158987,
-      "unitType": "US_COMMON"
-    },
-    {
       "id": "yd3",
       "name": "Cubic Yard",
       "symbol": "yd³",
       "factor": 0.764555,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "ac_ft",
-      "name": "Acre-foot",
-      "symbol": "ac⋅ft",
-      "factor": 1233.48184,
-      "unitType": "US_COMMON"
-    },
-    {
-      "id": "mi3",
-      "name": "Cubic Mile",
-      "symbol": "mi³",
-      "factor": 4168180000,
       "unitType": "US_COMMON"
     }
   ]
