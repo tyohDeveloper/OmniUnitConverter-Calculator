@@ -10,42 +10,48 @@
       "symbol": "lm",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "incandescent_w",
       "name": "Incandescent Bulb (watts)",
       "symbol": "W (inc)",
       "factor": 15,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "halogen_w",
       "name": "Halogen Bulb (watts)",
       "symbol": "W (hal)",
       "factor": 20,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "fluorescent_w",
       "name": "Fluorescent Bulb (watts)",
       "symbol": "W (CFL)",
       "factor": 70,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "led_w",
       "name": "LED Bulb (watts)",
       "symbol": "W (LED)",
       "factor": 95,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "sodium_w",
       "name": "Sodium Vapor Lamp (watts)",
       "symbol": "W (Na)",
       "factor": 100,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

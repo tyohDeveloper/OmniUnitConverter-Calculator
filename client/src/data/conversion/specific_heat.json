@@ -9,7 +9,8 @@
       "name": "J/(kg⋅K)",
       "symbol": "J⋅kg⁻¹⋅K⁻¹",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "jgk",
@@ -17,28 +18,32 @@
       "symbol": "J⋅g⁻¹⋅K⁻¹",
       "factor": 1000,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kjkgk",
       "name": "kJ/(kg⋅K)",
       "symbol": "kJ⋅kg⁻¹⋅K⁻¹",
       "factor": 1000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "cal_gC",
       "name": "cal/(g⋅°C)",
       "symbol": "cal⋅g⁻¹⋅°C⁻¹",
       "factor": 4184,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "btu_lbF",
       "name": "BTU/(lb⋅°F)",
       "symbol": "BTU⋅lb⁻¹⋅°F⁻¹",
       "factor": 4186.8,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

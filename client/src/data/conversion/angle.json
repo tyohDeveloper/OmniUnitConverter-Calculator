@@ -10,42 +10,48 @@
       "symbol": "rad",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "arcsec",
       "name": "Arcsecond",
       "symbol": "″",
       "factor": 0.00000484813681109536,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "arcmin",
       "name": "Arcminute",
       "symbol": "′",
       "factor": 0.0002908882086657216,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "grad",
       "name": "Gradian",
       "symbol": "grad",
       "factor": 0.015707963267948967,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "deg",
       "name": "Degree",
       "symbol": "°",
       "factor": 0.017453292519943295,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "deg_dms",
       "name": "Degree (DMS)",
       "symbol": "° ′ ″",
       "factor": 0.017453292519943295,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

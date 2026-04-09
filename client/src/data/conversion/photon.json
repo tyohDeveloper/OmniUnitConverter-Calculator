@@ -10,7 +10,8 @@
       "symbol": "eV",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "J_photon",
@@ -18,7 +19,8 @@
       "symbol": "J",
       "factor": 6241509074000000000,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "nu",
@@ -26,7 +28,8 @@
       "symbol": "ν",
       "factor": 4.135667696e-15,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "lambda",
@@ -35,7 +38,8 @@
       "factor": 0.000001239841984,
       "allowPrefixes": true,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

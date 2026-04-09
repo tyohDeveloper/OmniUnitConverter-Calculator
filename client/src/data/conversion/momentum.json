@@ -9,7 +9,8 @@
       "name": "kg⋅m/s",
       "symbol": "kg⋅m⋅s⁻¹",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "gms",
@@ -17,28 +18,32 @@
       "symbol": "g⋅m⋅s⁻¹",
       "factor": 0.001,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "lbfts",
       "name": "lb⋅ft/s",
       "symbol": "lb⋅ft⋅s⁻¹",
       "factor": 0.138255,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "ns",
       "name": "Newton-second",
       "symbol": "N⋅s",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "slugfts",
       "name": "slug⋅ft/s",
       "symbol": "slug⋅ft⋅s⁻¹",
       "factor": 4.44822,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

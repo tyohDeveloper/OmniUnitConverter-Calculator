@@ -10,42 +10,48 @@
       "symbol": "m⋅s⁻¹",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kmh",
       "name": "Kilometer/Hour",
       "symbol": "km⋅h⁻¹",
       "factor": 0.2777777777777778,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "mph",
       "name": "Mile/Hour",
       "symbol": "mph",
       "factor": 0.44704,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "kn",
       "name": "Knot",
       "symbol": "kn",
       "factor": 0.514444,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "mach",
       "name": "Mach",
       "symbol": "Ma",
       "factor": 343,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "c",
       "name": "Speed of Light",
       "symbol": "c",
       "factor": 299792458,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

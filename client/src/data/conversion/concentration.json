@@ -10,49 +10,56 @@
       "symbol": "mol⋅L⁻¹",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ppt",
       "name": "Parts per Trillion",
       "symbol": "ppt",
       "factor": 1e-12,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ppb",
       "name": "Parts per Billion",
       "symbol": "ppb",
       "factor": 1e-9,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ppm",
       "name": "Parts per Million",
       "symbol": "ppm",
       "factor": 0.000001,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "mol_m3",
       "name": "Mole/m³",
       "symbol": "mol⋅m⁻³",
       "factor": 0.001,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "permille",
       "name": "Per Mille",
       "symbol": "‰",
       "factor": 0.001,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "percent",
       "name": "Percent",
       "symbol": "%",
       "factor": 0.01,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

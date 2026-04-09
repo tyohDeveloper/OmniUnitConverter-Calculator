@@ -10,7 +10,8 @@
       "symbol": "N",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "dyn",
@@ -18,28 +19,32 @@
       "symbol": "dyn",
       "factor": 0.00001,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "lbf",
       "name": "Pound-force",
       "symbol": "lbf",
       "factor": 4.44822,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "kgf",
       "name": "Kilogram-force",
       "symbol": "kgf",
       "factor": 9.80665,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kip",
       "name": "Kip",
       "symbol": "kip",
       "factor": 4448.22,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

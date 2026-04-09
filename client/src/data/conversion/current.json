@@ -10,7 +10,8 @@
       "symbol": "A",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "statA",
@@ -18,7 +19,8 @@
       "symbol": "statA",
       "factor": 3.33564e-10,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "biot",
@@ -26,7 +28,8 @@
       "symbol": "Bi",
       "factor": 10,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

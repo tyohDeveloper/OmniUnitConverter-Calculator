@@ -10,35 +10,40 @@
       "symbol": "W",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "btu_h",
       "name": "BTU per Hour",
       "symbol": "BTU⋅h⁻¹",
       "factor": 0.293071,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "hp_m",
       "name": "Metric HP",
       "symbol": "hp (M)",
       "factor": 735.499,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "hp",
       "name": "Horsepower (Mechanical)",
       "symbol": "hp",
       "factor": 745.7,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "ton_ref",
       "name": "Ton of Refrigeration",
       "symbol": "TR",
       "factor": 3516.85,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

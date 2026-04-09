@@ -10,84 +10,96 @@
       "symbol": "m³",
       "factor": 1,
       "allowPrefixes": false,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "floz_imp",
       "name": "Fluid Ounce (Imp)",
       "symbol": "fl oz (imp)",
       "factor": 0.0000284130625,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "floz",
       "name": "Fluid Ounce (US)",
       "symbol": "fl oz (US)",
       "factor": 0.0000295735,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "glass_wine",
       "name": "Glass (Wine)",
       "symbol": "glass",
       "factor": 0.00015,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "cup",
       "name": "Cup (US)",
       "symbol": "cp (US)",
       "factor": 0.000236588,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "bottle_beer_small",
       "name": "Bottle (Beer, small)",
       "symbol": "btl (small)",
       "factor": 0.00035,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "bottle_beer_longneck",
       "name": "Bottle (Beer, longneck)",
       "symbol": "btl (beer, US)",
       "factor": 0.000354882,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "pt",
       "name": "Pint (US)",
       "symbol": "pt (US)",
       "factor": 0.000473176,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "bottle_beer_large",
       "name": "Bottle (Beer, large)",
       "symbol": "btl (large)",
       "factor": 0.0005,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "pt_imp",
       "name": "Pint (Imp)",
       "symbol": "pt (imp)",
       "factor": 0.00056826125,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "bottle_wine",
       "name": "Bottle (Wine)",
       "symbol": "btl (wine)",
       "factor": 0.00075,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "qt",
       "name": "Quart (US)",
       "symbol": "qt (US)",
       "factor": 0.000946353,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "l",
@@ -95,84 +107,96 @@
       "symbol": "L",
       "factor": 0.001,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "qt_imp",
       "name": "Quart (Imp)",
       "symbol": "qt (imp)",
       "factor": 0.0011365225,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "magnum_wine",
       "name": "Magnum (Wine)",
       "symbol": "mag",
       "factor": 0.0015,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal",
       "name": "Gallon (US)",
       "symbol": "gal (US)",
       "factor": 0.003785411784,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "gal_imp",
       "name": "Gallon (Imp)",
       "symbol": "gal (imp)",
       "factor": 0.00454609,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "mini_keg",
       "name": "Mini Keg (Beer)",
       "symbol": "mini keg",
       "factor": 0.005,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "pony_keg",
       "name": "Pony Keg (Beer)",
       "symbol": "pony",
       "factor": 0.0147,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "ft3",
       "name": "Cubic Foot",
       "symbol": "ft³",
       "factor": 0.0283168,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "bu",
       "name": "Bushel",
       "symbol": "bu",
       "factor": 0.0352391,
-      "unitType": "US_COMMON_DRY"
+      "unitType": "US_COMMON_DRY",
+      "measurementSystem": "US_CUSTOMARY_DRY"
     },
     {
       "id": "keg_beer",
       "name": "Keg (Beer)",
       "symbol": "keg",
       "factor": 0.0587,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "bbl_beer",
       "name": "Barrel (Beer)",
       "symbol": "bbl (beer)",
       "factor": 0.117,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "yd3",
       "name": "Cubic Yard",
       "symbol": "yd³",
       "factor": 0.764555,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

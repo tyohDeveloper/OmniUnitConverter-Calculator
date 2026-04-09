@@ -63,6 +63,7 @@ const EXPORT_COUNT_RULE_DIRS = [
  * - preferredRepresentations.ts: exports interface + constant (co-located by design)
  * - languageTypes.ts:           exports constant + derived type (co-located by design)
  * - unitDefinition.ts:          type definitions only (UnitDefinition + CategoryDefinition are coupled)
+ * - measurementSystem.ts:       data-only const object + derived type (co-located by design)
  */
 const EXPORT_RULE_EXCLUDES = new Set([
   'index.ts', 'shared-types.ts', 'siDerivedUnits.ts', 'categoryDimensions.ts',
@@ -74,6 +75,7 @@ const EXPORT_RULE_EXCLUDES = new Set([
   'queryClient.ts', 'test-utils.ts', 'translateUi.ts', 'translateUnit.ts',
   'siBaseUnits.ts', 'siDerivedUnitsCatalog.ts', 'nonSiUnitsCatalog.ts',
   'preferredRepresentations.ts', 'languageTypes.ts', 'unitDefinition.ts',
+  'measurementSystem.ts',
 ]);
 
 /**
@@ -112,6 +114,7 @@ const FUNCTION_RULE_DATA_EXCLUDES = new Set([
   'localization.ts',
   'siBaseUnits.ts', 'siDerivedUnitsCatalog.ts', 'nonSiUnitsCatalog.ts',
   'preferredRepresentations.ts', 'languageTypes.ts',
+  'measurementSystem.ts',
 ]);
 
 const MAX_FUNCTION_LINES = 20;

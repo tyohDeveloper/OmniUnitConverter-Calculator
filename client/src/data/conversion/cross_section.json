@@ -10,28 +10,32 @@
       "symbol": "b",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "fm2",
       "name": "Square Femtometer",
       "symbol": "fm²",
       "factor": 0.01,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "cm2_cs",
       "name": "Square Centimeter",
       "symbol": "cm²",
       "factor": 1e+24,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "m2_cs",
       "name": "Square Meter",
       "symbol": "m²",
       "factor": 1e+28,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

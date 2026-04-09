@@ -10,7 +10,8 @@
       "symbol": "J",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "cal",
@@ -18,14 +19,16 @@
       "symbol": "cal",
       "factor": 4.184,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "btu",
       "name": "BTU",
       "symbol": "BTU",
       "factor": 1055.06,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "wh",
@@ -33,280 +36,320 @@
       "symbol": "Wh",
       "factor": 3600,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kg_tnt",
       "name": "Kilogram of TNT",
       "symbol": "kg (TNT)",
       "factor": 4184000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_dynamite",
       "name": "Kilogram of Dynamite",
       "symbol": "kg (dyn)",
       "factor": 7500000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_ethanol",
       "name": "Pound of Ethanol",
       "symbol": "lb (ethanol)",
       "factor": 12156289.972875144,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_ethanol",
       "name": "Gallon of Ethanol (US)",
       "symbol": "gal (ethanol)",
       "factor": 80250692,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_ethanol",
       "name": "Litre of Ethanol",
       "symbol": "L (ethanol)",
       "factor": 21200000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_ethanol",
       "name": "Kilogram of Ethanol",
       "symbol": "kg (ethanol)",
       "factor": 26800000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_e85",
       "name": "Pound of E-85",
       "symbol": "lb (E-85)",
       "factor": 13244912.95552068,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_e85",
       "name": "Gallon of E-85 (US)",
       "symbol": "gal (E-85)",
       "factor": 86307348,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_e85",
       "name": "Litre of E-85",
       "symbol": "L (E-85)",
       "factor": 22800000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_e85",
       "name": "Kilogram of E-85",
       "symbol": "kg (E-85)",
       "factor": 29200000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_kerosene",
       "name": "Pound of Kerosene (Paraffin)",
       "symbol": "lb (karo)",
       "factor": 19640572.9785632,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_kerosene",
       "name": "Gallon of Kerosene (US)",
       "symbol": "gal (karo)",
       "factor": 132867891,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_kerosene",
       "name": "Litre of Kerosene (Paraffin)",
       "symbol": "L (para)",
       "factor": 35100000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_kerosene",
       "name": "Kilogram of Kerosene (Paraffin)",
       "symbol": "kg (para)",
       "factor": 43300000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_jetfuel",
       "name": "Pound of Jet Fuel",
       "symbol": "lb (jet)",
       "factor": 19731291.56045033,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_jetfuel",
       "name": "Gallon of Jet Fuel (US)",
       "symbol": "gal (jet)",
       "factor": 132489350,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_jetfuel",
       "name": "Litre of Jet Fuel (Jet A)",
       "symbol": "L (jet)",
       "factor": 35000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_jetfuel",
       "name": "Kilogram of Jet Fuel",
       "symbol": "kg (jet)",
       "factor": 43500000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_gasoline",
       "name": "Pound of Gasoline (Petrol)",
       "symbol": "lb (gas)",
       "factor": 20547758.79743448,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_gasoline",
       "name": "Gallon of Gasoline (US)",
       "symbol": "gal (gas)",
       "factor": 129461022,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_gasoline",
       "name": "Litre of Gasoline (Petrol)",
       "symbol": "L (petrol)",
       "factor": 34200000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_gasoline",
       "name": "Kilogram of Gasoline (Petrol)",
       "symbol": "kg (petrol)",
       "factor": 45300000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_diesel",
       "name": "Pound of Diesel",
       "symbol": "lb (diesel)",
       "factor": 20593118.088378046,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_diesel",
       "name": "Gallon of Diesel (US)",
       "symbol": "gal (diesel)",
       "factor": 146116826,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_diesel",
       "name": "Litre of Diesel",
       "symbol": "L (diesel)",
       "factor": 38600000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_diesel",
       "name": "Kilogram of Diesel",
       "symbol": "kg (diesel)",
       "factor": 45400000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_lng",
       "name": "Pound of LNG",
       "symbol": "lb (LNG)",
       "factor": 20411680.92460379,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_lng",
       "name": "Gallon of LNG (US)",
       "symbol": "gal (LNG)",
       "factor": 76843823,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_lng",
       "name": "Litre of LNG",
       "symbol": "L (LNG)",
       "factor": 20300000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_lng",
       "name": "Kilogram of LNG",
       "symbol": "kg (LNG)",
       "factor": 45000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "lb_propane",
       "name": "Pound of Propane",
       "symbol": "lb (propane)",
       "factor": 22815723.34461268,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "gal_propane",
       "name": "Gallon of Propane (US)",
       "symbol": "gal (propane)",
       "factor": 97285037,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "l_propane",
       "name": "Litre of Propane (LPG)",
       "symbol": "L (propane)",
       "factor": 25700000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "kg_propane",
       "name": "Kilogram of Propane",
       "symbol": "kg (propane)",
       "factor": 50300000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "therm",
       "name": "Therm (US)",
       "symbol": "therm",
       "factor": 105505600,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "t_tnt",
       "name": "Tonne of TNT",
       "symbol": "t (TNT)",
       "factor": 4184000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "t_dynamite",
       "name": "Tonne of Dynamite",
       "symbol": "t (dyn)",
       "factor": 7500000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "tce",
       "name": "Tonne of Coal Equivalent",
       "symbol": "tce",
       "factor": 29307600000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "toe",
       "name": "Tonne of Oil Equivalent",
       "symbol": "toe",
       "factor": 41868000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     }
   ]
 }

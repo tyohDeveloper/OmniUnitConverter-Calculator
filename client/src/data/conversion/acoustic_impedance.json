@@ -10,21 +10,24 @@
       "symbol": "rayl",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "pa_s_per_m",
       "name": "Pascal-second per Meter",
       "symbol": "Pa⋅s⋅m⁻¹",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "mrayl",
       "name": "Megarayl",
       "symbol": "MRayl",
       "factor": 1000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

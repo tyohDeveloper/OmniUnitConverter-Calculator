@@ -9,7 +9,8 @@
       "name": "Kilogram",
       "symbol": "kg",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "g",
@@ -17,182 +18,208 @@
       "symbol": "g",
       "factor": 0.001,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "fun_jp",
       "name": "Fun (Japan)",
       "symbol": "fun",
       "factor": 0.000375,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "momme_jp",
       "name": "Momme (Japan)",
       "symbol": "momme",
       "factor": 0.00375,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "ryo_jp",
       "name": "Ryō (Japan)",
       "symbol": "ryo",
       "factor": 0.0375,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "kan_jp",
       "name": "Kan (Japan)",
       "symbol": "kan",
       "factor": 3.75,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "don_kr",
       "name": "Don (Korea)",
       "symbol": "don",
       "factor": 0.00375,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "geun_kr",
       "name": "Geun (Korea)",
       "symbol": "geun",
       "factor": 0.6,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "mace_cn",
       "name": "Mace (China, PRC)",
       "symbol": "mace",
       "factor": 0.005,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "tael_cn",
       "name": "Tael (China, PRC)",
       "symbol": "tael",
       "factor": 0.05,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "jin_cn",
       "name": "Jin (China, PRC)",
       "symbol": "jin",
       "factor": 0.5,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "dan_cn",
       "name": "Dan (China, PRC)",
       "symbol": "dan",
       "factor": 50,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "catty_hk",
       "name": "Catty (HK/Traditional)",
       "symbol": "catty",
       "factor": 0.60478982,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "HONG_KONG"
     },
     {
       "id": "picul_hk",
       "name": "Picul (HK/Traditional)",
       "symbol": "picul",
       "factor": 60.478982,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "HONG_KONG"
     },
     {
       "id": "ratti",
       "name": "Ratti (South Asia)",
       "symbol": "ratti",
       "factor": 0.0001215,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "tola",
       "name": "Tola (South Asia)",
       "symbol": "tola",
       "factor": 0.0116638,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "seer",
       "name": "Seer (South Asia)",
       "symbol": "seer",
       "factor": 0.9331,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "maund",
       "name": "Maund (South Asia)",
       "symbol": "maund",
       "factor": 37.324,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "baht_th",
       "name": "Baht (Thailand)",
       "symbol": "baht",
       "factor": 0.015244,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "THAI"
     },
     {
       "id": "carat",
       "name": "Carat (Metric)",
       "symbol": "ct",
       "factor": 0.0002,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "pfund_de",
       "name": "Pfund (German)",
       "symbol": "pfund",
       "factor": 0.4677,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "GERMAN"
     },
     {
       "id": "livre_fr",
       "name": "Livre (French)",
       "symbol": "livre",
       "factor": 0.4895,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "FRENCH_TRADITIONAL"
     },
     {
       "id": "pennyweight",
       "name": "Pennyweight (Troy)",
       "symbol": "dwt",
       "factor": 0.00155517,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "TROY"
     },
     {
       "id": "grain",
       "name": "Grain",
       "symbol": "gr",
       "factor": 0.00006479891,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "TROY"
     },
     {
       "id": "scruple",
       "name": "Scruple (Apothecaries')",
       "symbol": "s ap",
       "factor": 0.001296,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "APOTHECARIES"
     },
     {
       "id": "dram",
       "name": "Dram (Avoirdupois, US)",
       "symbol": "dr",
       "factor": 0.001771845,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "dram_ap",
       "name": "Dram (Apothecaries')",
       "symbol": "dr ap",
       "factor": 0.0038879346,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "APOTHECARIES"
     }
   ]
 }

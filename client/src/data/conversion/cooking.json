@@ -10,154 +10,176 @@
       "symbol": "mL",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "drop",
       "name": "Drop",
       "symbol": "drop",
       "factor": 0.05,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "pinch",
       "name": "Pinch",
       "symbol": "pinch",
       "factor": 0.3,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "dash",
       "name": "Dash",
       "symbol": "dash",
       "factor": 0.6,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tsp_us",
       "name": "Teaspoon (US)",
       "symbol": "tsp (US)",
       "factor": 4.92892,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tsp_metric",
       "name": "Teaspoon (Metric)",
       "symbol": "tsp (M)",
       "factor": 5,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tsp_uk",
       "name": "Teaspoon (UK)",
       "symbol": "tsp (imp)",
       "factor": 5.91939,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "dsp",
       "name": "Dessertspoon",
       "symbol": "dsp",
       "factor": 10,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tbsp_us",
       "name": "Tablespoon (US)",
       "symbol": "tbsp (US)",
       "factor": 14.7868,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tbsp_metric",
       "name": "Tablespoon (Metric)",
       "symbol": "tbsp (M)",
       "factor": 15,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tbsp_uk",
       "name": "Tablespoon (UK)",
       "symbol": "tbsp (imp)",
       "factor": 17.7582,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "fl_oz_uk",
       "name": "Fluid Ounce (UK)",
       "symbol": "fl oz (imp)",
       "factor": 28.4131,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "fl_oz_us",
       "name": "Fluid Ounce (US)",
       "symbol": "fl oz (US)",
       "factor": 29.5735,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "shot",
       "name": "Shot (US)",
       "symbol": "shot",
       "factor": 44.3603,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "jigger",
       "name": "Jigger",
       "symbol": "jigger",
       "factor": 44.3603,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "cup_jp",
       "name": "Cup (Japan)",
       "symbol": "cp (JP)",
       "factor": 200,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "cup_us",
       "name": "Cup (US)",
       "symbol": "cp (US)",
       "factor": 236.588,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "cup_metric",
       "name": "Cup (Metric)",
       "symbol": "cp (M)",
       "factor": 250,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "cup_uk",
       "name": "Cup (UK)",
       "symbol": "cp (imp)",
       "factor": 284.131,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "pt_us",
       "name": "Pint (US)",
       "symbol": "pt (US)",
       "factor": 473.176,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "pt_uk",
       "name": "Pint (UK)",
       "symbol": "pt (imp)",
       "factor": 568.261,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "qt_us",
       "name": "Quart (US)",
       "symbol": "qt (US)",
       "factor": 946.353,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "l",
@@ -165,14 +187,16 @@
       "symbol": "L",
       "factor": 1000,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "gal_us",
       "name": "Gallon (US)",
       "symbol": "gal (US)",
       "factor": 3785.411784,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     }
   ]
 }

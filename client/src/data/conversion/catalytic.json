@@ -10,14 +10,16 @@
       "symbol": "kat",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "u",
       "name": "Enzyme Unit",
       "symbol": "U",
       "factor": 1.667e-8,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

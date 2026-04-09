@@ -10,7 +10,8 @@
       "symbol": "F",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "statf",
@@ -18,7 +19,8 @@
       "symbol": "statF",
       "factor": 1.11265e-12,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "abf",
@@ -26,7 +28,8 @@
       "symbol": "abF",
       "factor": 1e-9,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

@@ -9,28 +9,32 @@
       "name": "Pascal",
       "symbol": "Pa",
       "factor": 1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ubar",
       "name": "Microbar",
       "symbol": "µbar",
       "factor": 0.1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "dyncm2",
       "name": "Dyne/cm²",
       "symbol": "dyn⋅cm⁻²",
       "factor": 0.1,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "bar",
       "name": "Bar",
       "symbol": "bar",
       "factor": 100000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

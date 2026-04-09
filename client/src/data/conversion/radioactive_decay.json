@@ -9,7 +9,8 @@
       "name": "Per Day (λ)",
       "symbol": "d⁻¹",
       "factor": 0.000011574074074074073,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "half_s",
@@ -17,7 +18,8 @@
       "symbol": "t½(s)",
       "factor": 0.693147180559945,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "half_min",
@@ -25,7 +27,8 @@
       "symbol": "t½(min)",
       "factor": 41.588830833596695,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "half_hr",
@@ -33,7 +36,8 @@
       "symbol": "t½(h)",
       "factor": 2495.3298500158016,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "half_day",
@@ -41,7 +45,8 @@
       "symbol": "t½(d)",
       "factor": 59887.91640037925,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "half_year",
@@ -49,7 +54,8 @@
       "symbol": "t½(y)",
       "factor": 21874061.46523852,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tau_s",
@@ -57,7 +63,8 @@
       "symbol": "τ (s)",
       "factor": 1,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tau_min",
@@ -65,7 +72,8 @@
       "symbol": "τ (min)",
       "factor": 60,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tau_hr",
@@ -73,7 +81,8 @@
       "symbol": "τ (h)",
       "factor": 3600,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tau_day",
@@ -81,7 +90,8 @@
       "symbol": "τ (d)",
       "factor": 86400,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "tau_year",
@@ -89,7 +99,8 @@
       "symbol": "τ (y)",
       "factor": 31557600,
       "isInverse": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

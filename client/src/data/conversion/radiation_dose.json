@@ -10,14 +10,16 @@
       "symbol": "Gy",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "rad",
       "name": "Rad (CGS)",
       "symbol": "Rad",
       "factor": 0.01,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

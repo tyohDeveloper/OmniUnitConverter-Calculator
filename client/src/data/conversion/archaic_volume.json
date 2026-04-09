@@ -10,196 +10,224 @@
       "symbol": "L",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ml",
       "name": "Millilitre",
       "symbol": "mL",
       "factor": 0.001,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "go_jp",
       "name": "Go (Japan)",
       "symbol": "go",
       "factor": 0.18039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "sho_jp",
       "name": "Sho (Japan)",
       "symbol": "sho",
       "factor": 1.8039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "to_jp",
       "name": "To (Japan)",
       "symbol": "to",
       "factor": 18.039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "koku_jp",
       "name": "Koku (Japan)",
       "symbol": "koku",
       "factor": 180.39,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "hop_kr",
       "name": "Hop (Korea)",
       "symbol": "hop",
       "factor": 0.18039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "doe_kr",
       "name": "Doe (Korea)",
       "symbol": "doe",
       "factor": 1.8039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "mal_kr",
       "name": "Mal (Korea)",
       "symbol": "mal",
       "factor": 18.039,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "sheng_cn",
       "name": "Sheng (China)",
       "symbol": "sheng",
       "factor": 1.0355,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "dou_cn",
       "name": "Dou (China)",
       "symbol": "dou",
       "factor": 10.355,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "dan_vol_cn",
       "name": "Dan (China)",
       "symbol": "dan-v",
       "factor": 103.55,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "amphora",
       "name": "Amphora (Greek)",
       "symbol": "amphora",
       "factor": 26.026,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_GREEK"
     },
     {
       "id": "fl_scruple",
       "name": "Fluid Scruple (Apothecaries')",
       "symbol": "fl s",
       "factor": 0.00123223,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "APOTHECARIES"
     },
     {
       "id": "apoth_oz",
       "name": "Fluid Ounce (Apothecaries')",
       "symbol": "fl oz ap",
       "factor": 0.0295735,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "APOTHECARIES"
     },
     {
       "id": "gill_imp",
       "name": "Gill (Imperial)",
       "symbol": "gi Imp",
       "factor": 0.142065,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "firkin",
       "name": "Firkin (Imperial)",
       "symbol": "firkin",
       "factor": 40.9148,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "minim",
       "name": "Minim (US)",
       "symbol": "minim",
       "factor": 0.0000616115,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "fl_dram",
       "name": "Fluid Dram (US)",
       "symbol": "fl dr",
       "factor": 0.00369669,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "teaspoon",
       "name": "Teaspoon (US)",
       "symbol": "tsp (US)",
       "factor": 0.00492892,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "tablespoon",
       "name": "Tablespoon (US)",
       "symbol": "tbsp (US)",
       "factor": 0.0147868,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "jigger",
       "name": "Jigger (US)",
       "symbol": "jigger",
       "factor": 0.044355,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "gill_us",
       "name": "Gill (US)",
       "symbol": "gi",
       "factor": 0.118294,
-      "unitType": "US_COMMON_FLUID"
+      "unitType": "US_COMMON_FLUID",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "cup_us",
       "name": "Cup (US)",
       "symbol": "cp (US)",
       "factor": 0.236588,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "peck_us",
       "name": "Peck",
       "symbol": "pk",
       "factor": 8.80977,
-      "unitType": "US_COMMON_DRY"
+      "unitType": "US_COMMON_DRY",
+      "measurementSystem": "US_CUSTOMARY_DRY"
     },
     {
       "id": "bushel_us",
       "name": "Bushel",
       "symbol": "bu",
       "factor": 35.2391,
-      "unitType": "US_COMMON_DRY"
+      "unitType": "US_COMMON_DRY",
+      "measurementSystem": "US_CUSTOMARY_DRY"
     },
     {
       "id": "hogshead",
       "name": "Hogshead (US)",
       "symbol": "hhd",
       "factor": 238.481,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY_FLUID"
     },
     {
       "id": "cord_us",
       "name": "Cord",
       "symbol": "cord",
       "factor": 3624.56,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "m3",
@@ -207,7 +235,8 @@
       "symbol": "m³",
       "factor": 1000,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

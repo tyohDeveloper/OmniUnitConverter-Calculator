@@ -10,84 +10,112 @@
       "symbol": "m",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "twip",
       "name": "Twip",
       "symbol": "twip",
       "factor": 0.000017639,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "px",
       "name": "Pixel (96 PPI)",
       "symbol": "px",
       "factor": 0.000264583,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "pt_trad",
       "name": "Point (Traditional)",
       "symbol": "pt (trad)",
       "factor": 0.000351459,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
     },
     {
       "id": "pt",
       "name": "Point (Desktop)",
       "symbol": "pt (CSS)",
       "factor": 0.0003527778,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
+    },
+    {
+      "id": "didot",
+      "name": "Didot Point",
+      "symbol": "dd",
+      "factor": 0.000376065,
+      "unitType": "SI_BASE",
+      "measurementSystem": "FRENCH_TRADITIONAL"
     },
     {
       "id": "mm",
       "name": "Millimeter",
       "symbol": "mm",
       "factor": 0.001,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "ligne",
+      "name": "Ligne",
+      "symbol": "‴",
+      "factor": 0.0022558,
+      "unitType": "SI_BASE",
+      "measurementSystem": "FRENCH_TRADITIONAL"
     },
     {
       "id": "pc_trad",
       "name": "Pica (Traditional)",
       "symbol": "pc (trad)",
       "factor": 0.0042175,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
     },
     {
       "id": "pc",
       "name": "Pica",
       "symbol": "pc (CSS)",
       "factor": 0.0042333,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "em",
       "name": "Em (16px ref)",
       "symbol": "em",
       "factor": 0.0042333,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "DOMAIN"
     },
     {
       "id": "cicero",
       "name": "Cicero",
       "symbol": "cicero",
       "factor": 0.004512,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "FRENCH_TRADITIONAL"
     },
     {
       "id": "in",
       "name": "Inch",
       "symbol": "in",
       "factor": 0.0254,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "ft",
       "name": "Foot",
       "symbol": "ft",
       "factor": 0.3048,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

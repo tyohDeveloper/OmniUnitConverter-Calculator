@@ -10,7 +10,8 @@
       "symbol": "J",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ev",
@@ -18,70 +19,80 @@
       "symbol": "eV",
       "factor": 1.602176634e-19,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "cal",
       "name": "Calorie",
       "symbol": "cal",
       "factor": 4.184,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "btu",
       "name": "BTU (IT)",
       "symbol": "BTU",
       "factor": 1055.06,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "wh",
       "name": "Watt-hour",
       "symbol": "Wh",
       "factor": 3600,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kcal",
       "name": "Kilocalorie",
       "symbol": "kcal",
       "factor": 4184,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "kwh",
       "name": "Kilowatt-hour",
       "symbol": "kWh",
       "factor": 3600000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "therm",
       "name": "Therm (US)",
       "symbol": "therm",
       "factor": 105480400,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tnt",
       "name": "Ton of TNT",
       "symbol": "tTNT",
       "factor": 4184000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "boe",
       "name": "Barrel of Oil Equivalent",
       "symbol": "BOE",
       "factor": 6100000000,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tce",
       "name": "Ton of Coal Equivalent",
       "symbol": "TCE",
       "factor": 29300000000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

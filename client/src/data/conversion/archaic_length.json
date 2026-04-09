@@ -10,224 +10,256 @@
       "symbol": "m",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "sun_jp",
       "name": "Sun (Japan)",
       "symbol": "sun",
       "factor": 0.030303,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "shaku_jp",
       "name": "Shaku (Japan)",
       "symbol": "shaku",
       "factor": 0.30303,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "ken_jp",
       "name": "Ken (Japan)",
       "symbol": "ken",
       "factor": 1.818,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "jo_jp",
       "name": "Jō (Japan)",
       "symbol": "jo (len)",
       "factor": 3.03,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "ri_jp",
       "name": "Ri (Japan)",
       "symbol": "ri-jp",
       "factor": 3927.27,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE"
     },
     {
       "id": "ja_kr",
       "name": "Ja (Korea)",
       "symbol": "ja",
       "factor": 0.30303,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "ri_kr",
       "name": "Ri (Korea)",
       "symbol": "ri-kr",
       "factor": 392.727,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "KOREAN"
     },
     {
       "id": "cun_cn",
       "name": "Cun (China)",
       "symbol": "cun",
       "factor": 0.03333,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "chi_cn",
       "name": "Chi (China)",
       "symbol": "chi",
       "factor": 0.3333,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "zhang_cn",
       "name": "Zhang (China)",
       "symbol": "zhang",
       "factor": 3.333,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "li_cn",
       "name": "Li (China)",
       "symbol": "li-cn",
       "factor": 500,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "CHINESE"
     },
     {
       "id": "chek_hk",
       "name": "Chek (Hong Kong)",
       "symbol": "chek",
       "factor": 0.371,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "HONG_KONG"
     },
     {
       "id": "hath_in",
       "name": "Hath (India)",
       "symbol": "hath",
       "factor": 0.46,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "gaj_in",
       "name": "Gaj (India)",
       "symbol": "gaj",
       "factor": 0.9144,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SOUTH_ASIAN"
     },
     {
       "id": "digit",
       "name": "Digit (Egyptian)",
       "symbol": "digit",
       "factor": 0.01875,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_EGYPTIAN"
     },
     {
       "id": "cubit_royal",
       "name": "Cubit (Egyptian Royal)",
       "symbol": "cubit-R",
       "factor": 0.524,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_EGYPTIAN"
     },
     {
       "id": "palm",
       "name": "Palm (Ancient)",
       "symbol": "palm",
       "factor": 0.075,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_EGYPTIAN"
     },
     {
       "id": "span",
       "name": "Span (Ancient)",
       "symbol": "span",
       "factor": 0.2286,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_EGYPTIAN"
     },
     {
       "id": "cubit_common",
       "name": "Cubit (Common)",
       "symbol": "cubit",
       "factor": 0.4572,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_EGYPTIAN"
     },
     {
       "id": "stade",
       "name": "Stade (Greek)",
       "symbol": "stade",
       "factor": 185,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_GREEK"
     },
     {
       "id": "pace",
       "name": "Pace (Roman)",
       "symbol": "pace",
       "factor": 1.48,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_ROMAN"
     },
     {
       "id": "arshin_ru",
       "name": "Arshin (Russia)",
       "symbol": "arshin",
       "factor": 0.7112,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "RUSSIAN"
     },
     {
       "id": "vara_es",
       "name": "Vara (Spain)",
       "symbol": "vara",
       "factor": 0.8359,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SPANISH"
     },
     {
       "id": "ell_en",
       "name": "Ell (English)",
       "symbol": "ell",
       "factor": 1.143,
-      "unitType": "IMPERIAL"
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "hand",
       "name": "Hand",
       "symbol": "hh",
       "factor": 0.1016,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "link",
       "name": "Link (Gunter)",
       "symbol": "li",
       "factor": 0.201168,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_SURVEY"
     },
     {
       "id": "fathom",
       "name": "Fathom",
       "symbol": "ftm",
       "factor": 1.8288,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "IMPERIAL"
     },
     {
       "id": "rod",
       "name": "Rod/Pole/Perch",
       "symbol": "rd",
       "factor": 5.0292,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_SURVEY"
     },
     {
       "id": "chain",
       "name": "Chain (Gunter)",
       "symbol": "ch",
       "factor": 20.1168,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_SURVEY"
     },
     {
       "id": "furlong",
       "name": "Furlong",
       "symbol": "fur",
       "factor": 201.168,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_SURVEY"
     },
     {
       "id": "league",
       "name": "League",
       "symbol": "lea",
       "factor": 4828.032,
-      "unitType": "US_COMMON"
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     }
   ]
 }

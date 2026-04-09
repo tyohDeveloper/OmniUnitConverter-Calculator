@@ -10,21 +10,24 @@
       "symbol": "W⋅m⁻²",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "i0",
       "name": "Reference Intensity (I₀)",
       "symbol": "I₀",
       "factor": 1e-12,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "w_per_cm2",
       "name": "Watt per Square Centimeter",
       "symbol": "W⋅cm⁻²",
       "factor": 10000,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

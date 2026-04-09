@@ -10,28 +10,32 @@
       "symbol": "rad⋅s⁻¹",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "deg_s",
       "name": "Degree/Second",
       "symbol": "°⋅s⁻¹",
       "factor": 0.017453292519943295,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "rpm",
       "name": "Revolutions/Minute",
       "symbol": "rpm",
       "factor": 0.10471975511965977,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "rps",
       "name": "Revolutions/Second",
       "symbol": "rps",
       "factor": 6.283185307179586,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

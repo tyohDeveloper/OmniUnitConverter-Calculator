@@ -10,28 +10,32 @@
       "symbol": "C",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "mah",
       "name": "Milliamp-hour",
       "symbol": "mAh",
       "factor": 3.6,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "ah",
       "name": "Ampere-hour",
       "symbol": "Ah",
       "factor": 3600,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "faraday",
       "name": "Faraday",
       "symbol": "F (charge)",
       "factor": 96485,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

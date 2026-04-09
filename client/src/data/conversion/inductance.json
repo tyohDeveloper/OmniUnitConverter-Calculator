@@ -10,7 +10,8 @@
       "symbol": "H",
       "factor": 1,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "abh",
@@ -18,14 +19,16 @@
       "symbol": "abH",
       "factor": 1e-9,
       "allowPrefixes": true,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     },
     {
       "id": "stath",
       "name": "Stathenry",
       "symbol": "statH",
       "factor": 898755178736.8176,
-      "unitType": "SI_BASE"
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }
