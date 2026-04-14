@@ -218,7 +218,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
 
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto p-4 md:px-8 md:pb-0 md:pt-1 grid md:grid-cols-[260px_1fr] gap-8 md:h-full md:overflow-hidden">
+    <div className="w-full max-w-[1400px] mx-auto p-4 md:pl-4 md:pr-8 md:pb-0 md:pt-1 grid md:grid-cols-[260px_1fr] gap-8 md:gap-4 md:h-full md:overflow-hidden">
       <nav className={`space-y-2 overflow-y-auto pe-2 -mt-1 pt-1 transition-opacity ${activeTab === 'custom' ? 'opacity-40 pointer-events-none' : ''}`}>
         {CATEGORY_GROUPS.map((group) => (
           <div key={group.name} className="space-y-1">
