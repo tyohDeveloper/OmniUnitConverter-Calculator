@@ -3,15 +3,8 @@ dist
 .DS_Store
 server/public
 vite.config.ts.*
-*.tar.gzplaywright-report/
-test-results/
+*.tar.gz
 attached_assets/
 playwright-report/
 test-results/
-server/
-
-attached_assets/
-playwright-report/
-test-results/
-playwright-report/
-test-results/
+sednlu7F6
