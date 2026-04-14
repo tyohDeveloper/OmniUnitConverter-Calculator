@@ -439,8 +439,11 @@ export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPa
 
             {/* Result Field 4 */}
             <div className="flex gap-2 items-center" style={{ width: '100%' }}>
-              <motion.div
-                className={`px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between select-none shrink-0 ${calcValues[3] ? 'cursor-pointer hover:bg-accent/15 active:bg-accent/25 hover:border-accent/70 hover:shadow-sm transition-all duration-150' : ''}`}
+              <motion.button
+                type="button"
+                aria-label={t('Copy result')}
+                disabled={!calcValues[3]}
+                className={`px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between select-none shrink-0 text-left ${calcValues[3] ? 'cursor-pointer hover:bg-accent/15 active:bg-accent/25 hover:border-accent/70 hover:shadow-sm transition-all duration-150' : ''}`}
                 style={{ height: FIELD_HEIGHT, width: CommonFieldWidth, pointerEvents: 'auto' }}
                 onClick={() => calcValues[3] && copyCalcResult()}
                 data-testid="calc-result"
@@ -467,7 +470,7 @@ export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPa
                     </>
                   );
                 })()}
-              </motion.div>
+              </motion.button>
               {calcValues[3] && !isDimensionEmpty(calcValues[3].dimensions) ? (
                 (() => {
                   const siReps = generateSIRepresentations(calcValues[3]!.dimensions, calcValues[3]!.sourceCategory);
@@ -876,8 +879,10 @@ export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPa
                   placeholder={t("Enter value or 'value unit'")}
                 />
               ) : (
-                <motion.div
-                  className="px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between cursor-text hover:bg-muted/40 active:bg-muted/60"
+                <motion.button
+                  type="button"
+                  aria-label={t('Edit X register')}
+                  className="px-3 bg-muted/20 border border-accent/50 rounded-md flex items-center justify-between cursor-text hover:bg-muted/40 active:bg-muted/60 text-left"
                   style={{ height: FIELD_HEIGHT, pointerEvents: 'auto' }}
                   data-testid="rpn-x-field"
                   onClick={() => {
@@ -912,7 +917,7 @@ export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPa
                       </>
                     );
                   })()}
-                </motion.div>
+                </motion.button>
               )}
               {rpnStack[3] && !isDimensionEmpty(rpnStack[3].dimensions) ? (
                 (() => {

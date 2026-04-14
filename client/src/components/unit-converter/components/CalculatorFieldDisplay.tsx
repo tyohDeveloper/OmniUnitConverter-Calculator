@@ -8,6 +8,7 @@ import { FIELD_HEIGHT } from '../constants';
 interface CalculatorFieldDisplayProps {
   value: CalcValue | null;
   onClick?: () => void;
+  ariaLabel?: string;
   isFlashing?: boolean;
   isResult?: boolean;
   formatDimensions: (dimensions: DimensionalFormula) => string;
@@ -27,6 +28,7 @@ interface CalculatorFieldDisplayProps {
 export function CalculatorFieldDisplay({
   value,
   onClick,
+  ariaLabel,
   isFlashing = false,
   isResult = false,
   formatDimensions,
@@ -68,24 +70,44 @@ export function CalculatorFieldDisplay({
     };
   })() : null;
 
-  return (
-    <motion.div 
-      className={`${baseClass} ${interactiveClass} ${className}`}
-      onClick={value && onClick ? onClick : undefined}
-      style={{ height: FIELD_HEIGHT, width, pointerEvents: 'auto' }}
-      animate={{
-        opacity: isFlashing ? [1, 0.3, 1] : 1,
-        scale: isFlashing ? [1, 1.02, 1] : 1
-      }}
-      transition={{ duration: 0.3 }}
-      data-testid={testId}
-    >
+  const content = (
+    <>
       <span className={`text-sm font-mono truncate ${isResult ? 'text-primary font-bold' : 'text-foreground'}`}>
         {displayData?.formattedValue || ''}
       </span>
       <span className="text-xs font-mono text-muted-foreground ml-2 shrink-0">
         {displayData?.unitSymbol || ''}
       </span>
+    </>
+  );
+
+  const motionProps = {
+    className: `${baseClass} ${interactiveClass} ${className}`,
+    style: { height: FIELD_HEIGHT, width, pointerEvents: 'auto' as const },
+    animate: {
+      opacity: isFlashing ? [1, 0.3, 1] : 1,
+      scale: isFlashing ? [1, 1.02, 1] : 1,
+    },
+    transition: { duration: 0.3 },
+    'data-testid': testId,
+  };
+
+  if (value && onClick) {
+    return (
+      <motion.button
+        type="button"
+        aria-label={ariaLabel}
+        onClick={onClick}
+        {...motionProps}
+      >
+        {content}
+      </motion.button>
+    );
+  }
+
+  return (
+    <motion.div {...motionProps}>
+      {content}
     </motion.div>
   );
 }
