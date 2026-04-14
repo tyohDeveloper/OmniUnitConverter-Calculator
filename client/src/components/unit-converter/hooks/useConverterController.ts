@@ -17,7 +17,9 @@ import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
 import type { SIRepresentation } from '@/lib/calculator/types';
-import { normalizeMassUnit as normalizeMassUnitHelper } from '@/lib/units/normalizeMassUnit';
+import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
+import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
+import { PASTE_RESET_TIMEOUT_MS } from '../constants';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import type { SupportedLanguage } from '@/lib/localization';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS } from '@/lib/localization';
@@ -232,7 +234,6 @@ export function useConverterController(): UseConverterControllerReturn {
 
   const translateUnitName = useCallback((unitName: string): string => t(unitName), [t]);
 
-  const normalizeMassUnit = normalizeMassUnitHelper;
   const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
 
   const getCategoryDimensions = useCallback((category: UnitCategory): { [key: string]: number } => {
@@ -690,7 +691,7 @@ export function useConverterController(): UseConverterControllerReturn {
     if (status !== 'ok') {
       setConverterPasteStatus(status);
       if (converterPasteTimerRef.current) clearTimeout(converterPasteTimerRef.current);
-      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), 3000);
+      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
     } else {
       setConverterPasteStatus('idle');
     }
@@ -702,7 +703,7 @@ export function useConverterController(): UseConverterControllerReturn {
       if (!text) {
         setCustomPasteStatus('unrecognised');
         if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 3000);
+        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
         return;
       }
       const parsed = parseUnitText(text);
@@ -731,27 +732,12 @@ export function useConverterController(): UseConverterControllerReturn {
         }
       }
       setDirectValue(parsed.value.toString());
-      const newExponents: Record<string, number> = { m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0 };
-      if (parsed.dimensions.length) newExponents.m = parsed.dimensions.length;
-      if (parsed.dimensions.mass) newExponents.kg = parsed.dimensions.mass;
-      if (parsed.dimensions.time) newExponents.s = parsed.dimensions.time;
-      if (parsed.dimensions.current) newExponents.A = parsed.dimensions.current;
-      if (parsed.dimensions.temperature) newExponents.K = parsed.dimensions.temperature;
-      if (parsed.dimensions.amount) newExponents.mol = parsed.dimensions.amount;
-      if (parsed.dimensions.intensity) newExponents.cd = parsed.dimensions.intensity;
-      if (parsed.dimensions.angle) newExponents.rad = parsed.dimensions.angle;
-      if (parsed.dimensions.solid_angle) newExponents.sr = parsed.dimensions.solid_angle;
-      const hasOutOfRange = Object.values(newExponents).some(exp => exp < -5 || exp > 5);
-      if (hasOutOfRange) {
-        setDirectExponents({ m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0 });
-      } else {
-        setDirectExponents(newExponents);
-      }
+      setDirectExponents(dimensionsToExponents(parsed.dimensions as DimensionalFormula));
       setCustomPasteStatus('idle');
     } catch {
       setCustomPasteStatus('unavailable');
       if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), 3000);
+      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
     }
   }, [setActiveTab, setActiveCategory, setFromUnit, setFromPrefix, setInputValue, setDirectValue, setDirectExponents]);
 

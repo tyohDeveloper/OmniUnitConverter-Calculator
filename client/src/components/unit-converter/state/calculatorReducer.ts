@@ -1,5 +1,6 @@
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { UnitCategory } from '@/lib/units/unitCategory';
+import { DEFAULT_PRECISION } from '@/components/unit-converter/constants';
 
 export interface CalculatorState {
   calculatorMode: 'simple' | 'rpn';
@@ -18,7 +19,7 @@ export interface CalculatorState {
 export const calculatorInitialState: CalculatorState = {
   calculatorMode: 'rpn',
   shiftActive: false,
-  calculatorPrecision: 4,
+  calculatorPrecision: DEFAULT_PRECISION,
   calcValues: [null, null, null, null],
   calcOp1: null,
   calcOp2: null,

@@ -72,27 +72,6 @@
   /* Brutalist/Technical feel */
 }
 
-.dark {
-  --background: 220 15% 10%;
-  --foreground: 40 10% 90%;
-  --card: 220 15% 13%;
-  --card-foreground: 40 10% 90%;
-  --popover: 220 15% 13%;
-  --popover-foreground: 40 10% 90%;
-  --primary: 30 80% 55%;
-  --primary-foreground: 220 15% 10%;
-  --secondary: 215 20% 20%;
-  --secondary-foreground: 40 10% 90%;
-  --muted: 215 20% 20%;
-  --muted-foreground: 215 20% 65%;
-  --accent: 30 80% 55%;
-  --accent-foreground: 220 15% 10%;
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 40 10% 90%;
-  --border: 215 20% 25%;
-  --input: 215 20% 20%;
-  --ring: 30 80% 55%;
-}
 
 @layer base {
   * {
@@ -124,4 +103,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) hsl(var(--background));
 }

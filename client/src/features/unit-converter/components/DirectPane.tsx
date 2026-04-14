@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
+import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import type { NumberFormat } from '@/lib/formatting';
 import { getMatchingPhysicalQuantities } from '@/lib/units/categoryDimensions';
 
@@ -75,26 +76,7 @@ export function DirectPane({
       if (parsed.value && (Object.keys(parsed.dimensions).length > 0 || parsed.categoryId)) {
         setDirectValue(parsed.value.toString());
 
-        const newExponents: Record<string, number> = {
-          m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0
-        };
-
-        if (parsed.dimensions.length) newExponents.m = parsed.dimensions.length;
-        if (parsed.dimensions.mass) newExponents.kg = parsed.dimensions.mass;
-        if (parsed.dimensions.time) newExponents.s = parsed.dimensions.time;
-        if (parsed.dimensions.current) newExponents.A = parsed.dimensions.current;
-        if (parsed.dimensions.temperature) newExponents.K = parsed.dimensions.temperature;
-        if (parsed.dimensions.amount) newExponents.mol = parsed.dimensions.amount;
-        if (parsed.dimensions.intensity) newExponents.cd = parsed.dimensions.intensity;
-        if (parsed.dimensions.angle) newExponents.rad = parsed.dimensions.angle;
-        if (parsed.dimensions.solid_angle) newExponents.sr = parsed.dimensions.solid_angle;
-
-        const hasOutOfRange = Object.values(newExponents).some(exp => exp < -5 || exp > 5);
-        if (hasOutOfRange) {
-          setDirectExponents({ m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0 });
-        } else {
-          setDirectExponents(newExponents);
-        }
+        setDirectExponents(dimensionsToExponents(parsed.dimensions));
       }
     }
   };

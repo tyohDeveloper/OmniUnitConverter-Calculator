@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1069718,
-  "gzipBytes": 403730,
-  "recordedAt": "2026-04-01",
-  "note": "Phase 6 baseline: post-deduplication/refactor"
+  "rawBytes": 1206135,
+  "gzipBytes": 434345,
+  "recordedAt": "2026-04-14",
+  "note": "Task 76 baseline: post-dependency-cleanup (removed @tanstack/react-query, date-fns, lodash, zod-validation-error; npm resolved updated transitive deps)"
 }

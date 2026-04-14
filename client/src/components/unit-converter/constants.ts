@@ -1,3 +1,7 @@
+export const FLASH_DURATION_MS = 300;
+export const PASTE_RESET_TIMEOUT_MS = 3000;
+export const DEFAULT_PRECISION = 4;
+
 export const FIELD_HEIGHT = '2.5rem';
 export const CommonFieldWidth = '285px';
 export const OperatorBtnWidth = '32px';

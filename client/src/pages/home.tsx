@@ -1,7 +1,7 @@
 import UnitConverterApp from '@/features/unit-converter/app/UnitConverterApp';
 import { ConverterProvider } from '@/components/unit-converter/context/ConverterContext';
 
-const APP_VERSION = '3.2.1.1';
+const APP_VERSION = '3.2.1.0';
 
 export default function Home() {
   return (

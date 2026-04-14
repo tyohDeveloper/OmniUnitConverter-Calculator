@@ -4,6 +4,7 @@ import { calculatorReducer, calculatorInitialState, type CalculatorState, type C
 import { rpnReducer, rpnInitialState, type RpnState, type RpnAction } from '../state/rpnReducer';
 import { uiPrefsReducer, uiPrefsInitialState, type UiPrefsState, type UiPrefsAction } from '../state/uiPrefsReducer';
 import { useAllFlashFlags, type FlashFlags } from '../hooks/useFlashFlag';
+import { FLASH_DURATION_MS } from '../constants';
 
 export type AppAction =
   | ({ domain: 'converter' } & ConverterAction)
@@ -69,7 +70,7 @@ interface ConverterProviderProps {
 
 export function ConverterProvider({ children }: ConverterProviderProps) {
   const [state, dispatch] = useReducer(appReducer, initialState);
-  const flash = useAllFlashFlags(300);
+  const flash = useAllFlashFlags(FLASH_DURATION_MS);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const value: ConverterContextValue = {

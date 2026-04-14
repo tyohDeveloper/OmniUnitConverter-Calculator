@@ -1,4 +1,5 @@
 import type { UnitCategory } from '@/lib/units/unitCategory';
+import { DEFAULT_PRECISION } from '@/components/unit-converter/constants';
 
 export interface ConverterState {
   activeCategory: UnitCategory;
@@ -20,7 +21,7 @@ export const converterInitialState: ConverterState = {
   toPrefix: 'none',
   inputValue: '1',
   result: null,
-  precision: 4,
+  precision: DEFAULT_PRECISION,
   comparisonMode: false,
 };
 
