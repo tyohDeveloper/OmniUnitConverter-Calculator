@@ -1,0 +1,1 @@
+This app has no server backend. 100% html app packaged into a single html file, capable of running on a computer with  no network or storage.
