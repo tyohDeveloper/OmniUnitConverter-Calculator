@@ -1,66 +1,55 @@
-# OmniUnit - Universal Converter
+# OmniUnit — Universal Unit Converter
 
-## Overview
-OmniUnit is a comprehensive, frontend-only unit conversion web application built with React and TypeScript. Its primary purpose is to provide a universal conversion tool with a "scientific archival" aesthetic, supporting a vast array of measurement systems including SI, Imperial, US Customary, Archaic, and specialized industrial units. The application produces a single, standalone HTML file for easy distribution, emphasizing accuracy and usability.
+OmniUnit is a universal conversion tool with a unit-aware calculator. It supports lots of units — everything you want, and a bunch of stuff you've never heard of. It is SI-focused; all values are stored internally as SI base unit expressions. You can do a simple conversion or paste in a full expression: copy "127.2342 J⋅s⁻¹" from a paper and paste it into the calculator — it will work. Type "7yd" and it parses that too. Units are organized into SI areas to reduce confusion. Power has power-related units: Watts, BTU, etc. No scrolling through thousands of units to find the one you want. Archaic and local units are also supported, but separately. You want tatami to m²? It's got you covered.
 
-## User Preferences
-- Preferred communication style: Simple, everyday language
-- Platform context: iPad using Replit iOS app or Chrome browser
-- iOS limitation: WebKit causes unreliable WebSockets, HMR is disabled
+It's localized for about a dozen languages and supports the most common number formats worldwide. You don't need to understand English to use it. It defaults to English number formats and the en locale. So you need to get at least that far into the app; otherwise, it's not readable.
 
-## System Architecture
-### Frontend-Only Architecture
-- **Framework & Build System**: React 19 with TypeScript, Vite for building, Wouter for routing, and vite-plugin-singlefile for single-HTML production builds.
-- **UI Component System**: shadcn/ui (New York variant) based on Radix UI, styled with Tailwind CSS v4. Theming is supported via CSS variables.
-- **State Management**: Local React state (useState, useRef) and custom hooks are used.
-- **Conversion Logic**: Client-side engine featuring a comprehensive unit catalog, dimensional analysis, metric prefix support, and a wide range of unit categories (length, mass, time, temperature, area, volume, energy, pressure, specialized units).
+The app has four main panes, only two of which are visible at the same time. The default top is the unit conversion. The bottom pane is an RPN unit-aware calculator. You can paste or type in just about anything, and it will work. The conversions for the output of the calculators are limited to SI base and derived units. To convert further, bring the result back to the conversion pane.
 
-### Key Design Decisions
-- **Calculator Layout**: CSS Grid-based, six-column layout with four arithmetic operators. Addition and subtraction require dimensional compatibility.
-- **Calculator Input**: Fields are read-only; data entry is only via copy buttons from Converter or Custom tabs.
-- **Dual Calculator Modes**: "UNIT" mode (three input fields + result) and "RPN" (Reverse Polish Notation) mode with a 4-level stack. Both modes support unit-aware operations.
-- **RPN Features**: Includes trigonometric, hyperbolic, power, root, and rounding functions. An undo/redo mechanism is implemented.
-- **Trigonometric/Hyperbolic Functions**: Preserve dimensions if input has units other than dimensionless, rad, or sr; otherwise, output is unitless.
-- **Rounding Functions**: `rnd` (banker's rounding) and `trunc` (truncate) preserve dimensions.
-- **Clipboard Copying**: Supports precision settings and "Normalize & Copy" for converting to SI units with optimal prefixing and dimensional analysis to derived units (J, N, W, etc.).
-- **Unit Categories**: Includes dedicated categories for Math (dimensionless output), Fuel Energy, Main Energy, Main Power, Archaic & Regional units (Length, Mass, Volume, Area, Energy, Power), Photon/Light, Typography, and Cooking Measures.
-- **Type Safety**: End-to-end TypeScript coverage with strict mode and Zod for schema validation.
-- **Modularity**: Component-based UI, client-side conversion logic, and plugin-based Vite configuration.
-- **SI Prefix Handling**: Kilogram (kg) does not allow prefixes to prevent stacking. Gram (g) allows prefixes. Binary prefixes (Ki, Mi, Gi) are exclusive to the Data/Information category. Complex kg-based SI units have g-based companions that allow prefixes and auto-switch to kg when a kilo prefix is selected. Prefixes reset to 'none' when changing units.
-- **Scientific Notation**: Automatically displays for very small (<1e-6), very large (>=1e8), or values that would round to zero. Precision setting controls significant figures. Input also accepts scientific notation.
-- **CGS Unit Prefixes**: Most CGS base units support prefixes, but pre-prefixed units (e.g., centipoise) do not allow additional prefixes.
-- **Comparison Mode**: Allows simultaneous conversion of input to up to 8 units with optimal prefix display.
-- **Smart Paste**: Parses "number unit" text into value, unit, prefix, category, and dimensions, directing to appropriate tabs.
-- **Symbol Conflict Prevention**: Unit symbols are unique to prevent overwrites, with specific naming conventions for half-life, poise, and minim.
-- **Cross-Domain Dimensional Analysis**: Calculator result dropdown shows related quantity categories with matching dimensions (e.g., Energy ↔ Torque). Certain categories (Archaic, specialty, Data, Math) are excluded.
-- **Calculator Module**: Extracted logic for dimensional analysis, formatting, and arithmetic operations.
-- **SI Representation Constraints**: Base unit expressions appear last in dropdowns. Derived representations cannot have more terms than the base. Frequency displays as s⁻¹, with Bq (Becquerel) for radioactivity sharing s⁻¹ dimensions. Coherent SI derived units (rad, sr, lm, lx, Gy, Sv, kat) are available.
-- **Multilingual Support**: Supports 12 languages with translated unit names, while symbols and SI prefixes remain standard. Asian units display native characters.
+There are two additional panes. You can swap out the conversion pane for a build-your-own unit. You can paste in just about anything (like the calculator), and it will reduce that to a base SI expression. You can take it from there. There's also a very simple calculator that will handle most unit arithmetic if you don't like RPN calculators.
 
-### Build & Deployment
-- **TypeScript Configuration**: Strict mode, path aliases, ESNext modules.
-- **Build Process**: Vite for development; `npm run build` generates a single `dist/public/index.html` file.
-- **Testing**: Extensive unit (Vitest, React Testing Library) and end-to-end (Playwright) tests covering conversion, localization, calculator logic, formatting, smart paste, RPN, edge cases, math functions, and precision comparison.
+The app is a single, standalone .html file. It references no other files and has no links. You can bring it anywhere you have a browser, and it will work. No network or packaging needed. I've also provided a GitHub repository with the project. It's a bog-standard TypeScript/React project. I built it on Replit, but that's not required. You're free to use the .html file or the source code any way you want.
 
-## External Dependencies
-### UI Libraries
-- **Radix UI**: Primitives for accessible UI components.
-- **Lucide React**: Iconography.
-- **cmdk**: Command palette functionality.
-- **class-variance-authority** and **clsx**: Conditional styling.
+> This is the only hyperlink or external reference in the .html distribution. You can click on it or not. It's not part of the app.
 
-### Development Tools
-- **@replit/vite-plugin-runtime-error-modal**: Error overlay.
-- **@replit/vite-plugin-cartographer** and **@replit/vite-plugin-dev-banner**: Replit integration.
-- **vite-plugin-singlefile**: Single HTML file production builds.
+GitHub: <https://github.com/tyohDeveloper/OmniUnitConverter-Calculator>
 
-### Form Handling
-- **react-hook-form**: Form state management.
-- **@hookform/resolvers**: Validation integration.
-- **zod**: Schema validation.
+> Note: I used an AI assistant to build most of this. It has been tested and includes unit tests. To the best of my knowledge the conversions are correct, but your mileage may vary.
 
-### Styling
-- **@tailwindcss/vite**: Tailwind CSS v4 integration.
-- **autoprefixer**: CSS vendor prefixing.
-- **tailwindcss-animate**: Animation utilities.
-- **Custom fonts**: Space Grotesk, IBM Plex Mono, Inter.
+---
+
+## License
+
+Copyright © 2025 David Hoyt. MIT License — Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+---
+
+## For Developers
+
+### Tech Stack
+
+- **Framework**: React 19 + TypeScript, built with Vite
+- **UI**: shadcn/ui (Radix UI) + Tailwind CSS v4
+- **Routing**: Wouter
+- **Output**: `vite-plugin-singlefile` produces a single self-contained `index.html`
+
+### Build
+
+```bash
+npm install
+npm run build
+# Output: dist/public/index.html
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Testing
+
+```bash
+npm test        # Vitest unit tests
+npm run e2e     # Playwright end-to-end tests
+```
