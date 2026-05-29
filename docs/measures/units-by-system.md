@@ -249,6 +249,10 @@ One section per measurement system or tradition.
 | `wk` | Week | 604800 s |
 | `mo` | Month (Avg) | 2628000 s |
 | `yr` | Year | 31540000 s |
+| `dec` | Decade | 315400000 s |
+| `cent` | Century | 3.154e+9 s |
+| `kyr` | Millennium | 3.154e+10 s |
+| `eon` | Eon | 3.154e+16 s |
 | `N⋅m` | Newton-metre | 1 kg⋅m²⋅s⁻² |
 | `dyn⋅cm` | Dyne-centimeter | 1e-7 kg⋅m²⋅s⁻² |
 | `kgf⋅cm` | Kilogram-force centimeter | 0.0980665 kg⋅m²⋅s⁻² |
@@ -744,11 +748,9 @@ One section per measurement system or tradition.
 | `hat-trick` | Hat-Trick | 3 1 |
 | `π` | Pi | 3.1415926536 1 |
 | `half-doz` | Half Dozen | 6 1 |
-| `decade` | Decade | 10 1 |
 | `doz` | Dozen | 12 1 |
 | `bakers-doz` | Baker's Dozen | 13 1 |
 | `score` | Score | 20 1 |
-| `century` | Century | 100 1 |
 | `long-hundred` | Long Hundred | 120 1 |
 | `gross` | Gross | 144 1 |
 | `great-gross` | Great Gross | 1728 1 |

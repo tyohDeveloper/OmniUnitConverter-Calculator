@@ -540,9 +540,13 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `BTU⋅h⁻¹⋅ft⁻¹⋅°F⁻¹` | BTU/(h⋅ft⋅°F) | Thermal Conductivity | W⋅m⁻¹⋅K⁻¹ | 1.73073 |
 | `cal⋅s⁻¹⋅cm⁻¹⋅°C⁻¹` | cal/(s⋅cm⋅°C) | Thermal Conductivity | W⋅m⁻¹⋅K⁻¹ | 418.4 |
 | `W⋅m⁻¹⋅K⁻¹` | W/(m⋅K) | Thermal Conductivity | W⋅m⁻¹⋅K⁻¹ | 1 |
+| `cent` | Century | Time | s | 3.154e+9 |
 | `d` | Day | Time | s | 86400 |
 | `d (sid)` | Sidereal Day | Time | s | 86164.0905 |
+| `dec` | Decade | Time | s | 315400000 |
+| `eon` | Eon | Time | s | 3.154e+16 |
 | `h` | Hour | Time | s | 3600 |
+| `kyr` | Millennium | Time | s | 3.154e+10 |
 | `min` | Minute | Time | s | 60 |
 | `mo` | Month (Avg) | Time | s | 2628000 |
 | `s` | Second | Time | s | 1 |
@@ -580,9 +584,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `bp` | Basis Point | Unitless Numbers | 1 | 1e-4 |
 | `brace` | Brace | Unitless Numbers | 1 | 2 |
 | `caret` | Caret | Unitless Numbers | 1 | 0.0416666667 |
-| `century` | Century | Unitless Numbers | 1 | 100 |
 | `couple` | Couple | Unitless Numbers | 1 | 2 |
-| `decade` | Decade | Unitless Numbers | 1 | 10 |
 | `doz` | Dozen | Unitless Numbers | 1 | 12 |
 | `e` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
 | `fold` | Fold | Unitless Numbers | 1 | 1 |
