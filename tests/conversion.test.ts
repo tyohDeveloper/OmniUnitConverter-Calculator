@@ -833,6 +833,40 @@ describe("Unit Ordering - SI Base First, Then Ascending Factor", () => {
     });
   });
 
+  describe("Long Time Units", () => {
+    const time = CONVERSION_DATA.find(c => c.id === "time");
+
+    it("has Decade, Century, Millennium and Eon after Year", () => {
+      const ids = time!.units.map(u => u.id);
+      const yearIdx = ids.indexOf("y");
+      expect(ids.slice(yearIdx + 1)).toEqual(["dec", "cent", "kyr", "eon"]);
+    });
+
+    it("Decade = 10 years", () => {
+      expect(convert(1, "dec", "y", "time")).toBeCloseTo(10, 9);
+    });
+
+    it("Century = 100 years", () => {
+      expect(convert(1, "cent", "y", "time")).toBeCloseTo(100, 9);
+    });
+
+    it("Millennium = 1000 years", () => {
+      expect(convert(1, "kyr", "y", "time")).toBeCloseTo(1000, 9);
+    });
+
+    it("Eon = 1e9 years", () => {
+      expect(convert(1, "eon", "y", "time")).toBeCloseTo(1e9, 0);
+    });
+
+    it("uses distinct symbols (cent avoids speed-of-light 'c')", () => {
+      const sym = (id: string) => time!.units.find(u => u.id === id)?.symbol;
+      expect(sym("dec")).toBe("dec");
+      expect(sym("cent")).toBe("cent");
+      expect(sym("kyr")).toBe("kyr");
+      expect(sym("eon")).toBe("eon");
+    });
+  });
+
   describe("Troy Pound Location", () => {
     it("should have Troy Pound in main mass category, not archaic_mass", () => {
       const mainMass = CONVERSION_DATA.find(c => c.id === "mass");

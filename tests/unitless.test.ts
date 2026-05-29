@@ -34,6 +34,15 @@ describe('Unitless Numbers category', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
+  it('no longer includes Decade or Century (moved to Time)', () => {
+    const ids = category!.units.map(u => u.id);
+    expect(ids).not.toContain('decade');
+    expect(ids).not.toContain('century');
+    const names = category!.units.map(u => u.name);
+    expect(names).not.toContain('Decade');
+    expect(names).not.toContain('Century');
+  });
+
   describe('conversions (value × factor)', () => {
     const c = (v: number, from: string, to: string) => convert(v, from, to, 'unitless');
 

@@ -76,6 +76,38 @@
       "factor": 31540000,
       "unitType": "SI_BASE",
       "measurementSystem": "SI"
+    },
+    {
+      "id": "dec",
+      "name": "Decade",
+      "symbol": "dec",
+      "factor": 315400000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "cent",
+      "name": "Century",
+      "symbol": "cent",
+      "factor": 3154000000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "kyr",
+      "name": "Millennium",
+      "symbol": "kyr",
+      "factor": 31540000000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
+      "id": "eon",
+      "name": "Eon",
+      "symbol": "eon",
+      "factor": 3.154e16,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
     }
   ]
 }

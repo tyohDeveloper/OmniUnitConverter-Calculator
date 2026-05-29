@@ -152,13 +152,6 @@
       "measurementSystem": "NONE"
     },
     {
-      "id": "decade",
-      "name": "Decade",
-      "symbol": "decade",
-      "factor": 10,
-      "measurementSystem": "NONE"
-    },
-    {
       "id": "dozen",
       "name": "Dozen",
       "symbol": "doz",
@@ -177,13 +170,6 @@
       "name": "Score",
       "symbol": "score",
       "factor": 20,
-      "measurementSystem": "NONE"
-    },
-    {
-      "id": "century",
-      "name": "Century",
-      "symbol": "century",
-      "factor": 100,
       "measurementSystem": "NONE"
     },
     {
