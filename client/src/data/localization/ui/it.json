@@ -134,5 +134,6 @@
   "help-github-note": "Questo è l'unico collegamento ipertestuale o riferimento esterno nella distribuzione .html. Puoi cliccarlo o ignorarlo. Non fa parte dell'app.",
   "help-llm-note": "Nota: Questa app è stata costruita in gran parte con l'aiuto di un assistente AI. È stata testata e include unit test. Per quanto ne so, le conversioni sono corrette, ma verificatelo autonomamente per applicazioni critiche.",
   "help-machine-translated": "(Questo testo è stato tradotto automaticamente. Per il testo originale, passa alla lingua «en».)",
-  "Paper Sizes": "Formati carta"
+  "Paper Sizes": "Formati carta",
+  "Unitless Numbers": "Numeri Adimensionali"
 }

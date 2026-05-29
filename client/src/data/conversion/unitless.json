@@ -1,0 +1,246 @@
+{
+  "id": "unitless",
+  "name": "Unitless Numbers",
+  "baseUnit": "Number",
+  "baseSISymbol": "1",
+  "units": [
+    {
+      "id": "number",
+      "name": "Number",
+      "symbol": "1",
+      "factor": 1,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "ppt",
+      "name": "Parts Per Trillion",
+      "symbol": "ppt",
+      "factor": 1e-12,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "ppb",
+      "name": "Parts Per Billion",
+      "symbol": "ppb",
+      "factor": 1e-9,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "ppm",
+      "name": "Parts Per Million",
+      "symbol": "ppm",
+      "factor": 1e-6,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "permyriad",
+      "name": "Permyriad",
+      "symbol": "‱",
+      "factor": 1e-4,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "basis_point",
+      "name": "Basis Point",
+      "symbol": "bp",
+      "factor": 1e-4,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "permille",
+      "name": "Permille",
+      "symbol": "‰",
+      "factor": 1e-3,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "proof_us",
+      "name": "Proof (US)",
+      "symbol": "proof (US)",
+      "factor": 0.005,
+      "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "proof_imp",
+      "name": "Proof (Imperial)",
+      "symbol": "proof (imp)",
+      "factor": 0.005715,
+      "measurementSystem": "IMPERIAL"
+    },
+    {
+      "id": "percent",
+      "name": "Percent",
+      "symbol": "%",
+      "factor": 0.01,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "abv",
+      "name": "Alcohol by Volume",
+      "symbol": "abv",
+      "factor": 0.01,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "caret",
+      "name": "Caret",
+      "symbol": "caret",
+      "factor": 0.0416666667,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "fold",
+      "name": "Fold",
+      "symbol": "fold",
+      "factor": 1,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "golden_ratio",
+      "name": "Golden Ratio",
+      "symbol": "φ",
+      "factor": 1.6180339887,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "pair",
+      "name": "Pair",
+      "symbol": "pair",
+      "factor": 2,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "couple",
+      "name": "Couple",
+      "symbol": "couple",
+      "factor": 2,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "brace",
+      "name": "Brace",
+      "symbol": "brace",
+      "factor": 2,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "euler",
+      "name": "Euler's Number",
+      "symbol": "e",
+      "factor": 2.7182818285,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "hat_trick",
+      "name": "Hat-Trick",
+      "symbol": "hat-trick",
+      "factor": 3,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "pi",
+      "name": "Pi",
+      "symbol": "π",
+      "factor": 3.1415926536,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "half_dozen",
+      "name": "Half Dozen",
+      "symbol": "half-doz",
+      "factor": 6,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "decade",
+      "name": "Decade",
+      "symbol": "decade",
+      "factor": 10,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "dozen",
+      "name": "Dozen",
+      "symbol": "doz",
+      "factor": 12,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "bakers_dozen",
+      "name": "Baker's Dozen",
+      "symbol": "bakers-doz",
+      "factor": 13,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "score",
+      "name": "Score",
+      "symbol": "score",
+      "factor": 20,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "century",
+      "name": "Century",
+      "symbol": "century",
+      "factor": 100,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "long_hundred",
+      "name": "Long Hundred",
+      "symbol": "long-hundred",
+      "factor": 120,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "gross",
+      "name": "Gross",
+      "symbol": "gross",
+      "factor": 144,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "great_gross",
+      "name": "Great Gross",
+      "symbol": "great-gross",
+      "factor": 1728,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "myriad",
+      "name": "Myriad",
+      "symbol": "myriad",
+      "factor": 10000,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "wan",
+      "name": "Wan",
+      "symbol": "万",
+      "factor": 10000,
+      "measurementSystem": "CHINESE"
+    },
+    {
+      "id": "lakh",
+      "name": "Lakh",
+      "symbol": "लाख",
+      "factor": 100000,
+      "measurementSystem": "SOUTH_ASIAN"
+    },
+    {
+      "id": "crore",
+      "name": "Crore",
+      "symbol": "करोड़",
+      "factor": 10000000,
+      "measurementSystem": "SOUTH_ASIAN"
+    },
+    {
+      "id": "mole",
+      "name": "Mole",
+      "symbol": "mole",
+      "factor": 6.02214076e23,
+      "measurementSystem": "NONE"
+    }
+  ]
+}

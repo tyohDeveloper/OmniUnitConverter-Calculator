@@ -267,12 +267,17 @@ describe('Language Localization', () => {
 
     it('should verify unit symbols in conversion data are Latin/SI (no translated text)', () => {
       const nonLatinScripts = /[\u0600-\u06FF\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF]/;
-      
+      // Culture-specific counting units in the Unitless Numbers category use their
+      // canonical native-script symbols by design (e.g. 万, लाख, करोड़). These are
+      // intentional, not untranslated text, and are exempt from the Latin/SI guard.
+      const nativeScriptSymbols = new Set(['万', 'लाख', 'करोड़']);
+
       for (const category of CONVERSION_DATA) {
         for (const unit of category.units) {
           const symbol = unit.symbol;
           expect(symbol).toBeTruthy();
           expect(typeof symbol).toBe('string');
+          if (nativeScriptSymbols.has(symbol)) continue;
           const hasNonLatinScript = nonLatinScripts.test(symbol);
           expect(hasNonLatinScript).toBe(false);
         }

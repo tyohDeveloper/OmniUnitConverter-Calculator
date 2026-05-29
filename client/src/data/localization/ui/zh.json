@@ -134,5 +134,6 @@
   "help-github-note": "这是 .html 发行版中唯一的超链接或外部引用，点击与否均可，与应用本身无关。",
   "help-llm-note": "注意：该应用主要借助 AI 助手构建，已通过测试并包含单元测试。据我所知转换结果正确，但对于关键应用请自行验证。",
   "help-machine-translated": "（本文为机器翻译。如需原文，请切换到「en」语言环境。）",
-  "Paper Sizes": "纸张尺寸"
+  "Paper Sizes": "纸张尺寸",
+  "Unitless Numbers": "无量纲数"
 }

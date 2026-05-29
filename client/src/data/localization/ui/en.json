@@ -134,5 +134,6 @@
   "help-github-note": "This is the only hyperlink or external reference in the .html distribution. You can click on it or not. It's not part of the app.",
   "help-llm-note": "Note: I used an AI assistant to build most of this. It has been tested and includes unit tests. To the best of my knowledge the conversions are correct, but your mileage may vary.",
   "help-machine-translated": "",
-  "Paper Sizes": "Paper Sizes"
+  "Paper Sizes": "Paper Sizes",
+  "Unitless Numbers": "Unitless Numbers"
 }

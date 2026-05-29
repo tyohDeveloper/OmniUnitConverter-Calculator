@@ -71,4 +71,5 @@ export type UnitCategory =
   | "archaic_power"
   | "typography"
   | "cooking"
-  | "paper_sizes";
+  | "paper_sizes"
+  | "unitless";

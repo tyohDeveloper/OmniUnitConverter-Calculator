@@ -79,12 +79,13 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   rack_geometry: { name: 'Rack Geometry', dimensions: { length: 1 }, isBase: false },
   shipping: { name: 'Shipping Volume', dimensions: { length: 3 }, isBase: false },
   math: { name: 'Math Functions', dimensions: {}, isBase: false },
+  unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 
 export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
   'archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power',
   'typography', 'cooking', 'beer_wine_volume', 'fuel', 'fuel_economy', 'lightbulb', 'rack_geometry', 'shipping',
-  'data', 'math', 'paper_sizes'
+  'data', 'math', 'paper_sizes', 'unitless'
 ];
 
 export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [

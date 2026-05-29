@@ -134,5 +134,6 @@
   "help-github-note": "Este es el único hipervínculo o referencia externa en la distribución .html. Puede hacer clic en él o no. No es parte de la aplicación.",
   "help-llm-note": "Nota: Esta aplicación fue construida en su mayor parte con la ayuda de un asistente de IA. Ha sido probada e incluye pruebas unitarias. Hasta donde sé, las conversiones son correctas, pero compruébelo usted mismo en aplicaciones críticas.",
   "help-machine-translated": "(Este texto fue traducido automáticamente. Para ver el texto original, cambie al idioma «en».)",
-  "Paper Sizes": "Tamaños de papel"
+  "Paper Sizes": "Tamaños de papel",
+  "Unitless Numbers": "Números Adimensionales"
 }

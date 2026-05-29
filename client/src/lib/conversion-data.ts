@@ -66,6 +66,7 @@ import timeData from '@/data/conversion/time.json';
 import torqueData from '@/data/conversion/torque.json';
 import typographyData from '@/data/conversion/typography.json';
 import paperSizesData from '@/data/conversion/paper_sizes.json';
+import unitlessData from '@/data/conversion/unitless.json';
 import viscosityData from '@/data/conversion/viscosity.json';
 import volumeData from '@/data/conversion/volume.json';
 
@@ -142,7 +143,8 @@ export type UnitCategory =
   | "archaic_power"
   | "typography"
   | "cooking"
-  | "paper_sizes";
+  | "paper_sizes"
+  | "unitless";
 
 export interface Prefix {
   id: string;
@@ -354,6 +356,7 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   typographyData,
   cookingData,
   paperSizesData,
+  unitlessData,
 ].map(asCategoryDefinition);
 
 const MATH_FUNCTIONS: Partial<Record<NonNullable<UnitDefinition['mathFunction']>, (v: number) => number>> = {
@@ -504,6 +507,7 @@ const CATEGORY_DIMENSION_MAP: Record<string, Record<string, number>> = {
   archaic_energy: { mass: 1, length: 2, time: -2 },
   archaic_power: { mass: 1, length: 2, time: -3 },
   typography: { length: 1 }, cooking: { length: 3 }, paper_sizes: { length: 2 },
+  unitless: {},
 };
 
 // Get category dimensions for a given category ID
