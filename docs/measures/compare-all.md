@@ -909,6 +909,45 @@ One section per measurement category. Each row shows how many base SI units one 
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
 
+### Unitless Numbers
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `1` | Number | 1 1 |
+| `ppt` | Parts Per Trillion | 1e-12 1 |
+| `ppb` | Parts Per Billion | 1e-9 1 |
+| `ppm` | Parts Per Million | 1e-6 1 |
+| `‱` | Permyriad | 1e-4 1 |
+| `bp` | Basis Point | 1e-4 1 |
+| `‰` | Permille | 0.001 1 |
+| `proof (US)` | Proof (US) | 0.005 1 |
+| `proof (imp)` | Proof (Imperial) | 0.005715 1 |
+| `%` | Percent | 0.01 1 |
+| `abv` | Alcohol by Volume | 0.01 1 |
+| `caret` | Caret | 0.0416666667 1 |
+| `fold` | Fold | 1 1 |
+| `φ` | Golden Ratio | 1.6180339887 1 |
+| `pair` | Pair | 2 1 |
+| `couple` | Couple | 2 1 |
+| `brace` | Brace | 2 1 |
+| `e` | Euler's Number | 2.7182818285 1 |
+| `hat-trick` | Hat-Trick | 3 1 |
+| `π` | Pi | 3.1415926536 1 |
+| `half-doz` | Half Dozen | 6 1 |
+| `decade` | Decade | 10 1 |
+| `doz` | Dozen | 12 1 |
+| `bakers-doz` | Baker's Dozen | 13 1 |
+| `score` | Score | 20 1 |
+| `century` | Century | 100 1 |
+| `long-hundred` | Long Hundred | 120 1 |
+| `gross` | Gross | 144 1 |
+| `great-gross` | Great Gross | 1728 1 |
+| `myriad` | Myriad | 10000 1 |
+| `万` | Wan | 10000 1 |
+| `लाख` | Lakh | 100000 1 |
+| `करोड़` | Crore | 10000000 1 |
+| `mole` | Mole | 6.02214076e+23 1 |
+
 ### Viscosity (Dynamic)
 
 | Symbol | English Name | 1 unit = (base SI) |

@@ -571,6 +571,40 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `pt (trad)` | Point (Traditional) | Typography | m | 3.51459e-4 |
 | `px` | Pixel (96 PPI) | Typography | m | 2.64583e-4 |
 | `twip` | Twip | Typography | m | 1.7639e-5 |
+| `%` | Percent | Unitless Numbers | 1 | 0.01 |
+| `‰` | Permille | Unitless Numbers | 1 | 0.001 |
+| `‱` | Permyriad | Unitless Numbers | 1 | 1e-4 |
+| `1` | Number | Unitless Numbers | 1 | 1 |
+| `abv` | Alcohol by Volume | Unitless Numbers | 1 | 0.01 |
+| `bakers-doz` | Baker's Dozen | Unitless Numbers | 1 | 13 |
+| `bp` | Basis Point | Unitless Numbers | 1 | 1e-4 |
+| `brace` | Brace | Unitless Numbers | 1 | 2 |
+| `caret` | Caret | Unitless Numbers | 1 | 0.0416666667 |
+| `century` | Century | Unitless Numbers | 1 | 100 |
+| `couple` | Couple | Unitless Numbers | 1 | 2 |
+| `decade` | Decade | Unitless Numbers | 1 | 10 |
+| `doz` | Dozen | Unitless Numbers | 1 | 12 |
+| `e` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
+| `fold` | Fold | Unitless Numbers | 1 | 1 |
+| `great-gross` | Great Gross | Unitless Numbers | 1 | 1728 |
+| `gross` | Gross | Unitless Numbers | 1 | 144 |
+| `half-doz` | Half Dozen | Unitless Numbers | 1 | 6 |
+| `hat-trick` | Hat-Trick | Unitless Numbers | 1 | 3 |
+| `long-hundred` | Long Hundred | Unitless Numbers | 1 | 120 |
+| `mole` | Mole | Unitless Numbers | 1 | 6.02214076e+23 |
+| `myriad` | Myriad | Unitless Numbers | 1 | 10000 |
+| `pair` | Pair | Unitless Numbers | 1 | 2 |
+| `ppb` | Parts Per Billion | Unitless Numbers | 1 | 1e-9 |
+| `ppm` | Parts Per Million | Unitless Numbers | 1 | 1e-6 |
+| `ppt` | Parts Per Trillion | Unitless Numbers | 1 | 1e-12 |
+| `proof (imp)` | Proof (Imperial) | Unitless Numbers | 1 | 0.005715 |
+| `proof (US)` | Proof (US) | Unitless Numbers | 1 | 0.005 |
+| `score` | Score | Unitless Numbers | 1 | 20 |
+| `π` | Pi | Unitless Numbers | 1 | 3.1415926536 |
+| `φ` | Golden Ratio | Unitless Numbers | 1 | 1.6180339887 |
+| `करोड़` | Crore | Unitless Numbers | 1 | 10000000 |
+| `लाख` | Lakh | Unitless Numbers | 1 | 100000 |
+| `万` | Wan | Unitless Numbers | 1 | 10000 |
 | `cP` | Centipoise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.001 |
 | `Pa·s` | Pascal-second | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 1 |
 | `Po` | Poise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.1 |

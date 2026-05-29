@@ -363,6 +363,7 @@ One section per measurement system or tradition.
 | `ft⋅lb` | Foot-pound | 1.35582 kg⋅m²⋅s⁻² |
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
+| `proof (US)` | Proof (US) | 0.005 1 |
 | `ft³` | Cubic Foot | 0.0283168 m³ |
 | `yd³` | Cubic Yard | 0.764555 m³ |
 | `ac⋅ft` | Acre-foot | 1233.48184 m³ |
@@ -450,6 +451,7 @@ One section per measurement system or tradition.
 | `st` | Stone | 6.35029318 kg |
 | `ton (imp)` | Long Ton (Imperial) | 1016.05 kg |
 | `ftm` | Fathom | 1.8288 m |
+| `proof (imp)` | Proof (Imperial) | 0.005715 1 |
 | `tsp (imp)` | Teaspoon (Imp) | 5.91939e-6 m³ |
 | `tbsp (imp)` | Tablespoon (Imp) | 1.77582e-5 m³ |
 | `fl oz (imp)` | Fluid Ounce (Imp) | 2.84130625e-5 m³ |
@@ -568,6 +570,7 @@ One section per measurement system or tradition.
 | `sheng` | Sheng (China) | 1.0355 L |
 | `dou` | Dou (China) | 10.355 L |
 | `dan-v` | Dan (China) | 103.55 L |
+| `万` | Wan | 10000 1 |
 
 ## Hong Kong Traditional
 
@@ -588,6 +591,8 @@ One section per measurement system or tradition.
 | `tola` | Tola (South Asia) | 0.0116638 kg |
 | `seer` | Seer (South Asia) | 0.9331 kg |
 | `maund` | Maund (South Asia) | 37.324 kg |
+| `लाख` | Lakh | 100000 1 |
+| `करोड़` | Crore | 10000000 1 |
 
 ## Thai Traditional
 
@@ -720,6 +725,35 @@ One section per measurement system or tradition.
 | `dunam` | Dunam (Israel) | 1000 m² |
 | `jerib` | Jerib (Middle East) | 2000 m² |
 | `bph` | Beats/Hour | 2.777777777777778e-4 s⁻¹ |
+| `1` | Number | 1 1 |
+| `ppt` | Parts Per Trillion | 1e-12 1 |
+| `ppb` | Parts Per Billion | 1e-9 1 |
+| `ppm` | Parts Per Million | 1e-6 1 |
+| `‱` | Permyriad | 1e-4 1 |
+| `bp` | Basis Point | 1e-4 1 |
+| `‰` | Permille | 0.001 1 |
+| `%` | Percent | 0.01 1 |
+| `abv` | Alcohol by Volume | 0.01 1 |
+| `caret` | Caret | 0.0416666667 1 |
+| `fold` | Fold | 1 1 |
+| `φ` | Golden Ratio | 1.6180339887 1 |
+| `pair` | Pair | 2 1 |
+| `couple` | Couple | 2 1 |
+| `brace` | Brace | 2 1 |
+| `e` | Euler's Number | 2.7182818285 1 |
+| `hat-trick` | Hat-Trick | 3 1 |
+| `π` | Pi | 3.1415926536 1 |
+| `half-doz` | Half Dozen | 6 1 |
+| `decade` | Decade | 10 1 |
+| `doz` | Dozen | 12 1 |
+| `bakers-doz` | Baker's Dozen | 13 1 |
+| `score` | Score | 20 1 |
+| `century` | Century | 100 1 |
+| `long-hundred` | Long Hundred | 120 1 |
+| `gross` | Gross | 144 1 |
+| `great-gross` | Great Gross | 1728 1 |
+| `myriad` | Myriad | 10000 1 |
+| `mole` | Mole | 6.02214076e+23 1 |
 
 
 
