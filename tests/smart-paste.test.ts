@@ -1085,3 +1085,79 @@ describe('findCategoryByDimensions - Compound Unit Routing', () => {
     });
   });
 });
+
+describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () => {
+  describe('Counting words', () => {
+    it('should parse "12 doz" as unitless dozen', () => {
+      const result = parseUnitText('12 doz');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('dozen');
+      expect(result.originalValue).toBe(12);
+    });
+
+    it('should parse "3 score" as unitless score', () => {
+      const result = parseUnitText('3 score');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('score');
+      expect(result.originalValue).toBe(3);
+    });
+
+    it('should parse "2 gross" as unitless gross', () => {
+      const result = parseUnitText('2 gross');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('gross');
+      expect(result.originalValue).toBe(2);
+    });
+
+    it('should parse "1 myriad" as unitless myriad', () => {
+      const result = parseUnitText('1 myriad');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('myriad');
+      expect(result.originalValue).toBe(1);
+    });
+  });
+
+  describe('Shared ratio symbols resolve to unitless', () => {
+    it('should parse "5 %" as unitless percent', () => {
+      const result = parseUnitText('5 %');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('percent');
+      expect(result.originalValue).toBe(5);
+    });
+
+    it('should parse "5%" (no space) as unitless percent', () => {
+      const result = parseUnitText('5%');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('percent');
+      expect(result.originalValue).toBe(5);
+    });
+
+    it('should parse "1 ppm" as unitless parts-per-million', () => {
+      const result = parseUnitText('1 ppm');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('ppm');
+      expect(result.originalValue).toBe(1);
+    });
+
+    it('should parse "10 ppb" as unitless parts-per-billion', () => {
+      const result = parseUnitText('10 ppb');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('ppb');
+      expect(result.originalValue).toBe(10);
+    });
+
+    it('should parse "2 ppt" as unitless parts-per-trillion', () => {
+      const result = parseUnitText('2 ppt');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('ppt');
+      expect(result.originalValue).toBe(2);
+    });
+
+    it('should parse "3 ‰" as unitless permille', () => {
+      const result = parseUnitText('3 ‰');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('permille');
+      expect(result.originalValue).toBe(3);
+    });
+  });
+});

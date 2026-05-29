@@ -403,3 +403,51 @@ describe('CONVERSION_DATA Symbol Verification', () => {
     });
   });
 });
+
+describe('Unitless ratio symbol disambiguation', () => {
+  const symbolMap = buildUnitSymbolMap();
+
+  it('"%" maps to unitless percent (not concentration)', () => {
+    const result = symbolMap.get('%');
+    expect(result?.categoryId).toBe('unitless');
+    expect(result?.unitId).toBe('percent');
+  });
+
+  it('"ppm" maps to unitless (not concentration)', () => {
+    const result = symbolMap.get('ppm');
+    expect(result?.categoryId).toBe('unitless');
+    expect(result?.unitId).toBe('ppm');
+  });
+
+  it('"ppb" maps to unitless (not concentration)', () => {
+    expect(symbolMap.get('ppb')?.categoryId).toBe('unitless');
+  });
+
+  it('"ppt" maps to unitless (not concentration)', () => {
+    expect(symbolMap.get('ppt')?.categoryId).toBe('unitless');
+  });
+
+  it('"‰" maps to unitless permille (not concentration)', () => {
+    const result = symbolMap.get('‰');
+    expect(result?.categoryId).toBe('unitless');
+    expect(result?.unitId).toBe('permille');
+  });
+
+  it('parseUnitText routes "1 ppm" to unitless', () => {
+    const result = parseUnitText('1 ppm');
+    expect(result.categoryId).toBe('unitless');
+    expect(result.unitId).toBe('ppm');
+  });
+
+  it('parseUnitText routes "5 %" to unitless', () => {
+    const result = parseUnitText('5 %');
+    expect(result.categoryId).toBe('unitless');
+    expect(result.unitId).toBe('percent');
+  });
+
+  it('counting words like "doz" route to unitless', () => {
+    const result = parseUnitText('12 doz');
+    expect(result.categoryId).toBe('unitless');
+    expect(result.unitId).toBe('dozen');
+  });
+});

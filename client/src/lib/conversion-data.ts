@@ -439,12 +439,29 @@ function registerRemainingUnits(map: SymbolMap): void {
   }
 }
 
+// Ratio symbols (%, ‰, ppm, ppb, ppt) are shared between the specialised
+// concentration category and the general-purpose unitless category. For global
+// free-text / smart-paste parsing these ambiguous symbols should resolve to
+// unitless (the dimensionless ratio home) rather than concentration, so typing
+// "5 %" or "1 ppm" lands in the intended category.
+const UNITLESS_PRIORITY_SYMBOLS = new Set(['%', '‰', 'ppm', 'ppb', 'ppt']);
+
+function registerPriorityUnitlessSymbols(map: SymbolMap): void {
+  const unitless = CONVERSION_DATA.find(c => c.id === 'unitless');
+  if (!unitless) return;
+  for (const unit of unitless.units) {
+    if (UNITLESS_PRIORITY_SYMBOLS.has(unit.symbol)) map.set(unit.symbol, makeEntry(unitless, unit));
+  }
+}
+
 // Build a lookup map for quick unit matching.
-// Two-pass priority: category base units (factor === 1) win over secondary units elsewhere.
-// Within the same tier, first-wins based on CONVERSION_DATA order.
+// Priority: category base units (factor === 1) win first, then a small set of
+// shared ratio symbols is claimed by the unitless category, then remaining units
+// fill in. Within the same tier, first-wins based on CONVERSION_DATA order.
 export function buildUnitSymbolMap(): SymbolMap {
   const map: SymbolMap = new Map();
   registerBaseUnits(map);
+  registerPriorityUnitlessSymbols(map);
   registerRemainingUnits(map);
   return map;
 }

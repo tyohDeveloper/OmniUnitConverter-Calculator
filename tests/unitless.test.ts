@@ -111,16 +111,16 @@ describe('Unitless Numbers category', () => {
       }
     });
 
-    // The ratio symbols (%, ‰, ppm, ppb, ppt) are intentional cross-category
-    // aliases shared with the concentration category. This mirrors the app's
-    // established design where many symbols (e.g. m, L, J) appear in several
-    // categories. Global free-text parsing is first-win by category order, so
-    // these symbols keep resolving to concentration (registered earlier) — no
-    // regression — while unitless conversions are always category-scoped.
-    it('keeps concentration as the global owner of the shared ratio symbols (no regression)', () => {
+    // The ratio symbols (%, ‰, ppm, ppb, ppt) are shared cross-category aliases
+    // with the concentration category. For global free-text / smart-paste parsing
+    // they are intentionally claimed by the general-purpose unitless category (the
+    // dimensionless ratio home) via a priority pass in buildUnitSymbolMap, so that
+    // typing "5 %" or "1 ppm" lands in unitless. Concentration's own ratio units
+    // remain available when the concentration category is selected directly.
+    it('routes the shared ratio symbols to unitless for global parsing', () => {
       const map = buildUnitSymbolMap();
       for (const sym of ['%', '‰', 'ppm', 'ppb', 'ppt']) {
-        expect(map.get(sym)?.categoryId, `${sym} should remain owned by concentration`).toBe('concentration');
+        expect(map.get(sym)?.categoryId, `${sym} should be owned by unitless`).toBe('unitless');
       }
     });
   });
