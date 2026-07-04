@@ -479,9 +479,13 @@ function lookupTimeWordAlias(text: string): SymbolMapEntry | null {
 // romanized words ("5 wan", "2 lakh", "1 crore") in smart paste should land on
 // the matching unitless unit. Keys must be lowercase; plurals included.
 const UNITLESS_WORD_ALIASES: Record<string, string> = {
-  wan: 'wan',
+  wan: 'wan', man: 'wan',
   lakh: 'lakh', lakhs: 'lakh', lac: 'lakh', lacs: 'lakh',
   crore: 'crore', crores: 'crore',
+  yi: 'yi',
+  oku: 'oku',
+  arab: 'arab', arabs: 'arab',
+  kharab: 'kharab', kharabs: 'kharab',
 };
 
 function lookupUnitlessWordAlias(text: string): SymbolMapEntry | null {

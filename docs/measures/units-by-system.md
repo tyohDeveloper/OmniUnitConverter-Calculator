@@ -542,6 +542,7 @@ One section per measurement system or tradition.
 | `JIS B6` | JIS B6 | 0.023296 m² |
 | `JIS B7` | JIS B7 | 0.011648 m² |
 | `JIS B8` | JIS B8 | 0.005824 m² |
+| `億` | Oku | 100000000 1 |
 
 ## Korean Traditional
 
@@ -575,6 +576,7 @@ One section per measurement system or tradition.
 | `dou` | Dou (China) | 10.355 L |
 | `dan-v` | Dan (China) | 103.55 L |
 | `万` | Wan | 10000 1 |
+| `亿` | Yi | 100000000 1 |
 
 ## Hong Kong Traditional
 
@@ -597,6 +599,8 @@ One section per measurement system or tradition.
 | `maund` | Maund (South Asia) | 37.324 kg |
 | `लाख` | Lakh | 100000 1 |
 | `करोड़` | Crore | 10000000 1 |
+| `अरब` | Arab | 1e+9 1 |
+| `खरब` | Kharab | 1e+11 1 |
 
 ## Thai Traditional
 

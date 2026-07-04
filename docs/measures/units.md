@@ -604,9 +604,13 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `score` | Score | Unitless Numbers | 1 | 20 |
 | `π` | Pi | Unitless Numbers | 1 | 3.1415926536 |
 | `φ` | Golden Ratio | Unitless Numbers | 1 | 1.6180339887 |
+| `अरब` | Arab | Unitless Numbers | 1 | 1e+9 |
 | `करोड़` | Crore | Unitless Numbers | 1 | 10000000 |
+| `खरब` | Kharab | Unitless Numbers | 1 | 1e+11 |
 | `लाख` | Lakh | Unitless Numbers | 1 | 100000 |
 | `万` | Wan | Unitless Numbers | 1 | 10000 |
+| `亿` | Yi | Unitless Numbers | 1 | 100000000 |
+| `億` | Oku | Unitless Numbers | 1 | 100000000 |
 | `cP` | Centipoise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.001 |
 | `Pa·s` | Pascal-second | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 1 |
 | `Po` | Poise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.1 |

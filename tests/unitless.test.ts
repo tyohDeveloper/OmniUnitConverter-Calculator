@@ -53,6 +53,13 @@ describe('Unitless Numbers category', () => {
     it('1 wan = 10000', () => { expect(c(1, 'wan', 'number')).toBe(10000); });
     it('1 lakh = 100000', () => { expect(c(1, 'lakh', 'number')).toBe(100000); });
     it('1 crore = 10000000', () => { expect(c(1, 'crore', 'number')).toBe(10000000); });
+    it('1 yi = 100000000', () => { expect(c(1, 'yi', 'number')).toBe(100000000); });
+    it('1 oku = 100000000', () => { expect(c(1, 'oku', 'number')).toBe(100000000); });
+    it('1 arab = 1000000000', () => { expect(c(1, 'arab', 'number')).toBe(1000000000); });
+    it('1 kharab = 100000000000', () => { expect(c(1, 'kharab', 'number')).toBe(100000000000); });
+    it('cross-unit: 1 yi = 10000 wan', () => { expect(c(1, 'yi', 'wan')).toBe(10000); });
+    it('cross-unit: 1 arab = 100 crore', () => { expect(c(1, 'arab', 'crore')).toBe(100); });
+    it('cross-unit: 1 kharab = 100 arab', () => { expect(c(1, 'kharab', 'arab')).toBe(100); });
     it('1 mole = Avogadro count', () => { expect(c(1, 'mole', 'number')).toBe(6.02214076e23); });
     it('1 caret = 1/24', () => { expect(c(1, 'caret', 'number')).toBeCloseTo(1 / 24, 8); });
     it('1 proof (US) = 0.005', () => { expect(c(1, 'proof_us', 'number')).toBe(0.005); });

@@ -948,6 +948,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | `万` | Wan | 10000 1 |
 | `लाख` | Lakh | 100000 1 |
 | `करोड़` | Crore | 10000000 1 |
+| `亿` | Yi | 100000000 1 |
+| `億` | Oku | 100000000 1 |
+| `अरब` | Arab | 1e+9 1 |
+| `खरब` | Kharab | 1e+11 1 |
 | `mole` | Mole | 6.02214076e+23 1 |
 
 ### Viscosity (Dynamic)

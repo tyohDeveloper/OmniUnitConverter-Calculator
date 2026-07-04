@@ -222,6 +222,34 @@
       "measurementSystem": "SOUTH_ASIAN"
     },
     {
+      "id": "yi",
+      "name": "Yi",
+      "symbol": "亿",
+      "factor": 100000000,
+      "measurementSystem": "CHINESE"
+    },
+    {
+      "id": "oku",
+      "name": "Oku",
+      "symbol": "億",
+      "factor": 100000000,
+      "measurementSystem": "JAPANESE"
+    },
+    {
+      "id": "arab",
+      "name": "Arab",
+      "symbol": "अरब",
+      "factor": 1000000000,
+      "measurementSystem": "SOUTH_ASIAN"
+    },
+    {
+      "id": "kharab",
+      "name": "Kharab",
+      "symbol": "खरब",
+      "factor": 100000000000,
+      "measurementSystem": "SOUTH_ASIAN"
+    },
+    {
       "id": "mole",
       "name": "Mole",
       "symbol": "mole",

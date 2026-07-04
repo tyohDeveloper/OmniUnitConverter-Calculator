@@ -1211,6 +1211,57 @@ describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () =
       expect(parseUnitText('5 Wan').unitId).toBe('wan');
       expect(parseUnitText('2 LAKH').unitId).toBe('lakh');
     });
+
+    it('should parse "3 yi" as unitless yi', () => {
+      const result = parseUnitText('3 yi');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('yi');
+      expect(result.originalValue).toBe(3);
+      expect(result.value).toBe(300000000);
+    });
+
+    it('should parse "2 oku" as unitless oku', () => {
+      const result = parseUnitText('2 oku');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('oku');
+      expect(result.originalValue).toBe(2);
+      expect(result.value).toBe(200000000);
+    });
+
+    it('should parse "1 arab" as unitless arab', () => {
+      const result = parseUnitText('1 arab');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('arab');
+      expect(result.originalValue).toBe(1);
+      expect(result.value).toBe(1000000000);
+    });
+
+    it('should parse "4 kharab" as unitless kharab', () => {
+      const result = parseUnitText('4 kharab');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('kharab');
+      expect(result.originalValue).toBe(4);
+      expect(result.value).toBe(400000000000);
+    });
+
+    it('should parse "5 man" (Japanese romanization) as unitless wan', () => {
+      const result = parseUnitText('5 man');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('wan');
+      expect(result.originalValue).toBe(5);
+      expect(result.value).toBe(50000);
+    });
+
+    it('should parse plurals "2 arabs" and "3 kharabs"', () => {
+      expect(parseUnitText('2 arabs').unitId).toBe('arab');
+      expect(parseUnitText('3 kharabs').unitId).toBe('kharab');
+    });
+
+    it('should be case-insensitive for new words ("3 Yi", "2 OKU", "1 Arab")', () => {
+      expect(parseUnitText('3 Yi').unitId).toBe('yi');
+      expect(parseUnitText('2 OKU').unitId).toBe('oku');
+      expect(parseUnitText('1 Arab').unitId).toBe('arab');
+    });
   });
 
   describe('Asian counting words (native scripts)', () => {
@@ -1241,6 +1292,41 @@ describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () =
       expect(result.categoryId).toBe('unitless');
       expect(result.unitId).toBe('crore');
       expect(result.value).toBe(10000000);
+    });
+
+    it('should parse "3 亿" as unitless yi', () => {
+      const result = parseUnitText('3 亿');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('yi');
+      expect(result.value).toBe(300000000);
+    });
+
+    it('should parse "3亿" (no space) as unitless yi', () => {
+      const result = parseUnitText('3亿');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('yi');
+      expect(result.value).toBe(300000000);
+    });
+
+    it('should parse "2 億" as unitless oku', () => {
+      const result = parseUnitText('2 億');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('oku');
+      expect(result.value).toBe(200000000);
+    });
+
+    it('should parse "1 अरब" as unitless arab', () => {
+      const result = parseUnitText('1 अरब');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('arab');
+      expect(result.value).toBe(1000000000);
+    });
+
+    it('should parse "1 खरब" as unitless kharab', () => {
+      const result = parseUnitText('1 खरब');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('kharab');
+      expect(result.value).toBe(100000000000);
     });
   });
 });
