@@ -368,6 +368,7 @@ One section per measurement system or tradition.
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
 | `proof (US)` | Proof (US) | 0.005 1 |
+| `in³` | Cubic Inch | 1.6387064e-5 m³ |
 | `ft³` | Cubic Foot | 0.0283168 m³ |
 | `yd³` | Cubic Yard | 0.764555 m³ |
 | `ac⋅ft` | Acre-foot | 1233.48184 m³ |

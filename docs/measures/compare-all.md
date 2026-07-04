@@ -970,6 +970,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `tsp (US)` | Teaspoon (US) | 4.92892e-6 m³ |
 | `tsp (imp)` | Teaspoon (Imp) | 5.91939e-6 m³ |
 | `tbsp (US)` | Tablespoon (US) | 1.47868e-5 m³ |
+| `in³` | Cubic Inch | 1.6387064e-5 m³ |
 | `tbsp (imp)` | Tablespoon (Imp) | 1.77582e-5 m³ |
 | `fl oz (imp)` | Fluid Ounce (Imp) | 2.84130625e-5 m³ |
 | `fl oz (US)` | Fluid Ounce (US) | 2.95735e-5 m³ |

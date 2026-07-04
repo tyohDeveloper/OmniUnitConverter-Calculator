@@ -625,6 +625,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `ft³` | Cubic Foot | Volume | m³ | 0.0283168 |
 | `gal (imp)` | Gallon (Imp) | Volume | m³ | 0.00454609 |
 | `gal (US)` | Gallon (US) | Volume | m³ | 0.003785411784 |
+| `in³` | Cubic Inch | Volume | m³ | 1.6387064e-5 |
 | `L` | Litre | Volume | m³ | 0.001 |
 | `m³` | Cubic Metre | Volume | m³ | 1 |
 | `mi³` | Cubic Mile | Volume | m³ | 4.16818e+9 |
