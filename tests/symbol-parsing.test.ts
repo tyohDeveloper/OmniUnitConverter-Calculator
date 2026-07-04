@@ -451,3 +451,38 @@ describe('Unitless ratio symbol disambiguation', () => {
     expect(result.unitId).toBe('dozen');
   });
 });
+
+describe('Time full-word aliases', () => {
+  const cases: Array<[string, string]> = [
+    ['1 decade', 'dec'],
+    ['3 decades', 'dec'],
+    ['1 century', 'cent'],
+    ['2 centuries', 'cent'],
+    ['1 millennium', 'kyr'],
+    ['2 millennia', 'kyr'],
+    ['2 millenniums', 'kyr'],
+    ['1 eon', 'eon'],
+    ['4 eons', 'eon'],
+    ['1 aeon', 'eon'],
+  ];
+
+  for (const [input, unitId] of cases) {
+    it(`routes "${input}" to time ${unitId}`, () => {
+      const result = parseUnitText(input);
+      expect(result.categoryId).toBe('time');
+      expect(result.unitId).toBe(unitId);
+    });
+  }
+
+  it('is case-insensitive ("2 Centuries")', () => {
+    const result = parseUnitText('2 Centuries');
+    expect(result.categoryId).toBe('time');
+    expect(result.unitId).toBe('cent');
+  });
+
+  it('preserves canonical symbol parsing ("1 dec")', () => {
+    const result = parseUnitText('1 dec');
+    expect(result.categoryId).toBe('time');
+    expect(result.unitId).toBe('dec');
+  });
+});

@@ -454,6 +454,26 @@ function registerPriorityUnitlessSymbols(map: SymbolMap): void {
   }
 }
 
+// Full-word aliases (case-insensitive) for Time units whose canonical symbols
+// are short codes (dec, cent, kyr, eon). Users naturally type the spelled-out
+// words ("2 centuries", "1 millennium", "3 decades") in smart paste, so map the
+// singular and plural forms to their Time unit ids. Keys must be lowercase.
+const TIME_WORD_ALIASES: Record<string, string> = {
+  decade: 'dec', decades: 'dec',
+  century: 'cent', centuries: 'cent',
+  millennium: 'kyr', millennia: 'kyr', millenniums: 'kyr',
+  eon: 'eon', eons: 'eon', aeon: 'eon', aeons: 'eon',
+};
+
+function lookupTimeWordAlias(text: string): SymbolMapEntry | null {
+  const unitId = TIME_WORD_ALIASES[text.toLowerCase()];
+  if (!unitId) return null;
+  const timeCategory = CONVERSION_DATA.find(c => c.id === 'time');
+  const unit = timeCategory?.units.find(u => u.id === unitId);
+  if (!timeCategory || !unit) return null;
+  return makeEntry(timeCategory, unit);
+}
+
 // Build a lookup map for quick unit matching.
 // Priority: category base units (factor === 1) win first, then a small set of
 // shared ratio symbols is claimed by the unitless category, then remaining units
@@ -557,6 +577,18 @@ export function parseUnitSymbol(
     };
   }
   
+  // 1b. Try full-word Time aliases (case-insensitive, singular/plural), e.g.
+  // "decade", "centuries", "millennium", "eons" → the matching Time unit.
+  const timeAlias = lookupTimeWordAlias(normalizedText);
+  if (timeAlias) {
+    return {
+      categoryId: timeAlias.categoryId,
+      unitId: timeAlias.unitId,
+      prefixId: 'none',
+      factor: timeAlias.factor
+    };
+  }
+
   // 2. Try localized name match if provided
   if (unitNameLookup) {
     const nameLower = normalizedText.toLowerCase();
