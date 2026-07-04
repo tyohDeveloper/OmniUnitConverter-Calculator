@@ -10,6 +10,7 @@
       "symbol": "m³",
       "factor": 1,
       "allowPrefixes": true,
+      "prefixPower": 3,
       "unitType": "SI_BASE",
       "measurementSystem": "SI"
     },
@@ -36,6 +37,14 @@
       "factor": 0.0000147868,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID"
+    },
+    {
+      "id": "in3",
+      "name": "Cubic Inch",
+      "symbol": "in³",
+      "factor": 0.000016387064,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY"
     },
     {
       "id": "tbsp_imp",

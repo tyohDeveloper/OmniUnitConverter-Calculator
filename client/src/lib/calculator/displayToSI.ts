@@ -21,9 +21,10 @@ export function displayToSI(displayValue: number, symbol: string, prefixId: stri
     const factor = unit?.factor ?? 1;
     return (displayValue / effectivePrefixFactor) * factor;
   }
-  const prefixFactor = PREFIXES.find(p => p.id === prefixId)?.factor ?? 1;
-  const scaled = displayValue * prefixFactor;
+  const basePrefixFactor = PREFIXES.find(p => p.id === prefixId)?.factor ?? 1;
   const unit = lookupUnitForSymbol(symbol);
+  const prefixFactor = Math.pow(basePrefixFactor, unit?.prefixPower ?? 1);
+  const scaled = displayValue * prefixFactor;
   if (!unit) return scaled;
   if (unit.categoryId === 'temperature') return (scaled + unit.offset) * unit.factor;
   if (unit.isInverse) return unit.factor / scaled;

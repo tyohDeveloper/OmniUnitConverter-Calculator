@@ -21,6 +21,7 @@ import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import { PASTE_RESET_TIMEOUT_MS } from '../constants';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import type { SupportedLanguage } from '@/lib/localization';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS } from '@/lib/localization';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
@@ -467,8 +468,8 @@ export function useConverterController(): UseConverterControllerReturn {
     const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
     const isSpecialFrom = fromUnit === 'deg_dms' || fromUnit === 'ft_in';
     const isSpecialTo = toUnit === 'deg_dms' || toUnit === 'ft_in';
-    const fromFactor = (fromUnitData?.allowPrefixes && fromPrefixData && !isSpecialFrom) ? fromPrefixData.factor : 1;
-    const toFactor = (toUnitData?.allowPrefixes && toPrefixData && !isSpecialTo) ? toPrefixData.factor : 1;
+    const fromFactor = (fromUnitData?.allowPrefixes && fromPrefixData && !isSpecialFrom) ? prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower) : 1;
+    const toFactor = (toUnitData?.allowPrefixes && toPrefixData && !isSpecialTo) ? prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower) : 1;
     const res = convert(val, fromUnit, toUnit, activeCategory, fromFactor, toFactor);
     setResult(res);
   }, [inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix, numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -606,7 +607,7 @@ export function useConverterController(): UseConverterControllerReturn {
     const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
     const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
     if (fromUnitData) {
-      navigator.clipboard.writeText((fromUnitData.factor * fromPrefixData.factor).toString());
+      navigator.clipboard.writeText((fromUnitData.factor * prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower)).toString());
       triggerFlashFromBaseFactor();
     }
   }, [activeCategory, fromUnit, fromPrefix, triggerFlashFromBaseFactor]);
@@ -621,7 +622,7 @@ export function useConverterController(): UseConverterControllerReturn {
     const toUnitData = categoryData.units.find(u => u.id === toUnit);
     const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
     if (toUnitData) {
-      navigator.clipboard.writeText((toUnitData.factor * toPrefixData.factor).toString());
+      navigator.clipboard.writeText((toUnitData.factor * prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)).toString());
       triggerFlashToBaseFactor();
     }
   }, [activeCategory, toUnit, toPrefix, triggerFlashToBaseFactor]);
@@ -641,8 +642,8 @@ export function useConverterController(): UseConverterControllerReturn {
       const fromPrefixSymbol = (fromUnitData.allowPrefixes && fromPrefixData?.id !== 'none') ? fromPrefixData.symbol : '';
       const toPrefixSymbol = (toUnitData.allowPrefixes && toPrefixData?.id !== 'none') ? toPrefixData.symbol : '';
       const ratio = convert(1, fromUnit, toUnit, activeCategory,
-        fromUnitData.allowPrefixes ? fromPrefixData.factor : 1,
-        toUnitData.allowPrefixes ? toPrefixData.factor : 1
+        fromUnitData.allowPrefixes ? prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower) : 1,
+        toUnitData.allowPrefixes ? prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower) : 1
       );
       const ratioText = `1 ${fromPrefixSymbol}${fromUnitData.symbol} = ${formatForClipboard(ratio, precision)} ${toPrefixSymbol}${toUnitData.symbol}`;
       navigator.clipboard.writeText(ratioText);

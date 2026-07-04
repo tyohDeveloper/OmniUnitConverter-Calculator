@@ -199,13 +199,13 @@ export const ALL_PREFIXES: Prefix[] = [...PREFIXES, ...BINARY_PREFIXES].sort((a,
  * @param precision - Optional precision setting to ensure value is displayable
  * @returns Object with the best prefix and the adjusted value
  */
-function findBestRangePrefix(absValue: number, nonePrefix: Prefix): Prefix {
+function findBestRangePrefix(absValue: number, nonePrefix: Prefix, prefixPower: number): Prefix {
   let best = nonePrefix;
   let bestScore = Math.abs(Math.log10(absValue));
   for (const prefix of PREFIXES) {
     if (prefix.id === 'none') continue;
-    const adj = absValue / prefix.factor;
-    if (adj >= 1 && adj < 1000) {
+    const adj = absValue / Math.pow(prefix.factor, prefixPower);
+    if (adj >= 1 && adj < Math.pow(1000, prefixPower)) {
       const score = Math.abs(Math.log10(adj));
       if (score < bestScore) { bestScore = score; best = prefix; }
     }
@@ -213,16 +213,16 @@ function findBestRangePrefix(absValue: number, nonePrefix: Prefix): Prefix {
   return best;
 }
 
-function findPrecisionFallbackPrefix(absValue: number, bestPrefix: Prefix, precision: number): Prefix {
+function findPrecisionFallbackPrefix(absValue: number, bestPrefix: Prefix, precision: number, prefixPower: number): Prefix {
   for (const prefix of PREFIXES) {
     if (prefix.factor >= bestPrefix.factor) continue;
-    const rounded = parseFloat((absValue / prefix.factor).toFixed(precision));
+    const rounded = parseFloat((absValue / Math.pow(prefix.factor, prefixPower)).toFixed(precision));
     if (rounded !== 0) return prefix;
   }
   return bestPrefix;
 }
 
-export function findOptimalPrefix(value: number, unitSymbol = '', precision = 8): { prefix: Prefix; adjustedValue: number } {
+export function findOptimalPrefix(value: number, unitSymbol = '', precision = 8, prefixPower = 1): { prefix: Prefix; adjustedValue: number } {
   const nonePrefix = PREFIXES.find(p => p.id === 'none')!;
   const containsKg = unitSymbol.includes('kg');
   const effectiveValue = containsKg ? value * 1000 : value;
@@ -232,13 +232,13 @@ export function findOptimalPrefix(value: number, unitSymbol = '', precision = 8)
     return { prefix: nonePrefix, adjustedValue: value };
   }
 
-  let bestPrefix = findBestRangePrefix(absValue, nonePrefix);
-  const roundedWithBest = parseFloat((effectiveValue / bestPrefix.factor).toFixed(precision));
+  let bestPrefix = findBestRangePrefix(absValue, nonePrefix, prefixPower);
+  const roundedWithBest = parseFloat((effectiveValue / Math.pow(bestPrefix.factor, prefixPower)).toFixed(precision));
   if (roundedWithBest === 0 && effectiveValue !== 0) {
-    bestPrefix = findPrecisionFallbackPrefix(absValue, bestPrefix, precision);
+    bestPrefix = findPrecisionFallbackPrefix(absValue, bestPrefix, precision, prefixPower);
   }
 
-  return { prefix: bestPrefix, adjustedValue: effectiveValue / bestPrefix.factor };
+  return { prefix: bestPrefix, adjustedValue: effectiveValue / Math.pow(bestPrefix.factor, prefixPower) };
 }
 
 export interface UnitDefinition {
@@ -249,6 +249,7 @@ export interface UnitDefinition {
   offset?: number; // For temperature (e.g. Celsius to Kelvin)
   description?: string;
   allowPrefixes?: boolean;
+  prefixPower?: number; // Prefix applies to a length raised to this power (2 for m², 3 for m³)
   mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4'; // For math function units
   isInverse?: boolean; // For photon wavelength: E = constant/λ (inverse relationship)
   unitType?: import('./units/unitType').UnitType;
@@ -275,6 +276,7 @@ type RawCategoryJson = {
     offset?: number;
     description?: string;
     allowPrefixes?: boolean;
+    prefixPower?: number;
     mathFunction?: string;
     isInverse?: boolean;
     unitType?: string;
@@ -417,11 +419,27 @@ export interface ParsedUnitResult {
   dimensions: Record<string, number>;
 }
 
-type SymbolMapEntry = { categoryId: UnitCategory; unitId: string; symbol: string; allowPrefixes: boolean; factor: number };
+type SymbolMapEntry = { categoryId: UnitCategory; unitId: string; symbol: string; allowPrefixes: boolean; factor: number; prefixPower: number };
 type SymbolMap = Map<string, SymbolMapEntry>;
 
 function makeEntry(category: CategoryDefinition, unit: UnitDefinition): SymbolMapEntry {
-  return { categoryId: category.id as UnitCategory, unitId: unit.id, symbol: unit.symbol, allowPrefixes: unit.allowPrefixes || false, factor: unit.factor };
+  return { categoryId: category.id as UnitCategory, unitId: unit.id, symbol: unit.symbol, allowPrefixes: unit.allowPrefixes || false, factor: unit.factor, prefixPower: unit.prefixPower ?? 1 };
+}
+
+let englishNameMapCache: Map<string, SymbolMapEntry> | null = null;
+
+// Lowercased English unit names → symbol-map entry, e.g. "cubic inch" → in³.
+function getEnglishNameMap(): Map<string, SymbolMapEntry> {
+  if (englishNameMapCache) return englishNameMapCache;
+  const map: Map<string, SymbolMapEntry> = new Map();
+  for (const category of CONVERSION_DATA) {
+    for (const unit of category.units) {
+      const key = unit.name.toLowerCase();
+      if (!unit.mathFunction && !map.has(key)) map.set(key, makeEntry(category, unit));
+    }
+  }
+  englishNameMapCache = map;
+  return map;
 }
 
 function registerBaseUnits(map: SymbolMap): void {
@@ -640,6 +658,17 @@ export function parseUnitSymbol(
     }
   }
   
+  // 2b. Try English unit-name match (case-insensitive), e.g. "cubic inch" → in³.
+  const englishNameMatch = getEnglishNameMap().get(normalizedText.toLowerCase());
+  if (englishNameMatch) {
+    return {
+      categoryId: englishNameMatch.categoryId,
+      unitId: englishNameMatch.unitId,
+      prefixId: 'none',
+      factor: englishNameMatch.factor
+    };
+  }
+
   // 3. Try prefix + symbol match
   // Sort prefixes by symbol length (longest first) to match "micro" before "m"
   const sortedPrefixes = [...PREFIXES, ...BINARY_PREFIXES]
@@ -662,7 +691,7 @@ export function parseUnitSymbol(
           categoryId: unitMatch.categoryId,
           unitId: unitMatch.unitId,
           prefixId: prefix.id,
-          factor: unitMatch.factor * prefix.factor
+          factor: unitMatch.factor * Math.pow(prefix.factor, unitMatch.prefixPower)
         };
       }
     }
@@ -1039,6 +1068,18 @@ export function parseUnitText(
         unitId: matchedUnitId,
         prefixId: 'none',
         dimensions: getCategoryDimensionsForParse(matchedCategoryId)
+      };
+    }
+
+    const prefixedMatch = parseUnitSymbol(unitText, unitNameLookup);
+    if (prefixedMatch.categoryId && prefixedMatch.unitId) {
+      return {
+        value: numValue * prefixedMatch.factor,
+        originalValue: numValue,
+        categoryId: prefixedMatch.categoryId,
+        unitId: prefixedMatch.unitId,
+        prefixId: prefixedMatch.prefixId,
+        dimensions: getCategoryDimensionsForParse(prefixedMatch.categoryId)
       };
     }
 

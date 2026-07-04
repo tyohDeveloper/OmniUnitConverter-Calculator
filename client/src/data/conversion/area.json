@@ -10,6 +10,7 @@
       "symbol": "m²",
       "factor": 1,
       "allowPrefixes": true,
+      "prefixPower": 2,
       "unitType": "SI_BASE",
       "measurementSystem": "SI"
     },

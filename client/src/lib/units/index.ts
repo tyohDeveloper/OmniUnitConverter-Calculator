@@ -4,6 +4,7 @@ export type { UnitDefinition, CategoryDefinition } from './unitDefinition';
 
 export { PREFIXES, BINARY_PREFIXES, ALL_PREFIXES } from './prefixes';
 export { findOptimalPrefix } from './findOptimalPrefix';
+export { prefixPowerFactor } from './prefixPowerFactor';
 
 export type { DimensionalFormula } from './dimensionalFormula';
 export type { CalcValue } from './calcValue';

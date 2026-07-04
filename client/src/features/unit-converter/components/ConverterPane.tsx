@@ -13,6 +13,7 @@ import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
 
 export interface ConverterFlash {
@@ -406,10 +407,10 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                     <span>=</span>
                     <span className="text-foreground font-bold">
                       {toUnit === 'deg_dms'
-                        ? formatDMS(convert(1, fromUnit, toUnit, activeCategory, fromPrefixData.factor, toPrefixData.factor))
+                        ? formatDMS(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)))
                         : toUnit === 'ft_in'
-                          ? formatFtIn(convert(1, fromUnit, toUnit, activeCategory, fromPrefixData.factor, toPrefixData.factor))
-                          : `${formatResultValue(convert(1, fromUnit, toUnit, activeCategory, fromPrefixData.factor, toPrefixData.factor), precision)} ${toPrefixData.id !== 'none' ? toPrefixData.symbol : ''}${toUnitData.symbol}`}
+                          ? formatFtIn(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)))
+                          : `${formatResultValue(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)), precision)} ${toPrefixData.id !== 'none' ? toPrefixData.symbol : ''}${toUnitData.symbol}`}
                     </span>
                   </div>
                 </motion.button>
@@ -462,7 +463,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                           fromUnit,
                           unit.id,
                           activeCategory,
-                          fromPrefixData.factor,
+                          prefixPowerFactor(fromPrefixData.factor, fromUnitData?.prefixPower),
                           1
                         );
 
@@ -471,7 +472,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                         let displayValue = convertedValue;
 
                         if (unit.allowPrefixes && Math.abs(convertedValue) > 0) {
-                          const optimal = findOptimalPrefix(convertedValue, unit.symbol, precision);
+                          const optimal = findOptimalPrefix(convertedValue, unit.symbol, precision, unit.prefixPower);
                           displayPrefix = optimal.prefix;
                           displayValue = optimal.adjustedValue;
                         }

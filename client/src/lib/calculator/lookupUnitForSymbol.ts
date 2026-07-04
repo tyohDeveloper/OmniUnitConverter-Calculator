@@ -5,6 +5,7 @@ export interface UnitLookupResult {
   offset: number;
   isInverse: boolean;
   categoryId: string;
+  prefixPower: number;
 }
 
 /**
@@ -20,6 +21,7 @@ export function lookupUnitForSymbol(symbol: string): UnitLookupResult | null {
           offset: unit.offset ?? 0,
           isInverse: unit.isInverse ?? false,
           categoryId: category.id,
+          prefixPower: unit.prefixPower ?? 1,
         };
       }
     }
