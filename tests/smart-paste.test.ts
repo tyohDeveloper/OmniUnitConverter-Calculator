@@ -1160,4 +1160,87 @@ describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () =
       expect(result.originalValue).toBe(3);
     });
   });
+
+  describe('Asian counting words (romanized)', () => {
+    it('should parse "5 wan" as unitless wan', () => {
+      const result = parseUnitText('5 wan');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('wan');
+      expect(result.originalValue).toBe(5);
+      expect(result.value).toBe(50000);
+    });
+
+    it('should parse "2 lakh" as unitless lakh', () => {
+      const result = parseUnitText('2 lakh');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('lakh');
+      expect(result.originalValue).toBe(2);
+      expect(result.value).toBe(200000);
+    });
+
+    it('should parse "1 crore" as unitless crore', () => {
+      const result = parseUnitText('1 crore');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('crore');
+      expect(result.originalValue).toBe(1);
+      expect(result.value).toBe(10000000);
+    });
+
+    it('should parse plural "3 lakhs" as unitless lakh', () => {
+      const result = parseUnitText('3 lakhs');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('lakh');
+      expect(result.originalValue).toBe(3);
+    });
+
+    it('should parse plural "2 crores" as unitless crore', () => {
+      const result = parseUnitText('2 crores');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('crore');
+      expect(result.originalValue).toBe(2);
+    });
+
+    it('should parse alternate spelling "4 lac" as unitless lakh', () => {
+      const result = parseUnitText('4 lac');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('lakh');
+      expect(result.originalValue).toBe(4);
+    });
+
+    it('should be case-insensitive ("5 Wan", "2 LAKH")', () => {
+      expect(parseUnitText('5 Wan').unitId).toBe('wan');
+      expect(parseUnitText('2 LAKH').unitId).toBe('lakh');
+    });
+  });
+
+  describe('Asian counting words (native scripts)', () => {
+    it('should parse "5 万" as unitless wan', () => {
+      const result = parseUnitText('5 万');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('wan');
+      expect(result.originalValue).toBe(5);
+      expect(result.value).toBe(50000);
+    });
+
+    it('should parse "5万" (no space) as unitless wan', () => {
+      const result = parseUnitText('5万');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('wan');
+      expect(result.value).toBe(50000);
+    });
+
+    it('should parse "2 लाख" as unitless lakh', () => {
+      const result = parseUnitText('2 लाख');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('lakh');
+      expect(result.value).toBe(200000);
+    });
+
+    it('should parse "1 करोड़" as unitless crore', () => {
+      const result = parseUnitText('1 करोड़');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('crore');
+      expect(result.value).toBe(10000000);
+    });
+  });
 });

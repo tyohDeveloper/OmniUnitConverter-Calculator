@@ -474,6 +474,25 @@ function lookupTimeWordAlias(text: string): SymbolMapEntry | null {
   return makeEntry(timeCategory, unit);
 }
 
+// Full-word aliases (case-insensitive) for Unitless counting units whose
+// canonical symbols are non-Latin scripts (万, लाख, करोड़). Users typing the
+// romanized words ("5 wan", "2 lakh", "1 crore") in smart paste should land on
+// the matching unitless unit. Keys must be lowercase; plurals included.
+const UNITLESS_WORD_ALIASES: Record<string, string> = {
+  wan: 'wan',
+  lakh: 'lakh', lakhs: 'lakh', lac: 'lakh', lacs: 'lakh',
+  crore: 'crore', crores: 'crore',
+};
+
+function lookupUnitlessWordAlias(text: string): SymbolMapEntry | null {
+  const unitId = UNITLESS_WORD_ALIASES[text.toLowerCase()];
+  if (!unitId) return null;
+  const unitlessCategory = CONVERSION_DATA.find(c => c.id === 'unitless');
+  const unit = unitlessCategory?.units.find(u => u.id === unitId);
+  if (!unitlessCategory || !unit) return null;
+  return makeEntry(unitlessCategory, unit);
+}
+
 // Build a lookup map for quick unit matching.
 // Priority: category base units (factor === 1) win first, then a small set of
 // shared ratio symbols is claimed by the unitless category, then remaining units
@@ -586,6 +605,18 @@ export function parseUnitSymbol(
       unitId: timeAlias.unitId,
       prefixId: 'none',
       factor: timeAlias.factor
+    };
+  }
+
+  // 1c. Try Unitless counting-word aliases (case-insensitive), e.g.
+  // "wan", "lakh", "crore" → the matching Unitless unit.
+  const unitlessAlias = lookupUnitlessWordAlias(normalizedText);
+  if (unitlessAlias) {
+    return {
+      categoryId: unitlessAlias.categoryId,
+      unitId: unitlessAlias.unitId,
+      prefixId: 'none',
+      factor: unitlessAlias.factor
     };
   }
 
