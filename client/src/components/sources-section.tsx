@@ -41,41 +41,43 @@ export default function SourcesSection({ t, language }: SourcesSectionProps) {
             {t("sources-note")}
           </p>
         </div>
-        {CONVERSION_DATA.map((cat) => {
-          const baseSym = baseSymbolFor(cat.units, cat.baseSISymbol);
-          return (
-            <section key={cat.id} data-testid={`sources-category-${cat.id}`}>
-              <h3 className="text-sm font-bold text-foreground mb-1">{t(cat.name)}</h3>
-              <table className="w-full text-xs font-mono">
-                <tbody>
-                  {cat.units.map((u) => (
-                    <tr key={u.id} className="align-top" data-testid={`sources-row-${cat.id}-${u.id}`}>
-                      <td className="text-right pr-3 py-0.5 whitespace-nowrap text-muted-foreground w-[35%]">
-                        {translateUnit(u.name, language as SupportedLanguage)}
-                      </td>
-                      <td className="text-left pr-3 py-0.5">
-                        {formatSiEquivalent(u, baseSym)}
-                      </td>
-                      <td className="text-left py-0.5 whitespace-nowrap">
-                        {u.sourceUrl && (
-                          <a
-                            href={u.sourceUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline text-muted-foreground hover:text-foreground"
-                            data-testid={`sources-link-${cat.id}-${u.id}`}
-                          >
-                            {linkLabel(u.sourceUrl)}
-                          </a>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          );
-        })}
+        <table className="w-full text-xs font-mono">
+          <tbody>
+            {CONVERSION_DATA.map((cat) => {
+              const baseSym = baseSymbolFor(cat.units, cat.baseSISymbol);
+              return [
+                <tr key={`${cat.id}-header`} data-testid={`sources-category-${cat.id}`}>
+                  <td colSpan={3} className="pt-4 pb-1">
+                    <h3 className="text-sm font-bold text-foreground">{t(cat.name)}</h3>
+                  </td>
+                </tr>,
+                ...cat.units.map((u) => (
+                  <tr key={`${cat.id}-${u.id}`} className="align-top" data-testid={`sources-row-${cat.id}-${u.id}`}>
+                    <td className="text-right pr-3 py-0.5 whitespace-nowrap text-muted-foreground w-[35%]">
+                      {translateUnit(u.name, language as SupportedLanguage)}
+                    </td>
+                    <td className="text-left pr-3 py-0.5">
+                      {formatSiEquivalent(u, baseSym, { categoryId: cat.id, baseSISymbol: cat.baseSISymbol })}
+                    </td>
+                    <td className="text-left py-0.5 whitespace-nowrap w-[12%]">
+                      {u.sourceUrl && (
+                        <a
+                          href={u.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline text-muted-foreground hover:text-foreground"
+                          data-testid={`sources-link-${cat.id}-${u.id}`}
+                        >
+                          {linkLabel(u.sourceUrl)}
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                )),
+              ];
+            })}
+          </tbody>
+        </table>
       </div>
     </Card>
   );
