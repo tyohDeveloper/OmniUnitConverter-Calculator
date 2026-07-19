@@ -29,28 +29,28 @@
       "id": "ppm",
       "name": "Parts Per Million",
       "symbol": "ppm",
-      "factor": 1e-6,
+      "factor": 0.000001,
       "measurementSystem": "NONE"
     },
     {
       "id": "permyriad",
       "name": "Permyriad",
       "symbol": "‱",
-      "factor": 1e-4,
+      "factor": 0.0001,
       "measurementSystem": "NONE"
     },
     {
       "id": "basis_point",
       "name": "Basis Point",
       "symbol": "bp",
-      "factor": 1e-4,
+      "factor": 0.0001,
       "measurementSystem": "NONE"
     },
     {
       "id": "permille",
       "name": "Permille",
       "symbol": "‰",
-      "factor": 1e-3,
+      "factor": 0.001,
       "measurementSystem": "NONE"
     },
     {
@@ -187,6 +187,13 @@
       "measurementSystem": "NONE"
     },
     {
+      "id": "sen",
+      "name": "Sen",
+      "symbol": "千",
+      "factor": 1000,
+      "measurementSystem": "JAPANESE"
+    },
+    {
       "id": "great_gross",
       "name": "Great Gross",
       "symbol": "great-gross",
@@ -250,10 +257,24 @@
       "measurementSystem": "SOUTH_ASIAN"
     },
     {
+      "id": "zhao",
+      "name": "Zhao",
+      "symbol": "兆",
+      "factor": 1000000000000,
+      "measurementSystem": "CHINESE"
+    },
+    {
+      "id": "kei",
+      "name": "Kei",
+      "symbol": "京",
+      "factor": 10000000000000000,
+      "measurementSystem": "JAPANESE"
+    },
+    {
       "id": "mole",
       "name": "Mole",
       "symbol": "mole",
-      "factor": 6.02214076e23,
+      "factor": 6.02214076e+23,
       "measurementSystem": "NONE"
     }
   ]

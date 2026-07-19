@@ -1186,6 +1186,41 @@ describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () =
       expect(result.value).toBe(10000000);
     });
 
+    it('should parse "3 sen" as unitless sen', () => {
+      const result = parseUnitText('3 sen');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('sen');
+      expect(result.originalValue).toBe(3);
+      expect(result.value).toBe(3000);
+    });
+
+    it('should parse "2 zhao" as unitless zhao', () => {
+      const result = parseUnitText('2 zhao');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('zhao');
+      expect(result.originalValue).toBe(2);
+      expect(result.value).toBe(2e12);
+    });
+
+    it('should parse alternate romanization "1 chou" as unitless zhao', () => {
+      const result = parseUnitText('1 chou');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('zhao');
+    });
+
+    it('should parse "4 kei" as unitless kei', () => {
+      const result = parseUnitText('4 kei');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('kei');
+      expect(result.value).toBe(4e16);
+    });
+
+    it('should parse native symbol "5 兆" as unitless zhao', () => {
+      const result = parseUnitText('5 兆');
+      expect(result.categoryId).toBe('unitless');
+      expect(result.unitId).toBe('zhao');
+    });
+
     it('should parse plural "3 lakhs" as unitless lakh', () => {
       const result = parseUnitText('3 lakhs');
       expect(result.categoryId).toBe('unitless');

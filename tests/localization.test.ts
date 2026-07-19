@@ -270,7 +270,7 @@ describe('Language Localization', () => {
       // Culture-specific counting units in the Unitless Numbers category use their
       // canonical native-script symbols by design (e.g. 万, लाख, करोड़). These are
       // intentional, not untranslated text, and are exempt from the Latin/SI guard.
-      const nativeScriptSymbols = new Set(['万', 'लाख', 'करोड़', '亿', '億', 'अरब', 'खरब']);
+      const nativeScriptSymbols = new Set(['万', 'लाख', 'करोड़', '亿', '億', 'अरब', 'खरब', '千', '兆', '京']);
 
       for (const category of CONVERSION_DATA) {
         for (const unit of category.units) {

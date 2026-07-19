@@ -57,6 +57,12 @@ describe('Unitless Numbers category', () => {
     it('1 oku = 100000000', () => { expect(c(1, 'oku', 'number')).toBe(100000000); });
     it('1 arab = 1000000000', () => { expect(c(1, 'arab', 'number')).toBe(1000000000); });
     it('1 kharab = 100000000000', () => { expect(c(1, 'kharab', 'number')).toBe(100000000000); });
+    it('1 sen = 1000', () => { expect(c(1, 'sen', 'number')).toBe(1000); });
+    it('1 zhao = 1e12', () => { expect(c(1, 'zhao', 'number')).toBe(1e12); });
+    it('1 kei = 1e16', () => { expect(c(1, 'kei', 'number')).toBe(1e16); });
+    it('cross-unit: 1 zhao = 10000 oku', () => { expect(c(1, 'zhao', 'oku')).toBe(10000); });
+    it('cross-unit: 1 kei = 10000 zhao', () => { expect(c(1, 'kei', 'zhao')).toBe(10000); });
+    it('cross-unit: 1 wan = 10 sen', () => { expect(c(1, 'wan', 'sen')).toBe(10); });
     it('cross-unit: 1 yi = 10000 wan', () => { expect(c(1, 'yi', 'wan')).toBe(10000); });
     it('cross-unit: 1 arab = 100 crore', () => { expect(c(1, 'arab', 'crore')).toBe(100); });
     it('cross-unit: 1 kharab = 100 arab', () => { expect(c(1, 'kharab', 'arab')).toBe(100); });
