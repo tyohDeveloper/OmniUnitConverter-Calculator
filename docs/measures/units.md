@@ -27,6 +27,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `rad⋅s⁻¹` | Radian/Second | Angular Velocity | rad⋅s⁻¹ | 1 |
 | `rpm` | Revolutions/Minute | Angular Velocity | rad⋅s⁻¹ | 0.10471975511965977 |
 | `rps` | Revolutions/Second | Angular Velocity | rad⋅s⁻¹ | 6.283185307179586 |
+| `arpent` | Arpent (French) | Archaic Area | m² | 3418.89 |
 | `bigha` | Bigha (South Asia) | Archaic Area | m² | 2529 |
 | `cho` | Chō (Japan) | Archaic Area | m² | 9917.36 |
 | `chukyoma` | Chūkyō-ma (Japan) | Archaic Area | m² | 1.6562 |
@@ -35,6 +36,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `dunam` | Dunam (Israel) | Archaic Area | m² | 1000 |
 | `edoma` | Edoma/Kantō-ma (Japan) | Archaic Area | m² | 1.5488 |
 | `feddan` | Feddan (Egypt) | Archaic Area | m² | 4200.833 |
+| `hide` | Hide (English) | Archaic Area | m² | 485623 |
 | `jerib` | Jerib (Middle East) | Archaic Area | m² | 2000 |
 | `jo` | Jō/Tatami (Japan) | Archaic Area | m² | 1.62 |
 | `kyoma` | Kyōma (Japan) | Archaic Area | m² | 1.8241 |
@@ -44,6 +46,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `pyeong` | Pyeong (Korea) | Archaic Area | m² | 3.3058 |
 | `qing` | Qing (China) | Archaic Area | m² | 66666.67 |
 | `qirat` | Qirat (Egypt) | Archaic Area | m² | 175.03 |
+| `rai` | Rai (Thailand) | Archaic Area | m² | 1600 |
 | `se` | Se (Korea) | Archaic Area | m² | 99.174 |
 | `section` | Section (US) | Archaic Area | m² | 2589988 |
 | `tan` | Tan (Japan) | Archaic Area | m² | 991.7 |
@@ -55,6 +58,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `quad` | Quad | Archaic Energy | kg⋅m²⋅s⁻² | 1.055e+18 |
 | `th` | Thermie | Archaic Energy | kg⋅m²⋅s⁻² | 4186800 |
 | `arshin` | Arshin (Russia) | Archaic Length | m | 0.7112 |
+| `barleycorn` | Barleycorn | Archaic Length | m | 0.008466666666666667 |
 | `ch` | Chain (Gunter) | Archaic Length | m | 20.1168 |
 | `chek` | Chek (Hong Kong) | Archaic Length | m | 0.371 |
 | `chi` | Chi (China) | Archaic Length | m | 0.3333 |
@@ -75,16 +79,20 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `li` | Link (Gunter) | Archaic Length | m | 0.201168 |
 | `li-cn` | Li (China) | Archaic Length | m | 500 |
 | `m` | Metre | Archaic Length | m | 1 |
+| `mi (Rom)` | Roman Mile | Archaic Length | m | 1480 |
 | `pace` | Pace (Roman) | Archaic Length | m | 1.48 |
 | `palm` | Palm (Ancient) | Archaic Length | m | 0.075 |
 | `rd` | Rod/Pole/Perch | Archaic Length | m | 5.0292 |
 | `ri-jp` | Ri (Japan) | Archaic Length | m | 3927.27 |
 | `ri-kr` | Ri (Korea) | Archaic Length | m | 392.727 |
+| `sazhen` | Sazhen (Russia) | Archaic Length | m | 2.1336 |
 | `shaku` | Shaku (Japan) | Archaic Length | m | 0.30303 |
 | `span` | Span (Ancient) | Archaic Length | m | 0.2286 |
 | `stade` | Stade (Greek) | Archaic Length | m | 185 |
 | `sun` | Sun (Japan) | Archaic Length | m | 0.030303 |
+| `toise` | Toise (French) | Archaic Length | m | 1.949 |
 | `vara` | Vara (Spain) | Archaic Length | m | 0.8359 |
+| `verst` | Verst (Russia) | Archaic Length | m | 1066.8 |
 | `zhang` | Zhang (China) | Archaic Length | m | 3.333 |
 | `baht` | Baht (Thailand) | Archaic Mass | kg | 0.015244 |
 | `catty` | Catty (HK/Traditional) | Archaic Mass | kg | 0.60478982 |
@@ -104,21 +112,30 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `livre` | Livre (French) | Archaic Mass | kg | 0.4895 |
 | `mace` | Mace (China, PRC) | Archaic Mass | kg | 0.005 |
 | `maund` | Maund (South Asia) | Archaic Mass | kg | 37.324 |
+| `mina` | Mina (Biblical) | Archaic Mass | kg | 0.571 |
 | `momme` | Momme (Japan) | Archaic Mass | kg | 0.00375 |
 | `pfund` | Pfund (German) | Archaic Mass | kg | 0.4677 |
 | `picul` | Picul (HK/Traditional) | Archaic Mass | kg | 60.478982 |
+| `pood` | Pood (Russia) | Archaic Mass | kg | 16.3807 |
+| `quintal` | Quintal (Metric) | Archaic Mass | kg | 100 |
 | `ratti` | Ratti (South Asia) | Archaic Mass | kg | 1.215e-4 |
 | `ryo` | Ryō (Japan) | Archaic Mass | kg | 0.0375 |
 | `s ap` | Scruple (Apothecaries') | Archaic Mass | kg | 0.001296 |
 | `seer` | Seer (South Asia) | Archaic Mass | kg | 0.9331 |
+| `shekel` | Shekel (Biblical) | Archaic Mass | kg | 0.0114 |
 | `tael` | Tael (China, PRC) | Archaic Mass | kg | 0.05 |
+| `talent` | Talent (Biblical) | Archaic Mass | kg | 34.2 |
 | `tola` | Tola (South Asia) | Archaic Mass | kg | 0.0116638 |
+| `zolotnik` | Zolotnik (Russia) | Archaic Mass | kg | 0.0042658 |
 | `erg⋅s⁻¹` | Erg per Second | Archaic Power | kg⋅m²⋅s⁻³ | 1e-7 |
 | `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | Archaic Power | kg⋅m²⋅s⁻³ | 1.3558179483 |
 | `hp (boiler)` | Boiler Horsepower | Archaic Power | kg⋅m²⋅s⁻³ | 9810.55 |
 | `W` | Watt | Archaic Power | kg⋅m²⋅s⁻³ | 1 |
 | `amphora` | Amphora (Greek) | Archaic Volume | L | 26.026 |
 | `bu` | Bushel | Archaic Volume | L | 35.2391 |
+| `butt` | Butt (Pipe) | Archaic Volume | L | 476.96 |
+| `chaldron` | Chaldron | Archaic Volume | L | 1309.27 |
+| `congius` | Congius (Roman) | Archaic Volume | L | 3.275 |
 | `cord` | Cord | Archaic Volume | L | 3624.56 |
 | `cp (US)` | Cup (US) | Archaic Volume | L | 0.236588 |
 | `dan-v` | Dan (China) | Archaic Volume | L | 103.55 |
@@ -134,6 +151,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `hhd` | Hogshead (US) | Archaic Volume | L | 238.481 |
 | `hop` | Hop (Korea) | Archaic Volume | L | 0.18039 |
 | `jigger` | Jigger (US) | Archaic Volume | L | 0.044355 |
+| `kilderkin` | Kilderkin | Archaic Volume | L | 81.8296 |
 | `koku` | Koku (Japan) | Archaic Volume | L | 180.39 |
 | `L` | Litre | Archaic Volume | L | 1 |
 | `m³` | Cubic Metre | Archaic Volume | L | 1000 |
@@ -141,18 +159,23 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `minim` | Minim (US) | Archaic Volume | L | 6.16115e-5 |
 | `mL` | Millilitre | Archaic Volume | L | 0.001 |
 | `pk` | Peck | Archaic Volume | L | 8.80977 |
+| `pottle` | Pottle | Archaic Volume | L | 2.273045 |
+| `sextarius` | Sextarius (Roman) | Archaic Volume | L | 0.546 |
 | `sheng` | Sheng (China) | Archaic Volume | L | 1.0355 |
 | `sho` | Shō (Japan) | Archaic Volume | L | 1.8039 |
 | `tbsp (US)` | Tablespoon (US) | Archaic Volume | L | 0.0147868 |
 | `to` | To (Japan) | Archaic Volume | L | 18.039 |
 | `tsp (US)` | Teaspoon (US) | Archaic Volume | L | 0.00492892 |
+| `tun` | Tun | Archaic Volume | L | 953.92 |
 | `ac` | Acre | Area | m² | 4046.86 |
+| `are` | Are | Area | m² | 100 |
 | `b` | Barn | Area | m² | 1e-28 |
 | `ft²` | Square Foot | Area | m² | 0.092903 |
 | `ha` | Hectare | Area | m² | 10000 |
 | `in²` | Square Inch | Area | m² | 6.4516e-4 |
 | `m²` | Square Metre | Area | m² | 1 |
 | `mi²` | Square Mile | Area | m² | 2590000 |
+| `rood` | Rood | Area | m² | 1011.7141056 |
 | `yd²` | Square Yard | Area | m² | 0.836127 |
 | `bbl (beer)` | Barrel (Beer) | Beer & Wine | m³ | 0.117 |
 | `btl (beer, US)` | Bottle (Beer, longneck) | Beer & Wine | m³ | 3.54882e-4 |
@@ -185,6 +208,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `U` | Enzyme Unit | Catalytic Activity | mol⋅s⁻¹ | 1.667e-8 |
 | `%` | Percent | Concentration | mol⋅L⁻¹ | 0.01 |
 | `‰` | Per Mille | Concentration | mol⋅L⁻¹ | 0.001 |
+| `g⋅L⁻¹` | Gram/Litre | Concentration | mol⋅L⁻¹ | 0.001 |
+| `mg⋅dL⁻¹` | Milligram/Decilitre | Concentration | mol⋅L⁻¹ | 1e-5 |
 | `mol⋅L⁻¹` | Mole/Liter | Concentration | mol⋅L⁻¹ | 1 |
 | `mol⋅m⁻³` | Mole/m³ | Concentration | mol⋅L⁻¹ | 0.001 |
 | `pH` | pH | Concentration | mol⋅L⁻¹ | 0.1 |
@@ -230,12 +255,18 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Sh` | Shannon | Data/Information | B | 0.125 |
 | `g⋅cm⁻³` | g/cm³ | Density | kg⋅m⁻³ | 1000 |
 | `g⋅m⁻³` | g/m³ | Density | kg⋅m⁻³ | 0.001 |
+| `kg⋅L⁻¹` | kg/L | Density | kg⋅m⁻³ | 1000 |
 | `kg⋅m⁻³` | kg/m³ | Density | kg⋅m⁻³ | 1 |
 | `lb⋅ft⁻³` | lb/ft³ | Density | kg⋅m⁻³ | 16.0185 |
+| `lb⋅gal⁻¹` | lb/gal (US) | Density | kg⋅m⁻³ | 119.8264 |
+| `slug⋅ft⁻³` | slug/ft³ | Density | kg⋅m⁻³ | 515.3788 |
+| `abC` | Abcoulomb | Electric Charge | A⋅s | 10 |
 | `Ah` | Ampere-hour | Electric Charge | A⋅s | 3600 |
 | `C` | Coulomb | Electric Charge | A⋅s | 1 |
+| `e` | Elementary Charge | Electric Charge | A⋅s | 1.602176634e-19 |
 | `F (charge)` | Faraday | Electric Charge | A⋅s | 96485 |
 | `mAh` | Milliamp-hour | Electric Charge | A⋅s | 3.6 |
+| `statC` | Statcoulomb | Electric Charge | A⋅s | 3.33564095e-10 |
 | `A` | Ampere | Electric Current | A | 1 |
 | `Bi` | Biot (abampere) | Electric Current | A | 10 |
 | `statA` | Statampere | Electric Current | A | 3.33564e-10 |
@@ -244,6 +275,9 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `statV⋅cm⁻¹` | Statvolt per Centimeter | Electric Field Strength | V⋅m⁻¹ | 29979.2458 |
 | `V⋅cm⁻¹` | Volt per Centimeter | Electric Field Strength | V⋅m⁻¹ | 100 |
 | `V⋅m⁻¹` | Volt per Meter | Electric Field Strength | V⋅m⁻¹ | 1 |
+| `dBu` | Decibel unloaded | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 0.8691117575297783 |
+| `dBV` | Decibel-volt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 1.1220184543019633 |
+| `dBµV` | Decibel-microvolt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 1.1220184543019633e-6 |
 | `statV` | Statvolt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 299.792 |
 | `V` | Volt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 1 |
 | `BOE` | Barrel of Oil Equivalent | Energy | kg⋅m²⋅s⁻² | 6.1e+9 |
@@ -294,6 +328,10 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `kip` | Kip | Force | kg⋅m⋅s⁻² | 4448.22 |
 | `lbf` | Pound-force | Force | kg⋅m⋅s⁻² | 4.44822 |
 | `N` | Newton | Force | kg⋅m⋅s⁻² | 1 |
+| `ozf` | Ounce-force | Force | kg⋅m⋅s⁻² | 0.2780138509537812 |
+| `pdl` | Poundal | Force | kg⋅m⋅s⁻² | 0.138254954376 |
+| `tf` | Ton-force (Metric) | Force | kg⋅m⋅s⁻² | 9806.65 |
+| `tonf (US)` | Ton-force (Short) | Force | kg⋅m⋅s⁻² | 8896.443230521 |
 | `bph` | Beats/Hour | Frequency | s⁻¹ | 2.777777777777778e-4 |
 | `d⁻¹` | Per Day | Frequency | s⁻¹ | 1.1574074074074073e-5 |
 | `h⁻¹` | Per Hour | Frequency | s⁻¹ | 2.777777777777778e-4 |
@@ -308,6 +346,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `km⋅gal⁻¹` | Kilometers/Gallon (US) | Fuel Economy | km⋅L⁻¹ | 0.264172 |
 | `km⋅kWh⁻¹` | Kilometers/kWh (EV) | Fuel Economy | km⋅L⁻¹ | 9.5 |
 | `km⋅L⁻¹` | Kilometers/Liter | Fuel Economy | km⋅L⁻¹ | 1 |
+| `L/100 km` | Litres/100 km | Fuel Economy | km⋅L⁻¹ | 100 |
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | Fuel Economy | km⋅L⁻¹ | 15.29 |
 | `mi⋅L⁻¹` | Miles/Liter | Fuel Economy | km⋅L⁻¹ | 1.60934 |
 | `mpg (Imp)` | Miles/Gallon (Imp) | Fuel Economy | km⋅L⁻¹ | 0.354006 |
@@ -376,6 +415,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `mi` | Mile | Length | m | 1609.344 |
 | `nmi` | Nautical Mile | Length | m | 1852 |
 | `parsec` | Parsec | Length | m | 3.0857e+16 |
+| `thou` | Mil/Thou | Length | m | 2.54e-5 |
 | `yd` | Yard | Length | m | 0.9144 |
 | `lm` | Lumen | Lightbulb Efficiency | lm | 1 |
 | `W (CFL)` | Fluorescent Bulb (watts) | Lightbulb Efficiency | lm | 70 |
@@ -403,6 +443,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Wb` | Weber | Magnetic Flux | kg⋅m²⋅s⁻²⋅A⁻¹ | 1 |
 | `G` | Gauss | Magnetic Flux Density | kg⋅s⁻²⋅A⁻¹ | 1e-4 |
 | `T` | Tesla | Magnetic Flux Density | kg⋅s⁻²⋅A⁻¹ | 1 |
+| `γ` | Gamma | Magnetic Flux Density | kg⋅s⁻²⋅A⁻¹ | 1e-9 |
+| `Da` | Dalton | Mass | kg | 1.66053906892e-27 |
 | `eV⋅c⁻²` | Electronvolt/c² | Mass | kg | 1.78266192e-36 |
 | `g` | Gram | Mass | kg | 0.001 |
 | `kg` | Kilogram | Mass | kg | 1 |
@@ -470,14 +512,23 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `°` | Degree | Plane Angle | rad | 0.017453292519943295 |
 | `° ′ ″` | Degree (DMS) | Plane Angle | rad | 0.017453292519943295 |
 | `grad` | Gradian | Plane Angle | rad | 0.015707963267948967 |
+| `mil (NATO)` | NATO Mil | Plane Angle | rad | 9.817477042468104e-4 |
 | `rad` | Radian | Plane Angle | rad | 1 |
+| `tr` | Turn | Plane Angle | rad | 6.283185307179586 |
 | `BTU⋅h⁻¹` | BTU per Hour | Power | kg⋅m²⋅s⁻³ | 0.293071 |
+| `dBkW` | Decibel-kilowatt | Power | kg⋅m²⋅s⁻³ | 1258.9254117941673 |
+| `dBm` | Decibel-milliwatt | Power | kg⋅m²⋅s⁻³ | 0.0012589254117941673 |
+| `dBW` | Decibel-watt | Power | kg⋅m²⋅s⁻³ | 1.2589254117941673 |
+| `dBµW` | Decibel-microwatt | Power | kg⋅m²⋅s⁻³ | 1.2589254117941672e-6 |
 | `hp` | Horsepower (Mechanical) | Power | kg⋅m²⋅s⁻³ | 745.7 |
 | `hp (M)` | Metric HP | Power | kg⋅m²⋅s⁻³ | 735.499 |
 | `TR` | Ton of Refrigeration | Power | kg⋅m²⋅s⁻³ | 3516.85 |
 | `W` | Watt | Power | kg⋅m²⋅s⁻³ | 1 |
+| `at` | Technical Atmosphere | Pressure | kg⋅m⁻¹⋅s⁻² | 98066.5 |
 | `atm` | Atmosphere | Pressure | kg⋅m⁻¹⋅s⁻² | 101325 |
 | `bar` | Bar | Pressure | kg⋅m⁻¹⋅s⁻² | 100000 |
+| `inH₂O` | Inch of Water | Pressure | kg⋅m⁻¹⋅s⁻² | 249.0889 |
+| `inHg` | Inch of Mercury | Pressure | kg⋅m⁻¹⋅s⁻² | 3386.389 |
 | `mmHg` | mmHg (Blood) | Pressure | kg⋅m⁻¹⋅s⁻² | 133.322 |
 | `Pa` | Pascal | Pressure | kg⋅m⁻¹⋅s⁻² | 1 |
 | `psi` | PSI | Pressure | kg⋅m⁻¹⋅s⁻² | 6894.76 |
@@ -512,6 +563,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Rd` | Rutherford | Radioactivity | s⁻¹ | 1000000 |
 | `D` | Diopter | Refractive Power (Vision) | m⁻¹ | 1 |
 | `m⁻¹` | Reciprocal Meter | Refractive Power (Vision) | m⁻¹ | 1 |
+| `abΩ` | Abohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 1e-9 |
+| `statΩ` | Statohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 8.98755178737e+11 |
 | `Ω` | Ohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 1 |
 | `ch` | Chain | Shipping Containers | m | 20.1168 |
 | `DEU` | DEU (40ft Container) | Shipping Containers | m | 12.192 |
@@ -531,6 +584,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `W⋅cm⁻²` | Watt per Square Centimeter | Sound Intensity | W⋅m⁻² | 10000 |
 | `W⋅m⁻²` | Watt per Square Meter | Sound Intensity | W⋅m⁻² | 1 |
 | `bar` | Bar | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 100000 |
+| `dB SPL` | Sound Pressure Level | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 2.244036908603927e-5 |
+| `dBµPa` | Decibel-micropascal | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 1.1220184543019633e-6 |
 | `dyn⋅cm⁻²` | Dyne/cm² | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 0.1 |
 | `Pa` | Pascal | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 1 |
 | `µbar` | Microbar | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 0.1 |
@@ -540,6 +595,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `J⋅kg⁻¹⋅K⁻¹` | J/(kg⋅K) | Specific Heat Capacity | J⋅kg⁻¹⋅K⁻¹ | 1 |
 | `kJ⋅kg⁻¹⋅K⁻¹` | kJ/(kg⋅K) | Specific Heat Capacity | J⋅kg⁻¹⋅K⁻¹ | 1000 |
 | `c` | Speed of Light | Speed | m⋅s⁻¹ | 299792458 |
+| `ft⋅s⁻¹` | Foot/Second | Speed | m⋅s⁻¹ | 0.3048 |
 | `km⋅h⁻¹` | Kilometre/Hour | Speed | m⋅s⁻¹ | 0.2777777777777778 |
 | `kn` | Knot | Speed | m⋅s⁻¹ | 0.514444 |
 | `m⋅s⁻¹` | Metre/Second | Speed | m⋅s⁻¹ | 1 |
@@ -550,6 +606,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `°C` | Celsius † | Temperature | K | 1 |
 | `°F` | Fahrenheit † | Temperature | K | 0.5555555555555556 |
 | `°R` | Rankine † | Temperature | K | 0.5555555555555556 |
+| `°Ré` | Réaumur † | Temperature | K | 1.25 |
 | `K` | Kelvin † | Temperature | K | 1 |
 | `BTU⋅h⁻¹⋅ft⁻¹⋅°F⁻¹` | BTU/(h⋅ft⋅°F) | Thermal Conductivity | W⋅m⁻¹⋅K⁻¹ | 1.73073 |
 | `cal⋅s⁻¹⋅cm⁻¹⋅°C⁻¹` | cal/(s⋅cm⋅°C) | Thermal Conductivity | W⋅m⁻¹⋅K⁻¹ | 418.4 |
@@ -559,6 +616,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `d (sid)` | Sidereal Day | Time | s | 86164.0905 |
 | `dec` | Decade | Time | s | 315400000 |
 | `eon` | Eon | Time | s | 3.154e+16 |
+| `ftn` | Fortnight | Time | s | 1209600 |
 | `h` | Hour | Time | s | 3600 |
 | `kyr` | Millennium | Time | s | 3.154e+10 |
 | `min` | Minute | Time | s | 60 |
@@ -600,7 +658,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `caret` | Caret | Unitless Numbers | 1 | 0.0416666667 |
 | `couple` | Couple | Unitless Numbers | 1 | 2 |
 | `doz` | Dozen | Unitless Numbers | 1 | 12 |
-| `e` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
+| `𝑒` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
 | `fold` | Fold | Unitless Numbers | 1 | 1 |
 | `great-gross` | Great Gross | Unitless Numbers | 1 | 1728 |
 | `gross` | Gross | Unitless Numbers | 1 | 144 |
@@ -637,6 +695,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `cp (US)` | Cup (US) | Volume | m³ | 2.36588e-4 |
 | `dry pt` | Pint (US Dry) | Volume | m³ | 5.5061e-4 |
 | `dry qt` | Quart (US Dry) | Volume | m³ | 0.00110122 |
+| `FBM` | Board Foot | Volume | m³ | 0.002359737216 |
 | `fl oz (imp)` | Fluid Ounce (Imp) | Volume | m³ | 2.84130625e-5 |
 | `fl oz (US)` | Fluid Ounce (US) | Volume | m³ | 2.95735e-5 |
 | `ft³` | Cubic Foot | Volume | m³ | 0.0283168 |

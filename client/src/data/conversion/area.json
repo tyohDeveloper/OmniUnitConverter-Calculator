@@ -52,6 +52,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
+      "id": "are",
+      "name": "Are",
+      "symbol": "are",
+      "factor": 100,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Are_(unit)"
+    },
+    {
+      "id": "rood",
+      "name": "Rood",
+      "symbol": "rood",
+      "factor": 1011.7141056,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rood_(unit)"
+    },
+    {
       "id": "acre",
       "name": "Acre",
       "symbol": "ac",

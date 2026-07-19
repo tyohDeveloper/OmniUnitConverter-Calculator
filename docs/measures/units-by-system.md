@@ -16,6 +16,7 @@ One section per measurement system or tradition.
 | `″` | Arcsecond | 4.84813681109536e-6 rad |
 | `′` | Arcminute | 2.908882086657216e-4 rad |
 | `grad` | Gradian | 0.015707963267948967 rad |
+| `tr` | Turn | 6.283185307179586 rad |
 | `kg⋅m²⋅s⁻¹` | kg⋅m²/s | 1 kg⋅m²⋅s⁻¹ |
 | `ℏ` | Reduced Planck constant | 1.054571817e-34 kg⋅m²⋅s⁻¹ |
 | `g⋅cm²⋅s⁻¹` | g⋅cm²/s | 1e-7 kg⋅m²⋅s⁻¹ |
@@ -33,6 +34,7 @@ One section per measurement system or tradition.
 | `kg` | Kilogram | 1 kg |
 | `g` | Gram | 0.001 kg |
 | `ct` | Carat (Metric) | 2e-4 kg |
+| `quintal` | Quintal (Metric) | 100 kg |
 | `W` | Watt | 1 kg⋅m²⋅s⁻³ |
 | `erg⋅s⁻¹` | Erg per Second | 1e-7 kg⋅m²⋅s⁻³ |
 | `L` | Litre | 1 L |
@@ -40,6 +42,7 @@ One section per measurement system or tradition.
 | `m³` | Cubic Metre | 1000 L |
 | `m²` | Square Metre | 1 m² |
 | `b` | Barn | 1e-28 m² |
+| `are` | Are | 100 m² |
 | `ha` | Hectare | 10000 m² |
 | `m³` | Cubic Metre | 1 m³ |
 | `L` | Litre | 0.001 m³ |
@@ -49,6 +52,7 @@ One section per measurement system or tradition.
 | `kat` | Katal | 1 mol⋅s⁻¹ |
 | `U` | Enzyme Unit | 1.667e-8 mol⋅s⁻¹ |
 | `C` | Coulomb | 1 A⋅s |
+| `e` | Elementary Charge | 1.602176634e-19 A⋅s |
 | `mAh` | Milliamp-hour | 3.6 A⋅s |
 | `Ah` | Ampere-hour | 3600 A⋅s |
 | `F (charge)` | Faraday | 96485 A⋅s |
@@ -56,8 +60,10 @@ One section per measurement system or tradition.
 | `ppt` | Parts per Trillion | 1e-12 mol⋅L⁻¹ |
 | `ppb` | Parts per Billion | 1e-9 mol⋅L⁻¹ |
 | `ppm` | Parts per Million | 1e-6 mol⋅L⁻¹ |
+| `mg⋅dL⁻¹` | Milligram/Decilitre | 1e-5 mol⋅L⁻¹ |
 | `mol⋅m⁻³` | Mole/m³ | 0.001 mol⋅L⁻¹ |
 | `‰` | Per Mille | 0.001 mol⋅L⁻¹ |
+| `g⋅L⁻¹` | Gram/Litre | 0.001 mol⋅L⁻¹ |
 | `%` | Percent | 0.01 mol⋅L⁻¹ |
 | `pH` | pH | 0.1 mol⋅L⁻¹ |
 | `S` | Siemens | 1 kg⁻¹⋅m⁻²⋅s³⋅A² |
@@ -85,6 +91,7 @@ One section per measurement system or tradition.
 | `kg⋅m⁻³` | kg/m³ | 1 kg⋅m⁻³ |
 | `g⋅m⁻³` | g/m³ | 0.001 kg⋅m⁻³ |
 | `g⋅cm⁻³` | g/cm³ | 1000 kg⋅m⁻³ |
+| `kg⋅L⁻¹` | kg/L | 1000 kg⋅m⁻³ |
 | `V⋅m⁻¹` | Volt per Meter | 1 V⋅m⁻¹ |
 | `V⋅cm⁻¹` | Volt per Centimeter | 100 V⋅m⁻¹ |
 | `kV⋅m⁻¹` | Kilovolt per Meter | 1000 V⋅m⁻¹ |
@@ -119,6 +126,7 @@ One section per measurement system or tradition.
 | `gf` | Gram-force | 0.00980665 kg⋅m⋅s⁻² |
 | `kgf` | Kilogram-force | 9.80665 kg⋅m⋅s⁻² |
 | `g-force` | g-force | 9.80665 kg⋅m⋅s⁻² |
+| `tf` | Ton-force (Metric) | 9806.65 kg⋅m⋅s⁻² |
 | `s⁻¹` | Per Second | 1 s⁻¹ |
 | `y⁻¹` | Per Year | 3.1688087814028954e-8 s⁻¹ |
 | `wk⁻¹` | Per Week | 1.6534391534391533e-6 s⁻¹ |
@@ -133,6 +141,7 @@ One section per measurement system or tradition.
 | `Wh` | Watt-hour | 3600 J |
 | `km⋅L⁻¹` | Kilometers/Liter | 1 km⋅L⁻¹ |
 | `km⋅kWh⁻¹` | Kilometers/kWh (EV) | 9.5 km⋅L⁻¹ |
+| `L/100 km` | Litres/100 km | 100 km⋅L⁻¹ |
 | `lx` | Lux | 1 cd⋅sr⋅m⁻² |
 | `nox` | Nox | 0.001 cd⋅sr⋅m⁻² |
 | `ph` | Phot | 10000 cd⋅sr⋅m⁻² |
@@ -161,6 +170,7 @@ One section per measurement system or tradition.
 | `Mx` | Maxwell | 1e-8 kg⋅m²⋅s⁻²⋅A⁻¹ |
 | `kg` | Kilogram | 1 kg |
 | `eV⋅c⁻²` | Electronvolt/c² | 1.78266192e-36 kg |
+| `Da` | Dalton | 1.66053906892e-27 kg |
 | `mcg` | Microgram | 1e-9 kg |
 | `g` | Gram | 0.001 kg |
 | `t` | Tonne | 1000 kg |
@@ -200,6 +210,7 @@ One section per measurement system or tradition.
 | `Pa` | Pascal | 1 kg⋅m⁻¹⋅s⁻² |
 | `Torr` | Torr | 133.322 kg⋅m⁻¹⋅s⁻² |
 | `mmHg` | mmHg (Blood) | 133.322 kg⋅m⁻¹⋅s⁻² |
+| `at` | Technical Atmosphere | 98066.5 kg⋅m⁻¹⋅s⁻² |
 | `bar` | Bar | 100000 kg⋅m⁻¹⋅s⁻² |
 | `atm` | Atmosphere | 101325 kg⋅m⁻¹⋅s⁻² |
 | `m` | Metre | 1 m |
@@ -246,6 +257,7 @@ One section per measurement system or tradition.
 | `dyn⋅cm⁻¹` | Dyne/centimeter | 0.001 kg⋅s⁻² |
 | `K` | Kelvin † | 1 K |
 | `°C` | Celsius † | 1 K |
+| `°Ré` | Réaumur † | 1.25 K |
 | `W⋅m⁻¹⋅K⁻¹` | W/(m⋅K) | 1 W⋅m⁻¹⋅K⁻¹ |
 | `cal⋅s⁻¹⋅cm⁻¹⋅°C⁻¹` | cal/(s⋅cm⋅°C) | 418.4 W⋅m⁻¹⋅K⁻¹ |
 | `s` | Second | 1 s |
@@ -255,6 +267,7 @@ One section per measurement system or tradition.
 | `d (sid)` | Sidereal Day | 86164.0905 s |
 | `d` | Day | 86400 s |
 | `wk` | Week | 604800 s |
+| `ftn` | Fortnight | 1209600 s |
 | `mo` | Month (Avg) | 2628000 s |
 | `yr` | Year | 31540000 s |
 | `dec` | Decade | 315400000 s |
@@ -280,6 +293,7 @@ One section per measurement system or tradition.
 | `ft⋅s⁻²` | Foot/sq sec | 0.3048 m⋅s⁻² |
 | `g-force` | g-force | 9.80665 m⋅s⁻² |
 | `lb-mol` | Pound-mole | 453.59237 mol |
+| `mil (NATO)` | NATO Mil | 9.817477042468104e-4 rad |
 | `°` | Degree | 0.017453292519943295 rad |
 | `° ′ ″` | Degree (DMS) | 0.017453292519943295 rad |
 | `oz⋅in²⋅s⁻¹` | oz⋅in²/s | 1.829e-5 kg⋅m²⋅s⁻¹ |
@@ -307,6 +321,8 @@ One section per measurement system or tradition.
 | `shot` | Shot (US) | 44.3603 mL |
 | `jigger` | Jigger | 44.3603 mL |
 | `lb⋅ft⁻³` | lb/ft³ | 16.0185 kg⋅m⁻³ |
+| `lb⋅gal⁻¹` | lb/gal (US) | 119.8264 kg⋅m⁻³ |
+| `slug⋅ft⁻³` | slug/ft³ | 515.3788 kg⋅m⁻³ |
 | `BTU` | BTU | 1055.06 kg⋅m²⋅s⁻² |
 | `therm` | Therm (US) | 105480400 kg⋅m²⋅s⁻² |
 | `BOE` | Barrel of Oil Equivalent | 6.1e+9 kg⋅m²⋅s⁻² |
@@ -320,8 +336,10 @@ One section per measurement system or tradition.
 | `gal⋅s⁻¹` | US Gallon/second | 0.003785411784 m³⋅s⁻¹ |
 | `ft³⋅s⁻¹` | Cubic Foot/second | 0.0283168 m³⋅s⁻¹ |
 | `bbl⋅s⁻¹` | Barrel/second | 0.158987295 m³⋅s⁻¹ |
+| `ozf` | Ounce-force | 0.2780138509537812 kg⋅m⋅s⁻² |
 | `lbf` | Pound-force | 4.44822 kg⋅m⋅s⁻² |
 | `kip` | Kip | 4448.22 kg⋅m⋅s⁻² |
+| `tonf (US)` | Ton-force (Short) | 8896.443230521 kg⋅m⋅s⁻² |
 | `rpm` | Revolutions/Minute | 0.016666666666666666 s⁻¹ |
 | `BTU` | BTU | 1055.06 J |
 | `km⋅gal⁻¹` | Kilometers/Gallon (US) | 0.264172 km⋅L⁻¹ |
@@ -330,6 +348,7 @@ One section per measurement system or tradition.
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | 15.29 km⋅L⁻¹ |
 | `fc` | Foot-candle | 10.7639 cd⋅sr⋅m⁻² |
 | `ft²⋅s⁻¹` | Square Foot per Second | 0.09290304 m²⋅s⁻¹ |
+| `thou` | Mil/Thou | 2.54e-5 m |
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
 | `ft'in"` | Foot & Inch | 0.3048 m |
@@ -359,6 +378,8 @@ One section per measurement system or tradition.
 | `BTU⋅h⁻¹` | BTU per Hour | 0.293071 kg⋅m²⋅s⁻³ |
 | `hp` | Horsepower (Mechanical) | 745.7 kg⋅m²⋅s⁻³ |
 | `TR` | Ton of Refrigeration | 3516.85 kg⋅m²⋅s⁻³ |
+| `inH₂O` | Inch of Water | 249.0889 kg⋅m⁻¹⋅s⁻² |
+| `inHg` | Inch of Mercury | 3386.389 kg⋅m⁻¹⋅s⁻² |
 | `psi` | PSI | 6894.76 kg⋅m⁻¹⋅s⁻² |
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
@@ -366,6 +387,7 @@ One section per measurement system or tradition.
 | `yd` | Yard | 0.9144 m |
 | `yd` | Yard | 0.9144 m |
 | `BTU⋅lb⁻¹⋅°F⁻¹` | BTU/(lb⋅°F) | 4186.8 J⋅kg⁻¹⋅K⁻¹ |
+| `ft⋅s⁻¹` | Foot/Second | 0.3048 m⋅s⁻¹ |
 | `mph` | Mile/Hour | 0.44704 m⋅s⁻¹ |
 | `°F` | Fahrenheit † | 0.5555555555555556 K |
 | `°R` | Rankine † | 0.5555555555555556 K |
@@ -377,6 +399,7 @@ One section per measurement system or tradition.
 | `ft` | Foot | 0.3048 m |
 | `proof (US)` | Proof (US) | 0.005 1 |
 | `in³` | Cubic Inch | 1.6387064e-5 m³ |
+| `FBM` | Board Foot | 0.002359737216 m³ |
 | `ft³` | Cubic Foot | 0.0283168 m³ |
 | `yd³` | Cubic Yard | 0.764555 m³ |
 | `ac⋅ft` | Acre-foot | 1233.48184 m³ |
@@ -443,11 +466,19 @@ One section per measurement system or tradition.
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
+| `hide` | Hide (English) | 485623 m² |
 | `ell` | Ell (English) | 1.143 m |
 | `hh` | Hand | 0.1016 m |
 | `ftm` | Fathom | 1.8288 m |
+| `barleycorn` | Barleycorn | 0.008466666666666667 m |
 | `gi Imp` | Gill (Imperial) | 0.142065 L |
 | `firkin` | Firkin (Imperial) | 40.9148 L |
+| `tun` | Tun | 953.92 L |
+| `butt` | Butt (Pipe) | 476.96 L |
+| `kilderkin` | Kilderkin | 81.8296 L |
+| `pottle` | Pottle | 2.273045 L |
+| `chaldron` | Chaldron | 1309.27 L |
+| `rood` | Rood | 1011.7141056 m² |
 | `fl oz (imp)` | Fluid Ounce (Imp) | 2.84130625e-5 m³ |
 | `pt (imp)` | Pint (Imp) | 5.6826125e-4 m³ |
 | `qt (imp)` | Quart (Imp) | 0.0011365225 m³ |
@@ -460,6 +491,7 @@ One section per measurement system or tradition.
 | `Imp gal⋅h⁻¹` | Imperial Gallon/hour | 1.2628027777777779e-6 m³⋅s⁻¹ |
 | `Imp gal⋅min⁻¹` | Imperial Gallon/minute | 7.576816666666667e-5 m³⋅s⁻¹ |
 | `Imp gal⋅s⁻¹` | Imperial Gallon/second | 0.00454609 m³⋅s⁻¹ |
+| `pdl` | Poundal | 0.138254954376 kg⋅m⋅s⁻² |
 | `mpg (Imp)` | Miles/Gallon (Imp) | 0.354006 km⋅L⁻¹ |
 | `st` | Stone | 6.35029318 kg |
 | `ton (imp)` | Long Ton (Imperial) | 1016.05 kg |
@@ -511,6 +543,8 @@ One section per measurement system or tradition.
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
+| `arpent` | Arpent (French) | 3418.89 m² |
+| `toise` | Toise (French) | 1.949 m |
 | `livre` | Livre (French) | 0.4895 kg |
 | `dd` | Didot | 3.76065e-4 m |
 | `‴` | Ligne | 0.0022558 m |
@@ -618,6 +652,7 @@ One section per measurement system or tradition.
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
+| `rai` | Rai (Thailand) | 1600 m² |
 | `baht` | Baht (Thailand) | 0.015244 kg |
 
 ## German Historical
@@ -633,6 +668,10 @@ One section per measurement system or tradition.
 |--------|-------------|-------------------|
 | `desyatina` | Desyatina (Russia) | 10925 m² |
 | `arshin` | Arshin (Russia) | 0.7112 m |
+| `verst` | Verst (Russia) | 1066.8 m |
+| `sazhen` | Sazhen (Russia) | 2.1336 m |
+| `pood` | Pood (Russia) | 16.3807 kg |
+| `zolotnik` | Zolotnik (Russia) | 0.0042658 kg |
 
 ## Spanish Traditional
 
@@ -662,6 +701,9 @@ One section per measurement system or tradition.
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `pace` | Pace (Roman) | 1.48 m |
+| `mi (Rom)` | Roman Mile | 1480 m |
+| `sextarius` | Sextarius (Roman) | 0.546 L |
+| `congius` | Congius (Roman) | 3.275 L |
 
 ## Domain-Specific (no governing system)
 
@@ -744,6 +786,9 @@ One section per measurement system or tradition.
 | `feddan` | Feddan (Egypt) | 4200.833 m² |
 | `dunam` | Dunam (Israel) | 1000 m² |
 | `jerib` | Jerib (Middle East) | 2000 m² |
+| `shekel` | Shekel (Biblical) | 0.0114 kg |
+| `mina` | Mina (Biblical) | 0.571 kg |
+| `talent` | Talent (Biblical) | 34.2 kg |
 | `bph` | Beats/Hour | 2.777777777777778e-4 s⁻¹ |
 | `ratio` | Power Ratio | 1 1 |
 | `dB` | Decibel | 1.2589254117941673 1 |
@@ -751,6 +796,15 @@ One section per measurement system or tradition.
 | `Np` | Neper | 7.38905609893065 1 |
 | `B` | Bel | 10 1 |
 | `decade` | Decade (Log) | 10 1 |
+| `dBµV` | Decibel-microvolt | 1.1220184543019633e-6 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBu` | Decibel unloaded | 0.8691117575297783 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBV` | Decibel-volt | 1.1220184543019633 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBµW` | Decibel-microwatt | 1.2589254117941672e-6 kg⋅m²⋅s⁻³ |
+| `dBm` | Decibel-milliwatt | 0.0012589254117941673 kg⋅m²⋅s⁻³ |
+| `dBW` | Decibel-watt | 1.2589254117941673 kg⋅m²⋅s⁻³ |
+| `dBkW` | Decibel-kilowatt | 1258.9254117941673 kg⋅m²⋅s⁻³ |
+| `dBµPa` | Decibel-micropascal | 1.1220184543019633e-6 kg⋅m⁻¹⋅s⁻² |
+| `dB SPL` | Sound Pressure Level | 2.244036908603927e-5 kg⋅m⁻¹⋅s⁻² |
 | `1` | Number | 1 1 |
 | `ppt` | Parts Per Trillion | 1e-12 1 |
 | `ppb` | Parts Per Billion | 1e-9 1 |
@@ -766,7 +820,7 @@ One section per measurement system or tradition.
 | `pair` | Pair | 2 1 |
 | `couple` | Couple | 2 1 |
 | `brace` | Brace | 2 1 |
-| `e` | Euler's Number | 2.7182818285 1 |
+| `𝑒` | Euler's Number | 2.7182818285 1 |
 | `hat-trick` | Hat-Trick | 3 1 |
 | `π` | Pi | 3.1415926536 1 |
 | `half-doz` | Half Dozen | 6 1 |
@@ -778,6 +832,16 @@ One section per measurement system or tradition.
 | `great-gross` | Great Gross | 1728 1 |
 | `myriad` | Myriad | 10000 1 |
 | `mole` | Mole | 6.02214076e+23 1 |
+
+## CGS
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `statC` | Statcoulomb | 3.33564095e-10 A⋅s |
+| `abC` | Abcoulomb | 10 A⋅s |
+| `γ` | Gamma | 1e-9 kg⋅s⁻²⋅A⁻¹ |
+| `abΩ` | Abohm | 1e-9 kg⋅m²⋅s⁻³⋅A⁻² |
+| `statΩ` | Statohm | 8.98755178737e+11 kg⋅m²⋅s⁻³⋅A⁻² |
 
 
 

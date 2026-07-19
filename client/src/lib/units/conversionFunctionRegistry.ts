@@ -66,6 +66,8 @@ const LOG_SCALE_PAIRS: Record<string, ConversionFunctionPair> = {
   log_decade: { toBase: v => 10 ** v, fromBase: v => Math.log10(v) },
   // pH → hydrogen-ion molar concentration (mol/L): [H⁺] = 10^(−pH)
   ph_concentration: { toBase: v => 10 ** -v, fromBase: v => -Math.log10(v) },
+  // L/100 km ↔ km/L (base): reciprocal, self-inverse (km/L = 100 / (L/100 km))
+  fuel_l_per_100km: { toBase: v => 100 / v, fromBase: v => 100 / v },
 };
 
 function buildRegistry(): Record<string, ConversionFunctionPair> {

@@ -66,6 +66,16 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+    },
+    {
+      "id": "l_100km",
+      "name": "Liters/100 km",
+      "symbol": "L/100 km",
+      "factor": 100,
+      "conversionFunction": "fuel_l_per_100km",
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles"
     }
   ]
 }

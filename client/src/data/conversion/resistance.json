@@ -13,6 +13,24 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://www.bipm.org/en/measurement-units"
+    },
+    {
+      "id": "abohm",
+      "name": "Abohm",
+      "symbol": "abΩ",
+      "factor": 1e-9,
+      "unitType": "SI_BASE",
+      "measurementSystem": "CGS",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Abohm"
+    },
+    {
+      "id": "statohm",
+      "name": "Statohm",
+      "symbol": "statΩ",
+      "factor": 898755178737,
+      "unitType": "SI_BASE",
+      "measurementSystem": "CGS",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Statohm"
     }
   ]
 }

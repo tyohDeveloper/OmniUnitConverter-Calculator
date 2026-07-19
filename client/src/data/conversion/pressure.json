@@ -33,6 +33,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Millimetre_of_mercury"
     },
     {
+      "id": "inh2o",
+      "name": "Inch of Water",
+      "symbol": "inH₂O",
+      "factor": 249.0889,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Inch_of_water"
+    },
+    {
+      "id": "inhg",
+      "name": "Inch of Mercury",
+      "symbol": "inHg",
+      "factor": 3386.389,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Inch_of_mercury"
+    },
+    {
       "id": "psi",
       "name": "PSI",
       "symbol": "psi",
@@ -40,6 +58,15 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+    },
+    {
+      "id": "at",
+      "name": "Technical Atmosphere",
+      "symbol": "at",
+      "factor": 98066.5,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Technical_atmosphere"
     },
     {
       "id": "bar",

@@ -142,3 +142,39 @@ describe('Regression: math and temperature unchanged', () => {
     expect(convert(100, 'c', 'k', 'temperature')).toBeCloseTo(373.15, 10);
   });
 });
+
+describe('Fuel economy: L/100 km reciprocal conversion', () => {
+  it('converts L/100 km to km/L via the registry (reciprocal)', () => {
+    expect(convert(5, 'l_100km', 'km_l', 'fuel_economy')).toBeCloseTo(20, 10);
+    expect(convert(10, 'l_100km', 'km_l', 'fuel_economy')).toBeCloseTo(10, 10);
+  });
+
+  it('converts km/L to L/100 km (self-inverse)', () => {
+    expect(convert(20, 'km_l', 'l_100km', 'fuel_economy')).toBeCloseTo(5, 10);
+  });
+
+  it('round-trips L/100 km through mpg (US)', () => {
+    const mpg = convert(8, 'l_100km', 'mpg_us', 'fuel_economy');
+    expect(mpg).toBeCloseTo(29.40195, 3);
+    expect(convert(mpg, 'mpg_us', 'l_100km', 'fuel_economy')).toBeCloseTo(8, 8);
+  });
+
+  it('is flagged non-linear so factor-based consumers exclude it', () => {
+    expect(isNonLinearUnit({ conversionFunction: 'fuel_l_per_100km' })).toBe(true);
+  });
+});
+
+describe('Temperature: Réaumur (°Ré)', () => {
+  it('0 °Ré = 0 °C and 80 °Ré = 100 °C', () => {
+    expect(convert(0, 're', 'c', 'temperature')).toBeCloseTo(0, 10);
+    expect(convert(80, 're', 'c', 'temperature')).toBeCloseTo(100, 10);
+  });
+
+  it('round-trips through Fahrenheit and Kelvin', () => {
+    const f = convert(40, 're', 'f', 'temperature');
+    expect(f).toBeCloseTo(122, 10);
+    expect(convert(f, 'f', 're', 'temperature')).toBeCloseTo(40, 10);
+    expect(convert(0, 'c', 're', 'temperature')).toBeCloseTo(0, 10);
+    expect(convert(273.15, 'k', 're', 'temperature')).toBeCloseTo(0, 10);
+  });
+});

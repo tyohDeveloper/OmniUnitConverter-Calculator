@@ -24,6 +24,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Mass"
     },
     {
+      "id": "dalton",
+      "name": "Dalton",
+      "symbol": "Da",
+      "factor": 1.66053906892e-27,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dalton_(unit)"
+    },
+    {
       "id": "mcg",
       "name": "Microgram",
       "symbol": "mcg",

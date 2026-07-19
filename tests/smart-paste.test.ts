@@ -1386,3 +1386,58 @@ describe('Gram-force smart paste', () => {
     expect(result.unitId).toBe('gf');
   });
 });
+
+describe('Elementary charge vs Euler symbol disambiguation', () => {
+  it('should parse "1 e" as electric charge / elementary charge', () => {
+    const result = parseUnitText('1 e');
+    expect(result.categoryId).toBe('charge');
+    expect(result.unitId).toBe('e_charge');
+  });
+
+  it('should parse "1 𝑒" as unitless Euler\u2019s number', () => {
+    const result = parseUnitText('1 𝑒');
+    expect(result.categoryId).toBe('unitless');
+    expect(result.unitId).toBe('euler');
+  });
+});
+
+describe('Technical atmosphere (at) smart paste', () => {
+  it('should parse "2 at" as pressure / technical atmosphere', () => {
+    const result = parseUnitText('2 at');
+    expect(result.originalValue).toBe(2);
+    expect(result.categoryId).toBe('pressure');
+    expect(result.unitId).toBe('at');
+  });
+});
+
+describe('New common unit symbols', () => {
+  it('should parse "5 thou" as length', () => {
+    const result = parseUnitText('5 thou');
+    expect(result.categoryId).toBe('length');
+    expect(result.unitId).toBe('thou');
+  });
+
+  it('should parse "1 Da" as mass / dalton', () => {
+    const result = parseUnitText('1 Da');
+    expect(result.categoryId).toBe('mass');
+    expect(result.unitId).toBe('dalton');
+  });
+
+  it('should parse "29.92 inHg" as pressure', () => {
+    const result = parseUnitText('29.92 inHg');
+    expect(result.categoryId).toBe('pressure');
+    expect(result.unitId).toBe('inhg');
+  });
+
+  it('should parse "3 are" as area', () => {
+    const result = parseUnitText('3 are');
+    expect(result.categoryId).toBe('area');
+    expect(result.unitId).toBe('are');
+  });
+
+  it('should parse "1 ftn" as time / fortnight', () => {
+    const result = parseUnitText('1 ftn');
+    expect(result.categoryId).toBe('time');
+    expect(result.unitId).toBe('fortnight');
+  });
+});

@@ -292,6 +292,51 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://en.wikipedia.org/wiki/League_(unit)"
+    },
+    {
+      "id": "verst_ru",
+      "name": "Verst (Russia)",
+      "symbol": "verst",
+      "factor": 1066.8,
+      "unitType": "SI_BASE",
+      "measurementSystem": "RUSSIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Verst"
+    },
+    {
+      "id": "sazhen_ru",
+      "name": "Sazhen (Russia)",
+      "symbol": "sazhen",
+      "factor": 2.1336,
+      "unitType": "SI_BASE",
+      "measurementSystem": "RUSSIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Obsolete_Russian_units_of_measurement"
+    },
+    {
+      "id": "toise_fr",
+      "name": "Toise (French)",
+      "symbol": "toise",
+      "factor": 1.949,
+      "unitType": "SI_BASE",
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Toise"
+    },
+    {
+      "id": "mile_roman",
+      "name": "Roman Mile",
+      "symbol": "mi (Rom)",
+      "factor": 1480,
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_ROMAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Roman_mile"
+    },
+    {
+      "id": "barleycorn",
+      "name": "Barleycorn",
+      "symbol": "barleycorn",
+      "factor": 0.008466666666666667,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Barleycorn_(unit)"
     }
   ]
 }

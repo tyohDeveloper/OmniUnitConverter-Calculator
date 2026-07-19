@@ -15,6 +15,24 @@
       "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
+      "id": "e_charge",
+      "name": "Elementary Charge",
+      "symbol": "e",
+      "factor": 1.602176634e-19,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Elementary_charge"
+    },
+    {
+      "id": "statc",
+      "name": "Statcoulomb",
+      "symbol": "statC",
+      "factor": 3.33564095e-10,
+      "unitType": "SI_BASE",
+      "measurementSystem": "CGS",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Statcoulomb"
+    },
+    {
       "id": "mah",
       "name": "Milliamp-hour",
       "symbol": "mAh",
@@ -22,6 +40,15 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Ampere-hour"
+    },
+    {
+      "id": "abc",
+      "name": "Abcoulomb",
+      "symbol": "abC",
+      "factor": 10,
+      "unitType": "SI_BASE",
+      "measurementSystem": "CGS",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Abcoulomb"
     },
     {
       "id": "ah",

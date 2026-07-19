@@ -44,6 +44,16 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://en.wikipedia.org/wiki/Rankine_scale"
+    },
+    {
+      "id": "re",
+      "name": "Réaumur",
+      "symbol": "°Ré",
+      "factor": 1.25,
+      "offset": 218.52,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/R%C3%A9aumur_scale"
     }
   ]
 }

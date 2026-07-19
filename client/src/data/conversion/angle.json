@@ -33,6 +33,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Minute_and_second_of_arc"
     },
     {
+      "id": "mil_nato",
+      "name": "NATO Mil",
+      "symbol": "mil (NATO)",
+      "factor": 0.0009817477042468104,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Angular_mil"
+    },
+    {
       "id": "grad",
       "name": "Gradian",
       "symbol": "grad",
@@ -58,6 +67,15 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://en.wikipedia.org/wiki/Degree_(angle)"
+    },
+    {
+      "id": "turn",
+      "name": "Turn",
+      "symbol": "tr",
+      "factor": 6.283185307179586,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Turn_(angle)"
     }
   ]
 }

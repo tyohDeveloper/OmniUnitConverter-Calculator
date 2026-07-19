@@ -33,6 +33,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
+      "id": "lbgal",
+      "name": "lb/gal (US)",
+      "symbol": "lb⋅gal⁻¹",
+      "factor": 119.8264,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Density"
+    },
+    {
+      "id": "slugft3",
+      "name": "slug/ft³",
+      "symbol": "slug⋅ft⁻³",
+      "factor": 515.3788,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Slug_(unit)"
+    },
+    {
       "id": "gcm3",
       "name": "g/cm³",
       "symbol": "g⋅cm⁻³",
@@ -40,6 +58,15 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Gram_per_cubic_centimetre"
+    },
+    {
+      "id": "kgl",
+      "name": "kg/L",
+      "symbol": "kg⋅L⁻¹",
+      "factor": 1000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Density"
     }
   ]
 }

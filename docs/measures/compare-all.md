@@ -33,9 +33,11 @@ One section per measurement category. Each row shows how many base SI units one 
 | `rad` | Radian | 1 rad |
 | `″` | Arcsecond | 4.84813681109536e-6 rad |
 | `′` | Arcminute | 2.908882086657216e-4 rad |
+| `mil (NATO)` | NATO Mil | 9.817477042468104e-4 rad |
 | `grad` | Gradian | 0.015707963267948967 rad |
 | `°` | Degree | 0.017453292519943295 rad |
 | `° ′ ″` | Degree (DMS) | 0.017453292519943295 rad |
+| `tr` | Turn | 6.283185307179586 rad |
 
 ### Angular Momentum
 
@@ -85,6 +87,9 @@ One section per measurement category. Each row shows how many base SI units one 
 | `desyatina` | Desyatina (Russia) | 10925 m² |
 | `section` | Section (US) | 2589988 m² |
 | `twp` | Township (US) | 93239571 m² |
+| `arpent` | Arpent (French) | 3418.89 m² |
+| `rai` | Rai (Thailand) | 1600 m² |
+| `hide` | Hide (English) | 485623 m² |
 
 ### Archaic Energy
 
@@ -132,6 +137,11 @@ One section per measurement category. Each row shows how many base SI units one 
 | `ch` | Chain (Gunter) | 20.1168 m |
 | `fur` | Furlong | 201.168 m |
 | `lea` | League | 4828.032 m |
+| `verst` | Verst (Russia) | 1066.8 m |
+| `sazhen` | Sazhen (Russia) | 2.1336 m |
+| `toise` | Toise (French) | 1.949 m |
+| `mi (Rom)` | Roman Mile | 1480 m |
+| `barleycorn` | Barleycorn | 0.008466666666666667 m |
 
 ### Archaic Mass
 
@@ -164,6 +174,12 @@ One section per measurement category. Each row shows how many base SI units one 
 | `s ap` | Scruple (Apothecaries') | 0.001296 kg |
 | `dr` | Dram (Avoirdupois, US) | 0.001771845 kg |
 | `dr ap` | Dram (Apothecaries') | 0.0038879346 kg |
+| `pood` | Pood (Russia) | 16.3807 kg |
+| `zolotnik` | Zolotnik (Russia) | 0.0042658 kg |
+| `shekel` | Shekel (Biblical) | 0.0114 kg |
+| `mina` | Mina (Biblical) | 0.571 kg |
+| `talent` | Talent (Biblical) | 34.2 kg |
+| `quintal` | Quintal (Metric) | 100 kg |
 
 ### Archaic Power
 
@@ -207,6 +223,13 @@ One section per measurement category. Each row shows how many base SI units one 
 | `hhd` | Hogshead (US) | 238.481 L |
 | `cord` | Cord | 3624.56 L |
 | `m³` | Cubic Metre | 1000 L |
+| `tun` | Tun | 953.92 L |
+| `butt` | Butt (Pipe) | 476.96 L |
+| `kilderkin` | Kilderkin | 81.8296 L |
+| `pottle` | Pottle | 2.273045 L |
+| `chaldron` | Chaldron | 1309.27 L |
+| `sextarius` | Sextarius (Roman) | 0.546 L |
+| `congius` | Congius (Roman) | 3.275 L |
 
 ### Area
 
@@ -217,6 +240,8 @@ One section per measurement category. Each row shows how many base SI units one 
 | `in²` | Square Inch | 6.4516e-4 m² |
 | `ft²` | Square Foot | 0.092903 m² |
 | `yd²` | Square Yard | 0.836127 m² |
+| `are` | Are | 100 m² |
+| `rood` | Rood | 1011.7141056 m² |
 | `ac` | Acre | 4046.86 m² |
 | `ha` | Hectare | 10000 m² |
 | `mi²` | Square Mile | 2590000 m² |
@@ -270,7 +295,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `C` | Coulomb | 1 A⋅s |
+| `e` | Elementary Charge | 1.602176634e-19 A⋅s |
+| `statC` | Statcoulomb | 3.33564095e-10 A⋅s |
 | `mAh` | Milliamp-hour | 3.6 A⋅s |
+| `abC` | Abcoulomb | 10 A⋅s |
 | `Ah` | Ampere-hour | 3600 A⋅s |
 | `F (charge)` | Faraday | 96485 A⋅s |
 
@@ -282,8 +310,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | `ppt` | Parts per Trillion | 1e-12 mol⋅L⁻¹ |
 | `ppb` | Parts per Billion | 1e-9 mol⋅L⁻¹ |
 | `ppm` | Parts per Million | 1e-6 mol⋅L⁻¹ |
+| `mg⋅dL⁻¹` | Milligram/Decilitre | 1e-5 mol⋅L⁻¹ |
 | `mol⋅m⁻³` | Mole/m³ | 0.001 mol⋅L⁻¹ |
 | `‰` | Per Mille | 0.001 mol⋅L⁻¹ |
+| `g⋅L⁻¹` | Gram/Litre | 0.001 mol⋅L⁻¹ |
 | `%` | Percent | 0.01 mol⋅L⁻¹ |
 | `pH` | pH | 0.1 mol⋅L⁻¹ |
 
@@ -359,7 +389,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | `kg⋅m⁻³` | kg/m³ | 1 kg⋅m⁻³ |
 | `g⋅m⁻³` | g/m³ | 0.001 kg⋅m⁻³ |
 | `lb⋅ft⁻³` | lb/ft³ | 16.0185 kg⋅m⁻³ |
+| `lb⋅gal⁻¹` | lb/gal (US) | 119.8264 kg⋅m⁻³ |
+| `slug⋅ft⁻³` | slug/ft³ | 515.3788 kg⋅m⁻³ |
 | `g⋅cm⁻³` | g/cm³ | 1000 kg⋅m⁻³ |
+| `kg⋅L⁻¹` | kg/L | 1000 kg⋅m⁻³ |
 
 ### Electric Field Strength
 
@@ -439,10 +472,14 @@ One section per measurement category. Each row shows how many base SI units one 
 | `N` | Newton | 1 kg⋅m⋅s⁻² |
 | `dyn` | Dyne | 1e-5 kg⋅m⋅s⁻² |
 | `gf` | Gram-force | 0.00980665 kg⋅m⋅s⁻² |
+| `pdl` | Poundal | 0.138254954376 kg⋅m⋅s⁻² |
+| `ozf` | Ounce-force | 0.2780138509537812 kg⋅m⋅s⁻² |
 | `lbf` | Pound-force | 4.44822 kg⋅m⋅s⁻² |
 | `kgf` | Kilogram-force | 9.80665 kg⋅m⋅s⁻² |
 | `g-force` | g-force | 9.80665 kg⋅m⋅s⁻² |
 | `kip` | Kip | 4448.22 kg⋅m⋅s⁻² |
+| `tonf (US)` | Ton-force (Short) | 8896.443230521 kg⋅m⋅s⁻² |
+| `tf` | Ton-force (Metric) | 9806.65 kg⋅m⋅s⁻² |
 
 ### Frequency
 
@@ -519,6 +556,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `mi⋅L⁻¹` | Miles/Liter | 1.60934 km⋅L⁻¹ |
 | `km⋅kWh⁻¹` | Kilometers/kWh (EV) | 9.5 km⋅L⁻¹ |
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | 15.29 km⋅L⁻¹ |
+| `L/100 km` | Litres/100 km | 100 km⋅L⁻¹ |
 
 ### Illuminance
 
@@ -560,6 +598,7 @@ One section per measurement category. Each row shows how many base SI units one 
 |--------|-------------|-------------------|
 | `m` | Metre | 1 m |
 | `Å` | Angstrom | 1e-10 m |
+| `thou` | Mil/Thou | 2.54e-5 m |
 | `in` | Inch | 0.0254 m |
 | `ft` | Foot | 0.3048 m |
 | `ft'in"` | Foot & Inch | 0.3048 m |
@@ -606,6 +645,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `T` | Tesla | 1 kg⋅s⁻²⋅A⁻¹ |
+| `γ` | Gamma | 1e-9 kg⋅s⁻²⋅A⁻¹ |
 | `G` | Gauss | 1e-4 kg⋅s⁻²⋅A⁻¹ |
 
 ### Magnetic Field Strength (H)
@@ -629,6 +669,7 @@ One section per measurement category. Each row shows how many base SI units one 
 |--------|-------------|-------------------|
 | `kg` | Kilogram | 1 kg |
 | `eV⋅c⁻²` | Electronvolt/c² | 1.78266192e-36 kg |
+| `Da` | Dalton | 1.66053906892e-27 kg |
 | `mcg` | Microgram | 1e-9 kg |
 | `g` | Gram | 0.001 kg |
 | `oz` | Ounce (Avoirdupois) | 0.028349523125 kg |
@@ -710,6 +751,9 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `V` | Volt | 1 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBµV` | Decibel-microvolt | 1.1220184543019633e-6 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBu` | Decibel unloaded | 0.8691117575297783 kg⋅m²⋅s⁻³⋅A⁻¹ |
+| `dBV` | Decibel-volt | 1.1220184543019633 kg⋅m²⋅s⁻³⋅A⁻¹ |
 | `statV` | Statvolt | 299.792 kg⋅m²⋅s⁻³⋅A⁻¹ |
 
 ### Power
@@ -717,9 +761,13 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `W` | Watt | 1 kg⋅m²⋅s⁻³ |
+| `dBµW` | Decibel-microwatt | 1.2589254117941672e-6 kg⋅m²⋅s⁻³ |
+| `dBm` | Decibel-milliwatt | 0.0012589254117941673 kg⋅m²⋅s⁻³ |
 | `BTU⋅h⁻¹` | BTU per Hour | 0.293071 kg⋅m²⋅s⁻³ |
+| `dBW` | Decibel-watt | 1.2589254117941673 kg⋅m²⋅s⁻³ |
 | `hp (M)` | Metric HP | 735.499 kg⋅m²⋅s⁻³ |
 | `hp` | Horsepower (Mechanical) | 745.7 kg⋅m²⋅s⁻³ |
+| `dBkW` | Decibel-kilowatt | 1258.9254117941673 kg⋅m²⋅s⁻³ |
 | `TR` | Ton of Refrigeration | 3516.85 kg⋅m²⋅s⁻³ |
 
 ### Pressure
@@ -729,7 +777,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | `Pa` | Pascal | 1 kg⋅m⁻¹⋅s⁻² |
 | `Torr` | Torr | 133.322 kg⋅m⁻¹⋅s⁻² |
 | `mmHg` | mmHg (Blood) | 133.322 kg⋅m⁻¹⋅s⁻² |
+| `inH₂O` | Inch of Water | 249.0889 kg⋅m⁻¹⋅s⁻² |
+| `inHg` | Inch of Mercury | 3386.389 kg⋅m⁻¹⋅s⁻² |
 | `psi` | PSI | 6894.76 kg⋅m⁻¹⋅s⁻² |
+| `at` | Technical Atmosphere | 98066.5 kg⋅m⁻¹⋅s⁻² |
 | `bar` | Bar | 100000 kg⋅m⁻¹⋅s⁻² |
 | `atm` | Atmosphere | 101325 kg⋅m⁻¹⋅s⁻² |
 
@@ -795,6 +846,8 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `Ω` | Ohm | 1 kg⋅m²⋅s⁻³⋅A⁻² |
+| `abΩ` | Abohm | 1e-9 kg⋅m²⋅s⁻³⋅A⁻² |
+| `statΩ` | Statohm | 8.98755178737e+11 kg⋅m²⋅s⁻³⋅A⁻² |
 
 ### Shipping Containers
 
@@ -833,6 +886,8 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `Pa` | Pascal | 1 kg⋅m⁻¹⋅s⁻² |
+| `dBµPa` | Decibel-micropascal | 1.1220184543019633e-6 kg⋅m⁻¹⋅s⁻² |
+| `dB SPL` | Sound Pressure Level | 2.244036908603927e-5 kg⋅m⁻¹⋅s⁻² |
 | `µbar` | Microbar | 0.1 kg⋅m⁻¹⋅s⁻² |
 | `dyn⋅cm⁻²` | Dyne/cm² | 0.1 kg⋅m⁻¹⋅s⁻² |
 | `bar` | Bar | 100000 kg⋅m⁻¹⋅s⁻² |
@@ -853,6 +908,7 @@ One section per measurement category. Each row shows how many base SI units one 
 |--------|-------------|-------------------|
 | `m⋅s⁻¹` | Metre/Second | 1 m⋅s⁻¹ |
 | `km⋅h⁻¹` | Kilometre/Hour | 0.2777777777777778 m⋅s⁻¹ |
+| `ft⋅s⁻¹` | Foot/Second | 0.3048 m⋅s⁻¹ |
 | `mph` | Mile/Hour | 0.44704 m⋅s⁻¹ |
 | `kn` | Knot | 0.514444 m⋅s⁻¹ |
 | `Ma` | Mach | 343 m⋅s⁻¹ |
@@ -873,6 +929,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `°C` | Celsius † | 1 K |
 | `°F` | Fahrenheit † | 0.5555555555555556 K |
 | `°R` | Rankine † | 0.5555555555555556 K |
+| `°Ré` | Réaumur † | 1.25 K |
 
 ### Thermal Conductivity
 
@@ -893,6 +950,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `d (sid)` | Sidereal Day | 86164.0905 s |
 | `d` | Day | 86400 s |
 | `wk` | Week | 604800 s |
+| `ftn` | Fortnight | 1209600 s |
 | `mo` | Month (Avg) | 2628000 s |
 | `yr` | Year | 31540000 s |
 | `dec` | Decade | 315400000 s |
@@ -953,7 +1011,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `pair` | Pair | 2 1 |
 | `couple` | Couple | 2 1 |
 | `brace` | Brace | 2 1 |
-| `e` | Euler's Number | 2.7182818285 1 |
+| `𝑒` | Euler's Number | 2.7182818285 1 |
 | `hat-trick` | Hat-Trick | 3 1 |
 | `π` | Pi | 3.1415926536 1 |
 | `half-doz` | Half Dozen | 6 1 |
@@ -1004,6 +1062,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `L` | Litre | 0.001 m³ |
 | `dry qt` | Quart (US Dry) | 0.00110122 m³ |
 | `qt (imp)` | Quart (Imp) | 0.0011365225 m³ |
+| `FBM` | Board Foot | 0.002359737216 m³ |
 | `gal (US)` | Gallon (US) | 0.003785411784 m³ |
 | `gal (imp)` | Gallon (Imp) | 0.00454609 m³ |
 | `pk` | Peck (US) | 0.00880977 m³ |

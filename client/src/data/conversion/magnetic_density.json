@@ -15,6 +15,15 @@
       "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
+      "id": "gamma",
+      "name": "Gamma",
+      "symbol": "γ",
+      "factor": 1e-9,
+      "unitType": "SI_BASE",
+      "measurementSystem": "CGS",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gauss_(unit)"
+    },
+    {
       "id": "g",
       "name": "Gauss",
       "symbol": "G",

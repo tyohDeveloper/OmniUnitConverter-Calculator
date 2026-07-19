@@ -152,6 +152,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
+      "id": "fbm",
+      "name": "Board Foot",
+      "symbol": "FBM",
+      "factor": 0.002359737216,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Board_foot"
+    },
+    {
       "id": "gal",
       "name": "Gallon (US)",
       "symbol": "gal (US)",

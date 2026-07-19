@@ -202,6 +202,33 @@
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
       "sourceUrl": "https://en.wikipedia.org/wiki/Township_(United_States)"
+    },
+    {
+      "id": "arpent",
+      "name": "Arpent (French)",
+      "symbol": "arpent",
+      "factor": 3418.89,
+      "unitType": "SI_BASE",
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Arpent"
+    },
+    {
+      "id": "rai_th",
+      "name": "Rai (Thailand)",
+      "symbol": "rai",
+      "factor": 1600,
+      "unitType": "SI_BASE",
+      "measurementSystem": "THAI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rai_(unit)"
+    },
+    {
+      "id": "hide",
+      "name": "Hide (English)",
+      "symbol": "hide",
+      "factor": 485623,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hide_(unit)"
     }
   ]
 }

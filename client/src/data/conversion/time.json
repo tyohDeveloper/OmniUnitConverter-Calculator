@@ -69,6 +69,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Week"
     },
     {
+      "id": "fortnight",
+      "name": "Fortnight",
+      "symbol": "ftn",
+      "factor": 1209600,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fortnight"
+    },
+    {
       "id": "mo",
       "name": "Month (Avg)",
       "symbol": "mo",

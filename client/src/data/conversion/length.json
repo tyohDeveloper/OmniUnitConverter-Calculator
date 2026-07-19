@@ -24,6 +24,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Angstrom"
     },
     {
+      "id": "thou",
+      "name": "Mil/Thou",
+      "symbol": "thou",
+      "factor": 0.0000254,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Thousandth_of_an_inch"
+    },
+    {
       "id": "in",
       "name": "Inch",
       "symbol": "in",

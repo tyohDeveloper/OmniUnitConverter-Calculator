@@ -42,6 +42,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Concentration"
     },
     {
+      "id": "mg_dl",
+      "name": "Milligram/Deciliter",
+      "symbol": "mg⋅dL⁻¹",
+      "factor": 0.00001,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mass_concentration_(chemistry)"
+    },
+    {
       "id": "mol_m3",
       "name": "Mole/m³",
       "symbol": "mol⋅m⁻³",
@@ -58,6 +67,15 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Concentration"
+    },
+    {
+      "id": "g_l",
+      "name": "Gram/Liter",
+      "symbol": "g⋅L⁻¹",
+      "factor": 0.001,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gram_per_litre"
     },
     {
       "id": "percent",

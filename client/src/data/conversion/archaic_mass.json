@@ -247,6 +247,60 @@
       "unitType": "IMPERIAL",
       "measurementSystem": "APOTHECARIES",
       "sourceUrl": "https://en.wikipedia.org/wiki/Dram_(unit)"
+    },
+    {
+      "id": "pood_ru",
+      "name": "Pood (Russia)",
+      "symbol": "pood",
+      "factor": 16.3807,
+      "unitType": "SI_BASE",
+      "measurementSystem": "RUSSIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pood"
+    },
+    {
+      "id": "zolotnik_ru",
+      "name": "Zolotnik (Russia)",
+      "symbol": "zolotnik",
+      "factor": 0.0042658,
+      "unitType": "SI_BASE",
+      "measurementSystem": "RUSSIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Zolotnik"
+    },
+    {
+      "id": "shekel",
+      "name": "Shekel (Biblical)",
+      "symbol": "shekel",
+      "factor": 0.0114,
+      "unitType": "SI_BASE",
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Shekel"
+    },
+    {
+      "id": "mina",
+      "name": "Mina (Biblical)",
+      "symbol": "mina",
+      "factor": 0.571,
+      "unitType": "SI_BASE",
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mina_(unit)"
+    },
+    {
+      "id": "talent",
+      "name": "Talent (Biblical)",
+      "symbol": "talent",
+      "factor": 34.2,
+      "unitType": "SI_BASE",
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Talent_(measurement)"
+    },
+    {
+      "id": "quintal",
+      "name": "Quintal (Metric)",
+      "symbol": "quintal",
+      "factor": 100,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quintal"
     }
   ]
 }

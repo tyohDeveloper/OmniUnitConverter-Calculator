@@ -24,6 +24,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Kilometres_per_hour"
     },
     {
+      "id": "ftps",
+      "name": "Foot/Second",
+      "symbol": "ft⋅s⁻¹",
+      "factor": 0.3048,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Foot_per_second"
+    },
+    {
       "id": "mph",
       "name": "Mile/Hour",
       "symbol": "mph",

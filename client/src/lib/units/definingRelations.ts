@@ -20,4 +20,5 @@ export const DEFINING_RELATIONS: Record<string, string> = {
   log_stop: 'ratio = 2^x',
   log_decade: 'ratio = 10^x',
   ph_concentration: '[H⁺] = 10^(−x) mol/L',
+  fuel_l_per_100km: 'km/L = 100 / x',
 };

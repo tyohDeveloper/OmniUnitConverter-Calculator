@@ -10,3 +10,5 @@ Units may declare `conversionFunction: "<name>"` in category JSON, resolved agai
 - Paper sizes use sheet-count semantics: series anchored at size 0's mm area, halved by exact `2 ** n`, so within-series ratios are exact powers of two; cross-series goes through mm-derived anchor areas.
 
 **Why:** Silent wrong results occur if a non-linear unit leaks into factor-assuming consumers, or if JSON factor drifts from the registered function.
+
+**Unit ordering:** Category JSON unit arrays must be SI base (factor 1) first, then ascending factor — a test computes the expected order independently. A short list of special-ordered categories (archaic_*, fuel_economy, temperature, paper_sizes, etc.) is exempt; when adding units elsewhere, insert in sorted position, not appended.

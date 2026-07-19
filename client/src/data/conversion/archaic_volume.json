@@ -266,6 +266,69 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Unit_of_volume"
+    },
+    {
+      "id": "tun",
+      "name": "Tun",
+      "symbol": "tun",
+      "factor": 953.92,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tun_(unit)"
+    },
+    {
+      "id": "butt",
+      "name": "Butt (Pipe)",
+      "symbol": "butt",
+      "factor": 476.96,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Butt_(unit)"
+    },
+    {
+      "id": "kilderkin",
+      "name": "Kilderkin",
+      "symbol": "kilderkin",
+      "factor": 81.8296,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kilderkin"
+    },
+    {
+      "id": "pottle",
+      "name": "Pottle",
+      "symbol": "pottle",
+      "factor": 2.273045,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pottle"
+    },
+    {
+      "id": "chaldron",
+      "name": "Chaldron",
+      "symbol": "chaldron",
+      "factor": 1309.27,
+      "unitType": "IMPERIAL",
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chaldron"
+    },
+    {
+      "id": "sextarius",
+      "name": "Sextarius (Roman)",
+      "symbol": "sextarius",
+      "factor": 0.546,
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_ROMAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ancient_Roman_units_of_measurement"
+    },
+    {
+      "id": "congius",
+      "name": "Congius (Roman)",
+      "symbol": "congius",
+      "factor": 3.275,
+      "unitType": "SI_BASE",
+      "measurementSystem": "ANCIENT_ROMAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Congius"
     }
   ]
 }
