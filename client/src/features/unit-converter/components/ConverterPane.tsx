@@ -14,6 +14,7 @@ import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/cons
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
+import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
 
 export interface ConverterFlash {
@@ -72,6 +73,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
   const toUnitData = categoryData.units.find(u => u.id === toUnit);
   const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
   const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
+  const resultSuffix = activeCategory === 'unitless' ? regionalCountingSuffix(toUnit) : '';
 
   return (
     <Card
@@ -267,7 +269,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                       ? formatDMS(result)
                       : toUnit === 'ft_in'
                         ? formatFtIn(result)
-                        : formatResultValue(result, precision))
+                        : formatResultValue(result, precision) + resultSuffix)
                   : ''}
               </span>
               <motion.button
@@ -290,7 +292,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                         ? formatDMS(result)
                         : toUnit === 'ft_in'
                           ? formatFtIn(result)
-                          : formatResultValue(result, precision))
+                          : formatResultValue(result, precision) + resultSuffix)
                     : '...'}
                 </span>
               </motion.button>
