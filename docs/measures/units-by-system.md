@@ -110,6 +110,7 @@ One section per measurement system or tradition.
 | `Sv (flow)` | Sverdrup | 1000000 m³⋅s⁻¹ |
 | `N` | Newton | 1 kg⋅m⋅s⁻² |
 | `dyn` | Dyne | 1e-5 kg⋅m⋅s⁻² |
+| `gf` | Gram-force | 0.00980665 kg⋅m⋅s⁻² |
 | `kgf` | Kilogram-force | 9.80665 kg⋅m⋅s⁻² |
 | `g-force` | g-force | 9.80665 kg⋅m⋅s⁻² |
 | `s⁻¹` | Per Second | 1 s⁻¹ |
