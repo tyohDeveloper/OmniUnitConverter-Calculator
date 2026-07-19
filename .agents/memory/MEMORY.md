@@ -1,1 +1,3 @@
 - [RPN X-register origin metadata](rpn-x-origin-metadata.md) — stale-closure metadata stamping makes X display old values; compute meta inside setRpnStack functional updater.
+- [Build size ceiling](build-size-ceiling.md) — single-file gzip build is ~0.3 kB under verify-build's ceiling; new data/features will fail the check without trimming or re-baselining.
+- [Conversion function registry](conversion-function-registry.md) — non-factor conversions go through a named code-side registry; JSON references by name, factor must stay in sync for linear pairs.

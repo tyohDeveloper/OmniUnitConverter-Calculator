@@ -13,7 +13,7 @@ import { findCrossDomainMatchesByKey } from './findCrossDomainMatchesByKey';
 import { SI_DERIVED_UNITS, GENERAL_SI_DERIVED, SPECIALTY_DERIVED_UNITS } from './siDerivedUnits';
 import { getDimensionSignature } from '../units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '../units/preferredRepresentations';
-import { CONVERSION_DATA } from '../conversion-data';
+import { CONVERSION_DATA, isNonLinearUnit } from '../conversion-data';
 import { CATEGORY_DIMENSIONS } from '../units/categoryDimensions';
 
 const EXCLUDED_DROPDOWN_CATEGORIES = new Set([
@@ -41,7 +41,7 @@ function collectCategoryUnits(
 ): SIRepresentation[] {
   const result: SIRepresentation[] = [];
   for (const unit of categoryData.units) {
-    if (unit.mathFunction || seenSymbols.has(unit.symbol)) continue;
+    if (isNonLinearUnit(unit) || seenSymbols.has(unit.symbol)) continue;
     if (suppressAngular && ANGULAR_SYMBOL_PATTERN.test(unit.symbol)) continue;
     seenSymbols.add(unit.symbol);
     result.push({ displaySymbol: unit.symbol, derivedUnits: [], depth: 2 });

@@ -1,4 +1,4 @@
-import { CONVERSION_DATA } from '../conversion-data';
+import { CONVERSION_DATA, isNonLinearUnit } from '../conversion-data';
 
 export interface UnitLookupResult {
   factor: number;
@@ -15,7 +15,7 @@ export interface UnitLookupResult {
 export function lookupUnitForSymbol(symbol: string): UnitLookupResult | null {
   for (const category of CONVERSION_DATA) {
     for (const unit of category.units) {
-      if (unit.symbol === symbol && !unit.mathFunction) {
+      if (unit.symbol === symbol && !isNonLinearUnit(unit)) {
         return {
           factor: unit.factor,
           offset: unit.offset ?? 0,

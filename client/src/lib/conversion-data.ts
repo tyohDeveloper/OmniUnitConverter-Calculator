@@ -69,6 +69,8 @@ import paperSizesData from '@/data/conversion/paper_sizes.json';
 import unitlessData from '@/data/conversion/unitless.json';
 import viscosityData from '@/data/conversion/viscosity.json';
 import volumeData from '@/data/conversion/volume.json';
+import { CONVERSION_FUNCTIONS } from './units/conversionFunctionRegistry';
+import { validateCategoryJson } from './units/validateCategoryJson';
 
 export type UnitCategory =
   | "length"
@@ -252,6 +254,7 @@ export interface UnitDefinition {
   prefixPower?: number; // Prefix applies to a length raised to this power (2 for m², 3 for m³)
   mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4'; // For math function units
   isInverse?: boolean; // For photon wavelength: E = constant/λ (inverse relationship)
+  conversionFunction?: string; // Name of a registered invertible function pair (see units/conversionFunctionRegistry)
   unitType?: import('./units/unitType').UnitType;
 }
 
@@ -279,11 +282,13 @@ type RawCategoryJson = {
     prefixPower?: number;
     mathFunction?: string;
     isInverse?: boolean;
+    conversionFunction?: string;
     unitType?: string;
   }>;
 };
 
 function asCategoryDefinition(raw: RawCategoryJson): CategoryDefinition {
+  validateCategoryJson(raw);
   return raw as unknown as CategoryDefinition;
 }
 
@@ -361,22 +366,22 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   unitlessData,
 ].map(asCategoryDefinition);
 
-const MATH_FUNCTIONS: Partial<Record<NonNullable<UnitDefinition['mathFunction']>, (v: number) => number>> = {
-  sin: Math.sin, cos: Math.cos, tan: Math.tan,
-  asin: Math.asin, acos: Math.acos, atan: Math.atan,
-  sinh: Math.sinh, cosh: Math.cosh, tanh: Math.tanh,
-  asinh: Math.asinh, acosh: Math.acosh, atanh: Math.atanh,
-  sqrt: Math.sqrt, cbrt: Math.cbrt, root4: v => Math.pow(v, 0.25),
-  log10: Math.log10, log2: Math.log2, ln: Math.log,
-  exp: Math.exp, abs: Math.abs, sign: Math.sign,
-  floor: Math.floor, ceil: Math.ceil, round: Math.round, trunc: Math.trunc,
-  square: v => v * v, cube: v => v * v * v, pow4: v => Math.pow(v, 4),
-};
-
+// Math-category one-way functions live in the shared conversion function
+// registry (units/conversionFunctionRegistry) as oneWay entries.
 export function applyMathFunction(value: number, func: UnitDefinition['mathFunction']): number {
   if (!func) return value;
-  const fn = MATH_FUNCTIONS[func];
-  return fn ? fn(value) : value;
+  const entry = CONVERSION_FUNCTIONS[func];
+  return entry?.oneWay ? entry.toBase(value) : value;
+}
+
+// True for units that must be excluded from factor-based consumers
+// (comparison mode, smart paste symbol/name maps, calculator lookup):
+// one-way math functions and any non-linear registered function pair.
+export function isNonLinearUnit(unit: Pick<UnitDefinition, 'mathFunction' | 'conversionFunction'>): boolean {
+  if (unit.mathFunction) return true;
+  if (!unit.conversionFunction) return false;
+  const pair = CONVERSION_FUNCTIONS[unit.conversionFunction];
+  return !!pair && !pair.linear;
 }
 
 function convertTemperature(val: number, fromUnit: UnitDefinition, toUnit: UnitDefinition, toPrefixFactor: number): number {
@@ -385,10 +390,14 @@ function convertTemperature(val: number, fromUnit: UnitDefinition, toUnit: UnitD
 }
 
 function toBaseValue(val: number, unit: UnitDefinition): number {
+  const pair = unit.conversionFunction ? CONVERSION_FUNCTIONS[unit.conversionFunction] : undefined;
+  if (pair) return pair.toBase(val);
   return unit.isInverse ? unit.factor / val : val * unit.factor;
 }
 
 function fromBaseValue(baseValue: number, unit: UnitDefinition): number {
+  const pair = unit.conversionFunction ? CONVERSION_FUNCTIONS[unit.conversionFunction] : undefined;
+  if (pair?.fromBase) return pair.fromBase(baseValue);
   return unit.isInverse ? unit.factor / baseValue : baseValue / unit.factor;
 }
 
@@ -435,7 +444,7 @@ function getEnglishNameMap(): Map<string, SymbolMapEntry> {
   for (const category of CONVERSION_DATA) {
     for (const unit of category.units) {
       const key = unit.name.toLowerCase();
-      if (!unit.mathFunction && !map.has(key)) map.set(key, makeEntry(category, unit));
+      if (!isNonLinearUnit(unit) && !map.has(key)) map.set(key, makeEntry(category, unit));
     }
   }
   englishNameMapCache = map;
@@ -444,7 +453,7 @@ function getEnglishNameMap(): Map<string, SymbolMapEntry> {
 
 function registerBaseUnits(map: SymbolMap): void {
   for (const category of CONVERSION_DATA) {
-    const base = category.units.find(u => !u.mathFunction);
+    const base = category.units.find(u => !isNonLinearUnit(u));
     if (base && base.factor === 1 && !map.has(base.symbol)) map.set(base.symbol, makeEntry(category, base));
   }
 }
@@ -452,7 +461,7 @@ function registerBaseUnits(map: SymbolMap): void {
 function registerRemainingUnits(map: SymbolMap): void {
   for (const category of CONVERSION_DATA) {
     for (const unit of category.units) {
-      if (!unit.mathFunction && !map.has(unit.symbol)) map.set(unit.symbol, makeEntry(category, unit));
+      if (!isNonLinearUnit(unit) && !map.has(unit.symbol)) map.set(unit.symbol, makeEntry(category, unit));
     }
   }
 }
