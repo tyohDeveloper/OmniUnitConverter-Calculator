@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1206135,
-  "gzipBytes": 434345,
-  "recordedAt": "2026-04-14",
-  "note": "Task 76 baseline: post-dependency-cleanup (removed @tanstack/react-query, date-fns, lodash, zod-validation-error; npm resolved updated transitive deps)"
+  "rawBytes": 1243136,
+  "gzipBytes": 444729,
+  "recordedAt": "2026-07-19",
+  "note": "Task 99 re-baseline: added build-time translation pruning (scripts/vite-plugin-prune-translations.ts) which drops localization entries identical to their English/key fallback; build dropped 445.3 -> 434.3 kB gzip. Baseline recorded at 434.3 kB so ceiling (x1.05) restores ~21 kB headroom while still catching regressions."
 }

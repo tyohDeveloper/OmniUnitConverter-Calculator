@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { viteSingleFile } from "vite-plugin-singlefile";
+import { pruneTranslations } from "./scripts/vite-plugin-prune-translations";
 
 export default defineConfig({
   plugins: [
@@ -21,6 +22,7 @@ export default defineConfig({
           ),
         ]
       : []),
+    pruneTranslations(),
     ...(process.env.NODE_ENV === "production" ? [viteSingleFile()] : []),
   ],
   resolve: {
