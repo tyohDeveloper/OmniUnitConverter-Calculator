@@ -13,6 +13,22 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "dbupa",
+      "name": "Decibel-micropascal",
+      "symbol": "dBµPa",
+      "factor": 0.0000011220184543019633,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_micropascal"
+    },
+    {
+      "id": "dbspl",
+      "name": "Sound Pressure Level",
+      "symbol": "dB SPL",
+      "factor": 0.00002244036908603927,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_spl"
+    },
+    {
       "id": "ubar",
       "name": "Microbar",
       "symbol": "µbar",

@@ -14,12 +14,36 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "dbuw",
+      "name": "Decibel-microwatt",
+      "symbol": "dBµW",
+      "factor": 0.0000012589254117941672,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_microwatt"
+    },
+    {
+      "id": "dbm",
+      "name": "Decibel-milliwatt",
+      "symbol": "dBm",
+      "factor": 0.0012589254117941673,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_milliwatt"
+    },
+    {
       "id": "btu_h",
       "name": "BTU per Hour",
       "symbol": "BTU⋅h⁻¹",
       "factor": 0.293071,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "dbw",
+      "name": "Decibel-watt",
+      "symbol": "dBW",
+      "factor": 1.2589254117941673,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_watt"
     },
     {
       "id": "hp_m",
@@ -36,6 +60,14 @@
       "factor": 745.7,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY"
+    },
+    {
+      "id": "dbkw",
+      "name": "Decibel-kilowatt",
+      "symbol": "dBkW",
+      "factor": 1258.9254117941673,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_kilowatt"
     },
     {
       "id": "ton_ref",

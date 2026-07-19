@@ -19,6 +19,8 @@
  * floor(previous/√2) halving rule ((w,h) → (floor(h/2), w)). Cross-series
  * and US conversions go through these mm-derived anchor areas in m².
  */
+import { DB_LEVEL_PAIRS } from './dbLevelPairs';
+
 export interface ConversionFunctionPair {
   toBase: (value: number) => number;
   fromBase?: (value: number) => number;
@@ -78,6 +80,7 @@ function buildRegistry(): Record<string, ConversionFunctionPair> {
     }
   }
   Object.assign(registry, LOG_SCALE_PAIRS);
+  Object.assign(registry, DB_LEVEL_PAIRS);
   return registry;
 }
 

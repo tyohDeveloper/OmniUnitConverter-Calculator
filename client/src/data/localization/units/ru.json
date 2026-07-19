@@ -535,5 +535,14 @@
   "Nat": "Нат",
   "Hartley": "Хартли",
   "Deciban": "Децибан",
-  "Dit": "Дит"
+  "Dit": "Дит",
+  "Decibel-microwatt": "Децибел-микроватт",
+  "Decibel-milliwatt": "Децибел-милливатт",
+  "Decibel-watt": "Децибел-ватт",
+  "Decibel-kilowatt": "Децибел-киловатт",
+  "Decibel-microvolt": "Децибел-микровольт",
+  "Decibel-volt": "Децибел-вольт",
+  "Decibel unloaded": "Децибел без нагрузки",
+  "Sound Pressure Level": "Уровень звукового давления",
+  "Decibel-micropascal": "Децибел-микропаскаль"
 }

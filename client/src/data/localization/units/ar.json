@@ -543,5 +543,14 @@
   "Nat": "نات",
   "Hartley": "هارتلي",
   "Deciban": "ديسيبان",
-  "Dit": "دِت"
+  "Dit": "دِت",
+  "Decibel-microwatt": "ديسيبل ميكروواط",
+  "Decibel-milliwatt": "ديسيبل ميلي واط",
+  "Decibel-watt": "ديسيبل واط",
+  "Decibel-kilowatt": "ديسيبل كيلوواط",
+  "Decibel-microvolt": "ديسيبل ميكروفولت",
+  "Decibel-volt": "ديسيبل فولت",
+  "Decibel unloaded": "ديسيبل غير محمل",
+  "Sound Pressure Level": "مستوى ضغط الصوت",
+  "Decibel-micropascal": "ديسيبل ميكروباسكال"
 }

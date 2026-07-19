@@ -535,5 +535,14 @@
   "Nat": "纳特",
   "Hartley": "哈特莱",
   "Deciban": "德西班",
-  "Dit": "迪特"
+  "Dit": "迪特",
+  "Decibel-microwatt": "分贝微瓦",
+  "Decibel-milliwatt": "分贝毫瓦",
+  "Decibel-watt": "分贝瓦",
+  "Decibel-kilowatt": "分贝千瓦",
+  "Decibel-microvolt": "分贝微伏",
+  "Decibel-volt": "分贝伏",
+  "Decibel unloaded": "分贝（空载）",
+  "Sound Pressure Level": "声压级",
+  "Decibel-micropascal": "分贝微帕"
 }

@@ -535,5 +535,14 @@
   "Nat": "나트",
   "Hartley": "하틀리",
   "Deciban": "데시반",
-  "Dit": "디트"
+  "Dit": "디트",
+  "Decibel-microwatt": "데시벨 마이크로와트",
+  "Decibel-milliwatt": "데시벨 밀리와트",
+  "Decibel-watt": "데시벨 와트",
+  "Decibel-kilowatt": "데시벨 킬로와트",
+  "Decibel-microvolt": "데시벨 마이크로볼트",
+  "Decibel-volt": "데시벨 볼트",
+  "Decibel unloaded": "데시벨(무부하)",
+  "Sound Pressure Level": "음압 레벨",
+  "Decibel-micropascal": "데시벨 마이크로파스칼"
 }

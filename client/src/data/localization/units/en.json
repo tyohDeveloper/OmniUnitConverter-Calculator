@@ -543,5 +543,14 @@
   "Nat": "Nat",
   "Hartley": "Hartley",
   "Deciban": "Deciban",
-  "Dit": "Dit"
+  "Dit": "Dit",
+  "Decibel-microwatt": "Decibel-microwatt",
+  "Decibel-milliwatt": "Decibel-milliwatt",
+  "Decibel-watt": "Decibel-watt",
+  "Decibel-kilowatt": "Decibel-kilowatt",
+  "Decibel-microvolt": "Decibel-microvolt",
+  "Decibel-volt": "Decibel-volt",
+  "Decibel unloaded": "Decibel unloaded",
+  "Sound Pressure Level": "Sound Pressure Level",
+  "Decibel-micropascal": "Decibel-micropascal"
 }

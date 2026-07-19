@@ -535,5 +535,14 @@
   "Nat": "ナット",
   "Hartley": "ハートレー",
   "Deciban": "デシバン",
-  "Dit": "ディット"
+  "Dit": "ディット",
+  "Decibel-microwatt": "デシベルマイクロワット",
+  "Decibel-milliwatt": "デシベルミリワット",
+  "Decibel-watt": "デシベルワット",
+  "Decibel-kilowatt": "デシベルキロワット",
+  "Decibel-microvolt": "デシベルマイクロボルト",
+  "Decibel-volt": "デシベルボルト",
+  "Decibel unloaded": "デシベル（無負荷）",
+  "Sound Pressure Level": "音圧レベル",
+  "Decibel-micropascal": "デシベルマイクロパスカル"
 }

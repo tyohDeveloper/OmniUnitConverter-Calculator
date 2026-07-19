@@ -14,6 +14,30 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "dbuv",
+      "name": "Decibel-microvolt",
+      "symbol": "dBµV",
+      "factor": 0.0000011220184543019633,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_microvolt"
+    },
+    {
+      "id": "dbu",
+      "name": "Decibel unloaded",
+      "symbol": "dBu",
+      "factor": 0.8691117575297783,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_unloaded"
+    },
+    {
+      "id": "dbv",
+      "name": "Decibel-volt",
+      "symbol": "dBV",
+      "factor": 1.1220184543019633,
+      "measurementSystem": "NONE",
+      "conversionFunction": "db_volt"
+    },
+    {
       "id": "statv",
       "name": "Statvolt",
       "symbol": "statV",
