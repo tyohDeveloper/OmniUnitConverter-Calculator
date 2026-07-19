@@ -22,6 +22,7 @@ import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import { PASTE_RESET_TIMEOUT_MS } from '../constants';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
+import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import type { SupportedLanguage } from '@/lib/localization';
 import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS } from '@/lib/localization';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
@@ -548,6 +549,9 @@ export function useConverterController(): UseConverterControllerReturn {
       if (toUnit === 'deg_dms') { textToCopy = formatDMS(result); }
       else if (toUnit === 'ft_in') { textToCopy = formatFtIn(result); }
       else if (activeCategory === 'lightbulb') { textToCopy = `${formatForClipboard(valueToCopy, precision)} lm`; }
+      else if (activeCategory === 'unitless' && regionalCountingSuffix(toUnit)) {
+        textToCopy = `${formatForClipboard(result, precision)}${regionalCountingSuffix(toUnit)}`;
+      }
       else {
         const unitSymbol = toUnitData?.symbol || '';
         const prefixSymbol = (toUnitData?.allowPrefixes && toPrefixData?.id !== 'none') ? toPrefixData.symbol : '';

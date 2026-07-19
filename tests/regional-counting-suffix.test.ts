@@ -13,6 +13,9 @@ describe('regionalCountingSuffix', () => {
     expect(regionalCountingSuffix('wan')).toBe('万');
     expect(regionalCountingSuffix('yi')).toBe('亿');
     expect(regionalCountingSuffix('oku')).toBe('億');
+    expect(regionalCountingSuffix('sen')).toBe('千');
+    expect(regionalCountingSuffix('zhao')).toBe('兆');
+    expect(regionalCountingSuffix('kei')).toBe('京');
   });
 
   it('returns empty string for non-regional units', () => {
