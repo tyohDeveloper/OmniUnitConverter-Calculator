@@ -6,7 +6,7 @@
   "units": [
     {
       "id": "per_day",
-      "name": "Per Day (λ)",
+      "name": "Decay Constant (λ, per day)",
       "symbol": "d⁻¹",
       "factor": 0.000011574074074074073,
       "unitType": "SI_BASE",
