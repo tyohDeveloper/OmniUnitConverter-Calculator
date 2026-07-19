@@ -60,6 +60,15 @@
       "factor": 0.01,
       "unitType": "SI_BASE",
       "measurementSystem": "SI"
+    },
+    {
+      "id": "ph",
+      "name": "pH",
+      "symbol": "pH",
+      "factor": 0.1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "conversionFunction": "ph_concentration"
     }
   ]
 }

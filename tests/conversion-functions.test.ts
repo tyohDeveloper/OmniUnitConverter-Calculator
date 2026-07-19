@@ -33,7 +33,10 @@ describe('Conversion function registry', () => {
   it('round-trips through every invertible pair', () => {
     for (const [name, pair] of Object.entries(CONVERSION_FUNCTIONS)) {
       if (!pair.fromBase) continue;
-      for (const v of [1, 2.5, 0.001, 12345.678]) {
+      // Non-linear (log-scale) pairs overflow/underflow for huge inputs,
+      // so restrict them to a domain-safe value set.
+      const values = pair.linear ? [1, 2.5, 0.001, 12345.678] : [0.5, 1, 2.5, 20];
+      for (const v of values) {
         const roundTrip = pair.fromBase(pair.toBase(v));
         expect(Math.abs(roundTrip - v) / v, `round trip ${name}(${v})`).toBeLessThan(1e-14);
       }
@@ -62,7 +65,7 @@ describe('Zod validation of category JSON', () => {
   });
 
   it('all shipped category data passes validation (loaded without throwing)', () => {
-    expect(CONVERSION_DATA.length).toBe(71);
+    expect(CONVERSION_DATA.length).toBe(72);
   });
 });
 

@@ -135,5 +135,6 @@
   "help-llm-note": "Hinweis: Diese App wurde größtenteils mithilfe eines KI-Assistenten erstellt. Sie wurde getestet und enthält Unit-Tests. Soweit ich weiß, sind die Umrechnungen korrekt — aber für kritische Anwendungen bitte selbst prüfen.",
   "help-machine-translated": "(Dieser Text wurde maschinell übersetzt. Für den Originaltext wechseln Sie bitte zur Sprache «en».)",
   "Paper Sizes": "Papierformate",
-  "Unitless Numbers": "Einheitenlose Zahlen"
+  "Unitless Numbers": "Einheitenlose Zahlen",
+  "Logarithmic Scales": "Logarithmische Skalen"
 }

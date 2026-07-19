@@ -135,5 +135,6 @@
   "help-llm-note": "Note: I used an AI assistant to build most of this. It has been tested and includes unit tests. To the best of my knowledge the conversions are correct, but your mileage may vary.",
   "help-machine-translated": "",
   "Paper Sizes": "Paper Sizes",
-  "Unitless Numbers": "Unitless Numbers"
+  "Unitless Numbers": "Unitless Numbers",
+  "Logarithmic Scales": "Logarithmic Scales"
 }

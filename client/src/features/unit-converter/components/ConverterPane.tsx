@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits } from '@/lib/conversion-data';
+import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits, getComparisonUnits } from '@/lib/conversion-data';
 import { NUMBER_FORMATS } from '@/lib/formatting';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { Card } from '@/components/ui/card';
@@ -457,7 +457,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                   </div>
                   <div className="grid gap-1 max-h-64 overflow-y-auto">
                     {(() => {
-                      const allUnits = categoryData.units.filter(u => u.id !== fromUnit);
+                      const allUnits = getComparisonUnits(activeCategory, fromUnit);
 
                       return allUnits.map(unit => {
                         const convertedValue = convert(

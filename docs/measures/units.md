@@ -187,6 +187,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `‰` | Per Mille | Concentration | mol⋅L⁻¹ | 0.001 |
 | `mol⋅L⁻¹` | Mole/Liter | Concentration | mol⋅L⁻¹ | 1 |
 | `mol⋅m⁻³` | Mole/m³ | Concentration | mol⋅L⁻¹ | 0.001 |
+| `pH` | pH | Concentration | mol⋅L⁻¹ | 0.1 |
 | `ppb` | Parts per Billion | Concentration | mol⋅L⁻¹ | 1e-9 |
 | `ppm` | Parts per Million | Concentration | mol⋅L⁻¹ | 1e-6 |
 | `ppt` | Parts per Trillion | Concentration | mol⋅L⁻¹ | 1e-12 |
@@ -222,6 +223,11 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `m²` | Square Metre | Cross-Section | m² | 1e+28 |
 | `B` | Byte | Data/Information | B | 1 |
 | `bit` | Bit | Data/Information | B | 0.125 |
+| `dban` | Deciban | Data/Information | B | 0.041524101186092024 |
+| `dit` | Dit | Data/Information | B | 0.4152410118609203 |
+| `Hart` | Hartley | Data/Information | B | 0.4152410118609203 |
+| `nat` | Nat | Data/Information | B | 0.18033688011112042 |
+| `Sh` | Shannon | Data/Information | B | 0.125 |
 | `g⋅cm⁻³` | g/cm³ | Density | kg⋅m⁻³ | 1000 |
 | `g⋅m⁻³` | g/m³ | Density | kg⋅m⁻³ | 0.001 |
 | `kg⋅m⁻³` | kg/m³ | Density | kg⋅m⁻³ | 1 |
@@ -377,6 +383,12 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `W (inc)` | Incandescent Bulb (watts) | Lightbulb Efficiency | lm | 15 |
 | `W (LED)` | LED Bulb (watts) | Lightbulb Efficiency | lm | 95 |
 | `W (Na)` | Sodium Vapor Lamp (watts) | Lightbulb Efficiency | lm | 100 |
+| `B` | Bel | Logarithmic Scales | 1 | 10 |
+| `dB` | Decibel | Logarithmic Scales | 1 | 1.2589254117941673 |
+| `decade` | Decade (Log) | Logarithmic Scales | 1 | 10 |
+| `EV` | Stop (EV) | Logarithmic Scales | 1 | 2 |
+| `Np` | Neper | Logarithmic Scales | 1 | 7.38905609893065 |
+| `ratio` | Power Ratio | Logarithmic Scales | 1 | 1 |
 | `cd⋅sr` | Candela-Steradian | Luminous Flux (Human) | cd⋅sr | 1 |
 | `cp` | Candlepower (spherical) | Luminous Flux (Human) | cd⋅sr | 12.566370614359172 |
 | `lm` | Lumen | Luminous Flux (Human) | cd⋅sr | 1 |
@@ -611,8 +623,11 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `खरब` | Kharab | Unitless Numbers | 1 | 1e+11 |
 | `लाख` | Lakh | Unitless Numbers | 1 | 100000 |
 | `万` | Wan | Unitless Numbers | 1 | 10000 |
+| `京` | Kei | Unitless Numbers | 1 | 1e+16 |
 | `亿` | Yi | Unitless Numbers | 1 | 100000000 |
 | `億` | Oku | Unitless Numbers | 1 | 100000000 |
+| `兆` | Zhao | Unitless Numbers | 1 | 1e+12 |
+| `千` | Sen | Unitless Numbers | 1 | 1000 |
 | `cP` | Centipoise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.001 |
 | `Pa·s` | Pascal-second | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 1 |
 | `Po` | Poise | Viscosity (Dynamic) | kg⋅m⁻¹⋅s⁻¹ | 0.1 |

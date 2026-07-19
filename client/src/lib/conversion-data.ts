@@ -66,6 +66,7 @@ import timeData from '@/data/conversion/time.json';
 import torqueData from '@/data/conversion/torque.json';
 import typographyData from '@/data/conversion/typography.json';
 import paperSizesData from '@/data/conversion/paper_sizes.json';
+import logarithmicData from '@/data/conversion/logarithmic.json';
 import unitlessData from '@/data/conversion/unitless.json';
 import viscosityData from '@/data/conversion/viscosity.json';
 import volumeData from '@/data/conversion/volume.json';
@@ -146,6 +147,7 @@ export type UnitCategory =
   | "typography"
   | "cooking"
   | "paper_sizes"
+  | "logarithmic"
   | "unitless";
 
 export interface Prefix {
@@ -363,6 +365,7 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   typographyData,
   cookingData,
   paperSizesData,
+  logarithmicData,
   unitlessData,
 ].map(asCategoryDefinition);
 
@@ -1222,6 +1225,15 @@ const sortUnitsWithBase = (units: UnitDefinition[], baseUnit: UnitDefinition | u
     }
     return a.factor - b.factor;
   });
+
+// Units shown in comparison mode ("Compare All"): everything in the category
+// except the source unit and any non-linear unit (math functions, log scales,
+// pH), which factor-based consumers must exclude.
+export function getComparisonUnits(category: string, fromUnitId: string): UnitDefinition[] {
+  const catData = CONVERSION_DATA.find(c => c.id === category);
+  if (!catData) return [];
+  return catData.units.filter(u => u.id !== fromUnitId && !isNonLinearUnit(u));
+}
 
 // Special handling for offset/inverse units to preserve data ordering
 export function getFilteredSortedUnits(category: string): UnitDefinition[] {

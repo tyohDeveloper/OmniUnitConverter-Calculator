@@ -52,6 +52,20 @@ function makePaperPair(anchorAreaM2: number, index: number): ConversionFunctionP
   return { toBase: v => v * area, fromBase: v => v / area, linear: true };
 }
 
+// Logarithmic-scale pairs, POWER-RATIO convention: the base value is the
+// plain dimensionless power ratio. 1 B = 10 dB, 1 Np = 2/ln10 B (power
+// sense), 1 decade = 1 B, 1 stop (EV) = log10(2) B. Non-linear — these are
+// excluded from factor-based consumers via isNonLinearUnit().
+const LOG_SCALE_PAIRS: Record<string, ConversionFunctionPair> = {
+  log_decibel: { toBase: v => 10 ** (v / 10), fromBase: v => 10 * Math.log10(v) },
+  log_bel: { toBase: v => 10 ** v, fromBase: v => Math.log10(v) },
+  log_neper: { toBase: v => Math.exp(2 * v), fromBase: v => Math.log(v) / 2 },
+  log_stop: { toBase: v => 2 ** v, fromBase: v => Math.log2(v) },
+  log_decade: { toBase: v => 10 ** v, fromBase: v => Math.log10(v) },
+  // pH → hydrogen-ion molar concentration (mol/L): [H⁺] = 10^(−pH)
+  ph_concentration: { toBase: v => 10 ** -v, fromBase: v => -Math.log10(v) },
+};
+
 function buildRegistry(): Record<string, ConversionFunctionPair> {
   const registry: Record<string, ConversionFunctionPair> = {};
   for (const [name, fn] of Object.entries(MATH_ONE_WAY)) {
@@ -63,6 +77,7 @@ function buildRegistry(): Record<string, ConversionFunctionPair> {
       registry[`paper_${series}${n}`] = makePaperPair(anchorAreaM2, n);
     }
   }
+  Object.assign(registry, LOG_SCALE_PAIRS);
   return registry;
 }
 

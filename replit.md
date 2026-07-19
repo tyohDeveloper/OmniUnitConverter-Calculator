@@ -17,7 +17,7 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 
 ### Key Design Decisions
 - **Calculator Modes**: Supports a standard calculator mode with three input fields and a result, and an RPN (Reverse Polish Notation) mode with a 4-level stack, both offering unit-aware operations. RPN includes HP-inspired functions and an undo mechanism.
-- **Unit Categories**: Extensive categories including Math, Fuel Energy, Main Energy, Main Power, Archaic & Regional units, Photon/Light, Typography, Cooking Measures, and Paper Sizes (ISO A/B, US, JIS B series — area-based).
+- **Unit Categories**: Extensive categories including Math, Fuel Energy, Main Energy, Main Power, Archaic & Regional units, Photon/Light, Typography, Cooking Measures, Paper Sizes (ISO A/B, US, JIS B series — area-based), and Logarithmic Scales (dB, Bel, Neper, EV stops, log decades — power-ratio convention; pH lives in Concentration; information-entropy units Sh/nat/Hart/deciban/dit live in Data/Information).
 - **Type Safety**: End-to-end TypeScript with strict mode and Zod for schema validation.
 - **SI Prefix Handling**: Intelligent prefixing, including special handling for kilogram (kg) vs. gram (g), binary prefixes for data, and auto-switching for complex kg-based SI units.
 - **Scientific Notation**: Automatic display and input support for very small or very large numbers.

@@ -135,5 +135,6 @@
   "help-llm-note": "Note : Cette application a été construite en grande partie à l'aide d'un assistant IA. Elle a été testée et inclut des tests unitaires. À ma connaissance, les conversions sont correctes, mais vérifiez par vous-même pour les applications critiques.",
   "help-machine-translated": "(Ce texte a été traduit automatiquement. Pour le texte original, passez à la langue « en ».)",
   "Paper Sizes": "Formats de papier",
-  "Unitless Numbers": "Nombres Sans Dimension"
+  "Unitless Numbers": "Nombres Sans Dimension",
+  "Logarithmic Scales": "Échelles logarithmiques"
 }

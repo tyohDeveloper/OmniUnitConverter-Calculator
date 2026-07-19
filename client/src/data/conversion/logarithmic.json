@@ -1,0 +1,55 @@
+{
+  "id": "logarithmic",
+  "name": "Logarithmic Scales",
+  "baseUnit": "Power Ratio",
+  "baseSISymbol": "1",
+  "units": [
+    {
+      "id": "ratio",
+      "name": "Power Ratio",
+      "symbol": "ratio",
+      "factor": 1,
+      "measurementSystem": "NONE"
+    },
+    {
+      "id": "db",
+      "name": "Decibel",
+      "symbol": "dB",
+      "factor": 1.2589254117941673,
+      "measurementSystem": "NONE",
+      "conversionFunction": "log_decibel"
+    },
+    {
+      "id": "stop",
+      "name": "Stop (EV)",
+      "symbol": "EV",
+      "factor": 2,
+      "measurementSystem": "NONE",
+      "conversionFunction": "log_stop"
+    },
+    {
+      "id": "neper",
+      "name": "Neper",
+      "symbol": "Np",
+      "factor": 7.38905609893065,
+      "measurementSystem": "NONE",
+      "conversionFunction": "log_neper"
+    },
+    {
+      "id": "bel",
+      "name": "Bel",
+      "symbol": "B",
+      "factor": 10,
+      "measurementSystem": "NONE",
+      "conversionFunction": "log_bel"
+    },
+    {
+      "id": "decade",
+      "name": "Decade (Log)",
+      "symbol": "decade",
+      "factor": 10,
+      "measurementSystem": "NONE",
+      "conversionFunction": "log_decade"
+    }
+  ]
+}

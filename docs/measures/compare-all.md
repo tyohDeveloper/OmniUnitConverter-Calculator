@@ -285,6 +285,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `mol⋅m⁻³` | Mole/m³ | 0.001 mol⋅L⁻¹ |
 | `‰` | Per Mille | 0.001 mol⋅L⁻¹ |
 | `%` | Percent | 0.01 mol⋅L⁻¹ |
+| `pH` | pH | 0.1 mol⋅L⁻¹ |
 
 ### Conductance
 
@@ -344,7 +345,12 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `B` | Byte | 1 B |
+| `dban` | Deciban | 0.041524101186092024 B |
 | `bit` | Bit | 0.125 B |
+| `Sh` | Shannon | 0.125 B |
+| `nat` | Nat | 0.18033688011112042 B |
+| `Hart` | Hartley | 0.4152410118609203 B |
+| `dit` | Dit | 0.4152410118609203 B |
 
 ### Density
 
@@ -574,6 +580,17 @@ One section per measurement category. Each row shows how many base SI units one 
 | `W (CFL)` | Fluorescent Bulb (watts) | 70 lm |
 | `W (LED)` | LED Bulb (watts) | 95 lm |
 | `W (Na)` | Sodium Vapor Lamp (watts) | 100 lm |
+
+### Logarithmic Scales
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `ratio` | Power Ratio | 1 1 |
+| `dB` | Decibel | 1.2589254117941673 1 |
+| `EV` | Stop (EV) | 2 1 |
+| `Np` | Neper | 7.38905609893065 1 |
+| `B` | Bel | 10 1 |
+| `decade` | Decade (Log) | 10 1 |
 
 ### Luminous Flux (Human)
 
@@ -945,6 +962,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `score` | Score | 20 1 |
 | `long-hundred` | Long Hundred | 120 1 |
 | `gross` | Gross | 144 1 |
+| `千` | Sen | 1000 1 |
 | `great-gross` | Great Gross | 1728 1 |
 | `myriad` | Myriad | 10000 1 |
 | `万` | Wan | 10000 1 |
@@ -954,6 +972,8 @@ One section per measurement category. Each row shows how many base SI units one 
 | `億` | Oku | 100000000 1 |
 | `अरब` | Arab | 1e+9 1 |
 | `खरब` | Kharab | 1e+11 1 |
+| `兆` | Zhao | 1e+12 1 |
+| `京` | Kei | 1e+16 1 |
 | `mole` | Mole | 6.02214076e+23 1 |
 
 ### Viscosity (Dynamic)

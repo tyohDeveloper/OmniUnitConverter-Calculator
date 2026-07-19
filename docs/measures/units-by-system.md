@@ -59,6 +59,7 @@ One section per measurement system or tradition.
 | `mol⋅m⁻³` | Mole/m³ | 0.001 mol⋅L⁻¹ |
 | `‰` | Per Mille | 0.001 mol⋅L⁻¹ |
 | `%` | Percent | 0.01 mol⋅L⁻¹ |
+| `pH` | pH | 0.1 mol⋅L⁻¹ |
 | `S` | Siemens | 1 kg⁻¹⋅m⁻²⋅s³⋅A² |
 | `℧` | Mho | 1 kg⁻¹⋅m⁻²⋅s³⋅A² |
 | `mL` | Millilitre | 1 mL |
@@ -75,7 +76,12 @@ One section per measurement system or tradition.
 | `statA` | Statampere | 3.33564e-10 A |
 | `Bi` | Biot (abampere) | 10 A |
 | `B` | Byte | 1 B |
+| `dban` | Deciban | 0.041524101186092024 B |
 | `bit` | Bit | 0.125 B |
+| `Sh` | Shannon | 0.125 B |
+| `nat` | Nat | 0.18033688011112042 B |
+| `Hart` | Hartley | 0.4152410118609203 B |
+| `dit` | Dit | 0.4152410118609203 B |
 | `kg⋅m⁻³` | kg/m³ | 1 kg⋅m⁻³ |
 | `g⋅m⁻³` | g/m³ | 0.001 kg⋅m⁻³ |
 | `g⋅cm⁻³` | g/cm³ | 1000 kg⋅m⁻³ |
@@ -545,7 +551,9 @@ One section per measurement system or tradition.
 | `JIS B6` | JIS B6 | 0.0234325 m² |
 | `JIS B7` | JIS B7 | 0.01171625 m² |
 | `JIS B8` | JIS B8 | 0.005858125 m² |
+| `千` | Sen | 1000 1 |
 | `億` | Oku | 100000000 1 |
+| `京` | Kei | 1e+16 1 |
 
 ## Korean Traditional
 
@@ -580,6 +588,7 @@ One section per measurement system or tradition.
 | `dan-v` | Dan (China) | 103.55 L |
 | `万` | Wan | 10000 1 |
 | `亿` | Yi | 100000000 1 |
+| `兆` | Zhao | 1e+12 1 |
 
 ## Hong Kong Traditional
 
@@ -736,6 +745,12 @@ One section per measurement system or tradition.
 | `dunam` | Dunam (Israel) | 1000 m² |
 | `jerib` | Jerib (Middle East) | 2000 m² |
 | `bph` | Beats/Hour | 2.777777777777778e-4 s⁻¹ |
+| `ratio` | Power Ratio | 1 1 |
+| `dB` | Decibel | 1.2589254117941673 1 |
+| `EV` | Stop (EV) | 2 1 |
+| `Np` | Neper | 7.38905609893065 1 |
+| `B` | Bel | 10 1 |
+| `decade` | Decade (Log) | 10 1 |
 | `1` | Number | 1 1 |
 | `ppt` | Parts Per Trillion | 1e-12 1 |
 | `ppb` | Parts Per Billion | 1e-9 1 |

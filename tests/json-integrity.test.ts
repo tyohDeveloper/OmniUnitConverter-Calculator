@@ -108,8 +108,8 @@ describe('JSON Integrity: unit-name-translations.json', () => {
 });
 
 describe('JSON Integrity: conversion category JSON files', () => {
-  it('loads 71 categories', () => {
-    expect(CONVERSION_DATA.length).toBe(71);
+  it('loads 72 categories', () => {
+    expect(CONVERSION_DATA.length).toBe(72);
   });
 
   it('every category has required fields', () => {
