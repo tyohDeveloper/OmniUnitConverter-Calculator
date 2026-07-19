@@ -547,6 +547,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `RU` | Rack Unit Height | Rack Geometry | m | 0.044449999999999996 |
 | `U-W` | U Width (19") | Rack Geometry | m | 0.4826 |
 | `yd` | Yard | Rack Geometry | m | 0.9144 |
+| `C/kg` | Coulomb per Kilogram | Radiation Exposure | A⋅s⋅kg⁻¹ | 1 |
+| `R` | Roentgen | Radiation Exposure | A⋅s⋅kg⁻¹ | 2.58e-4 |
 | `d⁻¹` | Per Day (λ) | Radioactive Decay | s⁻¹ | 1.1574074074074073e-5 |
 | `t½(d)` | Half-life (days) | Radioactive Decay | s⁻¹ | 59887.91640037925 |
 | `t½(h)` | Half-life (hours) | Radioactive Decay | s⁻¹ | 2495.3298500158016 |

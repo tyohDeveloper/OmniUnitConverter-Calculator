@@ -19,7 +19,7 @@ An audit across all 70 conversion categories found common everyday units that ar
 - Volume includes board foot (FBM)
 - Time includes fortnight
 - Temperature includes Réaumur (°Ré)
-- Area includes are (a) and rood
+- Area includes are (symbol "are") and rood
 - Archaic Length adds: verst, sazhen, toise, Roman mile (mille passus), barleycorn
 - Archaic Mass adds: pood, zolotnik, shekel, mina, talent, quintal
 - Archaic Volume adds: tun, butt (pipe), kilderkin, pottle, chaldron, sextarius, congius
@@ -30,8 +30,8 @@ An audit across all 70 conversion categories found common everyday units that ar
 - No planned unit IDs collide with existing IDs across all 70 data files.
 - Duplicate symbols across categories are tolerated (first-registered-wins symbol map with priority overrides in the Smart Paste lookup); all planned symbols are unique within their target category.
 - Handle these three ambiguities explicitly:
-  1. Elementary charge "e" collides with Euler's e (Unitless). Keep Euler's e as the Smart Paste winner via the existing priority mechanism; add a test locking this in.
-  2. "a" (are) collides with the atto- prefix symbol, and "at" (technical atmosphere) could parse as atto+tonne. Add Smart Paste tests for "5 a" and "2 at" and disambiguate symbols if parsing misroutes (e.g., "a (are)").
+  1. Change Euler's constant symbol in Unitless to "𝑒" (U+1D452 mathematical italic small e), freeing plain "e" for elementary charge in Electric Charge. Add Smart Paste tests confirming "e" resolves to elementary charge and "𝑒" to Euler's constant.
+  2. Use symbol "are" (not "a") for the are unit in Area, avoiding the atto- prefix clash. "at" (technical atmosphere) could still parse as atto+tonne — add a Smart Paste test for "2 at" and disambiguate if it misroutes.
   3. NATO mil (angle) vs mil/thou (length) are both in this batch: use symbol "mil (NATO)" for angle and "thou" for length to avoid a same-batch symbol clash.
 
 ## Out of scope

@@ -810,6 +810,13 @@ One section per measurement category. Each row shows how many base SI units one 
 | `Gy` | Gray | 1 m²⋅s⁻² |
 | `Rad` | Rad (CGS) | 0.01 m²⋅s⁻² |
 
+### Radiation Exposure
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `C/kg` | Coulomb per Kilogram | 1 A⋅s⋅kg⁻¹ |
+| `R` | Roentgen | 2.58e-4 A⋅s⋅kg⁻¹ |
+
 ### Radioactive Decay
 
 | Symbol | English Name | 1 unit = (base SI) |

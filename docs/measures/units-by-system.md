@@ -216,6 +216,8 @@ One section per measurement system or tradition.
 | `m` | Metre | 1 m |
 | `Gy` | Gray | 1 m²⋅s⁻² |
 | `Rad` | Rad (CGS) | 0.01 m²⋅s⁻² |
+| `C/kg` | Coulomb per Kilogram | 1 A⋅s⋅kg⁻¹ |
+| `R` | Roentgen | 2.58e-4 A⋅s⋅kg⁻¹ |
 | `d⁻¹` | Per Day (λ) | 1.1574074074074073e-5 s⁻¹ |
 | `t½(s)` | Half-life (seconds) | 0.693147180559945 s⁻¹ |
 | `t½(min)` | Half-life (minutes) | 41.588830833596695 s⁻¹ |
