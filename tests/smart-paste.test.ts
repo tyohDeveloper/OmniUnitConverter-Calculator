@@ -1330,3 +1330,24 @@ describe('Smart Paste - Unitless Numbers (counting words & ratio symbols)', () =
     });
   });
 });
+
+describe('Gram-force smart paste', () => {
+  it('should parse "5 gf" as force/gram-force', () => {
+    const result = parseUnitText('5 gf');
+    expect(result.originalValue).toBe(5);
+    expect(result.categoryId).toBe('force');
+    expect(result.unitId).toBe('gf');
+  });
+
+  it('should parse "5 gram-force" by full word name', () => {
+    const result = parseUnitText('5 gram-force');
+    expect(result.categoryId).toBe('force');
+    expect(result.unitId).toBe('gf');
+  });
+
+  it('should parse "5 Gram-force" case-insensitively', () => {
+    const result = parseUnitText('5 Gram-force');
+    expect(result.categoryId).toBe('force');
+    expect(result.unitId).toBe('gf');
+  });
+});
