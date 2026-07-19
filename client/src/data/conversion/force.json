@@ -39,6 +39,14 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "gforce",
+      "name": "g-force",
+      "symbol": "g-force",
+      "factor": 9.80665,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
       "id": "kip",
       "name": "Kip",
       "symbol": "kip",
