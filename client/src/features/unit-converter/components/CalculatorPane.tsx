@@ -38,9 +38,10 @@ interface CalculatorPaneProps {
   controller: UseCalculatorControllerReturn;
   numberFormat: NumberFormat;
   flash: CalculatorFlash;
+  lockRpnMode?: boolean;
 }
 
-export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPaneProps) {
+export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = false }: CalculatorPaneProps) {
   const {
     calculatorMode,
     shiftActive, setShiftActive,
@@ -210,10 +211,10 @@ export function CalculatorPane({ controller, numberFormat, flash }: CalculatorPa
           <div className="flex items-center justify-between" style={{ width: CommonFieldWidth, maxWidth: CommonFieldWidth }}>
             <Label
               data-testid="button-switch-to-simple"
-              className="text-xs font-mono uppercase text-foreground cursor-pointer hover:text-accent transition-colors px-2 py-1 rounded border border-border/30"
-              onClick={() => switchToSimple()}
+              className={`text-xs font-mono uppercase text-foreground px-2 py-1 rounded border border-border/30 ${lockRpnMode ? '' : 'cursor-pointer hover:text-accent transition-colors'}`}
+              onClick={lockRpnMode ? undefined : () => switchToSimple()}
             >
-              {t('CALCULATOR - RPN') + ' ⇅'}
+              {t('CALCULATOR - RPN') + (lockRpnMode ? '' : ' ⇅')}
             </Label>
             <div className="flex items-center gap-1.5">
               <Label className="text-xs text-foreground">{t('Precision')}</Label>

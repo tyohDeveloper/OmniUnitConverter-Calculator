@@ -84,6 +84,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
     resultPrefix, selectedAlternative,
     rpnStack, rpnResultPrefix, rpnSelectedAlternative,
     calculatorPrecision,
+    switchToRpn, setRpnXEditing, setRpnXEditValue, getRpnResultDisplay,
   } = calc;
 
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
@@ -121,6 +122,18 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
   }, [activeCategory]);
 
   useEffect(() => { inputRef.current?.focus(); }, []);
+
+  useEffect(() => {
+    if (activeTab === 'rpn') {
+      if (calculatorMode !== 'rpn') switchToRpn();
+      const display = getRpnResultDisplay();
+      const currentText = display ? `${display.formattedValue}${display.unitSymbol ? ' ' + display.unitSymbol : ''}` : '';
+      setRpnXEditValue(currentText);
+      setRpnXEditing(true);
+    } else {
+      setRpnXEditing(false);
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     const handlePaste = (e: ClipboardEvent) => {
@@ -219,7 +232,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
 
   return (
     <div className="w-full max-w-[1400px] mx-auto p-4 md:pl-4 md:pr-8 md:pb-0 md:pt-1 grid md:grid-cols-[260px_1fr] gap-8 md:gap-4 md:h-full md:overflow-hidden">
-      <nav className={`space-y-2 overflow-y-auto pe-2 -mt-1 pt-1 transition-opacity ${activeTab === 'custom' ? 'opacity-40 pointer-events-none' : ''}`}>
+      <nav className={`space-y-2 overflow-y-auto pe-2 -mt-1 pt-1 transition-opacity ${activeTab !== 'converter' ? 'opacity-40 pointer-events-none' : ''}`}>
         {CATEGORY_GROUPS.map((group) => (
           <div key={group.name} className="space-y-1">
             <h2 className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 px-2 font-bold">{t(group.name)}</h2>
@@ -232,7 +245,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
                   <button
                     key={cat.id}
                     onClick={() => { setActiveCategory(cat.id as UnitCategory); setInputValue('1'); }}
-                    disabled={activeTab === 'custom'}
+                    disabled={activeTab !== 'converter'}
                     data-testid="display-category"
                     data-category-id={cat.id}
                     className={`w-full text-start px-3 py-[1px] rounded-sm text-xs font-medium transition-all duration-200 border-s-2 flex items-center justify-between group ${
@@ -281,6 +294,18 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
                 {...testId('tab-custom')}
               >
                 {t('Custom')}
+              </button>
+              <button
+                onClick={() => setActiveTab('rpn')}
+                aria-current={activeTab === 'rpn' ? 'page' : undefined}
+                className={`text-sm px-4 py-1.5 rounded-md font-medium transition-all ${
+                  activeTab === 'rpn'
+                    ? 'bg-accent text-accent-foreground'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                }`}
+                {...testId('tab-rpn')}
+              >
+                {t('RPN')}
               </button>
             </nav>
             <div className="flex items-center gap-3">
@@ -410,9 +435,17 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
               </div>
             </div>
           )}
+          {activeTab === 'rpn' && (
+            <div className="mt-2">
+              <h2 className="text-3xl font-bold text-foreground tracking-tight">{t('RPN Calculator')}</h2>
+              <p className="text-muted-foreground text-sm font-mono mt-1">
+                {t('Unit-aware Reverse Polish Notation calculator')}
+              </p>
+            </div>
+          )}
         </div>
 
-        <div className="grid">
+        <div className={activeTab === 'rpn' ? 'hidden' : 'grid'}>
           <ConverterPane
             controller={conv}
             flash={{
@@ -448,6 +481,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
         <CalculatorPane
           controller={calc}
           numberFormat={numberFormat}
+          lockRpnMode={activeTab === 'rpn'}
           flash={{
             calcField1: flash.calcField1[0],
             calcField2: flash.calcField2[0],
