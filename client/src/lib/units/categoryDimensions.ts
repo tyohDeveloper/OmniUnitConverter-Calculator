@@ -52,6 +52,7 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   radiation_dose: { name: 'Radiation Dose', dimensions: { length: 2, time: -2 }, isBase: false },
   absorbed_dose: { name: 'Absorbed Dose', dimensions: { length: 2, time: -2 }, isBase: false },
   equivalent_dose: { name: 'Equivalent Dose', dimensions: { length: 2, time: -2 }, isBase: false },
+  radiation_exposure: { name: 'Radiation Exposure', dimensions: { current: 1, time: 1, mass: -1 }, isBase: false },
   cross_section: { name: 'Cross-Section', dimensions: { length: 2 }, isBase: false },
   photon: { name: 'Photon Energy', dimensions: { mass: 1, length: 2, time: -2 }, isBase: false },
   luminous_flux: { name: 'Luminous Flux', dimensions: { intensity: 1, solid_angle: 1 }, isBase: false },
@@ -91,7 +92,7 @@ export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
 
 export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [
   'radioactivity', 'radioactive_decay',
-  'radiation_dose', 'absorbed_dose', 'equivalent_dose',
+  'radiation_dose', 'absorbed_dose', 'equivalent_dose', 'radiation_exposure',
   'cross_section',
   'sound_pressure',
   'sound_intensity',

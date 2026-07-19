@@ -26,6 +26,7 @@ export type UnitCategory =
   | "radioactivity"
   | "radiation_dose"
   | "equivalent_dose"
+  | "radiation_exposure"
   | "catalytic"
   | "angle"
   | "solid_angle"

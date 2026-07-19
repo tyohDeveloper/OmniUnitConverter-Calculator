@@ -49,6 +49,7 @@ import powerData from '@/data/conversion/power.json';
 import pressureData from '@/data/conversion/pressure.json';
 import rackGeometryData from '@/data/conversion/rack_geometry.json';
 import radiationDoseData from '@/data/conversion/radiation_dose.json';
+import radiationExposureData from '@/data/conversion/radiation_exposure.json';
 import radioactiveDecayData from '@/data/conversion/radioactive_decay.json';
 import radioactivityData from '@/data/conversion/radioactivity.json';
 import refractivePowerData from '@/data/conversion/refractive_power.json';
@@ -101,6 +102,7 @@ export type UnitCategory =
   | "radioactivity"
   | "radiation_dose"
   | "equivalent_dose"
+  | "radiation_exposure"
   | "catalytic"
   | "angle"
   | "solid_angle"
@@ -324,6 +326,7 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   radioactivityData,
   radiationDoseData,
   equivalentDoseData,
+  radiationExposureData,
   photonData,
   radioactiveDecayData,
   crossSectionData,

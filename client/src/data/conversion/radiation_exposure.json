@@ -1,0 +1,27 @@
+{
+  "id": "radiation_exposure",
+  "name": "Radiation Exposure",
+  "baseUnit": "coulomb_per_kilogram",
+  "baseSISymbol": "A⋅s⋅kg⁻¹",
+  "units": [
+    {
+      "id": "c_per_kg",
+      "name": "Coulomb per Kilogram",
+      "symbol": "C/kg",
+      "factor": 1,
+      "allowPrefixes": true,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Coulomb_per_kilogram"
+    },
+    {
+      "id": "roentgen",
+      "name": "Roentgen",
+      "symbol": "R",
+      "factor": 0.000258,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Roentgen_(unit)"
+    }
+  ]
+}
