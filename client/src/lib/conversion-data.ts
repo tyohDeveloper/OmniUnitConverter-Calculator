@@ -37,6 +37,7 @@ import intensityData from '@/data/conversion/intensity.json';
 import kinematicViscosityData from '@/data/conversion/kinematic_viscosity.json';
 import lengthData from '@/data/conversion/length.json';
 import lightbulbData from '@/data/conversion/lightbulb.json';
+import luminanceData from '@/data/conversion/luminance.json';
 import luminousFluxData from '@/data/conversion/luminous_flux.json';
 import magneticDensityData from '@/data/conversion/magnetic_density.json';
 import magneticFieldHData from '@/data/conversion/magnetic_field_h.json';
@@ -351,6 +352,7 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   flowData,
   luminousFluxData,
   illuminanceData,
+  luminanceData,
   refractivePowerData,
   soundPressureData,
   concentrationData,

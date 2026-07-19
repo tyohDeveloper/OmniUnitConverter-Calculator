@@ -110,7 +110,7 @@ const CATEGORY_GROUPS_ALL = [
   { categories: ['thermal_conductivity', 'specific_heat', 'entropy', 'concentration'] },
   { categories: ['charge', 'potential', 'capacitance', 'resistance', 'conductance', 'inductance', 'magnetic_flux', 'magnetic_density', 'electric_field', 'magnetic_field_h'] },
   { categories: ['radioactivity', 'radiation_dose', 'equivalent_dose', 'radiation_exposure', 'radioactive_decay', 'cross_section', 'photon', 'catalytic', 'angle', 'solid_angle', 'sound_pressure', 'sound_intensity', 'acoustic_impedance'] },
-  { categories: ['luminous_flux', 'illuminance', 'refractive_power'] },
+  { categories: ['luminous_flux', 'illuminance', 'luminance', 'refractive_power'] },
   { categories: ['math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb', 'paper_sizes', 'typography', 'cooking', 'logarithmic'] },
   { categories: ['archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power'] },
 ];

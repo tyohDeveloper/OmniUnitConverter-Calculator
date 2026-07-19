@@ -1,0 +1,100 @@
+{
+  "id": "luminance",
+  "name": "Luminance",
+  "baseUnit": "candela_per_square_metre",
+  "baseSISymbol": "cd⋅m⁻²",
+  "units": [
+    {
+      "id": "cd_per_m2",
+      "name": "Candela per Square Metre",
+      "symbol": "cd/m²",
+      "factor": 1,
+      "allowPrefixes": true,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
+    },
+    {
+      "id": "bril",
+      "name": "Bril",
+      "symbol": "bril",
+      "factor": 3.183098861837907e-8,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bril_(unit)"
+    },
+    {
+      "id": "skot",
+      "name": "Skot",
+      "symbol": "sk",
+      "factor": 0.0003183098861837907,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Skot_(unit)"
+    },
+    {
+      "id": "apostilb",
+      "name": "Apostilb",
+      "symbol": "asb",
+      "factor": 0.3183098861837907,
+      "description": "Also known as blondel",
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Apostilb"
+    },
+    {
+      "id": "nit",
+      "name": "Nit",
+      "symbol": "nt",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Candela_per_square_metre"
+    },
+    {
+      "id": "foot_lambert",
+      "name": "Foot-Lambert",
+      "symbol": "fL",
+      "factor": 3.4262590996353905,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Foot-lambert"
+    },
+    {
+      "id": "cd_per_ft2",
+      "name": "Candela per Square Foot",
+      "symbol": "cd/ft²",
+      "factor": 10.763910416709722,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Candela_per_square_metre"
+    },
+    {
+      "id": "cd_per_in2",
+      "name": "Candela per Square Inch",
+      "symbol": "cd/in²",
+      "factor": 1550.0031000062002,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Candela_per_square_metre"
+    },
+    {
+      "id": "lambert",
+      "name": "Lambert",
+      "symbol": "L (lum)",
+      "factor": 3183.098861837907,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Lambert_(unit)"
+    },
+    {
+      "id": "stilb",
+      "name": "Stilb",
+      "symbol": "sb",
+      "factor": 10000,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Stilb_(unit)"
+    }
+  ]
+}
