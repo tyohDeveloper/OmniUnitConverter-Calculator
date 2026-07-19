@@ -101,7 +101,7 @@ describe('formatSiEquivalent', () => {
     expect(s.includes('×')).toBe(false);
   });
   it('non-linear dB unit uses cleaned defining relation', () => {
-    expect(formatSiEquivalent(find('power', 'dbm'), 'W')).toBe('P = mW⋅10^(x/10)');
+    expect(formatSiEquivalent(find('power', 'dbm'), 'W')).toBe('dBm = mW⋅10^(x/10)');
   });
   it('SI base unit without decomposition shows identity', () => {
     expect(formatSiEquivalent(find('length', 'm'), 'm')).toBe('m = 1 m');
