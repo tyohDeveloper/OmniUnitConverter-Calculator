@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "u",
@@ -19,7 +20,8 @@
       "symbol": "U",
       "factor": 1.667e-8,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Catalysis"
     }
   ]
 }

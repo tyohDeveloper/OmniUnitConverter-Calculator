@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": false,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cubic_metre"
     },
     {
       "id": "floz_imp",
@@ -19,7 +20,8 @@
       "symbol": "fl oz (imp)",
       "factor": 0.0000284130625,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "floz",
@@ -27,7 +29,8 @@
       "symbol": "fl oz (US)",
       "factor": 0.0000295735,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "glass_wine",
@@ -35,7 +38,8 @@
       "symbol": "glass",
       "factor": 0.00015,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "cup",
@@ -43,7 +47,8 @@
       "symbol": "cp (US)",
       "factor": 0.000236588,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
     },
     {
       "id": "bottle_beer_small",
@@ -51,7 +56,8 @@
       "symbol": "btl (small)",
       "factor": 0.00035,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "bottle_beer_longneck",
@@ -59,7 +65,8 @@
       "symbol": "btl (beer, US)",
       "factor": 0.000354882,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "pt",
@@ -67,7 +74,8 @@
       "symbol": "pt (US)",
       "factor": 0.000473176,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
     },
     {
       "id": "bottle_beer_large",
@@ -75,7 +83,8 @@
       "symbol": "btl (large)",
       "factor": 0.0005,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "pt_imp",
@@ -83,7 +92,8 @@
       "symbol": "pt (imp)",
       "factor": 0.00056826125,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
     },
     {
       "id": "bottle_wine",
@@ -91,7 +101,8 @@
       "symbol": "btl (wine)",
       "factor": 0.00075,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "qt",
@@ -99,7 +110,8 @@
       "symbol": "qt (US)",
       "factor": 0.000946353,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
       "id": "l",
@@ -108,7 +120,8 @@
       "factor": 0.001,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Litre"
     },
     {
       "id": "qt_imp",
@@ -116,7 +129,8 @@
       "symbol": "qt (imp)",
       "factor": 0.0011365225,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
       "id": "magnum_wine",
@@ -124,7 +138,8 @@
       "symbol": "mag",
       "factor": 0.0015,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "gal",
@@ -132,7 +147,8 @@
       "symbol": "gal (US)",
       "factor": 0.003785411784,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
     },
     {
       "id": "gal_imp",
@@ -140,7 +156,8 @@
       "symbol": "gal (imp)",
       "factor": 0.00454609,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
     },
     {
       "id": "mini_keg",
@@ -148,7 +165,8 @@
       "symbol": "mini keg",
       "factor": 0.005,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "pony_keg",
@@ -156,7 +174,8 @@
       "symbol": "pony",
       "factor": 0.0147,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "ft3",
@@ -164,7 +183,8 @@
       "symbol": "ft³",
       "factor": 0.0283168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "bu",
@@ -172,7 +192,8 @@
       "symbol": "bu",
       "factor": 0.0352391,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bushel"
     },
     {
       "id": "keg_beer",
@@ -180,7 +201,8 @@
       "symbol": "keg",
       "factor": 0.0587,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_measurements"
     },
     {
       "id": "bbl_beer",
@@ -188,7 +210,8 @@
       "symbol": "bbl (beer)",
       "factor": 0.117,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Barrel_(unit)"
     },
     {
       "id": "yd3",
@@ -196,7 +219,8 @@
       "symbol": "yd³",
       "factor": 0.764555,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     }
   ]
 }

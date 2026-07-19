@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "mah",
@@ -19,7 +20,8 @@
       "symbol": "mAh",
       "factor": 3.6,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ampere-hour"
     },
     {
       "id": "ah",
@@ -27,7 +29,8 @@
       "symbol": "Ah",
       "factor": 3600,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ampere-hour"
     },
     {
       "id": "faraday",
@@ -35,7 +38,8 @@
       "symbol": "F (charge)",
       "factor": 96485,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_charge"
     }
   ]
 }

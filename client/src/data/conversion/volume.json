@@ -12,7 +12,8 @@
       "allowPrefixes": true,
       "prefixPower": 3,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cubic_metre"
     },
     {
       "id": "tsp",
@@ -20,7 +21,8 @@
       "symbol": "tsp (US)",
       "factor": 0.00000492892,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "tsp_imp",
@@ -28,7 +30,8 @@
       "symbol": "tsp (imp)",
       "factor": 0.00000591939,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "tbsp",
@@ -36,7 +39,8 @@
       "symbol": "tbsp (US)",
       "factor": 0.0000147868,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
     },
     {
       "id": "in3",
@@ -44,7 +48,8 @@
       "symbol": "in³",
       "factor": 0.000016387064,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "tbsp_imp",
@@ -52,7 +57,8 @@
       "symbol": "tbsp (imp)",
       "factor": 0.0000177582,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
     },
     {
       "id": "floz_imp",
@@ -60,7 +66,8 @@
       "symbol": "fl oz (imp)",
       "factor": 0.0000284130625,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "floz",
@@ -68,7 +75,8 @@
       "symbol": "fl oz (US)",
       "factor": 0.0000295735,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "cup",
@@ -76,7 +84,8 @@
       "symbol": "cp (US)",
       "factor": 0.000236588,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
     },
     {
       "id": "pt",
@@ -84,7 +93,8 @@
       "symbol": "pt (US)",
       "factor": 0.000473176,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
     },
     {
       "id": "pt_dry",
@@ -92,7 +102,8 @@
       "symbol": "dry pt",
       "factor": 0.00055061,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
     },
     {
       "id": "pt_imp",
@@ -100,7 +111,8 @@
       "symbol": "pt (imp)",
       "factor": 0.00056826125,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
     },
     {
       "id": "qt",
@@ -108,7 +120,8 @@
       "symbol": "qt (US)",
       "factor": 0.000946353,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
       "id": "l",
@@ -117,7 +130,8 @@
       "factor": 0.001,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Litre"
     },
     {
       "id": "qt_dry",
@@ -125,7 +139,8 @@
       "symbol": "dry qt",
       "factor": 0.00110122,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
       "id": "qt_imp",
@@ -133,7 +148,8 @@
       "symbol": "qt (imp)",
       "factor": 0.0011365225,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
     },
     {
       "id": "gal",
@@ -141,7 +157,8 @@
       "symbol": "gal (US)",
       "factor": 0.003785411784,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
     },
     {
       "id": "gal_imp",
@@ -149,7 +166,8 @@
       "symbol": "gal (imp)",
       "factor": 0.00454609,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
     },
     {
       "id": "pk",
@@ -157,7 +175,8 @@
       "symbol": "pk",
       "factor": 0.00880977,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Peck"
     },
     {
       "id": "ft3",
@@ -165,7 +184,8 @@
       "symbol": "ft³",
       "factor": 0.0283168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "bu",
@@ -173,7 +193,8 @@
       "symbol": "bu",
       "factor": 0.0352391,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bushel"
     },
     {
       "id": "bbl",
@@ -181,7 +202,8 @@
       "symbol": "bbl",
       "factor": 0.158987,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Barrel_(unit)"
     },
     {
       "id": "yd3",
@@ -189,7 +211,8 @@
       "symbol": "yd³",
       "factor": 0.764555,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ac_ft",
@@ -197,7 +220,8 @@
       "symbol": "ac⋅ft",
       "factor": 1233.48184,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Acre-foot"
     },
     {
       "id": "mi3",
@@ -205,7 +229,8 @@
       "symbol": "mi³",
       "factor": 4168180000,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     }
   ]
 }

@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "cdsr",
@@ -19,7 +20,8 @@
       "symbol": "cd⋅sr",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Luminous_flux"
     },
     {
       "id": "talbot",
@@ -28,7 +30,8 @@
       "factor": 1,
       "description": "Lumen-second (photographic)",
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Lumen_second"
     },
     {
       "id": "candlepower",
@@ -36,7 +39,8 @@
       "symbol": "cp",
       "factor": 12.566370614359172,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Candlepower"
     }
   ]
 }

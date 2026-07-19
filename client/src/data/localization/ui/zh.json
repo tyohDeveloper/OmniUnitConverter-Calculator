@@ -136,5 +136,7 @@
   "help-machine-translated": "（本文为机器翻译。如需原文，请切换到「en」语言环境。）",
   "Paper Sizes": "纸张尺寸",
   "Unitless Numbers": "无量纲数",
-  "Logarithmic Scales": "对数标度"
+  "Logarithmic Scales": "对数标度",
+  "Sources": "来源",
+  "sources-note": "每个单位的换算系数和定义关系，并附有各自的参考链接。链接在新标签页中打开。"
 }

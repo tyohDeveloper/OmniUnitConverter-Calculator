@@ -12,7 +12,8 @@
       "allowPrefixes": true,
       "prefixPower": 2,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Square_metre"
     },
     {
       "id": "barn",
@@ -20,7 +21,8 @@
       "symbol": "b",
       "factor": 1e-28,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Barn_(unit)"
     },
     {
       "id": "sqin",
@@ -28,7 +30,8 @@
       "symbol": "in²",
       "factor": 0.00064516,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "sqft",
@@ -36,7 +39,8 @@
       "symbol": "ft²",
       "factor": 0.092903,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "sqyd",
@@ -44,7 +48,8 @@
       "symbol": "yd²",
       "factor": 0.836127,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "acre",
@@ -52,7 +57,8 @@
       "symbol": "ac",
       "factor": 4046.86,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Acre"
     },
     {
       "id": "ha",
@@ -60,7 +66,8 @@
       "symbol": "ha",
       "factor": 10000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hectare"
     },
     {
       "id": "sqmi",
@@ -68,7 +75,8 @@
       "symbol": "mi²",
       "factor": 2590000,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     }
   ]
 }

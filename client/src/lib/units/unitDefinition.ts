@@ -14,6 +14,7 @@ export interface UnitDefinition {
   mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4';
   isInverse?: boolean;
   conversionFunction?: string;
+  sourceUrl?: string;
   unitType?: UnitType;
   measurementSystem?: MeasurementSystem;
 }

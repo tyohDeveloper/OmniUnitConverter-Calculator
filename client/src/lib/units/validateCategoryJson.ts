@@ -15,6 +15,7 @@ const unitSchema = z.object({
   unitType: z.string().optional(),
   measurementSystem: z.string().optional(),
   conversionFunction: z.string().optional(),
+  sourceUrl: z.string().url().optional(),
 }).superRefine((unit, ctx) => {
   if (unit.mathFunction && !CONVERSION_FUNCTIONS[unit.mathFunction]?.oneWay) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: `unit "${unit.id}": unknown mathFunction "${unit.mathFunction}"` });

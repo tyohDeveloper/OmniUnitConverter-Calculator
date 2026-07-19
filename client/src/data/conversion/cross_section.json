@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Barn_(unit)"
     },
     {
       "id": "fm2",
@@ -19,7 +20,8 @@
       "symbol": "fm²",
       "factor": 0.01,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cross_section_(physics)"
     },
     {
       "id": "cm2_cs",
@@ -27,7 +29,8 @@
       "symbol": "cm²",
       "factor": 1e+24,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cross_section_(physics)"
     },
     {
       "id": "m2_cs",
@@ -35,7 +38,8 @@
       "symbol": "m²",
       "factor": 1e+28,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Square_metre"
     }
   ]
 }

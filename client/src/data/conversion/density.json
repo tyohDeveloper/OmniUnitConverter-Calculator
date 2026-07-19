@@ -10,7 +10,8 @@
       "symbol": "kg⋅m⁻³",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kilogram_per_cubic_metre"
     },
     {
       "id": "gm3",
@@ -19,7 +20,8 @@
       "factor": 0.001,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kilogram_per_cubic_metre"
     },
     {
       "id": "lbft3",
@@ -27,7 +29,8 @@
       "symbol": "lb⋅ft⁻³",
       "factor": 16.0185,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "gcm3",
@@ -35,7 +38,8 @@
       "symbol": "g⋅cm⁻³",
       "factor": 1000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gram_per_cubic_centimetre"
     }
   ]
 }

@@ -10,7 +10,8 @@
       "symbol": "m⁻¹",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Optical_power"
     },
     {
       "id": "d",
@@ -18,7 +19,8 @@
       "symbol": "D",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dioptre"
     }
   ]
 }

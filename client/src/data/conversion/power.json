@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "dbuw",
@@ -19,7 +20,8 @@
       "symbol": "dBµW",
       "factor": 0.0000012589254117941672,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_microwatt"
+      "conversionFunction": "db_microwatt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/DBm"
     },
     {
       "id": "dbm",
@@ -27,7 +29,8 @@
       "symbol": "dBm",
       "factor": 0.0012589254117941673,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_milliwatt"
+      "conversionFunction": "db_milliwatt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/DBm"
     },
     {
       "id": "btu_h",
@@ -35,7 +38,8 @@
       "symbol": "BTU⋅h⁻¹",
       "factor": 0.293071,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "dbw",
@@ -43,7 +47,8 @@
       "symbol": "dBW",
       "factor": 1.2589254117941673,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_watt"
+      "conversionFunction": "db_watt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel_watt"
     },
     {
       "id": "hp_m",
@@ -51,7 +56,8 @@
       "symbol": "hp (M)",
       "factor": 735.499,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Power_(physics)"
     },
     {
       "id": "hp",
@@ -59,7 +65,8 @@
       "symbol": "hp",
       "factor": 745.7,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Horsepower"
     },
     {
       "id": "dbkw",
@@ -67,7 +74,8 @@
       "symbol": "dBkW",
       "factor": 1258.9254117941673,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_kilowatt"
+      "conversionFunction": "db_kilowatt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel_watt"
     },
     {
       "id": "ton_ref",
@@ -75,7 +83,8 @@
       "symbol": "TR",
       "factor": 3516.85,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     }
   ]
 }

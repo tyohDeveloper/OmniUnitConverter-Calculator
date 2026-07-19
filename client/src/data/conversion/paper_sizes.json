@@ -11,7 +11,8 @@
       "factor": 0.999949,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a0"
+      "conversionFunction": "paper_a0",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a1",
@@ -20,7 +21,8 @@
       "factor": 0.4999745,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a1"
+      "conversionFunction": "paper_a1",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a2",
@@ -29,7 +31,8 @@
       "factor": 0.24998725,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a2"
+      "conversionFunction": "paper_a2",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a3",
@@ -38,7 +41,8 @@
       "factor": 0.124993625,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a3"
+      "conversionFunction": "paper_a3",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a4",
@@ -47,7 +51,8 @@
       "factor": 0.0624968125,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a4"
+      "conversionFunction": "paper_a4",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a5",
@@ -56,7 +61,8 @@
       "factor": 0.03124840625,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a5"
+      "conversionFunction": "paper_a5",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a6",
@@ -65,7 +71,8 @@
       "factor": 0.015624203125,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a6"
+      "conversionFunction": "paper_a6",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a7",
@@ -74,7 +81,8 @@
       "factor": 0.0078121015625,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a7"
+      "conversionFunction": "paper_a7",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a8",
@@ -83,7 +91,8 @@
       "factor": 0.00390605078125,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a8"
+      "conversionFunction": "paper_a8",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a9",
@@ -92,7 +101,8 @@
       "factor": 0.001953025390625,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a9"
+      "conversionFunction": "paper_a9",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "a10",
@@ -101,7 +111,8 @@
       "factor": 0.0009765126953125,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_a10"
+      "conversionFunction": "paper_a10",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b0",
@@ -110,7 +121,8 @@
       "factor": 1.414,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b0"
+      "conversionFunction": "paper_b0",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b1",
@@ -119,7 +131,8 @@
       "factor": 0.707,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b1"
+      "conversionFunction": "paper_b1",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b2",
@@ -128,7 +141,8 @@
       "factor": 0.3535,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b2"
+      "conversionFunction": "paper_b2",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b3",
@@ -137,7 +151,8 @@
       "factor": 0.17675,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b3"
+      "conversionFunction": "paper_b3",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b4",
@@ -146,7 +161,8 @@
       "factor": 0.088375,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b4"
+      "conversionFunction": "paper_b4",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b5",
@@ -155,7 +171,8 @@
       "factor": 0.0441875,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b5"
+      "conversionFunction": "paper_b5",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b6",
@@ -164,7 +181,8 @@
       "factor": 0.02209375,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b6"
+      "conversionFunction": "paper_b6",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b7",
@@ -173,7 +191,8 @@
       "factor": 0.011046875,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b7"
+      "conversionFunction": "paper_b7",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b8",
@@ -182,7 +201,8 @@
       "factor": 0.0055234375,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b8"
+      "conversionFunction": "paper_b8",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b9",
@@ -191,7 +211,8 @@
       "factor": 0.00276171875,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b9"
+      "conversionFunction": "paper_b9",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "b10",
@@ -200,7 +221,8 @@
       "factor": 0.001380859375,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "conversionFunction": "paper_b10"
+      "conversionFunction": "paper_b10",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "us_letter",
@@ -208,7 +230,8 @@
       "symbol": "Letter",
       "factor": 0.060322,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "us_legal",
@@ -216,7 +239,8 @@
       "symbol": "Legal",
       "factor": 0.076774,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "us_tabloid",
@@ -224,7 +248,8 @@
       "symbol": "Tabloid",
       "factor": 0.120645,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "us_executive",
@@ -232,7 +257,8 @@
       "symbol": "Exec",
       "factor": 0.049094,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "us_statement",
@@ -240,7 +266,8 @@
       "symbol": "Statement",
       "factor": 0.030161,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "us_photo_8x10",
@@ -248,7 +275,8 @@
       "symbol": "8×10",
       "factor": 0.051613,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ansi_c",
@@ -256,7 +284,8 @@
       "symbol": "ANSI C",
       "factor": 0.24129,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ansi_d",
@@ -264,7 +293,8 @@
       "symbol": "ANSI D",
       "factor": 0.482581,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "ansi_e",
@@ -272,7 +302,8 @@
       "symbol": "ANSI E",
       "factor": 0.965161,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Paper_size"
     },
     {
       "id": "jis_b0",
@@ -281,7 +312,8 @@
       "factor": 1.49968,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b0"
+      "conversionFunction": "paper_jis_b0",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b1",
@@ -290,7 +322,8 @@
       "factor": 0.74984,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b1"
+      "conversionFunction": "paper_jis_b1",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b2",
@@ -299,7 +332,8 @@
       "factor": 0.37492,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b2"
+      "conversionFunction": "paper_jis_b2",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b3",
@@ -308,7 +342,8 @@
       "factor": 0.18746,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b3"
+      "conversionFunction": "paper_jis_b3",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b4",
@@ -317,7 +352,8 @@
       "factor": 0.09373,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b4"
+      "conversionFunction": "paper_jis_b4",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b5",
@@ -326,7 +362,8 @@
       "factor": 0.046865,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b5"
+      "conversionFunction": "paper_jis_b5",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b6",
@@ -335,7 +372,8 @@
       "factor": 0.0234325,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b6"
+      "conversionFunction": "paper_jis_b6",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b7",
@@ -344,7 +382,8 @@
       "factor": 0.01171625,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b7"
+      "conversionFunction": "paper_jis_b7",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "jis_b8",
@@ -353,7 +392,8 @@
       "factor": 0.005858125,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "conversionFunction": "paper_jis_b8"
+      "conversionFunction": "paper_jis_b8",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     }
   ]
 }

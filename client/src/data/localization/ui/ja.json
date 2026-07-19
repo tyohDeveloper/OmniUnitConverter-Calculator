@@ -136,5 +136,7 @@
   "help-machine-translated": "（このテキストは機械翻訳です。原文は「en」ロケールに切り替えてご確認ください。）",
   "Paper Sizes": "紙のサイズ",
   "Unitless Numbers": "無次元数",
-  "Logarithmic Scales": "対数スケール"
+  "Logarithmic Scales": "対数スケール",
+  "Sources": "出典",
+  "sources-note": "すべての単位の換算係数と定義関係を、それぞれの参照リンクとともに掲載しています。リンクは新しいタブで開きます。"
 }

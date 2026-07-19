@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Metre_per_second"
     },
     {
       "id": "kmh",
@@ -19,7 +20,8 @@
       "symbol": "km⋅h⁻¹",
       "factor": 0.2777777777777778,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kilometres_per_hour"
     },
     {
       "id": "mph",
@@ -27,7 +29,8 @@
       "symbol": "mph",
       "factor": 0.44704,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Miles_per_hour"
     },
     {
       "id": "kn",
@@ -35,7 +38,8 @@
       "symbol": "kn",
       "factor": 0.514444,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Knot_(unit)"
     },
     {
       "id": "mach",
@@ -43,7 +47,8 @@
       "symbol": "Ma",
       "factor": 343,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mach_number"
     },
     {
       "id": "c",
@@ -51,7 +56,8 @@
       "symbol": "c",
       "factor": 299792458,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Speed_of_light"
     }
   ]
 }

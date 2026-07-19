@@ -136,5 +136,7 @@
   "help-machine-translated": "（이 텍스트는 기계 번역되었습니다. 원문을 보려면 «en» 로케일로 전환하세요.）",
   "Paper Sizes": "용지 크기",
   "Unitless Numbers": "무차원 수",
-  "Logarithmic Scales": "로그 스케일"
+  "Logarithmic Scales": "로그 스케일",
+  "Sources": "출처",
+  "sources-note": "모든 단위의 환산 계수와 정의 관계를 각 단위별 참조 링크와 함께 제공합니다. 링크는 새 탭에서 열립니다."
 }

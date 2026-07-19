@@ -257,6 +257,7 @@ export interface UnitDefinition {
   mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4'; // For math function units
   isInverse?: boolean; // For photon wavelength: E = constant/λ (inverse relationship)
   conversionFunction?: string; // Name of a registered invertible function pair (see units/conversionFunctionRegistry)
+  sourceUrl?: string; // Authoritative reference link shown on the Sources page
   unitType?: import('./units/unitType').UnitType;
 }
 
@@ -285,6 +286,7 @@ type RawCategoryJson = {
     mathFunction?: string;
     isInverse?: boolean;
     conversionFunction?: string;
+    sourceUrl?: string;
     unitType?: string;
   }>;
 };

@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "torr",
@@ -19,7 +20,8 @@
       "symbol": "Torr",
       "factor": 133.322,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Torr"
     },
     {
       "id": "mmhg",
@@ -27,7 +29,8 @@
       "symbol": "mmHg",
       "factor": 133.322,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Millimetre_of_mercury"
     },
     {
       "id": "psi",
@@ -35,7 +38,8 @@
       "symbol": "psi",
       "factor": 6894.76,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "bar",
@@ -44,7 +48,8 @@
       "factor": 100000,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bar_(unit)"
     },
     {
       "id": "atm",
@@ -52,7 +57,8 @@
       "symbol": "atm",
       "factor": 101325,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Standard_atmosphere_(unit)"
     }
   ]
 }

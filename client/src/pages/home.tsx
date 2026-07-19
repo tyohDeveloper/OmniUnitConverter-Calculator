@@ -5,7 +5,10 @@ import { ConverterProvider } from '@/components/unit-converter/context/Converter
 const APP_VERSION = '3.2.1.0';
 
 export default function Home() {
-  const [helpOpen, setHelpOpen] = useState(false);
+  const [helpOpen, setHelpOpenRaw] = useState(false);
+  const [sourcesOpen, setSourcesOpenRaw] = useState(false);
+  const setHelpOpen = (open: boolean) => { setHelpOpenRaw(open); if (open) setSourcesOpenRaw(false); };
+  const setSourcesOpen = (open: boolean) => { setSourcesOpenRaw(open); if (open) setHelpOpenRaw(false); };
 
   return (
     <div className="h-dvh overflow-hidden flex flex-col bg-background text-foreground font-sans selection:bg-accent selection:text-accent-foreground">
@@ -18,12 +21,20 @@ export default function Home() {
             </div>
             <h1 className="font-bold text-xl tracking-tight m-0">Omni<span className="text-primary">Unit</span> & Calculator</h1>
             <button
-              onClick={() => setHelpOpen(v => !v)}
+              onClick={() => setHelpOpen(!helpOpen)}
               data-testid="button-open-help"
               aria-label="Open help"
               className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold leading-none hover:bg-blue-400 transition-colors flex-shrink-0"
             >
               i
+            </button>
+            <button
+              onClick={() => setSourcesOpen(!sourcesOpen)}
+              data-testid="button-open-sources"
+              aria-label="Open sources"
+              className="w-5 h-5 rounded-full bg-muted-foreground/70 flex items-center justify-center text-background text-xs font-bold leading-none hover:bg-muted-foreground transition-colors flex-shrink-0"
+            >
+              ※
             </button>
           </div>
           <div className="text-xs font-mono text-muted-foreground hidden sm:block" aria-label={`Version ${APP_VERSION}`}>
@@ -35,7 +46,7 @@ export default function Home() {
       {/* Main Content */}
       <main id="main-content" className="flex-1 min-h-0 overflow-y-auto py-4 md:py-6">
         <ConverterProvider>
-          <UnitConverterApp helpOpen={helpOpen} setHelpOpen={setHelpOpen} />
+          <UnitConverterApp helpOpen={helpOpen} setHelpOpen={setHelpOpen} sourcesOpen={sourcesOpen} setSourcesOpen={setSourcesOpen} />
         </ConverterProvider>
       </main>
     </div>

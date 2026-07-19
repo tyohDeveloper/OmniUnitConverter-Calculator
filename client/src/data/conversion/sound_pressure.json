@@ -10,7 +10,8 @@
       "symbol": "Pa",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pascal_(unit)"
     },
     {
       "id": "dbupa",
@@ -18,7 +19,8 @@
       "symbol": "dBµPa",
       "factor": 0.0000011220184543019633,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_micropascal"
+      "conversionFunction": "db_micropascal",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sound_pressure#Sound_pressure_level"
     },
     {
       "id": "dbspl",
@@ -26,7 +28,8 @@
       "symbol": "dB SPL",
       "factor": 0.00002244036908603927,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_spl"
+      "conversionFunction": "db_spl",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sound_pressure#Sound_pressure_level"
     },
     {
       "id": "ubar",
@@ -34,7 +37,8 @@
       "symbol": "µbar",
       "factor": 0.1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bar_(unit)"
     },
     {
       "id": "dyncm2",
@@ -42,7 +46,8 @@
       "symbol": "dyn⋅cm⁻²",
       "factor": 0.1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sound_pressure"
     },
     {
       "id": "bar",
@@ -50,7 +55,8 @@
       "symbol": "bar",
       "factor": 100000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bar_(unit)"
     }
   ]
 }

@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "shake",
@@ -19,7 +20,8 @@
       "symbol": "shake",
       "factor": 1e-8,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Shake_(unit)"
     },
     {
       "id": "min",
@@ -27,7 +29,8 @@
       "symbol": "min",
       "factor": 60,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Minute"
     },
     {
       "id": "h",
@@ -35,7 +38,8 @@
       "symbol": "h",
       "factor": 3600,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hour"
     },
     {
       "id": "d_sid",
@@ -43,7 +47,8 @@
       "symbol": "d (sid)",
       "factor": 86164.0905,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sidereal_time"
     },
     {
       "id": "d",
@@ -51,7 +56,8 @@
       "symbol": "d",
       "factor": 86400,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Unit_of_time"
     },
     {
       "id": "wk",
@@ -59,7 +65,8 @@
       "symbol": "wk",
       "factor": 604800,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Week"
     },
     {
       "id": "mo",
@@ -67,7 +74,8 @@
       "symbol": "mo",
       "factor": 2628000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Month"
     },
     {
       "id": "y",
@@ -75,7 +83,8 @@
       "symbol": "yr",
       "factor": 31540000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Year"
     },
     {
       "id": "dec",
@@ -83,7 +92,8 @@
       "symbol": "dec",
       "factor": 315400000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decade"
     },
     {
       "id": "cent",
@@ -91,7 +101,8 @@
       "symbol": "cent",
       "factor": 3154000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Century"
     },
     {
       "id": "kyr",
@@ -99,15 +110,17 @@
       "symbol": "kyr",
       "factor": 31540000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Millennium"
     },
     {
       "id": "eon",
       "name": "Eon",
       "symbol": "eon",
-      "factor": 3.154e16,
+      "factor": 31540000000000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Aeon"
     }
   ]
 }

@@ -10,7 +10,8 @@
       "symbol": "kg",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "ev_c2",
@@ -19,7 +20,8 @@
       "factor": 1.78266192e-36,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mass"
     },
     {
       "id": "mcg",
@@ -27,7 +29,8 @@
       "symbol": "mcg",
       "factor": 1e-9,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Microgram"
     },
     {
       "id": "g",
@@ -36,7 +39,8 @@
       "factor": 0.001,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gram"
     },
     {
       "id": "oz",
@@ -44,7 +48,8 @@
       "symbol": "oz",
       "factor": 0.028349523125,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ounce"
     },
     {
       "id": "oz_t",
@@ -52,7 +57,8 @@
       "symbol": "oz t",
       "factor": 0.0311034768,
       "unitType": "US_COMMON",
-      "measurementSystem": "TROY"
+      "measurementSystem": "TROY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Troy_weight"
     },
     {
       "id": "lb_t",
@@ -60,7 +66,8 @@
       "symbol": "lb t",
       "factor": 0.3732417,
       "unitType": "US_COMMON",
-      "measurementSystem": "TROY"
+      "measurementSystem": "TROY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Troy_weight"
     },
     {
       "id": "lb",
@@ -68,7 +75,8 @@
       "symbol": "lb",
       "factor": 0.45359237,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pound_(mass)"
     },
     {
       "id": "st",
@@ -76,7 +84,8 @@
       "symbol": "st",
       "factor": 6.35029318,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Stone_(unit)"
     },
     {
       "id": "slug",
@@ -84,7 +93,8 @@
       "symbol": "slug",
       "factor": 14.5939,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Slug_(unit)"
     },
     {
       "id": "ton_us",
@@ -92,7 +102,8 @@
       "symbol": "ton (US)",
       "factor": 907.185,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Short_ton"
     },
     {
       "id": "t",
@@ -100,7 +111,8 @@
       "symbol": "t",
       "factor": 1000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tonne"
     },
     {
       "id": "ton_uk",
@@ -108,7 +120,8 @@
       "symbol": "ton (imp)",
       "factor": 1016.05,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Long_ton"
     }
   ]
 }

@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Metre"
     },
     {
       "id": "twip",
@@ -19,7 +20,8 @@
       "symbol": "twip",
       "factor": 0.000017639,
       "unitType": "US_COMMON",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Twip"
     },
     {
       "id": "px",
@@ -27,7 +29,8 @@
       "symbol": "px",
       "factor": 0.000264583,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Point_(typography)"
     },
     {
       "id": "pt_trad",
@@ -35,7 +38,8 @@
       "symbol": "pt (trad)",
       "factor": 0.000351459,
       "unitType": "US_COMMON",
-      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Point_(typography)"
     },
     {
       "id": "pt",
@@ -43,7 +47,8 @@
       "symbol": "pt (CSS)",
       "factor": 0.0003527778,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Point_(typography)"
     },
     {
       "id": "didot",
@@ -51,7 +56,8 @@
       "symbol": "dd",
       "factor": 0.000376065,
       "unitType": "SI_BASE",
-      "measurementSystem": "FRENCH_TRADITIONAL"
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/French_units_of_measurement"
     },
     {
       "id": "mm",
@@ -59,7 +65,8 @@
       "symbol": "mm",
       "factor": 0.001,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Millimetre"
     },
     {
       "id": "agate",
@@ -67,7 +74,8 @@
       "symbol": "ag",
       "factor": 0.0018143,
       "unitType": "US_COMMON",
-      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Point_(typography)"
     },
     {
       "id": "ligne",
@@ -75,7 +83,8 @@
       "symbol": "‴",
       "factor": 0.0022558,
       "unitType": "SI_BASE",
-      "measurementSystem": "FRENCH_TRADITIONAL"
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ligne"
     },
     {
       "id": "pc_trad",
@@ -83,7 +92,8 @@
       "symbol": "pc (trad)",
       "factor": 0.0042175,
       "unitType": "US_COMMON",
-      "measurementSystem": "TYPOGRAPHIC_AMERICAN"
+      "measurementSystem": "TYPOGRAPHIC_AMERICAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pica_(unit)"
     },
     {
       "id": "pc",
@@ -91,7 +101,8 @@
       "symbol": "pc (CSS)",
       "factor": 0.0042333,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pica_(unit)"
     },
     {
       "id": "em",
@@ -99,7 +110,8 @@
       "symbol": "em",
       "factor": 0.0042333,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Point_(typography)"
     },
     {
       "id": "cicero",
@@ -107,7 +119,8 @@
       "symbol": "cicero",
       "factor": 0.004512,
       "unitType": "IMPERIAL",
-      "measurementSystem": "FRENCH_TRADITIONAL"
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/French_units_of_measurement"
     },
     {
       "id": "in",
@@ -115,7 +128,8 @@
       "symbol": "in",
       "factor": 0.0254,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Inch"
     },
     {
       "id": "ft",
@@ -123,7 +137,8 @@
       "symbol": "ft",
       "factor": 0.3048,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Foot_(unit)"
     }
   ]
 }

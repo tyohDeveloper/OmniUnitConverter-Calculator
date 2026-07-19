@@ -10,7 +10,8 @@
       "symbol": "kg",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "g",
@@ -19,7 +20,8 @@
       "factor": 0.001,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "fun_jp",
@@ -27,7 +29,8 @@
       "symbol": "fun",
       "factor": 0.000375,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "momme_jp",
@@ -35,7 +38,8 @@
       "symbol": "momme",
       "factor": 0.00375,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Momme_(unit)"
     },
     {
       "id": "ryo_jp",
@@ -43,7 +47,8 @@
       "symbol": "ryo",
       "factor": 0.0375,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ry%C5%8D"
     },
     {
       "id": "kan_jp",
@@ -51,7 +56,8 @@
       "symbol": "kan",
       "factor": 3.75,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kan_(unit)"
     },
     {
       "id": "don_kr",
@@ -59,7 +65,8 @@
       "symbol": "don",
       "factor": 0.00375,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Korean_units_of_measurement"
     },
     {
       "id": "geun_kr",
@@ -67,7 +74,8 @@
       "symbol": "geun",
       "factor": 0.6,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Korean_units_of_measurement"
     },
     {
       "id": "mace_cn",
@@ -75,7 +83,8 @@
       "symbol": "mace",
       "factor": 0.005,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mace_(unit)"
     },
     {
       "id": "tael_cn",
@@ -83,7 +92,8 @@
       "symbol": "tael",
       "factor": 0.05,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Liang_(mass)"
     },
     {
       "id": "jin_cn",
@@ -91,7 +101,8 @@
       "symbol": "jin",
       "factor": 0.5,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Jin_(mass)"
     },
     {
       "id": "dan_cn",
@@ -99,7 +110,8 @@
       "symbol": "dan",
       "factor": 50,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_units_of_measurement"
     },
     {
       "id": "catty_hk",
@@ -107,7 +119,8 @@
       "symbol": "catty",
       "factor": 0.60478982,
       "unitType": "SI_BASE",
-      "measurementSystem": "HONG_KONG"
+      "measurementSystem": "HONG_KONG",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Jin_(mass)"
     },
     {
       "id": "picul_hk",
@@ -115,7 +128,8 @@
       "symbol": "picul",
       "factor": 60.478982,
       "unitType": "SI_BASE",
-      "measurementSystem": "HONG_KONG"
+      "measurementSystem": "HONG_KONG",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Picul"
     },
     {
       "id": "ratti",
@@ -123,7 +137,8 @@
       "symbol": "ratti",
       "factor": 0.0001215,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ratti_(unit)"
     },
     {
       "id": "tola",
@@ -131,7 +146,8 @@
       "symbol": "tola",
       "factor": 0.0116638,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tola_(unit)"
     },
     {
       "id": "seer",
@@ -139,7 +155,8 @@
       "symbol": "seer",
       "factor": 0.9331,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Seer_(unit)"
     },
     {
       "id": "maund",
@@ -147,7 +164,8 @@
       "symbol": "maund",
       "factor": 37.324,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Maund_(unit)"
     },
     {
       "id": "baht_th",
@@ -155,7 +173,8 @@
       "symbol": "baht",
       "factor": 0.015244,
       "unitType": "SI_BASE",
-      "measurementSystem": "THAI"
+      "measurementSystem": "THAI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tical_(unit)"
     },
     {
       "id": "carat",
@@ -163,7 +182,8 @@
       "symbol": "ct",
       "factor": 0.0002,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Carat_(mass)"
     },
     {
       "id": "pfund_de",
@@ -171,7 +191,8 @@
       "symbol": "pfund",
       "factor": 0.4677,
       "unitType": "SI_BASE",
-      "measurementSystem": "GERMAN"
+      "measurementSystem": "GERMAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/German_units_of_measurement"
     },
     {
       "id": "livre_fr",
@@ -179,7 +200,8 @@
       "symbol": "livre",
       "factor": 0.4895,
       "unitType": "SI_BASE",
-      "measurementSystem": "FRENCH_TRADITIONAL"
+      "measurementSystem": "FRENCH_TRADITIONAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/French_units_of_measurement"
     },
     {
       "id": "pennyweight",
@@ -187,7 +209,8 @@
       "symbol": "dwt",
       "factor": 0.00155517,
       "unitType": "IMPERIAL",
-      "measurementSystem": "TROY"
+      "measurementSystem": "TROY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pennyweight"
     },
     {
       "id": "grain",
@@ -195,7 +218,8 @@
       "symbol": "gr",
       "factor": 0.00006479891,
       "unitType": "US_COMMON",
-      "measurementSystem": "TROY"
+      "measurementSystem": "TROY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Grain_(unit)"
     },
     {
       "id": "scruple",
@@ -203,7 +227,8 @@
       "symbol": "s ap",
       "factor": 0.001296,
       "unitType": "IMPERIAL",
-      "measurementSystem": "APOTHECARIES"
+      "measurementSystem": "APOTHECARIES",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Scruple_(unit)"
     },
     {
       "id": "dram",
@@ -211,7 +236,8 @@
       "symbol": "dr",
       "factor": 0.001771845,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dram_(unit)"
     },
     {
       "id": "dram_ap",
@@ -219,7 +245,8 @@
       "symbol": "dr ap",
       "factor": 0.0038879346,
       "unitType": "IMPERIAL",
-      "measurementSystem": "APOTHECARIES"
+      "measurementSystem": "APOTHECARIES",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dram_(unit)"
     }
   ]
 }

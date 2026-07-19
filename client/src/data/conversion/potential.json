@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "dbuv",
@@ -19,7 +20,8 @@
       "symbol": "dBµV",
       "factor": 0.0000011220184543019633,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_microvolt"
+      "conversionFunction": "db_microvolt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel#Voltage"
     },
     {
       "id": "dbu",
@@ -27,7 +29,8 @@
       "symbol": "dBu",
       "factor": 0.8691117575297783,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_unloaded"
+      "conversionFunction": "db_unloaded",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel#Voltage"
     },
     {
       "id": "dbv",
@@ -35,7 +38,8 @@
       "symbol": "dBV",
       "factor": 1.1220184543019633,
       "measurementSystem": "NONE",
-      "conversionFunction": "db_volt"
+      "conversionFunction": "db_volt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel#Voltage"
     },
     {
       "id": "statv",
@@ -44,7 +48,8 @@
       "factor": 299.792,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Statvolt"
     }
   ]
 }

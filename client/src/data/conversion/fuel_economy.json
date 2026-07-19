@@ -10,7 +10,8 @@
       "symbol": "km⋅L⁻¹",
       "factor": 1,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles"
     },
     {
       "id": "km_gal_us",
@@ -18,7 +19,8 @@
       "symbol": "km⋅gal⁻¹",
       "factor": 0.264172,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "mpg_imp",
@@ -26,7 +28,8 @@
       "symbol": "mpg (Imp)",
       "factor": 0.354006,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "mpg_us",
@@ -34,7 +37,8 @@
       "symbol": "mpg (US)",
       "factor": 0.425144,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "mi_l",
@@ -42,7 +46,8 @@
       "symbol": "mi⋅L⁻¹",
       "factor": 1.60934,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "km_kwh",
@@ -50,7 +55,8 @@
       "symbol": "km⋅kWh⁻¹",
       "factor": 9.5,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles"
     },
     {
       "id": "mi_kwh",
@@ -58,7 +64,8 @@
       "symbol": "mi⋅kWh⁻¹",
       "factor": 15.29,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     }
   ]
 }

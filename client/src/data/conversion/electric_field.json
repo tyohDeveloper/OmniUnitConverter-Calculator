@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_field"
     },
     {
       "id": "v_per_cm",
@@ -19,7 +20,8 @@
       "symbol": "V⋅cm⁻¹",
       "factor": 100,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_field"
     },
     {
       "id": "kv_per_m",
@@ -27,7 +29,8 @@
       "symbol": "kV⋅m⁻¹",
       "factor": 1000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_field"
     },
     {
       "id": "statv_per_cm",
@@ -35,7 +38,8 @@
       "symbol": "statV⋅cm⁻¹",
       "factor": 29979.2458,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_field"
     },
     {
       "id": "kv_per_cm",
@@ -43,7 +47,8 @@
       "symbol": "kV⋅cm⁻¹",
       "factor": 100000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electric_field"
     }
   ]
 }

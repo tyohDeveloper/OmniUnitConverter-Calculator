@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "sqdeg",
@@ -19,7 +20,8 @@
       "symbol": "deg²",
       "factor": 0.0003046,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Solid_angle"
     },
     {
       "id": "sp",
@@ -27,7 +29,8 @@
       "symbol": "sp",
       "factor": 12.566370614359172,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Solid_angle"
     }
   ]
 }

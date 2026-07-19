@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Litre"
     },
     {
       "id": "ml",
@@ -19,7 +20,8 @@
       "symbol": "mL",
       "factor": 0.001,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Litre"
     },
     {
       "id": "go_jp",
@@ -27,7 +29,8 @@
       "symbol": "go",
       "factor": 0.18039,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ge_(unit)"
     },
     {
       "id": "sho_jp",
@@ -35,7 +38,8 @@
       "symbol": "sho",
       "factor": 1.8039,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "to_jp",
@@ -43,7 +47,8 @@
       "symbol": "to",
       "factor": 18.039,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "koku_jp",
@@ -51,7 +56,8 @@
       "symbol": "koku",
       "factor": 180.39,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Koku"
     },
     {
       "id": "hop_kr",
@@ -59,7 +65,8 @@
       "symbol": "hop",
       "factor": 0.18039,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ge_(unit)"
     },
     {
       "id": "doe_kr",
@@ -67,7 +74,8 @@
       "symbol": "doe",
       "factor": 1.8039,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Korean_units_of_measurement"
     },
     {
       "id": "mal_kr",
@@ -75,7 +83,8 @@
       "symbol": "mal",
       "factor": 18.039,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Korean_units_of_measurement"
     },
     {
       "id": "sheng_cn",
@@ -83,7 +92,8 @@
       "symbol": "sheng",
       "factor": 1.0355,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_units_of_measurement"
     },
     {
       "id": "dou_cn",
@@ -91,7 +101,8 @@
       "symbol": "dou",
       "factor": 10.355,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_units_of_measurement"
     },
     {
       "id": "dan_vol_cn",
@@ -99,7 +110,8 @@
       "symbol": "dan-v",
       "factor": 103.55,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_units_of_measurement"
     },
     {
       "id": "amphora",
@@ -107,7 +119,8 @@
       "symbol": "amphora",
       "factor": 26.026,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_GREEK"
+      "measurementSystem": "ANCIENT_GREEK",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ancient_Greek_units_of_measurement"
     },
     {
       "id": "fl_scruple",
@@ -115,7 +128,8 @@
       "symbol": "fl s",
       "factor": 0.00123223,
       "unitType": "IMPERIAL",
-      "measurementSystem": "APOTHECARIES"
+      "measurementSystem": "APOTHECARIES",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Apothecaries%27_system"
     },
     {
       "id": "apoth_oz",
@@ -123,7 +137,8 @@
       "symbol": "fl oz ap",
       "factor": 0.0295735,
       "unitType": "US_COMMON",
-      "measurementSystem": "APOTHECARIES"
+      "measurementSystem": "APOTHECARIES",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Apothecaries%27_system"
     },
     {
       "id": "gill_imp",
@@ -131,7 +146,8 @@
       "symbol": "gi Imp",
       "factor": 0.142065,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gill_(unit)"
     },
     {
       "id": "firkin",
@@ -139,7 +155,8 @@
       "symbol": "firkin",
       "factor": 40.9148,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Firkin_(unit)"
     },
     {
       "id": "minim",
@@ -147,7 +164,8 @@
       "symbol": "minim",
       "factor": 0.0000616115,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Minim_(unit)"
     },
     {
       "id": "fl_dram",
@@ -155,7 +173,8 @@
       "symbol": "fl dr",
       "factor": 0.00369669,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "teaspoon",
@@ -163,7 +182,8 @@
       "symbol": "tsp (US)",
       "factor": 0.00492892,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "tablespoon",
@@ -171,7 +191,8 @@
       "symbol": "tbsp (US)",
       "factor": 0.0147868,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
     },
     {
       "id": "jigger",
@@ -179,7 +200,8 @@
       "symbol": "jigger",
       "factor": 0.044355,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "gill_us",
@@ -187,7 +209,8 @@
       "symbol": "gi",
       "factor": 0.118294,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gill_(unit)"
     },
     {
       "id": "cup_us",
@@ -195,7 +218,8 @@
       "symbol": "cp (US)",
       "factor": 0.236588,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
     },
     {
       "id": "peck_us",
@@ -203,7 +227,8 @@
       "symbol": "pk",
       "factor": 8.80977,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Peck"
     },
     {
       "id": "bushel_us",
@@ -211,7 +236,8 @@
       "symbol": "bu",
       "factor": 35.2391,
       "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY"
+      "measurementSystem": "US_CUSTOMARY_DRY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bushel"
     },
     {
       "id": "hogshead",
@@ -219,7 +245,8 @@
       "symbol": "hhd",
       "factor": 238.481,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hogshead"
     },
     {
       "id": "cord_us",
@@ -227,7 +254,8 @@
       "symbol": "cord",
       "factor": 3624.56,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cord_(unit)"
     },
     {
       "id": "m3",
@@ -236,7 +264,8 @@
       "factor": 1000,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Unit_of_volume"
     }
   ]
 }

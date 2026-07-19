@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "rd",
@@ -19,7 +20,8 @@
       "symbol": "Rd",
       "factor": 1000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rutherford_(unit)"
     },
     {
       "id": "ci",
@@ -27,7 +29,8 @@
       "symbol": "Ci",
       "factor": 37000000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Curie_(unit)"
     }
   ]
 }

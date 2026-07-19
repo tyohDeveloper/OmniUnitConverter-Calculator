@@ -9,7 +9,8 @@
       "name": "Power Ratio",
       "symbol": "ratio",
       "factor": 1,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Logarithmic_scale"
     },
     {
       "id": "db",
@@ -17,7 +18,8 @@
       "symbol": "dB",
       "factor": 1.2589254117941673,
       "measurementSystem": "NONE",
-      "conversionFunction": "log_decibel"
+      "conversionFunction": "log_decibel",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel"
     },
     {
       "id": "stop",
@@ -25,7 +27,8 @@
       "symbol": "EV",
       "factor": 2,
       "measurementSystem": "NONE",
-      "conversionFunction": "log_stop"
+      "conversionFunction": "log_stop",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Logarithmic_scale"
     },
     {
       "id": "neper",
@@ -33,7 +36,8 @@
       "symbol": "Np",
       "factor": 7.38905609893065,
       "measurementSystem": "NONE",
-      "conversionFunction": "log_neper"
+      "conversionFunction": "log_neper",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Neper"
     },
     {
       "id": "bel",
@@ -41,7 +45,8 @@
       "symbol": "B",
       "factor": 10,
       "measurementSystem": "NONE",
-      "conversionFunction": "log_bel"
+      "conversionFunction": "log_bel",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decibel"
     },
     {
       "id": "decade",
@@ -49,7 +54,8 @@
       "symbol": "decade",
       "factor": 10,
       "measurementSystem": "NONE",
-      "conversionFunction": "log_decade"
+      "conversionFunction": "log_decade",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Decade_(log_scale)"
     }
   ]
 }

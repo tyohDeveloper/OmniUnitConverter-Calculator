@@ -136,5 +136,7 @@
   "help-machine-translated": "(Dieser Text wurde maschinell übersetzt. Für den Originaltext wechseln Sie bitte zur Sprache «en».)",
   "Paper Sizes": "Papierformate",
   "Unitless Numbers": "Einheitenlose Zahlen",
-  "Logarithmic Scales": "Logarithmische Skalen"
+  "Logarithmic Scales": "Logarithmische Skalen",
+  "Sources": "Quellen",
+  "sources-note": "Umrechnungsfaktoren und Definitionsbeziehungen für jede Einheit, mit einem Referenzlink zu jeder. Links öffnen sich in einem neuen Tab."
 }

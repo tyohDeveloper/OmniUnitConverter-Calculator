@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Viscosity"
     },
     {
       "id": "cp",
@@ -19,7 +20,8 @@
       "symbol": "cP",
       "factor": 0.001,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Poise_(unit)"
     },
     {
       "id": "poise",
@@ -28,7 +30,8 @@
       "factor": 0.1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Poise_(unit)"
     }
   ]
 }

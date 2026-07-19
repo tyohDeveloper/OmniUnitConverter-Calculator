@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "cm3h",
@@ -19,7 +20,8 @@
       "symbol": "cm³⋅h⁻¹",
       "factor": 2.7777777777777777e-10,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "cm3min",
@@ -27,7 +29,8 @@
       "symbol": "cm³⋅min⁻¹",
       "factor": 1.6666666666666667e-8,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "gald",
@@ -35,7 +38,8 @@
       "symbol": "gal⋅d⁻¹",
       "factor": 4.381263638888889e-8,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "lh",
@@ -43,7 +47,8 @@
       "symbol": "L⋅h⁻¹",
       "factor": 2.7777777777777776e-7,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "cm3s",
@@ -51,7 +56,8 @@
       "symbol": "cm³⋅s⁻¹",
       "factor": 0.000001,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "galh",
@@ -59,7 +65,8 @@
       "symbol": "gal⋅h⁻¹",
       "factor": 0.0000010515032733333334,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "impgalh",
@@ -67,7 +74,8 @@
       "symbol": "Imp gal⋅h⁻¹",
       "factor": 0.0000012628027777777779,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "bbld",
@@ -75,7 +83,8 @@
       "symbol": "bbl⋅d⁻¹",
       "factor": 0.0000018401307291666666,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ft3h",
@@ -83,7 +92,8 @@
       "symbol": "ft³⋅h⁻¹",
       "factor": 0.000007865777777777777,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "lmin",
@@ -91,7 +101,8 @@
       "symbol": "L⋅min⁻¹",
       "factor": 0.000016666666666666667,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "bblh",
@@ -99,7 +110,8 @@
       "symbol": "bbl⋅h⁻¹",
       "factor": 0.0000441631375,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "gpm",
@@ -107,7 +119,8 @@
       "symbol": "GPM",
       "factor": 0.0000630901964,
       "unitType": "US_COMMON_FLUID",
-      "measurementSystem": "US_CUSTOMARY_FLUID"
+      "measurementSystem": "US_CUSTOMARY_FLUID",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "impgalmin",
@@ -115,7 +128,8 @@
       "symbol": "Imp gal⋅min⁻¹",
       "factor": 0.00007576816666666667,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "m3h",
@@ -123,7 +137,8 @@
       "symbol": "m³⋅h⁻¹",
       "factor": 0.0002777777777777778,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "cfm",
@@ -131,7 +146,8 @@
       "symbol": "CFM",
       "factor": 0.00047194666666666664,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ls",
@@ -139,7 +155,8 @@
       "symbol": "L⋅s⁻¹",
       "factor": 0.001,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "bblmin",
@@ -147,7 +164,8 @@
       "symbol": "bbl⋅min⁻¹",
       "factor": 0.00264978825,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "gals",
@@ -155,7 +173,8 @@
       "symbol": "gal⋅s⁻¹",
       "factor": 0.003785411784,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "impgals",
@@ -163,7 +182,8 @@
       "symbol": "Imp gal⋅s⁻¹",
       "factor": 0.00454609,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
     },
     {
       "id": "m3min",
@@ -171,7 +191,8 @@
       "symbol": "m³⋅min⁻¹",
       "factor": 0.016666666666666666,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
     },
     {
       "id": "ft3s",
@@ -179,7 +200,8 @@
       "symbol": "ft³⋅s⁻¹",
       "factor": 0.0283168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "bbls",
@@ -187,7 +209,8 @@
       "symbol": "bbl⋅s⁻¹",
       "factor": 0.158987295,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "sv",
@@ -195,7 +218,8 @@
       "symbol": "Sv (flow)",
       "factor": 1000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sverdrup"
     }
   ]
 }

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { ClipboardPaste } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import HelpSection from '@/components/help-section';
+import SourcesSection from '@/components/sources-section';
 import { FIELD_HEIGHT, ISO_LANGUAGES } from '@/components/unit-converter/constants';
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import { ConverterPane } from '@/features/unit-converter/components/ConverterPane';
@@ -37,9 +38,11 @@ const CATEGORY_GROUPS = [
 interface UnitConverterAppProps {
   helpOpen: boolean;
   setHelpOpen: (open: boolean) => void;
+  sourcesOpen: boolean;
+  setSourcesOpen: (open: boolean) => void;
 }
 
-export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverterAppProps) {
+export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, setSourcesOpen }: UnitConverterAppProps) {
   const { inputRef, flash } = useConverterContext();
 
   const conv = useConverterController();
@@ -517,6 +520,30 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
               ×
             </button>
             <HelpSection t={t} language={language} />
+          </div>
+        </div>
+      )}
+
+      {/* Sources overlay panel */}
+      {sourcesOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setSourcesOpen(false); }}
+          data-testid="backdrop-sources"
+        >
+          <div
+            className="relative bg-card border border-border rounded-lg w-full max-w-3xl max-h-[85vh] overflow-y-auto shadow-xl"
+            data-testid="panel-sources"
+          >
+            <button
+              onClick={() => setSourcesOpen(false)}
+              data-testid="button-close-sources"
+              aria-label="Close sources"
+              className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-lg leading-none"
+            >
+              ×
+            </button>
+            <SourcesSection t={t} language={language} />
           </div>
         </div>
       )}

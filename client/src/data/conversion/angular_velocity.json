@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Angular_velocity"
     },
     {
       "id": "deg_s",
@@ -19,7 +20,8 @@
       "symbol": "°⋅s⁻¹",
       "factor": 0.017453292519943295,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Angular_velocity"
     },
     {
       "id": "rpm",
@@ -27,7 +29,8 @@
       "symbol": "rpm",
       "factor": 0.10471975511965977,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Angular_velocity"
     },
     {
       "id": "rps",
@@ -35,7 +38,8 @@
       "symbol": "rps",
       "factor": 6.283185307179586,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Angular_velocity"
     }
   ]
 }

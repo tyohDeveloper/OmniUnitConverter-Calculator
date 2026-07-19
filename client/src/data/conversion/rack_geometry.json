@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Metre"
     },
     {
       "id": "in",
@@ -19,7 +20,8 @@
       "symbol": "in",
       "factor": 0.0254,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Inch"
     },
     {
       "id": "u",
@@ -27,7 +29,8 @@
       "symbol": "RU",
       "factor": 0.044449999999999996,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "u2",
@@ -35,7 +38,8 @@
       "symbol": "2U",
       "factor": 0.08889999999999999,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "u4",
@@ -43,7 +47,8 @@
       "symbol": "4U",
       "factor": 0.17779999999999999,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "ft",
@@ -52,7 +57,8 @@
       "factor": 0.3048,
       "allowPrefixes": true,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Foot_(unit)"
     },
     {
       "id": "ft_in",
@@ -60,7 +66,8 @@
       "symbol": "ft'in\"",
       "factor": 0.3048,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "rack_12u",
@@ -68,7 +75,8 @@
       "symbol": "12U",
       "factor": 0.5334,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "u_width",
@@ -76,7 +84,8 @@
       "symbol": "U-W",
       "factor": 0.4826,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "cabinet_width",
@@ -84,7 +93,8 @@
       "symbol": "Cab-W",
       "factor": 0.6095999999999999,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "yd",
@@ -92,7 +102,8 @@
       "symbol": "yd",
       "factor": 0.9144,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Yard"
     },
     {
       "id": "rack_24u",
@@ -100,7 +111,8 @@
       "symbol": "24U",
       "factor": 1.0668,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "rack_42u",
@@ -108,7 +120,8 @@
       "symbol": "42U",
       "factor": 1.8669,
       "unitType": "SI_BASE",
-      "measurementSystem": "DOMAIN"
+      "measurementSystem": "DOMAIN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Rack_unit"
     },
     {
       "id": "parsec",
@@ -116,7 +129,8 @@
       "symbol": "parsec",
       "factor": 30857000000000000,
       "unitType": "SI_BASE",
-      "measurementSystem": "ASTRONOMICAL"
+      "measurementSystem": "ASTRONOMICAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Parsec"
     }
   ]
 }

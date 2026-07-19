@@ -10,7 +10,8 @@
       "symbol": "d⁻¹",
       "factor": 0.000011574074074074073,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "half_s",
@@ -19,7 +20,8 @@
       "factor": 0.693147180559945,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "half_min",
@@ -28,7 +30,8 @@
       "factor": 41.588830833596695,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "half_hr",
@@ -37,7 +40,8 @@
       "factor": 2495.3298500158016,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "half_day",
@@ -46,7 +50,8 @@
       "factor": 59887.91640037925,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "half_year",
@@ -55,7 +60,8 @@
       "factor": 21874061.46523852,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "tau_s",
@@ -64,7 +70,8 @@
       "factor": 1,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "tau_min",
@@ -73,7 +80,8 @@
       "factor": 60,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "tau_hr",
@@ -82,7 +90,8 @@
       "factor": 3600,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "tau_day",
@@ -91,7 +100,8 @@
       "factor": 86400,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     },
     {
       "id": "tau_year",
@@ -100,7 +110,8 @@
       "factor": 31557600,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"
     }
   ]
 }

@@ -9,273 +9,312 @@
       "name": "Number",
       "symbol": "1",
       "factor": 1,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Number"
     },
     {
       "id": "ppt",
       "name": "Parts Per Trillion",
       "symbol": "ppt",
       "factor": 1e-12,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Parts-per_notation"
     },
     {
       "id": "ppb",
       "name": "Parts Per Billion",
       "symbol": "ppb",
       "factor": 1e-9,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Parts-per_notation"
     },
     {
       "id": "ppm",
       "name": "Parts Per Million",
       "symbol": "ppm",
       "factor": 0.000001,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Parts-per_notation"
     },
     {
       "id": "permyriad",
       "name": "Permyriad",
       "symbol": "‱",
       "factor": 0.0001,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Basis_point"
     },
     {
       "id": "basis_point",
       "name": "Basis Point",
       "symbol": "bp",
       "factor": 0.0001,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Basis_point"
     },
     {
       "id": "permille",
       "name": "Permille",
       "symbol": "‰",
       "factor": 0.001,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Per_mille"
     },
     {
       "id": "proof_us",
       "name": "Proof (US)",
       "symbol": "proof (US)",
       "factor": 0.005,
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_proof"
     },
     {
       "id": "proof_imp",
       "name": "Proof (Imperial)",
       "symbol": "proof (imp)",
       "factor": 0.005715,
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_proof"
     },
     {
       "id": "percent",
       "name": "Percent",
       "symbol": "%",
       "factor": 0.01,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Percentage"
     },
     {
       "id": "abv",
       "name": "Alcohol by Volume",
       "symbol": "abv",
       "factor": 0.01,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_by_volume"
     },
     {
       "id": "caret",
       "name": "Caret",
       "symbol": "caret",
       "factor": 0.0416666667,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Karat"
     },
     {
       "id": "fold",
       "name": "Fold",
       "symbol": "fold",
       "factor": 1,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fold_change"
     },
     {
       "id": "golden_ratio",
       "name": "Golden Ratio",
       "symbol": "φ",
       "factor": 1.6180339887,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Golden_ratio"
     },
     {
       "id": "pair",
       "name": "Pair",
       "symbol": "pair",
       "factor": 2,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pair"
     },
     {
       "id": "couple",
       "name": "Couple",
       "symbol": "couple",
       "factor": 2,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2"
     },
     {
       "id": "brace",
       "name": "Brace",
       "symbol": "brace",
       "factor": 2,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Brace_(tool)"
     },
     {
       "id": "euler",
       "name": "Euler's Number",
       "symbol": "e",
       "factor": 2.7182818285,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/E_(mathematical_constant)"
     },
     {
       "id": "hat_trick",
       "name": "Hat-Trick",
       "symbol": "hat-trick",
       "factor": 3,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hat-trick"
     },
     {
       "id": "pi",
       "name": "Pi",
       "symbol": "π",
       "factor": 3.1415926536,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pi"
     },
     {
       "id": "half_dozen",
       "name": "Half Dozen",
       "symbol": "half-doz",
       "factor": 6,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dozen"
     },
     {
       "id": "dozen",
       "name": "Dozen",
       "symbol": "doz",
       "factor": 12,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dozen"
     },
     {
       "id": "bakers_dozen",
       "name": "Baker's Dozen",
       "symbol": "bakers-doz",
       "factor": 13,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dozen"
     },
     {
       "id": "score",
       "name": "Score",
       "symbol": "score",
       "factor": 20,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/20_(number)"
     },
     {
       "id": "long_hundred",
       "name": "Long Hundred",
       "symbol": "long-hundred",
       "factor": 120,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Long_hundred"
     },
     {
       "id": "gross",
       "name": "Gross",
       "symbol": "gross",
       "factor": 144,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gross_(unit)"
     },
     {
       "id": "sen",
       "name": "Sen",
       "symbol": "千",
       "factor": 1000,
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_numerals"
     },
     {
       "id": "great_gross",
       "name": "Great Gross",
       "symbol": "great-gross",
       "factor": 1728,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gross_(unit)"
     },
     {
       "id": "myriad",
       "name": "Myriad",
       "symbol": "myriad",
       "factor": 10000,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Myriad"
     },
     {
       "id": "wan",
       "name": "Wan",
       "symbol": "万",
       "factor": 10000,
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_numerals"
     },
     {
       "id": "lakh",
       "name": "Lakh",
       "symbol": "लाख",
       "factor": 100000,
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Lakh"
     },
     {
       "id": "crore",
       "name": "Crore",
       "symbol": "करोड़",
       "factor": 10000000,
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Crore"
     },
     {
       "id": "yi",
       "name": "Yi",
       "symbol": "亿",
       "factor": 100000000,
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_numerals"
     },
     {
       "id": "oku",
       "name": "Oku",
       "symbol": "億",
       "factor": 100000000,
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_numerals"
     },
     {
       "id": "arab",
       "name": "Arab",
       "symbol": "अरब",
       "factor": 1000000000,
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_numbering_system"
     },
     {
       "id": "kharab",
       "name": "Kharab",
       "symbol": "खरब",
       "factor": 100000000000,
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_numbering_system"
     },
     {
       "id": "zhao",
       "name": "Zhao",
       "symbol": "兆",
       "factor": 1000000000000,
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_numerals"
     },
     {
       "id": "kei",
       "name": "Kei",
       "symbol": "京",
       "factor": 10000000000000000,
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_numerals"
     },
     {
       "id": "mole",
       "name": "Mole",
       "symbol": "mole",
       "factor": 6.02214076e+23,
-      "measurementSystem": "NONE"
+      "measurementSystem": "NONE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mole_(unit)"
     }
   ]
 }

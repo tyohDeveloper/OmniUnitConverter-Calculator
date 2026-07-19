@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://www.bipm.org/en/measurement-units"
     },
     {
       "id": "sun_jp",
@@ -19,7 +20,8 @@
       "symbol": "sun",
       "factor": 0.030303,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cun_(unit)"
     },
     {
       "id": "shaku_jp",
@@ -27,7 +29,8 @@
       "symbol": "shaku",
       "factor": 0.30303,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Shaku_(unit)"
     },
     {
       "id": "ken_jp",
@@ -35,7 +38,8 @@
       "symbol": "ken",
       "factor": 1.818,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ken_(unit)"
     },
     {
       "id": "jo_jp",
@@ -43,7 +47,8 @@
       "symbol": "jo (len)",
       "factor": 3.03,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
     },
     {
       "id": "ri_jp",
@@ -51,7 +56,8 @@
       "symbol": "ri-jp",
       "factor": 3927.27,
       "unitType": "SI_BASE",
-      "measurementSystem": "JAPANESE"
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Li_(unit)"
     },
     {
       "id": "ja_kr",
@@ -59,7 +65,8 @@
       "symbol": "ja",
       "factor": 0.30303,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chi_(unit)"
     },
     {
       "id": "ri_kr",
@@ -67,7 +74,8 @@
       "symbol": "ri-kr",
       "factor": 392.727,
       "unitType": "SI_BASE",
-      "measurementSystem": "KOREAN"
+      "measurementSystem": "KOREAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Li_(unit)"
     },
     {
       "id": "cun_cn",
@@ -75,7 +83,8 @@
       "symbol": "cun",
       "factor": 0.03333,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cun_(unit)"
     },
     {
       "id": "chi_cn",
@@ -83,7 +92,8 @@
       "symbol": "chi",
       "factor": 0.3333,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_units_of_measurement"
     },
     {
       "id": "zhang_cn",
@@ -91,7 +101,8 @@
       "symbol": "zhang",
       "factor": 3.333,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Zh%C3%A0ng"
     },
     {
       "id": "li_cn",
@@ -99,7 +110,8 @@
       "symbol": "li-cn",
       "factor": 500,
       "unitType": "SI_BASE",
-      "measurementSystem": "CHINESE"
+      "measurementSystem": "CHINESE",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Li_(unit)"
     },
     {
       "id": "chek_hk",
@@ -107,7 +119,8 @@
       "symbol": "chek",
       "factor": 0.371,
       "unitType": "SI_BASE",
-      "measurementSystem": "HONG_KONG"
+      "measurementSystem": "HONG_KONG",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chi_(unit)"
     },
     {
       "id": "hath_in",
@@ -115,7 +128,8 @@
       "symbol": "hath",
       "factor": 0.46,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_units_of_measurement"
     },
     {
       "id": "gaj_in",
@@ -123,7 +137,8 @@
       "symbol": "gaj",
       "factor": 0.9144,
       "unitType": "SI_BASE",
-      "measurementSystem": "SOUTH_ASIAN"
+      "measurementSystem": "SOUTH_ASIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_units_of_measurement"
     },
     {
       "id": "digit",
@@ -131,7 +146,8 @@
       "symbol": "digit",
       "factor": 0.01875,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_EGYPTIAN"
+      "measurementSystem": "ANCIENT_EGYPTIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Digit_(unit)"
     },
     {
       "id": "cubit_royal",
@@ -139,7 +155,8 @@
       "symbol": "cubit-R",
       "factor": 0.524,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_EGYPTIAN"
+      "measurementSystem": "ANCIENT_EGYPTIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cubit"
     },
     {
       "id": "palm",
@@ -147,7 +164,8 @@
       "symbol": "palm",
       "factor": 0.075,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_EGYPTIAN"
+      "measurementSystem": "ANCIENT_EGYPTIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Palm_(unit)"
     },
     {
       "id": "span",
@@ -155,7 +173,8 @@
       "symbol": "span",
       "factor": 0.2286,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_EGYPTIAN"
+      "measurementSystem": "ANCIENT_EGYPTIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Span_(unit)"
     },
     {
       "id": "cubit_common",
@@ -163,7 +182,8 @@
       "symbol": "cubit",
       "factor": 0.4572,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_EGYPTIAN"
+      "measurementSystem": "ANCIENT_EGYPTIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Cubit"
     },
     {
       "id": "stade",
@@ -171,7 +191,8 @@
       "symbol": "stade",
       "factor": 185,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_GREEK"
+      "measurementSystem": "ANCIENT_GREEK",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Stadion_(unit)"
     },
     {
       "id": "pace",
@@ -179,7 +200,8 @@
       "symbol": "pace",
       "factor": 1.48,
       "unitType": "SI_BASE",
-      "measurementSystem": "ANCIENT_ROMAN"
+      "measurementSystem": "ANCIENT_ROMAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pace_(unit)"
     },
     {
       "id": "arshin_ru",
@@ -187,7 +209,8 @@
       "symbol": "arshin",
       "factor": 0.7112,
       "unitType": "SI_BASE",
-      "measurementSystem": "RUSSIAN"
+      "measurementSystem": "RUSSIAN",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Historical_Russian_units_of_measurement"
     },
     {
       "id": "vara_es",
@@ -195,7 +218,8 @@
       "symbol": "vara",
       "factor": 0.8359,
       "unitType": "SI_BASE",
-      "measurementSystem": "SPANISH"
+      "measurementSystem": "SPANISH",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Spanish_units_of_measurement"
     },
     {
       "id": "ell_en",
@@ -203,7 +227,8 @@
       "symbol": "ell",
       "factor": 1.143,
       "unitType": "IMPERIAL",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ell"
     },
     {
       "id": "hand",
@@ -211,7 +236,8 @@
       "symbol": "hh",
       "factor": 0.1016,
       "unitType": "US_COMMON",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hand_(unit)"
     },
     {
       "id": "link",
@@ -219,7 +245,8 @@
       "symbol": "li",
       "factor": 0.201168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_SURVEY"
+      "measurementSystem": "US_SURVEY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Link_(unit)"
     },
     {
       "id": "fathom",
@@ -227,7 +254,8 @@
       "symbol": "ftm",
       "factor": 1.8288,
       "unitType": "US_COMMON",
-      "measurementSystem": "IMPERIAL"
+      "measurementSystem": "IMPERIAL",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Fathom"
     },
     {
       "id": "rod",
@@ -235,7 +263,8 @@
       "symbol": "rd",
       "factor": 5.0292,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_SURVEY"
+      "measurementSystem": "US_SURVEY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "chain",
@@ -243,7 +272,8 @@
       "symbol": "ch",
       "factor": 20.1168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_SURVEY"
+      "measurementSystem": "US_SURVEY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chain_(unit)"
     },
     {
       "id": "furlong",
@@ -251,7 +281,8 @@
       "symbol": "fur",
       "factor": 201.168,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_SURVEY"
+      "measurementSystem": "US_SURVEY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Furlong"
     },
     {
       "id": "league",
@@ -259,7 +290,8 @@
       "symbol": "lea",
       "factor": 4828.032,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/League_(unit)"
     }
   ]
 }

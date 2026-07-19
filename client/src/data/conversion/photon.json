@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Electronvolt"
     },
     {
       "id": "J_photon",
@@ -20,7 +21,8 @@
       "factor": 6241509074000000000,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Joule"
     },
     {
       "id": "nu",
@@ -29,7 +31,8 @@
       "factor": 4.135667696e-15,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Frequency"
     },
     {
       "id": "lambda",
@@ -39,7 +42,8 @@
       "allowPrefixes": true,
       "isInverse": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Photon"
     }
   ]
 }

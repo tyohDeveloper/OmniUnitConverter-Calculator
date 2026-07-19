@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Newton-metre"
     },
     {
       "id": "dyncm",
@@ -20,7 +21,8 @@
       "factor": 1e-7,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Torque"
     },
     {
       "id": "ozin",
@@ -28,7 +30,8 @@
       "symbol": "oz⋅in",
       "factor": 0.00706155,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "kgfcm",
@@ -36,7 +39,8 @@
       "symbol": "kgf⋅cm",
       "factor": 0.0980665,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Torque"
     },
     {
       "id": "inlb",
@@ -44,7 +48,8 @@
       "symbol": "in⋅lb",
       "factor": 0.112985,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
     },
     {
       "id": "ftlb",
@@ -52,7 +57,8 @@
       "symbol": "ft⋅lb",
       "factor": 1.35582,
       "unitType": "US_COMMON",
-      "measurementSystem": "US_CUSTOMARY"
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Foot-pound"
     },
     {
       "id": "kgfm",
@@ -60,7 +66,8 @@
       "symbol": "kgf⋅m",
       "factor": 9.80665,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Torque"
     }
   ]
 }

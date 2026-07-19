@@ -2,7 +2,7 @@
 name: Build size ceiling
 description: verify-build enforces a gzip size ceiling on the single-file HTML build; check headroom before adding data.
 ---
-The rule: `scripts/verify-build.mjs` enforces gzip size ≤ baseline × 1.05 (baseline re-recorded 2026-07-19 at 434.3 kB gzip, ceiling ~456 kB; build measured ~364 kB gzip later on 2026-07-19 — about 92 kB headroom).
+The rule: `scripts/verify-build.mjs` enforces gzip size ≤ baseline × 1.05 (baseline re-recorded 2026-07-19 at 434.3 kB gzip, ceiling ~456 kB; build measured ~440.8 kB gzip after per-unit source URLs were added — only ~15 kB headroom left). Next sizable data addition will likely require re-baselining.
 
 **Why:** The app inlines 70 unit-category JSONs and 12-language translation files into one HTML file, so large data additions can push it over.
 

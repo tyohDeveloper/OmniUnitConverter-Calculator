@@ -136,5 +136,7 @@
   "help-machine-translated": "(Este texto foi traduzido automaticamente. Para o texto original, mude para o idioma «en».)",
   "Paper Sizes": "Tamanhos de papel",
   "Unitless Numbers": "Números Adimensionais",
-  "Logarithmic Scales": "Escalas logarítmicas"
+  "Logarithmic Scales": "Escalas logarítmicas",
+  "Sources": "Fontes",
+  "sources-note": "Fatores de conversão e relações de definição para cada unidade, com um link de referência para cada uma. Os links abrem em uma nova aba."
 }

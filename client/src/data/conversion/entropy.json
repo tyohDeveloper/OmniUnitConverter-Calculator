@@ -11,7 +11,8 @@
       "factor": 1,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Entropy"
     },
     {
       "id": "calk",
@@ -19,7 +20,8 @@
       "symbol": "cal⋅K⁻¹",
       "factor": 4.184,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Entropy"
     },
     {
       "id": "kjk",
@@ -27,7 +29,8 @@
       "symbol": "kJ⋅K⁻¹",
       "factor": 1000,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Entropy"
     },
     {
       "id": "kcalk",
@@ -35,7 +38,8 @@
       "symbol": "kcal⋅K⁻¹",
       "factor": 4184,
       "unitType": "SI_BASE",
-      "measurementSystem": "SI"
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Entropy"
     }
   ]
 }
