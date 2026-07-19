@@ -23,6 +23,14 @@
       "measurementSystem": "SI"
     },
     {
+      "id": "gf",
+      "name": "Gram-force",
+      "symbol": "gf",
+      "factor": 0.00980665,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI"
+    },
+    {
       "id": "lbf",
       "name": "Pound-force",
       "symbol": "lbf",
