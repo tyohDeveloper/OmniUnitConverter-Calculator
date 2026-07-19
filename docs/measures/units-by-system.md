@@ -111,6 +111,7 @@ One section per measurement system or tradition.
 | `N` | Newton | 1 kg⋅m⋅s⁻² |
 | `dyn` | Dyne | 1e-5 kg⋅m⋅s⁻² |
 | `kgf` | Kilogram-force | 9.80665 kg⋅m⋅s⁻² |
+| `g-force` | g-force | 9.80665 kg⋅m⋅s⁻² |
 | `s⁻¹` | Per Second | 1 s⁻¹ |
 | `y⁻¹` | Per Year | 3.1688087814028954e-8 s⁻¹ |
 | `wk⁻¹` | Per Week | 1.6534391534391533e-6 s⁻¹ |

@@ -282,6 +282,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `m³⋅s⁻¹` | Cubic Metre/second | Flow Rate (Volumetric) | m³⋅s⁻¹ | 1 |
 | `Sv (flow)` | Sverdrup | Flow Rate (Volumetric) | m³⋅s⁻¹ | 1000000 |
 | `dyn` | Dyne | Force | kg⋅m⋅s⁻² | 1e-5 |
+| `g-force` | g-force | Force | kg⋅m⋅s⁻² | 9.80665 |
 | `kgf` | Kilogram-force | Force | kg⋅m⋅s⁻² | 9.80665 |
 | `kip` | Kip | Force | kg⋅m⋅s⁻² | 4448.22 |
 | `lbf` | Pound-force | Force | kg⋅m⋅s⁻² | 4.44822 |

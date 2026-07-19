@@ -434,6 +434,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `dyn` | Dyne | 1e-5 kg⋅m⋅s⁻² |
 | `lbf` | Pound-force | 4.44822 kg⋅m⋅s⁻² |
 | `kgf` | Kilogram-force | 9.80665 kg⋅m⋅s⁻² |
+| `g-force` | g-force | 9.80665 kg⋅m⋅s⁻² |
 | `kip` | Kip | 4448.22 kg⋅m⋅s⁻² |
 
 ### Frequency
