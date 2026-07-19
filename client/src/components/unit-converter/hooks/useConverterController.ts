@@ -550,7 +550,8 @@ export function useConverterController(): UseConverterControllerReturn {
       else if (toUnit === 'ft_in') { textToCopy = formatFtIn(result); }
       else if (activeCategory === 'lightbulb') { textToCopy = `${formatForClipboard(valueToCopy, precision)} lm`; }
       else if (activeCategory === 'unitless' && regionalCountingSuffix(toUnit)) {
-        textToCopy = `${formatForClipboard(result, precision)}${regionalCountingSuffix(toUnit)}`;
+        const suffix = regionalCountingSuffix(toUnit);
+        textToCopy = `${formatForClipboard(result, precision)}${suffix}`;
       }
       else {
         const unitSymbol = toUnitData?.symbol || '';
