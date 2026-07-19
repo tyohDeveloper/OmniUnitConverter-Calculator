@@ -305,7 +305,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen }: UnitConverte
                 }`}
                 {...testId('tab-rpn')}
               >
-                {t('RPN')}
+                {t('RPN Calculator')}
               </button>
             </nav>
             <div className="flex items-center gap-3">

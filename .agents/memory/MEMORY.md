@@ -1,0 +1,1 @@
+- [RPN X-register origin metadata](rpn-x-origin-metadata.md) — stale-closure metadata stamping makes X display old values; compute meta inside setRpnStack functional updater.

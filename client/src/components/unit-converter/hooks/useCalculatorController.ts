@@ -176,8 +176,7 @@ export function useCalculatorController(
     setPreviousRpnStack([...rpnStack]);
   }, [rpnStack, setPreviousRpnStack]);
 
-  const computeXOriginMeta = useCallback((altIndex: number, prefix: string): { originalUnit: string; originalValue: number; unitType: UnitType; sourceCategory: string | undefined } | null => {
-    const val = rpnStack[3];
+  const computeOriginMetaForValue = useCallback((val: CalcValue | null, altIndex: number, prefix: string): { originalUnit: string; originalValue: number; unitType: UnitType; sourceCategory: string | undefined } | null => {
     if (!val) return null;
     const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
     const rep = siReps[altIndex];
@@ -191,36 +190,32 @@ export function useCalculatorController(
     const derivedUnitInfo = primaryDerivedUnit ? SI_DERIVED_UNITS.find(u => u.symbol === primaryDerivedUnit) : undefined;
     const sourceCategory = derivedUnitInfo?.category ?? val.sourceCategory;
     return { originalUnit: prefixSymbol + kgResult.displaySymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
-  }, [rpnStack, generateSIRepresentations]);
+  }, [generateSIRepresentations]);
 
   const setRpnSelectedAlternative = useCallback((altIndex: number) => {
     setRpnSelectedAlternativeRaw(altIndex);
     setRpnResultPrefixRaw('none');
-    const meta = computeXOriginMeta(altIndex, 'none');
-    if (meta && rpnStack[3]) {
-      setRpnStack(prev => {
-        const ns = [...prev];
-        if (ns[3]) {
-          ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
-        }
-        return ns;
-      });
-    }
-  }, [setRpnSelectedAlternativeRaw, setRpnResultPrefixRaw, computeXOriginMeta, rpnStack, setRpnStack]);
+    setRpnStack(prev => {
+      const ns = [...prev];
+      const meta = computeOriginMetaForValue(ns[3], altIndex, 'none');
+      if (ns[3] && meta) {
+        ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
+      }
+      return ns;
+    });
+  }, [setRpnSelectedAlternativeRaw, setRpnResultPrefixRaw, computeOriginMetaForValue, setRpnStack]);
 
   const setRpnResultPrefix = useCallback((prefix: string) => {
     setRpnResultPrefixRaw(prefix);
-    const meta = computeXOriginMeta(rpnSelectedAlternative, prefix);
-    if (meta && rpnStack[3]) {
-      setRpnStack(prev => {
-        const ns = [...prev];
-        if (ns[3]) {
-          ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
-        }
-        return ns;
-      });
-    }
-  }, [setRpnResultPrefixRaw, computeXOriginMeta, rpnSelectedAlternative, rpnStack, setRpnStack]);
+    setRpnStack(prev => {
+      const ns = [...prev];
+      const meta = computeOriginMetaForValue(ns[3], rpnSelectedAlternative, prefix);
+      if (ns[3] && meta) {
+        ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
+      }
+      return ns;
+    });
+  }, [setRpnResultPrefixRaw, computeOriginMetaForValue, rpnSelectedAlternative, setRpnStack]);
 
   const clearCalculator = useCallback(() => {
     setCalcValues([null, null, null, null]);
