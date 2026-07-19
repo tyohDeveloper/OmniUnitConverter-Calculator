@@ -486,6 +486,13 @@ function registerPriorityUnitlessSymbols(map: SymbolMap): void {
 // words ("2 centuries", "1 millennium", "3 decades") in smart paste, so map the
 // singular and plural forms to their Time unit ids. Keys must be lowercase.
 const TIME_WORD_ALIASES: Record<string, string> = {
+  second: 's', seconds: 's', sec: 's', secs: 's',
+  minute: 'min', minutes: 'min', mins: 'min',
+  hour: 'h', hours: 'h', hr: 'h', hrs: 'h',
+  day: 'd', days: 'd',
+  week: 'wk', weeks: 'wk',
+  month: 'mo', months: 'mo',
+  year: 'y', years: 'y', yrs: 'y',
   decade: 'dec', decades: 'dec',
   century: 'cent', centuries: 'cent',
   millennium: 'kyr', millennia: 'kyr', millenniums: 'kyr',
