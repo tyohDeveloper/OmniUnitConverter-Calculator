@@ -409,40 +409,40 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `slug⋅ft⋅s⁻¹` | slug⋅ft/s | Momentum | kg⋅m⋅s⁻¹ | 4.44822 |
 | `8×10` | 8×10 (US Photo) | Paper Sizes | m² | 0.051613 |
 | `A0` | A0 | Paper Sizes | m² | 0.999949 |
-| `A1` | A1 | Paper Sizes | m² | 0.499554 |
-| `A10` | A10 | Paper Sizes | m² | 9.62e-4 |
-| `A2` | A2 | Paper Sizes | m² | 0.24948 |
-| `A3` | A3 | Paper Sizes | m² | 0.12474 |
-| `A4` | A4 | Paper Sizes | m² | 0.06237 |
-| `A5` | A5 | Paper Sizes | m² | 0.03108 |
-| `A6` | A6 | Paper Sizes | m² | 0.01554 |
-| `A7` | A7 | Paper Sizes | m² | 0.00777 |
-| `A8` | A8 | Paper Sizes | m² | 0.003848 |
-| `A9` | A9 | Paper Sizes | m² | 0.001924 |
+| `A1` | A1 | Paper Sizes | m² | 0.4999745 |
+| `A10` | A10 | Paper Sizes | m² | 9.765126953125e-4 |
+| `A2` | A2 | Paper Sizes | m² | 0.24998725 |
+| `A3` | A3 | Paper Sizes | m² | 0.124993625 |
+| `A4` | A4 | Paper Sizes | m² | 0.0624968125 |
+| `A5` | A5 | Paper Sizes | m² | 0.03124840625 |
+| `A6` | A6 | Paper Sizes | m² | 0.015624203125 |
+| `A7` | A7 | Paper Sizes | m² | 0.0078121015625 |
+| `A8` | A8 | Paper Sizes | m² | 0.00390605078125 |
+| `A9` | A9 | Paper Sizes | m² | 0.001953025390625 |
 | `ANSI C` | ANSI C | Paper Sizes | m² | 0.24129 |
 | `ANSI D` | ANSI D | Paper Sizes | m² | 0.482581 |
 | `ANSI E` | ANSI E | Paper Sizes | m² | 0.965161 |
 | `B0` | B0 | Paper Sizes | m² | 1.414 |
 | `B1` | B1 | Paper Sizes | m² | 0.707 |
-| `B10` | B10 | Paper Sizes | m² | 0.001364 |
+| `B10` | B10 | Paper Sizes | m² | 0.001380859375 |
 | `B2` | B2 | Paper Sizes | m² | 0.3535 |
-| `B3` | B3 | Paper Sizes | m² | 0.1765 |
-| `B4` | B4 | Paper Sizes | m² | 0.08825 |
-| `B5` | B5 | Paper Sizes | m² | 0.044 |
-| `B6` | B6 | Paper Sizes | m² | 0.022 |
-| `B7` | B7 | Paper Sizes | m² | 0.011 |
-| `B8` | B8 | Paper Sizes | m² | 0.005456 |
-| `B9` | B9 | Paper Sizes | m² | 0.002728 |
+| `B3` | B3 | Paper Sizes | m² | 0.17675 |
+| `B4` | B4 | Paper Sizes | m² | 0.088375 |
+| `B5` | B5 | Paper Sizes | m² | 0.0441875 |
+| `B6` | B6 | Paper Sizes | m² | 0.02209375 |
+| `B7` | B7 | Paper Sizes | m² | 0.011046875 |
+| `B8` | B8 | Paper Sizes | m² | 0.0055234375 |
+| `B9` | B9 | Paper Sizes | m² | 0.00276171875 |
 | `Exec` | Executive | Paper Sizes | m² | 0.049094 |
 | `JIS B0` | JIS B0 | Paper Sizes | m² | 1.49968 |
 | `JIS B1` | JIS B1 | Paper Sizes | m² | 0.74984 |
 | `JIS B2` | JIS B2 | Paper Sizes | m² | 0.37492 |
 | `JIS B3` | JIS B3 | Paper Sizes | m² | 0.18746 |
-| `JIS B4` | JIS B4 | Paper Sizes | m² | 0.093548 |
-| `JIS B5` | JIS B5 | Paper Sizes | m² | 0.046774 |
-| `JIS B6` | JIS B6 | Paper Sizes | m² | 0.023296 |
-| `JIS B7` | JIS B7 | Paper Sizes | m² | 0.011648 |
-| `JIS B8` | JIS B8 | Paper Sizes | m² | 0.005824 |
+| `JIS B4` | JIS B4 | Paper Sizes | m² | 0.09373 |
+| `JIS B5` | JIS B5 | Paper Sizes | m² | 0.046865 |
+| `JIS B6` | JIS B6 | Paper Sizes | m² | 0.0234325 |
+| `JIS B7` | JIS B7 | Paper Sizes | m² | 0.01171625 |
+| `JIS B8` | JIS B8 | Paper Sizes | m² | 0.005858125 |
 | `Legal` | Legal | Paper Sizes | m² | 0.076774 |
 | `Letter` | Letter | Paper Sizes | m² | 0.060322 |
 | `Statement` | Statement | Paper Sizes | m² | 0.030161 |
