@@ -18,6 +18,7 @@ import romanConsulsJson from '@/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
 import { HijriDateCard } from './HijriDateCard';
 import { EraNameLookup } from './EraNameLookup';
+import { RulersReignsCard } from './RulersReignsCard';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
 const CHINESE_ERAS = chineseErasJson as EraTable;
@@ -305,6 +306,8 @@ export function EraPane({ t, language }: EraPaneProps) {
         })}
         <p className="text-xs text-muted-foreground">{t('periods-approx-note')}</p>
       </Card>
+
+      <RulersReignsCard t={t} astro={astro} />
     </div>
   );
 }

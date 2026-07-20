@@ -74,3 +74,35 @@ export interface Civilization {
   sourceUrl: string;
   periods: HistoricalPeriod[];
 }
+
+// Rulers & Reigns reference data. Years are signed historical years
+// (negative = BCE, no year zero), like HistoricalPeriod.
+export interface Ruler {
+  name: string;
+  epithet?: string;
+  start: number;
+  end: number;
+  circa?: boolean;
+  city?: string;
+}
+
+export interface RulerDynasty {
+  name: string;
+  rulers: Ruler[];
+}
+
+// Explicit interregnum with a note key (e.g. Persia 330–247 BCE).
+export interface RulerGap {
+  start: number;
+  end: number;
+  note: string;
+}
+
+export interface RulerRegion {
+  id: string;
+  name: string;
+  sourceUrl: string;
+  note?: string;
+  gaps?: RulerGap[];
+  dynasties: RulerDynasty[];
+}

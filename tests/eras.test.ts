@@ -10,21 +10,25 @@ import { searchEraNames } from '../client/src/lib/eras/searchEraNames';
 import { parseEraYearText } from '../client/src/lib/eras/parseEraYearText';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
 import { lookupRomanConsuls } from '../client/src/lib/eras/lookupRomanConsuls';
+import { lookupRulers } from '../client/src/lib/eras/lookupRulers';
+import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
 import { hijriTabular } from '../client/src/lib/eras/hijriTabular';
 import { gregorianToJdn } from '../client/src/lib/eras/gregorianToJdn';
 import { jdnToGregorian } from '../client/src/lib/eras/jdnToGregorian';
 import { hijriToJdn } from '../client/src/lib/eras/hijriToJdn';
 import { jdnToHijri } from '../client/src/lib/eras/jdnToHijri';
-import type { EraTable, YearTable, Civilization } from '../client/src/lib/eras/types';
+import type { EraTable, YearTable, Civilization, RulerRegion } from '../client/src/lib/eras/types';
 import japaneseErasJson from '../client/src/data/eras/japaneseEras.json';
 import chineseErasJson from '../client/src/data/eras/chineseEras.json';
 import romanConsulsJson from '../client/src/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '../client/src/data/eras/historicalPeriods.json';
+import rulersReignsJson from '../client/src/data/eras/rulersReigns.json';
 
 const JAPANESE = japaneseErasJson as EraTable;
 const CHINESE = chineseErasJson as EraTable;
 const CONSULS = romanConsulsJson as YearTable;
 const CIVS = historicalPeriodsJson.civilizations as Civilization[];
+const RULERS = rulersReignsJson.regions as RulerRegion[];
 
 const scheme = (id: string) => {
   const s = ERA_SCHEMES.find(x => x.id === id);
@@ -578,5 +582,100 @@ describe('Roman consular dating', () => {
   it('has exactly one entry per year in range', () => {
     expect(CONSULS.consuls.length).toBe(CONSULS.end - CONSULS.start + 1);
     for (const entry of CONSULS.consuls) expect(entry.trim().length).toBeGreaterThan(0);
+  });
+});
+
+describe('Rulers & Reigns lookup', () => {
+  const region = (id: string) => {
+    const r = RULERS.find(x => x.id === id);
+    if (!r) throw new Error(`missing rulers region ${id}`);
+    return r;
+  };
+
+  it('data integrity: five regions, valid spans, source URLs', () => {
+    expect(RULERS.map(r => r.id).sort()).toEqual(['china', 'egypt', 'maya', 'persia', 'rome']);
+    for (const r of RULERS) {
+      expect(r.sourceUrl).toMatch(/^https:\/\//);
+      expect(r.dynasties.length).toBeGreaterThan(0);
+      for (const d of r.dynasties) {
+        for (const k of d.rulers) {
+          expect(k.start, `${k.name} span`).toBeLessThanOrEqual(k.end);
+          expect(k.start, `${k.name} year zero`).not.toBe(0);
+          expect(k.end, `${k.name} year zero`).not.toBe(0);
+        }
+      }
+    }
+  });
+
+  it('finds a single reigning ruler ("in the reign of Xerxes")', () => {
+    // 480 BCE = astronomical -479
+    const hit = lookupRulers(-479, region('persia'));
+    expect(hit.rulers.map(r => r.name)).toEqual(['Xerxes I']);
+    expect(hit.gapNote).toBeNull();
+  });
+
+  it('handles BCE reign boundaries (signed historical → astronomical)', () => {
+    // Cyrus II ends 530 BCE (astro -529); Cambyses II starts the same year.
+    const hit = lookupRulers(-529, region('persia'));
+    expect(hit.rulers.map(r => r.name).sort()).toEqual(['Cambyses II', 'Cyrus II']);
+  });
+
+  it('reports the Persia gap note instead of a false highlight', () => {
+    // 300 BCE = astro -299, inside the 330–247 BCE gap
+    const hit = lookupRulers(-299, region('persia'));
+    expect(hit.rulers).toEqual([]);
+    expect(hit.gapNote).toBe('rulers-gap-persia');
+  });
+
+  it('returns no rulers and no gap note for uncovered curated years', () => {
+    // 900 BCE: before Achaemenids, not an explicit gap
+    const hit = lookupRulers(-899, region('persia'));
+    expect(hit.rulers).toEqual([]);
+    expect(hit.gapNote).toBeNull();
+  });
+
+  it('handles Maya concurrent kings across city-states', () => {
+    const hit = lookupRulers(683, region('maya'));
+    const names = hit.rulers.map(r => r.name).sort();
+    expect(names).toEqual(["Jasaw Chan K'awiil I", "K'inich Janaab' Pakal I", "Yuknoom Ch'een II"]);
+    for (const r of hit.rulers) expect(r.city).toBeTruthy();
+  });
+
+  it('handles a reign spanning the BCE/CE boundary (Augustus)', () => {
+    const rome = region('rome');
+    expect(lookupRulers(-26, rome).rulers.map(r => r.name)).toEqual(['Augustus']);
+    expect(lookupRulers(0, rome).rulers.map(r => r.name)).toEqual(['Augustus']);
+    expect(lookupRulers(14, rome).rulers.map(r => r.name).sort()).toEqual(['Augustus', 'Tiberius']);
+  });
+
+  it('handles co-regency overlap (Ardashir I / Shapur I)', () => {
+    const hit = lookupRulers(241, region('persia'));
+    expect(hit.rulers.map(r => r.name).sort()).toEqual(['Ardashir I', 'Shapur I']);
+  });
+
+  it('China ends at 1912 (Puyi) and Persia at 651 (Yazdegerd III)', () => {
+    expect(lookupRulers(1912, region('china')).rulers.map(r => r.name)).toEqual(['Puyi']);
+    expect(lookupRulers(1913, region('china')).rulers).toEqual([]);
+    expect(lookupRulers(651, region('persia')).rulers.map(r => r.name)).toEqual(['Yazdegerd III']);
+    expect(lookupRulers(652, region('persia')).rulers).toEqual([]);
+  });
+
+  it('epithets and region/dynasty/note keys have UI translations in all locales', () => {
+    const keys = new Set<string>();
+    for (const r of RULERS) {
+      keys.add(r.name);
+      if (r.note) keys.add(r.note);
+      for (const g of r.gaps ?? []) keys.add(g.note);
+      for (const d of r.dynasties) {
+        keys.add(d.name);
+        for (const k of d.rulers) if (k.epithet) keys.add(k.epithet);
+      }
+    }
+    for (const lang of Object.keys(UI_TRANSLATIONS)) {
+      for (const key of Array.from(keys)) {
+        expect(UI_TRANSLATIONS[lang as keyof typeof UI_TRANSLATIONS][key],
+          `"${key}" missing in ui locale "${lang}"`).toBeTruthy();
+      }
+    }
   });
 });

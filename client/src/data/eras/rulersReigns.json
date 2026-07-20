@@ -1,0 +1,233 @@
+{
+  "regions": [
+    {
+      "id": "persia",
+      "name": "rulers-region-persia",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_monarchs_of_Persia",
+      "gaps": [
+        { "start": -330, "end": -247, "note": "rulers-gap-persia" }
+      ],
+      "dynasties": [
+        {
+          "name": "Achaemenid Empire",
+          "rulers": [
+            { "name": "Cyrus II", "epithet": "the Great", "start": -559, "end": -530, "circa": true },
+            { "name": "Cambyses II", "start": -530, "end": -522 },
+            { "name": "Darius I", "epithet": "the Great", "start": -522, "end": -486 },
+            { "name": "Xerxes I", "start": -486, "end": -465 },
+            { "name": "Artaxerxes I", "start": -465, "end": -424 },
+            { "name": "Darius II", "start": -423, "end": -404 },
+            { "name": "Artaxerxes II", "start": -404, "end": -358 },
+            { "name": "Artaxerxes III", "start": -358, "end": -338 },
+            { "name": "Darius III", "start": -336, "end": -330 }
+          ]
+        },
+        {
+          "name": "Parthian Empire",
+          "rulers": [
+            { "name": "Arsaces I", "start": -247, "end": -217, "circa": true },
+            { "name": "Mithridates I", "epithet": "the Great", "start": -171, "end": -132, "circa": true },
+            { "name": "Mithridates II", "epithet": "the Great", "start": -124, "end": -91, "circa": true },
+            { "name": "Orodes II", "start": -57, "end": -37 },
+            { "name": "Artabanus IV", "start": 213, "end": 224, "circa": true }
+          ]
+        },
+        {
+          "name": "Sasanian Empire",
+          "rulers": [
+            { "name": "Ardashir I", "start": 224, "end": 242 },
+            { "name": "Shapur I", "epithet": "the Great", "start": 240, "end": 270, "circa": true },
+            { "name": "Shapur II", "epithet": "the Great", "start": 309, "end": 379 },
+            { "name": "Khosrow I", "start": 531, "end": 579 },
+            { "name": "Khosrow II", "start": 590, "end": 628 },
+            { "name": "Yazdegerd III", "start": 632, "end": 651 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rome",
+      "name": "rulers-region-rome",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Roman_emperors",
+      "dynasties": [
+        {
+          "name": "Roman Empire",
+          "rulers": [
+            { "name": "Augustus", "start": -27, "end": 14 },
+            { "name": "Tiberius", "start": 14, "end": 37 },
+            { "name": "Claudius", "start": 41, "end": 54 },
+            { "name": "Nero", "start": 54, "end": 68 },
+            { "name": "Vespasian", "start": 69, "end": 79 },
+            { "name": "Trajan", "start": 98, "end": 117 },
+            { "name": "Hadrian", "start": 117, "end": 138 },
+            { "name": "Marcus Aurelius", "start": 161, "end": 180 },
+            { "name": "Septimius Severus", "start": 193, "end": 211 },
+            { "name": "Diocletian", "start": 284, "end": 305 },
+            { "name": "Constantine I", "epithet": "the Great", "start": 306, "end": 337 },
+            { "name": "Theodosius I", "epithet": "the Great", "start": 379, "end": 395 },
+            { "name": "Romulus Augustulus", "start": 475, "end": 476 }
+          ]
+        },
+        {
+          "name": "Byzantine Empire",
+          "rulers": [
+            { "name": "Justinian I", "epithet": "the Great", "start": 527, "end": 565 }
+          ]
+        },
+        {
+          "name": "Carolingian Empire",
+          "rulers": [
+            { "name": "Charlemagne", "start": 768, "end": 814 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "egypt",
+      "name": "rulers-region-egypt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_pharaohs",
+      "dynasties": [
+        {
+          "name": "Early Dynastic Period",
+          "rulers": [
+            { "name": "Narmer", "start": -3100, "end": -3050, "circa": true }
+          ]
+        },
+        {
+          "name": "Old Kingdom",
+          "rulers": [
+            { "name": "Djoser", "start": -2670, "end": -2650, "circa": true },
+            { "name": "Sneferu", "start": -2613, "end": -2589, "circa": true },
+            { "name": "Khufu", "start": -2589, "end": -2566, "circa": true }
+          ]
+        },
+        {
+          "name": "Middle Kingdom",
+          "rulers": [
+            { "name": "Mentuhotep II", "start": -2060, "end": -2010, "circa": true },
+            { "name": "Senusret III", "start": -1878, "end": -1839, "circa": true }
+          ]
+        },
+        {
+          "name": "New Kingdom",
+          "rulers": [
+            { "name": "Ahmose I", "start": -1550, "end": -1525, "circa": true },
+            { "name": "Hatshepsut", "start": -1479, "end": -1458, "circa": true },
+            { "name": "Thutmose III", "start": -1479, "end": -1425, "circa": true },
+            { "name": "Amenhotep III", "start": -1390, "end": -1352, "circa": true },
+            { "name": "Akhenaten", "start": -1353, "end": -1336, "circa": true },
+            { "name": "Tutankhamun", "start": -1332, "end": -1323, "circa": true },
+            { "name": "Ramesses II", "epithet": "the Great", "start": -1279, "end": -1213, "circa": true },
+            { "name": "Ramesses III", "start": -1186, "end": -1155, "circa": true }
+          ]
+        },
+        {
+          "name": "Late Period",
+          "rulers": [
+            { "name": "Taharqa", "start": -690, "end": -664 },
+            { "name": "Psamtik I", "start": -664, "end": -610 }
+          ]
+        },
+        {
+          "name": "Ptolemaic Period",
+          "rulers": [
+            { "name": "Ptolemy I Soter", "start": -305, "end": -282 },
+            { "name": "Cleopatra VII", "start": -51, "end": -30 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "china",
+      "name": "rulers-region-china",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Chinese_monarchs",
+      "dynasties": [
+        {
+          "name": "Qin Dynasty",
+          "rulers": [
+            { "name": "Qin Shi Huang", "start": -221, "end": -210 }
+          ]
+        },
+        {
+          "name": "Han Dynasty",
+          "rulers": [
+            { "name": "Han Gaozu", "start": -202, "end": -195 },
+            { "name": "Han Wudi", "start": -141, "end": -87 }
+          ]
+        },
+        {
+          "name": "Tang Dynasty",
+          "rulers": [
+            { "name": "Tang Taizong", "start": 626, "end": 649 },
+            { "name": "Wu Zetian", "start": 690, "end": 705 },
+            { "name": "Tang Xuanzong", "start": 712, "end": 756 }
+          ]
+        },
+        {
+          "name": "Song Dynasty",
+          "rulers": [
+            { "name": "Song Taizu", "start": 960, "end": 976 }
+          ]
+        },
+        {
+          "name": "Yuan Dynasty",
+          "rulers": [
+            { "name": "Kublai Khan", "start": 1271, "end": 1294 }
+          ]
+        },
+        {
+          "name": "Ming Dynasty",
+          "rulers": [
+            { "name": "Hongwu Emperor", "start": 1368, "end": 1398 },
+            { "name": "Yongle Emperor", "start": 1402, "end": 1424 }
+          ]
+        },
+        {
+          "name": "Qing Dynasty",
+          "rulers": [
+            { "name": "Kangxi Emperor", "start": 1661, "end": 1722 },
+            { "name": "Qianlong Emperor", "start": 1735, "end": 1796 },
+            { "name": "Puyi", "start": 1908, "end": 1912 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maya",
+      "name": "rulers-region-maya",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Maya_rulers",
+      "note": "rulers-maya-note",
+      "dynasties": [
+        {
+          "name": "Tikal",
+          "rulers": [
+            { "name": "Yax Nuun Ahiin I", "start": 379, "end": 404, "circa": true, "city": "Tikal" },
+            { "name": "Jasaw Chan K'awiil I", "start": 682, "end": 734, "city": "Tikal" },
+            { "name": "Yik'in Chan K'awiil", "start": 734, "end": 766, "circa": true, "city": "Tikal" }
+          ]
+        },
+        {
+          "name": "Palenque",
+          "rulers": [
+            { "name": "K'inich Janaab' Pakal I", "epithet": "the Great", "start": 615, "end": 683, "city": "Palenque" },
+            { "name": "K'inich Kan Bahlam II", "start": 684, "end": 702, "city": "Palenque" }
+          ]
+        },
+        {
+          "name": "Calakmul",
+          "rulers": [
+            { "name": "Yuknoom Ch'een II", "epithet": "the Great", "start": 636, "end": 686, "city": "Calakmul" },
+            { "name": "Yuknoom Yich'aak K'ahk'", "start": 686, "end": 697, "circa": true, "city": "Calakmul" }
+          ]
+        },
+        {
+          "name": "Copán",
+          "rulers": [
+            { "name": "K'inich Yax K'uk' Mo'", "start": 426, "end": 437, "circa": true, "city": "Copán" },
+            { "name": "Waxaklajuun Ub'aah K'awiil", "start": 695, "end": 738, "city": "Copán" }
+          ]
+        }
+      ]
+    }
+  ]
+}
