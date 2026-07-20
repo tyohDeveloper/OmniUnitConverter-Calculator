@@ -305,5 +305,10 @@
   "Chimú (Chimor)": "奇穆（奇莫尔）",
   "Inca Civilization": "印加文明",
   "Kingdom of Cusco": "库斯科王国",
-  "Inca Empire": "印加帝国"
+  "Inca Empire": "印加帝国",
+  "Era name lookup": "年号查询",
+  "era-lookup-placeholder": "例如 Meiji 33 或 Kangxi 39",
+  "era-lookup-out-of-range": "年数超出该年号范围",
+  "era-lookup-unknown": "未知的年号",
+  "Convert": "转换"
 }

@@ -305,5 +305,10 @@
   "Chimú (Chimor)": "تشيمو (تشيمور)",
   "Inca Civilization": "حضارة الإنكا",
   "Kingdom of Cusco": "مملكة كوسكو",
-  "Inca Empire": "إمبراطورية الإنكا"
+  "Inca Empire": "إمبراطورية الإنكا",
+  "Era name lookup": "البحث باسم الحقبة",
+  "era-lookup-placeholder": "مثال: Meiji 33 أو Kangxi 39",
+  "era-lookup-out-of-range": "رقم السنة خارج هذه الحقبة",
+  "era-lookup-unknown": "اسم حقبة غير معروف",
+  "Convert": "تحويل"
 }

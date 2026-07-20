@@ -15,6 +15,7 @@ import japaneseErasJson from '@/data/eras/japaneseEras.json';
 import chineseErasJson from '@/data/eras/chineseEras.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
 import { HijriDateCard } from './HijriDateCard';
+import { EraNameLookup } from './EraNameLookup';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
 const CHINESE_ERAS = chineseErasJson as EraTable;
@@ -142,6 +143,16 @@ export function EraPane({ t }: EraPaneProps) {
           )}
         </div>
         <p className="text-xs text-muted-foreground">{t('era-bce-convention')}</p>
+
+        <EraNameLookup
+          t={t}
+          tables={[JAPANESE_ERAS, CHINESE_ERAS]}
+          onApply={(a) => {
+            setSchemeId('gregorian');
+            setBce(a <= 0);
+            setYearText(a <= 0 ? String(1 - a) : String(a));
+          }}
+        />
 
         {rawYear === null && (
           <p className="text-sm text-destructive" {...testId('text-era-invalid')}>{t('Enter a whole year number')}</p>

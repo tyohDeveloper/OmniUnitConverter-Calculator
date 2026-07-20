@@ -64,6 +64,43 @@ test.describe('Dates/Eras tab', () => {
   });
 });
 
+test.describe('Era name lookup', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('tab-eras').click();
+    await expect(page.getByTestId('input-era-name-lookup')).toBeVisible();
+  });
+
+  test('Meiji 33 resolves to 1900 CE and applies to the table', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('Meiji 33');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
+    await page.getByTestId('button-era-lookup-apply').click();
+    await expect(page.getByTestId('input-era-year')).toHaveValue('1900');
+    await expect(page.getByTestId('text-era-value-buddhist')).toContainText('2443');
+  });
+
+  test('diacritic-free kangxi 39 resolves to 1700 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('kangxi 39');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Kāngxī 39 = 1700 CE');
+  });
+
+  test('autocomplete suggests era names while typing', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('kei');
+    await expect(page.getByTestId('list-era-lookup-suggestions')).toBeVisible();
+    await page.getByTestId('option-era-lookup-japanese-keicho').click();
+    await page.getByTestId('input-era-name-lookup').press('End');
+    await page.keyboard.type('5');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Keichō 5 = 1600 CE');
+  });
+
+  test('shows errors for out-of-range years and unknown names', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('Meiji 46');
+    await expect(page.getByTestId('text-era-lookup-out-of-range')).toBeVisible();
+    await page.getByTestId('input-era-name-lookup').fill('Notanera 5');
+    await expect(page.getByTestId('text-era-lookup-unknown')).toBeVisible();
+  });
+});
+
 test.describe('Hijri date converter', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');

@@ -305,5 +305,10 @@
   "Chimú (Chimor)": "치무 (치모르)",
   "Inca Civilization": "잉카 문명",
   "Kingdom of Cusco": "쿠스코 왕국",
-  "Inca Empire": "잉카 제국"
+  "Inca Empire": "잉카 제국",
+  "Era name lookup": "연호 이름 검색",
+  "era-lookup-placeholder": "예: Meiji 33, Kangxi 39",
+  "era-lookup-out-of-range": "이 연호 범위를 벗어난 연도입니다",
+  "era-lookup-unknown": "알 수 없는 연호입니다",
+  "Convert": "변환"
 }

@@ -305,5 +305,10 @@
   "Chimú (Chimor)": "Chimú (Chimor)",
   "Inca Civilization": "Inka-Zivilisation",
   "Kingdom of Cusco": "Königreich Cusco",
-  "Inca Empire": "Inka-Reich"
+  "Inca Empire": "Inka-Reich",
+  "Era name lookup": "Ära-Namenssuche",
+  "era-lookup-placeholder": "z. B. Meiji 33 oder Kangxi 39",
+  "era-lookup-out-of-range": "Jahreszahl liegt außerhalb dieser Ära",
+  "era-lookup-unknown": "Unbekannter Ära-Name",
+  "Convert": "Umrechnen"
 }

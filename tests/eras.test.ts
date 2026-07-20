@@ -5,6 +5,9 @@ import { fromAstronomicalYear } from '../client/src/lib/eras/fromAstronomicalYea
 import { formatAstronomicalYear } from '../client/src/lib/eras/formatAstronomicalYear';
 import { historicalYearToAstronomical } from '../client/src/lib/eras/historicalYearToAstronomical';
 import { lookupEraTable } from '../client/src/lib/eras/lookupEraTable';
+import { reverseLookupEraTable } from '../client/src/lib/eras/reverseLookupEraTable';
+import { searchEraNames } from '../client/src/lib/eras/searchEraNames';
+import { parseEraYearText } from '../client/src/lib/eras/parseEraYearText';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
 import { hijriTabular } from '../client/src/lib/eras/hijriTabular';
 import { gregorianToJdn } from '../client/src/lib/eras/gregorianToJdn';
@@ -407,5 +410,92 @@ describe('Hijri date-level conversion (tabular civil)', () => {
       const ah = hijriTabular.fromAstronomical(astro);
       expect(jdnToGregorian(hijriToJdn(ah, 1, 1)).year).toBe(astro);
     }
+  });
+});
+
+describe('Era name reverse lookup', () => {
+  it('converts Japanese era + year to astronomical CE', () => {
+    expect(reverseLookupEraTable('Meiji', 33, JAPANESE)).toBe(1900);
+    expect(reverseLookupEraTable('Keichō', 5, JAPANESE)).toBe(1600);
+    expect(reverseLookupEraTable('Reiwa', 1, JAPANESE)).toBe(2019);
+  });
+
+  it('is diacritic- and case-insensitive', () => {
+    expect(reverseLookupEraTable('keicho', 5, JAPANESE)).toBe(1600);
+    expect(reverseLookupEraTable('kangxi', 39, CHINESE)).toBe(1700);
+  });
+
+  it('converts Chinese era + year to astronomical CE', () => {
+    expect(reverseLookupEraTable('Kāngxī', 39, CHINESE)).toBe(1700);
+  });
+
+  it('honors epoch override for transition-year counting', () => {
+    // Zhìyuán (Kublai) counted from 1264 but only orthodox from 1279:
+    // Zhiyuan 16 = 1279 is valid, Zhiyuan 5 = 1268 belongs to Southern Song.
+    expect(reverseLookupEraTable('Zhìyuán (Kublai)', 16, CHINESE)).toBe(1279);
+    expect(reverseLookupEraTable('Zhìyuán (Kublai)', 5, CHINESE)).toBeNull();
+  });
+
+  it('rejects year counts past the end of an era', () => {
+    expect(reverseLookupEraTable('Meiji', 45, JAPANESE)).toBe(1912);
+    expect(reverseLookupEraTable('Meiji', 46, JAPANESE)).toBeNull();
+    expect(reverseLookupEraTable('Kāngxī', 61, CHINESE)).toBe(1722);
+    expect(reverseLookupEraTable('Kāngxī', 62, CHINESE)).toBeNull();
+  });
+
+  it('rejects long-range years landing on a later era start', () => {
+    // Meiji 152 = 2019 is Reiwa's start year but far outside Meiji's span.
+    expect(reverseLookupEraTable('Meiji', 152, JAPANESE)).toBeNull();
+    // Taika 1224 = 1868 lands on Meiji's start — also non-adjacent.
+    expect(reverseLookupEraTable('Taika', 1224, JAPANESE)).toBeNull();
+  });
+
+  it('rejects unknown names and invalid year counts', () => {
+    expect(reverseLookupEraTable('Notanera', 1, JAPANESE)).toBeNull();
+    expect(reverseLookupEraTable('Meiji', 0, JAPANESE)).toBeNull();
+    expect(reverseLookupEraTable('Meiji', 1.5, JAPANESE)).toBeNull();
+  });
+
+  it('round-trips forward and reverse lookups across both tables', () => {
+    for (const table of [JAPANESE, CHINESE]) {
+      for (const astro of [700, 1000, 1400, 1700, 1868, 1900]) {
+        const hit = lookupEraTable(astro, table);
+        if (!hit) continue;
+        expect(reverseLookupEraTable(hit.eraName, hit.eraYear, table)).toBe(astro);
+      }
+    }
+  });
+});
+
+describe('Era name autocomplete search', () => {
+  it('prefix matches rank before substring matches', () => {
+    const results = searchEraNames('kan', [JAPANESE, CHINESE]);
+    expect(results.length).toBeGreaterThan(0);
+    expect(results[0].name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().startsWith('kan')).toBe(true);
+  });
+
+  it('matches diacritics-insensitively and carries table metadata', () => {
+    const results = searchEraNames('kangxi', [JAPANESE, CHINESE]);
+    expect(results[0].name).toBe('Kāngxī');
+    expect(results[0].tableId).toBe('chinese');
+    expect(results[0].dynasty).toBe('Qing');
+  });
+
+  it('returns empty for empty queries and respects the limit', () => {
+    expect(searchEraNames('', [JAPANESE, CHINESE])).toEqual([]);
+    expect(searchEraNames('a', [JAPANESE, CHINESE], 3).length).toBeLessThanOrEqual(3);
+  });
+});
+
+describe('Era year text parsing', () => {
+  it('splits name and trailing year', () => {
+    expect(parseEraYearText('Meiji 33')).toEqual({ namePart: 'Meiji', eraYear: 33 });
+    expect(parseEraYearText('Zhìyuán (Kublai) 16')).toEqual({ namePart: 'Zhìyuán (Kublai)', eraYear: 16 });
+    expect(parseEraYearText('  Kāngxī, 39 ')).toEqual({ namePart: 'Kāngxī', eraYear: 39 });
+  });
+
+  it('returns null year for partial input', () => {
+    expect(parseEraYearText('Meiji')).toEqual({ namePart: 'Meiji', eraYear: null });
+    expect(parseEraYearText('33')).toEqual({ namePart: '33', eraYear: null });
   });
 });
