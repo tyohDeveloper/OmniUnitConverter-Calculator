@@ -2,5 +2,5 @@
   "rawBytes": 1389249,
   "gzipBytes": 471370,
   "recordedAt": "2026-07-20",
-  "note": "Task 116 re-baseline: bundle had already grown past the old ceiling before this task started, due to recently merged translation backfill (non-en entries survive build-time pruning). This task itself shrank the bundle by removing 122 confirmed-dead unit-name keys from all 12 locale files and added a json-integrity guard against future orphaned en.json keys. Baseline recorded at 460.3 kB gzip; ceiling (x1.05) gives ~23 kB headroom."
+  "note": "Task 116 re-baseline at 460.3 kB gzip; ceiling (x1.05) gives ~23 kB headroom. Task 118 audit (2026-07-20) confirmed the ~26 kB growth over the 434.3 kB baseline is legitimate: the translation backfill added ~24.6 kB of gzipped post-prune unit-name data across the 10 non-English locales (~1.4-1.7 kB each), Task 116's dead-key removal then clawed back ~9 kB. No orphan keys, no duplicated payload, no unpruned assets found; only ~25 case-only entries survive pruning and those reflect intentional language capitalization style (German noun caps, French lowercase). Nothing trimmable."
 }
