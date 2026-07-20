@@ -48,6 +48,7 @@ const ERA_TABLES_BY_REGION: Record<string, EraTable[]> = {
 
 interface EraPaneProps {
   t: (key: string) => string;
+  language: string;
 }
 
 function parseYearInput(text: string): number | null {
@@ -59,15 +60,26 @@ function parseYearInput(text: string): number | null {
 
 // Era-table values are lunisolar-year based: Japanese years before the 1873
 // Gregorian switch and all Chinese years carry the ±1 indicator.
-function eraTableDisplay(astro: number, table: EraTable, t: (k: string) => string): string {
+// When the UI language is ja/zh, era names show in native script (kanji/hanzi)
+// with the romanization in parentheses.
+function eraTableDisplay(
+  astro: number,
+  table: EraTable,
+  t: (k: string) => string,
+  nativeScript: boolean,
+): string {
   const hit = lookupEraTable(astro, table);
   if (!hit) return '—';
   const fuzzy = table.id === 'japanese' ? astro < 1873 : true;
   const dynasty = hit.dynasty ? ` · ${hit.dynasty}` : '';
-  return `${hit.eraName} ${hit.eraYear}${fuzzy ? ' (±1)' : ''}${dynasty}`;
+  const name = nativeScript && hit.eraNative
+    ? `${hit.eraNative} (${hit.eraName})`
+    : hit.eraName;
+  return `${name} ${hit.eraYear}${fuzzy ? ' (±1)' : ''}${dynasty}`;
 }
 
-export function EraPane({ t }: EraPaneProps) {
+export function EraPane({ t, language }: EraPaneProps) {
+  const nativeScript = language === 'ja' || language === 'zh';
   const [yearText, setYearText] = useState('2026');
   const [schemeId, setSchemeId] = useState('gregorian');
   const [bce, setBce] = useState(false);
@@ -147,6 +159,7 @@ export function EraPane({ t }: EraPaneProps) {
         <EraNameLookup
           t={t}
           tables={[JAPANESE_ERAS, CHINESE_ERAS]}
+          nativeScript={nativeScript}
           onApply={(a) => {
             setSchemeId('gregorian');
             setBce(a <= 0);
@@ -204,7 +217,7 @@ export function EraPane({ t }: EraPaneProps) {
                           </a>
                         </td>
                         <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${table.id}`)}>
-                          {eraTableDisplay(astro, table, t)}
+                          {eraTableDisplay(astro, table, t, nativeScript)}
                         </td>
                         <td className="py-1.5 text-xs text-muted-foreground">{table.note ? t(table.note) : ''}</td>
                       </tr>

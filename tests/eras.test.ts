@@ -159,17 +159,17 @@ describe('Hijri tabular calendar (exact arithmetic)', () => {
 
 describe('Japanese era-table lookup (generic piecewise)', () => {
   it('boundary years map to the era starting that year', () => {
-    expect(lookupEraTable(1868, JAPANESE)).toEqual({ eraName: 'Meiji', eraYear: 1 });
-    expect(lookupEraTable(1912, JAPANESE)).toEqual({ eraName: 'Taishō', eraYear: 1 });
-    expect(lookupEraTable(1926, JAPANESE)).toEqual({ eraName: 'Shōwa', eraYear: 1 });
-    expect(lookupEraTable(1989, JAPANESE)).toEqual({ eraName: 'Heisei', eraYear: 1 });
-    expect(lookupEraTable(2019, JAPANESE)).toEqual({ eraName: 'Reiwa', eraYear: 1 });
+    expect(lookupEraTable(1868, JAPANESE)).toMatchObject({ eraName: 'Meiji', eraYear: 1 });
+    expect(lookupEraTable(1912, JAPANESE)).toMatchObject({ eraName: 'Taishō', eraYear: 1 });
+    expect(lookupEraTable(1926, JAPANESE)).toMatchObject({ eraName: 'Shōwa', eraYear: 1 });
+    expect(lookupEraTable(1989, JAPANESE)).toMatchObject({ eraName: 'Heisei', eraYear: 1 });
+    expect(lookupEraTable(2019, JAPANESE)).toMatchObject({ eraName: 'Reiwa', eraYear: 1 });
   });
 
   it('mid-era years count from the era start (start = year 1)', () => {
-    expect(lookupEraTable(1911, JAPANESE)).toEqual({ eraName: 'Meiji', eraYear: 44 });
-    expect(lookupEraTable(1988, JAPANESE)).toEqual({ eraName: 'Shōwa', eraYear: 63 });
-    expect(lookupEraTable(2026, JAPANESE)).toEqual({ eraName: 'Reiwa', eraYear: 8 });
+    expect(lookupEraTable(1911, JAPANESE)).toMatchObject({ eraName: 'Meiji', eraYear: 44 });
+    expect(lookupEraTable(1988, JAPANESE)).toMatchObject({ eraName: 'Shōwa', eraYear: 63 });
+    expect(lookupEraTable(2026, JAPANESE)).toMatchObject({ eraName: 'Reiwa', eraYear: 8 });
   });
 
   it('years before the first era return null', () => {
@@ -193,6 +193,20 @@ describe('Japanese era-table lookup (generic piecewise)', () => {
     expect(lookupEraTable(210, table)).toEqual({ eraName: 'Beta', eraYear: 11 });
     expect(lookupEraTable(300, table)?.eraName).toBe('Beta');
     expect(lookupEraTable(301, table)).toBeNull();
+  });
+
+  it('surfaces the native-script form when the table entry carries one', () => {
+    expect(lookupEraTable(1868, JAPANESE)?.eraNative).toBe('明治');
+    expect(lookupEraTable(2026, JAPANESE)?.eraNative).toBe('令和');
+    expect(lookupEraTable(1700, CHINESE)?.eraNative).toBe('康熙');
+  });
+
+  it('every Japanese and Chinese era entry has a CJK native form', () => {
+    for (const table of [JAPANESE, CHINESE]) {
+      for (const era of table.eras) {
+        expect(era.native, `${table.id}: ${era.name}`).toMatch(/^[\u3400-\u9FFF]+$/);
+      }
+    }
   });
 });
 

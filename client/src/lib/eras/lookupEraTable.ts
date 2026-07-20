@@ -7,7 +7,7 @@ import type { EraTable, EraTableEntry } from './types';
 export function lookupEraTable(
   astro: number,
   table: EraTable,
-): { eraName: string; eraYear: number; dynasty?: string } | null {
+): { eraName: string; eraNative?: string; eraYear: number; dynasty?: string } | null {
   if (table.end !== undefined && astro > table.end) return null;
   let match: EraTableEntry | null = null;
   for (const era of table.eras) {
@@ -15,5 +15,10 @@ export function lookupEraTable(
   }
   if (!match) return null;
   const origin = match.epoch ?? match.start;
-  return { eraName: match.name, eraYear: astro - origin + 1, dynasty: match.dynasty };
+  return {
+    eraName: match.name,
+    eraNative: match.native,
+    eraYear: astro - origin + 1,
+    dynasty: match.dynasty,
+  };
 }

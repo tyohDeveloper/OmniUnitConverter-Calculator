@@ -20,6 +20,8 @@ export interface EraScheme {
 
 export interface EraTableEntry {
   name: string;
+  // Native-script form (kanji/hanzi), shown when the UI language is ja/zh.
+  native?: string;
   start: number;
   // Year-counting origin when it differs from the lookup boundary `start`
   // (e.g. Yuan "Zhiyuan" counted from 1264 but only orthodox from 1279).

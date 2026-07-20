@@ -502,7 +502,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
           />
         </div>
 
-        {activeTab === 'eras' && <EraPane t={t} />}
+        {activeTab === 'eras' && <EraPane t={t} language={language} />}
 
         <div className={activeTab === 'eras' ? 'hidden' : undefined}>
         <CalculatorPane

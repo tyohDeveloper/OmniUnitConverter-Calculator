@@ -3,6 +3,7 @@ import { normalizeEraName } from './normalizeEraName';
 
 export interface EraNameSuggestion {
   name: string;
+  native?: string;
   tableId: string;
   tableName: string;
   dynasty?: string;
@@ -24,7 +25,7 @@ export function searchEraNames(
     for (const era of table.eras) {
       const norm = normalizeEraName(era.name);
       const item = {
-        name: era.name, tableId: table.id, tableName: table.name,
+        name: era.name, native: era.native, tableId: table.id, tableName: table.name,
         dynasty: era.dynasty, start: era.start,
       };
       if (norm.startsWith(q)) prefix.push(item);

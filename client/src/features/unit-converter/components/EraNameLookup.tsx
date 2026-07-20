@@ -14,9 +14,11 @@ interface EraNameLookupProps {
   t: (key: string) => string;
   tables: EraTable[];
   onApply: (astro: number) => void;
+  // Show era names in native script (kanji/hanzi) when the UI language is ja/zh.
+  nativeScript?: boolean;
 }
 
-export function EraNameLookup({ t, tables, onApply }: EraNameLookupProps) {
+export function EraNameLookup({ t, tables, onApply, nativeScript }: EraNameLookupProps) {
   const [text, setText] = useState('');
   const [focused, setFocused] = useState(false);
 
@@ -62,7 +64,7 @@ export function EraNameLookup({ t, tables, onApply }: EraNameLookupProps) {
         {display && astro !== null && (
           <>
             <p className="text-sm font-mono text-muted-foreground" {...testId('text-era-lookup-result')}>
-              {exact!.entry.name} {eraYear} = {display.year} {t(display.era)}{fuzzy ? ' (±1)' : ''}
+              {nativeScript && exact!.entry.native ? `${exact!.entry.native} (${exact!.entry.name})` : exact!.entry.name} {eraYear} = {display.year} {t(display.era)}{fuzzy ? ' (±1)' : ''}
             </p>
             <Button
               size="sm" variant="secondary"
@@ -100,7 +102,7 @@ export function EraNameLookup({ t, tables, onApply }: EraNameLookupProps) {
                 }}
                 {...testId(`option-era-lookup-${s.tableId}-${normalizeEraName(s.name).replace(/\W+/g, '-')}`)}
               >
-                <span className="font-medium">{s.name}</span>
+                <span className="font-medium">{nativeScript && s.native ? `${s.native} (${s.name})` : s.name}</span>
                 <span className="text-xs text-muted-foreground ms-2">
                   {s.dynasty ?? t(s.tableName)} · {s.start < 1 ? `${1 - s.start} ${t('BCE')}` : `${s.start} ${t('CE')}`}
                 </span>
