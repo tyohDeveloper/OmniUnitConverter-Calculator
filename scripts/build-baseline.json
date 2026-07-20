@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1514366,
-  "gzipBytes": 505692,
+  "rawBytes": 1605994,
+  "gzipBytes": 530905,
   "recordedAt": "2026-07-20",
-  "note": "Task 135 re-baseline at 493.8 kB gzip. Growth since the Task 116 baseline (460.3 kB) audited: ~29 kB was already present on the untouched tree from merged upstream data tasks (regional era tables, Hijri date converter, historical-period expansions); this task adds ~4.2 kB of legitimate data (22 new civilizations in historicalPeriods.json plus ~37 new UI keys across 11 locales). No orphan keys or duplicated payloads introduced."
+  "note": "Task 149 re-baseline at 518.5 kB gzip. Growth since the Task 135 baseline (493.8 kB, gzipBytes 505692) is +24.6 kB: this task extends romanConsuls.json from 100 BCE back to 509 BCE (~409 new per-year entries, ~25 kB of legitimate reference data; decemvirate/anarchy/dictator/consular-tribune years use shared descriptive strings). No orphan keys or duplicated payloads introduced."
 }

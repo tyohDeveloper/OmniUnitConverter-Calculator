@@ -654,8 +654,29 @@ describe('Roman consular dating', () => {
     expect(lookupRomanConsuls(-42, CONSULS)).toBe('Gaius Vibius Pansa & Aulus Hirtius');
   });
 
+  it('resolves Republican consulships back to 509 BCE', () => {
+    // 216 BCE (Cannae) = astro -215; 205 BCE = astro -204
+    expect(lookupRomanConsuls(-215, CONSULS)).toBe('Lucius Aemilius Paullus (II) & Gaius Terentius Varro');
+    expect(lookupRomanConsuls(-204, CONSULS)).toBe('Publius Cornelius Scipio (Africanus) & Publius Licinius Crassus Dives');
+    // 509 BCE (first consuls) = astro -508
+    expect(lookupRomanConsuls(-508, CONSULS)).toBe('Lucius Junius Brutus & Lucius Tarquinius Collatinus');
+    // 195 BCE = astro -194 (Cato the Elder)
+    expect(lookupRomanConsuls(-194, CONSULS)).toBe('Marcus Porcius Cato & Lucius Valerius Flaccus');
+    // 101 BCE = astro -100, adjacent to the previously existing start
+    expect(lookupRomanConsuls(-100, CONSULS)).toBe('Gaius Marius (V) & Manius Aquillius');
+  });
+
+  it('uses descriptive entries for irregular years', () => {
+    // 451 BCE decemvirate; 373 BCE anarchy; 309 BCE dictator year
+    expect(lookupRomanConsuls(-450, CONSULS)).toContain('Decemvirate');
+    expect(lookupRomanConsuls(-372, CONSULS)).toContain('Anarchy');
+    expect(lookupRomanConsuls(-308, CONSULS)).toContain('Dictator year');
+    // 426 BCE consular tribunes
+    expect(lookupRomanConsuls(-425, CONSULS)).toContain('consular power');
+  });
+
   it('covers the range boundaries', () => {
-    expect(lookupRomanConsuls(CONSULS.start, CONSULS)).toBe('Gaius Marius (VI) & Lucius Valerius Flaccus');
+    expect(lookupRomanConsuls(CONSULS.start, CONSULS)).toBe('Lucius Junius Brutus & Lucius Tarquinius Collatinus');
     expect(lookupRomanConsuls(CONSULS.end, CONSULS)).toBe('Sextus Pompeius & Sextus Appuleius');
   });
 
