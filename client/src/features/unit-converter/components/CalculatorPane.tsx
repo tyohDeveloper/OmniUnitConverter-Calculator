@@ -22,6 +22,7 @@ import {
   RpnBtnWidth, CALC_CONTENT_HEIGHT
 } from '@/components/unit-converter/constants';
 import type { UseCalculatorControllerReturn, RpnUnaryOp, RpnBinaryOp } from '@/components/unit-converter/hooks/useCalculatorController';
+import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 
 export interface CalculatorFlash {
   calcField1: boolean;
@@ -89,6 +90,15 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
   // Text already committed via Enter (RPN section only). Used so a subsequent
   // blur doesn't double-commit the same value. Cleared on any edit.
   const committedXTextRef = useRef<string | null>(null);
+  // Set when Enter just committed in locked RPN mode. If the browser (notably
+  // iOS WebKit's Done key) fires a blur right after, we must NOT exit edit
+  // mode — the input needs to stay mounted so focus can be restored.
+  const enterCommitKeepFocusRef = useRef(false);
+
+  // Refs to the primary entry fields on the Converter/Custom tabs, used to
+  // hand focus back after an Enter-commit in the sub-calculator X register.
+  const { state: appState, inputRef: converterInputRef, customValueInputRef } = useConverterContext();
+  const activeTab = appState.uiPrefs.activeTab;
 
   // Commit the current X edit value into the X register. Returns true if a
   // commit happened. Metadata is computed from the freshly parsed text (not
@@ -879,6 +889,10 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
                     // prefix/alt selectors — the selector interaction clears this flag
                     // and restores focus to the input.
                     if (suppressXBlurRef.current) return;
+                    // Enter just committed in locked RPN mode: keep edit mode
+                    // alive (iOS WebKit's Done key blurs before we can refocus;
+                    // exiting here would unmount the input).
+                    if (enterCommitKeepFocusRef.current) return;
                     // Skip commit if Enter already committed this exact text.
                     if (rpnXEditValue !== committedXTextRef.current) {
                       commitRpnXValue();
@@ -893,13 +907,35 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
                         // Dedicated RPN section: commit but keep the input
                         // focused and editable, with the text selected so the
                         // next keystrokes replace it.
+                        e.preventDefault();
                         if (rpnXEditValue !== committedXTextRef.current) {
                           commitRpnXValue();
                           committedXTextRef.current = rpnXEditValue;
                         }
-                        requestAnimationFrame(() => rpnXInputRef.current?.select());
+                        // Guard against the native blur (iOS WebKit Done key)
+                        // unmounting the input before we can refocus it.
+                        enterCommitKeepFocusRef.current = true;
+                        requestAnimationFrame(() => {
+                          const input = rpnXInputRef.current;
+                          if (input) {
+                            input.focus();
+                            input.select();
+                          }
+                          enterCommitKeepFocusRef.current = false;
+                        });
                       } else {
+                        // Converter/Custom tabs: commit via blur, then hand
+                        // focus to the primary entry field of the active tab.
+                        e.preventDefault();
                         e.currentTarget.blur();
+                        const target = activeTab === 'custom' ? customValueInputRef : converterInputRef;
+                        requestAnimationFrame(() => {
+                          const input = target.current;
+                          if (input) {
+                            input.focus();
+                            input.select();
+                          }
+                        });
                       }
                     } else if (e.key === 'Escape') {
                       committedXTextRef.current = null;

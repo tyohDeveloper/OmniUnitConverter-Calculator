@@ -11,6 +11,7 @@ import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/cons
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import type { NumberFormat } from '@/lib/formatting';
 import { getMatchingPhysicalQuantities } from '@/lib/units/categoryDimensions';
+import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 
 interface DirectPaneProps {
   activeTab: string;
@@ -49,6 +50,7 @@ export function DirectPane({
   onCopyAndPushToCalculator,
   onQuantityClick,
 }: DirectPaneProps) {
+  const { customValueInputRef } = useConverterContext();
   const clearExponents = () => setDirectExponents({
     m: 0, kg: 0, s: 0, A: 0, K: 0, mol: 0, cd: 0, rad: 0, sr: 0
   });
@@ -100,6 +102,7 @@ export function DirectPane({
           <div className="flex flex-col gap-2">
             <Label className="text-xs font-mono uppercase text-muted-foreground">{t('Value')}</Label>
             <Input
+              ref={customValueInputRef}
               type="text"
               inputMode="text"
               value={directValue}

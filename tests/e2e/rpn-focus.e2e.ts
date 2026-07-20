@@ -59,7 +59,8 @@ test.describe('RPN X register focus behavior', () => {
     await fromInput.fill('123');
     await expect(fromInput).toBeFocused();
 
-    // Editing X requires an explicit click; Enter there blurs back to display.
+    // Editing X requires an explicit click; Enter commits and hands focus
+    // back to the FROM value input.
     const xField = page.getByTestId('rpn-x-field');
     if (await xField.count()) {
       await xField.click();
@@ -68,10 +69,11 @@ test.describe('RPN X register focus behavior', () => {
       await xInput.fill('9');
       await xInput.press('Enter');
       await expect(page.getByTestId('rpn-x-input')).toHaveCount(0);
+      await expect(fromInput).toBeFocused();
     }
   });
 
-  test('Custom section: X register requires explicit click before typing', async ({ page }) => {
+  test('Custom section: X register requires explicit click; Enter focuses VALUE input', async ({ page }) => {
     await page.getByTestId('tab-custom').click();
     await expect(page.getByTestId('rpn-x-input')).toHaveCount(0);
     const xField = page.getByTestId('rpn-x-field');
@@ -79,7 +81,15 @@ test.describe('RPN X register focus behavior', () => {
       await xField.click();
       const xInput = page.getByTestId('rpn-x-input');
       await expect(xInput).toBeFocused();
-      await xInput.press('Escape');
+      await xInput.fill('4');
+      await xInput.press('Enter');
+      await expect(page.getByTestId('rpn-x-input')).toHaveCount(0);
+      await expect(page.getByTestId('custom-input-value')).toBeFocused();
+
+      // Escape still exits edit mode without committing.
+      await xField.click();
+      await expect(page.getByTestId('rpn-x-input')).toBeFocused();
+      await page.getByTestId('rpn-x-input').press('Escape');
       await expect(page.getByTestId('rpn-x-input')).toHaveCount(0);
     }
   });

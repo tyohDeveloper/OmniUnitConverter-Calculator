@@ -24,6 +24,7 @@ export interface ConverterContextValue {
   dispatch: React.Dispatch<AppAction>;
   flash: FlashFlags;
   inputRef: React.RefObject<HTMLInputElement | null>;
+  customValueInputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 const ConverterContext = createContext<ConverterContextValue | null>(null);
@@ -72,12 +73,14 @@ export function ConverterProvider({ children }: ConverterProviderProps) {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const flash = useAllFlashFlags(FLASH_DURATION_MS);
   const inputRef = useRef<HTMLInputElement>(null);
+  const customValueInputRef = useRef<HTMLInputElement>(null);
 
   const value: ConverterContextValue = {
     state,
     dispatch,
     flash,
     inputRef,
+    customValueInputRef,
   };
 
   return (

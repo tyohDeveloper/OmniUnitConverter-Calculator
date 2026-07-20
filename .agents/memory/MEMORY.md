@@ -3,4 +3,5 @@
 - [Conversion function registry](conversion-function-registry.md) — non-factor conversions go through a named code-side registry; JSON references by name, factor must stay in sync for linear pairs.
 - [Sources notation conventions](sources-notation-conventions.md) — user rejected superscript fraction exponents (10⁽ˣ⁄¹⁰⁾); keep caret form 10^(x/10), superscripts only for single-char exponents.
 - [Unit translation key hygiene](translation-key-hygiene.md) — en.json keys must match current unit/category names or a documented allowlist; guard test in json-integrity enforces it.
+- [Playwright e2e chromium](playwright-e2e-chromium.md) — downloaded browsers fail on NixOS; run with PW_CHROMIUM_PATH=$(which chromium).
 - [Thai official source citations](thai-source-citations.md) — ditp.go.th PDF of W&M Act B.E. 2542 is reachable (needs browser UA); no Thai law defines the 15.244 g baht, so baht keeps Wikipedia.
