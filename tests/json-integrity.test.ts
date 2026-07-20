@@ -211,6 +211,47 @@ describe('JSON Integrity: cross-file consistency', () => {
     expect(checkedCount).toBeGreaterThan(50);
   });
 
+  it('every unit name has a non-empty entry in every locale', () => {
+    for (const lang of SUPPORTED_LANGUAGES) {
+      const map = UNIT_NAME_TRANSLATIONS[lang];
+      expect(map, `locale map missing for "${lang}"`).toBeDefined();
+      for (const cat of CONVERSION_DATA) {
+        for (const unit of cat.units) {
+          const val = map[unit.name];
+          expect(val, `"${unit.name}" (${cat.id}) missing in locale "${lang}"`).toBeTruthy();
+        }
+      }
+    }
+  });
+
+  it('no locale contains keys absent from en.json (no orphaned drift)', () => {
+    const enKeys = new Set(Object.keys(UNIT_NAME_TRANSLATIONS['en']));
+    for (const lang of SUPPORTED_LANGUAGES) {
+      if (lang === 'en') continue;
+      for (const key of Object.keys(UNIT_NAME_TRANSLATIONS[lang])) {
+        expect(enKeys.has(key), `orphaned key "${key}" in locale "${lang}" not present in en.json`).toBe(true);
+      }
+    }
+  });
+
+  it('stale renamed keys are fully removed from all locales', () => {
+    const removed = ['Long Ton (UK)', 'Stone (UK)', 'Dan (China volume)', 'Dunam', 'Ton Refrigeration'];
+    for (const lang of SUPPORTED_LANGUAGES) {
+      for (const key of removed) {
+        expect(UNIT_NAME_TRANSLATIONS[lang][key], `stale key "${key}" still present in "${lang}"`).toBeUndefined();
+      }
+    }
+  });
+
+  it('BTU naming policy: BTU everywhere except zh/ru/ar native terms', () => {
+    expect(UNIT_NAME_TRANSLATIONS['zh']['BTU']).toBe('英热单位');
+    expect(UNIT_NAME_TRANSLATIONS['ru']['BTU']).toBe('БТЕ');
+    expect(UNIT_NAME_TRANSLATIONS['ar']['BTU']).toBe('وحدة حرارية بريطانية');
+    for (const lang of ['en', 'en-us', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pt'] as const) {
+      expect(UNIT_NAME_TRANSLATIONS[lang]['BTU'], `BTU wrong in "${lang}"`).toBe('BTU');
+    }
+  });
+
   it('SUPPORTED_LANGUAGES covers all languages used in translations', () => {
     const langSet = new Set(SUPPORTED_LANGUAGES);
     for (const lang of REQUIRED_LANGUAGES) {
