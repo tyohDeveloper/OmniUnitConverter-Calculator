@@ -612,6 +612,20 @@ describe('Era name autocomplete search', () => {
     expect(results[0].dynasty).toBe('Qing');
   });
 
+  it('matches native kanji/hanzi era names', () => {
+    const meiji = searchEraNames('明治', [JAPANESE, CHINESE]);
+    expect(meiji[0].name).toBe('Meiji');
+    const kangxi = searchEraNames('康熙', [JAPANESE, CHINESE]);
+    expect(kangxi[0].name).toBe('Kāngxī');
+    expect(kangxi[0].tableId).toBe('chinese');
+  });
+
+  it('matches a single-character native prefix', () => {
+    const results = searchEraNames('明', [JAPANESE, CHINESE]);
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.some(r => r.native?.startsWith('明'))).toBe(true);
+  });
+
   it('returns empty for empty queries and respects the limit', () => {
     expect(searchEraNames('', [JAPANESE, CHINESE])).toEqual([]);
     expect(searchEraNames('a', [JAPANESE, CHINESE], 3).length).toBeLessThanOrEqual(3);

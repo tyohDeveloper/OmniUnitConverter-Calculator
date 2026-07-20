@@ -24,12 +24,13 @@ export function searchEraNames(
   for (const table of tables) {
     for (const era of table.eras) {
       const norm = normalizeEraName(era.name);
+      const native = era.native ? normalizeEraName(era.native) : '';
       const item = {
         name: era.name, native: era.native, tableId: table.id, tableName: table.name,
         dynasty: era.dynasty, start: era.start,
       };
-      if (norm.startsWith(q)) prefix.push(item);
-      else if (norm.includes(q)) substring.push(item);
+      if (norm.startsWith(q) || (native && native.startsWith(q))) prefix.push(item);
+      else if (norm.includes(q) || (native && native.includes(q))) substring.push(item);
     }
   }
   return [...prefix, ...substring].slice(0, limit);

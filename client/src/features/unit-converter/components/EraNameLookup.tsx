@@ -27,15 +27,20 @@ export function EraNameLookup({ t, tables, onApply, nativeScript }: EraNameLooku
     const wanted = normalizeEraName(namePart);
     if (!wanted) return null;
     for (const table of tables) {
-      const entry = table.eras.find(e => normalizeEraName(e.name) === wanted);
+      const entry = table.eras.find(e =>
+        normalizeEraName(e.name) === wanted
+        || (e.native !== undefined && normalizeEraName(e.native) === wanted));
       if (entry) return { entry, table };
     }
     return null;
   }, [namePart, tables]);
 
+  // Native-script (kanji/hanzi) era names are only 2 chars, so a single
+  // CJK character is already a meaningful prefix; Latin input needs 2+.
+  const minLen = /[\u3040-\u30ff\u3400-\u9fff]/.test(namePart) ? 1 : 2;
   const suggestions = useMemo(
-    () => (exact || namePart.length < 2 ? [] : searchEraNames(namePart, tables)),
-    [namePart, exact, tables],
+    () => (exact || namePart.length < minLen ? [] : searchEraNames(namePart, tables)),
+    [namePart, exact, tables, minLen],
   );
 
   const astro = exact && eraYear !== null
