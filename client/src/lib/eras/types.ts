@@ -40,6 +40,19 @@ export interface EraTable {
   eras: EraTableEntry[];
 }
 
+// Per-year eponym table (e.g. Roman consular dating): one entry per year,
+// indexed from `start` (astronomical CE) through `end` inclusive.
+export interface YearTable {
+  id: string;
+  name: string;
+  note?: string;
+  region: EraRegion;
+  start: number;
+  end: number;
+  sourceUrl: string;
+  consuls: string[];
+}
+
 export interface HistoricalPeriod {
   name: string;
   start: number;

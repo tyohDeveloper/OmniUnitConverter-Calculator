@@ -9,18 +9,21 @@ import { reverseLookupEraTable } from '../client/src/lib/eras/reverseLookupEraTa
 import { searchEraNames } from '../client/src/lib/eras/searchEraNames';
 import { parseEraYearText } from '../client/src/lib/eras/parseEraYearText';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
+import { lookupRomanConsuls } from '../client/src/lib/eras/lookupRomanConsuls';
 import { hijriTabular } from '../client/src/lib/eras/hijriTabular';
 import { gregorianToJdn } from '../client/src/lib/eras/gregorianToJdn';
 import { jdnToGregorian } from '../client/src/lib/eras/jdnToGregorian';
 import { hijriToJdn } from '../client/src/lib/eras/hijriToJdn';
 import { jdnToHijri } from '../client/src/lib/eras/jdnToHijri';
-import type { EraTable, Civilization } from '../client/src/lib/eras/types';
+import type { EraTable, YearTable, Civilization } from '../client/src/lib/eras/types';
 import japaneseErasJson from '../client/src/data/eras/japaneseEras.json';
 import chineseErasJson from '../client/src/data/eras/chineseEras.json';
+import romanConsulsJson from '../client/src/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '../client/src/data/eras/historicalPeriods.json';
 
 const JAPANESE = japaneseErasJson as EraTable;
 const CHINESE = chineseErasJson as EraTable;
+const CONSULS = romanConsulsJson as YearTable;
 const CIVS = historicalPeriodsJson.civilizations as Civilization[];
 
 const scheme = (id: string) => {
@@ -548,5 +551,32 @@ describe('Era year text parsing', () => {
   it('returns null year for partial input', () => {
     expect(parseEraYearText('Meiji')).toEqual({ namePart: 'Meiji', eraYear: null });
     expect(parseEraYearText('33')).toEqual({ namePart: '33', eraYear: null });
+  });
+});
+
+describe('Roman consular dating', () => {
+  it('resolves famous consulships (astronomical years)', () => {
+    // 59 BCE = astro -58; 63 BCE = astro -62
+    expect(lookupRomanConsuls(-58, CONSULS)).toBe('Gaius Julius Caesar & Marcus Calpurnius Bibulus');
+    expect(lookupRomanConsuls(-62, CONSULS)).toBe('Marcus Tullius Cicero & Gaius Antonius Hybrida');
+    expect(lookupRomanConsuls(-69, CONSULS)).toBe('Gnaeus Pompeius Magnus & Marcus Licinius Crassus');
+    expect(lookupRomanConsuls(-42, CONSULS)).toBe('Gaius Vibius Pansa & Aulus Hirtius');
+  });
+
+  it('covers the range boundaries', () => {
+    expect(lookupRomanConsuls(CONSULS.start, CONSULS)).toBe('Gaius Marius (VI) & Lucius Valerius Flaccus');
+    expect(lookupRomanConsuls(CONSULS.end, CONSULS)).toBe('Sextus Pompeius & Sextus Appuleius');
+  });
+
+  it('returns null outside the attested range and for non-integers', () => {
+    expect(lookupRomanConsuls(CONSULS.start - 1, CONSULS)).toBeNull();
+    expect(lookupRomanConsuls(CONSULS.end + 1, CONSULS)).toBeNull();
+    expect(lookupRomanConsuls(2026, CONSULS)).toBeNull();
+    expect(lookupRomanConsuls(-58.5, CONSULS)).toBeNull();
+  });
+
+  it('has exactly one entry per year in range', () => {
+    expect(CONSULS.consuls.length).toBe(CONSULS.end - CONSULS.start + 1);
+    for (const entry of CONSULS.consuls) expect(entry.trim().length).toBeGreaterThan(0);
   });
 });

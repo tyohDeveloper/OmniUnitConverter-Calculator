@@ -10,15 +10,18 @@ import { fromAstronomicalYear } from '@/lib/eras/fromAstronomicalYear';
 import { formatAstronomicalYear } from '@/lib/eras/formatAstronomicalYear';
 import { lookupEraTable } from '@/lib/eras/lookupEraTable';
 import { lookupPeriods } from '@/lib/eras/lookupPeriods';
-import type { EraRegion, EraTable, Civilization, PeriodRegion } from '@/lib/eras/types';
+import { lookupRomanConsuls } from '@/lib/eras/lookupRomanConsuls';
+import type { EraRegion, EraTable, YearTable, Civilization, PeriodRegion } from '@/lib/eras/types';
 import japaneseErasJson from '@/data/eras/japaneseEras.json';
 import chineseErasJson from '@/data/eras/chineseEras.json';
+import romanConsulsJson from '@/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
 import { HijriDateCard } from './HijriDateCard';
 import { EraNameLookup } from './EraNameLookup';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
 const CHINESE_ERAS = chineseErasJson as EraTable;
+const ROMAN_CONSULS = romanConsulsJson as YearTable;
 const CIVILIZATIONS = historicalPeriodsJson.civilizations as Civilization[];
 
 // Ordered regional sections; base offset schemes (Global/Modern) stay first.
@@ -44,6 +47,11 @@ const PERIOD_REGIONS: { id: PeriodRegion; label: string }[] = [
 const ERA_TABLES_BY_REGION: Record<string, EraTable[]> = {
   east_asia_japan: [JAPANESE_ERAS],
   east_asia_china: [CHINESE_ERAS],
+};
+
+// Per-year eponym tables (one entry per year, not multi-year eras).
+const YEAR_TABLES_BY_REGION: Record<string, YearTable[]> = {
+  europe: [ROMAN_CONSULS],
 };
 
 interface EraPaneProps {
@@ -184,7 +192,8 @@ export function EraPane({ t, language }: EraPaneProps) {
               {ERA_REGIONS.map(region => {
                 const schemes = ERA_SCHEMES.filter(s => s.region === region.id);
                 const tables = ERA_TABLES_BY_REGION[region.id] ?? [];
-                if (schemes.length === 0 && tables.length === 0) return null;
+                const yearTables = YEAR_TABLES_BY_REGION[region.id] ?? [];
+                if (schemes.length === 0 && tables.length === 0 && yearTables.length === 0) return null;
                 return (
                   <React.Fragment key={region.id}>
                     <tr className="border-b border-border/30" {...testId(`section-era-${region.id}`)}>
@@ -218,6 +227,19 @@ export function EraPane({ t, language }: EraPaneProps) {
                         </td>
                         <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${table.id}`)}>
                           {eraTableDisplay(astro, table, t, nativeScript)}
+                        </td>
+                        <td className="py-1.5 text-xs text-muted-foreground">{table.note ? t(table.note) : ''}</td>
+                      </tr>
+                    ))}
+                    {yearTables.map(table => (
+                      <tr key={table.id} className="border-b border-border/30" {...testId(`row-era-${table.id}`)}>
+                        <td className="py-1.5 pe-4">
+                          <a href={table.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent underline decoration-dotted underline-offset-2">
+                            {t(table.name)}
+                          </a>
+                        </td>
+                        <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${table.id}`)}>
+                          {lookupRomanConsuls(astro, table) ?? '—'}
                         </td>
                         <td className="py-1.5 text-xs text-muted-foreground">{table.note ? t(table.note) : ''}</td>
                       </tr>

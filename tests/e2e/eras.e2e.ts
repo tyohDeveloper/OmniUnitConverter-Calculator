@@ -25,6 +25,19 @@ test.describe('Dates/Eras tab', () => {
     await expect(auc).toContainText('±1');
   });
 
+  test('59 BCE shows the consulship of Caesar and Bibulus', async ({ page }) => {
+    await page.getByTestId('input-era-year').fill('59');
+    await page.getByTestId('select-era-ce-bce').click();
+    await page.getByRole('option', { name: 'BCE' }).click();
+    const consuls = page.getByTestId('text-era-value-roman-consuls');
+    await expect(consuls).toContainText('Gaius Julius Caesar & Marcus Calpurnius Bibulus');
+  });
+
+  test('Roman consuls show a dash outside the attested range', async ({ page }) => {
+    await expect(page.getByTestId('input-era-year')).toHaveValue('2026');
+    await expect(page.getByTestId('text-era-value-roman-consuls')).toHaveText('—');
+  });
+
   test('accepts negative astronomical year input directly', async ({ page }) => {
     await page.getByTestId('input-era-year').fill('-43');
     await expect(page.getByTestId('text-era-astro')).toContainText('44 BCE');
