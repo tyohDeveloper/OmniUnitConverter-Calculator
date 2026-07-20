@@ -666,7 +666,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `bakers-doz` | Baker's Dozen | Unitless Numbers | 1 | 13 |
 | `bp` | Basis Point | Unitless Numbers | 1 | 1e-4 |
 | `brace` | Brace | Unitless Numbers | 1 | 2 |
-| `caret` | Caret | Unitless Numbers | 1 | 0.0416666667 |
+| `caret` | Karat | Unitless Numbers | 1 | 0.0416666667 |
 | `couple` | Couple | Unitless Numbers | 1 | 2 |
 | `doz` | Dozen | Unitless Numbers | 1 | 12 |
 | `𝑒` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |

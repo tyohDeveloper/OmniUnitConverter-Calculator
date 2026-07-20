@@ -825,7 +825,7 @@ One section per measurement system or tradition.
 | `‰` | Permille | 0.001 1 |
 | `%` | Percent | 0.01 1 |
 | `abv` | Alcohol by Volume | 0.01 1 |
-| `caret` | Caret | 0.0416666667 1 |
+| `caret` | Karat | 0.0416666667 1 |
 | `fold` | Fold | 1 1 |
 | `φ` | Golden Ratio | 1.6180339887 1 |
 | `pair` | Pair | 2 1 |

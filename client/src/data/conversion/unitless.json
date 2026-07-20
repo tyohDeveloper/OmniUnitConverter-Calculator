@@ -94,8 +94,8 @@
     },
     {
       "id": "caret",
-      "name": "Caret",
-      "symbol": "caret",
+      "name": "Karat",
+      "symbol": "karat",
       "factor": 0.0416666667,
       "measurementSystem": "NONE",
       "sourceUrl": "https://en.wikipedia.org/wiki/Karat"
