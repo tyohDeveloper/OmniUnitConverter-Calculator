@@ -210,6 +210,24 @@ describe('Japanese nengō full table', () => {
     expect(lookupEraTable(750, JAPANESE)).toMatchObject({ eraName: 'Tenpyō-shōhō', eraYear: 2 });
   });
 
+  it('12th-lunar-month proclamations use the renamed lunar year (verified vs reference tables)', () => {
+    // Ten'en proclaimed 973-12-20 (Julian); Ten'en 2 = 974 in all concordances.
+    expect(lookupEraTable(973, JAPANESE)).toMatchObject({ eraName: "Ten'en", eraYear: 1 });
+    expect(lookupEraTable(974, JAPANESE)).toMatchObject({ eraName: "Ten'en", eraYear: 2 });
+    // Shōhō proclaimed Kan'ei 21/12/16 (Jan 1645 Gregorian); Shōhō 2 = 1645.
+    expect(lookupEraTable(1644, JAPANESE)).toMatchObject({ eraName: 'Shōhō', eraYear: 1 });
+    expect(lookupEraTable(1645, JAPANESE)).toMatchObject({ eraName: 'Shōhō', eraYear: 2 });
+  });
+
+  it('obscure-era spot anchors (systematic cross-check, July 2026)', () => {
+    expect(lookupEraTable(686, JAPANESE)).toMatchObject({ eraName: 'Shuchō', eraYear: 1 });
+    expect(lookupEraTable(848, JAPANESE)).toMatchObject({ eraName: 'Kajō', eraYear: 1 });
+    expect(lookupEraTable(1229, JAPANESE)).toMatchObject({ eraName: 'Kanki', eraYear: 1 });
+    expect(lookupEraTable(1213, JAPANESE)).toMatchObject({ eraName: 'Kenpō', eraYear: 1 });
+    expect(lookupEraTable(1394, JAPANESE)).toMatchObject({ eraName: 'Ōei', eraYear: 1 });
+    expect(lookupEraTable(1427, JAPANESE)).toMatchObject({ eraName: 'Ōei', eraYear: 34 });
+  });
+
   it('years before Taika return null', () => {
     expect(lookupEraTable(644, JAPANESE)).toBeNull();
   });
@@ -242,6 +260,25 @@ describe('Chinese niánhào orthodox table', () => {
     // Yuan absorbed the Song in 1279 = Zhìyuán 16 (proclaimed 1264).
     expect(lookupEraTable(1279, CHINESE)).toMatchObject({ eraName: 'Zhìyuán (Kublai)', eraYear: 16, dynasty: 'Yuan' });
     expect(lookupEraTable(1278, CHINESE)).toMatchObject({ eraName: 'Xiángxīng', eraYear: 1, dynasty: 'Southern Song' });
+  });
+
+  it('obscure-era spot anchors (systematic cross-check, July 2026)', () => {
+    // Zhānghé 章和 = 87–88 (Yuánhé 元和 ends 87; en-wiki table itself misprints Zhanghe's range).
+    expect(lookupEraTable(87, CHINESE)).toMatchObject({ eraName: 'Zhānghé', eraYear: 1 });
+    expect(lookupEraTable(86, CHINESE)).toMatchObject({ eraName: 'Yuánhé (Zhang)', eraYear: 3 });
+    // Tàishǐ 泰始 of Liu Song Emperor Ming proclaimed 12th lunar month of 465; Tàishǐ 2 = 466.
+    expect(lookupEraTable(465, CHINESE)).toMatchObject({ eraName: 'Tàishǐ (Ming)', eraYear: 1 });
+    expect(lookupEraTable(466, CHINESE)).toMatchObject({ eraName: 'Tàishǐ (Ming)', eraYear: 2 });
+    // Tàixīng 太興 (also romanized Dàxīng 大興), Eastern Jin, 318–321.
+    expect(lookupEraTable(318, CHINESE)).toMatchObject({ eraName: 'Tàixīng', eraYear: 1 });
+    // Tàihé 太和/大和 (Dàhé) of Tang Wenzong, 827–835.
+    expect(lookupEraTable(827, CHINESE)).toMatchObject({ eraName: 'Tàihé (Tang)', eraYear: 1 });
+    // Wu Zhou interregnum boundary checks.
+    expect(lookupEraTable(690, CHINESE)).toMatchObject({ eraName: 'Tiānshòu', eraYear: 1, dynasty: 'Wu Zhou' });
+    expect(lookupEraTable(705, CHINESE)).toMatchObject({ eraName: 'Shénlóng', eraYear: 1, dynasty: 'Tang' });
+    // Five Dynasties rapid turnover.
+    expect(lookupEraTable(947, CHINESE)).toMatchObject({ eraName: 'Tiānfú (Han)', eraYear: 1, dynasty: 'Later Han' });
+    expect(lookupEraTable(936, CHINESE)).toMatchObject({ eraName: 'Tiānfú (Jin)', eraYear: 1, dynasty: 'Later Jin' });
   });
 
   it('ends in 1912: later years return null', () => {
