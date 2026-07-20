@@ -11,7 +11,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Gal` | Gal | Acceleration | m⋅s⁻² | 0.01 |
 | `m⋅s⁻²` | Metre/sq sec | Acceleration | m⋅s⁻² | 1 |
 | `MRayl` | Megarayl | Acoustic Impedance | Pa⋅s⋅m⁻¹ | 1000000 |
-| `Pa⋅s⋅m⁻¹` | Pascal-second per Meter | Acoustic Impedance | Pa⋅s⋅m⁻¹ | 1 |
+| `Pa⋅s⋅m⁻¹` | Pascal-second per Metre | Acoustic Impedance | Pa⋅s⋅m⁻¹ | 1 |
 | `rayl` | Rayl | Acoustic Impedance | Pa⋅s⋅m⁻¹ | 1 |
 | `lb-mol` | Pound-mole | Amount of Substance | mol | 453.59237 |
 | `mol` | Mole | Amount of Substance | mol | 1 |
@@ -210,7 +210,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `‰` | Per Mille | Concentration | mol⋅L⁻¹ | 0.001 |
 | `g⋅L⁻¹` | Gram/Litre | Concentration | mol⋅L⁻¹ | 0.001 |
 | `mg⋅dL⁻¹` | Milligram/Decilitre | Concentration | mol⋅L⁻¹ | 1e-5 |
-| `mol⋅L⁻¹` | Mole/Liter | Concentration | mol⋅L⁻¹ | 1 |
+| `mol⋅L⁻¹` | Mole/Litre | Concentration | mol⋅L⁻¹ | 1 |
 | `mol⋅m⁻³` | Mole/m³ | Concentration | mol⋅L⁻¹ | 0.001 |
 | `pH` | pH | Concentration | mol⋅L⁻¹ | 0.1 |
 | `ppb` | Parts per Billion | Concentration | mol⋅L⁻¹ | 1e-9 |
@@ -243,8 +243,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `tsp (M)` | Teaspoon (Metric) | Cooking Measures | mL | 5 |
 | `tsp (US)` | Teaspoon (US) | Cooking Measures | mL | 4.92892 |
 | `b` | Barn | Cross-Section | m² | 1 |
-| `cm²` | Square Centimeter | Cross-Section | m² | 1e+24 |
-| `fm²` | Square Femtometer | Cross-Section | m² | 0.01 |
+| `cm²` | Square Centimetre | Cross-Section | m² | 1e+24 |
+| `fm²` | Square Femtometre | Cross-Section | m² | 0.01 |
 | `m²` | Square Metre | Cross-Section | m² | 1e+28 |
 | `B` | Byte | Data/Information | B | 1 |
 | `bit` | Bit | Data/Information | B | 0.125 |
@@ -270,11 +270,11 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `A` | Ampere | Electric Current | A | 1 |
 | `Bi` | Biot (abampere) | Electric Current | A | 10 |
 | `statA` | Statampere | Electric Current | A | 3.33564e-10 |
-| `kV⋅cm⁻¹` | Kilovolt per Centimeter | Electric Field Strength | V⋅m⁻¹ | 100000 |
-| `kV⋅m⁻¹` | Kilovolt per Meter | Electric Field Strength | V⋅m⁻¹ | 1000 |
-| `statV⋅cm⁻¹` | Statvolt per Centimeter | Electric Field Strength | V⋅m⁻¹ | 29979.2458 |
-| `V⋅cm⁻¹` | Volt per Centimeter | Electric Field Strength | V⋅m⁻¹ | 100 |
-| `V⋅m⁻¹` | Volt per Meter | Electric Field Strength | V⋅m⁻¹ | 1 |
+| `kV⋅cm⁻¹` | Kilovolt per Centimetre | Electric Field Strength | V⋅m⁻¹ | 100000 |
+| `kV⋅m⁻¹` | Kilovolt per Metre | Electric Field Strength | V⋅m⁻¹ | 1000 |
+| `statV⋅cm⁻¹` | Statvolt per Centimetre | Electric Field Strength | V⋅m⁻¹ | 29979.2458 |
+| `V⋅cm⁻¹` | Volt per Centimetre | Electric Field Strength | V⋅m⁻¹ | 100 |
+| `V⋅m⁻¹` | Volt per Metre | Electric Field Strength | V⋅m⁻¹ | 1 |
 | `dBu` | Decibel unloaded | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 0.8691117575297783 |
 | `dBV` | Decibel-volt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 1.1220184543019633 |
 | `dBµV` | Decibel-microvolt | Electric Potential | kg⋅m²⋅s⁻³⋅A⁻¹ | 1.1220184543019633e-6 |
@@ -314,7 +314,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Imp gal⋅h⁻¹` | Imperial Gallon/hour | Flow Rate (Volumetric) | m³⋅s⁻¹ | 1.2628027777777779e-6 |
 | `Imp gal⋅min⁻¹` | Imperial Gallon/minute | Flow Rate (Volumetric) | m³⋅s⁻¹ | 7.576816666666667e-5 |
 | `Imp gal⋅s⁻¹` | Imperial Gallon/second | Flow Rate (Volumetric) | m³⋅s⁻¹ | 0.00454609 |
-| `L⋅h⁻¹` | Liter/hour | Flow Rate (Volumetric) | m³⋅s⁻¹ | 2.7777777777777776e-7 |
+| `L⋅h⁻¹` | Litre/hour | Flow Rate (Volumetric) | m³⋅s⁻¹ | 2.7777777777777776e-7 |
 | `L⋅min⁻¹` | Litre/minute | Flow Rate (Volumetric) | m³⋅s⁻¹ | 1.6666666666666667e-5 |
 | `L⋅s⁻¹` | Litre/second | Flow Rate (Volumetric) | m³⋅s⁻¹ | 0.001 |
 | `m³⋅h⁻¹` | Cubic Metre/hour | Flow Rate (Volumetric) | m³⋅s⁻¹ | 2.777777777777778e-4 |
@@ -343,12 +343,12 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `s⁻¹` | Per Second | Frequency | s⁻¹ | 1 |
 | `wk⁻¹` | Per Week | Frequency | s⁻¹ | 1.6534391534391533e-6 |
 | `y⁻¹` | Per Year | Frequency | s⁻¹ | 3.1688087814028954e-8 |
-| `km⋅gal⁻¹` | Kilometers/Gallon (US) | Fuel Economy | km⋅L⁻¹ | 0.264172 |
-| `km⋅kWh⁻¹` | Kilometers/kWh (EV) | Fuel Economy | km⋅L⁻¹ | 9.5 |
-| `km⋅L⁻¹` | Kilometers/Liter | Fuel Economy | km⋅L⁻¹ | 1 |
+| `km⋅gal⁻¹` | Kilometres/Gallon (US) | Fuel Economy | km⋅L⁻¹ | 0.264172 |
+| `km⋅kWh⁻¹` | Kilometres/kWh (EV) | Fuel Economy | km⋅L⁻¹ | 9.5 |
+| `km⋅L⁻¹` | Kilometres/Litre | Fuel Economy | km⋅L⁻¹ | 1 |
 | `L/100 km` | Litres/100 km | Fuel Economy | km⋅L⁻¹ | 100 |
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | Fuel Economy | km⋅L⁻¹ | 15.29 |
-| `mi⋅L⁻¹` | Miles/Liter | Fuel Economy | km⋅L⁻¹ | 1.60934 |
+| `mi⋅L⁻¹` | Miles/Litre | Fuel Economy | km⋅L⁻¹ | 1.60934 |
 | `mpg (Imp)` | Miles/Gallon (Imp) | Fuel Economy | km⋅L⁻¹ | 0.354006 |
 | `mpg (US)` | Miles/Gallon (US) | Fuel Economy | km⋅L⁻¹ | 0.425144 |
 | `BTU` | BTU | Fuel Energy | J | 1055.06 |
@@ -403,7 +403,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `statH` | Stathenry | Inductance | kg⋅m²⋅s⁻²⋅A⁻² | 8.987551787368176e+11 |
 | `cSt` | Centistokes | Kinematic Viscosity | m²⋅s⁻¹ | 1e-6 |
 | `ft²⋅s⁻¹` | Square Foot per Second | Kinematic Viscosity | m²⋅s⁻¹ | 0.09290304 |
-| `m²⋅s⁻¹` | Square Meter per Second | Kinematic Viscosity | m²⋅s⁻¹ | 1 |
+| `m²⋅s⁻¹` | Square Metre per Second | Kinematic Viscosity | m²⋅s⁻¹ | 1 |
 | `St` | Stokes | Kinematic Viscosity | m²⋅s⁻¹ | 1e-4 |
 | `Å` | Angstrom | Length | m | 1e-10 |
 | `AU` | Astronomical Unit | Length | m | 1.496e+11 |
@@ -429,6 +429,16 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `EV` | Stop (EV) | Logarithmic Scales | 1 | 2 |
 | `Np` | Neper | Logarithmic Scales | 1 | 7.38905609893065 |
 | `ratio` | Power Ratio | Logarithmic Scales | 1 | 1 |
+| `asb` | Apostilb | Luminance | cd⋅m⁻² | 0.3183098861837907 |
+| `bril` | Bril | Luminance | cd⋅m⁻² | 3.183098861837907e-8 |
+| `cd/ft²` | Candela per Square Foot | Luminance | cd⋅m⁻² | 10.763910416709722 |
+| `cd/in²` | Candela per Square Inch | Luminance | cd⋅m⁻² | 1550.0031000062002 |
+| `cd/m²` | Candela per Square Metre | Luminance | cd⋅m⁻² | 1 |
+| `fL` | Foot-Lambert | Luminance | cd⋅m⁻² | 3.4262590996353905 |
+| `L (lum)` | Lambert | Luminance | cd⋅m⁻² | 3183.098861837907 |
+| `nt` | Nit | Luminance | cd⋅m⁻² | 1 |
+| `sb` | Stilb | Luminance | cd⋅m⁻² | 10000 |
+| `sk` | Skot | Luminance | cd⋅m⁻² | 3.183098861837907e-4 |
 | `cd⋅sr` | Candela-Steradian | Luminous Flux (Human) | cd⋅sr | 1 |
 | `cp` | Candlepower (spherical) | Luminous Flux (Human) | cd⋅sr | 12.566370614359172 |
 | `lm` | Lumen | Luminous Flux (Human) | cd⋅sr | 1 |
@@ -436,8 +446,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `cd` | Candela | Luminous Intensity | cd | 1 |
 | `cp` | Candlepower | Luminous Intensity | cd | 0.981 |
 | `HK` | Hefnerkerze | Luminous Intensity | cd | 0.903 |
-| `A⋅m⁻¹` | Ampere per Meter | Magnetic Field Strength (H) | A⋅m⁻¹ | 1 |
-| `kA⋅m⁻¹` | Kiloampere per Meter | Magnetic Field Strength (H) | A⋅m⁻¹ | 1000 |
+| `A⋅m⁻¹` | Ampere per Metre | Magnetic Field Strength (H) | A⋅m⁻¹ | 1 |
+| `kA⋅m⁻¹` | Kiloampere per Metre | Magnetic Field Strength (H) | A⋅m⁻¹ | 1000 |
 | `Oe` | Oersted | Magnetic Field Strength (H) | A⋅m⁻¹ | 79.5774715 |
 | `Mx` | Maxwell | Magnetic Flux | kg⋅m²⋅s⁻²⋅A⁻¹ | 1e-8 |
 | `Wb` | Weber | Magnetic Flux | kg⋅m²⋅s⁻²⋅A⁻¹ | 1 |
@@ -549,7 +559,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `yd` | Yard | Rack Geometry | m | 0.9144 |
 | `C/kg` | Coulomb per Kilogram | Radiation Exposure | A⋅s⋅kg⁻¹ | 1 |
 | `R` | Roentgen | Radiation Exposure | A⋅s⋅kg⁻¹ | 2.58e-4 |
-| `d⁻¹` | Per Day (λ) | Radioactive Decay | s⁻¹ | 1.1574074074074073e-5 |
+| `d⁻¹` | Decay Constant (λ, per day) | Radioactive Decay | s⁻¹ | 1.1574074074074073e-5 |
 | `t½(d)` | Half-life (days) | Radioactive Decay | s⁻¹ | 59887.91640037925 |
 | `t½(h)` | Half-life (hours) | Radioactive Decay | s⁻¹ | 2495.3298500158016 |
 | `t½(min)` | Half-life (minutes) | Radioactive Decay | s⁻¹ | 41.588830833596695 |
@@ -564,7 +574,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Ci` | Curie | Radioactivity | s⁻¹ | 3.7e+10 |
 | `Rd` | Rutherford | Radioactivity | s⁻¹ | 1000000 |
 | `D` | Diopter | Refractive Power (Vision) | m⁻¹ | 1 |
-| `m⁻¹` | Reciprocal Meter | Refractive Power (Vision) | m⁻¹ | 1 |
+| `m⁻¹` | Reciprocal Metre | Refractive Power (Vision) | m⁻¹ | 1 |
 | `abΩ` | Abohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 1e-9 |
 | `statΩ` | Statohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 8.98755178737e+11 |
 | `Ω` | Ohm | Resistance | kg⋅m²⋅s⁻³⋅A⁻² | 1 |
@@ -583,8 +593,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `sp` | Spat | Solid Angle | sr | 12.566370614359172 |
 | `sr` | Steradian | Solid Angle | sr | 1 |
 | `I₀` | Reference Intensity (I₀) | Sound Intensity | W⋅m⁻² | 1e-12 |
-| `W⋅cm⁻²` | Watt per Square Centimeter | Sound Intensity | W⋅m⁻² | 10000 |
-| `W⋅m⁻²` | Watt per Square Meter | Sound Intensity | W⋅m⁻² | 1 |
+| `W⋅cm⁻²` | Watt per Square Centimetre | Sound Intensity | W⋅m⁻² | 10000 |
+| `W⋅m⁻²` | Watt per Square Metre | Sound Intensity | W⋅m⁻² | 1 |
 | `bar` | Bar | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 100000 |
 | `dB SPL` | Sound Pressure Level | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 2.244036908603927e-5 |
 | `dBµPa` | Decibel-micropascal | Sound Pressure | kg⋅m⁻¹⋅s⁻² | 1.1220184543019633e-6 |

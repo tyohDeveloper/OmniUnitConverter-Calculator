@@ -16,7 +16,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `rayl` | Rayl | 1 Pa⋅s⋅m⁻¹ |
-| `Pa⋅s⋅m⁻¹` | Pascal-second per Meter | 1 Pa⋅s⋅m⁻¹ |
+| `Pa⋅s⋅m⁻¹` | Pascal-second per Metre | 1 Pa⋅s⋅m⁻¹ |
 | `MRayl` | Megarayl | 1000000 Pa⋅s⋅m⁻¹ |
 
 ### Amount of Substance
@@ -306,7 +306,7 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `mol⋅L⁻¹` | Mole/Liter | 1 mol⋅L⁻¹ |
+| `mol⋅L⁻¹` | Mole/Litre | 1 mol⋅L⁻¹ |
 | `ppt` | Parts per Trillion | 1e-12 mol⋅L⁻¹ |
 | `ppb` | Parts per Billion | 1e-9 mol⋅L⁻¹ |
 | `ppm` | Parts per Million | 1e-6 mol⋅L⁻¹ |
@@ -358,8 +358,8 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `b` | Barn | 1 m² |
-| `fm²` | Square Femtometer | 0.01 m² |
-| `cm²` | Square Centimeter | 1e+24 m² |
+| `fm²` | Square Femtometre | 0.01 m² |
+| `cm²` | Square Centimetre | 1e+24 m² |
 | `m²` | Square Metre | 1e+28 m² |
 
 ### Electric Current
@@ -398,11 +398,11 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `V⋅m⁻¹` | Volt per Meter | 1 V⋅m⁻¹ |
-| `V⋅cm⁻¹` | Volt per Centimeter | 100 V⋅m⁻¹ |
-| `kV⋅m⁻¹` | Kilovolt per Meter | 1000 V⋅m⁻¹ |
-| `statV⋅cm⁻¹` | Statvolt per Centimeter | 29979.2458 V⋅m⁻¹ |
-| `kV⋅cm⁻¹` | Kilovolt per Centimeter | 100000 V⋅m⁻¹ |
+| `V⋅m⁻¹` | Volt per Metre | 1 V⋅m⁻¹ |
+| `V⋅cm⁻¹` | Volt per Centimetre | 100 V⋅m⁻¹ |
+| `kV⋅m⁻¹` | Kilovolt per Metre | 1000 V⋅m⁻¹ |
+| `statV⋅cm⁻¹` | Statvolt per Centimetre | 29979.2458 V⋅m⁻¹ |
+| `kV⋅cm⁻¹` | Kilovolt per Centimetre | 100000 V⋅m⁻¹ |
 
 ### Energy
 
@@ -444,7 +444,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `cm³⋅h⁻¹` | Cubic Centimetre/hour | 2.7777777777777777e-10 m³⋅s⁻¹ |
 | `cm³⋅min⁻¹` | Cubic Centimetre/minute | 1.6666666666666667e-8 m³⋅s⁻¹ |
 | `gal⋅d⁻¹` | US Gallon/day | 4.381263638888889e-8 m³⋅s⁻¹ |
-| `L⋅h⁻¹` | Liter/hour | 2.7777777777777776e-7 m³⋅s⁻¹ |
+| `L⋅h⁻¹` | Litre/hour | 2.7777777777777776e-7 m³⋅s⁻¹ |
 | `cm³⋅s⁻¹` | Cubic Centimetre/second | 1e-6 m³⋅s⁻¹ |
 | `gal⋅h⁻¹` | US Gallon/hour | 1.0515032733333334e-6 m³⋅s⁻¹ |
 | `Imp gal⋅h⁻¹` | Imperial Gallon/hour | 1.2628027777777779e-6 m³⋅s⁻¹ |
@@ -549,12 +549,12 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `km⋅L⁻¹` | Kilometers/Liter | 1 km⋅L⁻¹ |
-| `km⋅gal⁻¹` | Kilometers/Gallon (US) | 0.264172 km⋅L⁻¹ |
+| `km⋅L⁻¹` | Kilometres/Litre | 1 km⋅L⁻¹ |
+| `km⋅gal⁻¹` | Kilometres/Gallon (US) | 0.264172 km⋅L⁻¹ |
 | `mpg (Imp)` | Miles/Gallon (Imp) | 0.354006 km⋅L⁻¹ |
 | `mpg (US)` | Miles/Gallon (US) | 0.425144 km⋅L⁻¹ |
-| `mi⋅L⁻¹` | Miles/Liter | 1.60934 km⋅L⁻¹ |
-| `km⋅kWh⁻¹` | Kilometers/kWh (EV) | 9.5 km⋅L⁻¹ |
+| `mi⋅L⁻¹` | Miles/Litre | 1.60934 km⋅L⁻¹ |
+| `km⋅kWh⁻¹` | Kilometres/kWh (EV) | 9.5 km⋅L⁻¹ |
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | 15.29 km⋅L⁻¹ |
 | `L/100 km` | Litres/100 km | 100 km⋅L⁻¹ |
 
@@ -587,7 +587,7 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `m²⋅s⁻¹` | Square Meter per Second | 1 m²⋅s⁻¹ |
+| `m²⋅s⁻¹` | Square Metre per Second | 1 m²⋅s⁻¹ |
 | `cSt` | Centistokes | 1e-6 m²⋅s⁻¹ |
 | `St` | Stokes | 1e-4 m²⋅s⁻¹ |
 | `ft²⋅s⁻¹` | Square Foot per Second | 0.09290304 m²⋅s⁻¹ |
@@ -631,6 +631,21 @@ One section per measurement category. Each row shows how many base SI units one 
 | `B` | Bel | 10 1 |
 | `decade` | Decade (Log) | 10 1 |
 
+### Luminance
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `cd/m²` | Candela per Square Metre | 1 cd⋅m⁻² |
+| `bril` | Bril | 3.183098861837907e-8 cd⋅m⁻² |
+| `sk` | Skot | 3.183098861837907e-4 cd⋅m⁻² |
+| `asb` | Apostilb | 0.3183098861837907 cd⋅m⁻² |
+| `nt` | Nit | 1 cd⋅m⁻² |
+| `fL` | Foot-Lambert | 3.4262590996353905 cd⋅m⁻² |
+| `cd/ft²` | Candela per Square Foot | 10.763910416709722 cd⋅m⁻² |
+| `cd/in²` | Candela per Square Inch | 1550.0031000062002 cd⋅m⁻² |
+| `L (lum)` | Lambert | 3183.098861837907 cd⋅m⁻² |
+| `sb` | Stilb | 10000 cd⋅m⁻² |
+
 ### Luminous Flux (Human)
 
 | Symbol | English Name | 1 unit = (base SI) |
@@ -652,9 +667,9 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `A⋅m⁻¹` | Ampere per Meter | 1 A⋅m⁻¹ |
+| `A⋅m⁻¹` | Ampere per Metre | 1 A⋅m⁻¹ |
 | `Oe` | Oersted | 79.5774715 A⋅m⁻¹ |
-| `kA⋅m⁻¹` | Kiloampere per Meter | 1000 A⋅m⁻¹ |
+| `kA⋅m⁻¹` | Kiloampere per Metre | 1000 A⋅m⁻¹ |
 
 ### Magnetic Flux
 
@@ -821,7 +836,7 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `d⁻¹` | Per Day (λ) | 1.1574074074074073e-5 s⁻¹ |
+| `d⁻¹` | Decay Constant (λ, per day) | 1.1574074074074073e-5 s⁻¹ |
 | `t½(s)` | Half-life (seconds) | 0.693147180559945 s⁻¹ |
 | `t½(min)` | Half-life (minutes) | 41.588830833596695 s⁻¹ |
 | `t½(h)` | Half-life (hours) | 2495.3298500158016 s⁻¹ |
@@ -845,7 +860,7 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `m⁻¹` | Reciprocal Meter | 1 m⁻¹ |
+| `m⁻¹` | Reciprocal Metre | 1 m⁻¹ |
 | `D` | Diopter | 1 m⁻¹ |
 
 ### Resistance
@@ -884,9 +899,9 @@ One section per measurement category. Each row shows how many base SI units one 
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
-| `W⋅m⁻²` | Watt per Square Meter | 1 W⋅m⁻² |
+| `W⋅m⁻²` | Watt per Square Metre | 1 W⋅m⁻² |
 | `I₀` | Reference Intensity (I₀) | 1e-12 W⋅m⁻² |
-| `W⋅cm⁻²` | Watt per Square Centimeter | 10000 W⋅m⁻² |
+| `W⋅cm⁻²` | Watt per Square Centimetre | 10000 W⋅m⁻² |
 
 ### Sound Pressure
 

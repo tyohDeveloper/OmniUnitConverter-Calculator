@@ -9,7 +9,7 @@ One section per measurement system or tradition.
 | `m⋅s⁻²` | Metre/sq sec | 1 m⋅s⁻² |
 | `Gal` | Gal | 0.01 m⋅s⁻² |
 | `rayl` | Rayl | 1 Pa⋅s⋅m⁻¹ |
-| `Pa⋅s⋅m⁻¹` | Pascal-second per Meter | 1 Pa⋅s⋅m⁻¹ |
+| `Pa⋅s⋅m⁻¹` | Pascal-second per Metre | 1 Pa⋅s⋅m⁻¹ |
 | `MRayl` | Megarayl | 1000000 Pa⋅s⋅m⁻¹ |
 | `mol` | Mole | 1 mol |
 | `rad` | Radian | 1 rad |
@@ -56,7 +56,7 @@ One section per measurement system or tradition.
 | `mAh` | Milliamp-hour | 3.6 A⋅s |
 | `Ah` | Ampere-hour | 3600 A⋅s |
 | `F (charge)` | Faraday | 96485 A⋅s |
-| `mol⋅L⁻¹` | Mole/Liter | 1 mol⋅L⁻¹ |
+| `mol⋅L⁻¹` | Mole/Litre | 1 mol⋅L⁻¹ |
 | `ppt` | Parts per Trillion | 1e-12 mol⋅L⁻¹ |
 | `ppb` | Parts per Billion | 1e-9 mol⋅L⁻¹ |
 | `ppm` | Parts per Million | 1e-6 mol⋅L⁻¹ |
@@ -75,8 +75,8 @@ One section per measurement system or tradition.
 | `cp (M)` | Cup (Metric) | 250 mL |
 | `L` | Litre | 1000 mL |
 | `b` | Barn | 1 m² |
-| `fm²` | Square Femtometer | 0.01 m² |
-| `cm²` | Square Centimeter | 1e+24 m² |
+| `fm²` | Square Femtometre | 0.01 m² |
+| `cm²` | Square Centimetre | 1e+24 m² |
 | `m²` | Square Metre | 1e+28 m² |
 | `A` | Ampere | 1 A |
 | `statA` | Statampere | 3.33564e-10 A |
@@ -92,11 +92,11 @@ One section per measurement system or tradition.
 | `g⋅m⁻³` | g/m³ | 0.001 kg⋅m⁻³ |
 | `g⋅cm⁻³` | g/cm³ | 1000 kg⋅m⁻³ |
 | `kg⋅L⁻¹` | kg/L | 1000 kg⋅m⁻³ |
-| `V⋅m⁻¹` | Volt per Meter | 1 V⋅m⁻¹ |
-| `V⋅cm⁻¹` | Volt per Centimeter | 100 V⋅m⁻¹ |
-| `kV⋅m⁻¹` | Kilovolt per Meter | 1000 V⋅m⁻¹ |
-| `statV⋅cm⁻¹` | Statvolt per Centimeter | 29979.2458 V⋅m⁻¹ |
-| `kV⋅cm⁻¹` | Kilovolt per Centimeter | 100000 V⋅m⁻¹ |
+| `V⋅m⁻¹` | Volt per Metre | 1 V⋅m⁻¹ |
+| `V⋅cm⁻¹` | Volt per Centimetre | 100 V⋅m⁻¹ |
+| `kV⋅m⁻¹` | Kilovolt per Metre | 1000 V⋅m⁻¹ |
+| `statV⋅cm⁻¹` | Statvolt per Centimetre | 29979.2458 V⋅m⁻¹ |
+| `kV⋅cm⁻¹` | Kilovolt per Centimetre | 100000 V⋅m⁻¹ |
 | `J` | Joule | 1 kg⋅m²⋅s⁻² |
 | `eV` | Electronvolt | 1.602176634e-19 kg⋅m²⋅s⁻² |
 | `cal` | Calorie | 4.184 kg⋅m²⋅s⁻² |
@@ -114,7 +114,7 @@ One section per measurement system or tradition.
 | `m³⋅s⁻¹` | Cubic Metre/second | 1 m³⋅s⁻¹ |
 | `cm³⋅h⁻¹` | Cubic Centimetre/hour | 2.7777777777777777e-10 m³⋅s⁻¹ |
 | `cm³⋅min⁻¹` | Cubic Centimetre/minute | 1.6666666666666667e-8 m³⋅s⁻¹ |
-| `L⋅h⁻¹` | Liter/hour | 2.7777777777777776e-7 m³⋅s⁻¹ |
+| `L⋅h⁻¹` | Litre/hour | 2.7777777777777776e-7 m³⋅s⁻¹ |
 | `cm³⋅s⁻¹` | Cubic Centimetre/second | 1e-6 m³⋅s⁻¹ |
 | `L⋅min⁻¹` | Litre/minute | 1.6666666666666667e-5 m³⋅s⁻¹ |
 | `m³⋅h⁻¹` | Cubic Metre/hour | 2.777777777777778e-4 m³⋅s⁻¹ |
@@ -139,8 +139,8 @@ One section per measurement system or tradition.
 | `J` | Joule | 1 J |
 | `cal` | Calorie | 4.184 J |
 | `Wh` | Watt-hour | 3600 J |
-| `km⋅L⁻¹` | Kilometers/Liter | 1 km⋅L⁻¹ |
-| `km⋅kWh⁻¹` | Kilometers/kWh (EV) | 9.5 km⋅L⁻¹ |
+| `km⋅L⁻¹` | Kilometres/Litre | 1 km⋅L⁻¹ |
+| `km⋅kWh⁻¹` | Kilometres/kWh (EV) | 9.5 km⋅L⁻¹ |
 | `L/100 km` | Litres/100 km | 100 km⋅L⁻¹ |
 | `lx` | Lux | 1 cd⋅sr⋅m⁻² |
 | `nox` | Nox | 0.001 cd⋅sr⋅m⁻² |
@@ -151,21 +151,28 @@ One section per measurement system or tradition.
 | `cd` | Candela | 1 cd |
 | `HK` | Hefnerkerze | 0.903 cd |
 | `cp` | Candlepower | 0.981 cd |
-| `m²⋅s⁻¹` | Square Meter per Second | 1 m²⋅s⁻¹ |
+| `m²⋅s⁻¹` | Square Metre per Second | 1 m²⋅s⁻¹ |
 | `cSt` | Centistokes | 1e-6 m²⋅s⁻¹ |
 | `St` | Stokes | 1e-4 m²⋅s⁻¹ |
 | `m` | Metre | 1 m |
 | `Å` | Angstrom | 1e-10 m |
 | `nmi` | Nautical Mile | 1852 m |
 | `lm` | Lumen | 1 lm |
+| `cd/m²` | Candela per Square Metre | 1 cd⋅m⁻² |
+| `bril` | Bril | 3.183098861837907e-8 cd⋅m⁻² |
+| `sk` | Skot | 3.183098861837907e-4 cd⋅m⁻² |
+| `asb` | Apostilb | 0.3183098861837907 cd⋅m⁻² |
+| `nt` | Nit | 1 cd⋅m⁻² |
+| `L (lum)` | Lambert | 3183.098861837907 cd⋅m⁻² |
+| `sb` | Stilb | 10000 cd⋅m⁻² |
 | `lm` | Lumen | 1 cd⋅sr |
 | `cd⋅sr` | Candela-Steradian | 1 cd⋅sr |
 | `T (lum)` | Talbot | 1 cd⋅sr |
 | `T` | Tesla | 1 kg⋅s⁻²⋅A⁻¹ |
 | `G` | Gauss | 1e-4 kg⋅s⁻²⋅A⁻¹ |
-| `A⋅m⁻¹` | Ampere per Meter | 1 A⋅m⁻¹ |
+| `A⋅m⁻¹` | Ampere per Metre | 1 A⋅m⁻¹ |
 | `Oe` | Oersted | 79.5774715 A⋅m⁻¹ |
-| `kA⋅m⁻¹` | Kiloampere per Meter | 1000 A⋅m⁻¹ |
+| `kA⋅m⁻¹` | Kiloampere per Metre | 1000 A⋅m⁻¹ |
 | `Wb` | Weber | 1 kg⋅m²⋅s⁻²⋅A⁻¹ |
 | `Mx` | Maxwell | 1e-8 kg⋅m²⋅s⁻²⋅A⁻¹ |
 | `kg` | Kilogram | 1 kg |
@@ -218,7 +225,7 @@ One section per measurement system or tradition.
 | `Rad` | Rad (CGS) | 0.01 m²⋅s⁻² |
 | `C/kg` | Coulomb per Kilogram | 1 A⋅s⋅kg⁻¹ |
 | `R` | Roentgen | 2.58e-4 A⋅s⋅kg⁻¹ |
-| `d⁻¹` | Per Day (λ) | 1.1574074074074073e-5 s⁻¹ |
+| `d⁻¹` | Decay Constant (λ, per day) | 1.1574074074074073e-5 s⁻¹ |
 | `t½(s)` | Half-life (seconds) | 0.693147180559945 s⁻¹ |
 | `t½(min)` | Half-life (minutes) | 41.588830833596695 s⁻¹ |
 | `t½(h)` | Half-life (hours) | 2495.3298500158016 s⁻¹ |
@@ -232,16 +239,16 @@ One section per measurement system or tradition.
 | `Bq` | Becquerel | 1 s⁻¹ |
 | `Rd` | Rutherford | 1000000 s⁻¹ |
 | `Ci` | Curie | 3.7e+10 s⁻¹ |
-| `m⁻¹` | Reciprocal Meter | 1 m⁻¹ |
+| `m⁻¹` | Reciprocal Metre | 1 m⁻¹ |
 | `D` | Diopter | 1 m⁻¹ |
 | `Ω` | Ohm | 1 kg⋅m²⋅s⁻³⋅A⁻² |
 | `m` | Metre | 1 m |
 | `sr` | Steradian | 1 sr |
 | `deg²` | Square Degree | 3.046e-4 sr |
 | `sp` | Spat | 12.566370614359172 sr |
-| `W⋅m⁻²` | Watt per Square Meter | 1 W⋅m⁻² |
+| `W⋅m⁻²` | Watt per Square Metre | 1 W⋅m⁻² |
 | `I₀` | Reference Intensity (I₀) | 1e-12 W⋅m⁻² |
-| `W⋅cm⁻²` | Watt per Square Centimeter | 10000 W⋅m⁻² |
+| `W⋅cm⁻²` | Watt per Square Centimetre | 10000 W⋅m⁻² |
 | `Pa` | Pascal | 1 kg⋅m⁻¹⋅s⁻² |
 | `µbar` | Microbar | 0.1 kg⋅m⁻¹⋅s⁻² |
 | `dyn⋅cm⁻²` | Dyne/cm² | 0.1 kg⋅m⁻¹⋅s⁻² |
@@ -344,9 +351,9 @@ One section per measurement system or tradition.
 | `tonf (US)` | Ton-force (Short) | 8896.443230521 kg⋅m⋅s⁻² |
 | `rpm` | Revolutions/Minute | 0.016666666666666666 s⁻¹ |
 | `BTU` | BTU | 1055.06 J |
-| `km⋅gal⁻¹` | Kilometers/Gallon (US) | 0.264172 km⋅L⁻¹ |
+| `km⋅gal⁻¹` | Kilometres/Gallon (US) | 0.264172 km⋅L⁻¹ |
 | `mpg (US)` | Miles/Gallon (US) | 0.425144 km⋅L⁻¹ |
-| `mi⋅L⁻¹` | Miles/Liter | 1.60934 km⋅L⁻¹ |
+| `mi⋅L⁻¹` | Miles/Litre | 1.60934 km⋅L⁻¹ |
 | `mi⋅kWh⁻¹` | Miles/kWh (EV) | 15.29 km⋅L⁻¹ |
 | `fc` | Foot-candle | 10.7639 cd⋅sr⋅m⁻² |
 | `ft²⋅s⁻¹` | Square Foot per Second | 0.09290304 m²⋅s⁻¹ |
@@ -361,6 +368,9 @@ One section per measurement system or tradition.
 | `W (CFL)` | Fluorescent Bulb (watts) | 70 lm |
 | `W (LED)` | LED Bulb (watts) | 95 lm |
 | `W (Na)` | Sodium Vapor Lamp (watts) | 100 lm |
+| `fL` | Foot-Lambert | 3.4262590996353905 cd⋅m⁻² |
+| `cd/ft²` | Candela per Square Foot | 10.763910416709722 cd⋅m⁻² |
+| `cd/in²` | Candela per Square Inch | 1550.0031000062002 cd⋅m⁻² |
 | `cp` | Candlepower (spherical) | 12.566370614359172 cd⋅sr |
 | `oz` | Ounce (Avoirdupois) | 0.028349523125 kg |
 | `lb` | Pound (Avoirdupois) | 0.45359237 kg |
