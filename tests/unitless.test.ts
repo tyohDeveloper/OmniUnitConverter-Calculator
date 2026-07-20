@@ -67,7 +67,7 @@ describe('Unitless Numbers category', () => {
     it('cross-unit: 1 arab = 100 crore', () => { expect(c(1, 'arab', 'crore')).toBe(100); });
     it('cross-unit: 1 kharab = 100 arab', () => { expect(c(1, 'kharab', 'arab')).toBe(100); });
     it('1 mole = Avogadro count', () => { expect(c(1, 'mole', 'number')).toBe(6.02214076e23); });
-    it('1 karat = 1/24', () => { expect(c(1, 'karat', 'number')).toBeCloseTo(1 / 24, 8); });
+    it('1 caret = 1/24', () => { expect(c(1, 'caret', 'number')).toBeCloseTo(1 / 24, 8); });
     it('1 proof (US) = 0.005', () => { expect(c(1, 'proof_us', 'number')).toBe(0.005); });
     it('1 proof (imperial) = 0.005715', () => { expect(c(1, 'proof_imp', 'number')).toBe(0.005715); });
     it('1 gross = 144', () => { expect(c(1, 'gross', 'number')).toBe(144); });

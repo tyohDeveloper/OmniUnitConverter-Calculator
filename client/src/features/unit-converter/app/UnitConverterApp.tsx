@@ -16,7 +16,6 @@ import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
 import { ConverterPane } from '@/features/unit-converter/components/ConverterPane';
 import { DirectPane } from '@/features/unit-converter/components/DirectPane';
 import { CalculatorPane } from '@/features/unit-converter/components/CalculatorPane';
-import { EraPane } from '@/features/unit-converter/components/EraPane';
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { useConverterController } from '@/components/unit-converter/hooks/useConverterController';
 import { useCalculatorController } from '@/components/unit-converter/hooks/useCalculatorController';
@@ -271,7 +270,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
       </nav>
 
       <div className="-mt-1 md:overflow-y-auto md:pr-1 overflow-x-auto">
-        <div className={`${activeTab === 'eras' ? '' : 'min-w-max '}space-y-4`}>
+        <div className="min-w-max space-y-4">
         <div className="mb-2">
           <div className="flex items-center justify-between">
             <nav aria-label={t('Main tabs')} className="flex gap-2">
@@ -311,18 +310,6 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
               >
                 {t('RPN Calculator')}
               </button>
-              <button
-                onClick={() => setActiveTab('eras')}
-                aria-current={activeTab === 'eras' ? 'page' : undefined}
-                className={`text-sm px-4 py-1.5 rounded-md font-medium transition-all ${
-                  activeTab === 'eras'
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                }`}
-                {...testId('tab-eras')}
-              >
-                {t('Dates/Eras')}
-              </button>
             </nav>
             <div className="flex items-center gap-3">
               <Label className="text-xs text-muted-foreground">{t('Number formatting')}</Label>
@@ -356,7 +343,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
                 onValueChange={(val) => { setLanguage(val as SupportedLanguage); refocusInput(); }}
                 onOpenChange={(open) => { if (!open) refocusInput(); }}
               >
-                <SelectTrigger className="h-10 w-[75px] text-xs" data-testid="select-language">
+                <SelectTrigger className="h-10 w-[75px] text-xs">
                   <SelectValue placeholder="" />
                 </SelectTrigger>
                 <SelectContent className="max-h-[50vh]">
@@ -459,17 +446,9 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
               </p>
             </div>
           )}
-          {activeTab === 'eras' && (
-            <div className="mt-2">
-              <h2 className="text-3xl font-bold text-foreground tracking-tight">{t('Dates/Eras')}</h2>
-              <p className="text-muted-foreground text-sm font-mono mt-1">
-                {t('Convert year numbers between calendar era systems')}
-              </p>
-            </div>
-          )}
         </div>
 
-        <div className={activeTab === 'rpn' || activeTab === 'eras' ? 'hidden' : 'grid'}>
+        <div className={activeTab === 'rpn' ? 'hidden' : 'grid'}>
           <ConverterPane
             controller={conv}
             flash={{
@@ -502,9 +481,6 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
           />
         </div>
 
-        {activeTab === 'eras' && <EraPane t={t} language={language} />}
-
-        <div className={activeTab === 'eras' ? 'hidden' : undefined}>
         <CalculatorPane
           controller={calc}
           numberFormat={numberFormat}
@@ -520,7 +496,6 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
             rpnResult: flash.rpnResult[0],
           }}
         />
-        </div>
 
         </div>
       </div>
