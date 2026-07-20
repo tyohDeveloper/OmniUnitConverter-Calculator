@@ -49,6 +49,46 @@ test.describe('RPN X register focus behavior', () => {
     await expect(page.getByTestId('text-rpn-x-value')).toHaveText('5');
   });
 
+  test('RPN section: simulated WebKit blur right after Enter keeps X editable', async ({ page }) => {
+    // iOS WebKit's Done key fires a native blur immediately after the Enter
+    // keydown, before the requestAnimationFrame refocus can run. Playwright's
+    // WebKit browser cannot run in this environment (missing system libs on
+    // NixOS), so we simulate that exact sequence: dispatch Enter and blur
+    // synchronously in the same task.
+    await page.getByTestId('tab-rpn').click();
+    const xInput = page.getByTestId('rpn-x-input');
+    await expect(xInput).toBeFocused();
+
+    await xInput.fill('5');
+    await xInput.press('Enter');
+    await expect(xInput).toBeFocused();
+
+    await page.keyboard.type('42');
+    await xInput.evaluate((el: HTMLInputElement) => {
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })
+      );
+      // Simulate the Done-key blur that lands before the rAF refocus.
+      el.blur();
+    });
+
+    // The input must stay mounted, regain focus, and the value must have
+    // committed exactly once.
+    await expect(xInput).toBeFocused();
+    await expect(xInput).toHaveValue('42');
+
+    // Typing immediately replaces the selected text (edit mode intact).
+    await page.keyboard.type('7');
+    await expect(xInput).toHaveValue('7');
+
+    // Blur elsewhere commits 7; a single undo restores 42 (proving the
+    // simulated-WebKit Enter committed once, not zero or twice).
+    await page.getByRole('heading', { name: 'RPN Calculator' }).click();
+    await expect(page.getByTestId('text-rpn-x-value')).toHaveText('7');
+    await page.getByTestId('button-rpn-undo').click();
+    await expect(page.getByTestId('text-rpn-x-value')).toHaveText('42');
+  });
+
   test('Converter section: X register does not grab focus; FROM field keeps focus', async ({ page }) => {
     await page.getByTestId('tab-converter').click();
     // X register shows as a static display, not an input.
