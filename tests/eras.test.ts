@@ -640,6 +640,17 @@ describe('Era year text parsing', () => {
     expect(parseEraYearText('  Kāngxī, 39 ')).toEqual({ namePart: 'Kāngxī', eraYear: 39 });
   });
 
+  it('splits no-space CJK input and ignores a trailing 年', () => {
+    expect(parseEraYearText('明治33')).toEqual({ namePart: '明治', eraYear: 33 });
+    expect(parseEraYearText('康熙39')).toEqual({ namePart: '康熙', eraYear: 39 });
+    expect(parseEraYearText('明治33年')).toEqual({ namePart: '明治', eraYear: 33 });
+    expect(parseEraYearText('明治 33年')).toEqual({ namePart: '明治', eraYear: 33 });
+  });
+
+  it('leaves Latin no-space input unchanged', () => {
+    expect(parseEraYearText('Meiji33')).toEqual({ namePart: 'Meiji33', eraYear: null });
+  });
+
   it('returns null year for partial input', () => {
     expect(parseEraYearText('Meiji')).toEqual({ namePart: 'Meiji', eraYear: null });
     expect(parseEraYearText('33')).toEqual({ namePart: '33', eraYear: null });

@@ -102,6 +102,21 @@ test.describe('Era name lookup', () => {
     await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
   });
 
+  test('no-space kanji input 明治33 resolves to 1900 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('明治33');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
+  });
+
+  test('no-space input with trailing 年 (明治33年) resolves to 1900 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('明治33年');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
+  });
+
+  test('no-space hanzi input 康熙39 resolves to 1700 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('康熙39');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Kāngxī 39 = 1700 CE');
+  });
+
   test('native hanzi input 康熙 39 resolves to 1700 CE', async ({ page }) => {
     await page.getByTestId('input-era-name-lookup').fill('康熙 39');
     await expect(page.getByTestId('text-era-lookup-result')).toContainText('Kāngxī 39 = 1700 CE');

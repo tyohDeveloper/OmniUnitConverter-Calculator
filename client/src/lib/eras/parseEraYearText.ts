@@ -4,8 +4,10 @@
 export function parseEraYearText(
   text: string,
 ): { namePart: string; eraYear: number | null } {
-  const trimmed = text.trim();
-  const m = trimmed.match(/^(.*?)[\s,]+(\d{1,4})$/);
+  const trimmed = text.trim().replace(/年$/, "");
+  const m =
+    trimmed.match(/^(.*?)[\s,]+(\d{1,4})$/) ??
+    trimmed.match(/^([^\d]*?[\u2E80-\u9FFF\uF900-\uFAFF])(\d{1,4})$/);
   if (m && m[1].trim().length > 0) {
     return { namePart: m[1].trim(), eraYear: parseInt(m[2], 10) };
   }
