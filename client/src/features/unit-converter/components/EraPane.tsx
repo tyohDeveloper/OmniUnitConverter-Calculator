@@ -187,6 +187,7 @@ export function EraPane({ t, language }: EraPaneProps) {
         <EraNameLookup
           t={t}
           tables={[JAPANESE_ERAS, JAPANESE_SOUTHERN_ERAS, CHINESE_ERAS]}
+          consulTables={[ROMAN_CONSULS]}
           nativeScript={nativeScript}
           onApply={(a) => {
             setSchemeId('gregorian');

@@ -7,6 +7,7 @@ import { historicalYearToAstronomical } from '../client/src/lib/eras/historicalY
 import { lookupEraTable } from '../client/src/lib/eras/lookupEraTable';
 import { reverseLookupEraTable } from '../client/src/lib/eras/reverseLookupEraTable';
 import { searchEraNames } from '../client/src/lib/eras/searchEraNames';
+import { searchConsulNames } from '../client/src/lib/eras/searchConsulNames';
 import { parseEraYearText } from '../client/src/lib/eras/parseEraYearText';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
 import { lookupRomanConsuls } from '../client/src/lib/eras/lookupRomanConsuls';
@@ -690,6 +691,53 @@ describe('Roman consular dating', () => {
   it('has exactly one entry per year in range', () => {
     expect(CONSULS.consuls.length).toBe(CONSULS.end - CONSULS.start + 1);
     for (const entry of CONSULS.consuls) expect(entry.trim().length).toBeGreaterThan(0);
+  });
+});
+
+describe('Consul name reverse lookup', () => {
+  it('finds Caesar & Bibulus → 59 BCE (astro -58)', () => {
+    const res = searchConsulNames('Caesar Bibulus', [CONSULS]);
+    expect(res).toHaveLength(1);
+    expect(res[0].year).toBe(-58);
+    expect(res[0].consuls).toBe('Gaius Julius Caesar & Marcus Calpurnius Bibulus');
+  });
+
+  it('matches natural phrases like "consulship of Caesar and Bibulus"', () => {
+    const res = searchConsulNames('consulship of Caesar and Bibulus', [CONSULS]);
+    expect(res).toHaveLength(1);
+    expect(res[0].year).toBe(-58); // 59 BCE
+    // Filler-only queries match nothing
+    expect(searchConsulNames('consulship of and the', [CONSULS])).toEqual([]);
+  });
+
+  it('lists all years for a repeated pair (Pompeius & Crassus)', () => {
+    const years = searchConsulNames('Pompeius Crassus', [CONSULS]).map(s => s.year);
+    // 70 BCE = astro -69, 55 BCE = astro -54; chronological order
+    expect(years).toContain(-69);
+    expect(years).toContain(-54);
+    expect(years.indexOf(-69)).toBeLessThan(years.indexOf(-54));
+  });
+
+  it('matches a single partial name', () => {
+    const years = searchConsulNames('Cicero', [CONSULS]).map(s => s.year);
+    expect(years).toContain(-62); // 63 BCE
+  });
+
+  it('is case- and diacritic-insensitive', () => {
+    expect(searchConsulNames('caesar bibulus', [CONSULS])[0]?.year).toBe(-58);
+    expect(searchConsulNames('CAESAR BIBULUS', [CONSULS])[0]?.year).toBe(-58);
+  });
+
+  it('ranks word-prefix matches before substring-only matches', () => {
+    const res = searchConsulNames('Caes', [CONSULS]);
+    expect(res.length).toBeGreaterThan(0);
+    expect(res[0].consuls).toContain('Caesar');
+  });
+
+  it('returns empty for blank or unmatched queries', () => {
+    expect(searchConsulNames('', [CONSULS])).toEqual([]);
+    expect(searchConsulNames('   ', [CONSULS])).toEqual([]);
+    expect(searchConsulNames('Napoleon', [CONSULS])).toEqual([]);
   });
 });
 
