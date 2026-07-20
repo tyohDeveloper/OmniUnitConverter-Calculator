@@ -271,7 +271,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
       </nav>
 
       <div className="-mt-1 md:overflow-y-auto md:pr-1 overflow-x-auto">
-        <div className="min-w-max space-y-4">
+        <div className={`${activeTab === 'eras' ? '' : 'min-w-max '}space-y-4`}>
         <div className="mb-2">
           <div className="flex items-center justify-between">
             <nav aria-label={t('Main tabs')} className="flex gap-2">

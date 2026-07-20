@@ -192,6 +192,43 @@ test.describe('Native-script era display (ja/zh)', () => {
   });
 });
 
+test.describe('Narrow-screen layout (iPad portrait)', () => {
+  test.use({ viewport: { width: 768, height: 1024 } });
+
+  test('ja: dual Nanboku-chō era names do not overflow the results table at 768px', async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('tab-eras').click();
+    await expect(page.getByTestId('input-era-year')).toBeVisible();
+    await page.getByTestId('select-language').click();
+    await page.getByRole('option', { name: 'ja', exact: true }).click();
+    await page.getByTestId('input-era-year').fill('1340');
+
+    const jp = page.getByTestId('text-era-value-japanese');
+    await expect(jp).toContainText('暦応 (Ryakuō)');
+    await expect(jp).toContainText('興国 (Kōkoku)');
+
+    const table = page.getByTestId('table-era-results');
+    await expect(table).toBeVisible();
+
+    const overflow = await page.evaluate(() => {
+      const doc = document.documentElement;
+      const tbl = document.querySelector('[data-testid="table-era-results"]') as HTMLElement;
+      const parent = tbl.parentElement as HTMLElement;
+      return {
+        pageOverflowX: doc.scrollWidth - doc.clientWidth,
+        tableOverflowX: tbl.scrollWidth - parent.clientWidth,
+      };
+    });
+    expect(overflow.pageOverflowX).toBeLessThanOrEqual(0);
+    expect(overflow.tableOverflowX).toBeLessThanOrEqual(0);
+
+    const jpBox = await jp.boundingBox();
+    expect(jpBox).not.toBeNull();
+    expect(jpBox!.x).toBeGreaterThanOrEqual(0);
+    expect(jpBox!.x + jpBox!.width).toBeLessThanOrEqual(768);
+  });
+});
+
 test.describe('Hijri date converter', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
