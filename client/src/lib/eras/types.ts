@@ -62,6 +62,7 @@ export interface HistoricalPeriod {
 export type PeriodRegion =
   | 'africa'
   | 'middle_east'
+  | 'south_asia'
   | 'east_asia'
   | 'mesoamerica'
   | 'andean';

@@ -396,7 +396,7 @@ describe('Historical period lookup', () => {
   });
 
   it('every civilization has a region and sourced, ordered periods', () => {
-    const regions = new Set(['africa', 'middle_east', 'east_asia', 'mesoamerica', 'andean']);
+    const regions = new Set(['africa', 'middle_east', 'south_asia', 'east_asia', 'mesoamerica', 'andean']);
     for (const civ of CIVS) {
       expect(regions.has(civ.region), `${civ.id} region "${civ.region}"`).toBe(true);
     }
@@ -592,8 +592,10 @@ describe('Rulers & Reigns lookup', () => {
     return r;
   };
 
-  it('data integrity: five regions, valid spans, source URLs', () => {
-    expect(RULERS.map(r => r.id).sort()).toEqual(['china', 'egypt', 'maya', 'persia', 'rome']);
+  it('data integrity: ten regions, valid spans, source URLs', () => {
+    expect(RULERS.map(r => r.id).sort()).toEqual(
+      ['aztec', 'china', 'egypt', 'india', 'inca', 'kush_aksum', 'maya', 'mesopotamia', 'persia', 'rome'].sort()
+    );
     for (const r of RULERS) {
       expect(r.sourceUrl).toMatch(/^https:\/\//);
       expect(r.dynasties.length).toBeGreaterThan(0);
@@ -658,6 +660,55 @@ describe('Rulers & Reigns lookup', () => {
     expect(lookupRulers(1913, region('china')).rulers).toEqual([]);
     expect(lookupRulers(651, region('persia')).rulers.map(r => r.name)).toEqual(['Yazdegerd III']);
     expect(lookupRulers(652, region('persia')).rulers).toEqual([]);
+  });
+
+  it('Mesopotamia: BCE lookups and 539 BCE end (fall to Cyrus)', () => {
+    const meso = region('mesopotamia');
+    // 700 BCE = astro -699 → Sennacherib
+    expect(lookupRulers(-699, meso).rulers.map(r => r.name)).toEqual(['Sennacherib']);
+    // 562 BCE = astro -561 → Nebuchadnezzar II's last year
+    expect(lookupRulers(-561, meso).rulers.map(r => r.name)).toEqual(['Nebuchadnezzar II']);
+    // 539 BCE = astro -538 → Nabonidus final year; 538 BCE → nobody
+    expect(lookupRulers(-538, meso).rulers.map(r => r.name)).toEqual(['Nabonidus']);
+    expect(lookupRulers(-537, meso).rulers).toEqual([]);
+  });
+
+  it('India: Ashoka circa reign and Gupta boundary', () => {
+    const india = region('india');
+    // 250 BCE = astro -249 → Ashoka
+    const hit = lookupRulers(-249, india);
+    expect(hit.rulers.map(r => r.name)).toEqual(['Ashoka']);
+    expect(hit.rulers[0].circa).toBe(true);
+    // 375 CE: Samudragupta end = Chandragupta II start
+    expect(lookupRulers(375, india).rulers.map(r => r.name).sort()).toEqual(['Chandragupta II', 'Samudragupta']);
+  });
+
+  it('Kush & Aksum: Taharqa, Meroë BCE/CE boundary, Ezana', () => {
+    const ka = region('kush_aksum');
+    // 680 BCE = astro -679 → Taharqa (also pharaoh in Egypt's Late Period list)
+    expect(lookupRulers(-679, ka).rulers.map(r => r.name)).toEqual(['Taharqa']);
+    // 20 BCE = astro -19 → Amanirenas
+    expect(lookupRulers(-19, ka).rulers.map(r => r.name)).toEqual(['Amanirenas']);
+    expect(lookupRulers(340, ka).rulers.map(r => r.name)).toEqual(['Ezana']);
+  });
+
+  it('Aztec: Moctezuma II and the 1520–1521 succession, ending Cuauhtémoc', () => {
+    const aztec = region('aztec');
+    expect(lookupRulers(1510, aztec).rulers.map(r => r.name)).toEqual(['Moctezuma II']);
+    expect(lookupRulers(1520, aztec).rulers.map(r => r.name).sort())
+      .toEqual(['Cuauhtémoc', 'Cuitláhuac', 'Moctezuma II']);
+    expect(lookupRulers(1521, aztec).rulers.map(r => r.name)).toEqual(['Cuauhtémoc']);
+    expect(lookupRulers(1522, aztec).rulers).toEqual([]);
+  });
+
+  it('Inca: Huáscar/Atahualpa civil-war overlap and Vilcabamba coda', () => {
+    const inca = region('inca');
+    expect(lookupRulers(1450, inca).rulers.map(r => r.name)).toEqual(['Pachacuti']);
+    // Civil war 1529–1532: both reign concurrently
+    expect(lookupRulers(1530, inca).rulers.map(r => r.name).sort()).toEqual(['Atahualpa', 'Huáscar']);
+    expect(lookupRulers(1533, inca).rulers.map(r => r.name).sort()).toEqual(['Atahualpa', 'Manco Inca Yupanqui']);
+    expect(lookupRulers(1572, inca).rulers.map(r => r.name)).toEqual(['Túpac Amaru']);
+    expect(lookupRulers(1573, inca).rulers).toEqual([]);
   });
 
   it('epithets and region/dynasty/note keys have UI translations in all locales', () => {

@@ -40,6 +40,7 @@ const ERA_REGIONS: { id: EraRegion; label: string }[] = [
 const PERIOD_REGIONS: { id: PeriodRegion; label: string }[] = [
   { id: 'africa', label: 'region-africa' },
   { id: 'middle_east', label: 'region-middle-east' },
+  { id: 'south_asia', label: 'region-south-asia' },
   { id: 'east_asia', label: 'region-east-asia' },
   { id: 'mesoamerica', label: 'region-mesoamerica' },
   { id: 'andean', label: 'region-andean' },

@@ -141,6 +141,21 @@
       ]
     },
     {
+      "id": "india",
+      "name": "India",
+      "region": "south_asia",
+      "sourceUrl": "https://en.wikipedia.org/wiki/History_of_India",
+      "periods": [
+        { "name": "Indus Valley Civilisation", "start": -3300, "end": -1300 },
+        { "name": "Vedic Period", "start": -1500, "end": -500 },
+        { "name": "Maurya Empire", "start": -321, "end": -185 },
+        { "name": "Kushan Empire", "start": 30, "end": 375 },
+        { "name": "Gupta Empire", "start": 320, "end": 550 },
+        { "name": "Delhi Sultanate", "start": 1206, "end": 1526 },
+        { "name": "Mughal Empire", "start": 1526, "end": 1857 }
+      ]
+    },
+    {
       "id": "china",
       "name": "Ancient China",
       "region": "east_asia",
