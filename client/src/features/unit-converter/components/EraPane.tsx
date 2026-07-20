@@ -10,7 +10,7 @@ import { fromAstronomicalYear } from '@/lib/eras/fromAstronomicalYear';
 import { formatAstronomicalYear } from '@/lib/eras/formatAstronomicalYear';
 import { lookupEraTable } from '@/lib/eras/lookupEraTable';
 import { lookupPeriods } from '@/lib/eras/lookupPeriods';
-import type { EraRegion, EraTable, Civilization } from '@/lib/eras/types';
+import type { EraRegion, EraTable, Civilization, PeriodRegion } from '@/lib/eras/types';
 import japaneseErasJson from '@/data/eras/japaneseEras.json';
 import chineseErasJson from '@/data/eras/chineseEras.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
@@ -29,6 +29,15 @@ const ERA_REGIONS: { id: EraRegion; label: string }[] = [
   { id: 'south_se_asia', label: 'region-south-se-asia' },
   { id: 'middle_east', label: 'region-middle-east' },
   { id: 'europe', label: 'region-europe' },
+];
+
+// Ordered regional sections for the Historical Periods widget.
+const PERIOD_REGIONS: { id: PeriodRegion; label: string }[] = [
+  { id: 'africa', label: 'region-africa' },
+  { id: 'middle_east', label: 'region-middle-east' },
+  { id: 'east_asia', label: 'region-east-asia' },
+  { id: 'mesoamerica', label: 'region-mesoamerica' },
+  { id: 'andean', label: 'region-andean' },
 ];
 
 const ERA_TABLES_BY_REGION: Record<string, EraTable[]> = {
@@ -201,8 +210,16 @@ export function EraPane({ t }: EraPaneProps) {
 
       <Card className="w-full p-6 bg-card border-border/50 space-y-3">
         <h3 className="text-sm font-mono uppercase tracking-wider text-muted-foreground font-bold">{t('Historical Periods')}</h3>
-        <div className="grid gap-4 md:grid-cols-3">
-          {CIVILIZATIONS.map(civ => {
+        {PERIOD_REGIONS.map(region => {
+          const civs = CIVILIZATIONS.filter(c => c.region === region.id);
+          if (civs.length === 0) return null;
+          return (
+            <div key={region.id} className="space-y-2" {...testId(`section-periods-region-${region.id}`)}>
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 font-bold border-b border-border/30 pb-1">
+                {t(region.label)}
+              </h4>
+              <div className="grid gap-4 md:grid-cols-3">
+                {civs.map(civ => {
             const active = periods.find(p => p.civilization.id === civ.id)?.period ?? null;
             return (
               <div key={civ.id} className="space-y-1" {...testId(`section-periods-${civ.id}`)}>
@@ -235,8 +252,11 @@ export function EraPane({ t }: EraPaneProps) {
                 )}
               </div>
             );
-          })}
-        </div>
+                })}
+              </div>
+            </div>
+          );
+        })}
         <p className="text-xs text-muted-foreground">{t('periods-approx-note')}</p>
       </Card>
     </div>

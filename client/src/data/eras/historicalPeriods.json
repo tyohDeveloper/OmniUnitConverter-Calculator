@@ -3,6 +3,7 @@
     {
       "id": "egypt",
       "name": "Ancient Egypt",
+      "region": "africa",
       "sourceUrl": "https://en.wikipedia.org/wiki/Ancient_Egypt",
       "periods": [
         { "name": "Early Dynastic Period", "start": -3150, "end": -2686 },
@@ -17,8 +18,102 @@
       ]
     },
     {
+      "id": "kush",
+      "name": "Kingdom of Kush",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kingdom_of_Kush",
+      "periods": [
+        { "name": "Kerma Period", "start": -2500, "end": -1500 },
+        { "name": "Napatan Period", "start": -750, "end": -270 },
+        { "name": "Meroitic Period", "start": -270, "end": 350 }
+      ]
+    },
+    {
+      "id": "aksum",
+      "name": "Kingdom of Aksum",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kingdom_of_Aksum",
+      "periods": [
+        { "name": "Kingdom of Aksum", "start": 100, "end": 940 }
+      ]
+    },
+    {
+      "id": "ghana",
+      "name": "Ghana Empire",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ghana_Empire",
+      "periods": [
+        { "name": "Ghana Empire", "start": 300, "end": 1240 }
+      ]
+    },
+    {
+      "id": "mali",
+      "name": "Mali Empire",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mali_Empire",
+      "periods": [
+        { "name": "Mali Empire", "start": 1226, "end": 1670 }
+      ]
+    },
+    {
+      "id": "songhai",
+      "name": "Songhai Empire",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Songhai_Empire",
+      "periods": [
+        { "name": "Songhai Empire", "start": 1464, "end": 1591 }
+      ]
+    },
+    {
+      "id": "kanem_bornu",
+      "name": "Kanem–Bornu",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kanem%E2%80%93Bornu_Empire",
+      "periods": [
+        { "name": "Kanem Empire", "start": 700, "end": 1380 },
+        { "name": "Bornu Empire", "start": 1380, "end": 1893 }
+      ]
+    },
+    {
+      "id": "great_zimbabwe",
+      "name": "Great Zimbabwe",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kingdom_of_Zimbabwe",
+      "periods": [
+        { "name": "Great Zimbabwe", "start": 1220, "end": 1450 }
+      ]
+    },
+    {
+      "id": "benin",
+      "name": "Kingdom of Benin",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kingdom_of_Benin",
+      "periods": [
+        { "name": "Kingdom of Benin", "start": 1180, "end": 1897 }
+      ]
+    },
+    {
+      "id": "ethiopia_solomonic",
+      "name": "Ethiopian Solomonic Dynasty",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Solomonic_dynasty",
+      "periods": [
+        { "name": "Ethiopian Solomonic Dynasty", "start": 1270, "end": 1974 }
+      ]
+    },
+    {
+      "id": "zulu",
+      "name": "Zulu Kingdom",
+      "region": "africa",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Zulu_Kingdom",
+      "periods": [
+        { "name": "Zulu Kingdom", "start": 1816, "end": 1897 }
+      ]
+    },
+    {
       "id": "mesopotamia",
       "name": "Mesopotamia",
+      "region": "middle_east",
       "sourceUrl": "https://en.wikipedia.org/wiki/History_of_Mesopotamia",
       "periods": [
         { "name": "Uruk Period", "start": -4000, "end": -3100 },
@@ -36,6 +131,7 @@
     {
       "id": "persia",
       "name": "Persia (Iran)",
+      "region": "middle_east",
       "sourceUrl": "https://en.wikipedia.org/wiki/History_of_Iran",
       "periods": [
         { "name": "Achaemenid Empire", "start": -550, "end": -330 },
@@ -47,6 +143,7 @@
     {
       "id": "china",
       "name": "Ancient China",
+      "region": "east_asia",
       "sourceUrl": "https://en.wikipedia.org/wiki/Dynasties_of_China",
       "periods": [
         { "name": "Shang Dynasty", "start": -1600, "end": -1046 },
@@ -68,6 +165,7 @@
       "id": "mongol",
       "name": "Mongol Empire & Successors",
       "note": "note-mongol",
+      "region": "east_asia",
       "sourceUrl": "https://en.wikipedia.org/wiki/Mongol_Empire",
       "periods": [
         { "name": "Mongol Empire", "start": 1206, "end": 1368 },
@@ -76,13 +174,125 @@
       ]
     },
     {
+      "id": "olmec",
+      "name": "Olmec Civilization",
+      "region": "mesoamerica",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Olmecs",
+      "periods": [
+        { "name": "Olmec Civilization", "start": -1200, "end": -400 }
+      ]
+    },
+    {
+      "id": "zapotec",
+      "name": "Zapotec (Monte Albán)",
+      "region": "mesoamerica",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Zapotec_civilization",
+      "periods": [
+        { "name": "Monte Albán Period", "start": -500, "end": 850 },
+        { "name": "Late Zapotec Period", "start": 850, "end": 1521 }
+      ]
+    },
+    {
+      "id": "teotihuacan",
+      "name": "Teotihuacan",
+      "region": "mesoamerica",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Teotihuacan",
+      "periods": [
+        { "name": "Teotihuacan", "start": -100, "end": 550 }
+      ]
+    },
+    {
       "id": "maya",
       "name": "Maya Civilization",
+      "region": "mesoamerica",
       "sourceUrl": "https://en.wikipedia.org/wiki/Maya_civilization",
       "periods": [
         { "name": "Preclassic Period", "start": -2000, "end": 250 },
         { "name": "Classic Period", "start": 250, "end": 900 },
         { "name": "Postclassic Period", "start": 900, "end": 1521 }
+      ]
+    },
+    {
+      "id": "toltec",
+      "name": "Toltec Civilization",
+      "region": "mesoamerica",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Toltec",
+      "periods": [
+        { "name": "Toltec Civilization", "start": 900, "end": 1168 }
+      ]
+    },
+    {
+      "id": "aztec",
+      "name": "Aztec Empire",
+      "region": "mesoamerica",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Aztec_Empire",
+      "periods": [
+        { "name": "Early Mexica Period", "start": 1325, "end": 1428 },
+        { "name": "Aztec Empire (Triple Alliance)", "start": 1428, "end": 1521 }
+      ]
+    },
+    {
+      "id": "chavin",
+      "name": "Chavín Culture",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chav%C3%ADn_culture",
+      "periods": [
+        { "name": "Chavín Culture", "start": -900, "end": -200 }
+      ]
+    },
+    {
+      "id": "nazca",
+      "name": "Nazca Culture",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Nazca_culture",
+      "periods": [
+        { "name": "Nazca Culture", "start": -100, "end": 800 }
+      ]
+    },
+    {
+      "id": "moche",
+      "name": "Moche Culture",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Moche_culture",
+      "periods": [
+        { "name": "Moche Culture", "start": 100, "end": 800 }
+      ]
+    },
+    {
+      "id": "wari",
+      "name": "Wari Empire",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Wari_Empire",
+      "periods": [
+        { "name": "Wari Empire", "start": 500, "end": 1000 }
+      ]
+    },
+    {
+      "id": "tiwanaku",
+      "name": "Tiwanaku",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tiwanaku_Empire",
+      "periods": [
+        { "name": "Tiwanaku", "start": 550, "end": 1000 }
+      ]
+    },
+    {
+      "id": "chimu",
+      "name": "Chimú (Chimor)",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chim%C3%BA_culture",
+      "periods": [
+        { "name": "Chimú (Chimor)", "start": 900, "end": 1470 }
+      ]
+    },
+    {
+      "id": "inca",
+      "name": "Inca Civilization",
+      "region": "andean",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Inca_Empire",
+      "periods": [
+        { "name": "Kingdom of Cusco", "start": 1200, "end": 1438 },
+        { "name": "Inca Empire", "start": 1438, "end": 1533 }
       ]
     }
   ]

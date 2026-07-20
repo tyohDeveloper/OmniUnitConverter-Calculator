@@ -297,6 +297,50 @@ describe('Historical period lookup', () => {
     expect(periodFor(31, 'egypt')).toBeNull();
   });
 
+  it('African civilizations resolve periods', () => {
+    expect(periodFor(-1999, 'kush')?.name).toBe('Kerma Period');
+    expect(periodFor(-699, 'kush')?.name).toBe('Napatan Period');
+    expect(periodFor(300, 'kush')?.name).toBe('Meroitic Period');
+    expect(periodFor(500, 'aksum')?.name).toBe('Kingdom of Aksum');
+    expect(periodFor(1000, 'ghana')?.name).toBe('Ghana Empire');
+    expect(periodFor(1300, 'mali')?.name).toBe('Mali Empire');
+    expect(periodFor(1500, 'songhai')?.name).toBe('Songhai Empire');
+    expect(periodFor(1000, 'kanem_bornu')?.name).toBe('Kanem Empire');
+    expect(periodFor(1600, 'kanem_bornu')?.name).toBe('Bornu Empire');
+    expect(periodFor(1300, 'great_zimbabwe')?.name).toBe('Great Zimbabwe');
+    expect(periodFor(1500, 'benin')?.name).toBe('Kingdom of Benin');
+    expect(periodFor(1900, 'ethiopia_solomonic')?.name).toBe('Ethiopian Solomonic Dynasty');
+    expect(periodFor(1850, 'zulu')?.name).toBe('Zulu Kingdom');
+  });
+
+  it('Mesoamerican civilizations resolve periods', () => {
+    expect(periodFor(-999, 'olmec')?.name).toBe('Olmec Civilization');
+    expect(periodFor(200, 'zapotec')?.name).toBe('Monte Albán Period');
+    expect(periodFor(1400, 'zapotec')?.name).toBe('Late Zapotec Period');
+    expect(periodFor(300, 'teotihuacan')?.name).toBe('Teotihuacan');
+    expect(periodFor(1000, 'toltec')?.name).toBe('Toltec Civilization');
+    expect(periodFor(1400, 'aztec')?.name).toBe('Early Mexica Period');
+    expect(periodFor(1500, 'aztec')?.name).toBe('Aztec Empire (Triple Alliance)');
+  });
+
+  it('Andean civilizations resolve periods', () => {
+    expect(periodFor(-499, 'chavin')?.name).toBe('Chavín Culture');
+    expect(periodFor(400, 'moche')?.name).toBe('Moche Culture');
+    expect(periodFor(400, 'nazca')?.name).toBe('Nazca Culture');
+    expect(periodFor(800, 'tiwanaku')?.name).toBe('Tiwanaku');
+    expect(periodFor(800, 'wari')?.name).toBe('Wari Empire');
+    expect(periodFor(1200, 'chimu')?.name).toBe('Chimú (Chimor)');
+    expect(periodFor(1300, 'inca')?.name).toBe('Kingdom of Cusco');
+    expect(periodFor(1500, 'inca')?.name).toBe('Inca Empire');
+  });
+
+  it('every civilization has a region and sourced, ordered periods', () => {
+    const regions = new Set(['africa', 'middle_east', 'east_asia', 'mesoamerica', 'andean']);
+    for (const civ of CIVS) {
+      expect(regions.has(civ.region), `${civ.id} region "${civ.region}"`).toBe(true);
+    }
+  });
+
   it('every civilization has sourced, ordered periods', () => {
     for (const civ of CIVS) {
       expect(civ.sourceUrl).toMatch(/^https:\/\//);

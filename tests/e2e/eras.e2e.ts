@@ -45,6 +45,23 @@ test.describe('Dates/Eras tab', () => {
     const hanRow = page.getByTestId('row-period-china-han-dynasty');
     await expect(hanRow).not.toHaveClass(/text-accent/);
   });
+
+  test('Historical Periods shows regional sections with new civilizations', async ({ page }) => {
+    for (const region of ['africa', 'middle_east', 'east_asia', 'mesoamerica', 'andean']) {
+      await expect(page.getByTestId(`section-periods-region-${region}`)).toBeVisible();
+    }
+    await expect(page.getByTestId('section-periods-kush')).toBeVisible();
+    await expect(page.getByTestId('section-periods-aztec')).toBeVisible();
+    await expect(page.getByTestId('section-periods-inca')).toBeVisible();
+  });
+
+  test('highlights Mali, Aztec, and Inca periods for 1500 CE', async ({ page }) => {
+    await page.getByTestId('input-era-year').fill('1500');
+    await expect(page.getByTestId('row-period-mali-mali-empire')).toHaveClass(/text-accent/);
+    await expect(page.getByTestId('row-period-aztec-aztec-empire-triple-alliance-')).toHaveClass(/text-accent/);
+    await expect(page.getByTestId('row-period-inca-inca-empire')).toHaveClass(/text-accent/);
+    await expect(page.getByTestId('row-period-inca-kingdom-of-cusco')).not.toHaveClass(/text-accent/);
+  });
 });
 
 test.describe('Hijri date converter', () => {

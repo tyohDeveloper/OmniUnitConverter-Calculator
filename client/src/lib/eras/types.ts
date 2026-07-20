@@ -44,10 +44,18 @@ export interface HistoricalPeriod {
   end: number;
 }
 
+export type PeriodRegion =
+  | 'africa'
+  | 'middle_east'
+  | 'east_asia'
+  | 'mesoamerica'
+  | 'andean';
+
 export interface Civilization {
   id: string;
   name: string;
   note?: string;
+  region: PeriodRegion;
   sourceUrl: string;
   periods: HistoricalPeriod[];
 }
