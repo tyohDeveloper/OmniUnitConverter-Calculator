@@ -313,7 +313,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b0",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b1",
@@ -323,7 +323,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b1",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b2",
@@ -333,7 +333,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b2",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b3",
@@ -343,7 +343,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b3",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b4",
@@ -353,7 +353,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b4",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b5",
@@ -363,7 +363,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b5",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b6",
@@ -373,7 +373,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b6",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b7",
@@ -383,7 +383,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b7",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     },
     {
       "id": "jis_b8",
@@ -393,7 +393,7 @@
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "conversionFunction": "paper_jis_b8",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+P+0138%3A1998"
     }
   ]
 }

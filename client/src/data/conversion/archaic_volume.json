@@ -30,7 +30,7 @@
       "factor": 0.18039,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Ge_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "sho_jp",
@@ -39,7 +39,7 @@
       "factor": 1.8039,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "to_jp",
@@ -48,7 +48,7 @@
       "factor": 18.039,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "koku_jp",
@@ -57,7 +57,7 @@
       "factor": 180.39,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Koku"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "hop_kr",
@@ -129,7 +129,7 @@
       "factor": 0.00123223,
       "unitType": "IMPERIAL",
       "measurementSystem": "APOTHECARIES",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Apothecaries%27_system"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "apoth_oz",
@@ -138,7 +138,7 @@
       "factor": 0.0295735,
       "unitType": "US_COMMON",
       "measurementSystem": "APOTHECARIES",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Apothecaries%27_system"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "gill_imp",

@@ -15,6 +15,9 @@ function linkLabel(url: string): string {
   if (url.includes("bipm.org")) return "BIPM";
   if (url.includes("nist.gov")) return "NIST";
   if (url.includes("legislation.gov.uk")) return "UK Legislation";
+  if (url.includes("laws.e-gov.go.jp")) return "Japan e-Gov";
+  if (url.includes("elegislation.gov.hk")) return "HK Legislation";
+  if (url.includes("jsa.or.jp")) return "JIS (JSA)";
   if (url.includes("wikipedia.org")) return "Wikipedia";
   try {
     return new URL(url).hostname.replace(/^www\./, "");

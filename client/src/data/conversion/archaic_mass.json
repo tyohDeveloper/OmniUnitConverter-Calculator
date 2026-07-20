@@ -30,7 +30,7 @@
       "factor": 0.000375,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "momme_jp",
@@ -39,7 +39,7 @@
       "factor": 0.00375,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Momme_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "ryo_jp",
@@ -48,7 +48,7 @@
       "factor": 0.0375,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Ry%C5%8D"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "kan_jp",
@@ -57,7 +57,7 @@
       "factor": 3.75,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Kan_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "don_kr",
@@ -120,7 +120,7 @@
       "factor": 0.60478982,
       "unitType": "SI_BASE",
       "measurementSystem": "HONG_KONG",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Jin_(mass)"
+      "sourceUrl": "https://www.elegislation.gov.hk/hk/cap68"
     },
     {
       "id": "picul_hk",
@@ -129,7 +129,7 @@
       "factor": 60.478982,
       "unitType": "SI_BASE",
       "measurementSystem": "HONG_KONG",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Picul"
+      "sourceUrl": "https://www.elegislation.gov.hk/hk/cap68"
     },
     {
       "id": "ratti",
@@ -210,7 +210,7 @@
       "factor": 0.00155517,
       "unitType": "IMPERIAL",
       "measurementSystem": "TROY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pennyweight"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "grain",
@@ -219,7 +219,7 @@
       "factor": 0.00006479891,
       "unitType": "US_COMMON",
       "measurementSystem": "TROY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Grain_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "scruple",
@@ -228,7 +228,7 @@
       "factor": 0.001296,
       "unitType": "IMPERIAL",
       "measurementSystem": "APOTHECARIES",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Scruple_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "dram",
@@ -246,7 +246,7 @@
       "factor": 0.0038879346,
       "unitType": "IMPERIAL",
       "measurementSystem": "APOTHECARIES",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Dram_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "pood_ru",

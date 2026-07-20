@@ -21,7 +21,7 @@
       "factor": 0.030303,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cun_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "shaku_jp",
@@ -30,7 +30,7 @@
       "factor": 0.30303,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Shaku_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "ken_jp",
@@ -39,7 +39,7 @@
       "factor": 1.818,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Ken_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "jo_jp",
@@ -48,7 +48,7 @@
       "factor": 3.03,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "ri_jp",
@@ -57,7 +57,7 @@
       "factor": 3927.27,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Li_(unit)"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "ja_kr",
@@ -120,7 +120,7 @@
       "factor": 0.371,
       "unitType": "SI_BASE",
       "measurementSystem": "HONG_KONG",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Chi_(unit)"
+      "sourceUrl": "https://www.elegislation.gov.hk/hk/cap68"
     },
     {
       "id": "hath_in",
@@ -246,7 +246,7 @@
       "factor": 0.201168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Link_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "fathom",
@@ -264,7 +264,7 @@
       "factor": 5.0292,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "chain",
@@ -273,7 +273,7 @@
       "factor": 20.1168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Chain_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "furlong",
@@ -282,7 +282,7 @@
       "factor": 201.168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Furlong"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "league",

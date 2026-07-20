@@ -75,7 +75,7 @@
       "factor": 5.0292,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Rod_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "teu",
@@ -102,7 +102,7 @@
       "factor": 20.1168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Chain_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     }
   ]
 }

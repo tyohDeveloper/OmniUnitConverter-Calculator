@@ -66,7 +66,7 @@
       "factor": 3.306,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "tan_jp",
@@ -75,7 +75,7 @@
       "factor": 991.7,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "cho_jp",
@@ -84,7 +84,7 @@
       "factor": 9917.36,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_units_of_measurement"
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "pyeong_kr",
@@ -192,7 +192,7 @@
       "factor": 2589988,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "township_us",
@@ -201,7 +201,7 @@
       "factor": 93239571,
       "unitType": "US_COMMON",
       "measurementSystem": "US_SURVEY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Township_(United_States)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "arpent",
