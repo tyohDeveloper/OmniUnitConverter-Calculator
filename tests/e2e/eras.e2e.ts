@@ -124,6 +124,59 @@ test.describe('Era name lookup', () => {
   });
 });
 
+test.describe('Native-script era display (ja/zh)', () => {
+  async function switchLanguage(page: import('@playwright/test').Page, lang: string) {
+    await page.getByTestId('select-language').click();
+    await page.getByRole('option', { name: lang, exact: true }).click();
+  }
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('tab-eras').click();
+    await expect(page.getByTestId('input-era-year')).toBeVisible();
+  });
+
+  test('ja: 1900 shows 明治 (Meiji) and 光緒 (Guāngxù) in the results table', async ({ page }) => {
+    await switchLanguage(page, 'ja');
+    await page.getByTestId('input-era-year').fill('1900');
+    await expect(page.getByTestId('text-era-value-japanese')).toContainText('明治 (Meiji) 33');
+    await expect(page.getByTestId('text-era-value-chinese')).toContainText('光緒 (Guāngxù) 26');
+  });
+
+  test('zh: 1900 shows native script era names', async ({ page }) => {
+    await switchLanguage(page, 'zh');
+    await page.getByTestId('input-era-year').fill('1900');
+    await expect(page.getByTestId('text-era-value-japanese')).toContainText('明治 (Meiji) 33');
+    await expect(page.getByTestId('text-era-value-chinese')).toContainText('光緒 (Guāngxù) 26');
+  });
+
+  test('ja: lookup result and suggestions include native script', async ({ page }) => {
+    await switchLanguage(page, 'ja');
+    await page.getByTestId('input-era-name-lookup').fill('Meiji 33');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('明治 (Meiji) 33 = 1900');
+    await page.getByTestId('input-era-name-lookup').fill('kei');
+    await expect(page.getByTestId('list-era-lookup-suggestions')).toBeVisible();
+    await expect(page.getByTestId('option-era-lookup-japanese-keicho')).toContainText('慶長 (Keichō)');
+  });
+
+  test('en: results table stays romanized-only', async ({ page }) => {
+    await page.getByTestId('input-era-year').fill('1900');
+    const jp = page.getByTestId('text-era-value-japanese');
+    await expect(jp).toContainText('Meiji 33');
+    await expect(jp).not.toContainText('明治');
+    const cn = page.getByTestId('text-era-value-chinese');
+    await expect(cn).toContainText('Guāngxù 26');
+    await expect(cn).not.toContainText('光緒');
+  });
+
+  test('de: results table stays romanized-only', async ({ page }) => {
+    await switchLanguage(page, 'de');
+    await page.getByTestId('input-era-year').fill('1900');
+    await expect(page.getByTestId('text-era-value-japanese')).toContainText('Meiji 33');
+    await expect(page.getByTestId('text-era-value-japanese')).not.toContainText('明治');
+  });
+});
+
 test.describe('Hijri date converter', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
