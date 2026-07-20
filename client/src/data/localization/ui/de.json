@@ -139,5 +139,16 @@
   "Unitless Numbers": "Einheitenlose Zahlen",
   "Logarithmic Scales": "Logarithmische Skalen",
   "Sources": "Quellen",
-  "sources-note": "Umrechnungsfaktoren und Definitionsbeziehungen für jede Einheit, mit einem Referenzlink zu jeder. Links öffnen sich in einem neuen Tab."
+  "sources-note": "Umrechnungsfaktoren und Definitionsbeziehungen für jede Einheit, mit einem Referenzlink zu jeder. Links öffnen sich in einem neuen Tab.",
+  "Date": "Datum",
+  "date-subtitle": "Ein Kalenderdatum zwischen Kalendersystemen umrechnen",
+  "Calendar": "Kalender",
+  "Era": "Ära",
+  "Year": "Jahr",
+  "Month": "Monat",
+  "Day": "Tag",
+  "All calendars": "Alle Kalender",
+  "date-error-year": "Ganze Jahreszahl eingeben",
+  "date-error-day": "Ganze Tageszahl eingeben",
+  "date-error-invalid": "Ungültiges Datum für diesen Kalender"
 }

@@ -23,6 +23,8 @@ import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { siToDisplay } from '@/lib/calculator/siToDisplay';
 import { PREFIXES } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
+import { DATE_CATEGORY_META } from '@/lib/calendar/dateCategoryMeta';
+import { DatePane } from '@/features/unit-converter/components/DatePane';
 
 const CATEGORY_GROUPS = [
   { name: 'Base Quantities', categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },
@@ -31,7 +33,7 @@ const CATEGORY_GROUPS = [
   { name: 'Electricity & Magnetism', categories: ['charge', 'potential', 'capacitance', 'resistance', 'conductance', 'inductance', 'magnetic_flux', 'magnetic_density', 'electric_field', 'magnetic_field_h'] },
   { name: 'Radiation & Physics', categories: ['radioactivity', 'radiation_dose', 'equivalent_dose', 'radiation_exposure', 'radioactive_decay', 'cross_section', 'photon', 'catalytic', 'angle', 'solid_angle', 'sound_pressure', 'sound_intensity', 'acoustic_impedance'] },
   { name: 'Human Response', categories: ['luminous_flux', 'illuminance', 'luminance', 'refractive_power'] },
-  { name: 'Other', categories: ['math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb', 'paper_sizes', 'typography', 'cooking', 'logarithmic', 'unitless'] },
+  { name: 'Other', categories: ['math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb', 'paper_sizes', 'typography', 'cooking', 'logarithmic', 'date', 'unitless'] },
   { name: 'Archaic & Regional', categories: ['archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power'] },
 ];
 
@@ -90,7 +92,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     switchToRpn, setRpnXEditing, setRpnXEditValue, getRpnResultDisplay,
   } = calc;
 
-  const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
+  const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory) ?? DATE_CATEGORY_META;
 
   useEffect(() => {
     document.documentElement.setAttribute('lang', language);
@@ -241,7 +243,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
             <h2 className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 px-2 font-bold">{t(group.name)}</h2>
             <div className="space-y-0">
               {group.categories.map((catId) => {
-                const cat = CONVERSION_DATA.find(c => c.id === catId);
+                const cat = CONVERSION_DATA.find(c => c.id === catId) ?? (catId === 'date' ? DATE_CATEGORY_META : undefined);
                 if (!cat) return null;
                 const isSelected = activeTab === 'converter' && activeCategory === cat.id;
                 return (
@@ -354,7 +356,13 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
               </Select>
             </div>
           </div>
-          {activeTab === 'converter' && (
+          {activeTab === 'converter' && activeCategory === 'date' && (
+            <div className="mt-2">
+              <h2 className="text-3xl font-bold text-foreground tracking-tight">{t('Date')}</h2>
+              <p className="text-muted-foreground text-sm font-mono mt-1">{t('date-subtitle')}</p>
+            </div>
+          )}
+          {activeTab === 'converter' && activeCategory !== 'date' && (
             <div className="mt-2">
               <h2 className="text-3xl font-bold text-foreground tracking-tight">{t(categoryData.name)}</h2>
               <div className="flex items-center justify-between mt-1">
@@ -449,6 +457,10 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
         </div>
 
         <div className={activeTab === 'rpn' ? 'hidden' : 'grid'}>
+          {activeCategory === 'date' && (
+            <DatePane visible={activeTab === 'converter'} language={language} t={t} />
+          )}
+          {activeCategory !== 'date' && (
           <ConverterPane
             controller={conv}
             flash={{
@@ -460,6 +472,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
               conversionRatio: flash.conversionRatio[0],
             }}
           />
+          )}
 
           <DirectPane
             activeTab={activeTab}

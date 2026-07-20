@@ -6,5 +6,16 @@
   "Sources": "Sources",
   "sources-note": "Conversion factors and defining relations for every unit, with a reference link for each. Links open in a new tab.",
   "Radiation Exposure": "Radiation Exposure",
-  "Luminance": "Luminance"
+  "Luminance": "Luminance",
+  "Date": "Date",
+  "date-subtitle": "Convert a calendar date between calendar systems",
+  "Calendar": "Calendar",
+  "Era": "Era",
+  "Year": "Year",
+  "Month": "Month",
+  "Day": "Day",
+  "All calendars": "All calendars",
+  "date-error-year": "Enter a whole-number year",
+  "date-error-day": "Enter a whole-number day",
+  "date-error-invalid": "Invalid date for this calendar"
 }

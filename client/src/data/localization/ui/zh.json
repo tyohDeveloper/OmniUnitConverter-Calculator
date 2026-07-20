@@ -139,5 +139,16 @@
   "Unitless Numbers": "无量纲数",
   "Logarithmic Scales": "对数标度",
   "Sources": "来源",
-  "sources-note": "每个单位的换算系数和定义关系，并附有各自的参考链接。链接在新标签页中打开。"
+  "sources-note": "每个单位的换算系数和定义关系，并附有各自的参考链接。链接在新标签页中打开。",
+  "Date": "日期",
+  "date-subtitle": "在不同历法之间转换日期",
+  "Calendar": "历法",
+  "Era": "纪元",
+  "Year": "年",
+  "Month": "月",
+  "Day": "日",
+  "All calendars": "所有历法",
+  "date-error-year": "请输入整数年份",
+  "date-error-day": "请输入整数日期",
+  "date-error-invalid": "该历法中无效的日期"
 }

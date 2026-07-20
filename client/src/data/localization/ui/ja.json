@@ -139,5 +139,16 @@
   "Unitless Numbers": "無次元数",
   "Logarithmic Scales": "対数スケール",
   "Sources": "出典",
-  "sources-note": "すべての単位の換算係数と定義関係を、それぞれの参照リンクとともに掲載しています。リンクは新しいタブで開きます。"
+  "sources-note": "すべての単位の換算係数と定義関係を、それぞれの参照リンクとともに掲載しています。リンクは新しいタブで開きます。",
+  "Date": "日付",
+  "date-subtitle": "暦法間で日付を変換",
+  "Calendar": "暦",
+  "Era": "元号・時代",
+  "Year": "年",
+  "Month": "月",
+  "Day": "日",
+  "All calendars": "すべての暦",
+  "date-error-year": "年を整数で入力してください",
+  "date-error-day": "日を整数で入力してください",
+  "date-error-invalid": "この暦では無効な日付です"
 }
