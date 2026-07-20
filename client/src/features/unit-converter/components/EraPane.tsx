@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { testId } from '@/lib/test-utils';
 import { ERA_SCHEMES } from '@/lib/eras/eraSchemes';
 import { toAstronomicalYear } from '@/lib/eras/toAstronomicalYear';
@@ -10,12 +10,30 @@ import { fromAstronomicalYear } from '@/lib/eras/fromAstronomicalYear';
 import { formatAstronomicalYear } from '@/lib/eras/formatAstronomicalYear';
 import { lookupEraTable } from '@/lib/eras/lookupEraTable';
 import { lookupPeriods } from '@/lib/eras/lookupPeriods';
-import type { EraTable, Civilization } from '@/lib/eras/types';
+import type { EraRegion, EraTable, Civilization } from '@/lib/eras/types';
 import japaneseErasJson from '@/data/eras/japaneseEras.json';
+import chineseErasJson from '@/data/eras/chineseEras.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
+const CHINESE_ERAS = chineseErasJson as EraTable;
 const CIVILIZATIONS = historicalPeriodsJson.civilizations as Civilization[];
+
+// Ordered regional sections; base offset schemes (Global/Modern) stay first.
+const ERA_REGIONS: { id: EraRegion; label: string }[] = [
+  { id: 'global', label: 'region-global' },
+  { id: 'east_asia_japan', label: 'region-east-asia-japan' },
+  { id: 'east_asia_china', label: 'region-east-asia-china' },
+  { id: 'east_asia_korea', label: 'region-east-asia-korea' },
+  { id: 'south_se_asia', label: 'region-south-se-asia' },
+  { id: 'middle_east', label: 'region-middle-east' },
+  { id: 'europe', label: 'region-europe' },
+];
+
+const ERA_TABLES_BY_REGION: Record<string, EraTable[]> = {
+  east_asia_japan: [JAPANESE_ERAS],
+  east_asia_china: [CHINESE_ERAS],
+};
 
 interface EraPaneProps {
   t: (key: string) => string;
@@ -26,6 +44,16 @@ function parseYearInput(text: string): number | null {
   if (!/^-?\d+$/.test(trimmed)) return null;
   const n = parseInt(trimmed, 10);
   return Number.isSafeInteger(n) ? n : null;
+}
+
+// Era-table values are lunisolar-year based: Japanese years before the 1873
+// Gregorian switch and all Chinese years carry the ±1 indicator.
+function eraTableDisplay(astro: number, table: EraTable, t: (k: string) => string): string {
+  const hit = lookupEraTable(astro, table);
+  if (!hit) return '—';
+  const fuzzy = table.id === 'japanese' ? astro < 1873 : true;
+  const dynasty = hit.dynasty ? ` · ${hit.dynasty}` : '';
+  return `${hit.eraName} ${hit.eraYear}${fuzzy ? ' (±1)' : ''}${dynasty}`;
 }
 
 export function EraPane({ t }: EraPaneProps) {
@@ -43,7 +71,6 @@ export function EraPane({ t }: EraPaneProps) {
   const astro = schemeYear === null ? null : toAstronomicalYear(schemeYear, scheme);
 
   const gregorianDisplay = astro === null ? null : formatAstronomicalYear(astro);
-  const japanese = astro === null ? null : lookupEraTable(astro, JAPANESE_ERAS);
   const periods = astro === null ? [] : lookupPeriods(astro, CIVILIZATIONS);
 
   return (
@@ -67,9 +94,20 @@ export function EraPane({ t }: EraPaneProps) {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="max-h-[50vh]">
-                {ERA_SCHEMES.map(s => (
-                  <SelectItem key={s.id} value={s.id} className="text-sm">{t(s.name)}</SelectItem>
-                ))}
+                {ERA_REGIONS.map(region => {
+                  const schemes = ERA_SCHEMES.filter(s => s.region === region.id);
+                  if (schemes.length === 0) return null;
+                  return (
+                    <SelectGroup key={region.id}>
+                      <SelectLabel className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">
+                        {t(region.label)}
+                      </SelectLabel>
+                      {schemes.map(s => (
+                        <SelectItem key={s.id} value={s.id} className="text-sm">{t(s.name)}</SelectItem>
+                      ))}
+                    </SelectGroup>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>
@@ -109,34 +147,50 @@ export function EraPane({ t }: EraPaneProps) {
               </tr>
             </thead>
             <tbody>
-              {ERA_SCHEMES.map(s => {
-                const value = fromAstronomicalYear(astro, s);
-                const display = s.id === 'gregorian'
-                  ? `${formatAstronomicalYear(astro).year} ${t(formatAstronomicalYear(astro).era)}`
-                  : `${value}${s.newYearJan1 ? '' : ' (±1)'}`;
+              {ERA_REGIONS.map(region => {
+                const schemes = ERA_SCHEMES.filter(s => s.region === region.id);
+                const tables = ERA_TABLES_BY_REGION[region.id] ?? [];
+                if (schemes.length === 0 && tables.length === 0) return null;
                 return (
-                  <tr key={s.id} className="border-b border-border/30" {...testId(`row-era-${s.id}`)}>
-                    <td className="py-1.5 pe-4">
-                      <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent underline decoration-dotted underline-offset-2">
-                        {t(s.name)}
-                      </a>
-                    </td>
-                    <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${s.id}`)}>{display}</td>
-                    <td className="py-1.5 text-xs text-muted-foreground">{s.note ? t(s.note) : ''}</td>
-                  </tr>
+                  <React.Fragment key={region.id}>
+                    <tr className="border-b border-border/30" {...testId(`section-era-${region.id}`)}>
+                      <td colSpan={3} className="pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 font-bold">
+                        {t(region.label)}
+                      </td>
+                    </tr>
+                    {schemes.map(s => {
+                      const value = fromAstronomicalYear(astro, s);
+                      const display = s.id === 'gregorian'
+                        ? `${formatAstronomicalYear(astro).year} ${t(formatAstronomicalYear(astro).era)}`
+                        : `${value}${s.newYearJan1 ? '' : ' (±1)'}`;
+                      return (
+                        <tr key={s.id} className="border-b border-border/30" {...testId(`row-era-${s.id}`)}>
+                          <td className="py-1.5 pe-4">
+                            <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent underline decoration-dotted underline-offset-2">
+                              {t(s.name)}
+                            </a>
+                          </td>
+                          <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${s.id}`)}>{display}</td>
+                          <td className="py-1.5 text-xs text-muted-foreground">{s.note ? t(s.note) : ''}</td>
+                        </tr>
+                      );
+                    })}
+                    {tables.map(table => (
+                      <tr key={table.id} className="border-b border-border/30" {...testId(`row-era-${table.id}`)}>
+                        <td className="py-1.5 pe-4">
+                          <a href={table.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent underline decoration-dotted underline-offset-2">
+                            {t(table.name)}
+                          </a>
+                        </td>
+                        <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${table.id}`)}>
+                          {eraTableDisplay(astro, table, t)}
+                        </td>
+                        <td className="py-1.5 text-xs text-muted-foreground">{table.note ? t(table.note) : ''}</td>
+                      </tr>
+                    ))}
+                  </React.Fragment>
                 );
               })}
-              <tr className="border-b border-border/30" {...testId('row-era-japanese')}>
-                <td className="py-1.5 pe-4">
-                  <a href={JAPANESE_ERAS.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent underline decoration-dotted underline-offset-2">
-                    {t('Japanese Era')}
-                  </a>
-                </td>
-                <td className="py-1.5 pe-4 font-mono" {...testId('text-era-value-japanese')}>
-                  {japanese ? `${japanese.eraName} ${japanese.eraYear}` : '—'}
-                </td>
-                <td className="py-1.5 text-xs text-muted-foreground">{t('note-japanese')}</td>
-              </tr>
             </tbody>
           </table>
         )}
@@ -173,6 +227,9 @@ export function EraPane({ t }: EraPaneProps) {
                     })}
                   </tbody>
                 </table>
+                {civ.note && (
+                  <p className="text-[11px] text-muted-foreground/80 leading-tight" {...testId(`text-civ-note-${civ.id}`)}>{t(civ.note)}</p>
+                )}
               </div>
             );
           })}

@@ -5,3 +5,4 @@
 - [Unit translation key hygiene](translation-key-hygiene.md) — en.json keys must match current unit/category names or a documented allowlist; guard test in json-integrity enforces it.
 - [Playwright e2e chromium](playwright-e2e-chromium.md) — downloaded browsers fail on NixOS; run with PW_CHROMIUM_PATH=$(which chromium).
 - [Thai official source citations](thai-source-citations.md) — ditp.go.th PDF of W&M Act B.E. 2542 is reachable (needs browser UA); no Thai law defines the 15.244 g baht, so baht keeps Wikipedia.
+- [Era table epoch vs start](era-table-epoch-convention.md) — orthodox era tables separate lookup boundary (start) from year-count origin (epoch) to handle dynastic transitions without overlap.

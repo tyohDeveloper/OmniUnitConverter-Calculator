@@ -17,6 +17,34 @@
       ]
     },
     {
+      "id": "mesopotamia",
+      "name": "Mesopotamia",
+      "sourceUrl": "https://en.wikipedia.org/wiki/History_of_Mesopotamia",
+      "periods": [
+        { "name": "Uruk Period", "start": -4000, "end": -3100 },
+        { "name": "Early Dynastic Period", "start": -2900, "end": -2350 },
+        { "name": "Akkadian Empire", "start": -2334, "end": -2154 },
+        { "name": "Ur III Period", "start": -2112, "end": -2004 },
+        { "name": "Old Babylonian Period", "start": -2004, "end": -1595 },
+        { "name": "Kassite Period", "start": -1595, "end": -1155 },
+        { "name": "Neo-Assyrian Empire", "start": -911, "end": -609 },
+        { "name": "Neo-Babylonian Empire", "start": -626, "end": -539 },
+        { "name": "Achaemenid Period", "start": -539, "end": -331 },
+        { "name": "Seleucid & Parthian Period", "start": -331, "end": 224 }
+      ]
+    },
+    {
+      "id": "persia",
+      "name": "Persia (Iran)",
+      "sourceUrl": "https://en.wikipedia.org/wiki/History_of_Iran",
+      "periods": [
+        { "name": "Achaemenid Empire", "start": -550, "end": -330 },
+        { "name": "Parthian Empire", "start": -247, "end": 224 },
+        { "name": "Sasanian Empire", "start": 224, "end": 651 },
+        { "name": "Islamic Persia", "start": 651, "end": 1501 }
+      ]
+    },
+    {
       "id": "china",
       "name": "Ancient China",
       "sourceUrl": "https://en.wikipedia.org/wiki/Dynasties_of_China",
@@ -34,6 +62,17 @@
         { "name": "Yuan Dynasty", "start": 1271, "end": 1368 },
         { "name": "Ming Dynasty", "start": 1368, "end": 1644 },
         { "name": "Qing Dynasty", "start": 1644, "end": 1912 }
+      ]
+    },
+    {
+      "id": "mongol",
+      "name": "Mongol Empire & Successors",
+      "note": "note-mongol",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mongol_Empire",
+      "periods": [
+        { "name": "Mongol Empire", "start": 1206, "end": 1368 },
+        { "name": "Golden Horde", "start": 1240, "end": 1502 },
+        { "name": "Yuan Dynasty", "start": 1271, "end": 1368 }
       ]
     },
     {

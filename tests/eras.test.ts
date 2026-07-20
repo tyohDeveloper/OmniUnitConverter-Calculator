@@ -8,9 +8,11 @@ import { lookupEraTable } from '../client/src/lib/eras/lookupEraTable';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
 import type { EraTable, Civilization } from '../client/src/lib/eras/types';
 import japaneseErasJson from '../client/src/data/eras/japaneseEras.json';
+import chineseErasJson from '../client/src/data/eras/chineseEras.json';
 import historicalPeriodsJson from '../client/src/data/eras/historicalPeriods.json';
 
 const JAPANESE = japaneseErasJson as EraTable;
+const CHINESE = chineseErasJson as EraTable;
 const CIVS = historicalPeriodsJson.civilizations as Civilization[];
 
 const scheme = (id: string) => {
@@ -26,6 +28,18 @@ describe('Era schemes data', () => {
       'auc', 'saka', 'vikram', 'holocene', 'ethiopian', 'solar_hijri', 'hijri']) {
       expect(ids, `missing scheme ${id}`).toContain(id);
     }
+  });
+
+  it('includes the regional expansion schemes', () => {
+    const ids = ERA_SCHEMES.map(s => s.id);
+    for (const id of ['seleucid', 'yazdegerdi', 'kali_yuga', 'bengali', 'kollam',
+      'nepal_sambat', 'chula_sakarat']) {
+      expect(ids, `missing scheme ${id}`).toContain(id);
+    }
+  });
+
+  it('every scheme has a region', () => {
+    for (const s of ERA_SCHEMES) expect(s.region, s.id).toBeTruthy();
   });
 
   it('every scheme has a source URL', () => {
@@ -52,6 +66,16 @@ describe('Fixed-offset conversion (astronomical hub)', () => {
     expect(fromAstronomicalYear(2026, scheme('holocene'))).toBe(12026);
     expect(fromAstronomicalYear(2026, scheme('ethiopian'))).toBe(2019);
     expect(fromAstronomicalYear(2026, scheme('solar_hijri'))).toBe(1405);
+  });
+
+  it('2026 CE in each new regional scheme', () => {
+    expect(fromAstronomicalYear(2026, scheme('seleucid'))).toBe(2337);
+    expect(fromAstronomicalYear(2026, scheme('yazdegerdi'))).toBe(1395);
+    expect(fromAstronomicalYear(2026, scheme('kali_yuga'))).toBe(5128);
+    expect(fromAstronomicalYear(2026, scheme('bengali'))).toBe(1433);
+    expect(fromAstronomicalYear(2026, scheme('kollam'))).toBe(1202);
+    expect(fromAstronomicalYear(2026, scheme('nepal_sambat'))).toBe(1147);
+    expect(fromAstronomicalYear(2026, scheme('chula_sakarat'))).toBe(1388);
   });
 
   it('round-trips through the astronomical hub for every offset scheme', () => {
@@ -141,17 +165,97 @@ describe('Japanese era-table lookup (generic piecewise)', () => {
   });
 
   it('years before the first era return null', () => {
-    expect(lookupEraTable(1867, JAPANESE)).toBeNull();
     expect(lookupEraTable(-100, JAPANESE)).toBeNull();
   });
 
   it('works with an arbitrary era table (pure data addition)', () => {
     const table: EraTable = {
-      id: 'x', name: 'X', sourceUrl: 'https://example.com',
+      id: 'x', name: 'X', region: 'global', sourceUrl: 'https://example.com',
       eras: [{ name: 'Alpha', start: 100 }, { name: 'Beta', start: 200 }],
     };
     expect(lookupEraTable(150, table)).toEqual({ eraName: 'Alpha', eraYear: 51 });
     expect(lookupEraTable(200, table)).toEqual({ eraName: 'Beta', eraYear: 1 });
+  });
+
+  it('honours epoch as the year-counting origin and end as the cutoff', () => {
+    const table: EraTable = {
+      id: 'x', name: 'X', region: 'global', end: 300, sourceUrl: 'https://example.com',
+      eras: [{ name: 'Alpha', start: 100 }, { name: 'Beta', start: 210, epoch: 200 }],
+    };
+    expect(lookupEraTable(210, table)).toEqual({ eraName: 'Beta', eraYear: 11 });
+    expect(lookupEraTable(300, table)?.eraName).toBe('Beta');
+    expect(lookupEraTable(301, table)).toBeNull();
+  });
+});
+
+describe('Japanese nengō full table', () => {
+  it('covers the classical anchors', () => {
+    expect(lookupEraTable(645, JAPANESE)).toMatchObject({ eraName: 'Taika', eraYear: 1 });
+    expect(lookupEraTable(1600, JAPANESE)).toMatchObject({ eraName: 'Keichō', eraYear: 5 });
+    expect(lookupEraTable(701, JAPANESE)).toMatchObject({ eraName: 'Taihō', eraYear: 1 });
+    expect(lookupEraTable(1467, JAPANESE)).toMatchObject({ eraName: 'Ōnin', eraYear: 1 });
+    expect(lookupEraTable(1867, JAPANESE)).toMatchObject({ eraName: 'Keiō', eraYear: 3 });
+  });
+
+  it('Tenpyō-shōhō counts from its true 749 proclamation via epoch', () => {
+    expect(lookupEraTable(749, JAPANESE)).toMatchObject({ eraName: 'Tenpyō-kanpō', eraYear: 1 });
+    expect(lookupEraTable(750, JAPANESE)).toMatchObject({ eraName: 'Tenpyō-shōhō', eraYear: 2 });
+  });
+
+  it('years before Taika return null', () => {
+    expect(lookupEraTable(644, JAPANESE)).toBeNull();
+  });
+
+  it('starts are strictly increasing and there are no duplicate era names', () => {
+    const names = new Set<string>();
+    let prev = -Infinity;
+    for (const e of JAPANESE.eras) {
+      expect(e.start, e.name).toBeGreaterThan(prev);
+      prev = e.start;
+      expect(names.has(e.name), `duplicate name ${e.name}`).toBe(false);
+      names.add(e.name);
+    }
+  });
+});
+
+describe('Chinese niánhào orthodox table', () => {
+  it('covers the dynastic anchors', () => {
+    expect(lookupEraTable(-139, CHINESE)).toMatchObject({ eraName: 'Jiànyuán', eraYear: 1, dynasty: 'Western Han' });
+    expect(lookupEraTable(1700, CHINESE)).toMatchObject({ eraName: 'Kāngxī', eraYear: 39, dynasty: 'Qing' });
+    expect(lookupEraTable(627, CHINESE)).toMatchObject({ eraName: 'Zhēnguàn', eraYear: 1, dynasty: 'Tang' });
+    expect(lookupEraTable(1368, CHINESE)).toMatchObject({ eraName: 'Hóngwǔ', eraYear: 1, dynasty: 'Ming' });
+    expect(lookupEraTable(1912, CHINESE)).toMatchObject({ eraName: 'Xuāntǒng', eraYear: 4 });
+  });
+
+  it('dynastic transitions count from the true era epoch', () => {
+    // Sui reunified the south in 589 = Kāihuáng 9 (proclaimed 581).
+    expect(lookupEraTable(589, CHINESE)).toMatchObject({ eraName: 'Kāihuáng', eraYear: 9 });
+    expect(lookupEraTable(588, CHINESE)).toMatchObject({ eraName: 'Zhēnmíng', eraYear: 2, dynasty: 'Chen' });
+    // Yuan absorbed the Song in 1279 = Zhìyuán 16 (proclaimed 1264).
+    expect(lookupEraTable(1279, CHINESE)).toMatchObject({ eraName: 'Zhìyuán (Kublai)', eraYear: 16, dynasty: 'Yuan' });
+    expect(lookupEraTable(1278, CHINESE)).toMatchObject({ eraName: 'Xiángxīng', eraYear: 1, dynasty: 'Southern Song' });
+  });
+
+  it('ends in 1912: later years return null', () => {
+    expect(CHINESE.end).toBe(1912);
+    expect(lookupEraTable(1913, CHINESE)).toBeNull();
+    expect(lookupEraTable(2026, CHINESE)).toBeNull();
+  });
+
+  it('years before the first niánhào return null', () => {
+    expect(lookupEraTable(-140, CHINESE)).toBeNull();
+  });
+
+  it('starts are strictly increasing, every era has a dynasty, and names are unique', () => {
+    const names = new Set<string>();
+    let prev = -Infinity;
+    for (const e of CHINESE.eras) {
+      expect(e.start, e.name).toBeGreaterThan(prev);
+      prev = e.start;
+      expect(e.dynasty, e.name).toBeTruthy();
+      expect(names.has(e.name), `duplicate name ${e.name}`).toBe(false);
+      names.add(e.name);
+    }
   });
 });
 
@@ -162,6 +266,14 @@ describe('Historical period lookup', () => {
   it('1500 BCE (astro −1499) is New Kingdom Egypt and Shang China', () => {
     expect(periodFor(-1499, 'egypt')?.name).toBe('New Kingdom');
     expect(periodFor(-1499, 'china')?.name).toBe('Shang Dynasty');
+  });
+
+  it('new civilizations resolve periods', () => {
+    expect(periodFor(-2300, 'mesopotamia')?.name).toBe('Akkadian Empire');
+    expect(periodFor(-599, 'mesopotamia')?.name).toBe('Neo-Babylonian Empire');
+    expect(periodFor(-500, 'persia')?.name).toBe('Achaemenid Empire');
+    expect(periodFor(400, 'persia')?.name).toBe('Sasanian Empire');
+    expect(periodFor(1250, 'mongol')?.name).toBe('Mongol Empire');
   });
 
   it('700 CE is Tang China and Classic Maya', () => {
