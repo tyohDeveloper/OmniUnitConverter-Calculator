@@ -151,7 +151,7 @@
   "Enter a whole year number": "Bitte eine ganze Jahreszahl eingeben",
   "era-bce-convention": "Eingabe v. Chr.: „v. Chr.“ wählen oder ein negatives astronomisches Jahr eingeben (0 = 1 v. Chr., −1 = 2 v. Chr.). Alle Umrechnungen laufen über das astronomische Jahr.",
   "note-new-year": "Jahresbeginn ist nicht der 1. Januar — Wert kann um eins abweichen (±1)",
-  "note-hijri": "Näherung für Mondjahre — driftet über Jahrhunderte um ganze Jahre (±1 oder mehr)",
+  "note-hijri": "Tabellarischer islamischer Kalender — exaktes Jahr des 1. Muharram; beobachtungsbasierte Kalender können um ein bis zwei Tage abweichen",
   "note-japanese": "Ab der Meiji-Restauration (1868); Ärengrenzen sind aufs Jahr genau genähert",
   "periods-approx-note": "Alle Zeiträume sind Näherungen („ca.“) nach gängiger wissenschaftlicher Datierung.",
   "ca.": "ca.",

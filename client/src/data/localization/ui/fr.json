@@ -151,7 +151,7 @@
   "Enter a whole year number": "Saisissez une année entière",
   "era-bce-convention": "Saisie av. J.-C. : choisissez av. J.-C. ou entrez une année astronomique négative (0 = 1 av. J.-C., −1 = 2 av. J.-C.). Les conversions passent par l’année astronomique.",
   "note-new-year": "Le nouvel an n'est pas le 1er janvier — la valeur peut varier d'une unité (±1)",
-  "note-hijri": "Approximation d'année lunaire — dérive d'années entières au fil des siècles (±1 ou plus)",
+  "note-hijri": "Calendrier islamique tabulaire — année exacte du 1er Mouharram ; les calendriers par observation peuvent différer d'un jour ou deux",
   "note-japanese": "Depuis la restauration Meiji (1868) ; limites d’ère approximatives à l’année près",
   "periods-approx-note": "Toutes les périodes sont approximatives (« ca. ») selon la datation académique usuelle.",
   "ca.": "ca.",

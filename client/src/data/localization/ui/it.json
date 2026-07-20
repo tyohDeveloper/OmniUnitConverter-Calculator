@@ -151,7 +151,7 @@
   "Enter a whole year number": "Inserisci un anno intero",
   "era-bce-convention": "Input a.C.: scegli a.C. oppure digita un anno astronomico negativo (0 = 1 a.C., −1 = 2 a.C.). Le conversioni passano per l’anno astronomico.",
   "note-new-year": "Il capodanno non è il 1º gennaio — il valore può variare di uno (±1)",
-  "note-hijri": "Approssimazione di anno lunare — deriva di anni interi nei secoli (±1 o più)",
+  "note-hijri": "Calendario islamico tabulare — anno esatto del 1° Muharram; i calendari osservativi possono differire di uno o due giorni",
   "note-japanese": "Dalla Restaurazione Meiji (1868); confini di era approssimati all’anno",
   "periods-approx-note": "Tutti gli intervalli sono approssimativi (\"ca.\") secondo la datazione accademica corrente.",
   "ca.": "ca.",

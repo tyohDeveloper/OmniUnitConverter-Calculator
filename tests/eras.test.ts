@@ -87,21 +87,40 @@ describe('BCE / year-0 handling', () => {
   });
 });
 
-describe('Hijri lunar approximation', () => {
-  it('622 CE is approximately AH 0/1 (epoch)', () => {
-    const ah = fromAstronomicalYear(622, scheme('hijri'));
-    expect(Math.abs(ah)).toBeLessThanOrEqual(1);
+describe('Hijri tabular calendar (exact arithmetic)', () => {
+  it('anchor: 1 Muharram AH 1 falls in 622 CE', () => {
+    expect(toAstronomicalYear(1, scheme('hijri'))).toBe(622);
+    expect(fromAstronomicalYear(622, scheme('hijri'))).toBe(1);
   });
 
-  it('2026 CE ≈ AH 1447 (±1, drift-tolerant)', () => {
-    const ah = fromAstronomicalYear(2026, scheme('hijri'));
-    expect(Math.abs(ah - 1447)).toBeLessThanOrEqual(1);
+  it('known anchor years (year of 1 Muharram)', () => {
+    // 1 Muharram 1447 AH = 26 June 2025; 1448 AH begins 17 June 2026.
+    expect(toAstronomicalYear(1447, scheme('hijri'))).toBe(2025);
+    expect(toAstronomicalYear(1448, scheme('hijri'))).toBe(2026);
+    expect(fromAstronomicalYear(2025, scheme('hijri'))).toBe(1447);
+    expect(fromAstronomicalYear(2026, scheme('hijri'))).toBe(1448);
+    // 1 Muharram 1000 AH = 19 October 1591 (Gregorian).
+    expect(toAstronomicalYear(1000, scheme('hijri'))).toBe(1591);
+    // 1 Muharram 1400 AH = 21 November 1979.
+    expect(toAstronomicalYear(1400, scheme('hijri'))).toBe(1979);
   });
 
-  it('inverse formula round-trips within ±1 year', () => {
-    for (const astro of [700, 1000, 1500, 2000, 2026]) {
+  it('round-trips exactly through the astronomical hub', () => {
+    for (const astro of [622, 700, 1000, 1500, 2000, 2026, 2100]) {
       const back = toAstronomicalYear(fromAstronomicalYear(astro, scheme('hijri')), scheme('hijri'));
-      expect(Math.abs(back - astro)).toBeLessThanOrEqual(1);
+      expect(back, `CE ${astro}`).toBe(astro);
+    }
+    for (const ah of [1, 100, 1000, 1447, 1500]) {
+      const ce = toAstronomicalYear(ah, scheme('hijri'));
+      // The AH year beginning in that CE year is the same year.
+      expect(fromAstronomicalYear(ce, scheme('hijri')), `AH ${ah}`).toBe(ah);
+    }
+  });
+
+  it('monotonic: consecutive AH years start 0 or 1 CE years apart', () => {
+    for (let ah = 1; ah <= 1500; ah++) {
+      const diff = toAstronomicalYear(ah + 1, scheme('hijri')) - toAstronomicalYear(ah, scheme('hijri'));
+      expect(diff === 0 || diff === 1, `AH ${ah}`).toBe(true);
     }
   });
 });

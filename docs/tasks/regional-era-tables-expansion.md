@@ -19,16 +19,18 @@ Expand the Dates/Eras tab (built by the Year & Era Converter task) with full his
 - Rival/parallel Chinese regimes' era names beyond the orthodox line (future data addition).
 - Day-level or lunisolar date conversion; exact new-year-day handling.
 - Korean, Vietnamese, or other regnal era systems (future data additions using the same shape).
-- Sumerian year-name conversion (not a numeric era system — covered only via Mesopotamian periods).
+- Post-1911 Mongolian Bogd Khan era names (tiny table, future data addition if requested).
+- Sumerian year-name conversion and the Turco-Mongol 12-year animal cycle (not numeric era systems — covered only via Historical Periods).
 - Any changes to the unit-conversion engine, Smart Paste, or other tabs.
 
 ## Steps
 1. **Regional grouping UI** — Add a region/section field to the scheme and era-table data shape and group the Dates/Eras pane's scheme selector and results table by regional section, keeping the base offset schemes prominent.
 2. **Japanese nengō data** — Author the full 645–present nengō JSON table with start years, romanized names, ±1 notes for pre-Meiji lunisolar years, and sources.
 3. **Chinese niánhào data** — Author the orthodox-line era table from Han through Qing with start years, romanized names, dynasty annotations, and sources.
-4. **Near East schemes & periods** — Add Seleucid and Yazdegerdi fixed-offset schemes with notes, and Mesopotamian + Persian period ranges to the Historical Periods data.
-5. **Localization** — Add all new scheme/section/note strings to the 12 language files, keeping era names romanized.
-6. **Tests & build verification** — Vitest coverage for new table boundaries and offsets, JSON integrity checks, lint-size, and verify-build; re-baseline the gzip ceiling if needed with documentation.
+4. **Near East schemes & periods** — Add Seleucid and Yazdegerdi fixed-offset schemes with notes, and Mesopotamian + Persian + Mongol/Golden Horde period ranges to the Historical Periods data.
+5. **South & Southeast Asian schemes** — Add Kali Yuga, Bengali San, Kollam, Nepal Sambat, and Chula Sakarat/Burmese fixed-offset schemes with ±1 indicators, notes, and sources.
+6. **Localization** — Add all new scheme/section/note strings to the 12 language files, keeping era names romanized.
+7. **Tests & build verification** — Vitest coverage for new table boundaries and offsets, JSON integrity checks, lint-size, and verify-build; re-baseline the gzip ceiling if needed with documentation.
 
 ## Relevant files
 - `client/src/features/unit-converter/app/UnitConverterApp.tsx`
