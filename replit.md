@@ -7,6 +7,8 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 - Preferred communication style: Simple, everyday language
 - Platform context: iPad using Replit iOS app or Chrome browser
 - iOS limitation: WebKit causes unreliable WebSockets, HMR is disabled
+- No special-case converter panes: every category must use the standard From/To pane (value box + unit dropdown on each side). Do not build custom layouts for individual categories (this rule caused the Date converter's removal).
+- Must maintain the single-file HTML build; audit bundle size before adding heavy libraries.
 
 ## System Architecture
 ### Frontend-Only Architecture
