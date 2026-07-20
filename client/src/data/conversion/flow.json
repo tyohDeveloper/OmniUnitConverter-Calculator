@@ -39,7 +39,7 @@
       "factor": 4.381263638888889e-8,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "lh",
@@ -66,7 +66,7 @@
       "factor": 0.0000010515032733333334,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "impgalh",
@@ -75,7 +75,7 @@
       "factor": 0.0000012628027777777779,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "bbld",
@@ -84,7 +84,7 @@
       "factor": 0.0000018401307291666666,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "ft3h",
@@ -93,7 +93,7 @@
       "factor": 0.000007865777777777777,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "lmin",
@@ -111,7 +111,7 @@
       "factor": 0.0000441631375,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "gpm",
@@ -120,7 +120,7 @@
       "factor": 0.0000630901964,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "impgalmin",
@@ -129,7 +129,7 @@
       "factor": 0.00007576816666666667,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "m3h",
@@ -147,7 +147,7 @@
       "factor": 0.00047194666666666664,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "ls",
@@ -165,7 +165,7 @@
       "factor": 0.00264978825,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "gals",
@@ -174,7 +174,7 @@
       "factor": 0.003785411784,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "impgals",
@@ -183,7 +183,7 @@
       "factor": 0.00454609,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "m3min",
@@ -201,7 +201,7 @@
       "factor": 0.0283168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "bbls",
@@ -210,7 +210,7 @@
       "factor": 0.158987295,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "sv",

@@ -30,7 +30,7 @@
       "factor": 0.0000254,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Thousandth_of_an_inch"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "in",
@@ -39,7 +39,7 @@
       "factor": 0.0254,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Inch"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "ft",
@@ -49,7 +49,7 @@
       "allowPrefixes": true,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Foot_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "ft_in",
@@ -58,7 +58,7 @@
       "factor": 0.3048,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "yd",
@@ -67,7 +67,7 @@
       "factor": 0.9144,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Yard"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "mi",
@@ -76,7 +76,7 @@
       "factor": 1609.344,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Mile"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "nmi",

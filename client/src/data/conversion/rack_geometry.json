@@ -21,7 +21,7 @@
       "factor": 0.0254,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Inch"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "u",
@@ -58,7 +58,7 @@
       "allowPrefixes": true,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Foot_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "ft_in",
@@ -67,7 +67,7 @@
       "factor": 0.3048,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "rack_12u",
@@ -103,7 +103,7 @@
       "factor": 0.9144,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Yard"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "rack_24u",

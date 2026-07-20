@@ -21,7 +21,7 @@
       "factor": 0.05,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Drop_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "pinch",
@@ -30,7 +30,7 @@
       "factor": 0.3,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "dash",
@@ -39,7 +39,7 @@
       "factor": 0.6,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "tsp_us",
@@ -48,7 +48,7 @@
       "factor": 4.92892,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "tsp_metric",
@@ -66,7 +66,7 @@
       "factor": 5.91939,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "dsp",
@@ -84,7 +84,7 @@
       "factor": 14.7868,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "tbsp_metric",
@@ -102,7 +102,7 @@
       "factor": 17.7582,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "fl_oz_uk",
@@ -111,7 +111,7 @@
       "factor": 28.4131,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "fl_oz_us",
@@ -120,7 +120,7 @@
       "factor": 29.5735,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "shot",
@@ -129,7 +129,7 @@
       "factor": 44.3603,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "jigger",
@@ -138,7 +138,7 @@
       "factor": 44.3603,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "cup_jp",
@@ -156,7 +156,7 @@
       "factor": 236.588,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "cup_metric",
@@ -174,7 +174,7 @@
       "factor": 284.131,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "pt_us",
@@ -183,7 +183,7 @@
       "factor": 473.176,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "pt_uk",
@@ -192,7 +192,7 @@
       "factor": 568.261,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "qt_us",
@@ -201,7 +201,7 @@
       "factor": 946.353,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "l",
@@ -220,7 +220,7 @@
       "factor": 3785.411784,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     }
   ]
 }

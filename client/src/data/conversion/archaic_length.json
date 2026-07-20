@@ -228,7 +228,7 @@
       "factor": 1.143,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Ell"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "hand",
@@ -237,7 +237,7 @@
       "factor": 0.1016,
       "unitType": "US_COMMON",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Hand_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "link",
@@ -255,7 +255,7 @@
       "factor": 1.8288,
       "unitType": "US_COMMON",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Fathom"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "rod",
@@ -291,7 +291,7 @@
       "factor": 4828.032,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/League_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "verst_ru",
@@ -336,7 +336,7 @@
       "factor": 0.008466666666666667,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Barleycorn_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     }
   ]
 }

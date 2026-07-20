@@ -81,10 +81,10 @@
   "Chi (China)": "Chi (China)",
   "Zhang (China)": "Zhang (China)",
   "Li (China)": "Li (China)",
-  "Mace (China, PRC)": "Mace (China)",
-  "Tael (China, PRC)": "Tael (China)",
-  "Jin (China, PRC)": "Jin (China)",
-  "Dan (China, PRC)": "Dan (China)",
+  "Mace (China)": "Mace (China)",
+  "Tael (China)": "Tael (China)",
+  "Jin (China)": "Jin (China)",
+  "Dan (China)": "Dan (China)",
   "Sheng (China)": "Sheng (China)",
   "Dou (China)": "Dou (China)",
   "Mu (China)": "Mu (China)",
@@ -705,5 +705,5 @@
   "Quart (US Fluid)": "Quarto (EUA, líquido)",
   "Quart (US Dry)": "Quarto (EUA, seco)",
   "Dunam (Israel)": "Dunam (Israel)",
-  "Dan (China)": "Dan (China)"
+  "Dan (China, Volume)": "Dan (China)"
 }

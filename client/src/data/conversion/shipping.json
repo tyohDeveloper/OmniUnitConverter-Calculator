@@ -21,7 +21,7 @@
       "factor": 0.9144,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Yard"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "fathom",
@@ -30,7 +30,7 @@
       "factor": 1.8288,
       "unitType": "US_COMMON",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Fathom"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "teu_w",

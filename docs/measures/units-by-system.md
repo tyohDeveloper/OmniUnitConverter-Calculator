@@ -455,7 +455,6 @@ One section per measurement system or tradition.
 |--------|-------------|-------------------|
 | `pk` | Peck | 8.80977 L |
 | `bu` | Bushel | 35.2391 L |
-| `bu` | Bushel | 0.0352391 m³ |
 | `dry pt` | Pint (US Dry) | 5.5061e-4 m³ |
 | `dry qt` | Quart (US Dry) | 0.00110122 m³ |
 | `pk` | Peck (US) | 0.00880977 m³ |
@@ -625,13 +624,13 @@ One section per measurement system or tradition.
 | `chi` | Chi (China) | 0.3333 m |
 | `zhang` | Zhang (China) | 3.333 m |
 | `li-cn` | Li (China) | 500 m |
-| `mace` | Mace (China, PRC) | 0.005 kg |
-| `tael` | Tael (China, PRC) | 0.05 kg |
-| `jin` | Jin (China, PRC) | 0.5 kg |
-| `dan` | Dan (China, PRC) | 50 kg |
+| `mace` | Mace (China) | 0.005 kg |
+| `tael` | Tael (China) | 0.05 kg |
+| `jin` | Jin (China) | 0.5 kg |
+| `dan` | Dan (China) | 50 kg |
 | `sheng` | Sheng (China) | 1.0355 L |
 | `dou` | Dou (China) | 10.355 L |
-| `dan-v` | Dan (China) | 103.55 L |
+| `dan-v` | Dan (China, Volume) | 103.55 L |
 | `万` | Wan | 10000 1 |
 | `亿` | Yi | 100000000 1 |
 | `兆` | Zhao | 1e+12 1 |

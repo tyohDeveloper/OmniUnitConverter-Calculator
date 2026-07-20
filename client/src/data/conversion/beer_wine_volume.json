@@ -21,7 +21,7 @@
       "factor": 0.0000284130625,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Imperial_units"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "floz",
@@ -30,7 +30,7 @@
       "factor": 0.0000295735,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "glass_wine",
@@ -48,7 +48,7 @@
       "factor": 0.000236588,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "bottle_beer_small",
@@ -75,7 +75,7 @@
       "factor": 0.000473176,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "bottle_beer_large",
@@ -93,7 +93,7 @@
       "factor": 0.00056826125,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pint"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "bottle_wine",
@@ -111,7 +111,7 @@
       "factor": 0.000946353,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "l",
@@ -130,7 +130,7 @@
       "factor": 0.0011365225,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Quart"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "magnum_wine",
@@ -148,7 +148,7 @@
       "factor": 0.003785411784,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "gal_imp",
@@ -157,7 +157,7 @@
       "factor": 0.00454609,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gallon"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "mini_keg",
@@ -184,16 +184,7 @@
       "factor": 0.0283168,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
-    },
-    {
-      "id": "bu",
-      "name": "Bushel",
-      "symbol": "bu",
-      "factor": 0.0352391,
-      "unitType": "US_COMMON_DRY",
-      "measurementSystem": "US_CUSTOMARY_DRY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Bushel"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "keg_beer",
@@ -220,7 +211,7 @@
       "factor": 0.764555,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     }
   ]
 }

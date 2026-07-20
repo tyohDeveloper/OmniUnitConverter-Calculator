@@ -97,7 +97,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `baht` | Baht (Thailand) | Archaic Mass | kg | 0.015244 |
 | `catty` | Catty (HK/Traditional) | Archaic Mass | kg | 0.60478982 |
 | `ct` | Carat (Metric) | Archaic Mass | kg | 2e-4 |
-| `dan` | Dan (China, PRC) | Archaic Mass | kg | 50 |
+| `dan` | Dan (China) | Archaic Mass | kg | 50 |
 | `don` | Don (Korea) | Archaic Mass | kg | 0.00375 |
 | `dr` | Dram (Avoirdupois, US) | Archaic Mass | kg | 0.001771845 |
 | `dr ap` | Dram (Apothecaries') | Archaic Mass | kg | 0.0038879346 |
@@ -106,11 +106,11 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `g` | Gram | Archaic Mass | kg | 0.001 |
 | `geun` | Geun (Korea) | Archaic Mass | kg | 0.6 |
 | `gr` | Grain | Archaic Mass | kg | 6.479891e-5 |
-| `jin` | Jin (China, PRC) | Archaic Mass | kg | 0.5 |
+| `jin` | Jin (China) | Archaic Mass | kg | 0.5 |
 | `kan` | Kan (Japan) | Archaic Mass | kg | 3.75 |
 | `kg` | Kilogram | Archaic Mass | kg | 1 |
 | `livre` | Livre (French) | Archaic Mass | kg | 0.4895 |
-| `mace` | Mace (China, PRC) | Archaic Mass | kg | 0.005 |
+| `mace` | Mace (China) | Archaic Mass | kg | 0.005 |
 | `maund` | Maund (South Asia) | Archaic Mass | kg | 37.324 |
 | `mina` | Mina (Biblical) | Archaic Mass | kg | 0.571 |
 | `momme` | Momme (Japan) | Archaic Mass | kg | 0.00375 |
@@ -123,7 +123,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `s ap` | Scruple (Apothecaries') | Archaic Mass | kg | 0.001296 |
 | `seer` | Seer (South Asia) | Archaic Mass | kg | 0.9331 |
 | `shekel` | Shekel (Biblical) | Archaic Mass | kg | 0.0114 |
-| `tael` | Tael (China, PRC) | Archaic Mass | kg | 0.05 |
+| `tael` | Tael (China) | Archaic Mass | kg | 0.05 |
 | `talent` | Talent (Biblical) | Archaic Mass | kg | 34.2 |
 | `tola` | Tola (South Asia) | Archaic Mass | kg | 0.0116638 |
 | `zolotnik` | Zolotnik (Russia) | Archaic Mass | kg | 0.0042658 |
@@ -138,7 +138,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `congius` | Congius (Roman) | Archaic Volume | L | 3.275 |
 | `cord` | Cord | Archaic Volume | L | 3624.56 |
 | `cp (US)` | Cup (US) | Archaic Volume | L | 0.236588 |
-| `dan-v` | Dan (China) | Archaic Volume | L | 103.55 |
+| `dan-v` | Dan (China, Volume) | Archaic Volume | L | 103.55 |
 | `doe` | Doe (Korea) | Archaic Volume | L | 1.8039 |
 | `dou` | Dou (China) | Archaic Volume | L | 10.355 |
 | `firkin` | Firkin (Imperial) | Archaic Volume | L | 40.9148 |
@@ -182,7 +182,6 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `btl (large)` | Bottle (Beer, large) | Beer & Wine | m³ | 5e-4 |
 | `btl (small)` | Bottle (Beer, small) | Beer & Wine | m³ | 3.5e-4 |
 | `btl (wine)` | Bottle (Wine) | Beer & Wine | m³ | 7.5e-4 |
-| `bu` | Bushel | Beer & Wine | m³ | 0.0352391 |
 | `cp (US)` | Cup (US) | Beer & Wine | m³ | 2.36588e-4 |
 | `fl oz (imp)` | Fluid Ounce (Imp) | Beer & Wine | m³ | 2.84130625e-5 |
 | `fl oz (US)` | Fluid Ounce (US) | Beer & Wine | m³ | 2.95735e-5 |

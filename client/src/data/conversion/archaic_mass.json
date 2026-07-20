@@ -79,7 +79,7 @@
     },
     {
       "id": "mace_cn",
-      "name": "Mace (China, PRC)",
+      "name": "Mace (China)",
       "symbol": "mace",
       "factor": 0.005,
       "unitType": "SI_BASE",
@@ -88,7 +88,7 @@
     },
     {
       "id": "tael_cn",
-      "name": "Tael (China, PRC)",
+      "name": "Tael (China)",
       "symbol": "tael",
       "factor": 0.05,
       "unitType": "SI_BASE",
@@ -97,7 +97,7 @@
     },
     {
       "id": "jin_cn",
-      "name": "Jin (China, PRC)",
+      "name": "Jin (China)",
       "symbol": "jin",
       "factor": 0.5,
       "unitType": "SI_BASE",
@@ -106,7 +106,7 @@
     },
     {
       "id": "dan_cn",
-      "name": "Dan (China, PRC)",
+      "name": "Dan (China)",
       "symbol": "dan",
       "factor": 50,
       "unitType": "SI_BASE",
@@ -237,7 +237,7 @@
       "factor": 0.001771845,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Dram_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "dram_ap",

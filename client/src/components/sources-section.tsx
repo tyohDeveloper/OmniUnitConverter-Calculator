@@ -14,6 +14,7 @@ interface SourcesSectionProps {
 function linkLabel(url: string): string {
   if (url.includes("bipm.org")) return "BIPM";
   if (url.includes("nist.gov")) return "NIST";
+  if (url.includes("legislation.gov.uk")) return "UK Legislation";
   if (url.includes("wikipedia.org")) return "Wikipedia";
   try {
     return new URL(url).hostname.replace(/^www\./, "");

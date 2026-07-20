@@ -106,7 +106,7 @@
     },
     {
       "id": "dan_vol_cn",
-      "name": "Dan (China)",
+      "name": "Dan (China, Volume)",
       "symbol": "dan-v",
       "factor": 103.55,
       "unitType": "SI_BASE",
@@ -147,7 +147,7 @@
       "factor": 0.142065,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gill_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "firkin",
@@ -156,7 +156,7 @@
       "factor": 40.9148,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Firkin_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "minim",
@@ -165,7 +165,7 @@
       "factor": 0.0000616115,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Minim_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "fl_dram",
@@ -174,7 +174,7 @@
       "factor": 0.00369669,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "teaspoon",
@@ -183,7 +183,7 @@
       "factor": 0.00492892,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "tablespoon",
@@ -192,7 +192,7 @@
       "factor": 0.0147868,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Tablespoon"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "jigger",
@@ -201,7 +201,7 @@
       "factor": 0.044355,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/United_States_customary_units"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "gill_us",
@@ -210,7 +210,7 @@
       "factor": 0.118294,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gill_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "cup_us",
@@ -219,7 +219,7 @@
       "factor": 0.236588,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cup_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "peck_us",
@@ -228,7 +228,7 @@
       "factor": 8.80977,
       "unitType": "US_COMMON_DRY",
       "measurementSystem": "US_CUSTOMARY_DRY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Peck"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "bushel_us",
@@ -237,7 +237,7 @@
       "factor": 35.2391,
       "unitType": "US_COMMON_DRY",
       "measurementSystem": "US_CUSTOMARY_DRY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Bushel"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "hogshead",
@@ -246,7 +246,7 @@
       "factor": 238.481,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Hogshead"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "cord_us",
@@ -255,7 +255,7 @@
       "factor": 3624.56,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Cord_(unit)"
+      "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
       "id": "m3",
@@ -274,7 +274,7 @@
       "factor": 953.92,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Tun_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "butt",
@@ -283,7 +283,7 @@
       "factor": 476.96,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Butt_(unit)"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "kilderkin",
@@ -292,7 +292,7 @@
       "factor": 81.8296,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Kilderkin"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "pottle",
@@ -301,7 +301,7 @@
       "factor": 2.273045,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pottle"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "chaldron",
@@ -310,7 +310,7 @@
       "factor": 1309.27,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Chaldron"
+      "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
     },
     {
       "id": "sextarius",

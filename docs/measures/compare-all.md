@@ -155,10 +155,10 @@ One section per measurement category. Each row shows how many base SI units one 
 | `kan` | Kan (Japan) | 3.75 kg |
 | `don` | Don (Korea) | 0.00375 kg |
 | `geun` | Geun (Korea) | 0.6 kg |
-| `mace` | Mace (China, PRC) | 0.005 kg |
-| `tael` | Tael (China, PRC) | 0.05 kg |
-| `jin` | Jin (China, PRC) | 0.5 kg |
-| `dan` | Dan (China, PRC) | 50 kg |
+| `mace` | Mace (China) | 0.005 kg |
+| `tael` | Tael (China) | 0.05 kg |
+| `jin` | Jin (China) | 0.5 kg |
+| `dan` | Dan (China) | 50 kg |
 | `catty` | Catty (HK/Traditional) | 0.60478982 kg |
 | `picul` | Picul (HK/Traditional) | 60.478982 kg |
 | `ratti` | Ratti (South Asia) | 1.215e-4 kg |
@@ -205,7 +205,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `mal` | Mal (Korea) | 18.039 L |
 | `sheng` | Sheng (China) | 1.0355 L |
 | `dou` | Dou (China) | 10.355 L |
-| `dan-v` | Dan (China) | 103.55 L |
+| `dan-v` | Dan (China, Volume) | 103.55 L |
 | `amphora` | Amphora (Greek) | 26.026 L |
 | `fl s` | Fluid Scruple (Apothecaries') | 0.00123223 L |
 | `fl oz ap` | Fluid Ounce (Apothecaries') | 0.0295735 L |
@@ -270,7 +270,6 @@ One section per measurement category. Each row shows how many base SI units one 
 | `mini keg` | Mini Keg (Beer) | 0.005 m³ |
 | `pony` | Pony Keg (Beer) | 0.0147 m³ |
 | `ft³` | Cubic Foot | 0.0283168 m³ |
-| `bu` | Bushel | 0.0352391 m³ |
 | `keg` | Keg (Beer) | 0.0587 m³ |
 | `bbl (beer)` | Barrel (Beer) | 0.117 m³ |
 | `yd³` | Cubic Yard | 0.764555 m³ |
