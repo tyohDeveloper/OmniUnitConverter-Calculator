@@ -1,0 +1,17 @@
+{
+  "schemes": [
+    { "id": "gregorian", "name": "Gregorian (CE/BCE)", "kind": "offset", "offset": 0, "newYearJan1": true, "sourceUrl": "https://en.wikipedia.org/wiki/Common_Era" },
+    { "id": "holocene", "name": "Holocene Era", "kind": "offset", "offset": 10000, "newYearJan1": true, "sourceUrl": "https://en.wikipedia.org/wiki/Holocene_calendar" },
+    { "id": "buddhist", "name": "Buddhist Era", "kind": "offset", "offset": 543, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Buddhist_calendar" },
+    { "id": "minguo", "name": "Minguo (ROC)", "kind": "offset", "offset": -1911, "newYearJan1": true, "sourceUrl": "https://en.wikipedia.org/wiki/Republic_of_China_calendar" },
+    { "id": "juche", "name": "Juche", "kind": "offset", "offset": -1911, "newYearJan1": true, "sourceUrl": "https://en.wikipedia.org/wiki/Juche_calendar" },
+    { "id": "hebrew", "name": "Hebrew (Anno Mundi)", "kind": "offset", "offset": 3760, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Hebrew_calendar" },
+    { "id": "byzantine", "name": "Byzantine (Anno Mundi)", "kind": "offset", "offset": 5508, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Byzantine_calendar" },
+    { "id": "auc", "name": "Ab Urbe Condita", "kind": "offset", "offset": 753, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Ab_urbe_condita" },
+    { "id": "saka", "name": "Saka Era", "kind": "offset", "offset": -78, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Indian_national_calendar" },
+    { "id": "vikram", "name": "Vikram Samvat", "kind": "offset", "offset": 57, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Vikram_Samvat" },
+    { "id": "ethiopian", "name": "Ethiopian", "kind": "offset", "offset": -7, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Ethiopian_calendar" },
+    { "id": "solar_hijri", "name": "Solar Hijri", "kind": "offset", "offset": -621, "newYearJan1": false, "note": "note-new-year", "sourceUrl": "https://en.wikipedia.org/wiki/Solar_Hijri_calendar" },
+    { "id": "hijri", "name": "Islamic (Hijri, lunar)", "kind": "lunar_hijri", "newYearJan1": false, "note": "note-hijri", "sourceUrl": "https://en.wikipedia.org/wiki/Islamic_calendar" }
+  ]
+}

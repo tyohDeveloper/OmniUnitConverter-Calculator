@@ -1,0 +1,50 @@
+{
+  "civilizations": [
+    {
+      "id": "egypt",
+      "name": "Ancient Egypt",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ancient_Egypt",
+      "periods": [
+        { "name": "Early Dynastic Period", "start": -3150, "end": -2686 },
+        { "name": "Old Kingdom", "start": -2686, "end": -2181 },
+        { "name": "First Intermediate Period", "start": -2181, "end": -2055 },
+        { "name": "Middle Kingdom", "start": -2055, "end": -1650 },
+        { "name": "Second Intermediate Period", "start": -1650, "end": -1550 },
+        { "name": "New Kingdom", "start": -1550, "end": -1069 },
+        { "name": "Third Intermediate Period", "start": -1069, "end": -664 },
+        { "name": "Late Period", "start": -664, "end": -332 },
+        { "name": "Ptolemaic Period", "start": -332, "end": -30 }
+      ]
+    },
+    {
+      "id": "china",
+      "name": "Ancient China",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dynasties_of_China",
+      "periods": [
+        { "name": "Shang Dynasty", "start": -1600, "end": -1046 },
+        { "name": "Zhou Dynasty", "start": -1046, "end": -256 },
+        { "name": "Qin Dynasty", "start": -221, "end": -206 },
+        { "name": "Han Dynasty", "start": -206, "end": 220 },
+        { "name": "Three Kingdoms", "start": 220, "end": 280 },
+        { "name": "Jin Dynasty", "start": 266, "end": 420 },
+        { "name": "Northern & Southern Dynasties", "start": 420, "end": 589 },
+        { "name": "Sui Dynasty", "start": 581, "end": 618 },
+        { "name": "Tang Dynasty", "start": 618, "end": 907 },
+        { "name": "Song Dynasty", "start": 960, "end": 1279 },
+        { "name": "Yuan Dynasty", "start": 1271, "end": 1368 },
+        { "name": "Ming Dynasty", "start": 1368, "end": 1644 },
+        { "name": "Qing Dynasty", "start": 1644, "end": 1912 }
+      ]
+    },
+    {
+      "id": "maya",
+      "name": "Maya Civilization",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Maya_civilization",
+      "periods": [
+        { "name": "Preclassic Period", "start": -2000, "end": 250 },
+        { "name": "Classic Period", "start": 250, "end": 900 },
+        { "name": "Postclassic Period", "start": 900, "end": 1521 }
+      ]
+    }
+  ]
+}

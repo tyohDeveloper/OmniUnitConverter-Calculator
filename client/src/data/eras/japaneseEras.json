@@ -1,0 +1,13 @@
+{
+  "id": "japanese",
+  "name": "Japanese Era",
+  "note": "note-japanese",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_era_name",
+  "eras": [
+    { "name": "Meiji", "start": 1868 },
+    { "name": "Taish\u014d", "start": 1912 },
+    { "name": "Sh\u014dwa", "start": 1926 },
+    { "name": "Heisei", "start": 1989 },
+    { "name": "Reiwa", "start": 2019 }
+  ]
+}
