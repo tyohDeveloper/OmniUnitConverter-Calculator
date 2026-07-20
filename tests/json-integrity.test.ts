@@ -243,6 +243,32 @@ describe('JSON Integrity: cross-file consistency', () => {
     }
   });
 
+  it('every en.json key maps to a current unit/category name or a documented app key (no dead keys)', () => {
+    // Keys referenced directly by application code via t()/translateUnit
+    const CODE_KEYS = [
+      'Thermodynamics & Chemistry', 'Radiation & Physics', 'Human Response', 'Other',
+      'Refractive Power', 'Base unit:', 'Base Factor', 'SI Base Units', 'Precision',
+      'Copy', 'Prefix', 'Unit', 'Result', 'CALCULATOR - RPN', 'CALCULATOR',
+      'Clear', 'Clear calculator', 'From', 'To', 'Compare All', 'Compare', 'Input',
+    ];
+    // Prefix-generated display names (e.g. SI prefix + base unit)
+    const PREFIXED_KEYS = [
+      'Millibar', 'Kilojoule', 'Kilotonne of TNT', 'Megatonne of TNT', 'Kilowatt',
+      'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte',
+    ];
+    const toTitleCase = (s: string) =>
+      s.replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
+    const allowed = new Set<string>([...CODE_KEYS, ...PREFIXED_KEYS]);
+    for (const cat of CONVERSION_DATA) {
+      allowed.add(cat.name);
+      allowed.add(toTitleCase(cat.baseUnit));
+      for (const unit of cat.units) allowed.add(unit.name);
+    }
+    for (const key of Object.keys(UNIT_NAME_TRANSLATIONS['en'])) {
+      expect(allowed.has(key), `orphaned en.json key "${key}" — not a current unit/category name; remove it from all locales or add it to the allowlist`).toBe(true);
+    }
+  });
+
   it('BTU naming policy: BTU everywhere except zh/ru/ar native terms', () => {
     expect(UNIT_NAME_TRANSLATIONS['zh']['BTU']).toBe('英热单位');
     expect(UNIT_NAME_TRANSLATIONS['ru']['BTU']).toBe('БТЕ');

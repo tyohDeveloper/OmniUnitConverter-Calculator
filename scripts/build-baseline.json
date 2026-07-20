@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1243136,
-  "gzipBytes": 444729,
-  "recordedAt": "2026-07-19",
-  "note": "Task 99 re-baseline: added build-time translation pruning (scripts/vite-plugin-prune-translations.ts) which drops localization entries identical to their English/key fallback; build dropped 445.3 -> 434.3 kB gzip. Baseline recorded at 434.3 kB so ceiling (x1.05) restores ~21 kB headroom while still catching regressions."
+  "rawBytes": 1389249,
+  "gzipBytes": 471370,
+  "recordedAt": "2026-07-20",
+  "note": "Task 116 re-baseline: bundle had already grown past the old ceiling before this task started, due to recently merged translation backfill (non-en entries survive build-time pruning). This task itself shrank the bundle by removing 122 confirmed-dead unit-name keys from all 12 locale files and added a json-integrity guard against future orphaned en.json keys. Baseline recorded at 460.3 kB gzip; ceiling (x1.05) gives ~23 kB headroom."
 }
