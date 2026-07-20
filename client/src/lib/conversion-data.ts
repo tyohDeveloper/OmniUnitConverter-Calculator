@@ -151,18 +151,7 @@ export type UnitCategory =
   | "cooking"
   | "paper_sizes"
   | "logarithmic"
-  | "unitless"
-  | "date";
-
-// Categories with no factor-based units (custom converter UIs). They are not
-// present in CONVERSION_DATA, and are additionally guarded out of every
-// factor-based consumer below (smart paste maps, comparison mode) so nothing
-// can match or crash even if unit data were ever added for them.
-const NON_UNIT_CATEGORIES = new Set<UnitCategory>(['date']);
-
-export function isNonUnitCategory(categoryId: string): boolean {
-  return NON_UNIT_CATEGORIES.has(categoryId as UnitCategory);
-}
+  | "unitless";
 
 export interface Prefix {
   id: string;
@@ -463,7 +452,6 @@ function getEnglishNameMap(): Map<string, SymbolMapEntry> {
   if (englishNameMapCache) return englishNameMapCache;
   const map: Map<string, SymbolMapEntry> = new Map();
   for (const category of CONVERSION_DATA) {
-    if (isNonUnitCategory(category.id)) continue;
     for (const unit of category.units) {
       const key = unit.name.toLowerCase();
       if (!isNonLinearUnit(unit) && !map.has(key)) map.set(key, makeEntry(category, unit));
@@ -475,7 +463,6 @@ function getEnglishNameMap(): Map<string, SymbolMapEntry> {
 
 function registerBaseUnits(map: SymbolMap): void {
   for (const category of CONVERSION_DATA) {
-    if (isNonUnitCategory(category.id)) continue;
     const base = category.units.find(u => !isNonLinearUnit(u));
     if (base && base.factor === 1 && !map.has(base.symbol)) map.set(base.symbol, makeEntry(category, base));
   }
@@ -483,7 +470,6 @@ function registerBaseUnits(map: SymbolMap): void {
 
 function registerRemainingUnits(map: SymbolMap): void {
   for (const category of CONVERSION_DATA) {
-    if (isNonUnitCategory(category.id)) continue;
     for (const unit of category.units) {
       if (!isNonLinearUnit(unit) && !map.has(unit.symbol)) map.set(unit.symbol, makeEntry(category, unit));
     }
@@ -1251,7 +1237,6 @@ const sortUnitsWithBase = (units: UnitDefinition[], baseUnit: UnitDefinition | u
 // except the source unit and any non-linear unit (math functions, log scales,
 // pH), which factor-based consumers must exclude.
 export function getComparisonUnits(category: string, fromUnitId: string): UnitDefinition[] {
-  if (isNonUnitCategory(category)) return [];
   const catData = CONVERSION_DATA.find(c => c.id === category);
   if (!catData) return [];
   return catData.units.filter(u => u.id !== fromUnitId && !isNonLinearUnit(u));
@@ -1259,7 +1244,6 @@ export function getComparisonUnits(category: string, fromUnitId: string): UnitDe
 
 // Special handling for offset/inverse units to preserve data ordering
 export function getFilteredSortedUnits(category: string): UnitDefinition[] {
-  if (isNonUnitCategory(category)) return [];
   const catData = CONVERSION_DATA.find(c => c.id === category);
   if (!catData) return [];
   const units = catData.units;

@@ -139,16 +139,5 @@
   "Unitless Numbers": "무차원 수",
   "Logarithmic Scales": "로그 스케일",
   "Sources": "출처",
-  "sources-note": "모든 단위의 환산 계수와 정의 관계를 각 단위별 참조 링크와 함께 제공합니다. 링크는 새 탭에서 열립니다.",
-  "Date": "날짜",
-  "date-subtitle": "역법 간 날짜 변환",
-  "Calendar": "역법",
-  "Era": "연호/시대",
-  "Year": "년",
-  "Month": "월",
-  "Day": "일",
-  "All calendars": "모든 역법",
-  "date-error-year": "연도를 정수로 입력하세요",
-  "date-error-day": "일을 정수로 입력하세요",
-  "date-error-invalid": "이 역법에서는 유효하지 않은 날짜입니다"
+  "sources-note": "모든 단위의 환산 계수와 정의 관계를 각 단위별 참조 링크와 함께 제공합니다. 링크는 새 탭에서 열립니다."
 }

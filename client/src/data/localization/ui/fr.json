@@ -139,16 +139,5 @@
   "Unitless Numbers": "Nombres Sans Dimension",
   "Logarithmic Scales": "Échelles logarithmiques",
   "Sources": "Sources",
-  "sources-note": "Facteurs de conversion et relations de définition pour chaque unité, avec un lien de référence pour chacune. Les liens s'ouvrent dans un nouvel onglet.",
-  "Date": "Date",
-  "date-subtitle": "Convertir une date entre systèmes calendaires",
-  "Calendar": "Calendrier",
-  "Era": "Ère",
-  "Year": "Année",
-  "Month": "Mois",
-  "Day": "Jour",
-  "All calendars": "Tous les calendriers",
-  "date-error-year": "Saisissez une année entière",
-  "date-error-day": "Saisissez un jour entier",
-  "date-error-invalid": "Date invalide pour ce calendrier"
+  "sources-note": "Facteurs de conversion et relations de définition pour chaque unité, avec un lien de référence pour chacune. Les liens s'ouvrent dans un nouvel onglet."
 }

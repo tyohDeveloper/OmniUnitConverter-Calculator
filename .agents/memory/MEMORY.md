@@ -1,8 +1,7 @@
 - [RPN X-register origin metadata](rpn-x-origin-metadata.md) — stale-closure metadata stamping makes X display old values; compute meta inside setRpnStack functional updater.
-- [Build size ceiling](build-size-ceiling.md) — verify-build enforces a gzip ceiling; re-baselined to 507.8 kB (July 2026, Temporal polyfill); ~25 kB headroom.
+- [Build size ceiling](build-size-ceiling.md) — verify-build enforces a gzip ceiling on the single-file build; ~23 kB headroom (July 2026); backfill growth audited legitimate — re-baseline likely for big data additions.
 - [Conversion function registry](conversion-function-registry.md) — non-factor conversions go through a named code-side registry; JSON references by name, factor must stay in sync for linear pairs.
 - [Sources notation conventions](sources-notation-conventions.md) — user rejected superscript fraction exponents (10⁽ˣ⁄¹⁰⁾); keep caret form 10^(x/10), superscripts only for single-char exponents.
 - [Unit translation key hygiene](translation-key-hygiene.md) — en.json keys must match current unit/category names or a documented allowlist; guard test in json-integrity enforces it.
 - [Playwright e2e chromium](playwright-e2e-chromium.md) — downloaded browsers fail on NixOS; run with PW_CHROMIUM_PATH=$(which chromium).
 - [Thai official source citations](thai-source-citations.md) — ditp.go.th PDF of W&M Act B.E. 2542 is reachable (needs browser UA); no Thai law defines the 15.244 g baht, so baht keeps Wikipedia.
-- [Temporal polyfill for calendar dates](temporal-polyfill-notes.md) — pre-ROC era code is 'roc-inverse' not 'broc'; polyfill costs ~60 kB gzip (drove July 2026 re-baseline).

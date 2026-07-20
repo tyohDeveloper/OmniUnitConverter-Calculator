@@ -463,11 +463,7 @@ export function useConverterController(): UseConverterControllerReturn {
       setResult(null);
       return;
     }
-    const catData = CONVERSION_DATA.find(c => c.id === activeCategory);
-    if (!catData) {
-      setResult(null);
-      return;
-    }
+    const catData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
     const fromUnitData = catData.units.find(u => u.id === fromUnit);
     const toUnitData = catData.units.find(u => u.id === toUnit);
     const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
@@ -542,8 +538,7 @@ export function useConverterController(): UseConverterControllerReturn {
 
   const copyResult = useCallback(() => {
     if (result !== null) {
-      const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-      if (!categoryData) return;
+      const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
       const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
       const toUnitData = categoryData.units.find(u => u.id === toUnit);
       const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
@@ -614,8 +609,7 @@ export function useConverterController(): UseConverterControllerReturn {
     setRpnSelectedAlternative, setCalcValues]);
 
   const copyFromBaseFactor = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-    if (!categoryData) return;
+    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
     const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
     const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
     if (fromUnitData) {
@@ -630,8 +624,7 @@ export function useConverterController(): UseConverterControllerReturn {
   }, [activeCategory, getCategoryDimensions, triggerFlashFromSIBase]);
 
   const copyToBaseFactor = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-    if (!categoryData) return;
+    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
     const toUnitData = categoryData.units.find(u => u.id === toUnit);
     const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
     if (toUnitData) {
@@ -646,8 +639,7 @@ export function useConverterController(): UseConverterControllerReturn {
   }, [activeCategory, getCategoryDimensions, triggerFlashToSIBase]);
 
   const copyConversionRatio = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-    if (!categoryData) return;
+    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
     const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
     const toUnitData = categoryData.units.find(u => u.id === toUnit);
     const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];

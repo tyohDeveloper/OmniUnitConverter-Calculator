@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1558682,
-  "gzipBytes": 519943,
+  "rawBytes": 1389249,
+  "gzipBytes": 471370,
   "recordedAt": "2026-07-20",
-  "note": "Task 170 re-baseline at 507.8 kB gzip (was 460.3 kB). The ~60 kB gzip growth is the @js-temporal/polyfill bundled for the new Date converter category, which converts calendar dates across all 16 Temporal/CLDR calendar systems (Hebrew, Chinese, Islamic variants, Japanese eras, etc.). Audited legitimate: the polyfill is the only production-grade implementation of non-Gregorian calendar arithmetic; Intl.DateTimeFormat alone can format but not construct/validate dates in these calendars. No other bundle growth; remaining app code added <2 kB gzip."
+  "note": "Task 116 re-baseline at 460.3 kB gzip; ceiling (x1.05) gives ~23 kB headroom. Task 118 audit (2026-07-20) confirmed the ~26 kB growth over the 434.3 kB baseline is legitimate: the translation backfill added ~24.6 kB of gzipped post-prune unit-name data across the 10 non-English locales (~1.4-1.7 kB each), Task 116's dead-key removal then clawed back ~9 kB. No orphan keys, no duplicated payload, no unpruned assets found; only ~25 case-only entries survive pruning and those reflect intentional language capitalization style (German noun caps, French lowercase). Nothing trimmable."
 }

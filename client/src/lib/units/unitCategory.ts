@@ -74,5 +74,4 @@ export type UnitCategory =
   | "cooking"
   | "paper_sizes"
   | "logarithmic"
-  | "unitless"
-  | "date";
+  | "unitless";
