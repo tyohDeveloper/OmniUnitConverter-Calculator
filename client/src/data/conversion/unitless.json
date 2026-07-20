@@ -93,9 +93,9 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Alcohol_by_volume"
     },
     {
-      "id": "caret",
-      "name": "Caret",
-      "symbol": "caret",
+      "id": "karat",
+      "name": "Karat",
+      "symbol": "kt",
       "factor": 0.0416666667,
       "measurementSystem": "NONE",
       "sourceUrl": "https://en.wikipedia.org/wiki/Karat"
