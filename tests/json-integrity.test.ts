@@ -251,14 +251,9 @@ describe('JSON Integrity: cross-file consistency', () => {
       'Copy', 'Prefix', 'Unit', 'Result', 'CALCULATOR - RPN', 'CALCULATOR',
       'Clear', 'Clear calculator', 'From', 'To', 'Compare All', 'Compare', 'Input',
     ];
-    // Prefix-generated display names (e.g. SI prefix + base unit)
-    const PREFIXED_KEYS = [
-      'Millibar', 'Kilojoule', 'Kilotonne of TNT', 'Megatonne of TNT', 'Kilowatt',
-      'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte',
-    ];
     const toTitleCase = (s: string) =>
       s.replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
-    const allowed = new Set<string>([...CODE_KEYS, ...PREFIXED_KEYS]);
+    const allowed = new Set<string>(CODE_KEYS);
     for (const cat of CONVERSION_DATA) {
       allowed.add(cat.name);
       allowed.add(toTitleCase(cat.baseUnit));
