@@ -26,8 +26,9 @@ test.describe('OmniUnit Converter', () => {
 
   test('should display typography units including Ligne and Didot Point when selected', async ({ page }) => {
     await page.getByText('Typography').first().click();
-    await expect(page.getByText('Ligne')).toBeVisible();
-    await expect(page.getByText('Didot Point')).toBeVisible();
-    await expect(page.getByText('Agate')).toBeVisible();
+    await page.getByTestId('select-from-unit').click();
+    await expect(page.getByRole('option', { name: /Ligne/ })).toBeVisible();
+    await expect(page.getByRole('option', { name: /Didot/ })).toBeVisible();
+    await expect(page.getByRole('option', { name: /Agate/ })).toBeVisible();
   });
 });
