@@ -24,8 +24,8 @@ export function reverseLookupEraTable(
   if (table.end !== undefined && astro > table.end) return null;
   const forward = lookupEraTable(astro, table);
   if (forward && forward.eraName === entry.name) return astro;
-  // Mid-year overlap: only the year the immediately following era starts.
-  return table.id === 'japanese' && astro === nextEraStart(entry, table)
+  // Mid-year overlap (main nengō line and Southern Court table alike).
+  return table.id.startsWith('japanese') && astro === nextEraStart(entry, table)
     ? astro
     : null;
 }

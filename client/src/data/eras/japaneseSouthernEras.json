@@ -1,0 +1,18 @@
+{
+  "id": "japanese_southern",
+  "name": "Southern Court Era",
+  "note": "note-japanese-southern",
+  "region": "east_asia_japan",
+  "end": 1392,
+  "sourceUrl": "https://en.wikipedia.org/wiki/Nanboku-ch%C5%8D_period",
+  "eras": [
+    { "name": "Engen", "native": "延元", "start": 1336 },
+    { "name": "Kōkoku", "native": "興国", "start": 1340 },
+    { "name": "Shōhei", "native": "正平", "start": 1346 },
+    { "name": "Kentoku", "native": "建徳", "start": 1370 },
+    { "name": "Bunchū", "native": "文中", "start": 1372 },
+    { "name": "Tenju", "native": "天授", "start": 1375 },
+    { "name": "Kōwa", "native": "弘和", "start": 1381 },
+    { "name": "Genchū", "native": "元中", "start": 1384 }
+  ]
+}

@@ -46,7 +46,7 @@ export function EraNameLookup({ t, tables, onApply, nativeScript }: EraNameLooku
   // Same lunisolar ±1 convention as the results table: Japanese years are
   // exact from the 1873 Gregorian switch; all Chinese years carry ±1.
   const fuzzy = astro !== null && exact !== null
-    && (exact.table.id === 'japanese' ? astro < 1873 : true);
+    && (exact.table.id.startsWith('japanese') ? astro < 1873 : true);
 
   return (
     <div className="space-y-1 relative">

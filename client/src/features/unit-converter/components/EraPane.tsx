@@ -13,6 +13,7 @@ import { lookupPeriods } from '@/lib/eras/lookupPeriods';
 import { lookupRomanConsuls } from '@/lib/eras/lookupRomanConsuls';
 import type { EraRegion, EraTable, YearTable, Civilization, PeriodRegion } from '@/lib/eras/types';
 import japaneseErasJson from '@/data/eras/japaneseEras.json';
+import japaneseSouthernErasJson from '@/data/eras/japaneseSouthernEras.json';
 import chineseErasJson from '@/data/eras/chineseEras.json';
 import romanConsulsJson from '@/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
@@ -21,6 +22,7 @@ import { EraNameLookup } from './EraNameLookup';
 import { RulersReignsCard } from './RulersReignsCard';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
+const JAPANESE_SOUTHERN_ERAS = japaneseSouthernErasJson as EraTable;
 const CHINESE_ERAS = chineseErasJson as EraTable;
 const ROMAN_CONSULS = romanConsulsJson as YearTable;
 const CIVILIZATIONS = historicalPeriodsJson.civilizations as Civilization[];
@@ -86,6 +88,22 @@ function eraTableDisplay(
     ? `${hit.eraNative} (${hit.eraName})`
     : hit.eraName;
   return `${name} ${hit.eraYear}${fuzzy ? ' (±1)' : ''}${dynasty}`;
+}
+
+// Nanboku-chō period (1336–1392): two rival courts each proclaimed era names,
+// so the Japanese row shows both lines, e.g. "Ryakuō 1 (±1) / Engen 3 (Southern)".
+function japaneseEraDisplay(
+  astro: number,
+  t: (k: string) => string,
+  nativeScript: boolean,
+): string {
+  const main = eraTableDisplay(astro, JAPANESE_ERAS, t, nativeScript);
+  const south = lookupEraTable(astro, JAPANESE_SOUTHERN_ERAS);
+  if (!south) return main;
+  const name = nativeScript && south.eraNative
+    ? `${south.eraNative} (${south.eraName})`
+    : south.eraName;
+  return `${main} / ${name} ${south.eraYear} (${t('Southern')})`;
 }
 
 export function EraPane({ t, language }: EraPaneProps) {
@@ -168,7 +186,7 @@ export function EraPane({ t, language }: EraPaneProps) {
 
         <EraNameLookup
           t={t}
-          tables={[JAPANESE_ERAS, CHINESE_ERAS]}
+          tables={[JAPANESE_ERAS, JAPANESE_SOUTHERN_ERAS, CHINESE_ERAS]}
           nativeScript={nativeScript}
           onApply={(a) => {
             setSchemeId('gregorian');
@@ -228,7 +246,9 @@ export function EraPane({ t, language }: EraPaneProps) {
                           </a>
                         </td>
                         <td className="py-1.5 pe-4 font-mono" {...testId(`text-era-value-${table.id}`)}>
-                          {eraTableDisplay(astro, table, t, nativeScript)}
+                          {table.id === 'japanese'
+                            ? japaneseEraDisplay(astro, t, nativeScript)
+                            : eraTableDisplay(astro, table, t, nativeScript)}
                         </td>
                         <td className="py-1.5 text-xs text-muted-foreground">{table.note ? t(table.note) : ''}</td>
                       </tr>

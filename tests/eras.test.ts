@@ -19,12 +19,14 @@ import { hijriToJdn } from '../client/src/lib/eras/hijriToJdn';
 import { jdnToHijri } from '../client/src/lib/eras/jdnToHijri';
 import type { EraTable, YearTable, Civilization, RulerRegion } from '../client/src/lib/eras/types';
 import japaneseErasJson from '../client/src/data/eras/japaneseEras.json';
+import japaneseSouthernErasJson from '../client/src/data/eras/japaneseSouthernEras.json';
 import chineseErasJson from '../client/src/data/eras/chineseEras.json';
 import romanConsulsJson from '../client/src/data/eras/romanConsuls.json';
 import historicalPeriodsJson from '../client/src/data/eras/historicalPeriods.json';
 import rulersReignsJson from '../client/src/data/eras/rulersReigns.json';
 
 const JAPANESE = japaneseErasJson as EraTable;
+const SOUTHERN = japaneseSouthernErasJson as EraTable;
 const CHINESE = chineseErasJson as EraTable;
 const CONSULS = romanConsulsJson as YearTable;
 const CIVS = historicalPeriodsJson.civilizations as Civilization[];
@@ -257,6 +259,57 @@ describe('Japanese nengō full table', () => {
     const names = new Set<string>();
     let prev = -Infinity;
     for (const e of JAPANESE.eras) {
+      expect(e.start, e.name).toBeGreaterThan(prev);
+      prev = e.start;
+      expect(names.has(e.name), `duplicate name ${e.name}`).toBe(false);
+      names.add(e.name);
+    }
+  });
+});
+
+describe('Japanese Southern Court table (Nanboku-chō 1336–1392)', () => {
+  it('covers the Southern Court anchors', () => {
+    expect(lookupEraTable(1336, SOUTHERN)).toMatchObject({ eraName: 'Engen', eraYear: 1 });
+    expect(lookupEraTable(1338, SOUTHERN)).toMatchObject({ eraName: 'Engen', eraYear: 3 });
+    expect(lookupEraTable(1340, SOUTHERN)).toMatchObject({ eraName: 'Kōkoku', eraYear: 1 });
+    expect(lookupEraTable(1352, SOUTHERN)).toMatchObject({ eraName: 'Shōhei', eraYear: 7 });
+    expect(lookupEraTable(1370, SOUTHERN)).toMatchObject({ eraName: 'Kentoku', eraYear: 1 });
+    expect(lookupEraTable(1375, SOUTHERN)).toMatchObject({ eraName: 'Tenju', eraYear: 1 });
+    expect(lookupEraTable(1384, SOUTHERN)).toMatchObject({ eraName: 'Genchū', eraYear: 1 });
+    expect(lookupEraTable(1392, SOUTHERN)).toMatchObject({ eraName: 'Genchū', eraYear: 9 });
+  });
+
+  it('the same years still resolve in the Northern (main) line', () => {
+    expect(lookupEraTable(1336, JAPANESE)).toMatchObject({ eraName: 'Kenmu', eraYear: 3 });
+    expect(lookupEraTable(1338, JAPANESE)).toMatchObject({ eraName: 'Ryakuō', eraYear: 1 });
+    expect(lookupEraTable(1392, JAPANESE)).toMatchObject({ eraName: 'Meitoku', eraYear: 3 });
+  });
+
+  it('returns null outside 1336–1392', () => {
+    expect(SOUTHERN.end).toBe(1392);
+    expect(lookupEraTable(1335, SOUTHERN)).toBeNull();
+    expect(lookupEraTable(1393, SOUTHERN)).toBeNull();
+  });
+
+  it('reverse lookup resolves Southern Court names', () => {
+    expect(reverseLookupEraTable('Shōhei', 7, SOUTHERN)).toBe(1352);
+    expect(reverseLookupEraTable('Engen', 1, SOUTHERN)).toBe(1336);
+    expect(reverseLookupEraTable('Genchū', 9, SOUTHERN)).toBe(1392);
+    expect(reverseLookupEraTable('shohei', 24, SOUTHERN)).toBe(1369);
+  });
+
+  it('reverse lookup allows the mid-year overlap and rejects out-of-range years', () => {
+    // Engen 5 = 1340 = Kōkoku 1 (nengō change mid-year).
+    expect(reverseLookupEraTable('Engen', 5, SOUTHERN)).toBe(1340);
+    expect(reverseLookupEraTable('Engen', 6, SOUTHERN)).toBeNull();
+    // Genchū 10 would be 1393, past the courts' 1392 reunification.
+    expect(reverseLookupEraTable('Genchū', 10, SOUTHERN)).toBeNull();
+  });
+
+  it('starts are strictly increasing and names are unique', () => {
+    const names = new Set<string>();
+    let prev = -Infinity;
+    for (const e of SOUTHERN.eras) {
       expect(e.start, e.name).toBeGreaterThan(prev);
       prev = e.start;
       expect(names.has(e.name), `duplicate name ${e.name}`).toBe(false);
