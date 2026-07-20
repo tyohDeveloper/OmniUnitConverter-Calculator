@@ -9,6 +9,7 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 - iOS limitation: WebKit causes unreliable WebSockets, HMR is disabled
 - No special-case converter panes: every category must use the standard From/To pane (value box + unit dropdown on each side). Do not build custom layouts for individual categories (this rule caused the Date converter's removal).
 - Must maintain the single-file HTML build; audit bundle size before adding heavy libraries.
+- Timezone design (if/when built): units are fixed-offset zone abbreviations (EST, EDT, CST, UTC, etc.), never location names like "New York". No DST logic — the user picks standard vs daylight abbreviation. Example: 12:30 PM EST → CST shows 11:30 AM. Uses the standard From/To pane.
 
 ## System Architecture
 ### Frontend-Only Architecture
