@@ -1,3 +1,7 @@
+// Tabular Islamic calendar epoch: civil (Friday, 16 July 622 Julian,
+// JDN 1948440) or astronomical (Thursday, 15 July 622, JDN 1948439).
+export type HijriEpoch = 'civil' | 'astronomical';
+
 export type EraRegion =
   | 'global'
   | 'east_asia_japan'

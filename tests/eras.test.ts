@@ -469,6 +469,26 @@ describe('Hijri date-level conversion (tabular civil)', () => {
       expect(jdnToGregorian(hijriToJdn(ah, 1, 1)).year).toBe(astro);
     }
   });
+
+  it('astronomical epoch is exactly one day earlier than civil for every date', () => {
+    expect(hijriToJdn(1, 1, 1, 'astronomical')).toBe(hijriToJdn(1, 1, 1) - 1);
+    // 1 Muharram AH 1 (astronomical) = 15 July 622 Julian = 18 July 622 proleptic Gregorian.
+    expect(jdnToGregorian(hijriToJdn(1, 1, 1, 'astronomical'))).toEqual({ year: 622, month: 7, day: 18 });
+    for (const [ah, m, d] of [[1445, 9, 1], [1447, 1, 1], [1500, 12, 30]] as const) {
+      expect(hijriToJdn(ah, m, d, 'astronomical')).toBe(hijriToJdn(ah, m, d) - 1);
+    }
+  });
+
+  it('astronomical-epoch JDN round-trips and defaults stay civil', () => {
+    for (let jdn = 1948439; jdn < 2600000; jdn += 1237) {
+      const h = jdnToHijri(jdn, 'astronomical');
+      expect(hijriToJdn(h.year, h.month, h.day, 'astronomical')).toBe(jdn);
+    }
+    // Default epoch remains civil (unchanged anchors).
+    expect(jdnToHijri(gregorianToJdn(2000, 1, 1))).toEqual({ year: 1420, month: 9, day: 24 });
+    // Same Gregorian day maps one Hijri day later under the astronomical epoch.
+    expect(jdnToHijri(gregorianToJdn(2000, 1, 1), 'astronomical')).toEqual({ year: 1420, month: 9, day: 25 });
+  });
 });
 
 describe('Era name reverse lookup', () => {

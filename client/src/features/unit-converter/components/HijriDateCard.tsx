@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { testId } from '@/lib/test-utils';
+import type { HijriEpoch } from '@/lib/eras/types';
 import { gregorianToJdn } from '@/lib/eras/gregorianToJdn';
 import { jdnToGregorian } from '@/lib/eras/jdnToGregorian';
 import { hijriToJdn } from '@/lib/eras/hijriToJdn';
@@ -56,17 +57,18 @@ interface HijriDateCardProps {
 export function HijriDateCard({ t }: HijriDateCardProps) {
   const now = new Date();
   const initialGreg = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+  const [epoch, setEpoch] = useState<HijriEpoch>('civil');
   const [greg, setGreg] = useState<DateFields>(toFields(initialGreg));
   const [hijri, setHijri] = useState<DateFields>(
-    toFields(jdnToHijri(gregorianToJdn(initialGreg.year, initialGreg.month, initialGreg.day))),
+    toFields(jdnToHijri(gregorianToJdn(initialGreg.year, initialGreg.month, initialGreg.day), 'civil')),
   );
   const [invalidSide, setInvalidSide] = useState<'greg' | 'hijri' | null>(null);
 
-  const updateGreg = (next: DateFields) => {
+  const updateGreg = (next: DateFields, ep: HijriEpoch = epoch) => {
     setGreg(next);
     const parsed = parseFields(next);
     if (parsed && parsed.month >= 1 && parsed.month <= 12 && roundTrips(parsed, gregorianToJdn, jdnToGregorian)) {
-      setHijri(toFields(jdnToHijri(gregorianToJdn(parsed.year, parsed.month, parsed.day))));
+      setHijri(toFields(jdnToHijri(gregorianToJdn(parsed.year, parsed.month, parsed.day), ep)));
       setInvalidSide(null);
     } else {
       setInvalidSide('greg');
@@ -76,12 +78,22 @@ export function HijriDateCard({ t }: HijriDateCardProps) {
   const updateHijri = (next: DateFields) => {
     setHijri(next);
     const parsed = parseFields(next);
-    if (parsed && parsed.year >= 1 && roundTrips(parsed, hijriToJdn, jdnToHijri)) {
-      setGreg(toFields(jdnToGregorian(hijriToJdn(parsed.year, parsed.month, parsed.day))));
+    if (
+      parsed && parsed.year >= 1 &&
+      roundTrips(parsed, (y, m, d) => hijriToJdn(y, m, d, epoch), (j) => jdnToHijri(j, epoch))
+    ) {
+      setGreg(toFields(jdnToGregorian(hijriToJdn(parsed.year, parsed.month, parsed.day, epoch))));
       setInvalidSide(null);
     } else {
       setInvalidSide('hijri');
     }
+  };
+
+  const switchEpoch = (ep: HijriEpoch) => {
+    if (ep === epoch) return;
+    setEpoch(ep);
+    // Re-derive the Hijri side from the current Gregorian date under the new epoch.
+    updateGreg(greg, ep);
   };
 
   const dateRow = (
@@ -130,9 +142,29 @@ export function HijriDateCard({ t }: HijriDateCardProps) {
 
   return (
     <Card className="w-full p-6 bg-card border-border/50 space-y-4" {...testId('card-hijri-date')}>
-      <h3 className="text-sm font-mono uppercase tracking-wider text-muted-foreground font-bold">
-        {t('Hijri Date Converter')}
-      </h3>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-sm font-mono uppercase tracking-wider text-muted-foreground font-bold">
+          {t('Hijri Date Converter')}
+        </h3>
+        <div className="flex items-center gap-1 rounded-md border border-border/50 p-0.5" role="group" aria-label={t('Epoch')}>
+          {(['civil', 'astronomical'] as const).map((ep) => (
+            <button
+              key={ep}
+              type="button"
+              aria-pressed={epoch === ep}
+              onClick={() => switchEpoch(ep)}
+              className={`px-2 py-1 rounded text-xs font-mono ${
+                epoch === ep
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover-elevate'
+              }`}
+              {...testId(`button-hijri-epoch-${ep}`)}
+            >
+              {t(ep === 'civil' ? 'Civil (Fri)' : 'Astronomical (Thu)')}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="space-y-1">
         <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground/80">{t('Gregorian date')}</p>
         {dateRow('greg', greg, GREGORIAN_MONTHS, t('CE'), updateGreg)}
@@ -146,7 +178,9 @@ export function HijriDateCard({ t }: HijriDateCardProps) {
           {t('Enter a valid date')}
         </p>
       )}
-      <p className="text-xs text-muted-foreground">{t('hijri-date-note')}</p>
+      <p className="text-xs text-muted-foreground">
+        {t(epoch === 'civil' ? 'hijri-date-note' : 'hijri-date-note-astronomical')}
+      </p>
     </Card>
   );
 }
