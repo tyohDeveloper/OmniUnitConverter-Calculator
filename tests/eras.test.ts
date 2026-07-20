@@ -6,6 +6,11 @@ import { formatAstronomicalYear } from '../client/src/lib/eras/formatAstronomica
 import { historicalYearToAstronomical } from '../client/src/lib/eras/historicalYearToAstronomical';
 import { lookupEraTable } from '../client/src/lib/eras/lookupEraTable';
 import { lookupPeriods } from '../client/src/lib/eras/lookupPeriods';
+import { hijriTabular } from '../client/src/lib/eras/hijriTabular';
+import { gregorianToJdn } from '../client/src/lib/eras/gregorianToJdn';
+import { jdnToGregorian } from '../client/src/lib/eras/jdnToGregorian';
+import { hijriToJdn } from '../client/src/lib/eras/hijriToJdn';
+import { jdnToHijri } from '../client/src/lib/eras/jdnToHijri';
 import type { EraTable, Civilization } from '../client/src/lib/eras/types';
 import japaneseErasJson from '../client/src/data/eras/japaneseEras.json';
 import chineseErasJson from '../client/src/data/eras/chineseEras.json';
@@ -300,6 +305,63 @@ describe('Historical period lookup', () => {
         expect(historicalYearToAstronomical(p.start), `${civ.id}/${p.name}`)
           .toBeLessThan(historicalYearToAstronomical(p.end));
       }
+    }
+  });
+});
+
+describe('Hijri date-level conversion (tabular civil)', () => {
+  it('epoch: 1 Muharram AH 1 = 19 July 622 CE (proleptic Gregorian)', () => {
+    expect(jdnToGregorian(hijriToJdn(1, 1, 1))).toEqual({ year: 622, month: 7, day: 19 });
+  });
+
+  it('1 Muharram 1447 AH = 27 June 2025', () => {
+    expect(jdnToGregorian(hijriToJdn(1447, 1, 1))).toEqual({ year: 2025, month: 6, day: 27 });
+  });
+
+  it('1 Ramadan 1445 AH = 11 March 2024', () => {
+    expect(jdnToGregorian(hijriToJdn(1445, 9, 1))).toEqual({ year: 2024, month: 3, day: 11 });
+  });
+
+  it('1 January 2000 = 24 Ramadan 1420 AH', () => {
+    expect(jdnToHijri(gregorianToJdn(2000, 1, 1))).toEqual({ year: 1420, month: 9, day: 24 });
+  });
+
+  it('known JDN anchor: 1 January 2000 = JDN 2451545', () => {
+    expect(gregorianToJdn(2000, 1, 1)).toBe(2451545);
+  });
+
+  it('Gregorian JDN round-trips across a wide range', () => {
+    for (let jdn = 1600000; jdn < 2600000; jdn += 1237) {
+      const g = jdnToGregorian(jdn);
+      expect(gregorianToJdn(g.year, g.month, g.day)).toBe(jdn);
+    }
+  });
+
+  it('Hijri JDN round-trips across a wide range', () => {
+    for (let jdn = 1948440; jdn < 2600000; jdn += 1237) {
+      const h = jdnToHijri(jdn);
+      expect(h.month).toBeGreaterThanOrEqual(1);
+      expect(h.month).toBeLessThanOrEqual(12);
+      expect(h.day).toBeGreaterThanOrEqual(1);
+      expect(h.day).toBeLessThanOrEqual(30);
+      expect(hijriToJdn(h.year, h.month, h.day)).toBe(jdn);
+    }
+  });
+
+  it('tabular month lengths alternate 30/29, month 12 has 30 in leap years', () => {
+    // AH 1446 is a leap year (355 days), AH 1447 is common (354 days).
+    expect(hijriToJdn(1447, 1, 1) - hijriToJdn(1446, 1, 1)).toBe(355);
+    expect(hijriToJdn(1448, 1, 1) - hijriToJdn(1447, 1, 1)).toBe(354);
+    expect(hijriToJdn(1446, 12, 30)).toBe(hijriToJdn(1447, 1, 1) - 1);
+    expect(hijriToJdn(1447, 12, 29)).toBe(hijriToJdn(1448, 1, 1) - 1);
+    expect(hijriToJdn(1447, 2, 1) - hijriToJdn(1447, 1, 1)).toBe(30);
+    expect(hijriToJdn(1447, 3, 1) - hijriToJdn(1447, 2, 1)).toBe(29);
+  });
+
+  it('day-level conversion agrees with the whole-year hijriTabular mapping', () => {
+    for (const astro of [622, 1000, 1445, 1900, 2000, 2026, 2100]) {
+      const ah = hijriTabular.fromAstronomical(astro);
+      expect(jdnToGregorian(hijriToJdn(ah, 1, 1)).year).toBe(astro);
     }
   });
 });

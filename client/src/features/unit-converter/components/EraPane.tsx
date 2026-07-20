@@ -14,6 +14,7 @@ import type { EraRegion, EraTable, Civilization } from '@/lib/eras/types';
 import japaneseErasJson from '@/data/eras/japaneseEras.json';
 import chineseErasJson from '@/data/eras/chineseEras.json';
 import historicalPeriodsJson from '@/data/eras/historicalPeriods.json';
+import { HijriDateCard } from './HijriDateCard';
 
 const JAPANESE_ERAS = japaneseErasJson as EraTable;
 const CHINESE_ERAS = chineseErasJson as EraTable;
@@ -195,6 +196,8 @@ export function EraPane({ t }: EraPaneProps) {
           </table>
         )}
       </Card>
+
+      <HijriDateCard t={t} />
 
       <Card className="w-full p-6 bg-card border-border/50 space-y-3">
         <h3 className="text-sm font-mono uppercase tracking-wider text-muted-foreground font-bold">{t('Historical Periods')}</h3>

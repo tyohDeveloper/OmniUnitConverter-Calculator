@@ -21,7 +21,7 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 - **Type Safety**: End-to-end TypeScript with strict mode and Zod for schema validation.
 - **SI Prefix Handling**: Intelligent prefixing, including special handling for kilogram (kg) vs. gram (g), binary prefixes for data, and auto-switching for complex kg-based SI units.
 - **Scientific Notation**: Automatic display and input support for very small or very large numbers.
-- **Dates/Eras Tab**: Standalone year/era converter (last tab), deliberately isolated from the unit engine. Converts via astronomical CE year hub (year 0 = 1 BCE): 19 fixed-offset schemes (incl. Seleucid, Yazdegerdi, Kali Yuga, Bengali San, Kollam, Nepal Sambat, Chula Sakarat), approximate lunar Hijri, data-driven era tables — full Japanese nengō (Taika 645 → Reiwa) and Chinese niánhào orthodox line (Han → Qing, ends 1912, dynasty annotations, `epoch` field for transition-year counting) — plus a Historical Periods reference widget (Egypt/Mesopotamia/Persia/China/Mongol/Maya). Schemes and results grouped into 7 regional sections. Non-Jan-1 schemes and lunisolar era-table years show ±1 indicators. Data in `client/src/data/eras/`, logic in `client/src/lib/eras/`.
+- **Dates/Eras Tab**: Standalone year/era converter (last tab), deliberately isolated from the unit engine. Converts via astronomical CE year hub (year 0 = 1 BCE): 19 fixed-offset schemes (incl. Seleucid, Yazdegerdi, Kali Yuga, Bengali San, Kollam, Nepal Sambat, Chula Sakarat), approximate lunar Hijri, data-driven era tables — full Japanese nengō (Taika 645 → Reiwa) and Chinese niánhào orthodox line (Han → Qing, ends 1912, dynasty annotations, `epoch` field for transition-year counting) — plus a Historical Periods reference widget (Egypt/Mesopotamia/Persia/China/Mongol/Maya). Includes a Hijri Date Converter card: full-date (day/month/year) Gregorian ↔ tabular Hijri conversion via JDN, with localized month names. Schemes and results grouped into 7 regional sections. Non-Jan-1 schemes and lunisolar era-table years show ±1 indicators. Data in `client/src/data/eras/`, logic in `client/src/lib/eras/`.
 - **Comparison Mode**: Allows simultaneous conversion of an input to up to 8 different units with optimal prefix display.
 - **Smart Paste**: Intelligently parses "number unit" text for direct input into appropriate fields and tabs.
 - **Cross-Domain Dimensional Analysis**: Calculator results can show related quantity categories with matching dimensions (e.g., Energy ↔ Torque).
@@ -31,7 +31,7 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 
 ### Build & Deployment
 - **Build Process**: Vite generates a single `dist/public/index.html` file.
-- **Testing**: Comprehensive Vitest unit tests and Playwright e2e tests (30 files, 1842 tests) covering conversion, localization, calculator logic, formatting, RPN, and edge cases.
+- **Testing**: Comprehensive Vitest unit tests and Playwright e2e tests (30 files, 1866 tests) covering conversion, localization, calculator logic, formatting, RPN, and edge cases.
 - **CI Scripts**: Automation for enforcing code quality (lint-size.mjs) and verifying build output (verify-build.mjs).
 
 ### Modular File Structure
