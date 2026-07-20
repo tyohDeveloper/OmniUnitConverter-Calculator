@@ -86,6 +86,43 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
   // When true, the next onBlur from the X input should be suppressed because
   // the user clicked one of the adjacent selector controls.
   const suppressXBlurRef = useRef(false);
+  // Text already committed via Enter (RPN section only). Used so a subsequent
+  // blur doesn't double-commit the same value. Cleared on any edit.
+  const committedXTextRef = useRef<string | null>(null);
+
+  // Commit the current X edit value into the X register. Returns true if a
+  // commit happened. Metadata is computed from the freshly parsed text (not
+  // from stale closure state) and applied inside the functional updater.
+  const commitRpnXValue = () => {
+    if (!rpnXEditValue.trim()) return false;
+    const parsed = parseUnitText(rpnXEditValue);
+    const dims: Record<string, number> = {};
+    if (parsed.dimensions.length) dims.length = parsed.dimensions.length;
+    if (parsed.dimensions.mass) dims.mass = parsed.dimensions.mass;
+    if (parsed.dimensions.time) dims.time = parsed.dimensions.time;
+    if (parsed.dimensions.current) dims.current = parsed.dimensions.current;
+    if (parsed.dimensions.temperature) dims.temperature = parsed.dimensions.temperature;
+    if (parsed.dimensions.amount) dims.amount = parsed.dimensions.amount;
+    if (parsed.dimensions.intensity) dims.intensity = parsed.dimensions.intensity;
+    if (parsed.dimensions.angle) dims.angle = parsed.dimensions.angle;
+    if (parsed.dimensions.solid_angle) dims.solid_angle = parsed.dimensions.solid_angle;
+
+    const newEntry = {
+      value: parsed.value,
+      dimensions: dims,
+      prefix: parsed.prefixId || 'none'
+    };
+
+    saveRpnStackForUndo();
+    setRpnStack(prev => {
+      const newStack = [...prev];
+      newStack[3] = newEntry;
+      return newStack;
+    });
+    setRpnResultPrefix('none');
+    setRpnSelectedAlternative(0);
+    return true;
+  };
 
   // Track previous rpnResultPrefix and rpnSelectedAlternative so we can
   // re-express the typed value when the user changes them while editing.
@@ -97,6 +134,9 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
 
     // Only re-express when the user is actively editing the X field.
     if (!rpnXEditing || !rpnXEditValue.trim()) return;
+    // Skip when the current text was just committed via Enter — the commit
+    // resets prefix/alt and must not rewrite the (already committed) text.
+    if (rpnXEditValue === committedXTextRef.current) return;
     // Need a previous state to compare.
     if (!prev) return;
     // Only act when prefix or alt changed.
@@ -830,47 +870,39 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
                   data-testid="rpn-x-input"
                   value={rpnXEditValue}
                   onFocus={(e) => e.target.select()}
-                  onChange={(e) => setRpnXEditValue(e.target.value)}
+                  onChange={(e) => {
+                    committedXTextRef.current = null;
+                    setRpnXEditValue(e.target.value);
+                  }}
                   onBlur={() => {
                     // Suppress commit when the user clicked one of the adjacent
                     // prefix/alt selectors — the selector interaction clears this flag
                     // and restores focus to the input.
                     if (suppressXBlurRef.current) return;
-                    if (rpnXEditValue.trim()) {
-                      const parsed = parseUnitText(rpnXEditValue);
-                      const dims: Record<string, number> = {};
-                      if (parsed.dimensions.length) dims.length = parsed.dimensions.length;
-                      if (parsed.dimensions.mass) dims.mass = parsed.dimensions.mass;
-                      if (parsed.dimensions.time) dims.time = parsed.dimensions.time;
-                      if (parsed.dimensions.current) dims.current = parsed.dimensions.current;
-                      if (parsed.dimensions.temperature) dims.temperature = parsed.dimensions.temperature;
-                      if (parsed.dimensions.amount) dims.amount = parsed.dimensions.amount;
-                      if (parsed.dimensions.intensity) dims.intensity = parsed.dimensions.intensity;
-                      if (parsed.dimensions.angle) dims.angle = parsed.dimensions.angle;
-                      if (parsed.dimensions.solid_angle) dims.solid_angle = parsed.dimensions.solid_angle;
-
-                      const newEntry = {
-                        value: parsed.value,
-                        dimensions: dims,
-                        prefix: parsed.prefixId || 'none'
-                      };
-
-                      saveRpnStackForUndo();
-                      setRpnStack(prev => {
-                        const newStack = [...prev];
-                        newStack[3] = newEntry;
-                        return newStack;
-                      });
-                      setRpnResultPrefix('none');
-                      setRpnSelectedAlternative(0);
+                    // Skip commit if Enter already committed this exact text.
+                    if (rpnXEditValue !== committedXTextRef.current) {
+                      commitRpnXValue();
                     }
+                    committedXTextRef.current = null;
                     setRpnXEditing(false);
                     setRpnXEditValue('');
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      e.currentTarget.blur();
+                      if (lockRpnMode) {
+                        // Dedicated RPN section: commit but keep the input
+                        // focused and editable, with the text selected so the
+                        // next keystrokes replace it.
+                        if (rpnXEditValue !== committedXTextRef.current) {
+                          commitRpnXValue();
+                          committedXTextRef.current = rpnXEditValue;
+                        }
+                        requestAnimationFrame(() => rpnXInputRef.current?.select());
+                      } else {
+                        e.currentTarget.blur();
+                      }
                     } else if (e.key === 'Escape') {
+                      committedXTextRef.current = null;
                       setRpnXEditing(false);
                       setRpnXEditValue('');
                     }

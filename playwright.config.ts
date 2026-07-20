@@ -12,6 +12,11 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:5000',
     trace: 'on-first-retry',
+    // Allow overriding the browser binary (e.g. Nix-provided chromium) when
+    // Playwright's downloaded browsers can't run in this environment.
+    ...(process.env.PW_CHROMIUM_PATH
+      ? { launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH } }
+      : {}),
   },
   projects: [
     {
