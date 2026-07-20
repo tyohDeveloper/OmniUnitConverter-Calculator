@@ -112,6 +112,16 @@ test.describe('Era name lookup', () => {
     await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
   });
 
+  test('kanji numeral year 明治三十三年 resolves to 1900 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('明治三十三年');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 33 = 1900 CE');
+  });
+
+  test('元年 input 明治元年 resolves to 1868 CE', async ({ page }) => {
+    await page.getByTestId('input-era-name-lookup').fill('明治元年');
+    await expect(page.getByTestId('text-era-lookup-result')).toContainText('Meiji 1 = 1868 CE');
+  });
+
   test('no-space hanzi input 康熙39 resolves to 1700 CE', async ({ page }) => {
     await page.getByTestId('input-era-name-lookup').fill('康熙39');
     await expect(page.getByTestId('text-era-lookup-result')).toContainText('Kāngxī 39 = 1700 CE');

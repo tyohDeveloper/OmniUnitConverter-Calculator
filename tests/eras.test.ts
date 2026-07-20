@@ -647,6 +647,20 @@ describe('Era year text parsing', () => {
     expect(parseEraYearText('明治 33年')).toEqual({ namePart: '明治', eraYear: 33 });
   });
 
+  it('parses kanji numeral years and 元年', () => {
+    expect(parseEraYearText('明治三十三年')).toEqual({ namePart: '明治', eraYear: 33 });
+    expect(parseEraYearText('康熙三十九年')).toEqual({ namePart: '康熙', eraYear: 39 });
+    expect(parseEraYearText('明治三十三')).toEqual({ namePart: '明治', eraYear: 33 });
+    expect(parseEraYearText('明治元年')).toEqual({ namePart: '明治', eraYear: 1 });
+    expect(parseEraYearText('令和二年')).toEqual({ namePart: '令和', eraYear: 2 });
+  });
+
+  it('does not treat 元 in era names as a year without 年', () => {
+    expect(parseEraYearText('開元')).toEqual({ namePart: '開元', eraYear: null });
+    expect(parseEraYearText('開元三年')).toEqual({ namePart: '開元', eraYear: 3 });
+    expect(parseEraYearText('開元元年')).toEqual({ namePart: '開元', eraYear: 1 });
+  });
+
   it('leaves Latin no-space input unchanged', () => {
     expect(parseEraYearText('Meiji33')).toEqual({ namePart: 'Meiji33', eraYear: null });
   });
