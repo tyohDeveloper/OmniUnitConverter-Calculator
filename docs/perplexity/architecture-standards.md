@@ -4,9 +4,10 @@
 >
 > **Location.** Committed at `docs/architecture/standards.md` (proposed). Linked from `README.md` and referenced from the header of `scripts/lint-size.mjs`. When a lint script or verifier fails, the error message should include a section number in this document.
 >
-> **Version.** 1.1. Extend by pull request; the doc is intended to grow alongside the codebase.
+> **Version.** 1.2. Extend by pull request; the doc is intended to grow alongside the codebase.
 >
 > **Change log.**
+> - 1.2 — new §15 (locale data and treatments): supported languages matrix, per-domain file layout, dead-key guard, global-name-uniqueness rule for unit-name keys, prune-translations build behavior, source-citation practice, RTL and numeral-system rules.
 > - 1.1 — §4 rewritten to match the `{role}-{area}-{name}[-{key}]` grammar the codebase already uses; §7 names ESLint + typescript-eslint as the AST toolchain (dev-only, zero bundle impact); §8 rewritten to "ship `.html` that meets XHTML markup rules"; new §13 (libraries over home-built code, with a size/complexity budget) and new §14 (final artifact minimization).
 > - 1.0 — initial.
 
@@ -309,6 +310,82 @@ The `scripts/lint-size.mjs:33-79` exclusion list is a working example of the rat
 
 ---
 
+## 15. Locale data and treatments
+
+OmniUnit ships in 12 languages and must render numbers, units, and directional layout correctly in each. This section makes the locale-data rules explicit so contributors can add or update a language without archaeology.
+
+### 15.1 Supported languages
+
+The canonical list lives at `client/src/lib/localization.ts` as `SUPPORTED_LANGUAGES`. Today: `en`, `en-us`, `ar`, `de`, `es`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `zh`.
+
+**Rule 15.1.** Adding a language means adding a locale code to `SUPPORTED_LANGUAGES` **and** adding both a `ui/<code>.json` and a `units/<code>.json` file with the full key coverage of `en.json` (missing keys will fall through to English by §15.4). Removing a language means removing all three in the same PR.
+
+**Rule 15.2.** `en` is the fallback locale. Every UI string and every unit-name key that any code path can reach must exist as a key in `data/localization/ui/en.json` or `data/localization/units/en.json`. The fallback chain in `client/src/lib/translateUi.ts` and `translateUnit.ts` is `requested locale → en → the raw key`; nothing further.
+
+**Rule 15.3.** Regional variants (currently `en-us`) contain **only the delta** from the base variant. `en-us.json` files should hold spellings that differ from `en` (e.g. `meter` vs `meter`, `liter` vs `litre`) and nothing else. The runtime does the merge; storing duplicates bloats the bundle.
+
+### 15.4 File layout and translation domains
+
+Locale data lives under `client/src/data/localization/` in two domains:
+
+- `ui/<code>.json` — all user-visible interface strings (button labels, tooltips, help copy, error messages, category and dimension names shown in chrome).
+- `units/<code>.json` — unit *display names* only (e.g. `"meter": "mètre"`). Unit **symbols** are never translated — they remain in their SI/international form regardless of locale.
+
+**Rule 15.4.** No third translation domain is introduced without a standards-doc amendment. If a new class of translated string appears, it belongs in one of these two files.
+
+**Rule 15.5.** JSON key sets are shape-identical across locales *before* the prune step (§15.7). A locale file that adds a key not present in `en.json`, or omits a key present in `en.json`, is a bug — caught by `tests/json-integrity.test.ts` and by a schema check in the build.
+
+### 15.6 Global name uniqueness (unit-name keys)
+
+Unit display names are **global** — the same key resolves to the same translation everywhere it appears, regardless of which category the unit lives in. This is a deliberate design decision recorded in `.agents/memory/translation-key-hygiene.md`.
+
+**Rule 15.6.** Two units in different categories must not share the same English display name. When a collision would otherwise occur, disambiguate the later entrant with a parenthetical qualifier in the name field of its conversion JSON — e.g. mass `"Dan (China)"` vs volume `"Dan (China, Volume)"`. The parenthetical is part of the name and translates as a whole.
+
+**Rule 15.7 — Dead-key guard.** Every key in every `units/<code>.json` must correspond to (a) a current unit name in the conversion JSONs, (b) a title-cased `baseUnit` value, (c) a key referenced by application code via `translateUi()`/`translateUnit()`/`t()`, or (d) a prefix-generated display name. The `"no dead keys"` test in `tests/json-integrity.test.ts` enforces this against an explicit allowlist. Rationale: renames in conversion data have historically left ~120 orphaned keys duplicated across 12 locale files, bloating the bundle silently.
+
+**Rule 15.8 — Renames and removals.** When a unit is renamed or removed, its old translation key is removed from all 12 `units/<code>.json` files in the same PR. When a new code-referenced or prefix-generated translation key is added, its entry in the dead-key guard's allowlist is added in the same PR.
+
+### 15.9 Build-time prune (bundle size)
+
+`scripts/vite-plugin-prune-translations.ts` runs at production build time only (`apply: "build"`). It shrinks the inlined locale payload by dropping entries that would resolve to the same string via fallback:
+
+- **`en.json`**: entries whose value equals the key are dropped (the runtime returns the key itself when a value is absent).
+- **Every other locale**: entries whose value equals the resolved `en[key] ?? key` are dropped (the runtime falls back to English).
+
+**Rule 15.9.** Source JSON files stay complete. Prune only affects the production bundle. The dev server and Vitest see the full files. Modifying the prune plugin, or opting a locale out of pruning, requires a standards-doc amendment.
+
+**Rule 15.10.** After a locale-file change, the recorded gzip baseline in `scripts/build-baseline.json` may shift. Legitimate shifts — documented in the baseline's `note` field — are permitted; unexplained increases fail the size-ceiling check (§6.4, §13.2). The baseline `note` should identify which locale or category caused the change.
+
+### 15.11 Numerals, formats, and RTL
+
+**Rule 15.11 — Numeral system.** Number formatting is decoupled from locale. The user's locale controls translated text; a separate `numberFormat` preference controls the numeral system (Western Arabic, Arabic-Indic, CJK-myriad, South Asian grouping, etc.). See `docs/tasks/decouple-arabic-format-and-locale.md` and `docs/tasks/traditional-number-format.md` for the current implementation. New locales inherit Western Arabic as default; overrides go in `client/src/lib/formatting.ts` behavior, not in locale JSONs.
+
+**Rule 15.12 — RTL layout.** Arabic (`ar`) is the current RTL locale. Application layout stays LTR by default (see `docs/tasks/layout-always-ltr.md`) except for text runs that should honor the locale's natural direction. Compound displays (feet-inches, degrees-minutes-seconds) preserve their canonical order across RTL locales; see `docs/tasks/fix-ftin-rtl-ordering.md`. When adding a new RTL locale, extend the RTL-locale set in one place (currently a small `isRtl` check) rather than sprinkling checks across components.
+
+**Rule 15.13 — Latin numerals in RTL contexts.** Numbers inside RTL text runs are rendered in Latin numerals unless the user explicitly opts into Arabic-Indic via `numberFormat` (see `docs/tasks/rtl-latin-numerals.md`). This is a stable behavioral contract; do not change it without a UX decision recorded in this document.
+
+### 15.14 Source citations for unit values
+
+**Rule 15.14.** Every non-obvious unit conversion factor cites a source. "Non-obvious" means anything other than the direct SI base-unit definition or a purely mathematical identity. Sources live in a `source` (or `sources`) field on the unit entry inside its category JSON, or in `client/src/components/sources-section.tsx` for prose-level attributions.
+
+**Rule 15.15 — Official over derivative.** Prefer primary sources (government gazettes, standards bodies, national laws) over Wikipedia or aggregators. When a primary source is unreachable from the build environment, cite Wikipedia and record the unreachable primary in `.agents/memory/` for later revisit. The Thai baht case (`.agents/memory/thai-source-citations.md`) is the reference example: the Royal Gazette notification is the correct primary source but is currently blocked; Wikipedia's Tical article is cited in its place, with the blocker documented.
+
+**Rule 15.16 — No inaccurate primary.** A primary source that contradicts the app's factor may not be cited to legitimize the factor. Cite either the primary that matches the factor, or an aggregator that explains the discrepancy — never a primary that would mislead a reader.
+
+### 15.17 Enforcement
+
+| Rule | Enforced by |
+|---|---|
+| 15.1–15.3 (language set, fallback, delta-only variants) | ESLint no-restricted-imports on `SUPPORTED_LANGUAGES`; §6 build gate + JSON schema check |
+| 15.4–15.5 (file layout, shape-identical keys) | `tests/json-integrity.test.ts`, extended if needed |
+| 15.6 (global name uniqueness) | `tests/json-integrity.test.ts` cross-category name-collision check |
+| 15.7–15.8 (dead-key guard, renames) | `tests/json-integrity.test.ts` "no dead keys" test with committed allowlist |
+| 15.9–15.10 (prune, baseline) | `scripts/vite-plugin-prune-translations.ts`; `scripts/verify-build.mjs` gzip baseline |
+| 15.11–15.13 (numerals, RTL) | Unit tests in `tests/regional-counting-suffix.test.ts`, `tests/formatting.test.ts`; Playwright RTL scenarios |
+| 15.14–15.16 (sourcing) | PR-review checklist; `sources-section.tsx` renders every citation; `.agents/memory/*.md` records blocked primaries |
+
+---
+
 ## Appendix A — Standards → source-of-truth map
 
 | Rule | Enforced by |
@@ -327,3 +404,4 @@ The `scripts/lint-size.mjs:33-79` exclusion list is a working example of the rat
 | §11 (exceptions) | `.architecture-exceptions.json` scanner with owner/expiry; ESLint `overrides` for scope-based exceptions |
 | §13.1–§13.7 (libraries vs. home-built code) | PR-review checklist; `verify-build.mjs` gzip-baseline delta enforces the ≤5 kB single-library limit for shipped code |
 | §14.1–§14.6 (final minimization) | `npm run build` ends with the minimization step; `verify-build.mjs` asserts comment-free, whitespace-collapsed, XHTML-conformant, no-gzip-regression output |
+| §15.1–§15.16 (locale data and treatments) | `tests/json-integrity.test.ts` (dead-key guard, shape-identical keys, name uniqueness); `scripts/vite-plugin-prune-translations.ts`; `scripts/verify-build.mjs` gzip baseline; PR-review checklist for source citations |
