@@ -22,6 +22,7 @@ import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
 import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { sanitizeInput } from '@/lib/formatting/sanitizeInput';
+import { buildPushFromConverter } from '@/lib/calculator/buildPushFromConverter';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -631,26 +632,22 @@ export function useConverterController(): UseConverterControllerReturn {
   }, [setActiveTab, setActiveCategory, setFromUnit, setFromPrefix, setInputValue, setDirectValue, setDirectExponents]);
 
   const handleDirectCopyAndPushToCalculator = useCallback((value: number, dims: Record<string, number>) => {
+    // Council-08e: stack transform is now a pure lib call.
     triggerFlashDirectCopy();
     const newEntry = { value, dimensions: dims, prefix: 'none' as string };
     if (calculatorMode === 'rpn') {
       setPreviousRpnStack([...rpnStack]);
-      setRpnStack(prev => {
-        const ns = [...prev];
-        ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry;
-        return ns;
-      });
+      setRpnStack(prev => buildPushFromConverter(prev, newEntry));
       setRpnResultPrefix('none');
       setRpnSelectedAlternative(0);
       triggerFlashRpnResult();
-    } else {
-      const firstEmptyIndex = calcValues.findIndex((v, i) => i < 3 && v === null);
-      if (firstEmptyIndex !== -1) {
-        const newCalcValues = [...calcValues];
-        newCalcValues[firstEmptyIndex] = newEntry;
-        setCalcValues(newCalcValues);
-      }
+      return;
     }
+    const firstEmptyIndex = calcValues.findIndex((v, i) => i < 3 && v === null);
+    if (firstEmptyIndex === -1) return;
+    const newCalcValues = [...calcValues];
+    newCalcValues[firstEmptyIndex] = newEntry;
+    setCalcValues(newCalcValues);
   }, [calculatorMode, rpnStack, calcValues, triggerFlashDirectCopy, triggerFlashRpnResult,
     setPreviousRpnStack, setRpnStack, setRpnResultPrefix, setRpnSelectedAlternative, setCalcValues]);
 
