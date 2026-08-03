@@ -1026,7 +1026,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `proof (imp)` | Proof (Imperial) | 0.005715 1 |
 | `%` | Percent | 0.01 1 |
 | `abv` | Alcohol by Volume | 0.01 1 |
-| `karat` | Karat | 0.0416666667 1 |
+| `caret` | Karat | 0.0416666667 1 |
 | `fold` | Fold | 1 1 |
 | `φ` | Golden Ratio | 1.6180339887 1 |
 | `pair` | Pair | 2 1 |

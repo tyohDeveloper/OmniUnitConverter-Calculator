@@ -666,6 +666,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `bakers-doz` | Baker's Dozen | Unitless Numbers | 1 | 13 |
 | `bp` | Basis Point | Unitless Numbers | 1 | 1e-4 |
 | `brace` | Brace | Unitless Numbers | 1 | 2 |
+| `caret` | Karat | Unitless Numbers | 1 | 0.0416666667 |
 | `couple` | Couple | Unitless Numbers | 1 | 2 |
 | `doz` | Dozen | Unitless Numbers | 1 | 12 |
 | `𝑒` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
@@ -674,7 +675,6 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `gross` | Gross | Unitless Numbers | 1 | 144 |
 | `half-doz` | Half Dozen | Unitless Numbers | 1 | 6 |
 | `hat-trick` | Hat-Trick | Unitless Numbers | 1 | 3 |
-| `karat` | Karat | Unitless Numbers | 1 | 0.0416666667 |
 | `long-hundred` | Long Hundred | Unitless Numbers | 1 | 120 |
 | `mole` | Mole | Unitless Numbers | 1 | 6.02214076e+23 |
 | `myriad` | Myriad | Unitless Numbers | 1 | 10000 |
