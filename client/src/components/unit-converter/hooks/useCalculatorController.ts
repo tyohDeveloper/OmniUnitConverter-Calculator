@@ -17,20 +17,18 @@ import { siToDisplay as siToDisplayLib } from '@/lib/calculator/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import type { SIRepresentation } from '@/lib/calculator/types';
+import { applyRpnUnary as applyRpnUnaryLib, type RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
+import { applyRpnBinary as applyRpnBinaryLib, type RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
 
-export type RpnUnaryOp =
-  | 'square' | 'cube' | 'sqrt' | 'cbrt' | 'recip'
-  | 'exp' | 'ln' | 'pow10' | 'log10' | 'pow2' | 'log2'
-  | 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan'
-  | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh'
-  | 'rnd' | 'trunc' | 'floor' | 'ceil'
-  | 'neg' | 'abs';
-
-export type RpnBinaryOp = 'mul' | 'div' | 'add' | 'sub' | 'mulUnit' | 'divUnit' | 'addUnit' | 'subUnit' | 'pow';
+// Council-02: re-export the lib's op types so any future op added to
+// lib/calculator/rpnOps/* is instantly visible here. Keeps a single
+// source of truth per architecture-standards §10.1.
+export type RpnUnaryOp = RpnUnaryOpLib;
+export type RpnBinaryOp = RpnBinaryOpLib;
 
 export interface UseCalculatorControllerReturn {
   calculatorMode: 'simple' | 'rpn';
@@ -442,58 +440,21 @@ export function useCalculatorController(
     }
   }, [saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, generateSIRepresentations]);
 
-  const isRadians = (dimensions: DimensionalFormula): boolean => {
-    if (dimensions.angle !== 1) return false;
-    for (const [key, value] of Object.entries(dimensions)) {
-      if (key === 'angle') continue;
-      if (value !== 0 && value !== undefined) return false;
-    }
-    return true;
-  };
-
+  // Council-02: RPN unary dispatch delegates to lib/calculator/applyRpnUnary
+  // (single source of truth). The controller's only remaining
+  // responsibilities are stack orchestration, undo capture, and adding the
+  // app-wide CalcValue.prefix field that the lib intentionally omits.
+  // Undo capture and lastX are set BEFORE the guard result is checked to
+  // preserve exact prior behavior of the inline switch (which called
+  // saveRpnStackForUndo/setLastX before any early return).
   const applyRpnUnary = useCallback((op: RpnUnaryOp) => {
-    if (!rpnStack[3]) return;
-    saveRpnStackForUndo();
-    setLastX(rpnStack[3]);
     const x = rpnStack[3];
-    let newValue: number;
-    let newDimensions: Record<string, number> = {};
-
-    switch (op) {
-      case 'square': newValue = fixPrecision(x.value * x.value); for (const [d, e] of Object.entries(x.dimensions)) newDimensions[d] = e * 2; break;
-      case 'cube': newValue = fixPrecision(x.value ** 3); for (const [d, e] of Object.entries(x.dimensions)) newDimensions[d] = e * 3; break;
-      case 'sqrt': if (x.value < 0) return; newValue = fixPrecision(Math.sqrt(x.value)); for (const [d, e] of Object.entries(x.dimensions)) newDimensions[d] = Math.ceil(e / 2); break;
-      case 'cbrt': newValue = fixPrecision(Math.cbrt(x.value)); for (const [d, e] of Object.entries(x.dimensions)) newDimensions[d] = Math.ceil(e / 3); break;
-      case 'exp': newValue = fixPrecision(Math.exp(x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'ln': if (x.value <= 0) return; newValue = fixPrecision(Math.log(x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'pow10': newValue = fixPrecision(Math.pow(10, x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'log10': if (x.value <= 0) return; newValue = fixPrecision(Math.log10(x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'pow2': newValue = fixPrecision(Math.pow(2, x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'log2': if (x.value <= 0) return; newValue = fixPrecision(Math.log2(x.value)); newDimensions = { ...x.dimensions }; break;
-      case 'rnd': { const f = Math.pow(10, calculatorPrecision); const sc = x.value * f; const fl = Math.floor(sc); newValue = (Math.abs(sc - fl - 0.5) < 1e-10 ? (fl % 2 === 0 ? fl : fl + 1) : Math.round(sc)) / f; newDimensions = { ...x.dimensions }; break; }
-      case 'trunc': { const f = Math.pow(10, calculatorPrecision); newValue = Math.trunc(x.value * f) / f; newDimensions = { ...x.dimensions }; break; }
-      case 'floor': { const f = Math.pow(10, calculatorPrecision); newValue = Math.floor(x.value * f) / f; newDimensions = { ...x.dimensions }; break; }
-      case 'ceil': { const f = Math.pow(10, calculatorPrecision); newValue = Math.ceil(x.value * f) / f; newDimensions = { ...x.dimensions }; break; }
-      case 'neg': newValue = -x.value; newDimensions = { ...x.dimensions }; break;
-      case 'abs': newValue = Math.abs(x.value); newDimensions = { ...x.dimensions }; break;
-      case 'recip': if (x.value === 0) return; newValue = fixPrecision(1 / x.value); for (const [d, e] of Object.entries(x.dimensions)) newDimensions[d] = -e; break;
-      case 'sin': newValue = fixPrecision(Math.sin(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'cos': newValue = fixPrecision(Math.cos(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'tan': newValue = fixPrecision(Math.tan(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'asin': if (x.value < -1 || x.value > 1) return; newValue = fixPrecision(Math.asin(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      case 'acos': if (x.value < -1 || x.value > 1) return; newValue = fixPrecision(Math.acos(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      case 'atan': newValue = fixPrecision(Math.atan(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      case 'sinh': newValue = fixPrecision(Math.sinh(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'cosh': newValue = fixPrecision(Math.cosh(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'tanh': newValue = fixPrecision(Math.tanh(x.value)); newDimensions = isRadians(x.dimensions) ? {} : { ...x.dimensions }; break;
-      case 'asinh': newValue = fixPrecision(Math.asinh(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      case 'acosh': if (x.value < 1) return; newValue = fixPrecision(Math.acosh(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      case 'atanh': if (x.value <= -1 || x.value >= 1) return; newValue = fixPrecision(Math.atanh(x.value)); newDimensions = isDimensionless(x.dimensions) ? { angle: 1 } : { ...x.dimensions }; break;
-      default: return;
-    }
-    for (const [d, e] of Object.entries(newDimensions)) { if (e === 0) delete newDimensions[d]; }
-    const preserveCat = op === 'neg' || op === 'abs';
-    const newEntry: CalcValue = { value: newValue!, dimensions: newDimensions, prefix: 'none', ...(preserveCat && x.sourceCategory ? { sourceCategory: x.sourceCategory } : {}) };
+    if (!x) return;
+    saveRpnStackForUndo();
+    setLastX(x);
+    const result = applyRpnUnaryLib(x, op, calculatorPrecision);
+    if (!result) return;
+    const newEntry: CalcValue = { ...result, prefix: 'none' };
     setRpnStack(prev => { const ns = [...prev]; ns[3] = newEntry; return ns; });
     setRpnResultPrefixRaw('none');
     setRpnSelectedAlternativeRaw(0);
@@ -509,49 +470,25 @@ export function useCalculatorController(
     return true;
   }, [rpnStack]);
 
+  // Council-02: RPN binary dispatch delegates to lib/calculator/applyRpnBinary.
+  // Undo capture and lastX are set BEFORE the guard result is checked to
+  // preserve exact prior behavior of the inline switch.
   const applyRpnBinary = useCallback((op: RpnBinaryOp) => {
-    if (!rpnStack[2] || !rpnStack[3]) return;
-    saveRpnStackForUndo();
-    setLastX(rpnStack[3]);
     const y = rpnStack[2]; const x = rpnStack[3];
-    let newValue: number; let newDimensions: Record<string, number> = {};
-    switch (op) {
-      case 'mul': newValue = fixPrecision(y.value * x.value); newDimensions = { ...x.dimensions }; break;
-      case 'div': if (x.value === 0) return; newValue = fixPrecision(y.value / x.value); newDimensions = { ...x.dimensions }; break;
-      case 'add': newValue = fixPrecision(y.value + x.value); newDimensions = { ...x.dimensions }; break;
-      case 'sub': newValue = fixPrecision(y.value - x.value); newDimensions = { ...x.dimensions }; break;
-      case 'mulUnit':
-        newValue = fixPrecision(y.value * x.value);
-        for (const d of Object.keys(y.dimensions)) newDimensions[d] = (y.dimensions as Record<string, number>)[d] || 0;
-        for (const d of Object.keys(x.dimensions)) newDimensions[d] = (newDimensions[d] || 0) + ((x.dimensions as Record<string, number>)[d] || 0);
-        break;
-      case 'divUnit':
-        if (x.value === 0) return;
-        newValue = fixPrecision(y.value / x.value);
-        for (const d of Object.keys(y.dimensions)) newDimensions[d] = (y.dimensions as Record<string, number>)[d] || 0;
-        for (const d of Object.keys(x.dimensions)) newDimensions[d] = (newDimensions[d] || 0) - ((x.dimensions as Record<string, number>)[d] || 0);
-        break;
-      case 'addUnit':
-        if (!dimensionsEqual(y.dimensions, x.dimensions) && !isDimensionless(y.dimensions) && !isDimensionless(x.dimensions)) return;
-        newValue = fixPrecision(y.value + x.value);
-        newDimensions = isDimensionless(x.dimensions) ? { ...y.dimensions } : { ...x.dimensions };
-        break;
-      case 'subUnit':
-        if (!dimensionsEqual(y.dimensions, x.dimensions) && !isDimensionless(y.dimensions) && !isDimensionless(x.dimensions)) return;
-        newValue = fixPrecision(y.value - x.value);
-        newDimensions = isDimensionless(x.dimensions) ? { ...y.dimensions } : { ...x.dimensions };
-        break;
-      case 'pow':
-        if (!isDimensionless(x.dimensions)) return;
-        if (y.value === 0 && x.value < 0) return;
-        if (y.value < 0 && !Number.isInteger(x.value)) return;
-        newValue = fixPrecision(Math.pow(y.value, x.value));
-        for (const [d, e] of Object.entries(y.dimensions)) { const ne = e * x.value; if (ne !== 0) newDimensions[d] = ne; }
-        break;
-      default: return;
-    }
-    for (const [d, e] of Object.entries(newDimensions)) { if (e === 0) delete newDimensions[d]; }
-    setRpnStack(prev => { const ns = [...prev]; ns[3] = { value: newValue!, dimensions: newDimensions, prefix: 'none' }; ns[2] = prev[1]; ns[1] = prev[0]; ns[0] = null; return ns; });
+    if (!y || !x) return;
+    saveRpnStackForUndo();
+    setLastX(x);
+    const result = applyRpnBinaryLib(y, x, op);
+    if (!result) return;
+    const newEntry: CalcValue = { ...result, prefix: 'none' };
+    setRpnStack(prev => {
+      const ns = [...prev];
+      ns[3] = newEntry;
+      ns[2] = prev[1];
+      ns[1] = prev[0];
+      ns[0] = null;
+      return ns;
+    });
     setRpnResultPrefixRaw('none');
     setRpnSelectedAlternativeRaw(0);
     triggerFlashRpnResult();
