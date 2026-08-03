@@ -21,6 +21,7 @@ import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calcula
 import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
 import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
 import { computeConversion } from '@/lib/calculator/computeConversion';
+import { sanitizeInput } from '@/lib/formatting/sanitizeInput';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -389,20 +390,9 @@ export function useConverterController(): UseConverterControllerReturn {
   }, [inputValue, fromUnit, setInputValue]);
 
   const handleInputChange = useCallback((value: string) => {
-    const format = NUMBER_FORMATS[numberFormat];
-    const decimalSep = format.decimal === '.' ? '\\.' : format.decimal === "'" ? "\\'" : format.decimal;
-    const thousandsSep = format.thousands ? (format.thousands === ' ' ? '\\s' : format.thousands === "'" ? "\\'" : format.thousands) : '';
-    const isArabicFormat = format.useArabicNumerals ?? false;
-    const digitPattern = isArabicFormat ? '0-9٠-٩' : '0-9';
-    if (fromUnit === 'deg_dms' || fromUnit === 'ft_in') {
-      const pattern = new RegExp(`[^${digitPattern}:\\-${decimalSep}${thousandsSep}'"']`, 'g');
-      const filtered = value.replace(pattern, '');
-      setInputValue(isArabicFormat ? toArabicNumerals(filtered) : filtered);
-      return;
-    }
-    const pattern = new RegExp(`[^${digitPattern}\\-${decimalSep}${thousandsSep}eE\\+]`, 'g');
-    const filtered = value.replace(pattern, '');
-    setInputValue(isArabicFormat ? toArabicNumerals(filtered) : filtered);
+    // Council-08d: sanitization lives in lib/formatting/sanitizeInput.
+    const isCompound = fromUnit === 'deg_dms' || fromUnit === 'ft_in';
+    setInputValue(sanitizeInput({ value, format: numberFormat, isCompound }));
   }, [numberFormat, fromUnit, setInputValue]);
 
   const handleInputBlur = useCallback((): void => {
