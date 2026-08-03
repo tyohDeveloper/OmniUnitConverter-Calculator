@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits, getComparisonUnits } from '@/lib/conversion-data';
+import { buildComparisonRows } from '@/lib/calculator/buildComparisonRows';
 import { NUMBER_FORMATS } from '@/lib/formatting';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { Card } from '@/components/ui/card';
@@ -456,59 +457,39 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
                     {' '}{fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
                   </div>
                   <div className="grid gap-1 max-h-64 overflow-y-auto">
-                    {(() => {
-                      const allUnits = getComparisonUnits(activeCategory, fromUnit);
-
-                      return allUnits.map(unit => {
-                        const convertedValue = convert(
-                          parseFloat(inputValue) || 0,
-                          fromUnit,
-                          unit.id,
-                          activeCategory,
-                          prefixPowerFactor(fromPrefixData.factor, fromUnitData?.prefixPower),
-                          1
-                        );
-
-                        const nonePrefix = PREFIXES.find(p => p.id === 'none')!;
-                        let displayPrefix = nonePrefix;
-                        let displayValue = convertedValue;
-
-                        if (unit.allowPrefixes && Math.abs(convertedValue) > 0) {
-                          const optimal = findOptimalPrefix(convertedValue, unit.symbol, precision, unit.prefixPower);
-                          displayPrefix = optimal.prefix;
-                          displayValue = optimal.adjustedValue;
-                        }
-
-                        const kgResult = applyPrefixToKgUnitLib(unit.symbol, displayPrefix.id);
-                        const displaySymbol = kgResult.showPrefix
-                          ? `${displayPrefix.symbol}${kgResult.displaySymbol}`
-                          : kgResult.displaySymbol;
-
-                        return (
-                          <button
-                            type="button"
-                            key={unit.id}
-                            className="w-full flex items-center px-2 py-1 rounded hover:bg-muted/20 cursor-pointer text-left"
-                            onClick={() => {
-                              setToUnit(unit.id);
-                              setToPrefix('none');
-                              setComparisonMode(false);
-                            }}
-                            data-testid={`comparison-row-${unit.id}`}
-                          >
-                            <span className="text-xs text-muted-foreground font-mono w-36 shrink-0">
-                              {displaySymbol}
-                            </span>
-                            <span className="text-xs text-muted-foreground flex-1 truncate px-1" data-testid={`comparison-name-${unit.id}`}>
-                              {translateUnitName(unit.name)}
-                            </span>
-                            <span className="text-sm font-mono text-foreground shrink-0">
-                              {formatNumberWithSeparators(displayValue, precision)}
-                            </span>
-                          </button>
-                        );
-                      });
-                    })()}
+                    {/* Council-07: comparison math extracted to lib/calculator/buildComparisonRows. */}
+                    {buildComparisonRows({
+                      units: getComparisonUnits(activeCategory, fromUnit),
+                      inputValue: parseFloat(inputValue) || 0,
+                      fromUnit,
+                      activeCategory,
+                      fromPrefixFactor: fromPrefixData.factor,
+                      fromPrefixPower: fromUnitData?.prefixPower,
+                      precision,
+                      nonePrefix: PREFIXES.find(p => p.id === 'none')!,
+                    }).map(row => (
+                      <button
+                        type="button"
+                        key={row.unitId}
+                        className="w-full flex items-center px-2 py-1 rounded hover:bg-muted/20 cursor-pointer text-left"
+                        onClick={() => {
+                          setToUnit(row.unitId);
+                          setToPrefix('none');
+                          setComparisonMode(false);
+                        }}
+                        data-testid={`comparison-row-${row.unitId}`}
+                      >
+                        <span className="text-xs text-muted-foreground font-mono w-36 shrink-0">
+                          {row.displaySymbol}
+                        </span>
+                        <span className="text-xs text-muted-foreground flex-1 truncate px-1" data-testid={`comparison-name-${row.unitId}`}>
+                          {translateUnitName(row.unitName)}
+                        </span>
+                        <span className="text-sm font-mono text-foreground shrink-0">
+                          {formatNumberWithSeparators(row.displayValue, precision)}
+                        </span>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </motion.div>
