@@ -1,11 +1,21 @@
 import type { NumberFormat } from '@/lib/formatting';
 
+export type PasteStatus = 'idle' | 'unrecognised' | 'unavailable';
+export interface PendingPasteUnit {
+  fromUnit: string;
+  prefixId: string;
+}
+
 export interface UiPrefsState {
   numberFormat: NumberFormat;
   language: string;
   activeTab: string;
   directValue: string;
   directExponents: Record<string, number>;
+  // Council-11: flow-significant paste state, moved out of controller refs/useState.
+  pendingPasteUnit: PendingPasteUnit | null;
+  converterPasteStatus: PasteStatus;
+  customPasteStatus: PasteStatus;
 }
 
 export const uiPrefsInitialState: UiPrefsState = {
@@ -24,6 +34,9 @@ export const uiPrefsInitialState: UiPrefsState = {
     rad: 0,
     sr: 0,
   },
+  pendingPasteUnit: null,
+  converterPasteStatus: 'idle',
+  customPasteStatus: 'idle',
 };
 
 export type UiPrefsAction =
@@ -32,7 +45,10 @@ export type UiPrefsAction =
   | { type: 'SET_ACTIVE_TAB'; payload: string }
   | { type: 'SET_DIRECT_VALUE'; payload: string }
   | { type: 'SET_DIRECT_EXPONENTS'; payload: Record<string, number> }
-  | { type: 'UPDATE_DIRECT_EXPONENTS'; payload: (prev: Record<string, number>) => Record<string, number> };
+  | { type: 'UPDATE_DIRECT_EXPONENTS'; payload: (prev: Record<string, number>) => Record<string, number> }
+  | { type: 'SET_PENDING_PASTE_UNIT'; payload: PendingPasteUnit | null }
+  | { type: 'SET_CONVERTER_PASTE_STATUS'; payload: PasteStatus }
+  | { type: 'SET_CUSTOM_PASTE_STATUS'; payload: PasteStatus };
 
 export function uiPrefsReducer(state: UiPrefsState, action: UiPrefsAction): UiPrefsState {
   switch (action.type) {
@@ -48,6 +64,12 @@ export function uiPrefsReducer(state: UiPrefsState, action: UiPrefsAction): UiPr
       return { ...state, directExponents: action.payload };
     case 'UPDATE_DIRECT_EXPONENTS':
       return { ...state, directExponents: action.payload(state.directExponents) };
+    case 'SET_PENDING_PASTE_UNIT':
+      return { ...state, pendingPasteUnit: action.payload };
+    case 'SET_CONVERTER_PASTE_STATUS':
+      return { ...state, converterPasteStatus: action.payload };
+    case 'SET_CUSTOM_PASTE_STATUS':
+      return { ...state, customPasteStatus: action.payload };
     default:
       return state;
   }

@@ -66,7 +66,8 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     formatForClipboard, formatNumberWithSeparators,
     buildDirectUnitSymbol, buildDirectDimensions,
     generateSIRepresentations, applyPrefixToKgUnit,
-    pendingPasteUnitRef,
+    pendingPasteUnit,
+    setPendingPasteUnit,
   } = conv;
 
   const calc = useCalculatorController(
@@ -100,8 +101,9 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
   useEffect(() => {
     const sorted = getFilteredSortedUnits(activeCategory);
     if (sorted.length === 0) return;
-    const pending = pendingPasteUnitRef.current;
-    pendingPasteUnitRef.current = null;
+    // Council-11: pending paste unit is now reducer state, not a ref.
+    const pending = pendingPasteUnit;
+    if (pending) setPendingPasteUnit(null);
     if (pending && sorted.some(u => u.id === pending.fromUnit)) {
       setFromUnit(pending.fromUnit);
       setToUnit(pending.fromUnit);
@@ -145,7 +147,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
             setFromUnit(parsed.unitId);
             setFromPrefix(parsed.prefixId);
           } else {
-            pendingPasteUnitRef.current = { fromUnit: parsed.unitId, prefixId: parsed.prefixId };
+            setPendingPasteUnit({ fromUnit: parsed.unitId, prefixId: parsed.prefixId });
             setActiveCategory(parsed.categoryId as UnitCategory);
           }
         }

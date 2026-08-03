@@ -111,7 +111,10 @@ export interface UseConverterControllerReturn {
   applyPrefixToKgUnit: typeof applyPrefixToKgUnitLib;
 
   inputRef: React.RefObject<HTMLInputElement | null>;
-  pendingPasteUnitRef: React.MutableRefObject<{ fromUnit: string; prefixId: string } | null>;
+  // Council-11: replaces pendingPasteUnitRef. The value now lives in
+  // uiPrefs reducer state; consumers dispatch setPendingPasteUnit to update.
+  pendingPasteUnit: { fromUnit: string; prefixId: string } | null;
+  setPendingPasteUnit: (v: { fromUnit: string; prefixId: string } | null) => void;
 }
 
 const CATEGORY_GROUPS_ALL = [
@@ -176,12 +179,30 @@ export function useConverterController(): UseConverterControllerReturn {
   const setDirectExponents = useCallback((v: Record<string, number>) =>
     dispatch({ domain: 'uiPrefs', ...uiActions.setDirectExponents(v) }), [dispatch]);
 
-  const pendingPasteUnitRef = useRef<{ fromUnit: string; prefixId: string } | null>(null);
+  // Council-11: only DOM/timer refs stay as useRef. The three flow-
+  // significant values (pendingPasteUnit, converter/customPasteStatus)
+  // now live in uiPrefs reducer state.
   const converterPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const customPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [converterPasteStatus, setConverterPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
-  const [customPasteStatus, setCustomPasteStatus] = useState<'idle' | 'unrecognised' | 'unavailable'>('idle');
+  const pendingPasteUnit = state.uiPrefs.pendingPasteUnit;
+  const converterPasteStatus = state.uiPrefs.converterPasteStatus;
+  const customPasteStatus = state.uiPrefs.customPasteStatus;
+  const setPendingPasteUnit = useCallback(
+    (v: { fromUnit: string; prefixId: string } | null) =>
+      dispatch({ domain: 'uiPrefs', ...uiActions.setPendingPasteUnit(v) }),
+    [dispatch],
+  );
+  const setConverterPasteStatus = useCallback(
+    (v: 'idle' | 'unrecognised' | 'unavailable') =>
+      dispatch({ domain: 'uiPrefs', ...uiActions.setConverterPasteStatus(v) }),
+    [dispatch],
+  );
+  const setCustomPasteStatus = useCallback(
+    (v: 'idle' | 'unrecognised' | 'unavailable') =>
+      dispatch({ domain: 'uiPrefs', ...uiActions.setCustomPasteStatus(v) }),
+    [dispatch],
+  );
 
   const {
     triggerFlashCopyResult, triggerFlashFromBaseFactor, triggerFlashFromSIBase,
@@ -550,7 +571,7 @@ export function useConverterController(): UseConverterControllerReturn {
           setFromUnit(parsed.unitId);
           setFromPrefix(parsed.prefixId || 'none');
         } else {
-          pendingPasteUnitRef.current = { fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' };
+          setPendingPasteUnit({ fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' });
           setActiveCategory(parsed.categoryId);
         }
         setInputValue(parsed.originalValue.toString());
@@ -599,7 +620,7 @@ export function useConverterController(): UseConverterControllerReturn {
       const parsed = parseUnitText(text);
       if (parsed.categoryId && parsed.unitId) {
         setActiveTab('converter');
-        pendingPasteUnitRef.current = { fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' };
+        setPendingPasteUnit({ fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' });
         setActiveCategory(parsed.categoryId);
         setInputValue(parsed.originalValue.toString());
         setCustomPasteStatus('idle');
@@ -683,6 +704,7 @@ export function useConverterController(): UseConverterControllerReturn {
     generateSIRepresentations, applyPrefixToKgUnit,
 
     inputRef,
-    pendingPasteUnitRef,
+    pendingPasteUnit,
+    setPendingPasteUnit,
   };
 }
