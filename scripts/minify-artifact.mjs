@@ -61,7 +61,37 @@ const OPTIONS = {
   sortClassName: false,
 };
 
-const after = await minify(before, OPTIONS);
+let after = await minify(before, OPTIONS);
+
+/**
+ * Expand HTML5 boolean-attribute shorthand into XHTML-conformant form.
+ * Standards §8.2 requires `<input disabled="disabled"/>` not `<input disabled/>`.
+ * Vite emits `<script ... crossorigin>` and similar which are legal HTML5 but
+ * illegal XML. This runs after html-minifier-terser because turning
+ * `collapseBooleanAttributes: false` is not enough — Vite emits them
+ * pre-minification too.
+ *
+ * Handled attributes (per HTML5 spec, list of boolean attributes):
+ *   allowfullscreen, async, autofocus, autoplay, checked, controls,
+ *   crossorigin (technically enumerable, but Vite emits it as boolean),
+ *   default, defer, disabled, formnovalidate, hidden, ismap, itemscope,
+ *   loop, multiple, muted, nomodule, novalidate, open, playsinline,
+ *   readonly, required, reversed, selected, truespeed.
+ */
+const BOOLEAN_ATTRS = [
+  'allowfullscreen', 'async', 'autofocus', 'autoplay', 'checked', 'controls',
+  'crossorigin', 'default', 'defer', 'disabled', 'formnovalidate', 'hidden',
+  'ismap', 'itemscope', 'loop', 'multiple', 'muted', 'nomodule', 'novalidate',
+  'open', 'playsinline', 'readonly', 'required', 'reversed', 'selected',
+  'truespeed',
+];
+for (const attr of BOOLEAN_ATTRS) {
+  // Only match the attribute when it's a bare token inside a tag — preceded
+  // by whitespace and followed by whitespace, /, or > (never by =).
+  const rx = new RegExp(`(<[a-zA-Z][^>]*?\\s)${attr}(\\s|/|>)`, 'g');
+  after = after.replace(rx, `$1${attr}="${attr}"$2`);
+}
+
 const afterBytes = Buffer.byteLength(after, 'utf8');
 const afterGzip = zlib.gzipSync(after).length;
 
