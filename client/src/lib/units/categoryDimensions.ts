@@ -57,6 +57,7 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   photon: { name: 'Photon Energy', dimensions: { mass: 1, length: 2, time: -2 }, isBase: false },
   luminous_flux: { name: 'Luminous Flux', dimensions: { intensity: 1, solid_angle: 1 }, isBase: false },
   illuminance: { name: 'Illuminance', dimensions: { intensity: 1, solid_angle: 1, length: -2 }, isBase: false },
+  luminous_exitance: { name: 'Luminous Exitance', dimensions: { intensity: 1, solid_angle: 1, length: -2 }, isBase: false },
   luminance: { name: 'Luminance', dimensions: { intensity: 1, length: -2 }, isBase: false },
   sound_pressure: { name: 'Sound Pressure', dimensions: { mass: 1, length: -1, time: -2 }, isBase: false },
   sound_intensity: { name: 'Sound Intensity', dimensions: { mass: 1, time: -3 }, isBase: false },
@@ -79,7 +80,11 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   fuel_economy: { name: 'Fuel Economy', dimensions: { length: -2 }, isBase: false },
   lightbulb: { name: 'Lightbulb Efficiency', dimensions: { intensity: 1, solid_angle: 1 }, isBase: false },
   rack_geometry: { name: 'Rack Geometry', dimensions: { length: 1 }, isBase: false },
-  shipping: { name: 'Shipping Volume', dimensions: { length: 3 }, isBase: false },
+  // Council-03: shipping units (container lengths, TEU) are LINEAR, not
+  // volumetric. The controllers' now-deleted dimMap had `{ length: 1 }`;
+  // this catalog previously had `{ length: 3 }` in error. Reconciled to
+  // match the controllers' correct value.
+  shipping: { name: 'Shipping Length', dimensions: { length: 1 }, isBase: false },
   math: { name: 'Math Functions', dimensions: {}, isBase: false },
   logarithmic: { name: 'Logarithmic Scales', dimensions: {}, isBase: false },
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },

@@ -13,6 +13,7 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { findCategoryByDimensions } from '@/lib/calculator/findCategoryByDimensions';
 import type { CalcValue } from '@/lib/units/calcValue';
+import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -115,49 +116,8 @@ const CATEGORY_GROUPS_ALL = [
   { categories: ['archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power'] },
 ];
 
-const CATEGORY_DIMENSION_MAP: Record<string, DimensionalFormula> = {
-  length: { length: 1 }, mass: { mass: 1 }, time: { time: 1 }, current: { current: 1 },
-  temperature: { temperature: 1 }, amount: { amount: 1 }, intensity: { intensity: 1 },
-  area: { length: 2 }, volume: { length: 3 }, speed: { length: 1, time: -1 },
-  acceleration: { length: 1, time: -2 }, force: { mass: 1, length: 1, time: -2 },
-  pressure: { mass: 1, length: -1, time: -2 }, energy: { mass: 1, length: 2, time: -2 },
-  power: { mass: 1, length: 2, time: -3 }, frequency: { time: -1 },
-  charge: { current: 1, time: 1 }, potential: { mass: 1, length: 2, time: -3, current: -1 },
-  capacitance: { mass: -1, length: -2, time: 4, current: 2 },
-  resistance: { mass: 1, length: 2, time: -3, current: -2 },
-  conductance: { mass: -1, length: -2, time: 3, current: 2 },
-  inductance: { mass: 1, length: 2, time: -2, current: -2 },
-  magnetic_flux: { mass: 1, length: 2, time: -2, current: -1 },
-  magnetic_density: { mass: 1, time: -2, current: -1 },
-  radioactivity: { time: -1 }, radiation_dose: { length: 2, time: -2 },
-  equivalent_dose: { length: 2, time: -2 }, radiation_exposure: { current: 1, time: 1, mass: -1 },
-  catalytic: { amount: 1, time: -1 },
-  angle: { angle: 1 }, solid_angle: { solid_angle: 1 },
-  angular_velocity: { angle: 1, time: -1 }, momentum: { mass: 1, length: 1, time: -1 },
-  angular_momentum: { mass: 1, length: 2, time: -1 },
-  luminous_flux: { intensity: 1, solid_angle: 1 },
-  illuminance: { intensity: 1, solid_angle: 1, length: -2 },
-  luminous_exitance: { intensity: 1, solid_angle: 1, length: -2 },
-  luminance: { intensity: 1, length: -2 }, torque: { mass: 1, length: 2, time: -2 },
-  density: { mass: 1, length: -3 }, flow: { length: 3, time: -1 },
-  viscosity: { mass: 1, length: -1, time: -1 }, surface_tension: { mass: 1, time: -2 },
-  thermal_conductivity: { mass: 1, length: 1, time: -3, temperature: -1 },
-  specific_heat: { length: 2, time: -2, temperature: -1 },
-  entropy: { mass: 1, length: 2, time: -2, temperature: -1 },
-  concentration: { amount: 1, length: -3 }, data: {}, rack_geometry: { length: 1 },
-  shipping: { length: 1 }, beer_wine_volume: { length: 3 }, math: {},
-  refractive_power: { length: -1 }, sound_pressure: { mass: 1, length: -1, time: -2 },
-  fuel_economy: { length: -2 }, lightbulb: { intensity: 1, solid_angle: 1 },
-  photon: { mass: 1, length: 2, time: -2 }, radioactive_decay: { time: -1 },
-  cross_section: { length: 2 }, kinematic_viscosity: { length: 2, time: -1 },
-  electric_field: { mass: 1, length: 1, time: -3, current: -1 },
-  magnetic_field_h: { current: 1, length: -1 }, sound_intensity: { mass: 1, time: -3 },
-  acoustic_impedance: { mass: 1, length: -2, time: -1 },
-  fuel: { mass: 1, length: 2, time: -2 }, archaic_length: { length: 1 },
-  archaic_mass: { mass: 1 }, archaic_volume: { length: 3 }, archaic_area: { length: 2 },
-  archaic_energy: { mass: 1, length: 2, time: -2 }, archaic_power: { mass: 1, length: 2, time: -3 },
-  typography: { length: 1 }, cooking: { length: 3 }, paper_sizes: { length: 2 }
-};
+// Council-03: local CATEGORY_DIMENSION_MAP replaced by the canonical
+// CATEGORY_DIMENSIONS catalog in lib/units/categoryDimensions.ts.
 
 export function useConverterController(): UseConverterControllerReturn {
   const { state, dispatch, flash, inputRef } = useConverterContext();
@@ -240,7 +200,7 @@ export function useConverterController(): UseConverterControllerReturn {
   const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
 
   const getCategoryDimensions = useCallback((category: UnitCategory): { [key: string]: number } => {
-    return (CATEGORY_DIMENSION_MAP[category] || {}) as { [key: string]: number };
+    return (CATEGORY_DIMENSIONS[category]?.dimensions ?? {}) as { [key: string]: number };
   }, []);
 
   const generateSIRepresentations = useCallback((dimensions: DimensionalFormula, sourceCategory?: string): SIRepresentation[] => {

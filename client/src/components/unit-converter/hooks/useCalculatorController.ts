@@ -16,6 +16,7 @@ import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations'
 import { siToDisplay as siToDisplayLib } from '@/lib/calculator/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
+import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import type { SIRepresentation } from '@/lib/calculator/types';
 import { applyRpnUnary as applyRpnUnaryLib, type RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
 import { applyRpnBinary as applyRpnBinaryLib, type RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
@@ -291,50 +292,9 @@ export function useCalculatorController(
           const categoryDef = CONVERSION_DATA.find(c => c.id === activeCategory);
           const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.symbol : '';
           const dims: Record<string, number> = {};
-          const dimMap: Record<string, DimensionalFormula> = {
-            length: { length: 1 }, mass: { mass: 1 }, time: { time: 1 }, current: { current: 1 },
-            temperature: { temperature: 1 }, amount: { amount: 1 }, intensity: { intensity: 1 },
-            area: { length: 2 }, volume: { length: 3 }, speed: { length: 1, time: -1 },
-            acceleration: { length: 1, time: -2 }, force: { mass: 1, length: 1, time: -2 },
-            pressure: { mass: 1, length: -1, time: -2 }, energy: { mass: 1, length: 2, time: -2 },
-            power: { mass: 1, length: 2, time: -3 }, frequency: { time: -1 },
-            charge: { current: 1, time: 1 }, potential: { mass: 1, length: 2, time: -3, current: -1 },
-            capacitance: { mass: -1, length: -2, time: 4, current: 2 },
-            resistance: { mass: 1, length: 2, time: -3, current: -2 },
-            conductance: { mass: -1, length: -2, time: 3, current: 2 },
-            inductance: { mass: 1, length: 2, time: -2, current: -2 },
-            magnetic_flux: { mass: 1, length: 2, time: -2, current: -1 },
-            magnetic_density: { mass: 1, time: -2, current: -1 },
-            radioactivity: { time: -1 }, radiation_dose: { length: 2, time: -2 },
-            equivalent_dose: { length: 2, time: -2 }, radiation_exposure: { current: 1, time: 1, mass: -1 },
-            catalytic: { amount: 1, time: -1 },
-            angle: { angle: 1 }, solid_angle: { solid_angle: 1 },
-            angular_velocity: { angle: 1, time: -1 }, momentum: { mass: 1, length: 1, time: -1 },
-            angular_momentum: { mass: 1, length: 2, time: -1 },
-            luminous_flux: { intensity: 1, solid_angle: 1 },
-            illuminance: { intensity: 1, solid_angle: 1, length: -2 },
-            luminous_exitance: { intensity: 1, solid_angle: 1, length: -2 },
-            luminance: { intensity: 1, length: -2 }, torque: { mass: 1, length: 2, time: -2 },
-            density: { mass: 1, length: -3 }, flow: { length: 3, time: -1 },
-            viscosity: { mass: 1, length: -1, time: -1 }, surface_tension: { mass: 1, time: -2 },
-            thermal_conductivity: { mass: 1, length: 1, time: -3, temperature: -1 },
-            specific_heat: { length: 2, time: -2, temperature: -1 },
-            entropy: { mass: 1, length: 2, time: -2, temperature: -1 },
-            concentration: { amount: 1, length: -3 }, data: {}, rack_geometry: { length: 1 },
-            shipping: { length: 1 }, beer_wine_volume: { length: 3 }, math: {},
-            refractive_power: { length: -1 }, sound_pressure: { mass: 1, length: -1, time: -2 },
-            fuel_economy: { length: -2 }, lightbulb: { intensity: 1, solid_angle: 1 },
-            photon: { mass: 1, length: 2, time: -2 }, radioactive_decay: { time: -1 },
-            cross_section: { length: 2 }, kinematic_viscosity: { length: 2, time: -1 },
-            electric_field: { mass: 1, length: 1, time: -3, current: -1 },
-            magnetic_field_h: { current: 1, length: -1 }, sound_intensity: { mass: 1, time: -3 },
-            acoustic_impedance: { mass: 1, length: -2, time: -1 },
-            fuel: { mass: 1, length: 2, time: -2 }, archaic_length: { length: 1 },
-            archaic_mass: { mass: 1 }, archaic_volume: { length: 3 }, archaic_area: { length: 2 },
-            archaic_energy: { mass: 1, length: 2, time: -2 }, archaic_power: { mass: 1, length: 2, time: -3 },
-            typography: { length: 1 }, cooking: { length: 3 }, paper_sizes: { length: 2 }
-          };
-          Object.assign(dims, dimMap[activeCategory] || {});
+          // Council-03: use the canonical CATEGORY_DIMENSIONS catalog
+          // instead of an embedded dimMap literal.
+          Object.assign(dims, CATEGORY_DIMENSIONS[activeCategory]?.dimensions ?? {});
           newEntry = {
             value: siValue,
             dimensions: dims,
