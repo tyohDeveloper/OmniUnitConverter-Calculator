@@ -5,12 +5,18 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 5000",
-    "build": "vite build",
     "preview": "vite preview --host 0.0.0.0 --port 5000",
-    "check": "tsc",
+    "check": "tsc --noEmit",
+    "lint:size": "node scripts/lint-size.mjs",
     "test": "vitest",
+    "test:run": "vitest run",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:bundle": "vite build",
+    "minify:artifact": "node scripts/minify-artifact.mjs",
+    "verify:build": "node scripts/verify-build.mjs",
+    "build:fast": "vite build",
+    "build": "npm run check && npm run lint:size && npm run test:run && npm run build:bundle && npm run minify:artifact && npm run verify:build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -82,6 +88,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
+    "html-minifier-terser": "^7.2.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
     "typescript": "5.6.3",
