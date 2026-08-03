@@ -530,13 +530,7 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
                     <>
                       <Select
                         value={resultPrefix}
-                        onValueChange={(val) => {
-                          if (currentSymbol.includes('kg')) {
-                            setResultPrefix(val);
-                          } else {
-                            setResultPrefix(val);
-                          }
-                        }}
+                        onValueChange={(val) => setResultPrefix(val)}
                       >
                         <SelectTrigger data-testid="select-calc-result-prefix" className="h-10 w-[50px] text-xs shrink-0">
                           <SelectValue placeholder={t('Prefix')} />
