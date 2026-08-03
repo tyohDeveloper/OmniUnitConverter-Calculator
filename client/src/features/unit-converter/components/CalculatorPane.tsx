@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { parseUnitText, PREFIXES } from '@/lib/conversion-data';
-import { displayToSI } from '@/lib/calculator/displayToSI';
+import { PREFIXES } from '@/lib/conversion-data';
 import { siToDisplay } from '@/lib/calculator/siToDisplay';
 import { isSymbolSI } from '@/lib/calculator/isSymbolSI';
+import { parseRpnXInput } from '@/lib/calculator/parseRpnXInput';
+import { reexpressRpnEntry } from '@/lib/calculator/reexpressRpnEntry';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { isDimensionEmpty } from '@/lib/calculator/isDimensionEmpty';
@@ -103,26 +104,11 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
   // Commit the current X edit value into the X register. Returns true if a
   // commit happened. Metadata is computed from the freshly parsed text (not
   // from stale closure state) and applied inside the functional updater.
+  // Council-07: parsing lives in lib/calculator/parseRpnXInput. The pane
+  // orchestrates the stack update and prefix/alt reset.
   const commitRpnXValue = () => {
-    if (!rpnXEditValue.trim()) return false;
-    const parsed = parseUnitText(rpnXEditValue);
-    const dims: Record<string, number> = {};
-    if (parsed.dimensions.length) dims.length = parsed.dimensions.length;
-    if (parsed.dimensions.mass) dims.mass = parsed.dimensions.mass;
-    if (parsed.dimensions.time) dims.time = parsed.dimensions.time;
-    if (parsed.dimensions.current) dims.current = parsed.dimensions.current;
-    if (parsed.dimensions.temperature) dims.temperature = parsed.dimensions.temperature;
-    if (parsed.dimensions.amount) dims.amount = parsed.dimensions.amount;
-    if (parsed.dimensions.intensity) dims.intensity = parsed.dimensions.intensity;
-    if (parsed.dimensions.angle) dims.angle = parsed.dimensions.angle;
-    if (parsed.dimensions.solid_angle) dims.solid_angle = parsed.dimensions.solid_angle;
-
-    const newEntry = {
-      value: parsed.value,
-      dimensions: dims,
-      prefix: parsed.prefixId || 'none'
-    };
-
+    const newEntry = parseRpnXInput(rpnXEditValue);
+    if (!newEntry) return false;
     saveRpnStackForUndo();
     setRpnStack(prev => {
       const newStack = [...prev];
@@ -170,24 +156,19 @@ export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = 
     const typedNumber = parseFloat(numericMatch[0].replace(/,/g, ''));
     if (isNaN(typedNumber) || !isFinite(typedNumber)) return;
 
-    const siReps = generateSIRepresentations(rpnStack[3].dimensions);
-    const oldSymbol = siReps[prev.alt]?.displaySymbol || formatDimensions(rpnStack[3].dimensions);
-    const newSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(rpnStack[3].dimensions);
-    if (!oldSymbol || !newSymbol) return;
-
-    // Convert: typedNumber in old context → SI → new display value
-    const siValue = displayToSI(typedNumber, oldSymbol, prev.prefix);
-    const newDisplayValue = siToDisplay(siValue, newSymbol, rpnResultPrefix);
-    if (!isFinite(newDisplayValue)) return;
-
-    // Compute the new unit symbol (for display in the edit field, so commit can parse it).
-    const kgResult = applyPrefixToKgUnit(newSymbol, rpnResultPrefix);
-    const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
-    const prefixSym = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    const newUnitSymbol = prefixSym + kgResult.displaySymbol;
-
-    const newNumber = parseFloat(newDisplayValue.toPrecision(15));
-    setRpnXEditValue(newUnitSymbol ? `${newNumber} ${newUnitSymbol}` : String(newNumber));
+    // Council-07: math lives in lib/calculator/reexpressRpnEntry.
+    const result = reexpressRpnEntry({
+      typedNumber,
+      dimensions: rpnStack[3].dimensions,
+      oldPrefix: prev.prefix,
+      oldAltIndex: prev.alt,
+      newPrefix: rpnResultPrefix,
+      newAltIndex: rpnSelectedAlternative,
+      siReps: generateSIRepresentations(rpnStack[3].dimensions),
+      prefixes: PREFIXES,
+    });
+    if (!result) return;
+    setRpnXEditValue(result.newUnitSymbol ? `${result.newNumber} ${result.newUnitSymbol}` : String(result.newNumber));
   }, [rpnResultPrefix, rpnSelectedAlternative]);
 
   return (
