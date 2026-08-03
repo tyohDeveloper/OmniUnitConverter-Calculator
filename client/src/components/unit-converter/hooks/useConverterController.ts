@@ -16,6 +16,10 @@ import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { findCategoryByDimensions } from '@/lib/calculator/findCategoryByDimensions';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
+import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/calculator/buildDirectUnitSymbol';
+import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calculator/buildDirectDimensions';
+import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
+import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -321,56 +325,33 @@ export function useConverterController(): UseConverterControllerReturn {
     return '0';
   }, [fromUnit]);
 
-  const buildDirectUnitSymbol = useCallback((): string => {
-    const superscripts: Record<number, string> = {
-      1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵',
-      [-1]: '⁻¹', [-2]: '⁻²', [-3]: '⁻³', [-4]: '⁻⁴', [-5]: '⁻⁵'
-    };
-    const parts: string[] = [];
-    const units = ['m', 'kg', 's', 'A', 'K', 'mol', 'cd', 'rad', 'sr'] as const;
-    for (const unit of units) {
-      const exp = directExponents[unit];
-      if (exp !== 0) parts.push(exp === 1 ? unit : `${unit}${superscripts[exp] || ''}`);
-    }
-    return parts.join('·') || '';
-  }, [directExponents]);
+  // Council-08: delegate to the lib implementations. These are
+  // byte-identical to the previous inline versions; keeping the useCallback
+  // wrapper preserves referential stability for downstream memoized effects.
+  const buildDirectUnitSymbol = useCallback(
+    (): string => buildDirectUnitSymbolLib(directExponents),
+    [directExponents],
+  );
 
-  const buildDirectDimensions = useCallback((): { [key: string]: number } => {
-    const dims: { [key: string]: number } = {};
-    const keyMap: Record<string, keyof DimensionalFormula> = {
-      'm': 'length', 'kg': 'mass', 's': 'time', 'A': 'current', 'K': 'temperature',
-      'mol': 'amount', 'cd': 'intensity', 'rad': 'angle', 'sr': 'solid_angle'
-    };
-    for (const [unit, dimKey] of Object.entries(keyMap)) {
-      const exp = directExponents[unit];
-      if (exp !== 0) dims[dimKey] = exp;
-    }
-    return dims;
-  }, [directExponents]);
+  const buildDirectDimensions = useCallback(
+    (): { [key: string]: number } => buildDirectDimensionsLib(directExponents) as { [key: string]: number },
+    [directExponents],
+  );
 
   const refocusInput = useCallback(() => {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
   }, [inputRef]);
 
-  const parseDMS = useCallback((dms: string): number => {
-    if (!dms.includes(':')) return parseNumberWithFormat(dms);
-    const parts = dms.split(':').map(p => parseNumberWithSpecificFormat(p, numberFormat));
-    let val = 0;
-    if (parts.length > 0) val += parts[0];
-    if (parts.length > 1) val += (parts[0] >= 0 ? parts[1] : -parts[1]) / 60;
-    if (parts.length > 2) val += (parts[0] >= 0 ? parts[2] : -parts[2]) / 3600;
-    return val;
-  }, [parseNumberWithFormat, numberFormat]);
+  // Council-08: DMS and foot-inch parsing extracted to lib/formatting.
+  const parseDMS = useCallback(
+    (dms: string): number => parseDMSLib(dms, numberFormat),
+    [numberFormat],
+  );
 
-  const parseFtIn = useCallback((ftIn: string): number => {
-    const cleaned = ftIn.replace(/['"]/g, ':');
-    if (!cleaned.includes(':')) return parseNumberWithFormat(cleaned);
-    const parts = cleaned.split(':').map(p => parseNumberWithSpecificFormat(p, numberFormat));
-    let val = 0;
-    if (parts.length > 0) val += parts[0];
-    if (parts.length > 1) val += (parts[0] >= 0 ? parts[1] : -parts[1]) / 12;
-    return val;
-  }, [parseNumberWithFormat, numberFormat]);
+  const parseFtIn = useCallback(
+    (ftIn: string): number => parseFtInLib(ftIn, numberFormat),
+    [numberFormat],
+  );
 
   useEffect(() => {
     if (!inputValue || !fromUnit || !toUnit) {
