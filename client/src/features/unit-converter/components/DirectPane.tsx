@@ -233,7 +233,7 @@ export function DirectPane({
                 key={quantity}
                 className="flex items-center px-3 py-1.5 rounded-md text-xs font-mono text-accent bg-accent/5 border border-accent/20 cursor-pointer hover:bg-accent/15 hover:border-accent/50 hover:shadow-sm active:bg-accent/25 transition-all duration-150 text-left w-fit"
                 onClick={() => onQuantityClick(quantity)}
-                {...testId('custom-physical-quantity-label')}
+                {...testId(`custom-physical-quantity-label-${quantity.toLowerCase().replace(/\s+/g, '-')}`)}
                 data-quantity-id={quantity.toLowerCase().replace(/\s+/g, '-')}
               >
                 {quantity}
