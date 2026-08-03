@@ -1,0 +1,8 @@
+{
+  "_note": "Council-13: per-category default unit/prefix when the category is first activated. Categories not listed here fall through to sorted[0].id. Keys are category ids; values are { unit, prefix }. If a paste smart-fill provides a target unit, the paste target wins over this table (see UnitConverterApp.tsx useEffect on activeCategory). NOTE: the 'math' branch that existed in the source literal was removed — there is no math.json in data/conversion/ so the category is not present in CONVERSION_DATA at runtime; the branch was dead.",
+  "defaults": {
+    "temperature": { "unit": "k", "prefix": "none" },
+    "volume": { "unit": "l", "prefix": "none" },
+    "capacitance": { "unit": "f", "prefix": "none" }
+  }
+}

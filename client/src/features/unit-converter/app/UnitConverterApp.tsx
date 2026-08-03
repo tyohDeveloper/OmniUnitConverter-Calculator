@@ -13,6 +13,7 @@ import HelpSection from '@/components/help-section';
 import SourcesSection from '@/components/sources-section';
 import { FIELD_HEIGHT, ISO_LANGUAGES } from '@/components/unit-converter/constants';
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
+import { CATEGORY_DEFAULTS } from '@/lib/units/categoryDefaults';
 import { ConverterPane } from '@/features/unit-converter/components/ConverterPane';
 import { DirectPane } from '@/features/unit-converter/components/DirectPane';
 import { CalculatorPane } from '@/features/unit-converter/components/CalculatorPane';
@@ -106,22 +107,14 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
       setToUnit(pending.fromUnit);
       setFromPrefix(pending.prefixId);
       setToPrefix('none');
-    } else if (activeCategory === 'temperature') {
-      setFromUnit('k'); setToUnit('k');
-      setFromPrefix('none'); setToPrefix('none');
-    } else if (activeCategory === 'volume') {
-      setFromUnit('l'); setToUnit('l');
-      setFromPrefix('none'); setToPrefix('none');
-    } else if (activeCategory === 'capacitance') {
-      setFromUnit('f'); setToUnit('f');
-      setFromPrefix('none'); setToPrefix('none');
-    } else if (activeCategory === 'math') {
-      setFromUnit('num'); setToUnit('num');
-      setFromPrefix('none'); setToPrefix('none');
-    } else {
-      setFromUnit(sorted[0].id); setToUnit(sorted[0].id);
-      setFromPrefix('none'); setToPrefix('none');
+      return;
     }
+    // Council-13: default unit/prefix per category lives in JSON.
+    const override = CATEGORY_DEFAULTS[activeCategory];
+    const defaultUnitId = override?.unit ?? sorted[0].id;
+    const defaultPrefix = override?.prefix ?? 'none';
+    setFromUnit(defaultUnitId); setToUnit(defaultUnitId);
+    setFromPrefix(defaultPrefix); setToPrefix(defaultPrefix);
   }, [activeCategory]);
 
   useEffect(() => { inputRef.current?.focus(); }, []);

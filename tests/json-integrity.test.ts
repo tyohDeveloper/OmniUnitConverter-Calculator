@@ -281,3 +281,24 @@ describe('JSON Integrity: cross-file consistency', () => {
     }
   });
 });
+
+describe('JSON Integrity: category-defaults.json (council-13)', () => {
+  it('every default category exists in CONVERSION_DATA', async () => {
+    const { CATEGORY_DEFAULTS } = await import('../client/src/lib/units/categoryDefaults');
+    const knownCategoryIds = new Set(CONVERSION_DATA.map((c: { id: string }) => c.id));
+    Object.keys(CATEGORY_DEFAULTS).forEach(catId => {
+      expect(knownCategoryIds.has(catId), `category '${catId}' in category-defaults.json but not in CONVERSION_DATA`).toBe(true);
+    });
+  });
+
+  it('every default unit exists inside its category', async () => {
+    const { CATEGORY_DEFAULTS } = await import('../client/src/lib/units/categoryDefaults');
+    Object.keys(CATEGORY_DEFAULTS).forEach(catId => {
+      const def = (CATEGORY_DEFAULTS as Record<string, { unit: string; prefix: string }>)[catId];
+      const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId);
+      expect(cat, `category '${catId}' missing`).toBeTruthy();
+      const unitIds = new Set((cat!.units as Array<{ id: string }>).map(u => u.id));
+      expect(unitIds.has(def.unit), `default unit '${def.unit}' not in category '${catId}'`).toBe(true);
+    });
+  });
+});
