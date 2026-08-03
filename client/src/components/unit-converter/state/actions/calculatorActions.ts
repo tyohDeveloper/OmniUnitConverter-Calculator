@@ -38,3 +38,8 @@ export const setSelectedAlternative = (v: number): CalculatorAction =>
 
 export const togglePreserveSourceUnit = (): CalculatorAction =>
   ({ type: 'TOGGLE_PRESERVE_SOURCE_UNIT' });
+
+// Council-10: atomic simple-calculator recalc. Reducer reads current state
+// and produces new state; no controller-side ref needed to dedup.
+export const recalculateSimple = (): CalculatorAction =>
+  ({ type: 'RECALCULATE_SIMPLE' });

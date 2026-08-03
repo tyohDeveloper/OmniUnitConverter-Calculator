@@ -26,6 +26,8 @@ export interface UseCalculatorStateReturn {
   setSelectedAlternative: (value: number) => void;
   preserveSourceUnit: boolean;
   togglePreserveSourceUnit: () => void;
+  // Council-10: atomic recalc; replaces the controller-side useEffect+ref.
+  recalculateSimple: () => void;
 }
 
 export function useCalculatorState(): UseCalculatorStateReturn {
@@ -57,5 +59,6 @@ export function useCalculatorState(): UseCalculatorStateReturn {
     setSelectedAlternative: (v) => dispatch({ domain: 'calculator', ...actions.setSelectedAlternative(v) }),
     preserveSourceUnit: s.preserveSourceUnit,
     togglePreserveSourceUnit: () => dispatch({ domain: 'calculator', ...actions.togglePreserveSourceUnit() }),
+    recalculateSimple: () => dispatch({ domain: 'calculator', ...actions.recalculateSimple() }),
   };
 }

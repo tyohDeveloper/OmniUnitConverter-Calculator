@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import { CONVERSION_DATA, PREFIXES, parseUnitText } from '@/lib/conversion-data';
 import { fixPrecision as fixPrecisionLib, toFixedBanker } from '@/lib/formatting';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
@@ -7,8 +7,6 @@ import { UnitType } from '@/lib/units/unitType';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
 import { isDimensionless } from '@/lib/calculator/isDimensionless';
 import { dimensionsEqual } from '@/lib/calculator/dimensionsEqual';
-import { multiplyDimensions } from '@/lib/calculator/multiplyDimensions';
-import { divideDimensions } from '@/lib/calculator/divideDimensions';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
@@ -121,6 +119,7 @@ export function useCalculatorController(
     resultUnit, setResultUnit,
     preserveSourceUnit, togglePreserveSourceUnit,
     setCalculatorPrecision,
+    recalculateSimple,
   } = calcState;
 
   const {
@@ -544,32 +543,12 @@ export function useCalculatorController(
     setCalculatorMode('simple');
   }, [rpnStack, setCalcValues, setCalcOp1, setCalcOp2, setResultPrefix, setSelectedAlternative, setCalculatorMode]);
 
-  const computeCalcResult = () => {
-    const v0 = calcValues[0];
-    const v1 = calcValues[1];
-    const v2 = calcValues[2];
-    const op1 = calcOp1;
-    const op2 = calcOp2;
-    if (!v0) return null;
-    let resultValue = v0.value;
-    let resultDimensions = { ...v0.dimensions };
-    if (v1 && op1) {
-      if (op1 === '*') { resultValue *= v1.value; resultDimensions = multiplyDimensions(resultDimensions, v1.dimensions); }
-      else if (op1 === '/') { resultValue /= v1.value; resultDimensions = divideDimensions(resultDimensions, v1.dimensions); }
-      else if (op1 === '+' && canAddSubtract(v0, v1)) { resultValue += v1.value; if (isDimensionless(resultDimensions) && !isDimensionless(v1.dimensions)) resultDimensions = { ...v1.dimensions }; }
-      else if (op1 === '-' && canAddSubtract(v0, v1)) { resultValue -= v1.value; if (isDimensionless(resultDimensions) && !isDimensionless(v1.dimensions)) resultDimensions = { ...v1.dimensions }; }
-      if (v2 && op2) {
-        if (op2 === '*') { resultValue *= v2.value; resultDimensions = multiplyDimensions(resultDimensions, v2.dimensions); }
-        else if (op2 === '/') { resultValue /= v2.value; resultDimensions = divideDimensions(resultDimensions, v2.dimensions); }
-        else if (op2 === '+' && canAddSubtract(v1, v2)) { resultValue += v2.value; if (isDimensionless(resultDimensions) && !isDimensionless(v2.dimensions)) resultDimensions = { ...v2.dimensions }; }
-        else if (op2 === '-' && canAddSubtract(v1, v2)) { resultValue -= v2.value; if (isDimensionless(resultDimensions) && !isDimensionless(v2.dimensions)) resultDimensions = { ...v2.dimensions }; }
-      }
-    }
-    return { value: resultValue, dimensions: resultDimensions };
-  };
-
-  const lastCalcInputsRef = useRef<string>('');
-
+  // Council-10: computeCalcResult now lives at
+  // client/src/lib/calculator/computeCalcResult.ts, and the recalc itself
+  // is a single atomic reducer action. The controller-local inputs-ref
+  // dedup is gone: the reducer only mutates state when it produces a new
+  // result, and calcValues[3] is not in this effect's dep array, so the
+  // effect fires exactly when inputs actually change.
   useEffect(() => {
     const v0 = calcValues[0]; const v1 = calcValues[1]; const v2 = calcValues[2];
 
@@ -584,28 +563,7 @@ export function useCalculatorController(
       return;
     }
 
-    const inputKey = JSON.stringify([
-      { value: v0.value, dim: v0.dimensions },
-      v1 ? { value: v1.value, dim: v1.dimensions } : null,
-      v2 ? { value: v2.value, dim: v2.dimensions } : null,
-      calcOp1,
-      calcOp2,
-    ]);
-    if (inputKey === lastCalcInputsRef.current) return;
-    lastCalcInputsRef.current = inputKey;
-
-    const computed = computeCalcResult();
-    if (!computed) return;
-
-    setCalcValues(prev => {
-      const nv = [...prev];
-      nv[3] = { value: computed.value, dimensions: computed.dimensions, prefix: 'none' };
-      return nv;
-    });
-    setResultPrefix('none');
-    setSelectedAlternative(0);
-    setResultCategory(null);
-    setResultUnit(null);
+    recalculateSimple();
   }, [calcValues[0], calcValues[1], calcValues[2], calcOp1, calcOp2]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
