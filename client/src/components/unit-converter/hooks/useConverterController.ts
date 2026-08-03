@@ -20,6 +20,7 @@ import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/calcula
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calculator/buildDirectDimensions';
 import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
 import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
+import { computeConversion } from '@/lib/calculator/computeConversion';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -354,32 +355,16 @@ export function useConverterController(): UseConverterControllerReturn {
   );
 
   useEffect(() => {
-    if (!inputValue || !fromUnit || !toUnit) {
-      setResult(null);
-      return;
-    }
+    if (!inputValue || !fromUnit || !toUnit) { setResult(null); return; }
+    // Council-08c: parse input, then delegate to lib/calculator/computeConversion.
     let val: number;
-    if (fromUnit === 'deg_dms') {
-      val = parseDMS(inputValue);
-    } else if (fromUnit === 'ft_in') {
-      val = parseFtIn(inputValue);
-    } else {
-      val = parseNumberWithFormat(inputValue);
-    }
-    if (isNaN(val)) {
-      setResult(null);
-      return;
-    }
-    const catData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
-    const fromUnitData = catData.units.find(u => u.id === fromUnit);
-    const toUnitData = catData.units.find(u => u.id === toUnit);
-    const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    const isSpecialFrom = fromUnit === 'deg_dms' || fromUnit === 'ft_in';
-    const isSpecialTo = toUnit === 'deg_dms' || toUnit === 'ft_in';
-    const fromFactor = (fromUnitData?.allowPrefixes && fromPrefixData && !isSpecialFrom) ? prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower) : 1;
-    const toFactor = (toUnitData?.allowPrefixes && toPrefixData && !isSpecialTo) ? prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower) : 1;
-    const res = convert(val, fromUnit, toUnit, activeCategory, fromFactor, toFactor);
+    if (fromUnit === 'deg_dms') val = parseDMS(inputValue);
+    else if (fromUnit === 'ft_in') val = parseFtIn(inputValue);
+    else val = parseNumberWithFormat(inputValue);
+    if (isNaN(val)) { setResult(null); return; }
+    const res = computeConversion({
+      value: val, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
+    });
     setResult(res);
   }, [inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix, numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
 
