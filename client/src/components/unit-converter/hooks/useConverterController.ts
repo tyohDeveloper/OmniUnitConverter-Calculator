@@ -7,7 +7,9 @@ import {
   toCJKMyriadString, toFixedBanker, NUMBER_FORMATS,
   parseNumberWithFormat as parseNumberWithSpecificFormat,
   formatNumberWithFormat as formatNumberWithSpecificFormat,
-  formatFtIn as formatFtInLib, getTraditionalConfig, type NumberFormat
+  formatFtIn as formatFtInLib, getTraditionalConfig, type NumberFormat,
+  cleanNumber as cleanNumberLib,
+  formatNumberWithSeparators as formatNumberWithSeparatorsLib,
 } from '@/lib/formatting';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
@@ -211,69 +213,33 @@ export function useConverterController(): UseConverterControllerReturn {
     return parseNumberWithSpecificFormat(str, numberFormat);
   }, [numberFormat]);
 
-  const cleanNumber = useCallback((num: number, p: number): string => {
-    const fixed = fixPrecisionLib(num);
-    let ep = p;
-    const absN = Math.abs(fixed);
-    if (absN > 0 && absN < 1) {
-      ep = Math.min(Math.abs(Math.floor(Math.log10(absN))) + p, 12);
-    }
-    const fmtd = toFixedBanker(fixed, ep);
-    return fmtd.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.0+$/, '');
-  }, []);
+  // Council-06: delegate to lib/formatting. The controller-local
+  // implementations were byte-for-byte equivalent except for a
+  // redundant fixed===0 short-circuit that produced the same output
+  // as the general path.
+  const cleanNumber = useCallback(
+    (num: number, p: number): string => cleanNumberLib(num, p),
+    [],
+  );
 
-  const formatNumberWithSeparators = useCallback((num: number, precisionValue: number): string => {
-    const format = numberFormat === 'traditional'
-      ? getTraditionalConfig(language)
-      : NUMBER_FORMATS[numberFormat];
-
-    const fixed = fixPrecisionLib(num);
-
-    if (fixed === 0) {
-      if (format.traditionalScript) {
-        const toNumerals = format.traditionalScript === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
-        return toNumerals('0');
+  const formatNumberWithSeparators = useCallback(
+    (num: number, precisionValue: number): string => {
+      const fixed = fixPrecisionLib(num);
+      const absNum = Math.abs(fixed);
+      // Scientific-notation escape hatch. The lib's formatter does not
+      // switch to exponential for extreme magnitudes; the controller
+      // used to. Preserve that behavior here.
+      if (absNum !== 0 && (absNum < 1e-12 || absNum >= 1e15)) {
+        const expStr = fixed.toExponential(Math.min(precisionValue, 10));
+        const format = numberFormat === 'traditional'
+          ? getTraditionalConfig(language)
+          : NUMBER_FORMATS[numberFormat];
+        return format.useArabicNumerals ? toArabicNumerals(expStr) : expStr;
       }
-      return format.useArabicNumerals ? '٠' : '0';
-    }
-    const absNum = Math.abs(fixed);
-    if (absNum < 1e-12 || absNum >= 1e15) {
-      const expStr = fixed.toExponential(Math.min(precisionValue, 10));
-      return format.useArabicNumerals ? toArabicNumerals(expStr) : expStr;
-    }
-    const cleaned = cleanNumber(fixed, precisionValue);
-    const [integer, decimal] = cleaned.split('.');
-
-    if (format.traditionalScript) {
-      const script = format.traditionalScript;
-      const cjkInteger = toCJKMyriadString(integer, script);
-      if (decimal) {
-        const toNumerals = script === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
-        return `${cjkInteger}${format.decimal}${toNumerals(decimal)}`;
-      }
-      return cjkInteger;
-    }
-
-    let formattedInteger = integer;
-    if (format.thousands) {
-      if (numberFormat === 'south-asian') {
-        const reversed = integer.split('').reverse().join('');
-        let result = '';
-        for (let i = 0; i < reversed.length; i++) {
-          if (i === 3 || (i > 3 && (i - 3) % 2 === 0)) result += format.thousands;
-          result += reversed[i];
-        }
-        formattedInteger = result.split('').reverse().join('');
-      } else if (format.myriad) {
-        formattedInteger = integer.replace(/\B(?=(\d{4})+(?!\d))/g, format.thousands);
-      } else {
-        formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands);
-      }
-    }
-    let result = decimal ? `${formattedInteger}${format.decimal}${decimal}` : formattedInteger;
-    if (format.useArabicNumerals) result = toArabicNumerals(result);
-    return result;
-  }, [numberFormat, language, cleanNumber]);
+      return formatNumberWithSeparatorsLib(fixed, precisionValue, numberFormat, language);
+    },
+    [numberFormat, language],
+  );
 
   const formatForClipboard = useCallback((num: number, precisionValue: number): string => {
     const format = numberFormat === 'traditional'
