@@ -4,7 +4,11 @@
 >
 > **Location.** Committed at `docs/architecture/standards.md` (proposed). Linked from `README.md` and referenced from the header of `scripts/lint-size.mjs`. When a lint script or verifier fails, the error message should include a section number in this document.
 >
-> **Version.** 1.0 (initial). Extend by pull request; the doc is intended to grow alongside the codebase.
+> **Version.** 1.1. Extend by pull request; the doc is intended to grow alongside the codebase.
+>
+> **Change log.**
+> - 1.1 — §4 rewritten to match the `{role}-{area}-{name}[-{key}]` grammar the codebase already uses; §7 names ESLint + typescript-eslint as the AST toolchain (dev-only, zero bundle impact); §8 rewritten to "ship `.html` that meets XHTML markup rules"; new §13 (libraries over home-built code, with a size/complexity budget) and new §14 (final artifact minimization).
+> - 1.0 — initial.
 
 ---
 
@@ -86,26 +90,42 @@ State is one of five classes. Each class has exactly one legal home.
 
 ## 4. UI-object identifiers
 
-**Rule 4.1 — Coverage.** Every interactive primitive rendered in the shipped artifact carries a stable identifier. An interactive primitive is any element with `onClick`, `onValueChange`, `onCheckedChange`, `onChange`, `onSubmit`, `role="button"`, or that renders through `<Input>`, `<Select>`, `<Switch>`, `<Button>`, `<Tabs*>`, `<Checkbox>`, `<Slider>`, or `<Toggle>`.
+**Rule 4.1 — Coverage.** Every interactive primitive rendered in the shipped artifact carries a stable, unique identifier. An interactive primitive is any element with `onClick`, `onValueChange`, `onCheckedChange`, `onChange`, `onSubmit`, `role="button"`, or that renders through `<Input>`, `<Select>`, `<Switch>`, `<Button>`, `<Tabs*>`, `<Checkbox>`, `<Slider>`, or `<Toggle>`. Read-only display widgets that a test needs to assert on (result readouts, computed factor displays, stack registers) also carry an identifier.
 
-**Rule 4.2 — Identifier form.** IDs are set via `data-testid` (preferred) or `id`. The grammar is:
+**Rule 4.2 — Identifier grammar.** IDs are set via `data-testid` and follow the hyphen-separated grammar the codebase already uses:
 
 ```
-<area>.<object>.<role>[.<key>]
+{role}-{area}-{name}[-{key}]
 ```
 
-- **area** — the top-level pane or region: `converter`, `calculator.simple`, `calculator.rpn`, `direct`, `app`, `help`, `sources`.
-- **object** — the specific widget group inside that area: `from`, `to`, `field-1`, `stack-x`, `function-grid`.
-- **role** — one of `button`, `select`, `input`, `display`, `switch`, `checkbox`, `slider`.
-- **key** — required whenever the widget is generated inside a `.map()` or list. Use the underlying domain key (unit id, category id, dimension symbol), not the array index.
+- **role** — what kind of widget it is. One of: `button`, `select`, `input`, `display`, `text`, `switch`, `checkbox`, `slider`, `panel`, `backdrop`, `tab`.
+- **area** — which pane or region it lives in. One of: `converter`, `calc` (simple calculator), `rpn`, `custom` (direct pane), `app`, `help`, `sources`, `comparison`. Omit when the widget is truly app-wide (e.g. `button-swap`).
+- **name** — the specific widget's purpose: `unit`, `prefix`, `precision`, `multiply`, `sqrt`, `undo`, `clear`, `swap`, `x-input`.
+- **key** — **required** whenever the widget is generated inside a `.map()` or list. Use the underlying domain key (unit id, category id, dimension symbol), never the array index.
 
-Examples: `converter.from.select.unit`, `calculator.simple.button.operator.multiply.1`, `calculator.rpn.button.function.sqrt`, `direct.button.exponent.mass.-2`.
+Examples that match current source:
+- `button-swap`, `button-clear-calculator`, `button-clear-rpn`
+- `select-from-unit`, `select-from-prefix`, `select-calc-precision`
+- `rpn-x-input`, `text-rpn-x-value`, `rpn-x-field`
+- `button-rpn-undo`, `button-rpn-sqrt`, `button-op1-multiply`
+- `input-value`, `display-result`, `panel-help`, `backdrop-sources`
 
-**Rule 4.3 — Uniqueness.** Every ID rendered in a given DOM tree is unique. A rendered test asserts no duplicate `data-testid` value on every route/pane. Category cards, list items, and generated buttons must include the domain key in the ID.
+Examples that require the `{key}` segment:
+- `display-category-length`, `display-category-mass` (currently a single duplicated `display-category` at `UnitConverterApp.tsx:252` — must be fixed)
+- `button-custom-exp-mass--2`, `button-custom-exp-length-1` (this pattern is already correct via `testId(\`custom-exp-${unit}-${exp}\`)` at `DirectPane.tsx:217`)
 
-**Rule 4.4 — Production retention.** Identifiers are part of the deliverable's testability contract. The build **must not** strip `data-testid` attributes from the production single-file artifact. If a `testId()` helper exists, it must return its input unchanged in every environment.
+**Rule 4.3 — Uniqueness.** Every `data-testid` value in a rendered DOM tree is unique. A Vitest rendered-DOM test asserts no duplicate values per pane and per full app render. `verify-build.mjs` additionally scans the shipped artifact and fails if any `data-testid` value appears more than once. Category cards, list items, and generated buttons include the domain key in the ID (Rule 4.2).
 
-**Rule 4.5 — Additive-only with a rename process.** Existing IDs are not silently renamed. Renames go through a "rename manifest" PR that updates all consumers (tests, docs, external harnesses) in the same change.
+**Rule 4.4 — Production retention.** Identifiers are part of the deliverable's testability contract. The build **must not** strip `data-testid` attributes from the production single-file artifact. Concretely, `client/src/lib/test-utils.ts` — which today returns `{}` in non-DEV builds — must return `{ 'data-testid': id }` in every environment. Bundle-size cost is measured, not estimated: for the current ~80 IDs the pre-gzip delta is under 3 kB and the post-gzip delta is under 500 bytes against a 460 kB baseline, comfortably below the §13.2 runtime budget.
+
+**Rule 4.5 — Domain metadata attributes coexist.** `data-*` attributes carrying domain metadata (e.g. `data-category-id={cat.id}` at `UnitConverterApp.tsx:253`) are permitted and encouraged alongside `data-testid`. They answer different questions — *which instance am I* vs. *what role do I play in the test harness* — and tests may query by either.
+
+**Rule 4.6 — Additive-only, with a rename process.** New IDs are additive; existing IDs are not silently renamed. Corrective renames (e.g. de-duplicating `display-category`) go through a "rename manifest" PR whose body lists every old → new mapping and updates every consumer (tests, docs, external harnesses) in the same change. A rename PR that leaves a consumer un-updated fails CI.
+
+**Rule 4.7 — Enforcement.** Three layered checks:
+1. **ESLint rule** — flags any interactive primitive (Rule 4.1) lacking `data-testid`. Runs on `client/src/**/*.tsx`.
+2. **Rendered-DOM Vitest** — asserts uniqueness per pane and app-wide (~30 lines, added to `tests/`).
+3. **Artifact scan in `verify-build.mjs`** — counts `data-testid` attributes in `dist/public/index.html` against a committed `testid-manifest.json`. A drop below the manifest count fails the build; an increase requires updating the manifest in the same PR (the additive rule from 4.6, made mechanical).
 
 ---
 
@@ -147,33 +167,50 @@ Examples: `converter.from.select.unit`, `calculator.simple.button.operator.multi
 
 ## 7. Enforcement mechanics
 
-The rules above are enforced by four independent checkers, each of which has a clear scope and known limits. This is preferred to one "smart" checker because scope is the only defense against silent regressions.
+The rules above are enforced by two AST-based checkers plus the existing artifact verifier. This is preferred to one "smart" checker because scope is the only defense against silent regressions.
 
 | Check | Tool | Scope |
 |---|---|---|
-| Function length, one-export-per-file, file length in `lib/` | `scripts/lint-size.mjs` | `client/src/lib/**` |
-| File length + named-handler length in features/hooks | Extended `lint-size.mjs` (added rule; regex-based, JSX-safe carve-out) | `client/src/components/unit-converter/{hooks,state}/**` and `client/src/features/**` |
-| AST-level function-length and file-length for `.tsx` | ESLint (`max-lines-per-function`, `max-lines`) — planned follow-up once panes are already smaller | `client/src/**/*.tsx` |
-| Bundle validity, XML well-formedness, size ceiling, testid coverage/uniqueness | `scripts/verify-build.mjs` | Built artifact only |
+| Function length, file length, exported-function count, testid coverage on interactive primitives | ESLint + `typescript-eslint` (`max-lines-per-function`, `max-lines`, custom rules) | `client/src/**/*.{ts,tsx}` |
+| Bundle validity, XHTML markup well-formedness, size ceiling, testid uniqueness and manifest count, external-URL scan | `scripts/verify-build.mjs` | Built artifact only |
+| Legacy transition (temporary) | `scripts/lint-size.mjs` | `client/src/lib/**` — retained until ESLint owns all rules across `client/src/**`; then deleted |
 
-**Rule 7.1 — Exclusion with rationale.** Every file excluded from any check must have a comment explaining why, referencing §3.6. The set of exclusions in `scripts/lint-size.mjs:33-79` is the reference pattern.
+ESLint is a **devDependency only**. It is not imported by application code, is not seen by Vite's dependency graph, and adds zero bytes to the shipped single-file artifact. The dev install adds ~30 MB to `node_modules`, comparable to `typescript`, `vitest`, and `playwright` which are already tolerated. See §13 for the general library-adoption rule.
 
-**Rule 7.2 — No rule is enforced only by convention.** If a checker cannot express a rule today, the rule is captured as an ESLint plan, a `TODO(architecture-standards §N)` marker, or a targeted test that fails when violated.
+**Rule 7.1 — Prefer AST parsing over regex parsing.** Any linter or codemod that inspects `.ts`/`.tsx` files uses the TypeScript AST (via `@typescript-eslint/parser` or the TypeScript compiler API). Regex or brace-count parsers are permitted only for `.json`, `.md`, and the built HTML/XHTML artifact.
+
+**Rule 7.2 — Exclusion with rationale.** Every file excluded from any check must carry a `// EXCEPTION [architecture-standards §<n>]:` comment (§3.6) or an entry in `.architecture-exceptions.json` with owner and expiry (§11). The current exclusion list in `scripts/lint-size.mjs:33-79` is the reference pattern until it is migrated to ESLint `overrides`.
+
+**Rule 7.3 — No rule is enforced only by convention.** If a checker cannot express a rule today, the rule is captured as an ESLint rule plan, a `TODO(architecture-standards §N)` marker, or a targeted test that fails when violated.
 
 ---
 
-## 8. Single-file offline deliverable
+## 8. Single-file offline deliverable — HTML with XHTML-conformant markup
 
 **Rule 8.1 — One artifact.** The build produces exactly one file that opens from `file://` with no network, no server, and no additional assets, on any modern desktop or mobile browser. Fonts, images, styles, and code are inlined.
 
-**Rule 8.2 — Chosen output format.** Pick one of:
+**Rule 8.2 — Output contract.** The shipped file is **`dist/public/index.html`** and is served/opened as HTML (`text/html`). The *markup inside it* additionally meets modern XHTML rules so the artifact is polyglot — the same bytes would also parse as XHTML if renamed and served as `application/xhtml+xml`. Concretely:
 
-- **(A) HTML with XML-well-formed markup.** Output remains `dist/public/index.html`. All tags are XML-well-formed (void elements self-closed, attributes quoted, case preserved), but the artifact is served/opened as HTML. `verify-build.mjs` parses the artifact as XML and fails on any parse error. This is the recommended default because HTML parsing is forgiving in edge cases.
-- **(B) Strict XHTML.** Output is `dist/public/OmniUnitConverter.xhtml`. Includes `<?xml version="1.0" encoding="UTF-8"?>`, `xmlns="http://www.w3.org/1999/xhtml"`, self-closed void elements, quoted attributes, inline `<script>`/`<style>` bodies wrapped in `//<![CDATA[ … //]]>`, and no literal `]]>` in minified content. Verifier XML-parses the artifact *and* checks `application/xhtml+xml` parsing in a headless browser smoke test.
+- `<!DOCTYPE html>` at the top; UTF-8 encoding declared via `<meta charset="UTF-8"/>`.
+- Every void element self-closed (`<br/>`, `<meta …/>`, `<link …/>`, `<img …/>`, `<input …/>`).
+- All attribute values quoted; all element and attribute names in lower case.
+- Elements properly nested and explicitly closed; no reliance on HTML's implicit optional-close rules for `<li>`, `<p>`, `<option>`, etc.
+- No boolean-attribute shorthand (`<input disabled="disabled"/>`, not `<input disabled/>`) — this is the one place polyglot markup diverges from idiomatic HTML5; the XHTML rule wins here.
+- Inline `<script>` and `<style>` bodies must be free of literal `<` and `&` characters, or wrapped in `//<![CDATA[ … //]]>` (JS) / `/*<![CDATA[*/ … /*]]>*/` (CSS). The minifier must not emit the literal sequence `]]>` inside such blocks.
+- No inline HTML comments (`<!-- … -->`) inside `<script>` or `<style>` bodies.
+- No attributes or values that a strict XML parser would reject.
 
-The current codebase implements *neither*. The standards document must record which of A or B is the accepted contract; this PR chooses **(A)** as the default and flags **(B)** as a controlled follow-up if the deliverable truly needs XML MIME parsing.
+The artifact is **not** given an `.xhtml` extension and **not** served with an XHTML MIME type. This preserves HTML's forgiving parser for end users while guaranteeing the markup would survive strict XML parsing. If a future consumer needs true `application/xhtml+xml` service, the change is a rename plus an XML declaration prepend — no source changes.
 
-**Rule 8.3 — Offline verification.** `verify-build.mjs` asserts the artifact contains no `src=`, `href=`, `url(…)`, or `import(…)` reference to an external URL. Currently only comment count and size are checked; extend accordingly.
+**Rule 8.3 — Build-time verification.** `scripts/verify-build.mjs` extends its existing checks with:
+
+1. Parse the artifact with a strict XML parser after (temporarily) prepending `<?xml version="1.0" encoding="UTF-8"?>`. Any parse error fails the build.
+2. Assert no `src=`, `href=`, `url(…)`, `@import`, or `import(…)` reference points to an external URL. `http://`, `https://`, and protocol-relative `//` URLs are rejected; `data:` URIs for inlined fonts/images are permitted.
+3. Assert exactly one file exists in `dist/public/` after build.
+4. Assert the artifact's `data-testid` count meets or exceeds the committed `testid-manifest.json` (§4.7).
+5. Assert every `data-testid` value in the artifact is unique (§4.3).
+
+**Rule 8.4 — Minification.** See §14 for the required final minimization pass and the acceptance criteria it must satisfy without breaking Rule 8.2.
 
 ---
 
@@ -221,18 +258,72 @@ The `scripts/lint-size.mjs:33-79` exclusion list is a working example of the rat
 
 ---
 
+## 13. Libraries vs. home-built code
+
+**Rule 13.1 — Prefer a known-good library over hand-rolled code**, subject to the budget in Rule 13.2. "Known-good" means: actively maintained (release in the last 12 months), broadly adopted (>100k weekly npm downloads or clearly the canonical implementation in its niche), and using a permissive license (MIT/BSD/Apache-2.0/ISC). This rule applies to build-time tooling *and* application code.
+
+**Rule 13.2 — Size and complexity budget.** Every library adoption must be evaluated against the ceilings below. A library that exceeds any ceiling needs an explicit exception (§11).
+
+| Where the library runs | Shipped-bundle gzip cost | Notes |
+|---|---|---|
+| **Dev / build only** (linters, test runners, bundlers, minifiers, type checkers) | **0 bytes** — hard rule | Verified by §8.3 external-URL scan and the gzip baseline: no dev-only package may enter the Vite entry graph. |
+| **Runtime application code** (imported by `client/src/**`) | **≤ +5 kB gzip** for a single new library; **≤ +20 kB gzip** cumulative per release | Enforced by the gzip-baseline delta in `scripts/verify-build.mjs`. A library over the single-library limit needs a §11 exception with measured before/after gzip numbers. |
+
+**Rule 13.3 — Ecosystem-standard exception.** A library that is the *canonical* implementation in its category (ESLint, TypeScript, Vitest, Playwright, Vite, React) is presumed compliant with Rule 13.1. "Canonical" is a high bar — being popular is not enough; it must be the tool the rest of the ecosystem's tools assume you use.
+
+**Rule 13.4 — Prefer libraries that shrink existing code.** When choosing between two libraries, prefer the one whose adoption lets you delete more application code. A library that replaces 200 lines of hand-rolled parsing with a 2 kB gzip import is a net win even if a smaller library would technically fit.
+
+**Rule 13.5 — Reject libraries that duplicate a stack primitive.** If React, Vite, or TypeScript already provide the capability, do not add a library for it. This rule catches "utility library sprawl" (`lodash`, `date-fns`, `moment`, etc.) — the `code-hygiene-cleanup.md` task documents exactly this failure mode.
+
+**Rule 13.6 — Dev-tool adoption is not free even at 0 bytes shipped.** New devDeps cost install time, `node_modules` disk, and CI cache size. A dev-only tool must justify itself against those costs *and* against the checker/rule/output it replaces or enables (§7, §14).
+
+**Rule 13.7 — Document adoptions.** When a new library is added, note it in the PR body with (a) the gzip cost measured against the current baseline, (b) the code it replaces or capability it enables, and (c) which §7 or §14 rule it participates in enforcing (if applicable).
+
+---
+
+## 14. Final artifact minimization
+
+**Rule 14.1 — Mandatory final pass.** `npm run build` ends with a minimization step that operates on the output of `vite build` and produces the shipped artifact at `dist/public/index.html`. The step runs *after* `vite build` and *before* `verify:build`, so verification always sees the final bytes the user will download.
+
+**Rule 14.2 — Minimum acceptance criteria.** The minimized artifact must:
+
+- Remove all HTML comments except the single `<!DOCTYPE html>` line (Vite's minifier already handles most; enforced by `verify-build.mjs`).
+- Remove all inter-tag whitespace that is not semantically significant, without collapsing whitespace inside `<pre>`, `<textarea>`, `<script>`, or `<style>`.
+- Remove all `/*! … */` license-preservation block comments from inlined JS (already enforced by `verify-build.mjs:67-76`).
+- Remove all `/* … */` and `//` comments from inlined JS and CSS, except any `//<![CDATA[` / `//]]>` wrappers required by Rule 8.2.
+- **Preserve every `data-testid` attribute** (§4.4). Minifiers that offer attribute-stripping options must have this disabled.
+- **Preserve XHTML-conformant markup** (§8.2) — the minifier must not "optimize" `<br/>` to `<br>`, drop attribute quotes, or lowercase-collapse boolean attributes.
+- Not increase gzip size relative to the un-minimized `vite build` output.
+
+**Rule 14.3 — Chosen minimizer.** The minimizer must be a known-good library (§13) with active maintenance and demonstrated support for the XHTML-conformant options in Rule 14.2. The current baseline is **`html-minifier-terser`** with configuration `{ collapseWhitespace: true, removeComments: true, minifyCSS: true, minifyJS: false, keepClosingSlash: true, caseSensitive: true, useShortDoctype: false, decodeEntities: false }`. `minifyJS` is false because Vite/esbuild has already minified JS; running Terser again would strip the CDATA wrappers from Rule 8.2 without a custom parser configuration.
+
+**Rule 14.4 — Evaluate alternatives on measured performance, not defaults.** Any change of minimizer must be justified with a measured before/after on the current bundle: gzip size, minification wall-clock time, and a byte-level diff of the output artifacts run through the XHTML verifier of Rule 8.3. A minimizer that produces a smaller artifact but breaks Rule 8.2 or Rule 4.4 is rejected. Candidates worth evaluating when the current minimizer is limiting:
+
+- **`@swc/html`** — Rust-based, typically 5–20× faster than `html-minifier-terser`; needs verification that its CDATA and self-closing behavior meets Rule 8.2.
+- **`lightningcss`** — for the inlined CSS only, if the CSS minification step becomes the bottleneck.
+- **Custom post-processing chain** (Vite's built-in minifier + a targeted XML-safe pass) — permitted only if benchmarked to beat every off-the-shelf option and reviewed against §13.
+
+**Rule 14.5 — Benchmark cadence.** Re-benchmark the minimizer at least once per major-version release, or whenever the raw bundle grows by more than 10%. Record measurements in `scripts/build-baseline.json` alongside the gzip baseline.
+
+**Rule 14.6 — Escape hatch.** `npm run build:fast` skips the final minimization pass for local iteration. This target must not be usable to produce a release artifact — `verify:build` fails on any output that is not fully minimized.
+
+---
+
 ## Appendix A — Standards → source-of-truth map
 
 | Rule | Enforced by |
 |---|---|
 | §1.1–§1.5 (layer boundaries) | ESLint `no-restricted-imports` + custom rule scanning for `document`/`window` in `lib/`; code review |
 | §2.1–§2.3 (state discipline) | ESLint `no-restricted-syntax` for `useState` in `UnitConverterApp.tsx`; code review |
-| §3.1–§3.5 (function/file length) | `scripts/lint-size.mjs` (extended per §7) → ESLint `max-lines*` follow-up |
-| §3.6 (exception rationale) | `scripts/lint-size.mjs` rejects an unrecognized exclusion without a matching comment |
-| §4.1–§4.5 (testids) | ESLint custom rule on interactive primitives; rendered test asserting uniqueness; `verify-build.mjs` counts identifiers in the artifact |
-| §5.1–§5.3 (data external) | Zod schemas per JSON file; `tests/json-integrity.test.ts` extended; ESLint rule on large inline `Record` literals |
+| §3.1–§3.5 (function/file length) | ESLint (`max-lines-per-function`, `max-lines`) via `typescript-eslint`; interim: `scripts/lint-size.mjs` |
+| §3.6 (exception rationale) | ESLint `overrides` require a companion `// EXCEPTION [architecture-standards §<n>]:` comment; scanned by a small custom rule |
+| §4.1–§4.7 (testids) | ESLint custom rule on interactive primitives; rendered-DOM Vitest asserting uniqueness; `verify-build.mjs` counts identifiers against `testid-manifest.json` and asserts uniqueness in the artifact |
+| §5.1–§5.3 (data external) | Zod schemas per JSON file; `tests/json-integrity.test.ts` extended; ESLint rule flagging inline `Record`/object literals over N entries in `.ts`/`.tsx` |
 | §6.1–§6.4 (build gate) | `package.json` scripts; GitHub Actions workflow |
-| §8.1–§8.3 (single-file offline) | `scripts/verify-build.mjs` (XML parse, external-URL scan, artifact-count check) |
+| §7 (enforcement mechanics) | ESLint + `typescript-eslint`; `verify-build.mjs`; legacy `lint-size.mjs` during transition |
+| §8.1–§8.4 (single-file offline, XHTML-conformant markup) | `scripts/verify-build.mjs` (strict XML parse after prepended prolog, external-URL scan, artifact-count check, testid manifest and uniqueness) |
 | §9.1–§9.4 (testing) | Coverage-scan script; `tests/reducers.test.ts` per-action pattern; Playwright suite |
-| §10.1–§10.2 (deprecation) | Manual + `ts-prune`/`eslint no-dupe-else-if` in build |
-| §11 (exceptions) | `.architecture-exceptions.json` scanner in `lint-size.mjs` |
+| §10.1–§10.2 (deprecation) | `ts-prune` + ESLint (`no-dupe-else-if`, `no-unreachable`, `no-unused-vars`) in build |
+| §11 (exceptions) | `.architecture-exceptions.json` scanner with owner/expiry; ESLint `overrides` for scope-based exceptions |
+| §13.1–§13.7 (libraries vs. home-built code) | PR-review checklist; `verify-build.mjs` gzip-baseline delta enforces the ≤5 kB single-library limit for shipped code |
+| §14.1–§14.6 (final minimization) | `npm run build` ends with the minimization step; `verify-build.mjs` asserts comment-free, whitespace-collapsed, XHTML-conformant, no-gzip-regression output |
