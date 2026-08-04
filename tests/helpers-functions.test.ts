@@ -5,7 +5,7 @@ import {
 } from '../client/src/lib/units/normalizeMassUnit';
 import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
 import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
-import { toTitleCase } from '../client/src/lib/units/toTitleCase';
+import { toTitleCase } from '../client/src/lib/formatting';
 import { buildDimensionalSymbol } from '../client/src/lib/units/buildDimensionalSymbol';
 
 // ── PREFIX_EXPONENTS ─────────────────────────────────────────────────────────
