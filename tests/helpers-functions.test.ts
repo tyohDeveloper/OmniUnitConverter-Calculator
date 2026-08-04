@@ -6,7 +6,7 @@ import {
 import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
 import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
 import { toTitleCase } from '../client/src/lib/formatting';
-import { buildDimensionalSymbol } from '../client/src/lib/units/buildDimensionalSymbol';
+import { buildDimensionalSymbol } from '../client/src/lib/unit-symbols/buildDimensionalSymbol';
 
 // ── PREFIX_EXPONENTS ─────────────────────────────────────────────────────────
 
