@@ -260,6 +260,7 @@ export default tseslint.config(
       'client/src/components/unit-converter/hooks/useRpnXEditField.ts',
       'client/src/components/unit-converter/hooks/useCalculatorState.ts',
       'client/src/components/unit-converter/hooks/useConverterState.ts',
+      'client/src/components/unit-converter/hooks/useUiPrefsState.ts',
       'client/src/components/unit-converter/hooks/useRpnState.ts',
       'client/src/components/unit-converter/hooks/useFlashFlag.ts',
     ],

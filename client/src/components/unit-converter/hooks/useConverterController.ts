@@ -42,7 +42,7 @@ import { useConverterState } from './useConverterState';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
 import { useLocaleHelpers } from './useLocaleHelpers';
-import * as uiActions from '../state/actions/uiActions';
+import { useUiPrefsState } from './useUiPrefsState';
 import * as converterActions from '../state/actions/converterActions';
 
 export interface UseConverterControllerReturn {
@@ -163,47 +163,23 @@ export function useConverterController(): UseConverterControllerReturn {
     setRpnSelectedAlternative,
   } = rpnState;
 
-  const numberFormat = state.uiPrefs.numberFormat;
-  const language = state.uiPrefs.language as SupportedLanguage;
-  const activeTab = state.uiPrefs.activeTab;
-  const directValue = state.uiPrefs.directValue;
-  const directExponents = state.uiPrefs.directExponents;
+  // uiPrefs slice reader/writer surface. See useUiPrefsState.ts for
+  // the pattern rationale (mirrors useConverterState).
+  const {
+    numberFormat, setNumberFormat,
+    language, setLanguage,
+    activeTab, setActiveTab,
+    directValue, setDirectValue,
+    directExponents, setDirectExponents,
+    pendingPasteUnit, setPendingPasteUnit,
+    converterPasteStatus, setConverterPasteStatus,
+    customPasteStatus, setCustomPasteStatus,
+  } = useUiPrefsState();
 
-  const setNumberFormat = useCallback((v: NumberFormat) =>
-    dispatch({ domain: 'uiPrefs', ...uiActions.setNumberFormat(v) }), [dispatch]);
-  const setLanguage = useCallback((v: SupportedLanguage) =>
-    dispatch({ domain: 'uiPrefs', ...uiActions.setLanguage(v) }), [dispatch]);
-  const setActiveTab = useCallback((v: string) =>
-    dispatch({ domain: 'uiPrefs', ...uiActions.setActiveTab(v) }), [dispatch]);
-  const setDirectValue = useCallback((v: string) =>
-    dispatch({ domain: 'uiPrefs', ...uiActions.setDirectValue(v) }), [dispatch]);
-  const setDirectExponents = useCallback((v: Record<string, number>) =>
-    dispatch({ domain: 'uiPrefs', ...uiActions.setDirectExponents(v) }), [dispatch]);
-
-  // Council-11: only DOM/timer refs stay as useRef. The three flow-
-  // significant values (pendingPasteUnit, converter/customPasteStatus)
-  // now live in uiPrefs reducer state.
+  // Only DOM/timer refs stay as useRef; the flow-significant paste
+  // state moved to uiPrefs reducer state (see council-11).
   const converterPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const customPasteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const pendingPasteUnit = state.uiPrefs.pendingPasteUnit;
-  const converterPasteStatus = state.uiPrefs.converterPasteStatus;
-  const customPasteStatus = state.uiPrefs.customPasteStatus;
-  const setPendingPasteUnit = useCallback(
-    (v: { fromUnit: string; prefixId: string } | null) =>
-      dispatch({ domain: 'uiPrefs', ...uiActions.setPendingPasteUnit(v) }),
-    [dispatch],
-  );
-  const setConverterPasteStatus = useCallback(
-    (v: 'idle' | 'unrecognised' | 'unavailable') =>
-      dispatch({ domain: 'uiPrefs', ...uiActions.setConverterPasteStatus(v) }),
-    [dispatch],
-  );
-  const setCustomPasteStatus = useCallback(
-    (v: 'idle' | 'unrecognised' | 'unavailable') =>
-      dispatch({ domain: 'uiPrefs', ...uiActions.setCustomPasteStatus(v) }),
-    [dispatch],
-  );
 
   const {
     triggerFlashCopyResult, triggerFlashFromBaseFactor, triggerFlashFromSIBase,
