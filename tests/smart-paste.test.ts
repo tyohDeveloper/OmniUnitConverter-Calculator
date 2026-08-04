@@ -3,7 +3,7 @@ import {
   parseUnitText,
   CONVERSION_DATA,
 } from '../client/src/lib/conversion-data';
-import { findCategoryByDimensions } from '../client/src/lib/calculator/findCategoryByDimensions';
+import { findCategoryByDimensions } from '../client/src/lib/si-representations/findCategoryByDimensions';
 
 /**
  * Smart Paste and Localization Tests

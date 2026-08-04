@@ -19,11 +19,11 @@ import { UI_TRANSLATIONS, UNIT_NAME_TRANSLATIONS } from '@/lib/localization';
 import type { SupportedLanguage } from '@/lib/localization';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
-import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
+import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import type { SIRepresentation } from '@/lib/calculator/types';
+import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // The hook's return type is co-located with its factory.

@@ -12,7 +12,7 @@ import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/unit-sy
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/unit-symbols/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { sanitizeInput } from '@/lib/parsing/sanitizeInput';
-import type { SIRepresentation } from '@/lib/calculator/types';
+import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';

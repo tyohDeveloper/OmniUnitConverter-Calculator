@@ -1,5 +1,5 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { AlternativeRepresentation } from './types';
+import type { DerivedUnitInfo } from '../units/derivedUnitInfo';
 import { NON_SI_UNITS_CATALOG } from '../units/nonSiUnitsCatalog';
 import { normalizeDimensions } from '../unit-symbols/normalizeDimensions';
 import { formatDimensions } from '../unit-symbols/formatDimensions';
@@ -9,6 +9,20 @@ import { hasOnlyOriginalDimensions } from '../unit-symbols/hasOnlyOriginalDimens
 import { subtractDimensions } from '../dimensions/subtractDimensions';
 import { isValidSymbolRepresentation } from '../unit-symbols/isValidSymbolRepresentation';
 import { SI_DERIVED_UNITS } from '../unit-symbols/siDerivedUnits';
+
+// EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
+// The AlternativeRepresentation shape is defined by this generator; the
+// RPN pane and controllers import it from here.
+export interface AlternativeRepresentation {
+  displaySymbol: string;
+  category: string | null;
+  unitId: string | null;
+  isHybrid: boolean;
+  components: {
+    derivedUnit?: DerivedUnitInfo;
+    remainingDimensions?: DimensionalFormula;
+  };
+}
 
 function makeEntry(symbol: string): AlternativeRepresentation {
   return { displaySymbol: symbol, category: null, unitId: null, isHybrid: false, components: {} };

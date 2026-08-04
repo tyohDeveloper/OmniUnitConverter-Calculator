@@ -15,23 +15,8 @@ export interface CategoryDimensionInfo {
   isBase: boolean;
 }
 
-export interface SIRepresentation {
-  displaySymbol: string;
-  derivedUnits: string[];
-  depth: number;
-  crossDomainMatches?: string[];
-}
-
-export interface AlternativeRepresentation {
-  displaySymbol: string;
-  category: string | null;
-  unitId: string | null;
-  isHybrid: boolean;
-  components: {
-    derivedUnit?: DerivedUnitInfo;
-    remainingDimensions?: DimensionalFormula;
-  };
-}
+// SIRepresentation moved to lib/si-representations/generateSIRepresentations.ts (§3.2 co-location).
+// AlternativeRepresentation moved to lib/si-representations/generateAlternativeRepresentations.ts.
 
 export interface NormalizableDerivedUnit {
   symbol: string;

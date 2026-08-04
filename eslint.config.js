@@ -67,11 +67,8 @@ const LIB_FILE_LENGTH_EXCLUDES = [
   'client/src/lib/units/normalizeMassDisplay.ts',
   'client/src/lib/calculator/applyRpnUnary.ts',
   'client/src/lib/calculator/applyRpnBinary.ts',
-  'client/src/lib/calculator/generateSIRepresentations.ts',
-  'client/src/lib/calculator/generateAlternativeRepresentations.ts',
-  'client/src/lib/units/normalizeDimensions.ts',
-  'client/src/lib/units/findDerivedUnitPower.ts',
-  'client/src/lib/units/getDerivedUnit.ts',
+  'client/src/lib/si-representations/generateSIRepresentations.ts',
+  'client/src/lib/si-representations/generateAlternativeRepresentations.ts',
   'client/src/lib/units/siBaseUnits.ts',
   'client/src/lib/units/siDerivedUnitsCatalog.ts',
   'client/src/lib/units/nonSiUnitsCatalog.ts',
@@ -279,7 +276,7 @@ export default tseslint.config(
   {
     files: [
       'client/src/lib/conversion-data.ts',
-      'client/src/lib/calculator/generateSIRepresentations.ts',
+      'client/src/lib/si-representations/generateSIRepresentations.ts',
       'client/src/lib/units/normalizeMassDisplay.ts',
     ],
     rules: {

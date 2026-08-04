@@ -29,6 +29,7 @@ const EXPORT_COUNT_RULE_DIRS = [
   path.join(LIB_ROOT, 'units'),
   path.join(LIB_ROOT, 'dimensions'),
   path.join(LIB_ROOT, 'unit-symbols'),
+  path.join(LIB_ROOT, 'si-representations'),
   LIB_ROOT,
 ];
 
@@ -126,6 +127,7 @@ const FILE_LENGTH_APPLIES_DIRS = [
   path.join(LIB_ROOT, 'units'),
   path.join(LIB_ROOT, 'dimensions'),
   path.join(LIB_ROOT, 'unit-symbols'),
+  path.join(LIB_ROOT, 'si-representations'),
 ];
 
 function getFilesRecursive(dir) {

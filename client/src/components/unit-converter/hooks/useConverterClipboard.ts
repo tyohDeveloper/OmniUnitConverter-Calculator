@@ -3,7 +3,7 @@ import { CONVERSION_DATA, PREFIXES, convert, parseUnitText } from '@/lib/convers
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { findCategoryByDimensions } from '@/lib/calculator/findCategoryByDimensions';
+import { findCategoryByDimensions } from '@/lib/si-representations/findCategoryByDimensions';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';

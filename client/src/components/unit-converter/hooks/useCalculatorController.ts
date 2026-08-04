@@ -8,14 +8,14 @@ import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { isDimensionless } from '@/lib/dimensions/isDimensionless';
 import { dimensionsEqual } from '@/lib/dimensions/dimensionsEqual';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
-import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
+import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
 import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
-import type { SIRepresentation } from '@/lib/calculator/types';
+import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
 import { applyRpnUnary as applyRpnUnaryLib, type RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
 import { applyRpnBinary as applyRpnBinaryLib, type RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
 

@@ -4,7 +4,7 @@ import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
 import { isDimensionless } from '../client/src/lib/dimensions/isDimensionless';
 import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
 import { divideDimensions } from '../client/src/lib/dimensions/divideDimensions';
-import { findCrossDomainMatches } from '../client/src/lib/calculator/findCrossDomainMatches';
+import { findCrossDomainMatches } from '../client/src/lib/si-representations/findCrossDomainMatches';
 import { isValidSymbolRepresentation } from '../client/src/lib/unit-symbols/isValidSymbolRepresentation';
 import { countUnits } from '../client/src/lib/unit-symbols/countUnits';
 import { formatDimensions } from '../client/src/lib/unit-symbols/formatDimensions';

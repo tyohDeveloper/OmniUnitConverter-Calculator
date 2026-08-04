@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import type { SIRepresentation } from '@/lib/calculator/types';
+import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
 import { buildPushFromConverter } from '@/lib/calculator/buildPushFromConverter';
 import type { CopyResultOutcome } from './useConverterClipboard';
 

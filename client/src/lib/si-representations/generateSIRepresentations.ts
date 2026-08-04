@@ -1,5 +1,4 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { SIRepresentation } from './types';
 import { isDimensionEmpty } from '../dimensions/isDimensionEmpty';
 import { isValidSIComposition } from '../unit-symbols/isValidSIComposition';
 import { subtractDimensions } from '../dimensions/subtractDimensions';
@@ -15,6 +14,16 @@ import { getDimensionSignature } from '../units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '../units/preferredRepresentations';
 import { CONVERSION_DATA, isNonLinearUnit } from '../conversion-data';
 import { CATEGORY_DIMENSIONS } from '../units/categoryDimensions';
+
+// EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
+// The SIRepresentation shape is defined by this generator; consumers
+// (RPN pane, controllers, useLocaleHelpers) import it from here.
+export interface SIRepresentation {
+  displaySymbol: string;
+  derivedUnits: string[];
+  depth: number;
+  crossDomainMatches?: string[];
+}
 
 const EXCLUDED_DROPDOWN_CATEGORIES = new Set([
   'archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power',
