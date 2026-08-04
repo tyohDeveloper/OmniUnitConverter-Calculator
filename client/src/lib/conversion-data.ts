@@ -74,84 +74,17 @@ import viscosityData from '@/data/conversion/viscosity.json';
 import volumeData from '@/data/conversion/volume.json';
 import { CONVERSION_FUNCTIONS } from './units/conversionFunctionRegistry';
 import { validateCategoryJson } from './units/validateCategoryJson';
+import type { UnitCategory } from './units/unitCategory';
+import type { UnitDefinition, CategoryDefinition } from './units/unitDefinition';
 
-export type UnitCategory =
-  | "length"
-  | "mass"
-  | "time"
-  | "current"
-  | "temperature"
-  | "amount"
-  | "intensity" // SI Base
-  | "area"
-  | "volume"
-  | "speed"
-  | "acceleration"
-  | "force"
-  | "pressure"
-  | "energy"
-  | "power"
-  | "frequency"
-  | "charge"
-  | "potential"
-  | "capacitance"
-  | "resistance"
-  | "conductance"
-  | "inductance"
-  | "magnetic_flux"
-  | "magnetic_density"
-  | "radioactivity"
-  | "radiation_dose"
-  | "equivalent_dose"
-  | "radiation_exposure"
-  | "catalytic"
-  | "angle"
-  | "solid_angle"
-  | "angular_velocity"
-  | "momentum"
-  | "angular_momentum"
-  | "luminous_flux"
-  | "illuminance"
-  | "luminous_exitance"
-  | "luminance"
-  | "torque"
-  | "density"
-  | "flow"
-  | "viscosity"
-  | "surface_tension"
-  | "thermal_conductivity"
-  | "specific_heat"
-  | "entropy"
-  | "concentration"
-  | "data"
-  | "rack_geometry"
-  | "shipping"
-  | "math"
-  | "beer_wine_volume"
-  | "refractive_power"
-  | "sound_pressure"
-  | "fuel_economy"
-  | "lightbulb"
-  | "photon"
-  | "radioactive_decay"
-  | "cross_section"
-  | "kinematic_viscosity"
-  | "electric_field"
-  | "magnetic_field_h"
-  | "sound_intensity"
-  | "acoustic_impedance"
-  | "fuel"
-  | "archaic_length"
-  | "archaic_mass"
-  | "archaic_volume"
-  | "archaic_area"
-  | "archaic_energy"
-  | "archaic_power"
-  | "typography"
-  | "cooking"
-  | "paper_sizes"
-  | "logarithmic"
-  | "unitless";
+// UnitCategory, UnitDefinition, CategoryDefinition were previously
+// declared *inline* in this file, duplicating the canonical definitions
+// in ./units/unitCategory and ./units/unitDefinition. Those inline
+// declarations were deleted (§3.1: one canonical home per type); the
+// canonical types are imported above and used throughout this file.
+// Callers of this module that need these types must import them from
+// ./units/ directly, not from here — conversion-data does not re-export
+// them (§3.8: no re-exports).
 
 export interface Prefix {
   id: string;
@@ -246,30 +179,6 @@ export function findOptimalPrefix(value: number, unitSymbol = '', precision = 8,
   }
 
   return { prefix: bestPrefix, adjustedValue: effectiveValue / Math.pow(bestPrefix.factor, prefixPower) };
-}
-
-export interface UnitDefinition {
-  id: string;
-  name: string;
-  symbol: string;
-  factor: number; // Conversion factor to base unit
-  offset?: number; // For temperature (e.g. Celsius to Kelvin)
-  description?: string;
-  allowPrefixes?: boolean;
-  prefixPower?: number; // Prefix applies to a length raised to this power (2 for m², 3 for m³)
-  mathFunction?: 'sin' | 'cos' | 'tan' | 'asin' | 'acos' | 'atan' | 'sqrt' | 'cbrt' | 'root4' | 'log10' | 'log2' | 'ln' | 'exp' | 'abs' | 'sinh' | 'cosh' | 'tanh' | 'asinh' | 'acosh' | 'atanh' | 'floor' | 'ceil' | 'round' | 'trunc' | 'sign' | 'square' | 'cube' | 'pow4'; // For math function units
-  isInverse?: boolean; // For photon wavelength: E = constant/λ (inverse relationship)
-  conversionFunction?: string; // Name of a registered invertible function pair (see units/conversionFunctionRegistry)
-  sourceUrl?: string; // Authoritative reference link shown on the Sources page
-  unitType?: import('./units/unitType').UnitType;
-}
-
-export interface CategoryDefinition {
-  id: UnitCategory;
-  name: string;
-  baseUnit: string;
-  baseSISymbol?: string;
-  units: UnitDefinition[];
 }
 
 type RawCategoryJson = {

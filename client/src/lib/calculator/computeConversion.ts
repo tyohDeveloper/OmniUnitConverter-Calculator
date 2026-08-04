@@ -1,5 +1,5 @@
 import { convert, CONVERSION_DATA, PREFIXES } from '../conversion-data';
-import type { UnitCategory } from '../conversion-data';
+import type { UnitCategory } from '../units/unitCategory';
 import { prefixPowerFactor } from '../units/prefixPowerFactor';
 
 /**

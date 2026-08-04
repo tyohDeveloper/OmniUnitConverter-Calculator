@@ -1,5 +1,6 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { CONVERSION_DATA, UnitCategory } from '@/lib/conversion-data';
+import { CONVERSION_DATA } from '@/lib/conversion-data';
+import type { UnitCategory } from '@/lib/units/unitCategory';
 import {
   toCJKMyriadString,
   formatNumberWithFormat as formatNumberWithSpecificFormat,

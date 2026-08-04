@@ -23,7 +23,7 @@ import { useCalculatorController } from '@/components/unit-converter/hooks/useCa
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { siToDisplay } from '@/lib/unit-symbols/siToDisplay';
 import { PREFIXES } from '@/lib/conversion-data';
-import type { UnitCategory } from '@/lib/conversion-data';
+import type { UnitCategory } from '@/lib/units/unitCategory';
 
 const CATEGORY_GROUPS = [
   { name: 'Base Quantities', categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },

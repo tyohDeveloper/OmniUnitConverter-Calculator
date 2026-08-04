@@ -5,7 +5,7 @@ import { convert } from '../conversion-data';
 import { findOptimalPrefix } from '../units/findOptimalPrefix';
 import { prefixPowerFactor } from '../units/prefixPowerFactor';
 import { applyPrefixToKgUnit } from '../units/applyPrefixToKgUnit';
-import type { UnitCategory } from '../conversion-data';
+import type { UnitCategory } from '../units/unitCategory';
 
 export interface ComparisonRow {
   unitId: string;
