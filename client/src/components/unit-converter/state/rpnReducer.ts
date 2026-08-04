@@ -1,5 +1,10 @@
 import type { CalcValue } from '@/lib/units/calcValue';
 import { applyPushValue } from './reducers/rpn/applyPushValue';
+import { applySaveAndUpdateStack } from './reducers/rpn/applySaveAndUpdateStack';
+import { applyDropValue } from './reducers/rpn/applyDropValue';
+import { applySwapXY } from './reducers/rpn/applySwapXY';
+import { applyRecallLastX } from './reducers/rpn/applyRecallLastX';
+import { applyClearStack } from './reducers/rpn/applyClearStack';
 
 export interface RpnState {
   rpnStack: Array<CalcValue | null>;
@@ -56,74 +61,20 @@ export function rpnReducer(state: RpnState, action: RpnAction): RpnState {
       return { ...state, rpnXEditing: action.payload };
     case 'SET_RPN_X_EDIT_VALUE':
       return { ...state, rpnXEditValue: action.payload };
-    case 'SAVE_AND_UPDATE_STACK': {
-      const newStack = action.payload([...state.rpnStack]);
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: newStack,
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
-    }
+    case 'SAVE_AND_UPDATE_STACK':
+      return applySaveAndUpdateStack(state, action.payload);
     case 'PUSH_VALUE':
       return applyPushValue(state, action.payload);
-    case 'DROP_VALUE': {
-      const newStack = [...state.rpnStack];
-      newStack[0] = newStack[1];
-      newStack[1] = newStack[2];
-      newStack[2] = newStack[3];
-      newStack[3] = null;
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: newStack,
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
-    }
-    case 'SWAP_XY': {
-      if (state.rpnStack[0] === null || state.rpnStack[1] === null) return state;
-      const newStack = [...state.rpnStack];
-      const temp = newStack[0];
-      newStack[0] = newStack[1];
-      newStack[1] = temp;
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: newStack,
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
-    }
+    case 'DROP_VALUE':
+      return applyDropValue(state);
+    case 'SWAP_XY':
+      return applySwapXY(state);
     case 'CLEAR_STACK':
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: [null, null, null, null],
-        lastX: null,
-        rpnXEditing: false,
-        rpnXEditValue: '',
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
+      return applyClearStack(state);
     case 'UNDO_STACK':
       return { ...state, rpnStack: [...state.previousRpnStack] };
-    case 'RECALL_LAST_X': {
-      if (state.lastX === null) return state;
-      const newStack = [...state.rpnStack];
-      newStack[3] = newStack[2];
-      newStack[2] = newStack[1];
-      newStack[1] = newStack[0];
-      newStack[0] = state.lastX;
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: newStack,
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
-    }
+    case 'RECALL_LAST_X':
+      return applyRecallLastX(state);
     default:
       return state;
   }
