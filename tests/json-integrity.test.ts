@@ -517,3 +517,16 @@ describe('JSON Integrity: dimensionalAliasOf metadata', () => {
     ])).toThrow(/is itself an alias/);
   });
 });
+
+describe('JSON Integrity: no ghost categories', () => {
+  it('every CATEGORY_DIMENSIONS id has a JSON file (no ghosts)', async () => {
+    const { CATEGORY_DIMENSIONS } = await import('../client/src/lib/units/categoryDimensions');
+    const jsonIds = new Set(CONVERSION_DATA.map((c: { id: string }) => c.id));
+    for (const dimId of Object.keys(CATEGORY_DIMENSIONS)) {
+      expect(
+        jsonIds.has(dimId),
+        `CATEGORY_DIMENSIONS contains '${dimId}' but there is no JSON file for it (ghost). Purge the entry or add data/conversion/${dimId}.json.`,
+      ).toBe(true);
+    }
+  });
+});

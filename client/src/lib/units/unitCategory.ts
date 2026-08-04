@@ -35,7 +35,6 @@ export type UnitCategory =
   | "angular_momentum"
   | "luminous_flux"
   | "illuminance"
-  | "luminous_exitance"
   | "luminance"
   | "torque"
   | "density"

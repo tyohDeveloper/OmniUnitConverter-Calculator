@@ -429,7 +429,6 @@ const CATEGORY_DIMENSION_MAP: Record<string, Record<string, number>> = {
   angular_momentum: { mass: 1, length: 2, time: -1 },
   luminous_flux: { intensity: 1, solid_angle: 1 },
   illuminance: { intensity: 1, solid_angle: 1, length: -2 },
-  luminous_exitance: { intensity: 1, solid_angle: 1, length: -2 },
   luminance: { intensity: 1, length: -2 },
   torque: { mass: 1, length: 2, time: -2 }, density: { mass: 1, length: -3 },
   flow: { length: 3, time: -1 }, viscosity: { mass: 1, length: -1, time: -1 },

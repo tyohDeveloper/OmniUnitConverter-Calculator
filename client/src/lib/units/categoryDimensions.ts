@@ -59,7 +59,6 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   photon: { name: 'Photon Energy', dimensions: { mass: 1, length: 2, time: -2 }, isBase: false },
   luminous_flux: { name: 'Luminous Flux', dimensions: { intensity: 1, solid_angle: 1 }, isBase: false },
   illuminance: { name: 'Illuminance', dimensions: { intensity: 1, solid_angle: 1, length: -2 }, isBase: false },
-  luminous_exitance: { name: 'Luminous Exitance', dimensions: { intensity: 1, solid_angle: 1, length: -2 }, isBase: false },
   luminance: { name: 'Luminance', dimensions: { intensity: 1, length: -2 }, isBase: false },
   sound_pressure: { name: 'Sound Pressure', dimensions: { mass: 1, length: -1, time: -2 }, isBase: false },
   sound_intensity: { name: 'Sound Intensity', dimensions: { mass: 1, time: -3 }, isBase: false },

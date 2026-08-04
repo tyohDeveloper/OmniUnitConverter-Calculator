@@ -8,10 +8,12 @@ import type { CategoryFamily } from './unitDefinition';
  * declares a required family field; the map is total (defined for
  * every id that has a JSON file).
  *
- * Ghost entries in CATEGORY_DIMENSIONS without JSON files (currently
- * luminous_exitance, pending implementation) are NOT in this map.
- * Consumers guarding on family treat undefined as 'not SI_QUANTITY',
- * preserving the exclusion behavior the old hardcoded lists provided.
+ * No ghost entries remain in CATEGORY_DIMENSIONS. Every id in
+ * CATEGORY_DIMENSIONS has a corresponding JSON file in
+ * data/conversion/ and thus a registered family. If a future ghost
+ * (dimension-declared category with no JSON) is added, consumers
+ * guarding on family should treat undefined as 'not SI_QUANTITY' to
+ * preserve exclusion behavior.
  *
  * Loading order mirrors categoryPrimaries: this module lives
  * downstream of CONVERSION_DATA, and nothing that conversion-data
