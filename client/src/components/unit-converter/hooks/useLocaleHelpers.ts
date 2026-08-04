@@ -24,7 +24,7 @@ import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
+import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // The hook's return type is co-located with its factory.

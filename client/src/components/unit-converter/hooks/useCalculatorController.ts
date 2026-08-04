@@ -17,7 +17,7 @@ import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
-import type { SIRepresentation } from '@/lib/si-representations/generateSIRepresentations';
+import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { applyRpnUnary as applyRpnUnaryLib, type RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
 import { applyRpnBinary as applyRpnBinaryLib, type RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
 

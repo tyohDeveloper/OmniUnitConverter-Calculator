@@ -8,7 +8,7 @@ import { siToDisplay } from '../unit-symbols/siToDisplay';
 import { formatDimensions } from '../unit-symbols/formatDimensions';
 import { applyPrefixToKgUnit } from '../units/applyPrefixToKgUnit';
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { SIRepresentation } from '../si-representations/generateSIRepresentations';
+import type { SIRepresentation } from '../si-representations/siRepresentation';
 
 export interface ReexpressResult {
   newNumber: number;

@@ -49,7 +49,6 @@ const EXPORT_COUNT_RULE_DIRS = [
  * - normalizeMassDisplay.ts:    exports type + function (same reason as above)
  * - applyRpnUnary.ts:           exports type + function (type is co-located with its function)
  * - applyRpnBinary.ts:          exports type + function (same reason as above)
- * - generateSIRepresentations.ts:          exports multiple steps of a single algorithm
  * - generateAlternativeRepresentations.ts: exports multiple steps of a single algorithm
  * - conversion-data.ts:         central data + utility module; refactoring into single-export
  *                               files would fragment related data and conversions across 20+ files
@@ -73,7 +72,7 @@ const EXPORT_RULE_EXCLUDES = new Set([
   'types.ts', 'prefixes.ts', 'prefixExponents.ts', 'helpers.ts',
   'normalizeMassUnit.ts', 'normalizeMassDisplay.ts',
   'applyRpnUnary.ts', 'applyRpnBinary.ts',
-  'generateSIRepresentations.ts', 'generateAlternativeRepresentations.ts',
+  'generateAlternativeRepresentations.ts',
   'conversion-data.ts', 'localization.ts', 'formatting.ts',
   'queryClient.ts', 'test-utils.ts', 'translateUi.ts', 'translateUnit.ts',
   'siBaseUnits.ts', 'siDerivedUnitsCatalog.ts', 'nonSiUnitsCatalog.ts',
@@ -90,7 +89,6 @@ const EXPORT_RULE_EXCLUDES = new Set([
  * - getDerivedUnit.ts:         similar multi-step lookup
  * - applyRpnUnary.ts:          25+ op dispatch requires multiple sub-dispatch functions
  * - applyRpnBinary.ts:         10 op dispatch with helpers
- * - generateSIRepresentations.ts:          multi-pass algorithm
  * - generateAlternativeRepresentations.ts: multi-pass algorithm with multiple helpers
  */
 const FILE_LENGTH_EXCLUDES = new Set([
@@ -98,7 +96,7 @@ const FILE_LENGTH_EXCLUDES = new Set([
   'types.ts', 'prefixes.ts', 'prefixExponents.ts', 'helpers.ts',
   'normalizeMassUnit.ts', 'normalizeMassDisplay.ts',
   'applyRpnUnary.ts', 'applyRpnBinary.ts',
-  'generateSIRepresentations.ts', 'generateAlternativeRepresentations.ts',
+  'generateAlternativeRepresentations.ts',
   'normalizeDimensions.ts', 'findDerivedUnitPower.ts', 'getDerivedUnit.ts',
   'siBaseUnits.ts', 'siDerivedUnitsCatalog.ts', 'nonSiUnitsCatalog.ts',
   'preferredRepresentations.ts',
