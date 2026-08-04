@@ -58,7 +58,7 @@ import {
   selectDirectValue,
   selectDirectExponents,
 } from '../client/src/components/unit-converter/state/selectors/uiSelectors';
-import type { CalcValue } from '../client/src/lib/units/shared-types';
+import type { CalcValue } from '../client/src/lib/units/calcValue';
 
 const makeCalcValue = (value: number): CalcValue => ({
   value,

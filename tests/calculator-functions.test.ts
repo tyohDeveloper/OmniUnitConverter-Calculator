@@ -1,29 +1,28 @@
 import { describe, it, expect } from 'vitest';
-import {
-  dimensionsEqual,
-  isDimensionless,
-  isDimensionEmpty,
-  multiplyDimensions,
-  divideDimensions,
-  subtractDimensions,
-  toSuperscript,
-  formatDimensions,
-  isValidSymbolRepresentation,
-  countUnits,
-  sumAbsExponents,
-  canAddSubtract,
-  canFactorOut,
-  hasOnlyOriginalDimensions,
-  isValidSIComposition,
-  formatSIComposition,
-  isRadians,
-  fixPrecision,
-  buildDirectUnitSymbol,
-  buildDirectDimensions,
-  applyRpnUnary,
-  applyRpnBinary,
-} from '../client/src/lib/calculator';
-import type { DimensionalFormula } from '../client/src/lib/units/shared-types';
+// §3.8: no barrels. Every symbol is imported from the file that owns it.
+import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
+import { isDimensionless } from '../client/src/lib/dimensions/isDimensionless';
+import { isDimensionEmpty } from '../client/src/lib/dimensions/isDimensionEmpty';
+import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
+import { divideDimensions } from '../client/src/lib/dimensions/divideDimensions';
+import { subtractDimensions } from '../client/src/lib/dimensions/subtractDimensions';
+import { isRadians } from '../client/src/lib/dimensions/isRadians';
+import { toSuperscript } from '../client/src/lib/unit-symbols/toSuperscript';
+import { formatDimensions } from '../client/src/lib/unit-symbols/formatDimensions';
+import { isValidSymbolRepresentation } from '../client/src/lib/unit-symbols/isValidSymbolRepresentation';
+import { countUnits } from '../client/src/lib/unit-symbols/countUnits';
+import { sumAbsExponents } from '../client/src/lib/unit-symbols/sumAbsExponents';
+import { canFactorOut } from '../client/src/lib/unit-symbols/canFactorOut';
+import { hasOnlyOriginalDimensions } from '../client/src/lib/unit-symbols/hasOnlyOriginalDimensions';
+import { isValidSIComposition } from '../client/src/lib/unit-symbols/isValidSIComposition';
+import { formatSIComposition } from '../client/src/lib/unit-symbols/formatSIComposition';
+import { buildDirectUnitSymbol } from '../client/src/lib/unit-symbols/buildDirectUnitSymbol';
+import { buildDirectDimensions } from '../client/src/lib/unit-symbols/buildDirectDimensions';
+import { canAddSubtract } from '../client/src/lib/calculator/canAddSubtract';
+import { fixPrecision } from '../client/src/lib/calculator/fixPrecision';
+import { applyRpnUnary } from '../client/src/lib/calculator/applyRpnUnary';
+import { applyRpnBinary } from '../client/src/lib/calculator/applyRpnBinary';
+import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
 
 const mkVal = (value: number, dimensions: DimensionalFormula = {}): any => ({
   value, dimensions, prefix: 'none'

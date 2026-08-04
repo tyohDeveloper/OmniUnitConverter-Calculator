@@ -6,7 +6,7 @@ import { useRpnStack } from '../client/src/components/unit-converter/hooks/useRp
 import { useConverterState } from '../client/src/components/unit-converter/hooks/useConverterState';
 import { useCalculatorState } from '../client/src/components/unit-converter/hooks/useCalculatorState';
 import { ConverterProvider } from '../client/src/components/unit-converter/context/ConverterContext';
-import type { CalcValue } from '../client/src/lib/units/shared-types';
+import type { CalcValue } from '../client/src/lib/units/calcValue';
 
 const wrapper = ({ children }: { children: React.ReactNode }) =>
   React.createElement(ConverterProvider, null, children);

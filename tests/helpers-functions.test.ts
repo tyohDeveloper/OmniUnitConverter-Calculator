@@ -1,15 +1,12 @@
 import { describe, it, expect } from 'vitest';
+import { PREFIX_EXPONENTS, EXPONENT_TO_PREFIX } from '../client/src/lib/units/prefixExponents';
 import {
-  PREFIX_EXPONENTS,
-  EXPONENT_TO_PREFIX,
-  GRAM_TO_KG_UNIT_PAIRS,
-  KG_TO_GRAM_UNIT_PAIRS,
-  normalizeMassUnit,
-  getDimensionSignature,
-  dimensionsEqual,
-  toTitleCase,
-  buildDimensionalSymbol,
-} from '../client/src/lib/units/helpers';
+  GRAM_TO_KG_UNIT_PAIRS, KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit,
+} from '../client/src/lib/units/normalizeMassUnit';
+import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
+import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
+import { toTitleCase } from '../client/src/lib/units/toTitleCase';
+import { buildDimensionalSymbol } from '../client/src/lib/units/buildDimensionalSymbol';
 
 // ── PREFIX_EXPONENTS ─────────────────────────────────────────────────────────
 

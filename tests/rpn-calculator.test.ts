@@ -1,11 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import {
-  dimensionsEqual,
-  multiplyDimensions,
-  divideDimensions,
-  isDimensionless,
-  type DimensionalFormula,
-} from '../client/src/lib/calculator';
+import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
+import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
+import { divideDimensions } from '../client/src/lib/dimensions/divideDimensions';
+import { isDimensionless } from '../client/src/lib/dimensions/isDimensionless';
+import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
 
 /**
  * RPN Calculator Stack Operations Tests

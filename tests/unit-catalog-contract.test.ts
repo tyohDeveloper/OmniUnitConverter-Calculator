@@ -1,22 +1,31 @@
+// Contract tests for the unit catalog data. Ensures the underlying data
+// files (SI derived, non-SI, category dimensions, preferred representations,
+// SI base) contain the expected units and structure. Renamed from
+// shared-types.test.ts per §3.7/3.8 — the old barrel is gone, and this file
+// was never actually testing 'shared types', it was testing catalog contents.
 import { describe, it, expect } from 'vitest';
+import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
+import type { CalcValue } from '../client/src/lib/units/calcValue';
+import type { DerivedUnitInfo } from '../client/src/lib/units/derivedUnitInfo';
+import { SI_DERIVED_UNITS } from '../client/src/lib/units/siDerivedUnitsCatalog';
+import { NON_SI_UNITS_CATALOG } from '../client/src/lib/units/nonSiUnitsCatalog';
 import {
-  DimensionalFormula,
-  CalcValue,
-  DerivedUnitInfo,
-  SI_DERIVED_UNITS,
-  NON_SI_UNITS_CATALOG,
   CATEGORY_DIMENSIONS,
-  CategoryDimensionInfo,
   EXCLUDED_CROSS_DOMAIN_CATEGORIES,
+  type CategoryDimensionInfo,
+} from '../client/src/lib/units/categoryDimensions';
+import {
   PREFERRED_REPRESENTATIONS,
-  PreferredRepresentation,
-  getDimensionSignature,
+  type PreferredRepresentation,
+} from '../client/src/lib/units/preferredRepresentations';
+import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
+import {
   SI_BASE_UNIT_SYMBOLS,
   SI_BASE_TO_DIMENSION,
   DIMENSION_TO_SI_SYMBOL,
-} from '../client/src/lib/units/shared-types';
+} from '../client/src/lib/units/siBaseUnits';
 
-describe('shared-types exports', () => {
+describe('unit catalog', () => {
   describe('SI_DERIVED_UNITS', () => {
     it('should be an array', () => {
       expect(Array.isArray(SI_DERIVED_UNITS)).toBe(true);

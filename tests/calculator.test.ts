@@ -1,17 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import {
-  dimensionsEqual,
-  isDimensionless,
-  findCrossDomainMatches,
-  isValidSymbolRepresentation,
-  countUnits,
-  multiplyDimensions,
-  divideDimensions,
-  formatDimensions,
-  CATEGORY_DIMENSIONS,
-  SI_DERIVED_UNITS,
-  type DimensionalFormula,
-} from '../client/src/lib/calculator';
+// §3.8: no barrels. Every symbol imported from its owner file.
+import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
+import { isDimensionless } from '../client/src/lib/dimensions/isDimensionless';
+import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
+import { divideDimensions } from '../client/src/lib/dimensions/divideDimensions';
+import { findCrossDomainMatches } from '../client/src/lib/calculator/findCrossDomainMatches';
+import { isValidSymbolRepresentation } from '../client/src/lib/unit-symbols/isValidSymbolRepresentation';
+import { countUnits } from '../client/src/lib/unit-symbols/countUnits';
+import { formatDimensions } from '../client/src/lib/unit-symbols/formatDimensions';
+import { SI_DERIVED_UNITS } from '../client/src/lib/unit-symbols/siDerivedUnits';
+import { CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
+import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
 
 describe('Dimensional Formula Operations', () => {
   describe('dimensionsEqual', () => {

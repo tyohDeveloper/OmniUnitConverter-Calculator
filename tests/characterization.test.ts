@@ -15,20 +15,15 @@ import {
   cleanNumber,
   formatNumberWithSeparators,
 } from '../client/src/lib/formatting';
-import {
-  getDimensionSignature,
-  CATEGORY_DIMENSIONS,
-  EXCLUDED_CROSS_DOMAIN_CATEGORIES,
-  PREFERRED_REPRESENTATIONS,
-} from '../client/src/lib/units/shared-types';
-import {
-  dimensionsEqual,
-  multiplyDimensions,
-  divideDimensions,
-  subtractDimensions,
-  normalizeDimensions,
-  type DimensionalFormula,
-} from '../client/src/lib/calculator';
+import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
+import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from '../client/src/lib/units/categoryDimensions';
+import { PREFERRED_REPRESENTATIONS } from '../client/src/lib/units/preferredRepresentations';
+import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
+import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
+import { divideDimensions } from '../client/src/lib/dimensions/divideDimensions';
+import { subtractDimensions } from '../client/src/lib/dimensions/subtractDimensions';
+import { normalizeDimensions } from '../client/src/lib/unit-symbols/normalizeDimensions';
+import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
 
 // ---------------------------------------------------------------------------
 // 1. convert() — unit conversion characterization
