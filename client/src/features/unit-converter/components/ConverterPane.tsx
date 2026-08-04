@@ -47,9 +47,6 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
 
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
   const filteredUnits = getFilteredSortedUnits(activeCategory);
-  const toFilteredUnits = activeCategory === 'math'
-    ? filteredUnits.filter(u => u.id === 'num')
-    : filteredUnits;
 
   return (
     <Card
@@ -87,7 +84,7 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
             controller={controller}
             flash={{ copyResult: flash.copyResult, toBaseFactor: flash.toBaseFactor, toSIBase: flash.toSIBase }}
             categoryData={categoryData}
-            toFilteredUnits={toFilteredUnits}
+            toFilteredUnits={filteredUnits}
           />
           <ConverterConversionSummary
             controller={controller}

@@ -212,9 +212,11 @@ describe('unit catalog', () => {
     // metadata instead — see the primaryCategory tests in
     // json-integrity.test.ts and the behavioral tests below.
 
-    it('should contain the SI-family exceptions (fuel_economy and the math ghost)', () => {
+    it('should contain fuel_economy (the sole SI-family exception; math ghost was purged)', () => {
       expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('fuel_economy');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('math');
+      // 'math' was removed — no math.json ever existed and the code
+      // branches that referenced it were dead.
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('math');
     });
 
     it('should NOT contain non-SI-family categories (covered by family filter)', () => {

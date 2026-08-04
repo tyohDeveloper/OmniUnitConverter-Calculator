@@ -168,14 +168,16 @@ describe('Cross-Domain Matching', () => {
       expect(matches).toContain('Sound Pressure');
     });
 
-    it('finds Radiation Dose and Equivalent Dose for absorbed-dose dimensions; Absorbed Dose itself has no JSON so is skipped by the family filter', () => {
+    it('finds Radiation Dose and Equivalent Dose for dimensions {length:2, time:-2}', () => {
+      // These are the dimensions absorbed dose would have if we had
+      // an absorbed_dose category; we don't (its ghost CATEGORY_
+      // DIMENSIONS entry was removed in a cleanup commit). The
+      // remaining categories with these dimensions are radiation_dose
+      // and equivalent_dose.
       const doseDims: DimensionalFormula = { length: 2, time: -2 };
-      const matches = findCrossDomainMatches(doseDims, 'absorbed_dose');
+      const matches = findCrossDomainMatches(doseDims);
       expect(matches).toContain('Radiation Dose');
       expect(matches).toContain('Equivalent Dose');
-      // Absorbed Dose is a ghost CATEGORY_DIMENSIONS entry (no JSON,
-      // undefined family) so the family-based filter skips it.
-      expect(matches).not.toContain('Absorbed Dose');
     });
 
     it('should return empty array for base quantity dimensions (no derived categories exist)', () => {
@@ -188,7 +190,7 @@ describe('Cross-Domain Matching', () => {
     });
 
     it('should return empty array for dimensionless quantities', () => {
-      const matches = findCrossDomainMatches({}, 'math');
+      const matches = findCrossDomainMatches({}, 'unitless');
       expect(matches).toHaveLength(0);
     });
 
@@ -214,7 +216,7 @@ describe('Cross-Domain Matching', () => {
       const siCategories = ['frequency', 'force', 'pressure', 'energy', 'power', 
                            'charge', 'potential', 'capacitance', 'resistance', 
                            'conductance', 'magnetic_flux', 'magnetic_density', 
-                           'inductance', 'radioactivity', 'absorbed_dose', 'equivalent_dose'];
+                           'inductance', 'radioactivity', 'radiation_dose', 'equivalent_dose'];
       for (const cat of siCategories) {
         expect(CATEGORY_DIMENSIONS[cat]).toBeDefined();
       }

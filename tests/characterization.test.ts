@@ -537,9 +537,8 @@ describe('characterization: CATEGORY_DIMENSIONS canonical data', () => {
     }
   });
 
-  it('data and math categories have empty dimensions', () => {
+  it('data category has empty dimensions', () => {
     expect(CATEGORY_DIMENSIONS['data'].dimensions).toEqual({});
-    expect(CATEGORY_DIMENSIONS['math'].dimensions).toEqual({});
   });
 });
 

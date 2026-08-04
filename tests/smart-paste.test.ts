@@ -907,7 +907,7 @@ describe('findCategoryByDimensions - Compound Unit Routing', () => {
       expect(result).toBe('volume');
     });
 
-    it('does not return "data" or "math" (dimensionless) — returns null', () => {
+    it('does not return "data" (dimensionless) — returns null', () => {
       expect(findCategoryByDimensions({})).toBeNull();
     });
   });

@@ -256,10 +256,6 @@ export function convert(value: number, fromId: string, toId: string, categoryId:
   const toUnit = category.units.find((u) => u.id === toId);
   if (!fromUnit || !toUnit) return 0;
 
-  if (categoryId === 'math' && fromUnit.mathFunction) {
-    return applyMathFunction(value * fromPrefixFactor, fromUnit.mathFunction);
-  }
-
   const val = value * fromPrefixFactor;
   if (categoryId === 'temperature') return convertTemperature(val, fromUnit, toUnit, toPrefixFactor);
 
@@ -1047,7 +1043,7 @@ export function parseUnitText(
 
 // Categories with special ordering that shouldn't be re-sorted
 const PRESERVE_ORDER_CATEGORIES = [
-  'lightbulb', 'math', 'fuel_economy', 'temperature', 
+  'lightbulb', 'fuel_economy', 'temperature', 
   'radioactive_decay', 'fuel', 'photon', 'rack_geometry', 'shipping',
   'archaic_mass', 'archaic_length', 'archaic_area', 'archaic_volume',
   'archaic_energy', 'archaic_power', 'paper_sizes'

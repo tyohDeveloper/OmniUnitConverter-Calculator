@@ -52,7 +52,6 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   radioactivity: { name: 'Radioactivity', dimensions: { time: -1 }, isBase: false },
   radioactive_decay: { name: 'Radioactive Decay', dimensions: { time: -1 }, isBase: false },
   radiation_dose: { name: 'Radiation Dose', dimensions: { length: 2, time: -2 }, isBase: false },
-  absorbed_dose: { name: 'Absorbed Dose', dimensions: { length: 2, time: -2 }, isBase: false },
   equivalent_dose: { name: 'Equivalent Dose', dimensions: { length: 2, time: -2 }, isBase: false },
   radiation_exposure: { name: 'Radiation Exposure', dimensions: { current: 1, time: 1, mass: -1 }, isBase: false },
   cross_section: { name: 'Cross-Section', dimensions: { length: 2 }, isBase: false },
@@ -87,7 +86,6 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   // this catalog previously had `{ length: 3 }` in error. Reconciled to
   // match the controllers' correct value.
   shipping: { name: 'Shipping Length', dimensions: { length: 1 }, isBase: false },
-  math: { name: 'Math Functions', dimensions: {}, isBase: false },
   logarithmic: { name: 'Logarithmic Scales', dimensions: {}, isBase: false },
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
@@ -96,30 +94,22 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
 // getMatchingPhysicalQuantities, or as smart-paste targets in
 // findCategoryByDimensions.
 //
-// Historical size:
-//   19 (pre-primaryCategory) -> 5 (post-primaryCategory) -> 2 (this
-//   commit, post-family). Every specialist entry is now covered by
-//   the primaryCategory-based filter, and every non-SI-family entry
-//   is now covered by the family-based filter. The remaining two are
-//   the SI_QUANTITY-family exceptions that don't fit either mechanism:
+// Historical size: 19 (pre-primaryCategory) -> 5 (post-primaryCategory)
+//                  -> 2 (post-family) -> 1 (post ghost purge). Every
+// specialist entry is now covered by the primaryCategory-based filter,
+// and every non-SI-family entry is covered by the family-based filter.
+// The lone remaining entry is the SI_QUANTITY-family exception that
+// doesn't fit either mechanism:
 //
 //   - fuel_economy: SI_QUANTITY with unique dims ({length:-2}). Not a
 //     specialist of anything. Excluded from smart-paste because its
 //     unit set is dimensionally heterogeneous (km/L is length:-2 but
 //     km/kWh has different dimensions), so routing paste by dims
-//     alone is unreliable. Genuine list entry, not derivable from
-//     metadata.
-//
-//   - math: ghost category with no JSON file (see comment in
-//     category-defaults.json). Still has a CATEGORY_DIMENSIONS entry
-//     with dimensions:{}. Kept until the entry is removed from
-//     CATEGORY_DIMENSIONS entirely (out of scope here). No family
-//     is registered for it so family-based filters don't see it.
-//
-// data, logarithmic, unitless have moved to family-based filtering.
+//     alone is unreliable. Genuine data-model quirk, not derivable
+//     from metadata. Follow-up work: give fuel_economy its own family
+//     FUEL_ECONOMY so this entry can also retire.
 export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
   'fuel_economy',
-  'math',
 ];
 
 // Categories that share dimensions with a more familiar primary and
@@ -136,7 +126,6 @@ export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
 export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [
   'radioactivity',       // {time:-1}, alias for frequency
   'radiation_dose',      // {length:2, time:-2}
-  'absorbed_dose',       // {length:2, time:-2}, same as radiation_dose
   'cross_section',       // {length:2}, alias for area
   'sound_pressure',      // {mass:1, length:-1, time:-2}, alias for pressure
   'sound_intensity',     // {mass:1, time:-3}

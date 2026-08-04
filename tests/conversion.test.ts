@@ -707,7 +707,6 @@ describe("Unit Ordering - SI Base First, Then Ascending Factor", () => {
   // - paper_sizes: grouped by series (ISO A, ISO B, US, JIS B) — not ascending factor
   const categoriesWithSpecialOrdering = [
     'lightbulb',
-    'math', 
     'fuel_economy',
     'temperature',
     'rack_geometry',

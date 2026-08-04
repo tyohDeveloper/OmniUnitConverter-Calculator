@@ -49,7 +49,6 @@ export type UnitCategory =
   | "data"
   | "rack_geometry"
   | "shipping"
-  | "math"
   | "beer_wine_volume"
   | "refractive_power"
   | "sound_pressure"
