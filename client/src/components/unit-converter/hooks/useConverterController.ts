@@ -1,40 +1,20 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
+import { CONVERSION_DATA, UnitCategory } from '@/lib/conversion-data';
 import {
-  CONVERSION_DATA, UnitCategory, convert, PREFIXES, parseUnitText
-} from '@/lib/conversion-data';
-import {
-  fixPrecision as fixPrecisionLib, toArabicNumerals, toJapaneseNumerals, toKoreanNumerals,
-  toCJKMyriadString, toFixedBanker, NUMBER_FORMATS,
+  toCJKMyriadString,
   parseNumberWithFormat as parseNumberWithSpecificFormat,
   formatNumberWithFormat as formatNumberWithSpecificFormat,
-  formatFtIn as formatFtInLib, getTraditionalConfig, type NumberFormat,
-  cleanNumber as cleanNumberLib,
-  formatNumberWithSeparators as formatNumberWithSeparatorsLib,
+  type NumberFormat,
 } from '@/lib/formatting';
+import type { SupportedLanguage } from '@/lib/localization';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import { formatDimensions } from '@/lib/calculator/formatDimensions';
-import { findCategoryByDimensions } from '@/lib/calculator/findCategoryByDimensions';
-import type { CalcValue } from '@/lib/units/calcValue';
-import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/calculator/buildDirectUnitSymbol';
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calculator/buildDirectDimensions';
-import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
-import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { sanitizeInput } from '@/lib/formatting/sanitizeInput';
-import { buildPushFromConverter } from '@/lib/calculator/buildPushFromConverter';
-import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
-import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
-import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
 import type { SIRepresentation } from '@/lib/calculator/types';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
-import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
-import { PASTE_RESET_TIMEOUT_MS } from '../constants';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
-import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
-import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
-import type { SupportedLanguage } from '@/lib/localization';
-import { UNIT_NAME_TRANSLATIONS, UI_TRANSLATIONS } from '@/lib/localization';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
 
 import { useConverterContext } from '../context/ConverterContext';
@@ -43,6 +23,8 @@ import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
 import { useLocaleHelpers } from './useLocaleHelpers';
 import { useUiPrefsState } from './useUiPrefsState';
+import { useConverterClipboard } from './useConverterClipboard';
+import { useConverterPushToCalculator } from './useConverterPushToCalculator';
 import * as converterActions from '../state/actions/converterActions';
 
 export interface UseConverterControllerReturn {
@@ -298,237 +280,47 @@ export function useConverterController(): UseConverterControllerReturn {
     }
   }, [activeCategory, setActiveCategory, setInputValue]);
 
-  const copyResult = useCallback(() => {
-    if (result !== null) {
-      const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
-      const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
-      const toUnitData = categoryData.units.find(u => u.id === toUnit);
-      const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-      const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
+  // Clipboard read/write surface. See useConverterClipboard.ts.
+  const clipboard = useConverterClipboard({
+    activeCategory, fromUnit, toUnit, fromPrefix, toPrefix, result, precision,
+    formatDMS, formatFtIn, formatForClipboard,
+    getCategoryDimensions,
+    triggerFlashCopyResult, triggerFlashFromBaseFactor, triggerFlashFromSIBase,
+    triggerFlashToBaseFactor, triggerFlashToSIBase, triggerFlashConversionRatio,
+    setActiveCategory, setFromUnit, setFromPrefix, setInputValue,
+    setActiveTab, setDirectValue, setDirectExponents,
+    setPendingPasteUnit, setConverterPasteStatus, setCustomPasteStatus,
+    converterPasteTimerRef, customPasteTimerRef,
+  });
 
-      if (!toUnitData || !fromUnitData) return;
-      let textToCopy: string;
-      const valueToCopy = result * toUnitData.factor * (toPrefixData?.factor || 1);
-      if (toUnit === 'deg_dms') { textToCopy = formatDMS(result); }
-      else if (toUnit === 'ft_in') { textToCopy = formatFtIn(result); }
-      else if (activeCategory === 'lightbulb') { textToCopy = `${formatForClipboard(valueToCopy, precision)} lm`; }
-      else if (activeCategory === 'unitless' && regionalCountingSuffix(toUnit)) {
-        const suffix = regionalCountingSuffix(toUnit);
-        textToCopy = `${formatForClipboard(result, precision)}${suffix}`;
-      }
-      else {
-        const unitSymbol = toUnitData?.symbol || '';
-        const prefixSymbol = (toUnitData?.allowPrefixes && toPrefixData?.id !== 'none') ? toPrefixData.symbol : '';
-        textToCopy = `${formatForClipboard(result, precision)} ${prefixSymbol}${unitSymbol}`;
-      }
-      navigator.clipboard.writeText(textToCopy);
-      triggerFlashCopyResult();
+  // Push-into-calculator surface. See useConverterPushToCalculator.ts.
+  const push = useConverterPushToCalculator({
+    calculatorMode, calcValues, rpnStack,
+    generateSIRepresentations,
+    setCalcValues, setRpnStack, setPreviousRpnStack,
+    setRpnResultPrefix, setRpnSelectedAlternative,
+    triggerFlashRpnResult, triggerFlashDirectCopy,
+  });
 
-      const siBaseValue = valueToCopy;
-      const categoryDef = CONVERSION_DATA.find(c => c.id === activeCategory);
-      const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData?.id !== 'none') ? (toPrefixData?.symbol || '') : '';
-      const newEntry: CalcValue = {
-        value: siBaseValue,
-        dimensions: getCategoryDimensions(activeCategory),
-        prefix: 'none',
-        sourceCategory: activeCategory,
-        siUnit: categoryDef?.baseSISymbol,
-        originalUnit: toUnit !== 'deg_dms' && toUnit !== 'ft_in' ? toPfxSymbol + toUnitData.symbol : undefined,
-        originalValue: toUnit !== 'deg_dms' && toUnit !== 'ft_in' ? result : undefined,
-        unitType: toUnitData.unitType,
-      };
+  // Copy-and-push composer: the clipboard hook writes the text and
+  // returns a payload; the push hook applies that payload to the
+  // calculator/RPN stack. This one-line composer is the only place
+  // that bridges the two domains.
+  const copyResult = useCallback((): void => {
+    const outcome = clipboard.copyResult();
+    if (outcome) push.pushCopyOutcome(outcome, activeCategory);
+  }, [clipboard, push, activeCategory]);
 
-      if (calculatorMode === 'rpn') {
-        setPreviousRpnStack([...rpnStack]);
-        setRpnStack(prev => {
-          const ns = [...prev];
-          ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry;
-          return ns;
-        });
-        let autoAlt = 0;
-        let autoPrefix = 'none';
-        const siReps = generateSIRepresentations(newEntry.dimensions, activeCategory);
-        const matchIdx = siReps.findIndex(rep => rep.displaySymbol === toUnitData.symbol);
-        if (matchIdx >= 0) {
-          autoAlt = matchIdx;
-          autoPrefix = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.id : 'none';
-        }
-        setRpnResultPrefix(autoPrefix);
-        setRpnSelectedAlternative(autoAlt);
-        triggerFlashRpnResult();
-      } else {
-        const firstEmptyIndex = calcValues.findIndex((v, i) => i < 3 && v === null);
-        if (firstEmptyIndex !== -1) {
-          const newCalcValues = [...calcValues];
-          newCalcValues[firstEmptyIndex] = newEntry;
-          setCalcValues(newCalcValues);
-        }
-      }
-    }
-  }, [result, activeCategory, fromUnit, toUnit, fromPrefix, toPrefix, precision, calculatorMode, rpnStack, calcValues,
-    formatDMS, formatFtIn, formatForClipboard, getCategoryDimensions, generateSIRepresentations,
-    triggerFlashCopyResult, triggerFlashRpnResult, setPreviousRpnStack, setRpnStack, setRpnResultPrefix,
-    setRpnSelectedAlternative, setCalcValues]);
+  const copyFromBaseFactor = clipboard.copyFromBaseFactor;
+  const copyFromSIBase = clipboard.copyFromSIBase;
+  const copyToBaseFactor = clipboard.copyToBaseFactor;
+  const copyToSIBase = clipboard.copyToSIBase;
+  const copyConversionRatio = clipboard.copyConversionRatio;
+  const handleConverterSmartPaste = clipboard.handleConverterSmartPaste;
+  const handleConverterSmartPasteClick = clipboard.handleConverterSmartPasteClick;
+  const handleCustomSmartPasteClick = clipboard.handleCustomSmartPasteClick;
 
-  const copyFromBaseFactor = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
-    const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
-    const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    if (fromUnitData) {
-      navigator.clipboard.writeText((fromUnitData.factor * prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower)).toString());
-      triggerFlashFromBaseFactor();
-    }
-  }, [activeCategory, fromUnit, fromPrefix, triggerFlashFromBaseFactor]);
-
-  const copyFromSIBase = useCallback(() => {
-    const siBaseUnits = formatDimensions(getCategoryDimensions(activeCategory));
-    if (siBaseUnits) { navigator.clipboard.writeText(siBaseUnits); triggerFlashFromSIBase(); }
-  }, [activeCategory, getCategoryDimensions, triggerFlashFromSIBase]);
-
-  const copyToBaseFactor = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
-    const toUnitData = categoryData.units.find(u => u.id === toUnit);
-    const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    if (toUnitData) {
-      navigator.clipboard.writeText((toUnitData.factor * prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)).toString());
-      triggerFlashToBaseFactor();
-    }
-  }, [activeCategory, toUnit, toPrefix, triggerFlashToBaseFactor]);
-
-  const copyToSIBase = useCallback(() => {
-    const siBaseUnits = formatDimensions(getCategoryDimensions(activeCategory));
-    if (siBaseUnits) { navigator.clipboard.writeText(siBaseUnits); triggerFlashToSIBase(); }
-  }, [activeCategory, getCategoryDimensions, triggerFlashToSIBase]);
-
-  const copyConversionRatio = useCallback(() => {
-    const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
-    const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
-    const toUnitData = categoryData.units.find(u => u.id === toUnit);
-    const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-    if (result !== null && fromUnitData && toUnitData) {
-      const fromPrefixSymbol = (fromUnitData.allowPrefixes && fromPrefixData?.id !== 'none') ? fromPrefixData.symbol : '';
-      const toPrefixSymbol = (toUnitData.allowPrefixes && toPrefixData?.id !== 'none') ? toPrefixData.symbol : '';
-      const ratio = convert(1, fromUnit, toUnit, activeCategory,
-        fromUnitData.allowPrefixes ? prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower) : 1,
-        toUnitData.allowPrefixes ? prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower) : 1
-      );
-      const ratioText = `1 ${fromPrefixSymbol}${fromUnitData.symbol} = ${formatForClipboard(ratio, precision)} ${toPrefixSymbol}${toUnitData.symbol}`;
-      navigator.clipboard.writeText(ratioText);
-      triggerFlashConversionRatio();
-    }
-  }, [result, activeCategory, fromUnit, toUnit, fromPrefix, toPrefix, precision, formatForClipboard, triggerFlashConversionRatio]);
-
-  const handleConverterSmartPaste = useCallback(async (): Promise<'ok' | 'unrecognised' | 'unavailable'> => {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text) return 'unrecognised';
-      const parsed = parseUnitText(text);
-      if (parsed.categoryId && parsed.unitId) {
-        if (parsed.categoryId === activeCategory) {
-          setFromUnit(parsed.unitId);
-          setFromPrefix(parsed.prefixId || 'none');
-        } else {
-          setPendingPasteUnit({ fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' });
-          setActiveCategory(parsed.categoryId);
-        }
-        setInputValue(parsed.originalValue.toString());
-        return 'ok';
-      }
-      const hasDimensions = Object.values(parsed.dimensions).some(v => v !== 0);
-      if (hasDimensions) {
-        const catId = findCategoryByDimensions(parsed.dimensions as DimensionalFormula);
-        if (catId) {
-          const catData = CONVERSION_DATA.find(c => c.id === catId);
-          if (catData) {
-            setActiveCategory(catId as UnitCategory);
-            setFromUnit(catData.baseUnit);
-            setFromPrefix('none');
-            setInputValue(parsed.originalValue.toString());
-            return 'ok';
-          }
-        }
-      }
-      return 'unrecognised';
-    } catch {
-      return 'unavailable';
-    }
-  }, [activeCategory, setActiveCategory, setFromUnit, setFromPrefix, setInputValue]);
-
-  const handleConverterSmartPasteClick = useCallback(async () => {
-    const status = await handleConverterSmartPaste();
-    if (status !== 'ok') {
-      setConverterPasteStatus(status);
-      if (converterPasteTimerRef.current) clearTimeout(converterPasteTimerRef.current);
-      converterPasteTimerRef.current = setTimeout(() => setConverterPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
-    } else {
-      setConverterPasteStatus('idle');
-    }
-  }, [handleConverterSmartPaste]);
-
-  const handleCustomSmartPasteClick = useCallback(async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text) {
-        setCustomPasteStatus('unrecognised');
-        if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-        customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
-        return;
-      }
-      const parsed = parseUnitText(text);
-      if (parsed.categoryId && parsed.unitId) {
-        setActiveTab('converter');
-        setPendingPasteUnit({ fromUnit: parsed.unitId, prefixId: parsed.prefixId || 'none' });
-        setActiveCategory(parsed.categoryId);
-        setInputValue(parsed.originalValue.toString());
-        setCustomPasteStatus('idle');
-        return;
-      }
-      const hasDimensions = Object.values(parsed.dimensions).some(v => v !== 0);
-      if (hasDimensions) {
-        const catId = findCategoryByDimensions(parsed.dimensions as DimensionalFormula);
-        if (catId) {
-          const catData = CONVERSION_DATA.find(c => c.id === catId);
-          if (catData) {
-            setActiveTab('converter');
-            setActiveCategory(catId as UnitCategory);
-            setFromUnit(catData.baseUnit);
-            setFromPrefix('none');
-            setInputValue(parsed.originalValue.toString());
-            setCustomPasteStatus('idle');
-            return;
-          }
-        }
-      }
-      setDirectValue(parsed.value.toString());
-      setDirectExponents(dimensionsToExponents(parsed.dimensions as DimensionalFormula));
-      setCustomPasteStatus('idle');
-    } catch {
-      setCustomPasteStatus('unavailable');
-      if (customPasteTimerRef.current) clearTimeout(customPasteTimerRef.current);
-      customPasteTimerRef.current = setTimeout(() => setCustomPasteStatus('idle'), PASTE_RESET_TIMEOUT_MS);
-    }
-  }, [setActiveTab, setActiveCategory, setFromUnit, setFromPrefix, setInputValue, setDirectValue, setDirectExponents]);
-
-  const handleDirectCopyAndPushToCalculator = useCallback((value: number, dims: Record<string, number>) => {
-    // Council-08e: stack transform is now a pure lib call.
-    triggerFlashDirectCopy();
-    const newEntry = { value, dimensions: dims, prefix: 'none' as string };
-    if (calculatorMode === 'rpn') {
-      setPreviousRpnStack([...rpnStack]);
-      setRpnStack(prev => buildPushFromConverter(prev, newEntry));
-      setRpnResultPrefix('none');
-      setRpnSelectedAlternative(0);
-      triggerFlashRpnResult();
-      return;
-    }
-    const firstEmptyIndex = calcValues.findIndex((v, i) => i < 3 && v === null);
-    if (firstEmptyIndex === -1) return;
-    const newCalcValues = [...calcValues];
-    newCalcValues[firstEmptyIndex] = newEntry;
-    setCalcValues(newCalcValues);
-  }, [calculatorMode, rpnStack, calcValues, triggerFlashDirectCopy, triggerFlashRpnResult,
-    setPreviousRpnStack, setRpnStack, setRpnResultPrefix, setRpnSelectedAlternative, setCalcValues]);
+  const handleDirectCopyAndPushToCalculator = push.pushDirectEntry;
 
   const handleQuantityClick = useCallback((quantityName: string) => {
     const categoryKey = getCategoryKeyForQuantityName(quantityName);
