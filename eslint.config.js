@@ -94,13 +94,12 @@ const LIB_FILE_LENGTH_EXCLUDES = [
 const TSX_FILE_LENGTH_EXCLUDES = [
   // EXCEPTION [architecture-standards §3.5]: council-09 split from a
   // 1,185-line CalculatorPane. Simple pane still needs the per-row
-  // sub-split that the RPN half received; RPN pane is now within cap.
+  // sub-split that the RPN half received; RPN pane is now within cap,
+  // as is ConverterPane after its own audit-step-3 sub-split.
   'client/src/features/unit-converter/components/SimpleCalculatorPane.tsx',
-  // EXCEPTION [architecture-standards §3.5]: legacy top-level views that
-  // predate the standards; each is on the list for its own follow-up
-  // extraction pass.
+  // EXCEPTION [architecture-standards §3.5]: legacy top-level view that
+  // predates the standards; needs its own follow-up extraction pass.
   'client/src/features/unit-converter/app/UnitConverterApp.tsx',
-  'client/src/features/unit-converter/components/ConverterPane.tsx',
 ];
 
 // Controller/state hook files that exceed the 150-line cap. Council-07

@@ -1,22 +1,13 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits, getComparisonUnits } from '@/lib/conversion-data';
-import { buildComparisonRows } from '@/lib/calculator/buildComparisonRows';
-import { NUMBER_FORMATS } from '@/lib/formatting';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
+import { CONVERSION_DATA, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { ArrowRightLeft, Copy, Info } from 'lucide-react';
-import { testId } from '@/lib/test-utils';
-import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
-import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
-import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
+import { ArrowRightLeft } from 'lucide-react';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import { ConverterInputSection } from './converter/ConverterInputSection';
+import { ConverterOutputHeader } from './converter/ConverterOutputHeader';
+import { ConverterOutputSection } from './converter/ConverterOutputSection';
+import { ConverterConversionSummary } from './converter/ConverterConversionSummary';
+import { ConverterComparisonPanel } from './converter/ConverterComparisonPanel';
 
 export interface ConverterFlash {
   copyResult: boolean;
@@ -32,49 +23,33 @@ interface ConverterPaneProps {
   flash: ConverterFlash;
 }
 
+// The Converter pane: input section, swap button, output section
+// (header + fields + summary), and the comparison panel. Each sub-
+// section lives in ./converter/ and receives the controller plus its
+// slice of the flash bag. The pane itself is pure layout composition
+// and owns only the small pieces of derived data (categoryData,
+// filtered unit lists) that its children share.
+//
+// The input and output sections are mirror-image but not identical:
+// the input side has an editable text field, refocus-on-selector-close
+// behavior, and its own set of flash keys; the output side has a
+// copyable display and different flash keys. They are two separate
+// components rather than one variant-driven component because
+// unifying them would introduce a variant prop that hides real
+// behavioral differences.
 export function ConverterPane({ controller, flash }: ConverterPaneProps) {
   const {
     activeTab,
     activeCategory,
-    fromUnit, setFromUnit,
-    toUnit, setToUnit,
-    fromPrefix, setFromPrefix,
-    toPrefix, setToPrefix,
-    inputValue, setInputValue,
-    result,
-    precision, setPrecision,
-    comparisonMode, setComparisonMode,
-    numberFormat,
-    inputRef,
-    swapUnits, copyResult,
-    copyFromBaseFactor, copyFromSIBase, copyToBaseFactor, copyToSIBase, copyConversionRatio,
-    handleInputChange, handleInputKeyDown, handleInputBlur,
-    refocusInput,
-    normalizeMassUnit, t, translateUnitName,
-    formatFactor, formatResultValue, formatDMS, formatFtIn,
-    getPlaceholder, getCategoryDimensions, formatNumberWithSeparators,
+    swapUnits,
+    t,
   } = controller;
-
-  const {
-    copyResult: flashCopyResult,
-    fromBaseFactor: flashFromBaseFactor,
-    fromSIBase: flashFromSIBase,
-    toBaseFactor: flashToBaseFactor,
-    toSIBase: flashToSIBase,
-    conversionRatio: flashConversionRatio,
-  } = flash;
 
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
   const filteredUnits = getFilteredSortedUnits(activeCategory);
   const toFilteredUnits = activeCategory === 'math'
     ? filteredUnits.filter(u => u.id === 'num')
     : filteredUnits;
-
-  const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
-  const toUnitData = categoryData.units.find(u => u.id === toUnit);
-  const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-  const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-  const resultSuffix = activeCategory === 'unitless' ? regionalCountingSuffix(toUnit) : '';
 
   return (
     <Card
@@ -85,123 +60,12 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
       <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
       <div className="grid gap-8 relative z-10">
-        {/* Input Section */}
-        <div className="grid gap-2">
-          <Label className="text-xs font-mono uppercase text-muted-foreground">{t('From')}</Label>
-          <div className="flex flex-col gap-2">
-            {/* Row 1: Input, Prefix, Unit Selector */}
-            <div className="flex gap-2">
-              <Input
-                ref={inputRef}
-                type="text"
-                inputMode="decimal"
-                value={inputValue}
-                onChange={(e) => handleInputChange(e.target.value)}
-                onKeyDown={handleInputKeyDown}
-                onBlur={handleInputBlur}
-                className="font-mono px-4 bg-background/50 border-border focus:border-accent focus:ring-accent/20 transition-all text-start"
-                style={{ height: FIELD_HEIGHT, fontSize: '0.875rem', width: CommonFieldWidth }}
-                placeholder={getPlaceholder()}
-                {...testId('input-value')}
-              />
-
-              {/* Prefix Dropdown */}
-              <Select
-                value={fromPrefix}
-                onValueChange={(val) => {
-                  const normalized = normalizeMassUnit(fromUnit, val);
-                  setFromUnit(normalized.unit);
-                  setFromPrefix(normalized.prefix);
-                  refocusInput();
-                }}
-                onOpenChange={(open) => { if (!open) refocusInput(); }}
-                disabled={!fromUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[fromUnit]}
-              >
-                <SelectTrigger data-testid="select-from-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
-                  <SelectValue placeholder={t('Prefix')} />
-                </SelectTrigger>
-                <SelectContent position="item-aligned" className="max-h-[50vh]">
-                  {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
-                    <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
-                      {p.symbol || '-'}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select
-                value={fromUnit}
-                onValueChange={(val) => { setFromUnit(val); setFromPrefix('none'); refocusInput(); }}
-                onOpenChange={(open) => { if (!open) refocusInput(); }}
-              >
-                <SelectTrigger data-testid="select-from-unit" className="flex-1 min-w-0 bg-background/30 border-border font-medium" style={{ height: FIELD_HEIGHT }}>
-                  <span data-testid="display-from-unit-name" className="truncate"><SelectValue placeholder={t('Unit')} /></span>
-                </SelectTrigger>
-                <SelectContent position="item-aligned" className="max-h-[50vh]">
-                  {filteredUnits.map((u) => (
-                    <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
-                      {u.symbol === u.name ? (
-                        <span className="font-bold">{u.symbol}</span>
-                      ) : (
-                        <>
-                          <span className="font-bold me-2">{u.symbol}</span>
-                          <span className="opacity-70">{translateUnitName(u.name)}</span>
-                        </>
-                      )}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Row 2: Base Factor, Spacer, SI Base Units */}
-            <div className="flex gap-2">
-              <motion.button
-                type="button"
-                aria-label={t('Copy base factor')}
-                className={`px-3 rounded bg-muted/20 border border-border/50 flex flex-col justify-center text-left ${fromUnitData ? 'cursor-pointer hover:bg-muted/40 active:bg-muted/60' : 'cursor-default'}`}
-                style={{ height: FIELD_HEIGHT, width: CommonFieldWidth }}
-                onClick={copyFromBaseFactor}
-                disabled={!fromUnitData}
-                animate={{
-                  opacity: flashFromBaseFactor ? [1, 0.3, 1] : 1,
-                  scale: flashFromBaseFactor ? [1, 1.02, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">{t('Base Factor')}</div>
-                <div className="font-mono text-sm text-foreground/80 truncate" title={fromUnitData ? (fromUnitData.factor * fromPrefixData.factor).toString() : ''}>
-                  {fromUnitData ? formatFactor(fromUnitData.factor * fromPrefixData.factor) : '-'}
-                </div>
-              </motion.button>
-              <div className="w-[50px] shrink-0" />
-              <motion.button
-                type="button"
-                aria-label={t('Copy SI base units')}
-                className={`px-3 rounded bg-muted/20 border border-border/50 flex flex-col justify-center flex-1 min-w-0 text-left ${formatDimensions(getCategoryDimensions(activeCategory)) ? 'cursor-pointer hover:bg-muted/40 active:bg-muted/60' : 'cursor-default'}`}
-                style={{ height: FIELD_HEIGHT }}
-                onClick={copyFromSIBase}
-                disabled={!formatDimensions(getCategoryDimensions(activeCategory))}
-                animate={{
-                  opacity: flashFromSIBase ? [1, 0.3, 1] : 1,
-                  scale: flashFromSIBase ? [1, 1.02, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">{t('SI Base Units')}</div>
-                <div className="font-mono text-sm text-foreground/80 truncate">
-                  {formatDimensions(getCategoryDimensions(activeCategory)) || '-'}
-                </div>
-              </motion.button>
-            </div>
-          </div>
-
-          {fromUnitData?.description && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              <Info className="w-3 h-3" /> {fromUnitData.description}
-            </p>
-          )}
-        </div>
+        <ConverterInputSection
+          controller={controller}
+          flash={{ fromBaseFactor: flash.fromBaseFactor, fromSIBase: flash.fromSIBase }}
+          categoryData={categoryData}
+          filteredUnits={filteredUnits}
+        />
 
         {/* Swap Button */}
         <div className="flex justify-center -my-2">
@@ -217,284 +81,23 @@ export function ConverterPane({ controller, flash }: ConverterPaneProps) {
           </Button>
         </div>
 
-        {/* Output Section */}
         <div className="grid gap-4">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-between" style={{ width: CommonFieldWidth }}>
-              <Label className="text-xs font-mono uppercase text-muted-foreground">{t('To')}</Label>
-              <div className="flex items-center gap-2">
-                <Label className="text-xs text-muted-foreground">{t('Precision')}</Label>
-                <Select
-                  value={precision.toString()}
-                  onValueChange={(val) => { setPrecision(parseInt(val)); refocusInput(); }}
-                  onOpenChange={(open) => { if (!open) refocusInput(); }}
-                >
-                  <SelectTrigger data-testid="select-precision" className="h-10 w-[70px] text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent align="end">
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-                      <SelectItem key={n} value={n.toString()} className="text-xs">
-                        {n}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="w-[50px] shrink-0" />
-            <div className="flex-1 min-w-0 flex justify-end">
-              <Button
-                variant={comparisonMode ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setComparisonMode(!comparisonMode)}
-                className={`h-6 px-2 text-[10px] font-mono uppercase ${comparisonMode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground border !border-border/30'}`}
-                data-testid="button-comparison-mode"
-              >
-                {t('Compare All')}
-              </Button>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            {/* Row 1: Result, Prefix, Unit Selector */}
-            <div className="flex gap-2">
-              {/* Dedicated live region — more robust across assistive tech than aria-live on an interactive element */}
-              <span
-                role="status"
-                aria-live="polite"
-                aria-atomic="true"
-                className="sr-only"
-              >
-                {result !== null
-                  ? (toUnit === 'deg_dms'
-                      ? formatDMS(result)
-                      : toUnit === 'ft_in'
-                        ? formatFtIn(result)
-                        : formatResultValue(result, precision) + resultSuffix)
-                  : ''}
-              </span>
-              <motion.button
-                type="button"
-                aria-label={t('Copy result')}
-                className={`px-4 bg-background/50 border border-border rounded-md flex items-center overflow-x-auto text-start justify-start ${result !== null ? 'cursor-pointer hover:bg-background/70 active:bg-background/90' : 'cursor-default'}`}
-                style={{ height: FIELD_HEIGHT, width: CommonFieldWidth }}
-                onClick={() => result !== null && copyResult()}
-                data-testid="display-result"
-                disabled={result === null}
-                animate={{
-                  opacity: flashCopyResult ? [1, 0.3, 1] : 1,
-                  scale: flashCopyResult ? [1, 1.02, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="font-mono text-primary whitespace-nowrap" style={{ fontSize: '0.875rem' }}>
-                  {result !== null
-                    ? (toUnit === 'deg_dms'
-                        ? formatDMS(result)
-                        : toUnit === 'ft_in'
-                          ? formatFtIn(result)
-                          : formatResultValue(result, precision) + resultSuffix)
-                    : '...'}
-                </span>
-              </motion.button>
-
-              {/* Prefix Dropdown */}
-              <Select
-                value={toPrefix}
-                onValueChange={(val) => {
-                  const normalized = normalizeMassUnit(toUnit, val);
-                  setToUnit(normalized.unit);
-                  setToPrefix(normalized.prefix);
-                }}
-                disabled={!toUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[toUnit]}
-              >
-                <SelectTrigger data-testid="select-to-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
-                  <SelectValue placeholder={t('Prefix')} />
-                </SelectTrigger>
-                <SelectContent position="item-aligned" className="max-h-[50vh]">
-                  {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
-                    <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
-                      {p.symbol || '-'}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={toUnit} onValueChange={(val) => { setToUnit(val); setToPrefix('none'); }}>
-                <SelectTrigger data-testid="select-to-unit" className="flex-1 min-w-0 bg-background/30 border-border font-medium" style={{ height: FIELD_HEIGHT }}>
-                  <span data-testid="display-to-unit-name" className="truncate"><SelectValue placeholder={t('Unit')} /></span>
-                </SelectTrigger>
-                <SelectContent position="item-aligned" className="max-h-[50vh]">
-                  {toFilteredUnits.map((u) => (
-                    <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
-                      {u.symbol === u.name ? (
-                        <span className="font-bold">{u.symbol}</span>
-                      ) : (
-                        <>
-                          <span className="font-bold me-2">{u.symbol}</span>
-                          <span className="opacity-70">{translateUnitName(u.name)}</span>
-                        </>
-                      )}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Row 2: Base Factor, Spacer, SI Base Units */}
-            <div className="flex gap-2">
-              <motion.button
-                type="button"
-                aria-label={t('Copy base factor')}
-                className={`px-3 rounded bg-muted/20 border border-border/50 flex flex-col justify-center text-left ${toUnitData ? 'cursor-pointer hover:bg-muted/40 active:bg-muted/60' : 'cursor-default'}`}
-                style={{ height: FIELD_HEIGHT, width: CommonFieldWidth }}
-                onClick={copyToBaseFactor}
-                disabled={!toUnitData}
-                animate={{
-                  opacity: flashToBaseFactor ? [1, 0.3, 1] : 1,
-                  scale: flashToBaseFactor ? [1, 1.02, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">{t('Base Factor')}</div>
-                <div className="font-mono text-sm text-foreground/80 truncate" title={toUnitData ? (toUnitData.factor * toPrefixData.factor).toString() : ''}>
-                  {toUnitData ? formatFactor(toUnitData.factor * toPrefixData.factor) : '-'}
-                </div>
-              </motion.button>
-              <div className="w-[50px] shrink-0" />
-              <motion.button
-                type="button"
-                aria-label={t('Copy SI base units')}
-                className={`px-3 rounded bg-muted/20 border border-border/50 flex flex-col justify-center flex-1 min-w-0 text-left ${formatDimensions(getCategoryDimensions(activeCategory)) ? 'cursor-pointer hover:bg-muted/40 active:bg-muted/60' : 'cursor-default'}`}
-                style={{ height: FIELD_HEIGHT }}
-                onClick={copyToSIBase}
-                disabled={!formatDimensions(getCategoryDimensions(activeCategory))}
-                animate={{
-                  opacity: flashToSIBase ? [1, 0.3, 1] : 1,
-                  scale: flashToSIBase ? [1, 1.02, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">{t('SI Base Units')}</div>
-                <div className="font-mono text-sm text-foreground/80 truncate">
-                  {formatDimensions(getCategoryDimensions(activeCategory)) || '-'}
-                </div>
-              </motion.button>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-[1fr_auto] gap-2 items-start">
-            <div className="space-y-2">
-              {toUnitData?.description && (
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Info className="w-3 h-3" /> {toUnitData.description}
-                </p>
-              )}
-              {result !== null && fromUnitData && toUnitData && (
-                <motion.button
-                  type="button"
-                  aria-label={t('Copy conversion ratio')}
-                  className="w-full text-left p-2 rounded bg-muted/20 border border-border/50 cursor-pointer hover:bg-muted/40 active:bg-muted/60"
-                  data-testid="display-factor"
-                  onClick={copyConversionRatio}
-                  animate={{
-                    opacity: flashConversionRatio ? [1, 0.3, 1] : 1,
-                    scale: flashConversionRatio ? [1, 1.02, 1] : 1
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-xs font-mono text-muted-foreground flex gap-2 items-center">
-                    <span className="text-foreground font-bold">
-                      {formatResultValue(1, 0)} {fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
-                    </span>
-                    <span>=</span>
-                    <span className="text-foreground font-bold">
-                      {toUnit === 'deg_dms'
-                        ? formatDMS(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)))
-                        : toUnit === 'ft_in'
-                          ? formatFtIn(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)))
-                          : `${formatResultValue(convert(1, fromUnit, toUnit, activeCategory, prefixPowerFactor(fromPrefixData.factor, fromUnitData.prefixPower), prefixPowerFactor(toPrefixData.factor, toUnitData.prefixPower)), precision)} ${toPrefixData.id !== 'none' ? toPrefixData.symbol : ''}${toUnitData.symbol}`}
-                    </span>
-                  </div>
-                </motion.button>
-              )}
-            </div>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => { copyResult(); refocusInput(); }}
-              onBlur={refocusInput}
-              className="text-xs hover:text-accent gap-2 border !border-border/30"
-            >
-              <Copy className="w-3 h-3" aria-hidden="true" />
-              <motion.span
-                animate={{
-                  opacity: flashCopyResult ? [1, 0.3, 1] : 1,
-                  scale: flashCopyResult ? [1, 1.1, 1] : 1
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {t('Copy')}
-              </motion.span>
-            </Button>
-          </div>
-
-          {/* Comparison Mode Panel */}
-          <AnimatePresence>
-            {comparisonMode && result !== null && fromUnitData && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                data-testid="comparison-panel"
-              >
-                <div className="mt-4 p-3 rounded-lg bg-muted/10 border border-border/30">
-                  <div className="text-[10px] font-mono text-muted-foreground mb-2">
-                    <span className="uppercase">{t('Compare')}</span>{' '}
-                    <span>{inputValue}</span>
-                    {' '}{fromPrefixData.id !== 'none' ? fromPrefixData.symbol : ''}{fromUnitData.symbol}
-                  </div>
-                  <div className="grid gap-1 max-h-64 overflow-y-auto">
-                    {/* Council-07: comparison math extracted to lib/calculator/buildComparisonRows. */}
-                    {buildComparisonRows({
-                      units: getComparisonUnits(activeCategory, fromUnit),
-                      inputValue: parseFloat(inputValue) || 0,
-                      fromUnit,
-                      activeCategory,
-                      fromPrefixFactor: fromPrefixData.factor,
-                      fromPrefixPower: fromUnitData?.prefixPower,
-                      precision,
-                      nonePrefix: PREFIXES.find(p => p.id === 'none')!,
-                    }).map(row => (
-                      <button
-                        type="button"
-                        key={row.unitId}
-                        className="w-full flex items-center px-2 py-1 rounded hover:bg-muted/20 cursor-pointer text-left"
-                        onClick={() => {
-                          setToUnit(row.unitId);
-                          setToPrefix('none');
-                          setComparisonMode(false);
-                        }}
-                        data-testid={`comparison-row-${row.unitId}`}
-                      >
-                        <span className="text-xs text-muted-foreground font-mono w-36 shrink-0">
-                          {row.displaySymbol}
-                        </span>
-                        <span className="text-xs text-muted-foreground flex-1 truncate px-1" data-testid={`comparison-name-${row.unitId}`}>
-                          {translateUnitName(row.unitName)}
-                        </span>
-                        <span className="text-sm font-mono text-foreground shrink-0">
-                          {formatNumberWithSeparators(row.displayValue, precision)}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <ConverterOutputHeader controller={controller} />
+          <ConverterOutputSection
+            controller={controller}
+            flash={{ copyResult: flash.copyResult, toBaseFactor: flash.toBaseFactor, toSIBase: flash.toSIBase }}
+            categoryData={categoryData}
+            toFilteredUnits={toFilteredUnits}
+          />
+          <ConverterConversionSummary
+            controller={controller}
+            flash={{ copyResult: flash.copyResult, conversionRatio: flash.conversionRatio }}
+            categoryData={categoryData}
+          />
+          <ConverterComparisonPanel
+            controller={controller}
+            categoryData={categoryData}
+          />
         </div>
       </div>
     </Card>
