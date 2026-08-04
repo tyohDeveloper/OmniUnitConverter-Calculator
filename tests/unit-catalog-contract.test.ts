@@ -205,23 +205,37 @@ describe('unit catalog', () => {
       expect(Array.isArray(EXCLUDED_CROSS_DOMAIN_CATEGORIES)).toBe(true);
     });
 
-    it('should contain archaic categories', () => {
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_length');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_mass');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_volume');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_area');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_energy');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('archaic_power');
+    // Archaic and named-standard specialists (typography, cooking,
+    // beer_wine_volume, fuel, lightbulb, rack_geometry, shipping,
+    // paper_sizes, and the six archaics) are no longer in this list.
+    // They're excluded from cross-domain matches via primaryCategory
+    // metadata instead — see the primaryCategory tests in
+    // json-integrity.test.ts and the behavioral tests below.
+
+    it('should contain fuel_economy (dimensionally unique non-specialist)', () => {
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('fuel_economy');
     });
 
-    it('should contain specialty categories', () => {
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('typography');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('cooking');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('beer_wine_volume');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('fuel');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('fuel_economy');
+    it('should contain dimensionless categories (findCategoryByDimensions has no dimensionless guard)', () => {
       expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('data');
       expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('math');
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('logarithmic');
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('unitless');
+    });
+
+    it('should NOT contain retired specialists (covered by primaryCategory)', () => {
+      const retired = [
+        'archaic_length', 'archaic_mass', 'archaic_area',
+        'archaic_volume', 'archaic_energy', 'archaic_power',
+        'typography', 'cooking', 'beer_wine_volume', 'fuel',
+        'lightbulb', 'rack_geometry', 'shipping', 'paper_sizes',
+      ];
+      for (const catId of retired) {
+        expect(
+          EXCLUDED_CROSS_DOMAIN_CATEGORIES,
+          `${catId} should be dropped from EXCLUDED_CROSS_DOMAIN_CATEGORIES; primaryCategory covers it`,
+        ).not.toContain(catId);
+      }
     });
   });
 

@@ -79,7 +79,7 @@ describe('Unitless Numbers category', () => {
   });
 
   describe('calculator cross-domain exclusion', () => {
-    it('unitless is excluded from cross-domain alternates', () => {
+    it('unitless remains in EXCLUDED_CROSS_DOMAIN_CATEGORIES (dimensionless guard for findCategoryByDimensions)', () => {
       expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('unitless');
     });
 

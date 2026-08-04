@@ -63,7 +63,7 @@ export const generateSIRepresentations = (
     applyCrossDomainOrdering(filteredRepresentations, crossMatchKeys);
   }
 
-  const crossMatches = findCrossDomainMatches(dimensions);
+  const crossMatches = findCrossDomainMatches(dimensions, sourceCategory);
   if (crossMatches.length > 0) {
     for (const rep of filteredRepresentations) rep.crossDomainMatches = crossMatches;
   }

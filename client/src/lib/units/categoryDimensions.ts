@@ -1,4 +1,5 @@
 import type { DimensionalFormula } from './dimensionalFormula';
+import { CATEGORY_PRIMARIES } from './categoryPrimaries';
 
 export interface CategoryDimensionInfo {
   name: string;
@@ -90,21 +91,50 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 
+// Categories that should never appear as cross-domain matches or in
+// getMatchingPhysicalQuantities.
+//
+// This list used to contain 19 entries. As of the primaryCategory
+// migration, categories that are specialists of a primary (archaics,
+// paper_sizes, cooking, typography, rack_geometry, shipping,
+// beer_wine_volume, lightbulb, fuel) are excluded automatically by
+// the primaryCategory-based filters in findCrossDomainMatchesByKey /
+// findCrossDomainMatches / getMatchingPhysicalQuantities. Only
+// non-specialist entries need to remain here:
+//
+//   - fuel_economy: dimensionally unique ({length:-2}) but not a
+//     specialist of any other category. Kept to prevent findCategory
+//     ByDimensions from picking it up when smart-pasting ambiguous
+//     compound units.
+//   - data, math, logarithmic, unitless: dimensionless. Filtered by
+//     isDimensionless() in findCross* functions, but findCategoryBy
+//     Dimensions has no dimensionless guard — the list keeps
+//     findCategoryByDimensions({}) returning null.
 export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
-  'archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power',
-  'typography', 'cooking', 'beer_wine_volume', 'fuel', 'fuel_economy', 'lightbulb', 'rack_geometry', 'shipping',
-  'data', 'math', 'paper_sizes', 'logarithmic', 'unitless'
+  'fuel_economy',
+  'data', 'math', 'logarithmic', 'unitless',
 ];
 
+// Categories that share dimensions with a more familiar primary and
+// should not appear in the Direct-pane's "matching quantities" list.
+// These are TRUE aliases (not primaryCategory specialists): they share
+// a dimensional signature with a well-known primary but represent a
+// specialized physical concept.
+//
+// This list used to contain 12 entries. Entries that are actually
+// primaryCategory specialists (radioactive_decay, equivalent_dose,
+// radiation_exposure, fuel) are now handled automatically by
+// getMatchingPhysicalQuantities' primaryCategory-based dedup, and
+// have been removed.
 export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [
-  'radioactivity', 'radioactive_decay',
-  'radiation_dose', 'absorbed_dose', 'equivalent_dose', 'radiation_exposure',
-  'cross_section',
-  'sound_pressure',
-  'sound_intensity',
-  'acoustic_impedance',
-  'refractive_power',
-  'fuel',
+  'radioactivity',       // {time:-1}, alias for frequency
+  'radiation_dose',      // {length:2, time:-2}
+  'absorbed_dose',       // {length:2, time:-2}, same as radiation_dose
+  'cross_section',       // {length:2}, alias for area
+  'sound_pressure',      // {mass:1, length:-1, time:-2}, alias for pressure
+  'sound_intensity',     // {mass:1, time:-3}
+  'acoustic_impedance',  // {mass:1, length:-2, time:-1}
+  'refractive_power',    // {length:-1}
 ];
 
 export const ALL_EXCLUDED_CATEGORIES = [
@@ -129,20 +159,29 @@ export function getMatchingPhysicalQuantities(dimensions: DimensionalFormula): s
     if (ALL_EXCLUDED_CATEGORIES.includes(categoryKey)) continue;
 
     const catDims = info.dimensions;
-    const allKeys = Array.from(new Set([
-      ...Object.keys(dimensions),
-      ...Object.keys(catDims),
-    ])) as (keyof DimensionalFormula)[];
+    if (!dimensionsMatchLocal(dimensions, catDims)) continue;
 
-    let match = true;
-    for (const k of allKeys) {
-      const a = (dimensions as Record<string, number>)[k] ?? 0;
-      const b = (catDims as Record<string, number>)[k] ?? 0;
-      if (a !== b) { match = false; break; }
+    // Specialist dedup: skip categories whose primaryCategory ALSO
+    // matches the query — the primary is (or will be) in `results`
+    // in its own iteration.
+    const primaryId = CATEGORY_PRIMARIES[categoryKey];
+    if (primaryId) {
+      const primaryDims = CATEGORY_DIMENSIONS[primaryId]?.dimensions;
+      if (primaryDims && dimensionsMatchLocal(dimensions, primaryDims)) continue;
     }
 
-    if (match) results.push(info.name);
+    results.push(info.name);
   }
 
   return results;
+}
+
+// Local dimensional-equality; kept in-file to avoid cross-module
+// dependency for a trivial check.
+function dimensionsMatchLocal(a: DimensionalFormula, b: DimensionalFormula): boolean {
+  const keys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)])) as (keyof DimensionalFormula)[];
+  for (const k of keys) {
+    if ((a[k] ?? 0) !== (b[k] ?? 0)) return false;
+  }
+  return true;
 }

@@ -2,20 +2,7 @@ import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { isDimensionless } from '../dimensions/isDimensionless';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from '../units/categoryDimensions';
-import { CONVERSION_DATA } from '../conversion-data';
-
-// Index category id -> primaryCategory, built once at module load
-// from CONVERSION_DATA. Categories with no primaryCategory field are
-// absent. Used below to skip specialists whose primary is the current
-// category the caller is viewing (avoids surfacing e.g. archaic_length
-// as a cross-domain match when the user is already on length).
-const CATEGORY_PRIMARIES: Record<string, string> = (() => {
-  const map: Record<string, string> = {};
-  for (const cat of CONVERSION_DATA) {
-    if (cat.primaryCategory) map[cat.id] = cat.primaryCategory;
-  }
-  return map;
-})();
+import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
 
 /**
  * Categories whose dimensions match the target, excluding:

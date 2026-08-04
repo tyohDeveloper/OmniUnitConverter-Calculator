@@ -2,10 +2,16 @@ import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { isDimensionless } from '../dimensions/isDimensionless';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from '../units/categoryDimensions';
+import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
 
+/**
+ * Names variant of findCrossDomainMatchesByKey. Same rules, returns
+ * info.name instead of category id. See findCrossDomainMatchesByKey
+ * for the primaryCategory-based contextual filter explanation.
+ */
 export const findCrossDomainMatches = (
   dimensions: DimensionalFormula,
-  _currentCategory?: string
+  currentCategory?: string,
 ): string[] => {
   const matches: string[] = [];
 
@@ -15,6 +21,7 @@ export const findCrossDomainMatches = (
     if (info.isBase) continue;
     if (EXCLUDED_CROSS_DOMAIN_CATEGORIES.includes(catId)) continue;
     if (isDimensionless(info.dimensions)) continue;
+    if (currentCategory && CATEGORY_PRIMARIES[catId] === currentCategory) continue;
     if (dimensionsEqual(dimensions, info.dimensions)) {
       matches.push(info.name);
     }

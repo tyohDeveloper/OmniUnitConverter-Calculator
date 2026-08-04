@@ -355,14 +355,14 @@ describe('JSON Integrity: primaryCategory metadata', () => {
   });
 
   it('archaic and named-standard specialists all have primaryCategory set', () => {
-    const expectedSpecialists = new Set([
+    const expectedSpecialists: string[] = [
       'archaic_length', 'archaic_mass', 'archaic_area', 'archaic_volume',
       'archaic_energy', 'archaic_power',
       'paper_sizes', 'rack_geometry', 'shipping', 'lightbulb',
       'cooking', 'beer_wine_volume', 'typography',
       'fuel',
       'radioactive_decay', 'equivalent_dose', 'radiation_exposure',
-    ]);
+    ];
     for (const catId of expectedSpecialists) {
       const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId);
       expect(cat, `category '${catId}' missing from CONVERSION_DATA`).toBeTruthy();
