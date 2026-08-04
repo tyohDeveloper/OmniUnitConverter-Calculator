@@ -93,11 +93,9 @@ const LIB_FILE_LENGTH_EXCLUDES = [
 // rationale that follows-up should retire.
 const TSX_FILE_LENGTH_EXCLUDES = [
   // EXCEPTION [architecture-standards §3.5]: council-09 split from a
-  // 1,185-line CalculatorPane. Both halves are still oversized JSX and
-  // need further sub-splits (per-row/per-button-group extractions) to
-  // reach the 250-line cap. Tracked for follow-up.
+  // 1,185-line CalculatorPane. Simple pane still needs the per-row
+  // sub-split that the RPN half received; RPN pane is now within cap.
   'client/src/features/unit-converter/components/SimpleCalculatorPane.tsx',
-  'client/src/features/unit-converter/components/RpnCalculatorPane.tsx',
   // EXCEPTION [architecture-standards §3.5]: legacy top-level views that
   // predate the standards; each is on the list for its own follow-up
   // extraction pass.

@@ -27,7 +27,7 @@ interface CalculatorPaneProps {
 // RpnCalculatorPane). Behaviour is unchanged.
 export function CalculatorPane({ controller, numberFormat, flash, lockRpnMode = false }: CalculatorPaneProps) {
   if (controller.calculatorMode === 'rpn') {
-    return <RpnCalculatorPane controller={controller} numberFormat={numberFormat} flash={flash} lockRpnMode={lockRpnMode} />;
+    return <RpnCalculatorPane controller={controller} flash={flash} lockRpnMode={lockRpnMode} />;
   }
   return <SimpleCalculatorPane controller={controller} numberFormat={numberFormat} flash={flash} />;
 }
