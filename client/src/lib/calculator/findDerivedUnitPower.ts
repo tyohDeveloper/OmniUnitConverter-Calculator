@@ -1,6 +1,6 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import type { DerivedUnitPowerMatch } from './types';
-import { isDimensionless } from './isDimensionless';
+import { isDimensionless } from '../dimensions/isDimensionless';
 import { toSuperscript } from './toSuperscript';
 import { SI_DERIVED_UNITS } from './siDerivedUnits';
 

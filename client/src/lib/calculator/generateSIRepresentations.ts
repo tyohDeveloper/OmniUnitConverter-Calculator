@@ -1,8 +1,8 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import type { SIRepresentation } from './types';
-import { isDimensionEmpty } from './isDimensionEmpty';
+import { isDimensionEmpty } from '../dimensions/isDimensionEmpty';
 import { isValidSIComposition } from './isValidSIComposition';
-import { subtractDimensions } from './subtractDimensions';
+import { subtractDimensions } from '../dimensions/subtractDimensions';
 import { formatSIComposition } from './formatSIComposition';
 import { isValidSymbolRepresentation } from './isValidSymbolRepresentation';
 import { formatDimensions } from './formatDimensions';

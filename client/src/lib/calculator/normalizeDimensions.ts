@@ -1,5 +1,5 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import { isDimensionEmpty } from './isDimensionEmpty';
+import { isDimensionEmpty } from '../dimensions/isDimensionEmpty';
 import { canApplyDerivedUnit } from './canApplyDerivedUnit';
 import { subtractDerivedUnit } from './subtractDerivedUnit';
 import { formatDimensions } from './formatDimensions';

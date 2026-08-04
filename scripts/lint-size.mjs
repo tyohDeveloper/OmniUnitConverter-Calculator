@@ -27,6 +27,7 @@ const LIB_ROOT = path.join(ROOT, 'client', 'src', 'lib');
 const EXPORT_COUNT_RULE_DIRS = [
   path.join(LIB_ROOT, 'calculator'),
   path.join(LIB_ROOT, 'units'),
+  path.join(LIB_ROOT, 'dimensions'),
   LIB_ROOT,
 ];
 
@@ -122,6 +123,7 @@ const MAX_FILE_LINES = 100;
 const FILE_LENGTH_APPLIES_DIRS = [
   path.join(LIB_ROOT, 'calculator'),
   path.join(LIB_ROOT, 'units'),
+  path.join(LIB_ROOT, 'dimensions'),
 ];
 
 function getFilesRecursive(dir) {

@@ -2,12 +2,12 @@ export type { CalcValue, CategoryDimensionInfo, SIRepresentation, AlternativeRep
 export type { DimensionalFormula } from '../units/dimensionalFormula';
 export type { DerivedUnitInfo } from '../units/derivedUnitInfo';
 
-export { dimensionsEqual } from './dimensionsEqual';
-export { isDimensionless } from './isDimensionless';
-export { isDimensionEmpty } from './isDimensionEmpty';
-export { multiplyDimensions } from './multiplyDimensions';
-export { divideDimensions } from './divideDimensions';
-export { subtractDimensions } from './subtractDimensions';
+export { dimensionsEqual } from '../dimensions/dimensionsEqual';
+export { isDimensionless } from '../dimensions/isDimensionless';
+export { isDimensionEmpty } from '../dimensions/isDimensionEmpty';
+export { multiplyDimensions } from '../dimensions/multiplyDimensions';
+export { divideDimensions } from '../dimensions/divideDimensions';
+export { subtractDimensions } from '../dimensions/subtractDimensions';
 export { toSuperscript } from './toSuperscript';
 export { formatDimensions } from './formatDimensions';
 export { isValidSymbolRepresentation } from './isValidSymbolRepresentation';
@@ -31,7 +31,7 @@ export { normalizeDimensions } from './normalizeDimensions';
 export { generateSIRepresentations, PREFERRED_REPRESENTATIONS } from './generateSIRepresentations';
 export { generateAlternativeRepresentations } from './generateAlternativeRepresentations';
 export { getDerivedUnit } from './getDerivedUnit';
-export { isRadians } from './isRadians';
+export { isRadians } from '../dimensions/isRadians';
 export { fixPrecision } from './fixPrecision';
 export { buildDirectUnitSymbol } from './buildDirectUnitSymbol';
 export { buildDirectDimensions } from './buildDirectDimensions';

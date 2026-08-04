@@ -3,10 +3,10 @@ import type { AlternativeRepresentation } from './types';
 import { NON_SI_UNITS_CATALOG } from '../units/nonSiUnitsCatalog';
 import { normalizeDimensions } from './normalizeDimensions';
 import { formatDimensions } from './formatDimensions';
-import { dimensionsEqual } from './dimensionsEqual';
+import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 import { canFactorOut } from './canFactorOut';
 import { hasOnlyOriginalDimensions } from './hasOnlyOriginalDimensions';
-import { subtractDimensions } from './subtractDimensions';
+import { subtractDimensions } from '../dimensions/subtractDimensions';
 import { isValidSymbolRepresentation } from './isValidSymbolRepresentation';
 import { SI_DERIVED_UNITS } from './siDerivedUnits';
 

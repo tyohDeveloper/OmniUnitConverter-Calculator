@@ -1,6 +1,6 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import { isDimensionless } from './isDimensionless';
-import { dimensionsEqual } from './dimensionsEqual';
+import { isDimensionless } from '../dimensions/isDimensionless';
+import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from './categoryDimensions';
 
 export const findCrossDomainMatches = (

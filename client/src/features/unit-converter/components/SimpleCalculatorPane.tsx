@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PREFIXES } from '@/lib/conversion-data';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
-import { isDimensionEmpty } from '@/lib/calculator/isDimensionEmpty';
+import { isDimensionEmpty } from '@/lib/dimensions/isDimensionEmpty';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import type { NumberFormat } from '@/lib/formatting';
 import { Card } from '@/components/ui/card';

@@ -1,7 +1,7 @@
 import type { DimensionalFormula } from '../../units/dimensionalFormula';
 import type { CalcValue } from '../types';
-import { isDimensionless } from '../isDimensionless';
-import { isRadians } from '../isRadians';
+import { isDimensionless } from '../../dimensions/isDimensionless';
+import { isRadians } from '../../dimensions/isRadians';
 import { fixPrecision } from '../fixPrecision';
 import type { DispatchResult } from './dispatchResult';
 

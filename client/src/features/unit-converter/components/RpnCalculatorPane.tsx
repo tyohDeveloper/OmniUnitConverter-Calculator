@@ -4,7 +4,7 @@ import { PREFIXES } from '@/lib/conversion-data';
 import { isSymbolSI } from '@/lib/calculator/isSymbolSI';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/calculator/formatDimensions';
-import { isDimensionEmpty } from '@/lib/calculator/isDimensionEmpty';
+import { isDimensionEmpty } from '@/lib/dimensions/isDimensionEmpty';
 import type { NumberFormat } from '@/lib/formatting';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';

@@ -38,7 +38,7 @@ export { normalizeMassValue } from './normalizeMassValue';
 export type { MassDisplayResult } from './normalizeMassDisplay';
 export { normalizeMassDisplay } from './normalizeMassDisplay';
 export { applyPrefixToKgUnit } from './applyPrefixToKgUnit';
-export { dimensionsEqual } from '../calculator/dimensionsEqual';
+export { dimensionsEqual } from '../dimensions/dimensionsEqual';
 export { findCrossDomainMatches } from '../calculator/findCrossDomainMatches';
 export { toTitleCase } from './toTitleCase';
 export { buildDimensionalSymbol } from './buildDimensionalSymbol';

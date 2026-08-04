@@ -1,7 +1,7 @@
-import { multiplyDimensions } from './multiplyDimensions';
-import { divideDimensions } from './divideDimensions';
+import { multiplyDimensions } from '../dimensions/multiplyDimensions';
+import { divideDimensions } from '../dimensions/divideDimensions';
 import { canAddSubtract } from './canAddSubtract';
-import { isDimensionless } from './isDimensionless';
+import { isDimensionless } from '../dimensions/isDimensionless';
 import type { CalcValue } from '../units/calcValue';
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 

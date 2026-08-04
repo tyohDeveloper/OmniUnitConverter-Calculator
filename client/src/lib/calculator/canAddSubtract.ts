@@ -1,6 +1,6 @@
 import type { CalcValue } from './types';
-import { dimensionsEqual } from './dimensionsEqual';
-import { isDimensionless } from './isDimensionless';
+import { dimensionsEqual } from '../dimensions/dimensionsEqual';
+import { isDimensionless } from '../dimensions/isDimensionless';
 
 export const canAddSubtract = (
   v1: CalcValue | null,

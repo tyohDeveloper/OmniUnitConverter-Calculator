@@ -1,6 +1,6 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from './categoryDimensions';
-import { dimensionsEqual } from './dimensionsEqual';
+import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 
 export const findCategoryByDimensions = (
   dimensions: DimensionalFormula

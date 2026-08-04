@@ -1,6 +1,6 @@
 import type { CalcValue } from '../types';
-import { isDimensionless } from '../isDimensionless';
-import { dimensionsEqual } from '../dimensionsEqual';
+import { isDimensionless } from '../../dimensions/isDimensionless';
+import { dimensionsEqual } from '../../dimensions/dimensionsEqual';
 import { fixPrecision } from '../fixPrecision';
 
 type Dims = Record<string, number>;
