@@ -92,13 +92,9 @@ const LIB_FILE_LENGTH_EXCLUDES = [
 // Pre-existing violators baselined by council-12. Each carries a
 // rationale that follows-up should retire.
 const TSX_FILE_LENGTH_EXCLUDES = [
-  // EXCEPTION [architecture-standards §3.5]: council-09 split from a
-  // 1,185-line CalculatorPane. Simple pane still needs the per-row
-  // sub-split that the RPN half received; RPN pane is now within cap,
-  // as is ConverterPane after its own audit-step-3 sub-split.
-  'client/src/features/unit-converter/components/SimpleCalculatorPane.tsx',
   // EXCEPTION [architecture-standards §3.5]: legacy top-level view that
   // predates the standards; needs its own follow-up extraction pass.
+  // Every other TSX file the audit touched has been brought within cap.
   'client/src/features/unit-converter/app/UnitConverterApp.tsx',
 ];
 

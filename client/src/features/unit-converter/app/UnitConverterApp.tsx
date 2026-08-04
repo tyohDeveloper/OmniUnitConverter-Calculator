@@ -478,7 +478,6 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
 
         <CalculatorPane
           controller={calc}
-          numberFormat={numberFormat}
           lockRpnMode={activeTab === 'rpn'}
           flash={{
             calcField1: flash.calcField1[0],
