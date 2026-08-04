@@ -3,6 +3,7 @@
   "name": "Rack Geometry",
   "baseUnit": "metre",
   "baseSISymbol": "m",
+  "primaryCategory": "length",
   "units": [
     {
       "id": "m",

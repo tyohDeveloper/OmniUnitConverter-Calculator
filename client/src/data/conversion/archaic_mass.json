@@ -3,6 +3,7 @@
   "name": "Archaic Mass",
   "baseUnit": "kilogram",
   "baseSISymbol": "kg",
+  "primaryCategory": "mass",
   "units": [
     {
       "id": "kg",
@@ -216,7 +217,7 @@
       "id": "grain",
       "name": "Grain",
       "symbol": "gr",
-      "factor": 0.00006479891,
+      "factor": 6.479891e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "TROY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"

@@ -3,6 +3,7 @@
   "name": "Typography",
   "baseUnit": "meter",
   "baseSISymbol": "m",
+  "primaryCategory": "length",
   "units": [
     {
       "id": "m",
@@ -18,7 +19,7 @@
       "id": "twip",
       "name": "Twip",
       "symbol": "twip",
-      "factor": 0.000017639,
+      "factor": 1.7639e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "DOMAIN",
       "sourceUrl": "https://en.wikipedia.org/wiki/Twip"

@@ -3,6 +3,7 @@
   "name": "Archaic Power",
   "baseUnit": "watt",
   "baseSISymbol": "kg⋅m²⋅s⁻³",
+  "primaryCategory": "power",
   "units": [
     {
       "id": "w",
@@ -18,7 +19,7 @@
       "id": "erg_s",
       "name": "Erg per Second",
       "symbol": "erg⋅s⁻¹",
-      "factor": 1e-7,
+      "factor": 1e-07,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Power_(physics)"

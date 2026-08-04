@@ -3,6 +3,7 @@
   "name": "Radiation Exposure",
   "baseUnit": "coulomb_per_kilogram",
   "baseSISymbol": "A⋅s⋅kg⁻¹",
+  "primaryCategory": "charge",
   "units": [
     {
       "id": "c_per_kg",

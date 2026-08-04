@@ -304,3 +304,72 @@ describe('JSON Integrity: category-defaults.json (council-13)', () => {
     });
   });
 });
+
+describe('JSON Integrity: primaryCategory metadata', () => {
+  it('every primaryCategory references an existing category id', () => {
+    const knownIds = new Set(CONVERSION_DATA.map((c: { id: string }) => c.id));
+    for (const cat of CONVERSION_DATA) {
+      if (!cat.primaryCategory) continue;
+      expect(
+        knownIds.has(cat.primaryCategory),
+        `category '${cat.id}' declares primaryCategory='${cat.primaryCategory}' but no such category exists`,
+      ).toBe(true);
+    }
+  });
+
+  it('no primaryCategory chains (specialists must point at primaries)', () => {
+    const byId = new Map(CONVERSION_DATA.map((c: { id: string; primaryCategory?: string }) => [c.id, c]));
+    for (const cat of CONVERSION_DATA) {
+      if (!cat.primaryCategory) continue;
+      const parent = byId.get(cat.primaryCategory);
+      expect(parent, `parent '${cat.primaryCategory}' missing for '${cat.id}'`).toBeTruthy();
+      expect(
+        parent!.primaryCategory,
+        `category '${cat.id}' points at '${cat.primaryCategory}', which is itself a specialist (primaryCategory='${parent!.primaryCategory}'); chains are forbidden`,
+      ).toBeUndefined();
+    }
+  });
+
+  it('validateNoPrimaryCategoryChains passes for a valid set', async () => {
+    const { validateNoPrimaryCategoryChains } = await import('../client/src/lib/units/validateNoPrimaryCategoryChains');
+    expect(() => validateNoPrimaryCategoryChains([
+      { id: 'length' },
+      { id: 'archaic_length', primaryCategory: 'length' },
+    ])).not.toThrow();
+  });
+
+  it('validateNoPrimaryCategoryChains rejects missing parent', async () => {
+    const { validateNoPrimaryCategoryChains } = await import('../client/src/lib/units/validateNoPrimaryCategoryChains');
+    expect(() => validateNoPrimaryCategoryChains([
+      { id: 'archaic_length', primaryCategory: 'length' },
+    ])).toThrow(/no such category exists/);
+  });
+
+  it('validateNoPrimaryCategoryChains rejects chained specialists', async () => {
+    const { validateNoPrimaryCategoryChains } = await import('../client/src/lib/units/validateNoPrimaryCategoryChains');
+    expect(() => validateNoPrimaryCategoryChains([
+      { id: 'length' },
+      { id: 'mid', primaryCategory: 'length' },
+      { id: 'leaf', primaryCategory: 'mid' },
+    ])).toThrow(/Chains are forbidden/);
+  });
+
+  it('archaic and named-standard specialists all have primaryCategory set', () => {
+    const expectedSpecialists = new Set([
+      'archaic_length', 'archaic_mass', 'archaic_area', 'archaic_volume',
+      'archaic_energy', 'archaic_power',
+      'paper_sizes', 'rack_geometry', 'shipping', 'lightbulb',
+      'cooking', 'beer_wine_volume', 'typography',
+      'fuel',
+      'radioactive_decay', 'equivalent_dose', 'radiation_exposure',
+    ]);
+    for (const catId of expectedSpecialists) {
+      const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId);
+      expect(cat, `category '${catId}' missing from CONVERSION_DATA`).toBeTruthy();
+      expect(
+        cat!.primaryCategory,
+        `expected specialist '${catId}' to declare primaryCategory`,
+      ).toBeTruthy();
+    }
+  });
+});

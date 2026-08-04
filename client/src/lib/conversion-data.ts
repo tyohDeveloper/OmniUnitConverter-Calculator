@@ -74,6 +74,7 @@ import viscosityData from '@/data/conversion/viscosity.json';
 import volumeData from '@/data/conversion/volume.json';
 import { CONVERSION_FUNCTIONS } from './units/conversionFunctionRegistry';
 import { validateCategoryJson } from './units/validateCategoryJson';
+import { validateNoPrimaryCategoryChains } from './units/validateNoPrimaryCategoryChains';
 import type { UnitCategory } from './units/unitCategory';
 import type { UnitDefinition, CategoryDefinition } from './units/unitDefinition';
 import type { Prefix } from './units/prefix';
@@ -102,6 +103,7 @@ type RawCategoryJson = {
   name: string;
   baseUnit: string;
   baseSISymbol?: string;
+  primaryCategory?: string;
   units: Array<{
     id: string;
     name: string;
@@ -200,6 +202,12 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   logarithmicData,
   unitlessData,
 ].map(asCategoryDefinition);
+
+// Cross-category validation: the per-category asCategoryDefinition
+// checks are enough for shape validation, but the primaryCategory
+// no-chain rule needs the full set. This throws at module load if any
+// category references a missing primary or a chained primary.
+validateNoPrimaryCategoryChains(CONVERSION_DATA);
 
 // Math-category one-way functions live in the shared conversion function
 // registry (units/conversionFunctionRegistry) as oneWay entries.

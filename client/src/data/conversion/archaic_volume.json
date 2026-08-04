@@ -3,6 +3,7 @@
   "name": "Archaic Volume",
   "baseUnit": "litre",
   "baseSISymbol": "L",
+  "primaryCategory": "volume",
   "units": [
     {
       "id": "l",
@@ -162,7 +163,7 @@
       "id": "minim",
       "name": "Minim (US)",
       "symbol": "minim",
-      "factor": 0.0000616115,
+      "factor": 6.16115e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY_FLUID",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"

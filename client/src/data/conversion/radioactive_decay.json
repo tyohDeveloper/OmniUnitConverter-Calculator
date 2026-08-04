@@ -3,12 +3,13 @@
   "name": "Radioactive Decay",
   "baseUnit": "per_day",
   "baseSISymbol": "s⁻¹",
+  "primaryCategory": "radioactivity",
   "units": [
     {
       "id": "per_day",
       "name": "Decay Constant (λ, per day)",
       "symbol": "d⁻¹",
-      "factor": 0.000011574074074074073,
+      "factor": 1.1574074074074073e-05,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Radioactive_decay"

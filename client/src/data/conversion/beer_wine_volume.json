@@ -3,6 +3,7 @@
   "name": "Beer & Wine",
   "baseUnit": "cubic meter",
   "baseSISymbol": "m³",
+  "primaryCategory": "volume",
   "units": [
     {
       "id": "m3",
@@ -18,7 +19,7 @@
       "id": "floz_imp",
       "name": "Fluid Ounce (Imp)",
       "symbol": "fl oz (imp)",
-      "factor": 0.0000284130625,
+      "factor": 2.84130625e-05,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
       "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
@@ -27,7 +28,7 @@
       "id": "floz",
       "name": "Fluid Ounce (US)",
       "symbol": "fl oz (US)",
-      "factor": 0.0000295735,
+      "factor": 2.95735e-05,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"

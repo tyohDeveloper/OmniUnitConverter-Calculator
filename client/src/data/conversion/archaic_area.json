@@ -3,6 +3,7 @@
   "name": "Archaic Area",
   "baseUnit": "square metre",
   "baseSISymbol": "m²",
+  "primaryCategory": "area",
   "units": [
     {
       "id": "m2",

@@ -58,7 +58,7 @@ export const generateSIRepresentations = (
   promotePerfectSIMatch(filteredRepresentations);
   applyPreferredRepresentation(filteredRepresentations, dimensions);
 
-  const crossMatchKeys = findCrossDomainMatchesByKey(dimensions);
+  const crossMatchKeys = findCrossDomainMatchesByKey(dimensions, sourceCategory);
   if (crossMatchKeys.length > 0) {
     applyCrossDomainOrdering(filteredRepresentations, crossMatchKeys);
   }

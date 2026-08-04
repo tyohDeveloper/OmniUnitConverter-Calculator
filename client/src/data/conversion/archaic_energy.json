@@ -3,6 +3,7 @@
   "name": "Archaic Energy",
   "baseUnit": "joule",
   "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "primaryCategory": "energy",
   "units": [
     {
       "id": "j",
@@ -18,7 +19,7 @@
       "id": "erg",
       "name": "Erg (CGS)",
       "symbol": "erg",
-      "factor": 1e-7,
+      "factor": 1e-07,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

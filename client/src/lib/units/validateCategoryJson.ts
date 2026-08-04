@@ -35,6 +35,7 @@ const categorySchema = z.object({
   baseUnit: z.string().min(1),
   baseSISymbol: z.string().optional(),
   units: z.array(unitSchema).min(1),
+  primaryCategory: z.string().min(1).optional(),
 });
 
 export function validateCategoryJson(raw: unknown): void {
