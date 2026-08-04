@@ -168,12 +168,14 @@ describe('Cross-Domain Matching', () => {
       expect(matches).toContain('Sound Pressure');
     });
 
-    it('should find all matching categories for Absorbed Dose dimensions (including Absorbed Dose)', () => {
+    it('finds Radiation Dose and Equivalent Dose for absorbed-dose dimensions; Absorbed Dose itself has no JSON so is skipped by the family filter', () => {
       const doseDims: DimensionalFormula = { length: 2, time: -2 };
       const matches = findCrossDomainMatches(doseDims, 'absorbed_dose');
-      expect(matches).toContain('Absorbed Dose');
       expect(matches).toContain('Radiation Dose');
       expect(matches).toContain('Equivalent Dose');
+      // Absorbed Dose is a ghost CATEGORY_DIMENSIONS entry (no JSON,
+      // undefined family) so the family-based filter skips it.
+      expect(matches).not.toContain('Absorbed Dose');
     });
 
     it('should return empty array for base quantity dimensions (no derived categories exist)', () => {

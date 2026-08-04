@@ -1,6 +1,8 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from '../units/categoryDimensions';
 import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
+import { CATEGORY_FAMILIES } from '../units/categoryFamilies';
+import { isDimensionless } from '../dimensions/isDimensionless';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 
 /**
@@ -16,9 +18,10 @@ import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 export const findCategoryByDimensions = (
   dimensions: DimensionalFormula,
 ): string | null => {
+  if (isDimensionless(dimensions)) return null;
   for (const [catId, info] of Object.entries(CATEGORY_DIMENSIONS)) {
     if (EXCLUDED_CROSS_DOMAIN_CATEGORIES.includes(catId)) continue;
-    // Prefer primary over specialist when both would match.
+    if (CATEGORY_FAMILIES[catId] !== 'SI_QUANTITY') continue;
     const primaryId = CATEGORY_PRIMARIES[catId];
     if (primaryId) {
       const primaryDims = CATEGORY_DIMENSIONS[primaryId]?.dimensions;

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { CONVERSION_DATA, convert, buildUnitSymbolMap } from '../client/src/lib/conversion-data';
-import { EXCLUDED_CROSS_DOMAIN_CATEGORIES, CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
+import { CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
+import { CATEGORY_FAMILIES } from '../client/src/lib/units/categoryFamilies';
 import { SUPPORTED_LANGUAGES } from '../client/src/lib/localization';
 import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
 import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
@@ -79,8 +80,8 @@ describe('Unitless Numbers category', () => {
   });
 
   describe('calculator cross-domain exclusion', () => {
-    it('unitless remains in EXCLUDED_CROSS_DOMAIN_CATEGORIES (dimensionless guard for findCategoryByDimensions)', () => {
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('unitless');
+    it('unitless is family=DIMENSIONLESS_RATIO (excluded from cross-domain via family filter, not hardcoded list)', () => {
+      expect(CATEGORY_FAMILIES['unitless']).toBe('DIMENSIONLESS_RATIO');
     });
 
     it('is dimensionless and not a base category', () => {

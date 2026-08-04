@@ -1066,8 +1066,9 @@ describe('findCategoryByDimensions - Compound Unit Routing', () => {
       expect(findCategoryByDimensions({})).toBeNull();
     });
 
-    it('data/math dimensions (empty) return null since those categories are excluded', () => {
-      // Both data and math have dimensions:{} and are in EXCLUDED_CROSS_DOMAIN_CATEGORIES
+    it('data/math dimensions (empty) return null since findCategoryByDimensions guards on dimensionlessness', () => {
+      // findCategoryByDimensions has an early-return isDimensionless
+      // guard, so dimensionless queries never reach the category loop.
       const result = findCategoryByDimensions({});
       expect(result).toBeNull();
     });
@@ -1079,7 +1080,10 @@ describe('findCategoryByDimensions - Compound Unit Routing', () => {
     });
 
     it('{ length: -2 } (fuel_economy dimensions) returns null — fuel_economy is excluded', () => {
-      // fuel_economy has dimensions { length: -2 } but is in EXCLUDED_CROSS_DOMAIN_CATEGORIES
+      // fuel_economy is SI_QUANTITY with unique dims but is in
+      // EXCLUDED_CROSS_DOMAIN_CATEGORIES because its unit set is
+      // dimensionally heterogeneous (km/L is length:-2 but km/kWh
+      // isn't), so routing paste by dims alone is unreliable.
       const result = findCategoryByDimensions({ length: -2 });
       expect(result).toBeNull();
     });

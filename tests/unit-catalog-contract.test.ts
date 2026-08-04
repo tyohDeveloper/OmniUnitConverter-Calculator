@@ -212,15 +212,18 @@ describe('unit catalog', () => {
     // metadata instead — see the primaryCategory tests in
     // json-integrity.test.ts and the behavioral tests below.
 
-    it('should contain fuel_economy (dimensionally unique non-specialist)', () => {
+    it('should contain the SI-family exceptions (fuel_economy and the math ghost)', () => {
       expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('fuel_economy');
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('math');
     });
 
-    it('should contain dimensionless categories (findCategoryByDimensions has no dimensionless guard)', () => {
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('data');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('math');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('logarithmic');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toContain('unitless');
+    it('should NOT contain non-SI-family categories (covered by family filter)', () => {
+      // data (SI_QUANTITY but dimensionless) is filtered by
+      // isDimensionless; logarithmic and unitless are filtered by
+      // family !== SI_QUANTITY. None need explicit list membership.
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('data');
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('logarithmic');
+      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('unitless');
     });
 
     it('should NOT contain retired specialists (covered by primaryCategory)', () => {

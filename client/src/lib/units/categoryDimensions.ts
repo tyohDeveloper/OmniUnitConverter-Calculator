@@ -1,5 +1,6 @@
 import type { DimensionalFormula } from './dimensionalFormula';
 import { CATEGORY_PRIMARIES } from './categoryPrimaries';
+import { CATEGORY_FAMILIES } from './categoryFamilies';
 
 export interface CategoryDimensionInfo {
   name: string;
@@ -91,28 +92,34 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 
-// Categories that should never appear as cross-domain matches or in
-// getMatchingPhysicalQuantities.
+// Categories that should never appear as cross-domain matches, in
+// getMatchingPhysicalQuantities, or as smart-paste targets in
+// findCategoryByDimensions.
 //
-// This list used to contain 19 entries. As of the primaryCategory
-// migration, categories that are specialists of a primary (archaics,
-// paper_sizes, cooking, typography, rack_geometry, shipping,
-// beer_wine_volume, lightbulb, fuel) are excluded automatically by
-// the primaryCategory-based filters in findCrossDomainMatchesByKey /
-// findCrossDomainMatches / getMatchingPhysicalQuantities. Only
-// non-specialist entries need to remain here:
+// Historical size:
+//   19 (pre-primaryCategory) -> 5 (post-primaryCategory) -> 2 (this
+//   commit, post-family). Every specialist entry is now covered by
+//   the primaryCategory-based filter, and every non-SI-family entry
+//   is now covered by the family-based filter. The remaining two are
+//   the SI_QUANTITY-family exceptions that don't fit either mechanism:
 //
-//   - fuel_economy: dimensionally unique ({length:-2}) but not a
-//     specialist of any other category. Kept to prevent findCategory
-//     ByDimensions from picking it up when smart-pasting ambiguous
-//     compound units.
-//   - data, math, logarithmic, unitless: dimensionless. Filtered by
-//     isDimensionless() in findCross* functions, but findCategoryBy
-//     Dimensions has no dimensionless guard — the list keeps
-//     findCategoryByDimensions({}) returning null.
+//   - fuel_economy: SI_QUANTITY with unique dims ({length:-2}). Not a
+//     specialist of anything. Excluded from smart-paste because its
+//     unit set is dimensionally heterogeneous (km/L is length:-2 but
+//     km/kWh has different dimensions), so routing paste by dims
+//     alone is unreliable. Genuine list entry, not derivable from
+//     metadata.
+//
+//   - math: ghost category with no JSON file (see comment in
+//     category-defaults.json). Still has a CATEGORY_DIMENSIONS entry
+//     with dimensions:{}. Kept until the entry is removed from
+//     CATEGORY_DIMENSIONS entirely (out of scope here). No family
+//     is registered for it so family-based filters don't see it.
+//
+// data, logarithmic, unitless have moved to family-based filtering.
 export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
   'fuel_economy',
-  'data', 'math', 'logarithmic', 'unitless',
+  'math',
 ];
 
 // Categories that share dimensions with a more familiar primary and
@@ -157,19 +164,13 @@ export function getMatchingPhysicalQuantities(dimensions: DimensionalFormula): s
   const results: string[] = [];
   for (const [categoryKey, info] of Object.entries(CATEGORY_DIMENSIONS)) {
     if (ALL_EXCLUDED_CATEGORIES.includes(categoryKey)) continue;
-
-    const catDims = info.dimensions;
-    if (!dimensionsMatchLocal(dimensions, catDims)) continue;
-
-    // Specialist dedup: skip categories whose primaryCategory ALSO
-    // matches the query — the primary is (or will be) in `results`
-    // in its own iteration.
+    if (CATEGORY_FAMILIES[categoryKey] !== 'SI_QUANTITY') continue;
+    if (!dimensionsMatchLocal(dimensions, info.dimensions)) continue;
     const primaryId = CATEGORY_PRIMARIES[categoryKey];
     if (primaryId) {
       const primaryDims = CATEGORY_DIMENSIONS[primaryId]?.dimensions;
       if (primaryDims && dimensionsMatchLocal(dimensions, primaryDims)) continue;
     }
-
     results.push(info.name);
   }
 

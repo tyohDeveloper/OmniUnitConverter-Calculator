@@ -2,12 +2,28 @@ import type { DimensionalFormula } from '../units/dimensionalFormula';
 import type { SIRepresentation } from './siRepresentation';
 import { CONVERSION_DATA, isNonLinearUnit } from '../conversion-data';
 import { CATEGORY_DIMENSIONS } from '../units/categoryDimensions';
+import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 
+// Categories to skip in the SI-representations dropdown regardless of
+// dimensional match. Historical size: 16 -> 2 (this commit, post-
+// family+primaryCategory).
+//
+// All archaics and named-standard locals (rack_geometry, shipping,
+// beer_wine_volume, lightbulb, cooking, typography, fuel) are now
+// skipped via the primaryCategory + family checks inside the loop.
+//
+// The two remaining SI_QUANTITY entries are:
+//   - data: SI_QUANTITY family, dimensions:{}. Wouldn't fail the
+//     dimensionsEqual test on non-empty queries, but included for
+//     safety when the query dims are {} (which shouldn't happen for
+//     the SI-representations dropdown path).
+//   - fuel_economy: SI_QUANTITY with dimensionally heterogeneous
+//     units. Even the km/L subset ({length:-2}) doesn't produce
+//     useful cross-domain suggestions in the dropdown.
 const EXCLUDED_DROPDOWN_CATEGORIES = new Set([
-  'archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power',
-  'math', 'data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb',
-  'cooking', 'typography',
+  'data',
+  'fuel_economy',
 ]);
 
 const ANGULAR_SYMBOL_PATTERN = /\brad\b|rpm|rps/;
@@ -55,6 +71,8 @@ export function buildCategoryUnitsForDropdown(
   for (const categoryData of CONVERSION_DATA) {
     const catId = categoryData.id;
     if (EXCLUDED_DROPDOWN_CATEGORIES.has(catId)) continue;
+    if (categoryData.family !== 'SI_QUANTITY') continue;
+    if (sourceCategory && CATEGORY_PRIMARIES[catId] === sourceCategory) continue;
     const catDimInfo = CATEGORY_DIMENSIONS[catId];
     if (!catDimInfo || !dimensionsEqual(dimensions, catDimInfo.dimensions)) continue;
     if (sourceCategory && catId !== sourceCategory) continue;
