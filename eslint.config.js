@@ -22,12 +22,14 @@
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 import noReexport from './scripts/eslint-rules/no-reexport.js';
+import noShapeNamedFile from './scripts/eslint-rules/no-shape-named-file.js';
 
 // Local plugin for repo-specific rules. Rules live in
 // scripts/eslint-rules/. Add to the object when adding a new rule.
 const omniunit = {
   rules: {
     'no-reexport': noReexport,
+    'no-shape-named-file': noShapeNamedFile,
   },
 };
 
@@ -175,6 +177,14 @@ export default tseslint.config(
     files: ['client/src/**/*.{ts,tsx}'],
     plugins: { omniunit },
     rules: { 'omniunit/no-reexport': 'error' },
+  },
+
+  // §3.7: no shape-named files or directories. See
+  // scripts/eslint-rules/no-shape-named-file.js.
+  {
+    files: ['client/src/**/*.{ts,tsx}'],
+    plugins: { omniunit },
+    rules: { 'omniunit/no-shape-named-file': 'error' },
   },
 
   // Default: function-length for all .ts and .tsx.
