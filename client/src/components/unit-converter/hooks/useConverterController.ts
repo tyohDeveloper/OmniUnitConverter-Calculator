@@ -41,6 +41,7 @@ import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
+import { useConverterFormatters } from './useConverterFormatters';
 import * as uiActions from '../state/actions/uiActions';
 import * as converterActions from '../state/actions/converterActions';
 
@@ -219,129 +220,19 @@ export function useConverterController(): UseConverterControllerReturn {
     triggerFlashDirectCopy: flash.directCopy[1],
   };
 
-  const t = useCallback((key: string): string => {
-    const val = UI_TRANSLATIONS[language]?.[key] ?? UNIT_NAME_TRANSLATIONS[language]?.[key];
-    if (val !== undefined) return val;
-    return UI_TRANSLATIONS['en']?.[key] ?? UNIT_NAME_TRANSLATIONS['en']?.[key] ?? key;
-  }, [language]);
-
-  const translateUnitName = useCallback((unitName: string): string => t(unitName), [t]);
-
   const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
 
-  const getCategoryDimensions = useCallback((category: UnitCategory): { [key: string]: number } => {
-    return (CATEGORY_DIMENSIONS[category]?.dimensions ?? {}) as { [key: string]: number };
-  }, []);
-
-  const generateSIRepresentations = useCallback((dimensions: DimensionalFormula, sourceCategory?: string): SIRepresentation[] => {
-    return generateSIRepresentationsLib(dimensions, getDimensionSignature, PREFERRED_REPRESENTATIONS, sourceCategory);
-  }, []);
-
-  const parseNumberWithFormat = useCallback((str: string): number => {
-    return parseNumberWithSpecificFormat(str, numberFormat);
-  }, [numberFormat]);
-
-  // Council-06: delegate to lib/formatting. The controller-local
-  // implementations were byte-for-byte equivalent except for a
-  // redundant fixed===0 short-circuit that produced the same output
-  // as the general path.
-  const cleanNumber = useCallback(
-    (num: number, p: number): string => cleanNumberLib(num, p),
-    [],
-  );
-
-  const formatNumberWithSeparators = useCallback(
-    (num: number, precisionValue: number): string => {
-      const fixed = fixPrecisionLib(num);
-      const absNum = Math.abs(fixed);
-      // Scientific-notation escape hatch. The lib's formatter does not
-      // switch to exponential for extreme magnitudes; the controller
-      // used to. Preserve that behavior here.
-      if (absNum !== 0 && (absNum < 1e-12 || absNum >= 1e15)) {
-        const expStr = fixed.toExponential(Math.min(precisionValue, 10));
-        const format = numberFormat === 'traditional'
-          ? getTraditionalConfig(language)
-          : NUMBER_FORMATS[numberFormat];
-        return format.useArabicNumerals ? toArabicNumerals(expStr) : expStr;
-      }
-      return formatNumberWithSeparatorsLib(fixed, precisionValue, numberFormat, language);
-    },
-    [numberFormat, language],
-  );
-
-  const formatForClipboard = useCallback((num: number, precisionValue: number): string => {
-    const format = numberFormat === 'traditional'
-      ? getTraditionalConfig(language)
-      : NUMBER_FORMATS[numberFormat];
-    const fixed = fixPrecisionLib(num);
-    if (fixed === 0) return format.useArabicNumerals ? '٠' : '0';
-    const absNum = Math.abs(fixed);
-    if (absNum < 1e-12 || absNum >= 1e15) {
-      const expStr = fixed.toExponential(Math.min(precisionValue, 10));
-      return format.useArabicNumerals ? toArabicNumerals(expStr) : expStr;
-    }
-    let effectivePrecision = precisionValue;
-    if (absNum < 1 && absNum > 0) {
-      const magnitude = Math.floor(Math.log10(absNum));
-      effectivePrecision = Math.min(Math.abs(magnitude) + precisionValue, 12);
-    }
-    const formatted = toFixedBanker(fixed, effectivePrecision);
-    const cleaned = formatted.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.0+$/, '');
-    return format.decimal !== '.' ? cleaned.replace('.', format.decimal) : cleaned;
-  }, [numberFormat, language]);
-
-  const formatResultValue = useCallback((num: number, precisionValue: number): string => {
-    const format = numberFormat === 'traditional'
-      ? getTraditionalConfig(language)
-      : NUMBER_FORMATS[numberFormat];
-    if (num === 0) {
-      if (format.traditionalScript) {
-        const toNumerals = format.traditionalScript === 'ko' ? toKoreanNumerals : toJapaneseNumerals;
-        return toNumerals('0');
-      }
-      return format.useArabicNumerals ? '٠' : '0';
-    }
-    const absNum = Math.abs(num);
-    if (absNum < 1e-12 || absNum >= 1e15) {
-      const expStr = num.toExponential(Math.min(precisionValue, 10));
-      return format.useArabicNumerals ? toArabicNumerals(expStr) : expStr;
-    }
-    let effectivePrecision = precisionValue;
-    if (absNum < 1 && absNum > 0) {
-      effectivePrecision = Math.min(Math.abs(Math.floor(Math.log10(absNum))) + precisionValue, 12);
-    }
-    return formatNumberWithSeparators(num, effectivePrecision);
-  }, [numberFormat, language, formatNumberWithSeparators]);
-
-  const formatFactor = useCallback((f: number): string => {
-    const format = numberFormat === 'traditional'
-      ? getTraditionalConfig(language)
-      : NUMBER_FORMATS[numberFormat];
-    if (f === 1) return format.useArabicNumerals ? '١' : '1';
-    if (f >= 1e9 || f <= 1e-8) {
-      const expStr = f.toExponential(7);
-      return format.useArabicNumerals ? `×${toArabicNumerals(expStr)}` : `×${expStr}`;
-    }
-    const str = f.toPrecision(9);
-    const n = parseFloat(str);
-    return `×${formatNumberWithSeparators(n, 8)}`;
-  }, [numberFormat, language, formatNumberWithSeparators]);
-
-  const formatDMS = useCallback((decimal: number): string => {
-    const d = Math.floor(Math.abs(decimal));
-    const mFloat = (Math.abs(decimal) - d) * 60;
-    const m = Math.floor(mFloat);
-    const s = (mFloat - m) * 60;
-    const sign = decimal < 0 ? '-' : '';
-    const sFixed = toFixedBanker(s, precision);
-    const [sInt, sDec] = sFixed.split('.');
-    const sDisplay = `${sInt.padStart(2, '0')}${sDec ? '.' + sDec : ''}`;
-    return `${sign}${d}:${m.toString().padStart(2, '0')}:${sDisplay}`;
-  }, [precision]);
-
-  const formatFtIn = useCallback((decimalFeet: number): string => {
-    return formatFtInLib(decimalFeet, precision);
-  }, [precision]);
+  // Council-13/step-C: pure-formatter surface (t, formatters, parsers)
+  // lives in useConverterFormatters. See that file for the rationale.
+  const {
+    t, translateUnitName,
+    getCategoryDimensions, generateSIRepresentations,
+    parseNumberWithFormat,
+    cleanNumber, formatNumberWithSeparators,
+    formatForClipboard, formatResultValue, formatFactor,
+    formatDMS, formatFtIn,
+    parseDMS, parseFtIn,
+  } = useConverterFormatters(numberFormat, language, precision);
 
   const getPlaceholder = useCallback((): string => {
     if (fromUnit === 'deg_dms') return 'dd:mm:ss';
@@ -365,17 +256,6 @@ export function useConverterController(): UseConverterControllerReturn {
   const refocusInput = useCallback(() => {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
   }, [inputRef]);
-
-  // Council-08: DMS and foot-inch parsing extracted to lib/formatting.
-  const parseDMS = useCallback(
-    (dms: string): number => parseDMSLib(dms, numberFormat),
-    [numberFormat],
-  );
-
-  const parseFtIn = useCallback(
-    (ftIn: string): number => parseFtInLib(ftIn, numberFormat),
-    [numberFormat],
-  );
 
   useEffect(() => {
     if (!inputValue || !fromUnit || !toUnit) { setResult(null); return; }

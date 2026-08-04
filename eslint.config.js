@@ -112,6 +112,7 @@ const HOOK_FILE_LENGTH_EXCLUDES = [
   'client/src/components/unit-converter/hooks/useConverterState.ts',
   'client/src/components/unit-converter/hooks/useRpnState.ts',
   'client/src/components/unit-converter/hooks/useRpnXEditField.ts',
+  'client/src/components/unit-converter/hooks/useConverterFormatters.ts',
   'client/src/components/unit-converter/context/ConverterContext.tsx',
 ];
 
@@ -254,6 +255,7 @@ export default tseslint.config(
     files: [
       'client/src/components/unit-converter/hooks/useConverterController.ts',
       'client/src/components/unit-converter/hooks/useCalculatorController.ts',
+      'client/src/components/unit-converter/hooks/useConverterFormatters.ts',
       'client/src/components/unit-converter/hooks/useRpnStack.ts',
       'client/src/components/unit-converter/hooks/useRpnXEditField.ts',
       'client/src/components/unit-converter/hooks/useCalculatorState.ts',
