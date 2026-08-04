@@ -1,8 +1,16 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { DerivedUnitPowerMatch } from '../calculator/types';
 import { isDimensionless } from '../dimensions/isDimensionless';
 import { toSuperscript } from './toSuperscript';
 import { SI_DERIVED_UNITS } from './siDerivedUnits';
+
+// EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
+// DerivedUnitPowerMatch is the return shape of findDerivedUnitPower.
+export interface DerivedUnitPowerMatch {
+  symbol: string;
+  baseSymbol: string;
+  power: number;
+  category: string;
+}
 
 type DimEntry = [keyof DimensionalFormula, number];
 

@@ -1,8 +1,17 @@
 import type { DerivedUnitInfo } from '../units/derivedUnitInfo';
-import type { NormalizableDerivedUnit } from '../calculator/types';
+import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { SI_DERIVED_UNITS as _SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
 
 export { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
+
+// EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
+// NormalizableDerivedUnit describes the shape of NORMALIZABLE_DERIVED_UNITS
+// (below) and is used only by consumers that read that constant.
+export interface NormalizableDerivedUnit {
+  symbol: string;
+  dimensions: DimensionalFormula;
+  exponentSum: number;
+}
 
 export const SPECIALTY_DERIVED_UNITS = new Set([
   'Gy', 'Sv', 'Bq', 'kat', 'lm', 'lx', 'rad', 'sr', 'ν', 'λ',

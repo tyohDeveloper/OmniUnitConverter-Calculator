@@ -1,4 +1,4 @@
-import type { CalcValue } from '../types';
+import type { CalcValue } from '../../units/calcValue';
 import { isDimensionless } from '../../dimensions/isDimensionless';
 import { dimensionsEqual } from '../../dimensions/dimensionsEqual';
 import { fixPrecision } from '../fixPrecision';

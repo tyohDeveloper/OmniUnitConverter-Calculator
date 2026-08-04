@@ -1,4 +1,4 @@
-import type { CalcValue } from '../types';
+import type { CalcValue } from '../../units/calcValue';
 import { fixPrecision } from '../fixPrecision';
 import type { DispatchResult } from './dispatchResult';
 

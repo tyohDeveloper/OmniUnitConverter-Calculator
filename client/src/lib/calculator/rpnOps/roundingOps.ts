@@ -1,4 +1,4 @@
-import type { CalcValue } from '../types';
+import type { CalcValue } from '../../units/calcValue';
 import type { DispatchResult } from './dispatchResult';
 
 type Dims = Record<string, number>;

@@ -1,5 +1,5 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { CalcValue } from './types';
+import type { CalcValue } from '../units/calcValue';
 import type { DispatchResult } from './rpnOps/dispatchResult';
 import { applyPowerOp } from './rpnOps/powerOps';
 import { applyLogOp } from './rpnOps/logOps';
@@ -35,6 +35,7 @@ export const applyRpnUnary = (x: CalcValue, op: RpnUnaryOp, precision: number = 
   return {
     value: result.value,
     dimensions: dims as DimensionalFormula,
+    prefix: 'none',
     ...(preserveCategory && x.sourceCategory ? { sourceCategory: x.sourceCategory } : {}),
   };
 };

@@ -1,5 +1,5 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import type { CalcValue } from './types';
+import type { CalcValue } from '../units/calcValue';
 import { applyScalar } from './rpnOps/scalarOps';
 import { applyUnit } from './rpnOps/unitOps';
 
@@ -13,5 +13,5 @@ export const applyRpnBinary = (y: CalcValue, x: CalcValue, op: RpnBinaryOp): Cal
   if (!result) return null;
   const dims = result.dims;
   for (const [dim, exp] of Object.entries(dims)) { if (exp === 0) delete dims[dim]; }
-  return { value: result.value, dimensions: dims as DimensionalFormula };
+  return { value: result.value, dimensions: dims as DimensionalFormula, prefix: 'none' };
 };
