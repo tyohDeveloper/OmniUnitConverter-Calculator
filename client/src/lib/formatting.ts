@@ -1,5 +1,6 @@
 import type { NumberFormat } from './units/numberFormat';
 import type { SupportedLanguage } from './localization';
+import { fixPrecision } from './calculator/fixPrecision';
 // NumberFormat is owned by lib/units/numberFormat.ts. Consumers import
 // it from there directly (§3.8: no re-exports).
 
@@ -142,15 +143,12 @@ export const formatFtIn = (decimalFeet: number, precision: number): string => {
   return `${sign}${ft}'${inFixed}"`;
 };
 
-export const fixPrecision = (num: number): number => {
-  if (num === 0) return 0;
-  if (!isFinite(num)) return num;
-  
-  // Use JavaScript's full 17 significant digit precision
-  // to preserve as much user-entered precision as possible
-  const result = parseFloat(num.toPrecision(17));
-  return result;
-};
+// fixPrecision is owned by lib/calculator/fixPrecision.ts. It was
+// previously duplicated here byte-equivalently; the calculator ops rely
+// on it for arithmetic-result noise scrubbing, so the calculator
+// directory is its natural home. See §3.1: one canonical home per
+// function. Consumers of this module that need fixPrecision should
+// import from lib/calculator/fixPrecision directly (no re-export, §3.8).
 
 export const cleanNumber = (num: number, precision: number): string => {
   const fixed = fixPrecision(num);

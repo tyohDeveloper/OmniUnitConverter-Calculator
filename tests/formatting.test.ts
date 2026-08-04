@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
+import { fixPrecision } from '../client/src/lib/calculator/fixPrecision';
 import {
   roundToNearestEven,
   toFixedBanker,
-  fixPrecision,
   cleanNumber,
   formatNumberWithSeparators,
   stripSeparators,

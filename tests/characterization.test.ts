@@ -10,8 +10,8 @@ import { describe, it, expect } from 'vitest';
 import { convert, parseUnitText } from '../client/src/lib/conversion-data';
 import { translate } from '../client/src/lib/localization';
 import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
+import { fixPrecision } from '../client/src/lib/calculator/fixPrecision';
 import {
-  fixPrecision,
   toFixedBanker,
   cleanNumber,
   formatNumberWithSeparators,

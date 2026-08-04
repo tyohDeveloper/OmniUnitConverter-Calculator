@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
+import { fixPrecision as fixPrecisionLib } from '@/lib/calculator/fixPrecision';
 import {
-  fixPrecision as fixPrecisionLib,
   toFixedBanker,
   cleanNumber as cleanNumberLib,
   formatNumberWithSeparators as formatNumberWithSeparatorsLib,

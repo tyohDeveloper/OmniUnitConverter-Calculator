@@ -1,7 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { CONVERSION_DATA, parseUnitText } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
-import { fixPrecision as fixPrecisionLib, toFixedBanker } from '@/lib/formatting';
+import { toFixedBanker } from '@/lib/formatting';
+import { fixPrecision as fixPrecisionLib } from '@/lib/calculator/fixPrecision';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { UnitType } from '@/lib/units/unitType';
