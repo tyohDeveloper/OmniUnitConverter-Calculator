@@ -13,8 +13,8 @@ import {
   formatFtIn as formatFtInLib,
 } from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/formatting';
-import { parseDMS as parseDMSLib } from '@/lib/formatting/parseDMS';
-import { parseFtIn as parseFtInLib } from '@/lib/formatting/parseFtIn';
+import { parseDMS as parseDMSLib } from '@/lib/parsing/parseDMS';
+import { parseFtIn as parseFtInLib } from '@/lib/parsing/parseFtIn';
 import { UI_TRANSLATIONS, UNIT_NAME_TRANSLATIONS } from '@/lib/localization';
 import type { SupportedLanguage } from '@/lib/localization';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';

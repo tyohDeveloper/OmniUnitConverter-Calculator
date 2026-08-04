@@ -11,7 +11,7 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/calculator/buildDirectUnitSymbol';
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calculator/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
-import { sanitizeInput } from '@/lib/formatting/sanitizeInput';
+import { sanitizeInput } from '@/lib/parsing/sanitizeInput';
 import type { SIRepresentation } from '@/lib/calculator/types';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
