@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { PREFIXES } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import { parseRpnXInput } from '@/lib/calculator/parseRpnXInput';
 import { reexpressRpnEntry } from '@/lib/calculator/reexpressRpnEntry';
 import type { UseCalculatorControllerReturn } from './useCalculatorController';

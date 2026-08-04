@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { CONVERSION_DATA, PREFIXES, convert } from "@/lib/conversion-data";
+import { CONVERSION_DATA, convert } from "@/lib/conversion-data";
+import { PREFIXES } from "@/lib/units/prefixes";
 import type { UnitCategory } from "@/lib/units/unitCategory";
 
 describe("Conversion Data", () => {

@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { CONVERSION_DATA, PREFIXES, convert, parseUnitText } from '@/lib/conversion-data';
+import { CONVERSION_DATA, convert, parseUnitText } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';

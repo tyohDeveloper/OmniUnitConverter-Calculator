@@ -8,7 +8,8 @@ import {
 } from '../client/src/lib/localization';
 import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
 import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
-import { PREFIXES, BINARY_PREFIXES, ALL_PREFIXES, CONVERSION_DATA } from '../client/src/lib/conversion-data';
+import { CONVERSION_DATA } from '../client/src/lib/conversion-data';
+import { PREFIXES, BINARY_PREFIXES, ALL_PREFIXES } from '../client/src/lib/units/prefixes';
 
 describe('Language Localization', () => {
   describe('UI Element Translations', () => {

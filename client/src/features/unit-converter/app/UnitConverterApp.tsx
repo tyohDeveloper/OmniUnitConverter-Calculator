@@ -22,7 +22,7 @@ import { useConverterController } from '@/components/unit-converter/hooks/useCon
 import { useCalculatorController } from '@/components/unit-converter/hooks/useCalculatorController';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { siToDisplay } from '@/lib/unit-symbols/siToDisplay';
-import { PREFIXES } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 
 const CATEGORY_GROUPS = [

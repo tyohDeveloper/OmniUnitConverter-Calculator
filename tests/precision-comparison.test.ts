@@ -1,10 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import {
-  convert,
-  findOptimalPrefix,
-  CONVERSION_DATA,
-  PREFIXES,
-} from '../client/src/lib/conversion-data';
+import { convert, CONVERSION_DATA } from '../client/src/lib/conversion-data';
+import { findOptimalPrefix } from '../client/src/lib/units/findOptimalPrefix';
+import { PREFIXES } from '../client/src/lib/units/prefixes';
 
 /**
  * Precision and Comparison Mode Tests

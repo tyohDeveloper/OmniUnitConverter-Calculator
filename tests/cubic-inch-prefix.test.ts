@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { CONVERSION_DATA, convert, parseUnitText, findOptimalPrefix } from '../client/src/lib/conversion-data';
+import { CONVERSION_DATA, convert, parseUnitText } from '../client/src/lib/conversion-data';
+import { findOptimalPrefix } from '../client/src/lib/units/findOptimalPrefix';
 import { prefixPowerFactor } from '../client/src/lib/units/prefixPowerFactor';
 import { displayToSI } from '../client/src/lib/unit-symbols/displayToSI';
 import { siToDisplay } from '../client/src/lib/unit-symbols/siToDisplay';

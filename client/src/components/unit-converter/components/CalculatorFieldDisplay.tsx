@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import { PREFIXES } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import { FIELD_HEIGHT } from '../constants';
 
 interface CalculatorFieldDisplayProps {

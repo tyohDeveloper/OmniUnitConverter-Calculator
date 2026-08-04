@@ -76,110 +76,26 @@ import { CONVERSION_FUNCTIONS } from './units/conversionFunctionRegistry';
 import { validateCategoryJson } from './units/validateCategoryJson';
 import type { UnitCategory } from './units/unitCategory';
 import type { UnitDefinition, CategoryDefinition } from './units/unitDefinition';
+import type { Prefix } from './units/prefix';
+import { PREFIXES, BINARY_PREFIXES, ALL_PREFIXES } from './units/prefixes';
+import { findOptimalPrefix } from './units/findOptimalPrefix';
 
 // UnitCategory, UnitDefinition, CategoryDefinition were previously
 // declared *inline* in this file, duplicating the canonical definitions
 // in ./units/unitCategory and ./units/unitDefinition. Those inline
 // declarations were deleted (§3.1: one canonical home per type); the
 // canonical types are imported above and used throughout this file.
-// Callers of this module that need these types must import them from
+//
+// Prefix, PREFIXES, BINARY_PREFIXES, ALL_PREFIXES, and findOptimalPrefix
+// were also previously declared *inline* here, byte-identical to the
+// canonical versions in ./units/prefix.ts, ./units/prefixes.ts, and
+// ./units/findOptimalPrefix.ts. Both PREFIXES arrays were ending up in
+// the compiled bundle (2 copies of the 19-entry prefix data). Deleted;
+// canonical versions imported above.
+//
+// Callers of this module that need any of these must import them from
 // ./units/ directly, not from here — conversion-data does not re-export
 // them (§3.8: no re-exports).
-
-export interface Prefix {
-  id: string;
-  name: string;
-  symbol: string;
-  factor: number;
-}
-
-export const PREFIXES: Prefix[] = [
-  { id: 'yotta', name: 'Yotta', symbol: 'Y', factor: 1e24 },
-  { id: 'zetta', name: 'Zetta', symbol: 'Z', factor: 1e21 },
-  { id: 'exa', name: 'Exa', symbol: 'E', factor: 1e18 },
-  { id: 'peta', name: 'Peta', symbol: 'P', factor: 1e15 },
-  { id: 'tera', name: 'Tera', symbol: 'T', factor: 1e12 },
-  { id: 'giga', name: 'Giga', symbol: 'G', factor: 1e9 },
-  { id: 'mega', name: 'Mega', symbol: 'M', factor: 1e6 },
-  { id: 'kilo', name: 'Kilo', symbol: 'k', factor: 1e3 },
-  { id: 'none', name: '', symbol: '', factor: 1 },
-  { id: 'centi', name: 'Centi', symbol: 'c', factor: 1e-2 },
-  { id: 'milli', name: 'Milli', symbol: 'm', factor: 1e-3 },
-  { id: 'micro', name: 'Micro', symbol: 'µ', factor: 1e-6 },
-  { id: 'nano', name: 'Nano', symbol: 'n', factor: 1e-9 },
-  { id: 'pico', name: 'Pico', symbol: 'p', factor: 1e-12 },
-  { id: 'femto', name: 'Femto', symbol: 'f', factor: 1e-15 },
-  { id: 'atto', name: 'Atto', symbol: 'a', factor: 1e-18 },
-  { id: 'zepto', name: 'Zepto', symbol: 'z', factor: 1e-21 },
-  { id: 'yocto', name: 'Yocto', symbol: 'y', factor: 1e-24 },
-];
-
-export const BINARY_PREFIXES: Prefix[] = [
-  { id: 'exbi', name: 'Exbi', symbol: 'Ei', factor: 1152921504606846976 },
-  { id: 'pebi', name: 'Pebi', symbol: 'Pi', factor: 1125899906842624 },
-  { id: 'tebi', name: 'Tebi', symbol: 'Ti', factor: 1099511627776 },
-  { id: 'gibi', name: 'Gibi', symbol: 'Gi', factor: 1073741824 },
-  { id: 'mebi', name: 'Mebi', symbol: 'Mi', factor: 1048576 },
-  { id: 'kibi', name: 'Kibi', symbol: 'Ki', factor: 1024 },
-];
-
-export const ALL_PREFIXES: Prefix[] = [...PREFIXES, ...BINARY_PREFIXES].sort((a, b) => b.factor - a.factor);
-
-/**
- * Find the optimal SI prefix for a value to minimize displayed digits.
- * The goal is to keep values in the range [1, 1000) when possible.
- * For example: 1500000 J → 1.5 MJ, 0.000001 m → 1 µm
- * 
- * For kg-containing units, the prefix is applied via "handoff" where the 'k' in kg
- * is replaced by the prefix (kg + milli → mg, kg + mega → Mg).
- * This function treats kg values as if they were in grams for prefix calculation.
- * 
- * @param value - The numeric value to find a prefix for
- * @param unitSymbol - The unit symbol (used to detect 'kg' for special handling)
- * @param precision - Optional precision setting to ensure value is displayable
- * @returns Object with the best prefix and the adjusted value
- */
-function findBestRangePrefix(absValue: number, nonePrefix: Prefix, prefixPower: number): Prefix {
-  let best = nonePrefix;
-  let bestScore = Math.abs(Math.log10(absValue));
-  for (const prefix of PREFIXES) {
-    if (prefix.id === 'none') continue;
-    const adj = absValue / Math.pow(prefix.factor, prefixPower);
-    if (adj >= 1 && adj < Math.pow(1000, prefixPower)) {
-      const score = Math.abs(Math.log10(adj));
-      if (score < bestScore) { bestScore = score; best = prefix; }
-    }
-  }
-  return best;
-}
-
-function findPrecisionFallbackPrefix(absValue: number, bestPrefix: Prefix, precision: number, prefixPower: number): Prefix {
-  for (const prefix of PREFIXES) {
-    if (prefix.factor >= bestPrefix.factor) continue;
-    const rounded = parseFloat((absValue / Math.pow(prefix.factor, prefixPower)).toFixed(precision));
-    if (rounded !== 0) return prefix;
-  }
-  return bestPrefix;
-}
-
-export function findOptimalPrefix(value: number, unitSymbol = '', precision = 8, prefixPower = 1): { prefix: Prefix; adjustedValue: number } {
-  const nonePrefix = PREFIXES.find(p => p.id === 'none')!;
-  const containsKg = unitSymbol.includes('kg');
-  const effectiveValue = containsKg ? value * 1000 : value;
-  const absValue = Math.abs(effectiveValue);
-
-  if (absValue === 0 || !isFinite(absValue)) {
-    return { prefix: nonePrefix, adjustedValue: value };
-  }
-
-  let bestPrefix = findBestRangePrefix(absValue, nonePrefix, prefixPower);
-  const roundedWithBest = parseFloat((effectiveValue / Math.pow(bestPrefix.factor, prefixPower)).toFixed(precision));
-  if (roundedWithBest === 0 && effectiveValue !== 0) {
-    bestPrefix = findPrecisionFallbackPrefix(absValue, bestPrefix, precision, prefixPower);
-  }
-
-  return { prefix: bestPrefix, adjustedValue: effectiveValue / Math.pow(bestPrefix.factor, prefixPower) };
-}
 
 type RawCategoryJson = {
   id: string;

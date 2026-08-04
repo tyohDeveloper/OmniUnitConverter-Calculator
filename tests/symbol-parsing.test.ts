@@ -3,8 +3,8 @@ import {
   parseUnitText,
   buildUnitSymbolMap,
   CONVERSION_DATA,
-  PREFIXES,
 } from '../client/src/lib/conversion-data';
+import { PREFIXES } from '../client/src/lib/units/prefixes';
 
 describe('Symbol Conflict Prevention', () => {
   describe('buildUnitSymbolMap critical uniqueness', () => {

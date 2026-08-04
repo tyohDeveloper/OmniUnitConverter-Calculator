@@ -1,11 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import {
-  convert,
-  findOptimalPrefix,
-  PREFIXES,
-  BINARY_PREFIXES,
-  CONVERSION_DATA,
-} from '../client/src/lib/conversion-data';
+import { convert, CONVERSION_DATA } from '../client/src/lib/conversion-data';
+import { findOptimalPrefix } from '../client/src/lib/units/findOptimalPrefix';
+import { PREFIXES, BINARY_PREFIXES } from '../client/src/lib/units/prefixes';
 
 /**
  * Conversion Edge Case Tests

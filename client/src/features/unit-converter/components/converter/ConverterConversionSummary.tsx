@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { PREFIXES, convert } from '@/lib/conversion-data';
+import { convert } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import { Button } from '@/components/ui/button';
 import { Copy, Info } from 'lucide-react';

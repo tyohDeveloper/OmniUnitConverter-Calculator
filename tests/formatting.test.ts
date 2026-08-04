@@ -16,7 +16,9 @@ import {
   formatFtIn,
 } from '../client/src/lib/formatting';
 import type { NumberFormat } from '../client/src/lib/units/numberFormat';
-import { findOptimalPrefix, PREFIXES, CONVERSION_DATA, convert } from '../client/src/lib/conversion-data';
+import { CONVERSION_DATA, convert } from '../client/src/lib/conversion-data';
+import { findOptimalPrefix } from '../client/src/lib/units/findOptimalPrefix';
+import { PREFIXES } from '../client/src/lib/units/prefixes';
 
 describe('Banker Rounding (roundToNearestEven)', () => {
   describe('standard rounding cases', () => {

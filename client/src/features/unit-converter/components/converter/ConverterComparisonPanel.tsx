@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { PREFIXES, getComparisonUnits } from '@/lib/conversion-data';
+import { getComparisonUnits } from '@/lib/conversion-data';
+import { PREFIXES } from '@/lib/units/prefixes';
 import { buildComparisonRows } from '@/lib/calculator/buildComparisonRows';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
 import type { CategoryDefinition } from '@/lib/units/unitDefinition';

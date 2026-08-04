@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { PREFIXES, ALL_PREFIXES } from '@/lib/conversion-data';
+import { PREFIXES, ALL_PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';

@@ -1,4 +1,4 @@
-import { PREFIXES } from '../conversion-data';
+import { PREFIXES } from '../units/prefixes';
 import { lookupUnitForSymbol } from './lookupUnitForSymbol';
 import { applyPrefixToKgUnit } from '../units/applyPrefixToKgUnit';
 
