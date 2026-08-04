@@ -17,7 +17,9 @@ import {
   formatNumberWithSeparators,
 } from '../client/src/lib/formatting';
 import { getDimensionSignature } from '../client/src/lib/units/getDimensionSignature';
-import { CATEGORY_DIMENSIONS, EXCLUDED_CROSS_DOMAIN_CATEGORIES } from '../client/src/lib/units/categoryDimensions';
+import { CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
+import { CATEGORY_DIRECT_MATCH_HIDDEN } from '../client/src/lib/units/categoryAliases';
+import { CATEGORY_FAMILIES } from '../client/src/lib/units/categoryFamilies';
 import { PREFERRED_REPRESENTATIONS } from '../client/src/lib/units/preferredRepresentations';
 import { dimensionsEqual } from '../client/src/lib/dimensions/dimensionsEqual';
 import { multiplyDimensions } from '../client/src/lib/dimensions/multiplyDimensions';
@@ -529,10 +531,19 @@ describe('characterization: CATEGORY_DIMENSIONS canonical data', () => {
     }
   });
 
-  it('excluded categories are marked as non-base', () => {
-    for (const catId of EXCLUDED_CROSS_DOMAIN_CATEGORIES) {
+  it('categories excluded from Direct-pane matching are all non-base', () => {
+    // Post-retirement mechanism: exclusion goes through family filter
+    // (non-SI families) and hideFromDirectMatch (dimensional aliases).
+    // In both cases, excluded categories should never be marked as
+    // base dimensions.
+    for (const catId of Array.from(CATEGORY_DIRECT_MATCH_HIDDEN)) {
       if (CATEGORY_DIMENSIONS[catId]) {
-        expect(CATEGORY_DIMENSIONS[catId].isBase, `${catId} should not be isBase`).toBe(false);
+        expect(CATEGORY_DIMENSIONS[catId].isBase, `alias ${catId} should not be isBase`).toBe(false);
+      }
+    }
+    for (const [catId, info] of Object.entries(CATEGORY_DIMENSIONS)) {
+      if (CATEGORY_FAMILIES[catId] && CATEGORY_FAMILIES[catId] !== 'SI_QUANTITY') {
+        expect(info.isBase, `non-SI-family ${catId} should not be isBase`).toBe(false);
       }
     }
   });

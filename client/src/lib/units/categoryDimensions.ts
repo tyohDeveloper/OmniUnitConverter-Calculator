@@ -1,6 +1,7 @@
 import type { DimensionalFormula } from './dimensionalFormula';
 import { CATEGORY_PRIMARIES } from './categoryPrimaries';
 import { CATEGORY_FAMILIES } from './categoryFamilies';
+import { CATEGORY_DIRECT_MATCH_HIDDEN } from './categoryAliases';
 
 export interface CategoryDimensionInfo {
   name: string;
@@ -90,45 +91,21 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 
-// Historical exclusion list, kept empty now that all reasons for
-// excluding a category have been moved to declared metadata:
+// The three historical exclusion lists have been fully retired.
+// Every reason a category could have been excluded now lives on the
+// category itself as declared metadata:
+//
 //   - archaics and named-standard locals: primaryCategory field
-//   - dimensionless categories: family !== 'SI_QUANTITY'
-//   - data: family = DATA_QUANTITY
-//   - fuel_economy: family = FUEL_ECONOMY
-//   - ghost/pending categories: undefined family (treated as non-SI)
+//   - non-SI conversion flavors: family (DIMENSIONLESS_RATIO,
+//     DATA_QUANTITY, FUEL_ECONOMY, NUMERIC_FUNCTION, SYMBOLIC)
+//   - dimensional aliases with distinct meaning: hideFromDirectMatch
+//     field (radioactivity, radiation_dose, cross_section,
+//     sound_pressure, sound_intensity, acoustic_impedance,
+//     refractive_power)
+//   - ghost/pending categories: undefined family, treated as non-SI
 //
-// The array remains an exported symbol at zero length so downstream
-// tests and any dead-code sites still compile. It may be removed
-// entirely in a follow-up commit once test/consumer references are
-// gone.
-export const EXCLUDED_CROSS_DOMAIN_CATEGORIES: readonly string[] = [];
-
-// Categories that share dimensions with a more familiar primary and
-// should not appear in the Direct-pane's "matching quantities" list.
-// These are TRUE aliases (not primaryCategory specialists): they share
-// a dimensional signature with a well-known primary but represent a
-// specialized physical concept.
-//
-// This list used to contain 12 entries. Entries that are actually
-// primaryCategory specialists (radioactive_decay, equivalent_dose,
-// radiation_exposure, fuel) are now handled automatically by
-// getMatchingPhysicalQuantities' primaryCategory-based dedup, and
-// have been removed.
-export const EXCLUDED_DOMAIN_ALIAS_CATEGORIES = [
-  'radioactivity',       // {time:-1}, alias for frequency
-  'radiation_dose',      // {length:2, time:-2}
-  'cross_section',       // {length:2}, alias for area
-  'sound_pressure',      // {mass:1, length:-1, time:-2}, alias for pressure
-  'sound_intensity',     // {mass:1, time:-3}
-  'acoustic_impedance',  // {mass:1, length:-2, time:-1}
-  'refractive_power',    // {length:-1}
-];
-
-export const ALL_EXCLUDED_CATEGORIES = [
-  ...EXCLUDED_CROSS_DOMAIN_CATEGORIES,
-  ...EXCLUDED_DOMAIN_ALIAS_CATEGORIES,
-];
+// The former EXCLUDED_CROSS_DOMAIN_CATEGORIES, EXCLUDED_DOMAIN_ALIAS_
+// CATEGORIES, and ALL_EXCLUDED_CATEGORIES symbols are gone.
 
 export function getCategoryKeyForQuantityName(name: string): string | null {
   for (const [key, info] of Object.entries(CATEGORY_DIMENSIONS)) {
@@ -144,8 +121,8 @@ export function getMatchingPhysicalQuantities(dimensions: DimensionalFormula): s
 
   const results: string[] = [];
   for (const [categoryKey, info] of Object.entries(CATEGORY_DIMENSIONS)) {
-    if (ALL_EXCLUDED_CATEGORIES.includes(categoryKey)) continue;
     if (CATEGORY_FAMILIES[categoryKey] !== 'SI_QUANTITY') continue;
+    if (CATEGORY_DIRECT_MATCH_HIDDEN.has(categoryKey)) continue;
     if (!dimensionsMatchLocal(dimensions, info.dimensions)) continue;
     const primaryId = CATEGORY_PRIMARIES[categoryKey];
     if (primaryId) {

@@ -4,6 +4,8 @@
   "baseUnit": "becquerel",
   "baseSISymbol": "s⁻¹",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
+  "dimensionalAliasOf": "frequency",
   "units": [
     {
       "id": "bq",

@@ -11,9 +11,11 @@ import { SI_DERIVED_UNITS } from '../client/src/lib/units/siDerivedUnitsCatalog'
 import { NON_SI_UNITS_CATALOG } from '../client/src/lib/units/nonSiUnitsCatalog';
 import {
   CATEGORY_DIMENSIONS,
-  EXCLUDED_CROSS_DOMAIN_CATEGORIES,
   type CategoryDimensionInfo,
 } from '../client/src/lib/units/categoryDimensions';
+import { CATEGORY_FAMILIES } from '../client/src/lib/units/categoryFamilies';
+import { CATEGORY_PRIMARIES } from '../client/src/lib/units/categoryPrimaries';
+import { CATEGORY_DIRECT_MATCH_HIDDEN } from '../client/src/lib/units/categoryAliases';
 import {
   PREFERRED_REPRESENTATIONS,
   type PreferredRepresentation,
@@ -200,44 +202,58 @@ describe('unit catalog', () => {
     });
   });
 
-  describe('EXCLUDED_CROSS_DOMAIN_CATEGORIES', () => {
-    it('should be an array', () => {
-      expect(Array.isArray(EXCLUDED_CROSS_DOMAIN_CATEGORIES)).toBe(true);
+  describe('exclusion mechanisms (post-retirement of hardcoded lists)', () => {
+    it('CATEGORY_FAMILIES: unitless is DIMENSIONLESS_RATIO', () => {
+      expect(CATEGORY_FAMILIES['unitless']).toBe('DIMENSIONLESS_RATIO');
     });
 
-    // Archaic and named-standard specialists (typography, cooking,
-    // beer_wine_volume, fuel, lightbulb, rack_geometry, shipping,
-    // paper_sizes, and the six archaics) are no longer in this list.
-    // They're excluded from cross-domain matches via primaryCategory
-    // metadata instead — see the primaryCategory tests in
-    // json-integrity.test.ts and the behavioral tests below.
-
-    it('is now empty — all reasons for exclusion have moved to declared metadata (primaryCategory + family)', () => {
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).toHaveLength(0);
+    it('CATEGORY_FAMILIES: logarithmic is NUMERIC_FUNCTION', () => {
+      expect(CATEGORY_FAMILIES['logarithmic']).toBe('NUMERIC_FUNCTION');
     });
 
-    it('should NOT contain non-SI-family categories (covered by family filter)', () => {
-      // data (DATA_QUANTITY), logarithmic (NUMERIC_FUNCTION), and
-      // unitless (DIMENSIONLESS_RATIO) are all filtered out by the
-      // family !== SI_QUANTITY predicate. None need explicit list
-      // membership.
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('data');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('logarithmic');
-      expect(EXCLUDED_CROSS_DOMAIN_CATEGORIES).not.toContain('unitless');
+    it('CATEGORY_FAMILIES: data is DATA_QUANTITY', () => {
+      expect(CATEGORY_FAMILIES['data']).toBe('DATA_QUANTITY');
     });
 
-    it('should NOT contain retired specialists (covered by primaryCategory)', () => {
-      const retired = [
-        'archaic_length', 'archaic_mass', 'archaic_area',
-        'archaic_volume', 'archaic_energy', 'archaic_power',
-        'typography', 'cooking', 'beer_wine_volume', 'fuel',
-        'lightbulb', 'rack_geometry', 'shipping', 'paper_sizes',
-      ];
-      for (const catId of retired) {
-        expect(
-          EXCLUDED_CROSS_DOMAIN_CATEGORIES,
-          `${catId} should be dropped from EXCLUDED_CROSS_DOMAIN_CATEGORIES; primaryCategory covers it`,
-        ).not.toContain(catId);
+    it('CATEGORY_FAMILIES: fuel_economy is FUEL_ECONOMY', () => {
+      expect(CATEGORY_FAMILIES['fuel_economy']).toBe('FUEL_ECONOMY');
+    });
+
+    it('CATEGORY_PRIMARIES: archaics and named-standard locals declare their primary', () => {
+      const expectedPrimaries: Record<string, string> = {
+        archaic_length: 'length',
+        archaic_mass: 'mass',
+        archaic_area: 'area',
+        archaic_volume: 'volume',
+        archaic_energy: 'energy',
+        archaic_power: 'power',
+        paper_sizes: 'area',
+        rack_geometry: 'length',
+        shipping: 'length',
+        lightbulb: 'luminous_flux',
+        cooking: 'volume',
+        beer_wine_volume: 'volume',
+        typography: 'length',
+        fuel: 'energy',
+      };
+      for (const [child, expectedParent] of Object.entries(expectedPrimaries)) {
+        expect(CATEGORY_PRIMARIES[child], `${child} should have primaryCategory=${expectedParent}`).toBe(expectedParent);
+      }
+    });
+
+    it('CATEGORY_DIRECT_MATCH_HIDDEN: contains the 7 dimensional aliases', () => {
+      const expected = ['radioactivity', 'radiation_dose', 'cross_section',
+                        'sound_pressure', 'sound_intensity', 'acoustic_impedance',
+                        'refractive_power'];
+      for (const catId of expected) {
+        expect(CATEGORY_DIRECT_MATCH_HIDDEN.has(catId), `${catId} should have hideFromDirectMatch=true`).toBe(true);
+      }
+    });
+
+    it('CATEGORY_DIRECT_MATCH_HIDDEN: primaries do NOT have hideFromDirectMatch', () => {
+      const primaries = ['length', 'mass', 'energy', 'frequency', 'area', 'pressure'];
+      for (const catId of primaries) {
+        expect(CATEGORY_DIRECT_MATCH_HIDDEN.has(catId), `${catId} should NOT have hideFromDirectMatch`).toBe(false);
       }
     });
   });

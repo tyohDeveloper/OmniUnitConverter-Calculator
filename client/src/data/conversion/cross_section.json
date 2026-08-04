@@ -4,6 +4,8 @@
   "baseUnit": "barn",
   "baseSISymbol": "m²",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
+  "dimensionalAliasOf": "area",
   "units": [
     {
       "id": "barn",

@@ -4,6 +4,7 @@
   "baseUnit": "gray",
   "baseSISymbol": "m²⋅s⁻²",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
   "units": [
     {
       "id": "gy",

@@ -5,12 +5,10 @@ import { CATEGORY_DIMENSIONS } from '../units/categoryDimensions';
 import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 
-// Historical exclusion set, kept empty. Every reason a category used
-// to be listed here has been moved to declared metadata: archaics and
-// named-standard locals via primaryCategory, data via family=DATA_
-// QUANTITY, fuel_economy via family=FUEL_ECONOMY. The set stays as an
-// exported symbol for now to keep the loop shape stable.
-const EXCLUDED_DROPDOWN_CATEGORIES: ReadonlySet<string> = new Set();
+// EXCLUDED_DROPDOWN_CATEGORIES retired. All reasons moved to declared
+// metadata: primaryCategory for specialists, family for non-SI
+// (DATA_QUANTITY, FUEL_ECONOMY, etc.), and the categoryData.family !==
+// 'SI_QUANTITY' check below covers all remaining cases.
 
 const ANGULAR_SYMBOL_PATTERN = /\brad\b|rpm|rps/;
 
@@ -56,7 +54,6 @@ export function buildCategoryUnitsForDropdown(
   const result: SIRepresentation[] = [];
   for (const categoryData of CONVERSION_DATA) {
     const catId = categoryData.id;
-    if (EXCLUDED_DROPDOWN_CATEGORIES.has(catId)) continue;
     if (categoryData.family !== 'SI_QUANTITY') continue;
     if (sourceCategory && CATEGORY_PRIMARIES[catId] === sourceCategory) continue;
     const catDimInfo = CATEGORY_DIMENSIONS[catId];

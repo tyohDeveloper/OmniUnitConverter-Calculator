@@ -4,6 +4,8 @@
   "baseUnit": "pascal",
   "baseSISymbol": "kg⋅m⁻¹⋅s⁻²",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
+  "dimensionalAliasOf": "pressure",
   "units": [
     {
       "id": "pa",

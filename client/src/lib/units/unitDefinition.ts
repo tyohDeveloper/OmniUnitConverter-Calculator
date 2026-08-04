@@ -54,30 +54,28 @@ export interface CategoryDefinition {
   family: CategoryFamily;
   units: UnitDefinition[];
   /**
-   * When present, marks this category as a *specialist* of another
-   * category (the "primary"). Two use cases:
-   *
-   *   1. Archaic sets: archaic_length is a specialist of length —
-   *      same physical dimension, decluttered into its own category
-   *      so obscure historical units don't crowd the main length
-   *      dropdown.
-   *
-   *   2. Named-standard locals: paper_sizes, rack_geometry, shipping,
-   *      lightbulb, cooking, beer_wine_volume, typography — units
-   *      that are named discrete standards but underlyingly a
-   *      familiar SI quantity (paper_sizes are areas, rack_geometry
-   *      are lengths, etc.).
-   *
-   *   3. Special subsets: fuel (energy content), equivalent_dose
-   *      (a per-body-effect refinement of radiation_dose), etc.
-   *
-   * Consumers use this to skip specialist categories in cross-domain
-   * matching against their primary (so that opening "length" doesn't
-   * surface every archaic-length unit as a cross-match) and, in
-   * future, to surface "see also" hints on the primary's page.
-   *
-   * Every referenced value MUST itself be a primary (no chains).
-   * validateCategoryJson enforces this at load time.
+   * Marks this category as a specialist of another category (the
+   * "primary") — archaics, named-standard locals, and special subsets.
+   * Consumers use it to dedupe specialists against their primary in
+   * cross-domain match. Referenced value must be a primary (no chains).
+   * Validated at load time. See docs/architecture/categoryMetadata.md.
    */
   primaryCategory?: UnitCategory;
+  /**
+   * True when this category shares dimensions with a more-familiar
+   * primary and should NOT surface in Direct-pane matching or the
+   * SI-representations dropdown. Used by suppression filters despite
+   * dimensional match. Distinct from primaryCategory: aliases are
+   * semantically different concepts sharing dims (radioactivity vs
+   * frequency, cross_section vs area, sound_pressure vs pressure).
+   */
+  hideFromDirectMatch?: boolean;
+  /**
+   * Optional: names the dimensional-parent primary. Informational
+   * only — the current suppression logic reads hideFromDirectMatch,
+   * not this field. Optional for orphan aliases (sound_intensity,
+   * acoustic_impedance, refractive_power) with no clean parent.
+   * Referenced value must be a non-specialist, non-alias primary.
+   */
+  dimensionalAliasOf?: UnitCategory;
 }

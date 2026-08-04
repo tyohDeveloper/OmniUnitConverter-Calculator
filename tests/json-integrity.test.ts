@@ -439,3 +439,81 @@ describe('JSON Integrity: family metadata', () => {
     }
   });
 });
+
+describe('JSON Integrity: dimensionalAliasOf metadata', () => {
+  it('every dimensionalAliasOf references an existing category id', () => {
+    const knownIds = new Set(CONVERSION_DATA.map((c: { id: string }) => c.id));
+    for (const cat of CONVERSION_DATA) {
+      const c = cat as { id: string; dimensionalAliasOf?: string };
+      if (!c.dimensionalAliasOf) continue;
+      expect(
+        knownIds.has(c.dimensionalAliasOf),
+        `category '${c.id}' declares dimensionalAliasOf='${c.dimensionalAliasOf}' but no such category exists`,
+      ).toBe(true);
+    }
+  });
+
+  it('dimensionalAliasOf targets are non-specialist, non-alias primaries', () => {
+    const byId = new Map(CONVERSION_DATA.map((c: { id: string; primaryCategory?: string; hideFromDirectMatch?: boolean }) => [c.id, c]));
+    for (const cat of CONVERSION_DATA) {
+      const c = cat as { id: string; dimensionalAliasOf?: string };
+      if (!c.dimensionalAliasOf) continue;
+      const target = byId.get(c.dimensionalAliasOf);
+      expect(target, `target missing for '${c.id}'`).toBeTruthy();
+      expect(target!.primaryCategory, `target '${c.dimensionalAliasOf}' of alias '${c.id}' must not be a specialist`).toBeUndefined();
+      expect(target!.hideFromDirectMatch, `target '${c.dimensionalAliasOf}' of alias '${c.id}' must not be an alias`).toBeFalsy();
+    }
+  });
+
+  it('expected aliases declare hideFromDirectMatch=true', () => {
+    const expectedAliases = ['radioactivity', 'radiation_dose', 'cross_section',
+                             'sound_pressure', 'sound_intensity', 'acoustic_impedance',
+                             'refractive_power'];
+    for (const catId of expectedAliases) {
+      const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId) as { hideFromDirectMatch?: boolean } | undefined;
+      expect(cat, `category '${catId}' missing`).toBeTruthy();
+      expect(cat!.hideFromDirectMatch, `${catId} should have hideFromDirectMatch=true`).toBe(true);
+    }
+  });
+
+  it('non-alias primaries do NOT declare hideFromDirectMatch', () => {
+    const primaries = ['length', 'mass', 'energy', 'frequency', 'area', 'pressure', 'power'];
+    for (const catId of primaries) {
+      const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId) as { hideFromDirectMatch?: boolean } | undefined;
+      expect(cat!.hideFromDirectMatch, `${catId} should NOT have hideFromDirectMatch`).toBeFalsy();
+    }
+  });
+
+  it('validateAliasMetadata passes for a valid set', async () => {
+    const { validateAliasMetadata } = await import('../client/src/lib/units/validateAliasMetadata');
+    expect(() => validateAliasMetadata([
+      { id: 'frequency' },
+      { id: 'radioactivity', hideFromDirectMatch: true, dimensionalAliasOf: 'frequency' },
+    ])).not.toThrow();
+  });
+
+  it('validateAliasMetadata rejects missing target', async () => {
+    const { validateAliasMetadata } = await import('../client/src/lib/units/validateAliasMetadata');
+    expect(() => validateAliasMetadata([
+      { id: 'radioactivity', hideFromDirectMatch: true, dimensionalAliasOf: 'nonexistent' },
+    ])).toThrow(/no such category exists/);
+  });
+
+  it('validateAliasMetadata rejects target that is itself a specialist', async () => {
+    const { validateAliasMetadata } = await import('../client/src/lib/units/validateAliasMetadata');
+    expect(() => validateAliasMetadata([
+      { id: 'length' },
+      { id: 'archaic_length', primaryCategory: 'length' },
+      { id: 'radioactivity', hideFromDirectMatch: true, dimensionalAliasOf: 'archaic_length' },
+    ])).toThrow(/is itself a specialist/);
+  });
+
+  it('validateAliasMetadata rejects target that is itself an alias', async () => {
+    const { validateAliasMetadata } = await import('../client/src/lib/units/validateAliasMetadata');
+    expect(() => validateAliasMetadata([
+      { id: 'frequency' },
+      { id: 'radioactivity', hideFromDirectMatch: true, dimensionalAliasOf: 'frequency' },
+      { id: 'other_alias', hideFromDirectMatch: true, dimensionalAliasOf: 'radioactivity' },
+    ])).toThrow(/is itself an alias/);
+  });
+});

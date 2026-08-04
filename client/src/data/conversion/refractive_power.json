@@ -4,6 +4,7 @@
   "baseUnit": "reciprocal-meter",
   "baseSISymbol": "m⁻¹",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
   "units": [
     {
       "id": "m-1",

@@ -4,6 +4,7 @@
   "baseUnit": "w_per_m2",
   "baseSISymbol": "W⋅m⁻²",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
   "units": [
     {
       "id": "w_per_m2",

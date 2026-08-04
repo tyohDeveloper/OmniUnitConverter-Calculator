@@ -37,6 +37,8 @@ const categorySchema = z.object({
   family: z.enum(['SI_QUANTITY', 'DIMENSIONLESS_RATIO', 'DATA_QUANTITY', 'FUEL_ECONOMY', 'NUMERIC_FUNCTION', 'SYMBOLIC']),
   units: z.array(unitSchema).min(1),
   primaryCategory: z.string().min(1).optional(),
+  hideFromDirectMatch: z.boolean().optional(),
+  dimensionalAliasOf: z.string().min(1).optional(),
 });
 
 export function validateCategoryJson(raw: unknown): void {

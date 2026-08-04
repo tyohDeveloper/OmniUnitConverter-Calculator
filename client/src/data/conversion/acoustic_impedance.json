@@ -4,6 +4,7 @@
   "baseUnit": "rayl",
   "baseSISymbol": "Pa⋅s⋅m⁻¹",
   "family": "SI_QUANTITY",
+  "hideFromDirectMatch": true,
   "units": [
     {
       "id": "rayl",

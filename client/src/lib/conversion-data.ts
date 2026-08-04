@@ -75,6 +75,7 @@ import volumeData from '@/data/conversion/volume.json';
 import { CONVERSION_FUNCTIONS } from './units/conversionFunctionRegistry';
 import { validateCategoryJson } from './units/validateCategoryJson';
 import { validateNoPrimaryCategoryChains } from './units/validateNoPrimaryCategoryChains';
+import { validateAliasMetadata } from './units/validateAliasMetadata';
 import type { UnitCategory } from './units/unitCategory';
 import type { UnitDefinition, CategoryDefinition } from './units/unitDefinition';
 import type { Prefix } from './units/prefix';
@@ -109,6 +110,8 @@ type RawCategoryJson = {
   // CategoryDefinition.
   family: string;
   primaryCategory?: string;
+  hideFromDirectMatch?: boolean;
+  dimensionalAliasOf?: string;
   units: Array<{
     id: string;
     name: string;
@@ -210,9 +213,11 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
 
 // Cross-category validation: the per-category asCategoryDefinition
 // checks are enough for shape validation, but the primaryCategory
-// no-chain rule needs the full set. This throws at module load if any
-// category references a missing primary or a chained primary.
+// no-chain rule and the dimensionalAliasOf rules need the full set.
+// Both throw at module load if any category references a missing
+// or wrongly-typed target.
 validateNoPrimaryCategoryChains(CONVERSION_DATA);
+validateAliasMetadata(CONVERSION_DATA);
 
 // Math-category one-way functions live in the shared conversion function
 // registry (units/conversionFunctionRegistry) as oneWay entries.
