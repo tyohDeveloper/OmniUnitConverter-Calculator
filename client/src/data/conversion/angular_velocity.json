@@ -3,6 +3,7 @@
   "name": "Angular Velocity",
   "baseUnit": "radian/second",
   "baseSISymbol": "rad⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "rad_s",

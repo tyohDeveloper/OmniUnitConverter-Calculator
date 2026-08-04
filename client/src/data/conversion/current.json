@@ -3,6 +3,7 @@
   "name": "Electric Current",
   "baseUnit": "ampere",
   "baseSISymbol": "A",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "a",

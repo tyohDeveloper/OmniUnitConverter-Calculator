@@ -3,6 +3,7 @@
   "name": "Density",
   "baseUnit": "kg/m³",
   "baseSISymbol": "kg⋅m⁻³",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "kgm3",

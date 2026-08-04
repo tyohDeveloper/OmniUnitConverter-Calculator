@@ -3,6 +3,7 @@
   "name": "Luminance",
   "baseUnit": "candela_per_square_metre",
   "baseSISymbol": "cd⋅m⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "cd_per_m2",
@@ -18,7 +19,7 @@
       "id": "bril",
       "name": "Bril",
       "symbol": "bril",
-      "factor": 3.183098861837907e-8,
+      "factor": 3.183098861837907e-08,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Bril_(unit)"

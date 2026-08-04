@@ -373,3 +373,59 @@ describe('JSON Integrity: primaryCategory metadata', () => {
     }
   });
 });
+
+describe('JSON Integrity: family metadata', () => {
+  const VALID_FAMILIES = new Set(['SI_QUANTITY', 'DIMENSIONLESS_RATIO', 'NUMERIC_FUNCTION', 'SYMBOLIC']);
+
+  it('every category declares a family', () => {
+    for (const cat of CONVERSION_DATA) {
+      expect(
+        (cat as { family?: string }).family,
+        `category '${cat.id}' missing required family`,
+      ).toBeTruthy();
+    }
+  });
+
+  it('every family value is a valid enum member', () => {
+    for (const cat of CONVERSION_DATA) {
+      const fam = (cat as { family: string }).family;
+      expect(
+        VALID_FAMILIES.has(fam),
+        `category '${cat.id}' has invalid family='${fam}'`,
+      ).toBe(true);
+    }
+  });
+
+  it('unitless is DIMENSIONLESS_RATIO', () => {
+    const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === 'unitless');
+    expect((cat as { family: string }).family).toBe('DIMENSIONLESS_RATIO');
+  });
+
+  it('logarithmic is NUMERIC_FUNCTION', () => {
+    const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === 'logarithmic');
+    expect((cat as { family: string }).family).toBe('NUMERIC_FUNCTION');
+  });
+
+  it('all archaics are SI_QUANTITY (decluttered SI subsets)', () => {
+    const archaics = ['archaic_length', 'archaic_mass', 'archaic_area',
+                      'archaic_volume', 'archaic_energy', 'archaic_power'];
+    for (const catId of archaics) {
+      const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === catId);
+      expect((cat as { family: string }).family, `${catId} should be SI_QUANTITY`).toBe('SI_QUANTITY');
+    }
+  });
+
+  it('specialists all point at a primary within the same family', () => {
+    const byId = new Map(CONVERSION_DATA.map((c: { id: string; family: string }) => [c.id, c]));
+    for (const cat of CONVERSION_DATA) {
+      const c = cat as { id: string; family: string; primaryCategory?: string };
+      if (!c.primaryCategory) continue;
+      const parent = byId.get(c.primaryCategory) as { family: string } | undefined;
+      expect(parent, `parent missing for ${c.id}`).toBeTruthy();
+      expect(
+        parent!.family,
+        `specialist '${c.id}' (family=${c.family}) must share family with primary '${c.primaryCategory}' (family=${parent!.family})`,
+      ).toBe(c.family);
+    }
+  });
+});

@@ -3,6 +3,7 @@
   "name": "Archaic Volume",
   "baseUnit": "litre",
   "baseSISymbol": "L",
+  "family": "SI_QUANTITY",
   "primaryCategory": "volume",
   "units": [
     {

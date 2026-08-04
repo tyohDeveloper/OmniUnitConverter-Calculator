@@ -3,6 +3,7 @@
   "name": "Beer & Wine",
   "baseUnit": "cubic meter",
   "baseSISymbol": "m³",
+  "family": "SI_QUANTITY",
   "primaryCategory": "volume",
   "units": [
     {

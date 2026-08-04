@@ -3,6 +3,7 @@
   "name": "Entropy",
   "baseUnit": "joule/kelvin",
   "baseSISymbol": "J⋅K⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "jk",

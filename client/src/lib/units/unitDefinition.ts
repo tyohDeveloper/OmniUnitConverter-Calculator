@@ -19,11 +19,42 @@ export interface UnitDefinition {
   measurementSystem?: MeasurementSystem;
 }
 
+/**
+ * The conversion "flavor" of a category:
+ *
+ * - SI_QUANTITY: a real physical quantity with SI dimensions. Its
+ *   units convert by linear scaling (with optional offset for
+ *   affine cases like Celsius→Kelvin) or by a bidirectional named
+ *   conversionFunction pair (paper_sizes, logarithmic-like log_*).
+ *   Includes archaics, named-standard locals, radiation cluster,
+ *   fuel, photon, and every other dimensioned category.
+ *
+ * - DIMENSIONLESS_RATIO: units are pure numerical ratios or named
+ *   counting groups (ppm, %, dozen, gross). Dimensions: {} but
+ *   distinct from NUMERIC_FUNCTION — units still relate by a scalar
+ *   factor.
+ *
+ * - NUMERIC_FUNCTION: not really a conversion at all; the "units"
+ *   are math functions or operators applied to a number. Included
+ *   in the category framework for UI uniformity. logarithmic and
+ *   (defunct) math live here.
+ *
+ * - SYMBOLIC: reserved for future non-numeric conversions (dates,
+ *   calendar systems, number bases, timezones). Value type will
+ *   need a widened conversion signature; no category uses this yet.
+ */
+export type CategoryFamily =
+  | 'SI_QUANTITY'
+  | 'DIMENSIONLESS_RATIO'
+  | 'NUMERIC_FUNCTION'
+  | 'SYMBOLIC';
+
 export interface CategoryDefinition {
   id: UnitCategory;
   name: string;
   baseUnit: string;
   baseSISymbol?: string;
+  family: CategoryFamily;
   units: UnitDefinition[];
   /**
    * When present, marks this category as a *specialist* of another

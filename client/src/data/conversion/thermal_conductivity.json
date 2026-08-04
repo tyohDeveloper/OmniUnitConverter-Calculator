@@ -3,6 +3,7 @@
   "name": "Thermal Conductivity",
   "baseUnit": "watt/meter-kelvin",
   "baseSISymbol": "W⋅m⁻¹⋅K⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "wmk",

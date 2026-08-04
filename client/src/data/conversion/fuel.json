@@ -3,6 +3,7 @@
   "name": "Fuel Energy",
   "baseUnit": "joule",
   "baseSISymbol": "J",
+  "family": "SI_QUANTITY",
   "primaryCategory": "energy",
   "units": [
     {

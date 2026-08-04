@@ -3,6 +3,7 @@
   "name": "Archaic Mass",
   "baseUnit": "kilogram",
   "baseSISymbol": "kg",
+  "family": "SI_QUANTITY",
   "primaryCategory": "mass",
   "units": [
     {

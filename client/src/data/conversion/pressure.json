@@ -3,6 +3,7 @@
   "name": "Pressure",
   "baseUnit": "pascal",
   "baseSISymbol": "kg⋅m⁻¹⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "pa",

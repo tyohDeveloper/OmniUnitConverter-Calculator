@@ -3,6 +3,7 @@
   "name": "Inductance",
   "baseUnit": "henry",
   "baseSISymbol": "kg⋅m²⋅s⁻²⋅A⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "h",
@@ -18,7 +19,7 @@
       "id": "abh",
       "name": "Abhenry",
       "symbol": "abH",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

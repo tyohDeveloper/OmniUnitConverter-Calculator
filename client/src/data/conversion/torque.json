@@ -3,6 +3,7 @@
   "name": "Torque",
   "baseUnit": "newton meter",
   "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "nm",
@@ -18,7 +19,7 @@
       "id": "dyncm",
       "name": "Dyne-centimeter",
       "symbol": "dyn⋅cm",
-      "factor": 1e-7,
+      "factor": 1e-07,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

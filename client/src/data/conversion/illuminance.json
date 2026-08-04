@@ -3,6 +3,7 @@
   "name": "Illuminance",
   "baseUnit": "lux",
   "baseSISymbol": "cd⋅sr⋅m⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "lx",

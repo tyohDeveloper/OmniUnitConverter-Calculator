@@ -3,6 +3,7 @@
   "name": "Mass",
   "baseUnit": "kilogram",
   "baseSISymbol": "kg",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "kg",
@@ -36,7 +37,7 @@
       "id": "mcg",
       "name": "Microgram",
       "symbol": "mcg",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Microgram"

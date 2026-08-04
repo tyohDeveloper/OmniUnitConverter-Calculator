@@ -3,6 +3,7 @@
   "name": "Photon/Light",
   "baseUnit": "electronvolt",
   "baseSISymbol": "eV",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "eV",
@@ -38,7 +39,7 @@
       "id": "lambda",
       "name": "Wavelength (λ)",
       "symbol": "λ",
-      "factor": 0.000001239841984,
+      "factor": 1.239841984e-06,
       "allowPrefixes": true,
       "isInverse": true,
       "unitType": "SI_BASE",

@@ -3,6 +3,7 @@
   "name": "Radioactivity",
   "baseUnit": "becquerel",
   "baseSISymbol": "s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "bq",

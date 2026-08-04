@@ -3,6 +3,7 @@
   "name": "Cooking Measures",
   "baseUnit": "milliliter",
   "baseSISymbol": "mL",
+  "family": "SI_QUANTITY",
   "primaryCategory": "volume",
   "units": [
     {

@@ -3,6 +3,7 @@
   "name": "Electric Field Strength",
   "baseUnit": "v_per_m",
   "baseSISymbol": "V⋅m⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "v_per_m",

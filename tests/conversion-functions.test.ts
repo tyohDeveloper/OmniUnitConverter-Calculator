@@ -4,7 +4,7 @@ import { CONVERSION_FUNCTIONS } from '../client/src/lib/units/conversionFunction
 import { validateCategoryJson } from '../client/src/lib/units/validateCategoryJson';
 
 const baseUnit = { id: 'u', name: 'Unit', symbol: 'u', factor: 1 };
-const category = (units: object[]) => ({ id: 'test', name: 'Test', baseUnit: 'unit', units });
+const category = (units: object[]) => ({ id: 'test', name: 'Test', baseUnit: 'unit', family: 'SI_QUANTITY' as const, units });
 
 describe('Conversion function registry', () => {
   it('contains invertible linear paper pairs for all A/B/JIS sizes', () => {

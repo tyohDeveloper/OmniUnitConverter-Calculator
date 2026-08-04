@@ -103,6 +103,11 @@ type RawCategoryJson = {
   name: string;
   baseUnit: string;
   baseSISymbol?: string;
+  // TS infers this as `string` from JSON literals; Zod validates the
+  // enum at load time via validateCategoryJson. The runtime cast in
+  // asCategoryDefinition tightens the type when producing
+  // CategoryDefinition.
+  family: string;
   primaryCategory?: string;
   units: Array<{
     id: string;

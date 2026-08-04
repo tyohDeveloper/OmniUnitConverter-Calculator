@@ -3,6 +3,7 @@
   "name": "Area",
   "baseUnit": "square meter",
   "baseSISymbol": "m²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "m2",

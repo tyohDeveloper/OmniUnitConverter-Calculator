@@ -3,6 +3,7 @@
   "name": "Force",
   "baseUnit": "newton",
   "baseSISymbol": "kg⋅m⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "n",
@@ -18,7 +19,7 @@
       "id": "dyn",
       "name": "Dyne",
       "symbol": "dyn",
-      "factor": 0.00001,
+      "factor": 1e-05,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

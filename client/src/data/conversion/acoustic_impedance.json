@@ -3,6 +3,7 @@
   "name": "Acoustic Impedance",
   "baseUnit": "rayl",
   "baseSISymbol": "Pa⋅s⋅m⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "rayl",

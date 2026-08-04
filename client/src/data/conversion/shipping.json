@@ -3,6 +3,7 @@
   "name": "Shipping Containers",
   "baseUnit": "metre",
   "baseSISymbol": "m",
+  "family": "SI_QUANTITY",
   "primaryCategory": "length",
   "units": [
     {

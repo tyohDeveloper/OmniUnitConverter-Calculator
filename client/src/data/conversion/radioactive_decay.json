@@ -3,6 +3,7 @@
   "name": "Radioactive Decay",
   "baseUnit": "per_day",
   "baseSISymbol": "s⁻¹",
+  "family": "SI_QUANTITY",
   "primaryCategory": "radioactivity",
   "units": [
     {

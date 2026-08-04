@@ -3,6 +3,7 @@
   "name": "Surface Tension",
   "baseUnit": "newton/meter",
   "baseSISymbol": "kg⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "nm",

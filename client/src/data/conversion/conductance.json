@@ -3,6 +3,7 @@
   "name": "Conductance",
   "baseUnit": "siemens",
   "baseSISymbol": "kg⁻¹⋅m⁻²⋅s³⋅A²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "s",

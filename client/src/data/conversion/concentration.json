@@ -3,6 +3,7 @@
   "name": "Concentration",
   "baseUnit": "mole/liter",
   "baseSISymbol": "mol⋅L⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "mol_l",
@@ -27,7 +28,7 @@
       "id": "ppb",
       "name": "Parts per Billion",
       "symbol": "ppb",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Concentration"
@@ -36,7 +37,7 @@
       "id": "ppm",
       "name": "Parts per Million",
       "symbol": "ppm",
-      "factor": 0.000001,
+      "factor": 1e-06,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Concentration"
@@ -45,7 +46,7 @@
       "id": "mg_dl",
       "name": "Milligram/Deciliter",
       "symbol": "mg⋅dL⁻¹",
-      "factor": 0.00001,
+      "factor": 1e-05,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Mass_concentration_(chemistry)"

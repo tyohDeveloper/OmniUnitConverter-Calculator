@@ -3,6 +3,7 @@
   "name": "Resistance",
   "baseUnit": "ohm",
   "baseSISymbol": "kg⋅m²⋅s⁻³⋅A⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "ohm",
@@ -18,7 +19,7 @@
       "id": "abohm",
       "name": "Abohm",
       "symbol": "abΩ",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "unitType": "SI_BASE",
       "measurementSystem": "CGS",
       "sourceUrl": "https://en.wikipedia.org/wiki/Abohm"

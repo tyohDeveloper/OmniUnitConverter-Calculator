@@ -3,6 +3,7 @@
   "name": "Solid Angle",
   "baseUnit": "steradian",
   "baseSISymbol": "sr",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "sr",

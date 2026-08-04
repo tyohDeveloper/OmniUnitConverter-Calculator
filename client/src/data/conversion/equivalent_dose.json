@@ -3,6 +3,7 @@
   "name": "Equivalent Radiation Dose",
   "baseUnit": "sievert",
   "baseSISymbol": "m²⋅s⁻²",
+  "family": "SI_QUANTITY",
   "primaryCategory": "radiation_dose",
   "units": [
     {

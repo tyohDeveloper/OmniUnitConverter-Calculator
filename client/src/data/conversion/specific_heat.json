@@ -3,6 +3,7 @@
   "name": "Specific Heat Capacity",
   "baseUnit": "joule/kilogram-kelvin",
   "baseSISymbol": "J⋅kg⁻¹⋅K⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "jkgk",

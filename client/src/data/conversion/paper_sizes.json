@@ -3,6 +3,7 @@
   "name": "Paper Sizes",
   "baseUnit": "square meter",
   "baseSISymbol": "m²",
+  "family": "SI_QUANTITY",
   "primaryCategory": "area",
   "units": [
     {

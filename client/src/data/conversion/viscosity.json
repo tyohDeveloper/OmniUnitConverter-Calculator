@@ -3,6 +3,7 @@
   "name": "Viscosity (Dynamic)",
   "baseUnit": "pascal-second",
   "baseSISymbol": "kg⋅m⁻¹⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "pas",

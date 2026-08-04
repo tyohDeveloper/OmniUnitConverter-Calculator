@@ -3,6 +3,7 @@
   "name": "Luminous Intensity",
   "baseUnit": "candela",
   "baseSISymbol": "cd",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "cd",

@@ -3,6 +3,7 @@
   "name": "Sound Intensity",
   "baseUnit": "w_per_m2",
   "baseSISymbol": "W⋅m⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "w_per_m2",

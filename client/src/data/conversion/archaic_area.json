@@ -3,6 +3,7 @@
   "name": "Archaic Area",
   "baseUnit": "square metre",
   "baseSISymbol": "m²",
+  "family": "SI_QUANTITY",
   "primaryCategory": "area",
   "units": [
     {

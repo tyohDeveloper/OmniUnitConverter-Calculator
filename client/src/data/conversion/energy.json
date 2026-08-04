@@ -3,6 +3,7 @@
   "name": "Energy",
   "baseUnit": "joule",
   "baseSISymbol": "kg⋅m²⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "j",

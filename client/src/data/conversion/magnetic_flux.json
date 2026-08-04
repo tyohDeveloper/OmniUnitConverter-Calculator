@@ -3,6 +3,7 @@
   "name": "Magnetic Flux",
   "baseUnit": "weber",
   "baseSISymbol": "kg⋅m²⋅s⁻²⋅A⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "wb",
@@ -18,7 +19,7 @@
       "id": "mx",
       "name": "Maxwell",
       "symbol": "Mx",
-      "factor": 1e-8,
+      "factor": 1e-08,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

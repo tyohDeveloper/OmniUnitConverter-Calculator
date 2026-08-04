@@ -3,6 +3,7 @@
   "name": "Catalytic Activity",
   "baseUnit": "katal",
   "baseSISymbol": "mol⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "kat",
@@ -18,7 +19,7 @@
       "id": "u",
       "name": "Enzyme Unit",
       "symbol": "U",
-      "factor": 1.667e-8,
+      "factor": 1.667e-08,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Catalysis"

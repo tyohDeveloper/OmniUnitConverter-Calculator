@@ -3,6 +3,7 @@
   "name": "Plane Angle",
   "baseUnit": "radian",
   "baseSISymbol": "rad",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "rad",
@@ -18,7 +19,7 @@
       "id": "arcsec",
       "name": "Arcsecond",
       "symbol": "″",
-      "factor": 0.00000484813681109536,
+      "factor": 4.84813681109536e-06,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Minute_and_second_of_arc"

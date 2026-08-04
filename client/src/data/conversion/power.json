@@ -3,6 +3,7 @@
   "name": "Power",
   "baseUnit": "watt",
   "baseSISymbol": "kg⋅m²⋅s⁻³",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "w",
@@ -18,7 +19,7 @@
       "id": "dbuw",
       "name": "Decibel-microwatt",
       "symbol": "dBµW",
-      "factor": 0.0000012589254117941672,
+      "factor": 1.2589254117941672e-06,
       "measurementSystem": "NONE",
       "conversionFunction": "db_microwatt",
       "sourceUrl": "https://en.wikipedia.org/wiki/DBm"

@@ -3,6 +3,7 @@
   "name": "Length",
   "baseUnit": "meter",
   "baseSISymbol": "m",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "m",
@@ -27,7 +28,7 @@
       "id": "thou",
       "name": "Mil/Thou",
       "symbol": "thou",
-      "factor": 0.0000254,
+      "factor": 2.54e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"

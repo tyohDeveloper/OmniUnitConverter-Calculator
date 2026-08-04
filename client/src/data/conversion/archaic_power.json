@@ -3,6 +3,7 @@
   "name": "Archaic Power",
   "baseUnit": "watt",
   "baseSISymbol": "kg⋅m²⋅s⁻³",
+  "family": "SI_QUANTITY",
   "primaryCategory": "power",
   "units": [
     {

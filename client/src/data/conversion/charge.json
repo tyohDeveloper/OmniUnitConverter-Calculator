@@ -3,6 +3,7 @@
   "name": "Electric Charge",
   "baseUnit": "coulomb",
   "baseSISymbol": "A⋅s",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "c",

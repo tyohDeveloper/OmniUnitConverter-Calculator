@@ -3,6 +3,7 @@
   "name": "Electric Potential",
   "baseUnit": "volt",
   "baseSISymbol": "kg⋅m²⋅s⁻³⋅A⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "v",
@@ -18,7 +19,7 @@
       "id": "dbuv",
       "name": "Decibel-microvolt",
       "symbol": "dBµV",
-      "factor": 0.0000011220184543019633,
+      "factor": 1.1220184543019633e-06,
       "measurementSystem": "NONE",
       "conversionFunction": "db_microvolt",
       "sourceUrl": "https://en.wikipedia.org/wiki/Decibel#Voltage"

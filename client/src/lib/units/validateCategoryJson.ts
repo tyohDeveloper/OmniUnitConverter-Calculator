@@ -34,6 +34,7 @@ const categorySchema = z.object({
   name: z.string().min(1),
   baseUnit: z.string().min(1),
   baseSISymbol: z.string().optional(),
+  family: z.enum(['SI_QUANTITY', 'DIMENSIONLESS_RATIO', 'NUMERIC_FUNCTION', 'SYMBOLIC']),
   units: z.array(unitSchema).min(1),
   primaryCategory: z.string().min(1).optional(),
 });

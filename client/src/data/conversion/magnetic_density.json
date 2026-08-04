@@ -3,6 +3,7 @@
   "name": "Magnetic Flux Density",
   "baseUnit": "tesla",
   "baseSISymbol": "kg⋅s⁻²⋅A⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "t",
@@ -18,7 +19,7 @@
       "id": "gamma",
       "name": "Gamma",
       "symbol": "γ",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "unitType": "SI_BASE",
       "measurementSystem": "CGS",
       "sourceUrl": "https://en.wikipedia.org/wiki/Gauss_(unit)"

@@ -3,6 +3,7 @@
   "name": "Kinematic Viscosity",
   "baseUnit": "m2_per_s",
   "baseSISymbol": "m²⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "m2_per_s",
@@ -18,7 +19,7 @@
       "id": "centistokes",
       "name": "Centistokes",
       "symbol": "cSt",
-      "factor": 0.000001,
+      "factor": 1e-06,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Viscosity"

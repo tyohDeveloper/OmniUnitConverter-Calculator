@@ -3,6 +3,7 @@
   "name": "Time",
   "baseUnit": "second",
   "baseSISymbol": "s",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "s",
@@ -18,7 +19,7 @@
       "id": "shake",
       "name": "Shake",
       "symbol": "shake",
-      "factor": 1e-8,
+      "factor": 1e-08,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Shake_(unit)"

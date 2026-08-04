@@ -3,6 +3,7 @@
   "name": "Frequency",
   "baseUnit": "per_second",
   "baseSISymbol": "s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "per_second",
@@ -17,7 +18,7 @@
       "id": "per_year",
       "name": "Per Year",
       "symbol": "y⁻¹",
-      "factor": 3.1688087814028954e-8,
+      "factor": 3.1688087814028954e-08,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Frequency"
@@ -26,7 +27,7 @@
       "id": "per_week",
       "name": "Per Week",
       "symbol": "wk⁻¹",
-      "factor": 0.0000016534391534391533,
+      "factor": 1.6534391534391533e-06,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Frequency"
@@ -35,7 +36,7 @@
       "id": "per_day",
       "name": "Per Day",
       "symbol": "d⁻¹",
-      "factor": 0.000011574074074074073,
+      "factor": 1.1574074074074073e-05,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Frequency"

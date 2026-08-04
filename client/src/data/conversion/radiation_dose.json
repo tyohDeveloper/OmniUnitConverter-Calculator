@@ -3,6 +3,7 @@
   "name": "Absorbed Radiation Dose",
   "baseUnit": "gray",
   "baseSISymbol": "m²⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "gy",

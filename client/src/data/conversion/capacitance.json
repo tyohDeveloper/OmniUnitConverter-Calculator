@@ -3,6 +3,7 @@
   "name": "Capacitance",
   "baseUnit": "farad",
   "baseSISymbol": "kg⁻¹⋅m⁻²⋅s⁴⋅A²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "f",
@@ -28,7 +29,7 @@
       "id": "abf",
       "name": "Abfarad",
       "symbol": "abF",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",

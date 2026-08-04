@@ -3,6 +3,7 @@
   "name": "Magnetic Field Strength (H)",
   "baseUnit": "a_per_m",
   "baseSISymbol": "A⋅m⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "a_per_m",

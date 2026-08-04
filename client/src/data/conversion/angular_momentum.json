@@ -3,6 +3,7 @@
   "name": "Angular Momentum",
   "baseUnit": "kilogram meter²/second",
   "baseSISymbol": "kg⋅m²⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "kgm2s",
@@ -26,7 +27,7 @@
       "id": "gcm2s",
       "name": "g⋅cm²/s",
       "symbol": "g⋅cm²⋅s⁻¹",
-      "factor": 1e-7,
+      "factor": 1e-07,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Angular_momentum"
@@ -35,7 +36,7 @@
       "id": "ozin2s",
       "name": "oz⋅in²/s",
       "symbol": "oz⋅in²⋅s⁻¹",
-      "factor": 0.00001829,
+      "factor": 1.829e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"

@@ -3,6 +3,7 @@
   "name": "Lightbulb Efficiency",
   "baseUnit": "lumen",
   "baseSISymbol": "lm",
+  "family": "SI_QUANTITY",
   "primaryCategory": "luminous_flux",
   "units": [
     {

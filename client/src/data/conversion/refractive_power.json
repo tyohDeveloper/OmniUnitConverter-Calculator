@@ -3,6 +3,7 @@
   "name": "Refractive Power (Vision)",
   "baseUnit": "reciprocal-meter",
   "baseSISymbol": "m⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "m-1",

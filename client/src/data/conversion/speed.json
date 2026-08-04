@@ -3,6 +3,7 @@
   "name": "Speed",
   "baseUnit": "meter/second",
   "baseSISymbol": "m⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "mps",

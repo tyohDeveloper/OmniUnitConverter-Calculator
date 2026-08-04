@@ -3,6 +3,7 @@
   "name": "Acceleration",
   "baseUnit": "meter/sq second",
   "baseSISymbol": "m⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "mps2",

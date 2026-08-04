@@ -3,6 +3,7 @@
   "name": "Temperature",
   "baseUnit": "kelvin",
   "baseSISymbol": "K",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "k",

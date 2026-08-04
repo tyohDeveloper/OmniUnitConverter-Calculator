@@ -3,6 +3,7 @@
   "name": "Luminous Flux (Human)",
   "baseUnit": "lumen",
   "baseSISymbol": "cd⋅sr",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "lm",

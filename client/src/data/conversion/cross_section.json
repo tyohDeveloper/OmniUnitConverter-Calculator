@@ -3,6 +3,7 @@
   "name": "Cross-Section",
   "baseUnit": "barn",
   "baseSISymbol": "m²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "barn",

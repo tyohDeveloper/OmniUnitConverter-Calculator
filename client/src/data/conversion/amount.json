@@ -3,6 +3,7 @@
   "name": "Amount of Substance",
   "baseUnit": "mole",
   "baseSISymbol": "mol",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "mol",

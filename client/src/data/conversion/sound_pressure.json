@@ -3,6 +3,7 @@
   "name": "Sound Pressure",
   "baseUnit": "pascal",
   "baseSISymbol": "kg⋅m⁻¹⋅s⁻²",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "pa",
@@ -17,7 +18,7 @@
       "id": "dbupa",
       "name": "Decibel-micropascal",
       "symbol": "dBµPa",
-      "factor": 0.0000011220184543019633,
+      "factor": 1.1220184543019633e-06,
       "measurementSystem": "NONE",
       "conversionFunction": "db_micropascal",
       "sourceUrl": "https://en.wikipedia.org/wiki/Sound_pressure#Sound_pressure_level"
@@ -26,7 +27,7 @@
       "id": "dbspl",
       "name": "Sound Pressure Level",
       "symbol": "dB SPL",
-      "factor": 0.00002244036908603927,
+      "factor": 2.244036908603927e-05,
       "measurementSystem": "NONE",
       "conversionFunction": "db_spl",
       "sourceUrl": "https://en.wikipedia.org/wiki/Sound_pressure#Sound_pressure_level"

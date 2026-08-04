@@ -3,6 +3,7 @@
   "name": "Unitless Numbers",
   "baseUnit": "Number",
   "baseSISymbol": "1",
+  "family": "DIMENSIONLESS_RATIO",
   "units": [
     {
       "id": "number",
@@ -24,7 +25,7 @@
       "id": "ppb",
       "name": "Parts Per Billion",
       "symbol": "ppb",
-      "factor": 1e-9,
+      "factor": 1e-09,
       "measurementSystem": "NONE",
       "sourceUrl": "https://en.wikipedia.org/wiki/Parts-per_notation"
     },
@@ -32,7 +33,7 @@
       "id": "ppm",
       "name": "Parts Per Million",
       "symbol": "ppm",
-      "factor": 0.000001,
+      "factor": 1e-06,
       "measurementSystem": "NONE",
       "sourceUrl": "https://en.wikipedia.org/wiki/Parts-per_notation"
     },

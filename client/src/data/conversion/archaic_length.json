@@ -3,6 +3,7 @@
   "name": "Archaic Length",
   "baseUnit": "metre",
   "baseSISymbol": "m",
+  "family": "SI_QUANTITY",
   "primaryCategory": "length",
   "units": [
     {

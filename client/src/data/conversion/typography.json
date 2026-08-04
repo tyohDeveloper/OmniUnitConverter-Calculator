@@ -3,6 +3,7 @@
   "name": "Typography",
   "baseUnit": "meter",
   "baseSISymbol": "m",
+  "family": "SI_QUANTITY",
   "primaryCategory": "length",
   "units": [
     {

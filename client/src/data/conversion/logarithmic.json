@@ -3,6 +3,7 @@
   "name": "Logarithmic Scales",
   "baseUnit": "Power Ratio",
   "baseSISymbol": "1",
+  "family": "NUMERIC_FUNCTION",
   "units": [
     {
       "id": "ratio",

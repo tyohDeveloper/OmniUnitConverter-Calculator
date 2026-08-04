@@ -3,6 +3,7 @@
   "name": "Flow Rate (Volumetric)",
   "baseUnit": "cubic metre/second",
   "baseSISymbol": "m³⋅s⁻¹",
+  "family": "SI_QUANTITY",
   "units": [
     {
       "id": "m3s",
@@ -27,7 +28,7 @@
       "id": "cm3min",
       "name": "Cubic Centimetre/minute",
       "symbol": "cm³⋅min⁻¹",
-      "factor": 1.6666666666666667e-8,
+      "factor": 1.6666666666666667e-08,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
@@ -36,7 +37,7 @@
       "id": "gald",
       "name": "US Gallon/day",
       "symbol": "gal⋅d⁻¹",
-      "factor": 4.381263638888889e-8,
+      "factor": 4.381263638888889e-08,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -45,7 +46,7 @@
       "id": "lh",
       "name": "Liter/hour",
       "symbol": "L⋅h⁻¹",
-      "factor": 2.7777777777777776e-7,
+      "factor": 2.7777777777777776e-07,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
@@ -54,7 +55,7 @@
       "id": "cm3s",
       "name": "Cubic Centimetre/second",
       "symbol": "cm³⋅s⁻¹",
-      "factor": 0.000001,
+      "factor": 1e-06,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
@@ -63,7 +64,7 @@
       "id": "galh",
       "name": "US Gallon/hour",
       "symbol": "gal⋅h⁻¹",
-      "factor": 0.0000010515032733333334,
+      "factor": 1.0515032733333334e-06,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -72,7 +73,7 @@
       "id": "impgalh",
       "name": "Imperial Gallon/hour",
       "symbol": "Imp gal⋅h⁻¹",
-      "factor": 0.0000012628027777777779,
+      "factor": 1.2628027777777779e-06,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
       "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
@@ -81,7 +82,7 @@
       "id": "bbld",
       "name": "Barrel/day",
       "symbol": "bbl⋅d⁻¹",
-      "factor": 0.0000018401307291666666,
+      "factor": 1.8401307291666666e-06,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -90,7 +91,7 @@
       "id": "ft3h",
       "name": "Cubic Foot/hour",
       "symbol": "ft³⋅h⁻¹",
-      "factor": 0.000007865777777777777,
+      "factor": 7.865777777777777e-06,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -99,7 +100,7 @@
       "id": "lmin",
       "name": "Liter/minute",
       "symbol": "L⋅min⁻¹",
-      "factor": 0.000016666666666666667,
+      "factor": 1.6666666666666667e-05,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
@@ -108,7 +109,7 @@
       "id": "bblh",
       "name": "Barrel/hour",
       "symbol": "bbl⋅h⁻¹",
-      "factor": 0.0000441631375,
+      "factor": 4.41631375e-05,
       "unitType": "US_COMMON",
       "measurementSystem": "US_CUSTOMARY",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -117,7 +118,7 @@
       "id": "gpm",
       "name": "US Gallon/minute",
       "symbol": "GPM",
-      "factor": 0.0000630901964,
+      "factor": 6.30901964e-05,
       "unitType": "US_COMMON_FLUID",
       "measurementSystem": "US_CUSTOMARY_FLUID",
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
@@ -126,7 +127,7 @@
       "id": "impgalmin",
       "name": "Imperial Gallon/minute",
       "symbol": "Imp gal⋅min⁻¹",
-      "factor": 0.00007576816666666667,
+      "factor": 7.576816666666667e-05,
       "unitType": "IMPERIAL",
       "measurementSystem": "IMPERIAL",
       "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/72"
