@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import { parseDirectEntry } from '@/lib/units/parseDirectEntry';
+import { parseDirectEntry } from '@/lib/parsing/parseDirectEntry';
 import type { NumberFormat } from '@/lib/units/numberFormat';
 import { getMatchingPhysicalQuantities } from '@/lib/units/categoryDimensions';
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';

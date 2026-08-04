@@ -1,5 +1,5 @@
 import { parseUnitText } from '../conversion-data';
-import { dimensionsToExponents } from './dimensionsToExponents';
+import { dimensionsToExponents } from '../units/dimensionsToExponents';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 export interface DirectEntry {
