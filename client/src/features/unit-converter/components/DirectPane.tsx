@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { parseUnitText } from '@/lib/conversion-data';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { testId } from '@/lib/test-utils';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
+import { parseDirectEntry } from '@/lib/units/parseDirectEntry';
 import type { NumberFormat } from '@/lib/formatting';
 import { getMatchingPhysicalQuantities } from '@/lib/units/categoryDimensions';
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
@@ -69,18 +68,12 @@ export function DirectPane({
     onCopyAndPushToCalculator(numValue, dims);
   };
 
+  // Council-07 (DirectPane): parse is now a pure lib call.
   const handleBlurParse = (text: string) => {
-    if (!text) return;
-
-    const hasUnitPart = /[a-zA-Z°⋅·×\^⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/.test(text);
-    if (hasUnitPart) {
-      const parsed = parseUnitText(text);
-      if (parsed.value && (Object.keys(parsed.dimensions).length > 0 || parsed.categoryId)) {
-        setDirectValue(parsed.value.toString());
-
-        setDirectExponents(dimensionsToExponents(parsed.dimensions));
-      }
-    }
+    const entry = parseDirectEntry(text);
+    if (!entry) return;
+    setDirectValue(entry.value);
+    setDirectExponents(entry.exponents);
   };
 
   const superscripts: Record<number, string> = {
