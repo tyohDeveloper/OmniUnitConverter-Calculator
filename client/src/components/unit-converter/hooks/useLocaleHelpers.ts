@@ -4,7 +4,6 @@ import {
   toFixedBanker,
   cleanNumber as cleanNumberLib,
   formatNumberWithSeparators as formatNumberWithSeparatorsLib,
-  parseNumberWithFormat as parseNumberWithSpecificFormat,
   toArabicNumerals,
   toJapaneseNumerals,
   toKoreanNumerals,
@@ -12,6 +11,7 @@ import {
   getTraditionalConfig,
   formatFtIn as formatFtInLib,
 } from '@/lib/formatting';
+import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import type { NumberFormat } from '@/lib/formatting';
 import { parseDMS as parseDMSLib } from '@/lib/parsing/parseDMS';
 import { parseFtIn as parseFtInLib } from '@/lib/parsing/parseFtIn';

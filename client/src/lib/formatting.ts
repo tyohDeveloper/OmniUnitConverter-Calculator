@@ -245,21 +245,8 @@ export const toTitleCase = (str: string): string => {
   ).join(' ');
 };
 
-// Parse a number string with a specific format (converts separators and returns a float)
-export const parseNumberWithFormat = (str: string, formatKey: NumberFormat): number => {
-  // Always convert Arabic numerals to Latin first (in case input has them)
-  let cleaned = toLatinNumerals(str);
-  const format = NUMBER_FORMATS[formatKey];
-  // Remove thousands separator
-  if (format.thousands) {
-    cleaned = cleaned.split(format.thousands).join('');
-  }
-  // Replace decimal separator with period for parsing
-  if (format.decimal !== '.') {
-    cleaned = cleaned.replace(format.decimal, '.');
-  }
-  return parseFloat(cleaned);
-};
+// parseNumberWithFormat moved to lib/parsing/parseNumber.ts per §3.7
+// (parsers live in the parsing domain, not formatting).
 
 // Format a number with a specific format (adds separators and converts numerals)
 export const formatNumberWithFormat = (num: number, formatKey: NumberFormat): string => {

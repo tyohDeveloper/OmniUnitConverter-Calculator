@@ -1,4 +1,4 @@
-import { parseNumberWithFormat } from '../formatting';
+import { parseNumberWithFormat } from './parseNumber';
 import type { NumberFormat } from '../formatting';
 
 /**
