@@ -1,7 +1,7 @@
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import { DEFAULT_PRECISION } from '@/components/unit-converter/constants';
-import { computeCalcResult } from '@/lib/calculator/computeCalcResult';
+import { applyRecalculateSimple } from './reducers/calculator/applyRecalculateSimple';
 
 export interface CalculatorState {
   calculatorMode: 'simple' | 'rpn';
@@ -76,26 +76,8 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
       return { ...state, selectedAlternative: action.payload };
     case 'TOGGLE_PRESERVE_SOURCE_UNIT':
       return { ...state, preserveSourceUnit: !state.preserveSourceUnit };
-    case 'RECALCULATE_SIMPLE': {
-      const computed = computeCalcResult({
-        v0: state.calcValues[0] ?? null,
-        v1: state.calcValues[1] ?? null,
-        v2: state.calcValues[2] ?? null,
-        op1: state.calcOp1,
-        op2: state.calcOp2,
-      });
-      if (!computed) return state;
-      const nv = [...state.calcValues];
-      nv[3] = { value: computed.value, dimensions: computed.dimensions, prefix: 'none' };
-      return {
-        ...state,
-        calcValues: nv,
-        resultPrefix: 'none',
-        selectedAlternative: 0,
-        resultCategory: null,
-        resultUnit: null,
-      };
-    }
+    case 'RECALCULATE_SIMPLE':
+      return applyRecalculateSimple(state);
     default:
       return state;
   }
