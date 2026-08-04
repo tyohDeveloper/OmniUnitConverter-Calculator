@@ -1,4 +1,4 @@
-import { toSuperscriptExponent } from './toSuperscriptExponent';
+import { toSuperscriptExponent } from '../unit-symbols/toSuperscriptExponent';
 
 /**
  * Format a conversion factor for the Sources reference table: up to 10

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { CONVERSION_DATA } from '../client/src/lib/conversion-data';
 import { formatSiEquivalent } from '../client/src/lib/units/formatSiEquivalent';
 import { formatSiFactor } from '../client/src/lib/units/formatSiFactor';
-import { toSuperscriptExponent } from '../client/src/lib/units/toSuperscriptExponent';
+import { toSuperscriptExponent } from '../client/src/lib/unit-symbols/toSuperscriptExponent';
 import { PAPER_SIZE_DIMENSIONS } from '../client/src/lib/units/paperSizeDimensions';
 import { DEFINING_RELATIONS } from '../client/src/lib/units/definingRelations';
 import { CONVERSION_FUNCTIONS } from '../client/src/lib/units/conversionFunctionRegistry';
