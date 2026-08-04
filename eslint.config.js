@@ -21,6 +21,15 @@
 
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
+import noReexport from './scripts/eslint-rules/no-reexport.js';
+
+// Local plugin for repo-specific rules. Rules live in
+// scripts/eslint-rules/. Add to the object when adding a new rule.
+const omniunit = {
+  rules: {
+    'no-reexport': noReexport,
+  },
+};
 
 const FN_LEN = ['error', {
   max: 20,
@@ -159,6 +168,13 @@ export default tseslint.config(
   {
     plugins: { 'react-hooks': reactHooks },
     rules: { 'react-hooks/exhaustive-deps': 'off' },
+  },
+
+  // §3.8: no re-exports. See scripts/eslint-rules/no-reexport.js.
+  {
+    files: ['client/src/**/*.{ts,tsx}'],
+    plugins: { omniunit },
+    rules: { 'omniunit/no-reexport': 'error' },
   },
 
   // Default: function-length for all .ts and .tsx.

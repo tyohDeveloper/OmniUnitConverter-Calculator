@@ -15,8 +15,9 @@ export const SUPPORTED_LANGUAGES = [
 
 export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
 
-export { UI_TRANSLATIONS } from './translateUi';
-export { UNIT_NAME_TRANSLATIONS } from './translateUnit';
+// UI_TRANSLATIONS is owned by ./translateUi.ts.
+// UNIT_NAME_TRANSLATIONS is owned by ./translateUnit.ts.
+// Consumers import from those files directly (§3.8: no re-exports).
 
 export const SI_SYMBOLS = [
   'm', 'kg', 'g', 's', 'A', 'K', 'mol', 'cd',

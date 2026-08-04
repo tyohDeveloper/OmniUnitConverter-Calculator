@@ -4,9 +4,11 @@
 >
 > **Location.** Committed at `docs/architecture/standards.md` (proposed). Linked from `README.md` and referenced from the header of `scripts/lint-size.mjs`. When a lint script or verifier fails, the error message should include a section number in this document.
 >
-> **Version.** 1.4. Extend by pull request; the doc is intended to grow alongside the codebase.
+> **Version.** 1.6. Extend by pull request; the doc is intended to grow alongside the codebase.
 >
 > **Change log.**
+> - 1.6 — §3.8 tightened: the rule prohibits re-export statements *anywhere in a file*, not just files that consist entirely of re-exports. A single `export { X } from '...'` (or `export type { X } from '...'`, `export * from '...'`, or `export { X };` where X was imported earlier in the same file) is a re-export line and triggers the rule. Rule renamed `omniunit/no-reexport`; source moved to `scripts/eslint-rules/no-reexport.js`. Rationale: a file that mixes real content with a re-export still laundered the domain of the re-forwarded symbol.
+> - 1.5 — §3.8 enforcement is live: custom ESLint rule `omniunit/no-barrel-file` at `scripts/eslint-rules/no-barrel-file.js` rejects any file whose top-level statements are all re-exports. Migration-shim exception recognized via an `EXCEPTION [architecture-standards §3.8]` comment in the first 30 lines.
 > - 1.4 — new §3.8 (no barrel files). Files that consist only of re-exports are prohibited; consumers import the specific file that owns each symbol. Barrels launder domain boundaries (§3.7), multiply refactor cost, hide overloaded-consumer smells, and risk defeating tree-shaking. Tightens §3.7 (removed the earlier carveout that permitted `helpers.ts` at the leaf of a well-named directory — the leaf must still describe its own responsibility).
 > - 1.3 — new §3.7 (file and directory naming for responsibility). Files and directories must be named for the domain they own, not for a technical shape ("helpers", "setters", "handlers"). Directories drift when they accumulate outliers; the drift must be corrected by rename, split, or move. Emerges from the reducer/hook extraction pass — the pattern was doing real work but a few of the files were named on convenience rather than responsibility.
 > - 1.2 — new §15 (locale data and treatments): supported languages matrix, per-domain file layout, dead-key guard, global-name-uniqueness rule for unit-name keys, prune-translations build behavior, source-citation practice, RTL and numeral-system rules.
@@ -114,7 +116,14 @@ Exceptions:
 - A file that re-exports a **single** symbol as a compatibility shim during a migration is permitted, but must carry an `EXCEPTION [architecture-standards §3.8]` comment naming the migration and the date by which the shim will be removed. "During a migration" means "a migration that is actively in progress"; a shim older than the migration that produced it is dead code and must be removed.
 - The public entry-point of a published npm package (`package.json#main`) is a barrel by convention. This codebase is a single-file HTML artifact, not a published package, so this exception does not currently apply here.
 
-**Enforcement.** ESLint via `no-restricted-syntax` (see §7 table) should reject files whose top-level statements are all `ExportNamedDeclaration` or `ExportAllDeclaration` re-exports. The tool doesn't need to distinguish a barrel from a legitimate re-export helper — the rule is that pure-barrel files are not allowed at all, and the rare compatibility shim carries an EXCEPTION comment that lints can ignore by regex.
+**Enforcement.** A custom ESLint rule at `scripts/eslint-rules/no-reexport.js` (registered under the local `omniunit` plugin) enforces this. The rule flags every re-export statement:
+
+- `export { X } from '...'`
+- `export type { X } from '...'`
+- `export * from '...'` (and `export * as ns from '...'`)
+- `export { X };` where X was introduced by an `ImportDeclaration` in the same file — the import-then-re-export pattern is a re-forward with no `from` clause, and has the same drift risks as a barrel line
+
+Files carrying an `EXCEPTION [architecture-standards §3.8]` comment in their first 30 lines are permitted for the migration-shim case above.
 
 ---
 

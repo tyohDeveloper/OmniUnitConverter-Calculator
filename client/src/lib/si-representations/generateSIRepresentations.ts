@@ -9,7 +9,8 @@ import { countUnits } from '../unit-symbols/countUnits';
 import { sumAbsExponents } from '../unit-symbols/sumAbsExponents';
 import { findCrossDomainMatches } from './findCrossDomainMatches';
 import { findCrossDomainMatchesByKey } from './findCrossDomainMatchesByKey';
-import { SI_DERIVED_UNITS, GENERAL_SI_DERIVED, SPECIALTY_DERIVED_UNITS } from '../unit-symbols/siDerivedUnits';
+import { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
+import { GENERAL_SI_DERIVED, SPECIALTY_DERIVED_UNITS } from '../unit-symbols/siDerivedUnits';
 import { getDimensionSignature } from '../units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '../units/preferredRepresentations';
 import { CONVERSION_DATA, isNonLinearUnit } from '../conversion-data';
@@ -75,8 +76,6 @@ function buildCategoryUnitsForDropdown(
   }
   return result;
 }
-
-export { PREFERRED_REPRESENTATIONS };
 
 const CATEGORY_DEFAULT_SYMBOLS: Record<string, string> = {
   energy: 'J',

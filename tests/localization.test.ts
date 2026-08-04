@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import {
   SUPPORTED_LANGUAGES,
-  UI_TRANSLATIONS,
-  UNIT_NAME_TRANSLATIONS,
   SI_SYMBOLS,
   SI_PREFIX_SYMBOLS,
   translate,
   type SupportedLanguage,
 } from '../client/src/lib/localization';
+import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
+import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
 import { PREFIXES, BINARY_PREFIXES, ALL_PREFIXES, CONVERSION_DATA } from '../client/src/lib/conversion-data';
 
 describe('Language Localization', () => {

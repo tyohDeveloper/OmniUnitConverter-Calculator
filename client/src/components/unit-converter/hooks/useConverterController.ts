@@ -3,8 +3,8 @@ import { CONVERSION_DATA, UnitCategory } from '@/lib/conversion-data';
 import {
   toCJKMyriadString,
   formatNumberWithFormat as formatNumberWithSpecificFormat,
-  type NumberFormat,
 } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import type { SupportedLanguage } from '@/lib/localization';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';

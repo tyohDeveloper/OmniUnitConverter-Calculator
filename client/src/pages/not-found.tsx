@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
-import { UI_TRANSLATIONS, SUPPORTED_LANGUAGES, type SupportedLanguage, translate } from "@/lib/localization";
+import { SUPPORTED_LANGUAGES, type SupportedLanguage, translate } from "@/lib/localization";
+import { UI_TRANSLATIONS } from "@/lib/translateUi";
 
 export default function NotFound() {
   const [language, setLanguage] = useState<SupportedLanguage>('en');

@@ -8,7 +8,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { convert, parseUnitText } from '../client/src/lib/conversion-data';
-import { translate, UI_TRANSLATIONS } from '../client/src/lib/localization';
+import { translate } from '../client/src/lib/localization';
+import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
 import {
   fixPrecision,
   toFixedBanker,

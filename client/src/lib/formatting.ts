@@ -1,6 +1,7 @@
 import type { NumberFormat } from './units/numberFormat';
 import type { SupportedLanguage } from './localization';
-export type { NumberFormat };
+// NumberFormat is owned by lib/units/numberFormat.ts. Consumers import
+// it from there directly (§3.8: no re-exports).
 
 export interface NumberFormatConfig {
   name: string;

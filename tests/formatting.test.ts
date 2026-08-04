@@ -14,8 +14,8 @@ import {
   toCJKMyriadString,
   NUMBER_FORMATS,
   formatFtIn,
-  type NumberFormat
 } from '../client/src/lib/formatting';
+import type { NumberFormat } from '../client/src/lib/units/numberFormat';
 import { findOptimalPrefix, PREFIXES, CONVERSION_DATA, convert } from '../client/src/lib/conversion-data';
 
 describe('Banker Rounding (roundToNearestEven)', () => {

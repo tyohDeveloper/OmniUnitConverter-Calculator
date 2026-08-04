@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { CONVERSION_DATA, convert, buildUnitSymbolMap } from '../client/src/lib/conversion-data';
 import { EXCLUDED_CROSS_DOMAIN_CATEGORIES, CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
-import { UI_TRANSLATIONS, UNIT_NAME_TRANSLATIONS, SUPPORTED_LANGUAGES } from '../client/src/lib/localization';
+import { SUPPORTED_LANGUAGES } from '../client/src/lib/localization';
+import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
+import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
 
 const category = CONVERSION_DATA.find(c => c.id === 'unitless');
 

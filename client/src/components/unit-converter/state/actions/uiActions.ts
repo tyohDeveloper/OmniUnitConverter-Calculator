@@ -1,4 +1,4 @@
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { UiPrefsAction, PasteStatus, PendingPasteUnit } from '../uiPrefsReducer';
 
 export const setNumberFormat = (v: NumberFormat): UiPrefsAction =>

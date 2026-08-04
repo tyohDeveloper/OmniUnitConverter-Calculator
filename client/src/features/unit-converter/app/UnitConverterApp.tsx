@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, getFilteredSortedUnits, parseUnitText } from '@/lib/conversion-data';
 import { toTitleCase } from '@/lib/formatting';
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { SupportedLanguage } from '@/lib/localization';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';

@@ -1,5 +1,5 @@
 import { parseNumberWithFormat } from './parseNumber';
-import type { NumberFormat } from '../formatting';
+import type { NumberFormat } from '../units/numberFormat';
 
 /**
  * Council-08: pure parser for foot-inch ("5'6\"") strings.

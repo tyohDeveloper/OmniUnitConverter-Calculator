@@ -1,4 +1,4 @@
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 
 export type PasteStatus = 'idle' | 'unrecognised' | 'unavailable';
 export interface PendingPasteUnit {

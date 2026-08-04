@@ -8,7 +8,7 @@ import { canFactorOut } from '../unit-symbols/canFactorOut';
 import { hasOnlyOriginalDimensions } from '../unit-symbols/hasOnlyOriginalDimensions';
 import { subtractDimensions } from '../dimensions/subtractDimensions';
 import { isValidSymbolRepresentation } from '../unit-symbols/isValidSymbolRepresentation';
-import { SI_DERIVED_UNITS } from '../unit-symbols/siDerivedUnits';
+import { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // The AlternativeRepresentation shape is defined by this generator; the

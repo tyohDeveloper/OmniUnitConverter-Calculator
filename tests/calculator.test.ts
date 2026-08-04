@@ -8,7 +8,7 @@ import { findCrossDomainMatches } from '../client/src/lib/si-representations/fin
 import { isValidSymbolRepresentation } from '../client/src/lib/unit-symbols/isValidSymbolRepresentation';
 import { countUnits } from '../client/src/lib/unit-symbols/countUnits';
 import { formatDimensions } from '../client/src/lib/unit-symbols/formatDimensions';
-import { SI_DERIVED_UNITS } from '../client/src/lib/unit-symbols/siDerivedUnits';
+import { SI_DERIVED_UNITS } from '../client/src/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '../client/src/lib/units/categoryDimensions';
 import type { DimensionalFormula } from '../client/src/lib/units/dimensionalFormula';
 

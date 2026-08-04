@@ -1,6 +1,7 @@
 import type { Prefix } from './prefix';
 
-export type { Prefix };
+// Prefix is owned by ./prefix.ts. Consumers import from there directly
+// (§3.8: no re-exports).
 
 export const PREFIXES: Prefix[] = [
   { id: 'yotta', name: 'Yotta', symbol: 'Y', factor: 1e24 },
@@ -34,4 +35,3 @@ export const BINARY_PREFIXES: Prefix[] = [
 
 export const ALL_PREFIXES: Prefix[] = [...PREFIXES, ...BINARY_PREFIXES].sort((a, b) => b.factor - a.factor);
 
-export { findOptimalPrefix } from './findOptimalPrefix';

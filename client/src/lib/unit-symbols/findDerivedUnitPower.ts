@@ -1,7 +1,7 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import { isDimensionless } from '../dimensions/isDimensionless';
 import { toSuperscript } from './toSuperscript';
-import { SI_DERIVED_UNITS } from './siDerivedUnits';
+import { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // DerivedUnitPowerMatch is the return shape of findDerivedUnitPower.

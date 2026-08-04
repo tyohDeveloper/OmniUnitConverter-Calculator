@@ -5,7 +5,7 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { isDimensionEmpty } from '@/lib/dimensions/isDimensionEmpty';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';

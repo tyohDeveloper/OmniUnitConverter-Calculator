@@ -2,8 +2,6 @@ import type { CalcValue } from '../../units/calcValue';
 import { fixPrecision } from '../fixPrecision';
 import type { DispatchResult } from './dispatchResult';
 
-export type { DispatchResult };
-
 type Dims = Record<string, number>;
 
 type PowerOp = 'square' | 'cube' | 'sqrt' | 'cbrt' | 'recip';

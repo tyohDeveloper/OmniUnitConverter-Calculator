@@ -1,5 +1,5 @@
 import { NUMBER_FORMATS, toLatinNumerals } from '../formatting';
-import type { NumberFormat } from '../formatting';
+import type { NumberFormat } from '../units/numberFormat';
 
 /**
  * Parse a locale-formatted number string into a JS number.

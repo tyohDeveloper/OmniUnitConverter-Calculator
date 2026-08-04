@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { UI_TRANSLATIONS, UNIT_NAME_TRANSLATIONS, SUPPORTED_LANGUAGES, translate } from '../client/src/lib/localization';
+import { SUPPORTED_LANGUAGES, translate } from '../client/src/lib/localization';
+import { UI_TRANSLATIONS } from '../client/src/lib/translateUi';
+import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
 import { CONVERSION_DATA } from '../client/src/lib/conversion-data';
 
 const REQUIRED_LANGUAGES = ['en', 'ar', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh'] as const;

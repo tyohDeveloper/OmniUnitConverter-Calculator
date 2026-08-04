@@ -1,8 +1,9 @@
 import type { DerivedUnitInfo } from '../units/derivedUnitInfo';
 import type { DimensionalFormula } from '../units/dimensionalFormula';
-import { SI_DERIVED_UNITS as _SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
+import { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
 
-export { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
+// SI_DERIVED_UNITS is owned by ../units/siDerivedUnitsCatalog.ts.
+// Consumers import from there directly (§3.8: no re-exports).
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // NormalizableDerivedUnit describes the shape of NORMALIZABLE_DERIVED_UNITS
@@ -17,7 +18,7 @@ export const SPECIALTY_DERIVED_UNITS = new Set([
   'Gy', 'Sv', 'Bq', 'kat', 'lm', 'lx', 'rad', 'sr', 'ν', 'λ',
 ]);
 
-export const SI_UNITS_BY_COMPLEXITY: DerivedUnitInfo[] = [..._SI_DERIVED_UNITS].sort((a, b) => {
+export const SI_UNITS_BY_COMPLEXITY: DerivedUnitInfo[] = [...SI_DERIVED_UNITS].sort((a, b) => {
   const aSum = Object.values(a.dimensions).reduce((sum, exp) => sum + Math.abs(exp || 0), 0);
   const bSum = Object.values(b.dimensions).reduce((sum, exp) => sum + Math.abs(exp || 0), 0);
   return bSum - aSum;

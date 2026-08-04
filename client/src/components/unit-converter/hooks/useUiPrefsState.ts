@@ -1,4 +1,4 @@
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { SupportedLanguage } from '@/lib/localization';
 import type { PasteStatus, PendingPasteUnit } from '../state/uiPrefsReducer';
 import { useConverterContext } from '../context/ConverterContext';

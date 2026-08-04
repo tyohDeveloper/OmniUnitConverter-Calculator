@@ -1,5 +1,5 @@
 import { NUMBER_FORMATS, toArabicNumerals } from '../formatting';
-import type { NumberFormat } from '../formatting';
+import type { NumberFormat } from '../units/numberFormat';
 
 /**
  * Council-08d: sanitize a user-typed conversion-input string.

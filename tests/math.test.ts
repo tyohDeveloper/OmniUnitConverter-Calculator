@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { convert, CONVERSION_DATA, applyMathFunction } from '../client/src/lib/conversion-data';
-import { UNIT_NAME_TRANSLATIONS, type SupportedLanguage } from '../client/src/lib/localization';
+import { type SupportedLanguage } from '../client/src/lib/localization';
+import { UNIT_NAME_TRANSLATIONS } from '../client/src/lib/translateUnit';
 
 describe('Math Category', () => {
   // Note: Math functions are handled directly via applyMathFunction in the RPN calculator

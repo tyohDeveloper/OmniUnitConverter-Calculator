@@ -1,5 +1,5 @@
 import React from 'react';
-import type { NumberFormat } from '@/lib/formatting';
+import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
 import { SimpleCalculatorPane } from './SimpleCalculatorPane';
 import { RpnCalculatorPane } from './RpnCalculatorPane';
