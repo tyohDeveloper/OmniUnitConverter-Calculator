@@ -4,9 +4,10 @@
 >
 > **Location.** Committed at `docs/architecture/standards.md` (proposed). Linked from `README.md` and referenced from the header of `scripts/lint-size.mjs`. When a lint script or verifier fails, the error message should include a section number in this document.
 >
-> **Version.** 1.3. Extend by pull request; the doc is intended to grow alongside the codebase.
+> **Version.** 1.4. Extend by pull request; the doc is intended to grow alongside the codebase.
 >
 > **Change log.**
+> - 1.4 — new §3.8 (no barrel files). Files that consist only of re-exports are prohibited; consumers import the specific file that owns each symbol. Barrels launder domain boundaries (§3.7), multiply refactor cost, hide overloaded-consumer smells, and risk defeating tree-shaking. Tightens §3.7 (removed the earlier carveout that permitted `helpers.ts` at the leaf of a well-named directory — the leaf must still describe its own responsibility).
 > - 1.3 — new §3.7 (file and directory naming for responsibility). Files and directories must be named for the domain they own, not for a technical shape ("helpers", "setters", "handlers"). Directories drift when they accumulate outliers; the drift must be corrected by rename, split, or move. Emerges from the reducer/hook extraction pass — the pattern was doing real work but a few of the files were named on convenience rather than responsibility.
 > - 1.2 — new §15 (locale data and treatments): supported languages matrix, per-domain file layout, dead-key guard, global-name-uniqueness rule for unit-name keys, prune-translations build behavior, source-citation practice, RTL and numeral-system rules.
 > - 1.1 — §4 rewritten to match the `{role}-{area}-{name}[-{key}]` grammar the codebase already uses; §7 names ESLint + typescript-eslint as the AST toolchain (dev-only, zero bundle impact); §8 rewritten to "ship `.html` that meets XHTML markup rules"; new §13 (libraries over home-built code, with a size/complexity budget) and new §14 (final artifact minimization).
@@ -90,11 +91,30 @@ State is one of five classes. Each class has exactly one legal home.
 
 **Rule 3.7 — Files and directories are named for the responsibility they own, not for a technical shape.** The reader must be able to guess whether a change belongs in a given file from the file name alone. This has two consequences:
 
-1. **Prefer domain names over shape names.** `useLocaleHelpers`, `useRpnXEditField`, `applyPushValue`, `parseDirectEntry`, `computeConversion` all name the thing they own. `useConverterHelpers`, `useSetters`, `useHandlers`, `utils`, `misc`, `common` name a shape ("a bag of helpers", "a bag of setters") and are prohibited by default. The exception list is short: names like `helpers` are permitted at the leaf of a directory that already fully identifies the domain (e.g. `lib/units/helpers.ts` is a re-export barrel for the `units` domain and is unambiguous by context).
+1. **Prefer domain names over shape names.** `useLocaleHelpers`, `useRpnXEditField`, `applyPushValue`, `parseDirectEntry`, `computeConversion` all name the thing they own. `useConverterHelpers`, `useSetters`, `useHandlers`, `utils`, `misc`, `common` name a shape ("a bag of helpers", "a bag of setters") and are prohibited by default. Even leaf files named `helpers.ts` or `common.ts` inside an otherwise-well-named directory are prohibited — the leaf name still has to describe its own responsibility, not just inherit context from the directory.
 
 2. **Directories name domains, not layers.** `lib/formatting/` should contain formatters. If it starts to accumulate parsers, sanitizers, or IO glue, the directory has drifted — either rename it (`lib/text/`), split it (`lib/format/` + `lib/parse/`), or move the outliers to a directory whose name matches their responsibility. The check: given a bug report of the form "the DMS parser drops the sign when the seconds field is empty", does a new contributor know where to look? If the answer is "maybe `lib/formatting/`, but also possibly `lib/units/`, and it turns out to be in `lib/formatting/parseDMS.ts`", the directory naming is failing rule 3.7 and needs adjustment.
 
 When an extraction produces a file whose responsibility genuinely doesn't fit any existing directory, add a new directory rather than dropping it in the closest-looking one. When splitting a large hook or component, split along the responsibilities that already exist in the code ("this group of callbacks all touch the clipboard", "this group all reformats the input field"), not along technical predicates ("everything that uses `useCallback`", "everything that dispatches"). Technical groupings are permitted only when the domain grouping is genuinely unavailable, and require an `EXCEPTION [architecture-standards §3.7]` comment naming the specific reason the domain grouping did not apply.
+
+**Rule 3.8 — No barrel files.** A file that consists only of re-exports (`export { X } from './x'; export { Y } from './y';`) is prohibited. Consumers import the specific file that owns each symbol.
+
+Rationale:
+
+1. **Barrels launder domain boundaries.** A consumer that writes `from '@/lib/calculator'` does not have to think about whether `formatDimensions` is calculator-domain, unit-symbol-domain, or dimensional-algebra-domain. That is exactly the question §3.7 exists to force people to answer. A barrel that re-exports across multiple `lib/*/` subdirectories — which is where they tend to grow into — defeats the domain check by construction.
+
+2. **Barrels multiply refactor cost.** Moving a file from `lib/foo/` to `lib/bar/` should update the file's own import statements and the direct import sites. A barrel doubles the update surface: the file has to be updated in the barrel too, and if the barrel is stale it silently keeps the old path working.
+
+3. **Barrels are usually a signal of overloaded domains.** As §3.1/3.2 push files toward one export apiece, the demand for barrels drops naturally. When someone reaches for a barrel it is usually because their consumer imports 8-10 things from 8-10 files, which itself is a signal that the consumer is coordinating too many domains and should be split.
+
+4. **Barrels can defeat tree-shaking.** Vite and Rollup handle most barrel patterns, but a barrel with any side-effecting import drags its whole graph into the bundle. Every barrel is one broken assumption away from silent bloat.
+
+Exceptions:
+
+- A file that re-exports a **single** symbol as a compatibility shim during a migration is permitted, but must carry an `EXCEPTION [architecture-standards §3.8]` comment naming the migration and the date by which the shim will be removed. "During a migration" means "a migration that is actively in progress"; a shim older than the migration that produced it is dead code and must be removed.
+- The public entry-point of a published npm package (`package.json#main`) is a barrel by convention. This codebase is a single-file HTML artifact, not a published package, so this exception does not currently apply here.
+
+**Enforcement.** ESLint via `no-restricted-syntax` (see §7 table) should reject files whose top-level statements are all `ExportNamedDeclaration` or `ExportAllDeclaration` re-exports. The tool doesn't need to distinguish a barrel from a legitimate re-export helper — the rule is that pure-barrel files are not allowed at all, and the rare compatibility shim carries an EXCEPTION comment that lints can ignore by regex.
 
 ---
 
