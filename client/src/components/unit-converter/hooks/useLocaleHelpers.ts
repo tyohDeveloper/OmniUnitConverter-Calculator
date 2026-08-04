@@ -27,7 +27,7 @@ import type { SIRepresentation } from '@/lib/calculator/types';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 // The hook's return type is co-located with its factory.
-export interface UseConverterFormattersReturn {
+export interface UseLocaleHelpersReturn {
   t: (key: string) => string;
   translateUnitName: (unitName: string) => string;
   getCategoryDimensions: (category: UnitCategory) => { [key: string]: number };
@@ -45,23 +45,29 @@ export interface UseConverterFormattersReturn {
 }
 
 /**
- * Pure-formatter surface for the converter controller.
+ * Locale-dependent helper surface for the converter controller.
  *
- * Everything here depends only on numberFormat, language, and precision
- * (plus per-call inputs) — no component state, no dispatch, no refs.
- * That makes it a clean seam: the main controller no longer needs to
- * house 150+ lines of formatter definitions, and formatting logic can
- * be inspected without wading through paste handlers or effect wiring.
+ * Provides translators (t, translateUnitName), locale-aware
+ * formatters (cleanNumber, formatNumberWithSeparators,
+ * formatForClipboard, formatResultValue, formatFactor, formatDMS,
+ * formatFtIn), locale-aware parsers (parseNumberWithFormat,
+ * parseDMS, parseFtIn), and dimensional metadata lookups
+ * (getCategoryDimensions, generateSIRepresentations).
+ *
+ * Everything here depends only on numberFormat, language, and
+ * precision (plus per-call inputs) — no component state, no dispatch,
+ * no refs. That's the actual domain: helpers whose behavior is
+ * determined by the locale-and-precision triple.
  *
  * The hook still owns useCallback wrappers for referential stability;
  * memoized effects downstream depend on these identities not changing
  * across renders where the deps haven't changed.
  */
-export function useConverterFormatters(
+export function useLocaleHelpers(
   numberFormat: NumberFormat,
   language: SupportedLanguage,
   precision: number,
-): UseConverterFormattersReturn {
+): UseLocaleHelpersReturn {
   const t = useCallback((key: string): string => {
     const val = UI_TRANSLATIONS[language]?.[key] ?? UNIT_NAME_TRANSLATIONS[language]?.[key];
     if (val !== undefined) return val;

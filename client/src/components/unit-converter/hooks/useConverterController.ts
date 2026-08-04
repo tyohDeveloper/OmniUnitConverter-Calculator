@@ -41,7 +41,7 @@ import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
-import { useConverterFormatters } from './useConverterFormatters';
+import { useLocaleHelpers } from './useLocaleHelpers';
 import * as uiActions from '../state/actions/uiActions';
 import * as converterActions from '../state/actions/converterActions';
 
@@ -222,8 +222,10 @@ export function useConverterController(): UseConverterControllerReturn {
 
   const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
 
-  // Council-13/step-C: pure-formatter surface (t, formatters, parsers)
-  // lives in useConverterFormatters. See that file for the rationale.
+  // Locale-dependent helpers (translators, formatters, parsers,
+  // dimensional metadata) live in useLocaleHelpers. Everything there
+  // depends only on numberFormat/language/precision — no state, no
+  // dispatch, no refs.
   const {
     t, translateUnitName,
     getCategoryDimensions, generateSIRepresentations,
@@ -232,7 +234,7 @@ export function useConverterController(): UseConverterControllerReturn {
     formatForClipboard, formatResultValue, formatFactor,
     formatDMS, formatFtIn,
     parseDMS, parseFtIn,
-  } = useConverterFormatters(numberFormat, language, precision);
+  } = useLocaleHelpers(numberFormat, language, precision);
 
   const getPlaceholder = useCallback((): string => {
     if (fromUnit === 'deg_dms') return 'dd:mm:ss';
