@@ -1,4 +1,5 @@
 import type { CalcValue } from '@/lib/units/calcValue';
+import { applyPushValue } from './reducers/rpn/applyPushValue';
 
 export interface RpnState {
   rpnStack: Array<CalcValue | null>;
@@ -65,20 +66,8 @@ export function rpnReducer(state: RpnState, action: RpnAction): RpnState {
         rpnSelectedAlternative: 0,
       };
     }
-    case 'PUSH_VALUE': {
-      const newStack = [...state.rpnStack];
-      newStack[3] = newStack[2];
-      newStack[2] = newStack[1];
-      newStack[1] = newStack[0];
-      newStack[0] = action.payload;
-      return {
-        ...state,
-        previousRpnStack: [...state.rpnStack],
-        rpnStack: newStack,
-        rpnResultPrefix: 'none',
-        rpnSelectedAlternative: 0,
-      };
-    }
+    case 'PUSH_VALUE':
+      return applyPushValue(state, action.payload);
     case 'DROP_VALUE': {
       const newStack = [...state.rpnStack];
       newStack[0] = newStack[1];
