@@ -102,10 +102,7 @@ const TSX_FILE_LENGTH_EXCLUDES = [
   // predate the standards; each is on the list for its own follow-up
   // extraction pass.
   'client/src/features/unit-converter/app/UnitConverterApp.tsx',
-  'client/src/features/unit-converter/components/DirectPane.tsx',
-  'client/src/features/unit-converter/components/CustomPane.tsx',
   'client/src/features/unit-converter/components/ConverterPane.tsx',
-  'client/src/components/unit-converter/components/CalculatorFieldDisplay.tsx',
 ];
 
 // Controller/state hook files that exceed the 150-line cap. Council-07
@@ -115,15 +112,8 @@ const TSX_FILE_LENGTH_EXCLUDES = [
 const HOOK_FILE_LENGTH_EXCLUDES = [
   'client/src/components/unit-converter/hooks/useConverterController.ts',
   'client/src/components/unit-converter/hooks/useCalculatorController.ts',
-  'client/src/components/unit-converter/hooks/useRpnStack.ts',
-  'client/src/components/unit-converter/hooks/useCalculatorState.ts',
-  'client/src/components/unit-converter/hooks/useConverterState.ts',
-  'client/src/components/unit-converter/hooks/useRpnState.ts',
-  'client/src/components/unit-converter/hooks/useRpnXEditField.ts',
   'client/src/components/unit-converter/hooks/useLocaleHelpers.ts',
   'client/src/components/unit-converter/hooks/useConverterClipboard.ts',
-  'client/src/components/unit-converter/hooks/useConverterPushToCalculator.ts',
-  'client/src/components/unit-converter/context/ConverterContext.tsx',
 ];
 
 export default tseslint.config(
