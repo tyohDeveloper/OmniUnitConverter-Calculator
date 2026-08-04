@@ -375,7 +375,7 @@ describe('JSON Integrity: primaryCategory metadata', () => {
 });
 
 describe('JSON Integrity: family metadata', () => {
-  const VALID_FAMILIES = new Set(['SI_QUANTITY', 'DIMENSIONLESS_RATIO', 'NUMERIC_FUNCTION', 'SYMBOLIC']);
+  const VALID_FAMILIES = new Set(['SI_QUANTITY', 'DIMENSIONLESS_RATIO', 'DATA_QUANTITY', 'FUEL_ECONOMY', 'NUMERIC_FUNCTION', 'SYMBOLIC']);
 
   it('every category declares a family', () => {
     for (const cat of CONVERSION_DATA) {
@@ -404,6 +404,16 @@ describe('JSON Integrity: family metadata', () => {
   it('logarithmic is NUMERIC_FUNCTION', () => {
     const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === 'logarithmic');
     expect((cat as { family: string }).family).toBe('NUMERIC_FUNCTION');
+  });
+
+  it('data is DATA_QUANTITY (byte / Shannon bit / IEC 80000-13 prefixes)', () => {
+    const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === 'data');
+    expect((cat as { family: string }).family).toBe('DATA_QUANTITY');
+  });
+
+  it('fuel_economy is FUEL_ECONOMY (heterogeneous efficiency ratios)', () => {
+    const cat = CONVERSION_DATA.find((c: { id: string }) => c.id === 'fuel_economy');
+    expect((cat as { family: string }).family).toBe('FUEL_ECONOMY');
   });
 
   it('all archaics are SI_QUANTITY (decluttered SI subsets)', () => {

@@ -3,7 +3,7 @@
   "name": "Data/Information",
   "baseUnit": "byte",
   "baseSISymbol": "B",
-  "family": "SI_QUANTITY",
+  "family": "DATA_QUANTITY",
   "units": [
     {
       "id": "b",

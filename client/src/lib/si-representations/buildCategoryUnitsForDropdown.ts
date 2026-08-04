@@ -5,26 +5,12 @@ import { CATEGORY_DIMENSIONS } from '../units/categoryDimensions';
 import { CATEGORY_PRIMARIES } from '../units/categoryPrimaries';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
 
-// Categories to skip in the SI-representations dropdown regardless of
-// dimensional match. Historical size: 16 -> 2 (this commit, post-
-// family+primaryCategory).
-//
-// All archaics and named-standard locals (rack_geometry, shipping,
-// beer_wine_volume, lightbulb, cooking, typography, fuel) are now
-// skipped via the primaryCategory + family checks inside the loop.
-//
-// The two remaining SI_QUANTITY entries are:
-//   - data: SI_QUANTITY family, dimensions:{}. Wouldn't fail the
-//     dimensionsEqual test on non-empty queries, but included for
-//     safety when the query dims are {} (which shouldn't happen for
-//     the SI-representations dropdown path).
-//   - fuel_economy: SI_QUANTITY with dimensionally heterogeneous
-//     units. Even the km/L subset ({length:-2}) doesn't produce
-//     useful cross-domain suggestions in the dropdown.
-const EXCLUDED_DROPDOWN_CATEGORIES = new Set([
-  'data',
-  'fuel_economy',
-]);
+// Historical exclusion set, kept empty. Every reason a category used
+// to be listed here has been moved to declared metadata: archaics and
+// named-standard locals via primaryCategory, data via family=DATA_
+// QUANTITY, fuel_economy via family=FUEL_ECONOMY. The set stays as an
+// exported symbol for now to keep the loop shape stable.
+const EXCLUDED_DROPDOWN_CATEGORIES: ReadonlySet<string> = new Set();
 
 const ANGULAR_SYMBOL_PATTERN = /\brad\b|rpm|rps/;
 

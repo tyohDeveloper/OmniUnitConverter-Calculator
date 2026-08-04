@@ -1079,11 +1079,10 @@ describe('findCategoryByDimensions - Compound Unit Routing', () => {
       expect(result).toBeNull();
     });
 
-    it('{ length: -2 } (fuel_economy dimensions) returns null — fuel_economy is excluded', () => {
-      // fuel_economy is SI_QUANTITY with unique dims but is in
-      // EXCLUDED_CROSS_DOMAIN_CATEGORIES because its unit set is
-      // dimensionally heterogeneous (km/L is length:-2 but km/kWh
-      // isn't), so routing paste by dims alone is unreliable.
+    it('{ length: -2 } (fuel_economy dimensions) returns null — fuel_economy is not SI_QUANTITY', () => {
+      // fuel_economy has family=FUEL_ECONOMY (its own family for
+      // heterogeneous efficiency ratios) so the SI_QUANTITY-only
+      // family filter in findCategoryByDimensions skips it.
       const result = findCategoryByDimensions({ length: -2 });
       expect(result).toBeNull();
     });

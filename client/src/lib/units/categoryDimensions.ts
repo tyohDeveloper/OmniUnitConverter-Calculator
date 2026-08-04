@@ -90,27 +90,19 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 
-// Categories that should never appear as cross-domain matches, in
-// getMatchingPhysicalQuantities, or as smart-paste targets in
-// findCategoryByDimensions.
+// Historical exclusion list, kept empty now that all reasons for
+// excluding a category have been moved to declared metadata:
+//   - archaics and named-standard locals: primaryCategory field
+//   - dimensionless categories: family !== 'SI_QUANTITY'
+//   - data: family = DATA_QUANTITY
+//   - fuel_economy: family = FUEL_ECONOMY
+//   - ghost/pending categories: undefined family (treated as non-SI)
 //
-// Historical size: 19 (pre-primaryCategory) -> 5 (post-primaryCategory)
-//                  -> 2 (post-family) -> 1 (post ghost purge). Every
-// specialist entry is now covered by the primaryCategory-based filter,
-// and every non-SI-family entry is covered by the family-based filter.
-// The lone remaining entry is the SI_QUANTITY-family exception that
-// doesn't fit either mechanism:
-//
-//   - fuel_economy: SI_QUANTITY with unique dims ({length:-2}). Not a
-//     specialist of anything. Excluded from smart-paste because its
-//     unit set is dimensionally heterogeneous (km/L is length:-2 but
-//     km/kWh has different dimensions), so routing paste by dims
-//     alone is unreliable. Genuine data-model quirk, not derivable
-//     from metadata. Follow-up work: give fuel_economy its own family
-//     FUEL_ECONOMY so this entry can also retire.
-export const EXCLUDED_CROSS_DOMAIN_CATEGORIES = [
-  'fuel_economy',
-];
+// The array remains an exported symbol at zero length so downstream
+// tests and any dead-code sites still compile. It may be removed
+// entirely in a follow-up commit once test/consumer references are
+// gone.
+export const EXCLUDED_CROSS_DOMAIN_CATEGORIES: readonly string[] = [];
 
 // Categories that share dimensions with a more familiar primary and
 // should not appear in the Direct-pane's "matching quantities" list.

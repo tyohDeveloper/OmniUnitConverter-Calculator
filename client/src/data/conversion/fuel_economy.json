@@ -3,7 +3,7 @@
   "name": "Fuel Economy",
   "baseUnit": "kilometer/liter",
   "baseSISymbol": "km⋅L⁻¹",
-  "family": "SI_QUANTITY",
+  "family": "FUEL_ECONOMY",
   "units": [
     {
       "id": "km_l",

@@ -22,30 +22,27 @@ export interface UnitDefinition {
 /**
  * The conversion "flavor" of a category:
  *
- * - SI_QUANTITY: a real physical quantity with SI dimensions. Its
- *   units convert by linear scaling (with optional offset for
- *   affine cases like Celsius→Kelvin) or by a bidirectional named
- *   conversionFunction pair (paper_sizes, logarithmic-like log_*).
- *   Includes archaics, named-standard locals, radiation cluster,
- *   fuel, photon, and every other dimensioned category.
- *
- * - DIMENSIONLESS_RATIO: units are pure numerical ratios or named
- *   counting groups (ppm, %, dozen, gross). Dimensions: {} but
- *   distinct from NUMERIC_FUNCTION — units still relate by a scalar
- *   factor.
- *
- * - NUMERIC_FUNCTION: not really a conversion at all; the "units"
- *   are math functions or operators applied to a number. Included
- *   in the category framework for UI uniformity. logarithmic and
- *   (defunct) math live here.
- *
+ * - SI_QUANTITY: real physical quantity with SI dimensions (linear
+ *   factor + optional affine offset, or named conversionFunction).
+ *   Includes archaics, named-standard locals, radiation, fuel, photon.
+ * - DIMENSIONLESS_RATIO: pure ratios / counting groups (ppm, %, dozen).
+ *   dimensions:{} but units relate by scalar factor.
+ * - DATA_QUANTITY: information quantity. Base unit byte, base concept
+ *   Shannon bit. Own prefix system (IEC 80000-13 Ki/Mi/Gi plus
+ *   commercial-decimal K/M/G abuse). Not a physical quantity.
+ * - FUEL_ECONOMY: efficiency ratios. Dimensionally heterogeneous
+ *   (km/L is length:-2; km/kWh is length · energy^-1); coherent
+ *   semantically but not routable by dimensions alone.
+ * - NUMERIC_FUNCTION: units are math functions applied to a number
+ *   (logarithmic: dB, EV/stop, phon, decade). Not really a conversion.
  * - SYMBOLIC: reserved for future non-numeric conversions (dates,
- *   calendar systems, number bases, timezones). Value type will
- *   need a widened conversion signature; no category uses this yet.
+ *   calendar systems, number bases). No category uses this yet.
  */
 export type CategoryFamily =
   | 'SI_QUANTITY'
   | 'DIMENSIONLESS_RATIO'
+  | 'DATA_QUANTITY'
+  | 'FUEL_ECONOMY'
   | 'NUMERIC_FUNCTION'
   | 'SYMBOLIC';
 
