@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { lookupUnitForSymbol } from '../client/src/lib/calculator/lookupUnitForSymbol';
-import { displayToSI } from '../client/src/lib/calculator/displayToSI';
-import { siToDisplay } from '../client/src/lib/calculator/siToDisplay';
+import { lookupUnitForSymbol } from '../client/src/lib/unit-symbols/lookupUnitForSymbol';
+import { displayToSI } from '../client/src/lib/unit-symbols/displayToSI';
+import { siToDisplay } from '../client/src/lib/unit-symbols/siToDisplay';
 
 describe('lookupUnitForSymbol', () => {
   it('returns factor/offset/isInverse for a known length unit (m)', () => {

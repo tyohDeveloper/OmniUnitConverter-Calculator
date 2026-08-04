@@ -1,5 +1,5 @@
 import type { DerivedUnitInfo } from '../units/derivedUnitInfo';
-import type { NormalizableDerivedUnit } from './types';
+import type { NormalizableDerivedUnit } from '../calculator/types';
 import { SI_DERIVED_UNITS as _SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';
 
 export { SI_DERIVED_UNITS } from '../units/siDerivedUnitsCatalog';

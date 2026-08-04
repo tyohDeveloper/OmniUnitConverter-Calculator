@@ -1,14 +1,14 @@
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import type { AlternativeRepresentation } from './types';
 import { NON_SI_UNITS_CATALOG } from '../units/nonSiUnitsCatalog';
-import { normalizeDimensions } from './normalizeDimensions';
-import { formatDimensions } from './formatDimensions';
+import { normalizeDimensions } from '../unit-symbols/normalizeDimensions';
+import { formatDimensions } from '../unit-symbols/formatDimensions';
 import { dimensionsEqual } from '../dimensions/dimensionsEqual';
-import { canFactorOut } from './canFactorOut';
-import { hasOnlyOriginalDimensions } from './hasOnlyOriginalDimensions';
+import { canFactorOut } from '../unit-symbols/canFactorOut';
+import { hasOnlyOriginalDimensions } from '../unit-symbols/hasOnlyOriginalDimensions';
 import { subtractDimensions } from '../dimensions/subtractDimensions';
-import { isValidSymbolRepresentation } from './isValidSymbolRepresentation';
-import { SI_DERIVED_UNITS } from './siDerivedUnits';
+import { isValidSymbolRepresentation } from '../unit-symbols/isValidSymbolRepresentation';
+import { SI_DERIVED_UNITS } from '../unit-symbols/siDerivedUnits';
 
 function makeEntry(symbol: string): AlternativeRepresentation {
   return { displaySymbol: symbol, category: null, unitId: null, isHybrid: false, components: {} };

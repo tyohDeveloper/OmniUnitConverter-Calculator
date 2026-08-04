@@ -20,8 +20,8 @@ import { CalculatorPane } from '@/features/unit-converter/components/CalculatorP
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { useConverterController } from '@/components/unit-converter/hooks/useConverterController';
 import { useCalculatorController } from '@/components/unit-converter/hooks/useCalculatorController';
-import { formatDimensions } from '@/lib/calculator/formatDimensions';
-import { siToDisplay } from '@/lib/calculator/siToDisplay';
+import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
+import { siToDisplay } from '@/lib/unit-symbols/siToDisplay';
 import { PREFIXES } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/conversion-data';
 

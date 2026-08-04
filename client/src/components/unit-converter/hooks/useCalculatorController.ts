@@ -4,14 +4,14 @@ import { fixPrecision as fixPrecisionLib, toFixedBanker } from '@/lib/formatting
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { UnitType } from '@/lib/units/unitType';
-import { formatDimensions } from '@/lib/calculator/formatDimensions';
+import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { isDimensionless } from '@/lib/dimensions/isDimensionless';
 import { dimensionsEqual } from '@/lib/dimensions/dimensionsEqual';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/calculator/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
-import { siToDisplay as siToDisplayLib } from '@/lib/calculator/siToDisplay';
+import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';

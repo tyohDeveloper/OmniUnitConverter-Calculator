@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { CONVERSION_DATA, convert, parseUnitText, findOptimalPrefix } from '../client/src/lib/conversion-data';
 import { prefixPowerFactor } from '../client/src/lib/units/prefixPowerFactor';
-import { displayToSI } from '../client/src/lib/calculator/displayToSI';
-import { siToDisplay } from '../client/src/lib/calculator/siToDisplay';
+import { displayToSI } from '../client/src/lib/unit-symbols/displayToSI';
+import { siToDisplay } from '../client/src/lib/unit-symbols/siToDisplay';
 
 const volume = CONVERSION_DATA.find(c => c.id === 'volume')!;
 const area = CONVERSION_DATA.find(c => c.id === 'area')!;

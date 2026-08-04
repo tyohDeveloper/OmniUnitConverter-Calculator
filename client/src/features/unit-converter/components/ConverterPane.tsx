@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, PREFIXES, ALL_PREFIXES, convert, findOptimalPrefix, getFilteredSortedUnits, getComparisonUnits } from '@/lib/conversion-data';
 import { buildComparisonRows } from '@/lib/calculator/buildComparisonRows';
 import { NUMBER_FORMATS } from '@/lib/formatting';
-import { formatDimensions } from '@/lib/calculator/formatDimensions';
+import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

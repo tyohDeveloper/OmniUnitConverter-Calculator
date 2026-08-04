@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PREFIXES } from '@/lib/conversion-data';
-import { isSymbolSI } from '@/lib/calculator/isSymbolSI';
+import { isSymbolSI } from '@/lib/unit-symbols/isSymbolSI';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import { formatDimensions } from '@/lib/calculator/formatDimensions';
+import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { isDimensionEmpty } from '@/lib/dimensions/isDimensionEmpty';
 import type { NumberFormat } from '@/lib/formatting';
 import { Card } from '@/components/ui/card';

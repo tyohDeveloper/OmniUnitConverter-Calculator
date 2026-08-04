@@ -8,8 +8,8 @@ import {
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import type { SupportedLanguage } from '@/lib/localization';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/calculator/buildDirectUnitSymbol';
-import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/calculator/buildDirectDimensions';
+import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/unit-symbols/buildDirectUnitSymbol';
+import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/unit-symbols/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { sanitizeInput } from '@/lib/parsing/sanitizeInput';
 import type { SIRepresentation } from '@/lib/calculator/types';

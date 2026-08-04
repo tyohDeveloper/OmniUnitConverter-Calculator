@@ -3,9 +3,9 @@
 // the function; extracting them to a separate .d.ts adds indirection
 // with no code-quality benefit. See lint-size.mjs:44-48 for the
 // normalizeMassUnit.ts reference pattern.
-import { displayToSI } from './displayToSI';
-import { siToDisplay } from './siToDisplay';
-import { formatDimensions } from './formatDimensions';
+import { displayToSI } from '../unit-symbols/displayToSI';
+import { siToDisplay } from '../unit-symbols/siToDisplay';
+import { formatDimensions } from '../unit-symbols/formatDimensions';
 import { applyPrefixToKgUnit } from '../units/applyPrefixToKgUnit';
 import type { DimensionalFormula } from '../units/dimensionalFormula';
 import type { SIRepresentation } from './types';
