@@ -231,8 +231,11 @@ export default tseslint.config(
   // EXCEPTION [architecture-standards §3.1]: reducer switch bodies count
   // every case toward function length. Splitting a reducer into
   // sub-reducers hides the domain → action → next-state mapping we want
-  // to keep visible. The pure lib functions each case delegates to are
-  // already ≤20 lines and enforced.
+  // to keep visible. The per-case handlers each case delegates to
+  // (state/reducers/**/) are single-export, ≤20-line pure functions,
+  // enforced by ESLint. Note this exception is scoped to
+  // max-lines-per-function only — the file-length rule (150 lines for
+  // state/**) still applies and is not excluded.
   {
     files: [
       'client/src/components/unit-converter/state/*Reducer.ts',
