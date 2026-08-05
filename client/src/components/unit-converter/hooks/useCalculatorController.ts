@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { CONVERSION_DATA, parseUnitText } from '@/lib/conversion-data';
+import { CONVERSION_DATA } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
@@ -12,7 +12,6 @@ import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations'
 import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
-import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
@@ -23,6 +22,8 @@ import { useCalculatorDisplayFormatters } from './useCalculatorDisplayFormatters
 import { useCalculatorClipboard } from './useCalculatorClipboard';
 import { useCalculatorRpnOps } from './useCalculatorRpnOps';
 import { useCalculatorRpnPaste } from './useCalculatorRpnPaste';
+import { useCalculatorRpnStackOps } from './useCalculatorRpnStackOps';
+import { useCalculatorRpnPull } from './useCalculatorRpnPull';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -85,7 +86,7 @@ export function useCalculatorController(
     return generateSIRepresentationsLib(dimensions, getDimensionSignature, PREFERRED_REPRESENTATIONS, sourceCategory);
   }, []);
 
-  const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
+
 
   const saveRpnStackForUndo = useCallback(() => {
     setPreviousRpnStack([...rpnStack]);
@@ -97,7 +98,7 @@ export function useCalculatorController(
     const rep = siReps[altIndex];
     const symbol = rep?.displaySymbol || formatDimensions(val.dimensions);
     if (!symbol || symbol === '1') return null;
-    const kgResult = applyPrefixToKgUnit(symbol, prefix);
+    const kgResult = applyPrefixToKgUnitLib(symbol, prefix);
     const displayValue = siToDisplayLib(val.value, symbol, prefix);
     const prefixData = PREFIXES.find(p => p.id === prefix);
     const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
@@ -152,107 +153,21 @@ export function useCalculatorController(
     setCalcValues(prev => { const nv = [...prev]; nv[2] = null; return nv; });
   }, [setCalcValues]);
 
-  const clearRpnStack = useCallback(() => {
-    saveRpnStackForUndo();
-    setRpnStack([null, null, null, null]);
-    setRpnResultPrefixRaw('none');
-    setRpnSelectedAlternativeRaw(0);
-  }, [saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw]);
+  // Basic RPN stack manipulation ops. See useCalculatorRpnStackOps.
+  const { clearRpnStack, pushToRpnStack, dropRpnStack, undoRpnStack, swapRpnXY, recallLastX, pushRpnConstant } = useCalculatorRpnStackOps({
+    rpnStack, previousRpnStack, lastX,
+    saveRpnStackForUndo, setRpnStack, setPreviousRpnStack,
+    setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult,
+  });
 
-  const pushToRpnStack = useCallback(() => {
-    if (!rpnStack[3]) return;
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; return ns; });
-  }, [rpnStack, saveRpnStackForUndo, setRpnStack]);
-
-  const dropRpnStack = useCallback(() => {
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[1] = prev[0]; ns[2] = prev[1]; ns[3] = prev[2]; return ns; });
-  }, [saveRpnStackForUndo, setRpnStack]);
-
-  const undoRpnStack = useCallback(() => {
-    const temp = [...rpnStack];
-    setRpnStack([...previousRpnStack]);
-    setPreviousRpnStack(temp);
-  }, [rpnStack, previousRpnStack, setRpnStack, setPreviousRpnStack]);
-
-  const swapRpnXY = useCallback(() => {
-    if (!rpnStack[3] || !rpnStack[2]) return;
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[3] = prev[2]; ns[2] = prev[3]; return ns; });
-  }, [rpnStack, saveRpnStackForUndo, setRpnStack]);
-
-  const recallLastX = useCallback(() => {
-    if (!lastX) return;
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = lastX; return ns; });
-  }, [lastX, saveRpnStackForUndo, setRpnStack]);
-
-  const pushRpnConstant = useCallback((value: number) => {
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = { value, dimensions: {}, prefix: 'none' }; return ns; });
-    setRpnResultPrefixRaw('none');
-    setRpnSelectedAlternativeRaw(0);
-    triggerFlashRpnResult();
-  }, [saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult]);
-
-  const pullFromPane = useCallback(() => {
-    let newEntry: CalcValue | null = null;
-    if (activeTab === 'converter') {
-      if (result !== null) {
-        const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-        const toUnitData = categoryData?.units.find(u => u.id === toUnit);
-        const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-        if (toUnitData) {
-          const siValue = result * toUnitData.factor * (toPrefixData?.factor || 1);
-          const categoryDef = CONVERSION_DATA.find(c => c.id === activeCategory);
-          const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.symbol : '';
-          const dims: Record<string, number> = {};
-          // Council-03: use the canonical CATEGORY_DIMENSIONS catalog
-          // instead of an embedded dimMap literal.
-          Object.assign(dims, CATEGORY_DIMENSIONS[activeCategory]?.dimensions ?? {});
-          newEntry = {
-            value: siValue,
-            dimensions: dims,
-            prefix: 'none',
-            sourceCategory: activeCategory,
-            siUnit: categoryDef?.baseSISymbol,
-            originalUnit: toPfxSymbol + toUnitData.symbol,
-            originalValue: result,
-            unitType: toUnitData.unitType,
-          };
-        }
-      }
-    } else if (activeTab === 'custom') {
-      const numValue = parseNumberWithFormat(directValue);
-      if (!isNaN(numValue) && directValue) {
-        newEntry = { value: numValue, dimensions: buildDirectDimensions(), prefix: 'none' };
-      }
-    }
-    if (!newEntry) return;
-    saveRpnStackForUndo();
-    setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry; return ns; });
-    let autoAlt = 0;
-    let autoPrefix = 'none';
-    if (activeTab === 'converter' && newEntry) {
-      const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory);
-      const toUnitData = categoryData?.units.find(u => u.id === toUnit);
-      const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
-      if (toUnitData) {
-        const siReps = generateSIRepresentations(newEntry.dimensions, activeCategory);
-        const matchIdx = siReps.findIndex(rep => rep.displaySymbol === toUnitData.symbol);
-        if (matchIdx >= 0) {
-          autoAlt = matchIdx;
-          autoPrefix = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.id : 'none';
-        }
-      }
-    }
-    setRpnResultPrefixRaw(autoPrefix);
-    setRpnSelectedAlternativeRaw(autoAlt);
-    triggerFlashRpnResult();
-  }, [activeTab, result, activeCategory, toUnit, toPrefix, directValue, buildDirectDimensions,
-    parseNumberWithFormat, saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw,
-    setRpnSelectedAlternativeRaw, triggerFlashRpnResult, generateSIRepresentations]);
+  // Pull converter or direct result to RPN stack. See useCalculatorRpnPull.
+  const { pullFromPane } = useCalculatorRpnPull({
+    activeTab, result, activeCategory, toUnit, toPrefix, directValue,
+    buildDirectDimensions, parseNumberWithFormat,
+    saveRpnStackForUndo, setRpnStack,
+    setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult,
+    generateSIRepresentations,
+  });
 
   // RPN paste (clipboard read + parseUnitText + push + auto-select).
   // See useCalculatorRpnPaste.
@@ -342,7 +257,7 @@ export function useCalculatorController(
     pasteToRpnStack, swapRpnXY, recallLastX, pushRpnConstant,
     saveRpnStackForUndo,
     getRpnResultDisplay, getCalcResultDisplay,
-    generateSIRepresentations, applyPrefixToKgUnit,
+    generateSIRepresentations, applyPrefixToKgUnit: applyPrefixToKgUnitLib,
     formatNumberWithSeparators, t,
   };
 }
