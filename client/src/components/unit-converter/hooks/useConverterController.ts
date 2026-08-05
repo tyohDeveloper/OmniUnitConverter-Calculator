@@ -1,21 +1,15 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { CONVERSION_DATA } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/units/unitCategory';
-import {
-  toCJKMyriadString,
-  formatNumberWithFormat as formatNumberWithSpecificFormat,
-} from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/units/numberFormat';
-import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/unit-symbols/buildDirectUnitSymbol';
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/unit-symbols/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
-import { sanitizeInput } from '@/lib/parsing/sanitizeInput';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
-import { CATEGORY_NAVIGATION_ORDER } from './categoryNavigationOrder';
+import { useConverterInputHandlers } from './useConverterInputHandlers';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
@@ -113,11 +107,7 @@ export function useConverterController(): UseConverterControllerReturn {
     parseDMS, parseFtIn,
   } = useLocaleHelpers(numberFormat, language, precision);
 
-  const getPlaceholder = useCallback((): string => {
-    if (fromUnit === 'deg_dms') return 'dd:mm:ss';
-    if (fromUnit === 'ft_in') return "ft'in\"";
-    return '0';
-  }, [fromUnit]);
+
 
   // Council-08: delegate to the lib implementations. These are
   // byte-identical to the previous inline versions; keeping the useCallback
@@ -161,43 +151,15 @@ export function useConverterController(): UseConverterControllerReturn {
     dispatch({ domain: 'converter', ...converterActions.swapUnits() });
   }, [dispatch]);
 
-  const reformatInputValue = useCallback((oldFormat: NumberFormat, newFormat: NumberFormat): void => {
-    if (!inputValue || inputValue === '') return;
-    if (fromUnit === 'deg_dms' || fromUnit === 'ft_in') return;
-    const numericValue = parseNumberWithSpecificFormat(inputValue, oldFormat);
-    if (!isNaN(numericValue) && isFinite(numericValue)) {
-      setInputValue(formatNumberWithSpecificFormat(numericValue, newFormat));
-    }
-  }, [inputValue, fromUnit, setInputValue]);
-
-  const handleInputChange = useCallback((value: string) => {
-    // Council-08d: sanitization lives in lib/formatting/sanitizeInput.
-    const isCompound = fromUnit === 'deg_dms' || fromUnit === 'ft_in';
-    setInputValue(sanitizeInput({ value, format: numberFormat, isCompound }));
-  }, [numberFormat, fromUnit, setInputValue]);
-
-  const handleInputBlur = useCallback((): void => {
-    if (!inputValue || inputValue === '') return;
-    if (fromUnit === 'deg_dms' || fromUnit === 'ft_in') return;
-    const numericValue = parseNumberWithFormat(inputValue);
-    if (!isNaN(numericValue) && isFinite(numericValue)) {
-      setInputValue(formatNumberWithSpecificFormat(numericValue, numberFormat));
-    }
-  }, [inputValue, fromUnit, parseNumberWithFormat, setInputValue, numberFormat]);
-
-  const handleInputKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      const allCategories = CATEGORY_NAVIGATION_ORDER.flatMap(g => g.categories);
-      const currentIndex = allCategories.indexOf(activeCategory);
-      if (currentIndex === -1) return;
-      const newIndex = e.key === 'ArrowUp'
-        ? (currentIndex > 0 ? currentIndex - 1 : allCategories.length - 1)
-        : (currentIndex < allCategories.length - 1 ? currentIndex + 1 : 0);
-      setActiveCategory(allCategories[newIndex] as UnitCategory);
-      setInputValue('1');
-    }
-  }, [activeCategory, setActiveCategory, setInputValue]);
+  // Input-domain handlers (change, blur, keydown, reformat, placeholder)
+  // live in useConverterInputHandlers; see that hook for domain rationale.
+  const {
+    getPlaceholder, reformatInputValue,
+    handleInputChange, handleInputBlur, handleInputKeyDown,
+  } = useConverterInputHandlers({
+    inputValue, fromUnit, activeCategory, numberFormat,
+    parseNumberWithFormat, setInputValue, setActiveCategory,
+  });
 
   // Clipboard read/write surface. See useConverterClipboard.ts.
   const clipboard = useConverterClipboard({
