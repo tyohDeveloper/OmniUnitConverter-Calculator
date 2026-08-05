@@ -28,6 +28,7 @@ import type {
 import { useConverterContext } from '../context/ConverterContext';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
+import { useCalculatorDisplayFormatters } from './useCalculatorDisplayFormatters';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -392,32 +393,12 @@ export function useCalculatorController(
     triggerFlashRpnResult();
   }, [rpnStack, saveRpnStackForUndo, setLastX, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult]);
 
-  const getRpnResultDisplay = useCallback(() => {
-    if (!rpnStack[3]) return null;
-    const val = rpnStack[3];
-    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
-    const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
-    if (currentSymbol === '1' || !currentSymbol) return { formattedValue: formatNumberWithSeparators(val.value, calculatorPrecision), unitSymbol: '' };
-    const kgResult = applyPrefixToKgUnit(currentSymbol, rpnResultPrefix);
-    const displayValue = siToDisplayLib(val.value, currentSymbol, rpnResultPrefix);
-    const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-    const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    return { formattedValue, unitSymbol: prefixSymbol + kgResult.displaySymbol };
-  }, [rpnStack, rpnSelectedAlternative, rpnResultPrefix, calculatorPrecision, generateSIRepresentations, formatNumberWithSeparators]);
-
-  const getCalcResultDisplay = useCallback(() => {
-    if (!calcValues[3]) return null;
-    const val = calcValues[3];
-    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
-    const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
-    const kgResult = applyPrefixToKgUnit(currentSymbol, resultPrefix);
-    const displayValue = val.value / kgResult.effectivePrefixFactor;
-    const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-    const prefixData = PREFIXES.find(p => p.id === resultPrefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    return { formattedValue, unitSymbol: prefixSymbol + kgResult.displaySymbol };
-  }, [calcValues, selectedAlternative, resultPrefix, calculatorPrecision, generateSIRepresentations, formatNumberWithSeparators]);
+  // Display formatters. See useCalculatorDisplayFormatters.
+  const { getRpnResultDisplay, getCalcResultDisplay } = useCalculatorDisplayFormatters({
+    calcValues, rpnStack, selectedAlternative, rpnSelectedAlternative,
+    resultPrefix, rpnResultPrefix, calculatorPrecision,
+    generateSIRepresentations, formatNumberWithSeparators,
+  });
 
   const copyCalcResult = useCallback(() => {
     const display = getCalcResultDisplay();
