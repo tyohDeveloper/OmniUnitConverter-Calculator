@@ -4,7 +4,6 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { CONVERSION_DATA, parseUnitText } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
-import { UnitType } from '@/lib/units/unitType';
 
 interface UseCalculatorRpnPasteArgs {
   saveRpnStackForUndo: () => void;
@@ -26,24 +25,22 @@ function copyDimensions(source: ParsedText['dimensions']): DimensionalFormula {
   return dims;
 }
 
-function resolveOriginalUnit(parsed: ParsedText): { originalUnit?: string; unitType?: UnitType; siUnit?: string } {
-  if (!parsed.categoryId) return {};
+function resolveOriginalUnit(parsed: ParsedText): string | undefined {
+  if (!parsed.categoryId || !parsed.unitId) return undefined;
   const categoryDef = CONVERSION_DATA.find(c => c.id === parsed.categoryId);
-  const siUnit = categoryDef?.baseSISymbol;
-  if (!parsed.unitId || !categoryDef) return { siUnit };
-  const unitDef = categoryDef.units.find(u => u.id === parsed.unitId);
-  if (!unitDef) return { siUnit };
+  const unitDef = categoryDef?.units.find(u => u.id === parsed.unitId);
+  if (!unitDef) return undefined;
   const prefixDef = PREFIXES.find(p => p.id === parsed.prefixId);
   const prefixSymbol = (unitDef.allowPrefixes && prefixDef && prefixDef.id !== 'none') ? prefixDef.symbol : '';
-  return { originalUnit: prefixSymbol + unitDef.symbol, unitType: unitDef.unitType, siUnit };
+  return prefixSymbol + unitDef.symbol;
 }
 
 function buildPasteEntry(parsed: ParsedText, dims: DimensionalFormula): CalcValue {
-  const { originalUnit, unitType, siUnit } = resolveOriginalUnit(parsed);
   return {
     value: parsed.value, dimensions: dims, prefix: parsed.prefixId || 'none',
-    sourceCategory: parsed.categoryId ?? undefined, siUnit, originalUnit,
-    originalValue: parsed.originalValue, unitType,
+    sourceCategory: parsed.categoryId ?? undefined,
+    originalUnit: resolveOriginalUnit(parsed),
+    originalValue: parsed.originalValue,
   };
 }
 

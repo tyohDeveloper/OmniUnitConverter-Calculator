@@ -31,15 +31,14 @@ function buildConverterEntry(a: UseCalculatorRpnPullArgs): CalcValue | null {
   if (!toUnitData) return null;
   const toPrefixData = PREFIXES.find(p => p.id === a.toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
   const siValue = a.result * toUnitData.factor * (toPrefixData?.factor || 1);
-  const categoryDef = CONVERSION_DATA.find(c => c.id === a.activeCategory);
   const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData && toPrefixData.id !== 'none') ? toPrefixData.symbol : '';
   const dims: Record<string, number> = {};
   Object.assign(dims, CATEGORY_DIMENSIONS[a.activeCategory]?.dimensions ?? {});
   return {
     value: siValue, dimensions: dims, prefix: 'none',
-    sourceCategory: a.activeCategory, siUnit: categoryDef?.baseSISymbol,
+    sourceCategory: a.activeCategory,
     originalUnit: toPfxSymbol + toUnitData.symbol,
-    originalValue: a.result, unitType: toUnitData.unitType,
+    originalValue: a.result,
   };
 }
 

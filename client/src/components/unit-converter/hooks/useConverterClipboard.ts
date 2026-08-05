@@ -8,7 +8,6 @@ import { findCategoryByDimensions } from '@/lib/si-representations/findCategoryB
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { dimensionsToExponents } from '@/lib/units/dimensionsToExponents';
-import type { UnitType } from '@/lib/units/unitType';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { PASTE_RESET_TIMEOUT_MS } from '../constants';
 import type { PasteStatus, PendingPasteUnit } from '../state/uiPrefsReducer';
@@ -174,7 +173,7 @@ function copyResultImpl(i: UseConverterClipboardInput): CopyResultOutcome | null
   const text = renderCopyResultText({ i, toUnitData, toPrefixData });
   navigator.clipboard.writeText(text);
   i.triggerFlashCopyResult();
-  return buildCopyResultOutcome({ i, catData, toUnitData, toPrefixData });
+  return buildCopyResultOutcome({ i, toUnitData, toPrefixData });
 }
 
 // The exact text that gets written to the clipboard for the current
@@ -207,8 +206,7 @@ function renderCopyResultText(a: {
 // equivalent so downstream stack ops see a canonical scalar.
 function buildCopyResultOutcome(a: {
   i: UseConverterClipboardInput;
-  catData: { id: string; baseSISymbol?: string };
-  toUnitData: { symbol: string; factor: number; allowPrefixes?: boolean; unitType?: UnitType };
+  toUnitData: { symbol: string; factor: number; allowPrefixes?: boolean };
   toPrefixData: { id: string; symbol: string; factor: number };
 }): CopyResultOutcome {
   return {
@@ -223,11 +221,10 @@ function buildCopyResultOutcome(a: {
 // The CalcValue that will get pushed onto the RPN or simple stack.
 function buildCopyResultEntry(a: {
   i: UseConverterClipboardInput;
-  catData: { id: string; baseSISymbol?: string };
-  toUnitData: { symbol: string; factor: number; allowPrefixes?: boolean; unitType?: UnitType };
+  toUnitData: { symbol: string; factor: number; allowPrefixes?: boolean };
   toPrefixData: { id: string; symbol: string; factor: number };
 }): CalcValue {
-  const { i, catData, toUnitData, toPrefixData } = a;
+  const { i, toUnitData, toPrefixData } = a;
   const siBaseValue = (i.result as number) * toUnitData.factor * (toPrefixData?.factor || 1);
   const toPfxSymbol = (toUnitData.allowPrefixes && toPrefixData.id !== 'none') ? toPrefixData.symbol : '';
   const isSpecialUnit = i.toUnit === 'deg_dms' || i.toUnit === 'ft_in';
@@ -236,10 +233,8 @@ function buildCopyResultEntry(a: {
     dimensions: i.getCategoryDimensions(i.activeCategory),
     prefix: 'none',
     sourceCategory: i.activeCategory,
-    siUnit: catData.baseSISymbol,
     originalUnit: isSpecialUnit ? undefined : toPfxSymbol + toUnitData.symbol,
     originalValue: isSpecialUnit ? undefined : (i.result as number),
-    unitType: toUnitData.unitType,
   };
 }
 

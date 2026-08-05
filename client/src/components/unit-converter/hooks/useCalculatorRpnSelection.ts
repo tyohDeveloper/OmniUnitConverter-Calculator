@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import { UnitType } from '@/lib/units/unitType';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { composeUnitDisplaySymbol } from '@/lib/units/composeUnitDisplaySymbol';
@@ -26,7 +25,6 @@ interface UseCalculatorRpnSelectionArgs {
 export interface OriginMeta {
   originalUnit: string;
   originalValue: number;
-  unitType: UnitType;
   sourceCategory: string | undefined;
 }
 
@@ -53,7 +51,7 @@ export function computeOriginMetaForValue(
   const primaryDerivedUnit = rep?.derivedUnits?.[0];
   const derivedUnitInfo = primaryDerivedUnit ? SI_DERIVED_UNITS.find(u => u.symbol === primaryDerivedUnit) : undefined;
   const sourceCategory = derivedUnitInfo?.category ?? val.sourceCategory;
-  return { originalUnit: unitSymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
+  return { originalUnit: unitSymbol, originalValue: displayValue, sourceCategory };
 }
 
 function applyOriginMetaToTop(
@@ -65,7 +63,7 @@ function applyOriginMetaToTop(
   const ns = [...prev];
   const meta = computeOriginMetaForValue(ns[3], altIndex, prefix, generateSIRepresentations);
   if (ns[3] && meta) {
-    ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
+    ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, sourceCategory: meta.sourceCategory };
   }
   return ns;
 }
