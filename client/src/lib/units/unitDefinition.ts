@@ -6,6 +6,15 @@ export interface UnitDefinition {
   id: string;
   name: string;
   symbol: string;
+  /**
+   * Numeric scaling factor from this unit to the category's base
+   * unit. Meaningful for numeric families (SI_QUANTITY,
+   * DIMENSIONLESS_RATIO, DATA_QUANTITY, FUEL_ECONOMY,
+   * NUMERIC_FUNCTION); for SYMBOLIC categories this is dead data
+   * (typically 1) since there's no scalar relationship between
+   * timezone codes or calendar tags. Kept as a required field on the
+   * type so numeric consumers don't need to null-check.
+   */
   factor: number;
   offset?: number;
   description?: string;

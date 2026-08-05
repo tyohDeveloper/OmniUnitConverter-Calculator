@@ -84,6 +84,10 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   // match the controllers' correct value.
   shipping: { name: 'Shipping Length', dimensions: { length: 1 }, isBase: false },
   logarithmic: { name: 'Logarithmic Scales', dimensions: {}, isBase: false },
+  // SYMBOLIC family: dimensions are meaningless (no arithmetic).
+  // Kept in the map for uniformity; filters that only surface
+  // dimensional categories skip SYMBOLIC via CATEGORY_FAMILIES.
+  timezone: { name: 'Time zone', dimensions: {}, isBase: false },
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 

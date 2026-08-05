@@ -1,0 +1,180 @@
+{
+  "id": "timezone",
+  "name": "Time zone",
+  "baseUnit": "utc",
+  "baseSISymbol": "UTC",
+  "family": "SYMBOLIC",
+  "units": [
+    {
+      "id": "utc",
+      "name": "Coordinated Universal Time",
+      "symbol": "UTC",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Coordinated_Universal_Time"
+    },
+    {
+      "id": "america_new_york",
+      "name": "New York (Eastern Time)",
+      "symbol": "America/New_York",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_New_York"
+    },
+    {
+      "id": "america_chicago",
+      "name": "Chicago (Central Time)",
+      "symbol": "America/Chicago",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Central_Time_Zone"
+    },
+    {
+      "id": "america_denver",
+      "name": "Denver (Mountain Time)",
+      "symbol": "America/Denver",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mountain_Time_Zone"
+    },
+    {
+      "id": "america_los_angeles",
+      "name": "Los Angeles (Pacific Time)",
+      "symbol": "America/Los_Angeles",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pacific_Time_Zone"
+    },
+    {
+      "id": "america_anchorage",
+      "name": "Anchorage (Alaska Time)",
+      "symbol": "America/Anchorage",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alaska_Time_Zone"
+    },
+    {
+      "id": "pacific_honolulu",
+      "name": "Honolulu (Hawaii Time)",
+      "symbol": "Pacific/Honolulu",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hawaii\u2013Aleutian_Time_Zone"
+    },
+    {
+      "id": "america_sao_paulo",
+      "name": "S\u00e3o Paulo",
+      "symbol": "America/Sao_Paulo",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Brazil"
+    },
+    {
+      "id": "europe_london",
+      "name": "London",
+      "symbol": "Europe/London",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_the_United_Kingdom"
+    },
+    {
+      "id": "europe_paris",
+      "name": "Paris (Central European)",
+      "symbol": "Europe/Paris",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Central_European_Time"
+    },
+    {
+      "id": "europe_berlin",
+      "name": "Berlin",
+      "symbol": "Europe/Berlin",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Germany"
+    },
+    {
+      "id": "europe_moscow",
+      "name": "Moscow",
+      "symbol": "Europe/Moscow",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Moscow_Time"
+    },
+    {
+      "id": "africa_johannesburg",
+      "name": "Johannesburg",
+      "symbol": "Africa/Johannesburg",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/South_African_Standard_Time"
+    },
+    {
+      "id": "asia_dubai",
+      "name": "Dubai",
+      "symbol": "Asia/Dubai",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_the_United_Arab_Emirates"
+    },
+    {
+      "id": "asia_kolkata",
+      "name": "Kolkata (India)",
+      "symbol": "Asia/Kolkata",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_Standard_Time"
+    },
+    {
+      "id": "asia_shanghai",
+      "name": "Shanghai (China)",
+      "symbol": "Asia/Shanghai",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_China"
+    },
+    {
+      "id": "asia_tokyo",
+      "name": "Tokyo",
+      "symbol": "Asia/Tokyo",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japan_Standard_Time"
+    },
+    {
+      "id": "australia_sydney",
+      "name": "Sydney",
+      "symbol": "Australia/Sydney",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Australia"
+    },
+    {
+      "id": "pacific_auckland",
+      "name": "Auckland",
+      "symbol": "Pacific/Auckland",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_New_Zealand"
+    }
+  ]
+}
