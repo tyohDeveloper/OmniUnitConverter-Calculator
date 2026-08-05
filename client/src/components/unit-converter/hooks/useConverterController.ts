@@ -15,6 +15,7 @@ import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
+import { CATEGORY_NAVIGATION_ORDER } from './categoryNavigationOrder';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
@@ -25,17 +26,6 @@ import { useUiPrefsState } from './useUiPrefsState';
 import { useConverterClipboard } from './useConverterClipboard';
 import { useConverterPushToCalculator } from './useConverterPushToCalculator';
 import * as converterActions from '../state/actions/converterActions';
-
-const CATEGORY_GROUPS_ALL = [
-  { categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },
-  { categories: ['area', 'volume', 'speed', 'acceleration', 'force', 'pressure', 'energy', 'power', 'torque', 'flow', 'density', 'viscosity', 'kinematic_viscosity', 'surface_tension', 'frequency', 'angular_velocity', 'momentum', 'angular_momentum'] },
-  { categories: ['thermal_conductivity', 'specific_heat', 'entropy', 'concentration'] },
-  { categories: ['charge', 'potential', 'capacitance', 'resistance', 'conductance', 'inductance', 'magnetic_flux', 'magnetic_density', 'electric_field', 'magnetic_field_h'] },
-  { categories: ['radioactivity', 'radiation_dose', 'equivalent_dose', 'radiation_exposure', 'radioactive_decay', 'cross_section', 'photon', 'catalytic', 'angle', 'solid_angle', 'sound_pressure', 'sound_intensity', 'acoustic_impedance'] },
-  { categories: ['luminous_flux', 'illuminance', 'luminance', 'refractive_power'] },
-  { categories: ['data', 'fuel', 'fuel_economy', 'rack_geometry', 'shipping', 'beer_wine_volume', 'lightbulb', 'paper_sizes', 'typography', 'cooking', 'logarithmic'] },
-  { categories: ['archaic_length', 'archaic_mass', 'archaic_volume', 'archaic_area', 'archaic_energy', 'archaic_power'] },
-];
 
 // Council-03: local CATEGORY_DIMENSION_MAP replaced by the canonical
 // CATEGORY_DIMENSIONS catalog in lib/units/categoryDimensions.ts.
@@ -198,7 +188,7 @@ export function useConverterController(): UseConverterControllerReturn {
   const handleInputKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
-      const allCategories = CATEGORY_GROUPS_ALL.flatMap(g => g.categories);
+      const allCategories = CATEGORY_NAVIGATION_ORDER.flatMap(g => g.categories);
       const currentIndex = allCategories.indexOf(activeCategory);
       if (currentIndex === -1) return;
       const newIndex = e.key === 'ArrowUp'
