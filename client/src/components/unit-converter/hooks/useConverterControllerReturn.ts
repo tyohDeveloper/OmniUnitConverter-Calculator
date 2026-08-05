@@ -25,6 +25,7 @@ export interface UseConverterControllerReturn {
   toPrefix: string;
   inputValue: string;
   result: number | null;
+  symbolicResult: string | null;
   precision: number;
   comparisonMode: boolean;
   numberFormat: NumberFormat;
@@ -41,6 +42,7 @@ export interface UseConverterControllerReturn {
   setFromPrefix: (v: string) => void;
   setToPrefix: (v: string) => void;
   setInputValue: (v: string) => void;
+  setSymbolicResult: (v: string | null) => void;
   setPrecision: (v: number) => void;
   setComparisonMode: (v: boolean) => void;
   setNumberFormat: (v: NumberFormat) => void;

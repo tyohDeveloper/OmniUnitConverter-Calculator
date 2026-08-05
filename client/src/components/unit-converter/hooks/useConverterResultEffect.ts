@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import { computeConversion } from '@/lib/calculator/computeConversion';
+import { computeSymbolicConversion } from '@/lib/calculator/computeSymbolicConversion';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 
 interface UseConverterResultEffectArgs {
   inputValue: string;
@@ -14,6 +16,7 @@ interface UseConverterResultEffectArgs {
   parseDMS: (s: string) => number;
   parseFtIn: (s: string) => number;
   setResult: (v: number | null) => void;
+  setSymbolicResult: (v: string | null) => void;
 }
 
 function parseInput(
@@ -38,16 +41,31 @@ function parseInput(
  * the dep array intentionally uses numberFormat as the trigger and
  * omits the parsers.
  */
-export function useConverterResultEffect(args: UseConverterResultEffectArgs): void {
-  const { inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-          numberFormat, parseNumberWithFormat, parseDMS, parseFtIn, setResult } = args;
+function runSymbolicBranch(a: UseConverterResultEffectArgs): void {
+  a.setResult(null);
+  if (!a.fromUnit || !a.toUnit) { a.setSymbolicResult(null); return; }
+  a.setSymbolicResult(computeSymbolicConversion({
+    value: a.inputValue, fromUnit: a.fromUnit, toUnit: a.toUnit,
+    activeCategory: a.activeCategory,
+  }));
+}
 
+function runNumericBranch(a: UseConverterResultEffectArgs): void {
+  a.setSymbolicResult(null);
+  if (!a.inputValue || !a.fromUnit || !a.toUnit) { a.setResult(null); return; }
+  const val = parseInput(a.inputValue, a.fromUnit, a.parseNumberWithFormat, a.parseDMS, a.parseFtIn);
+  if (isNaN(val)) { a.setResult(null); return; }
+  a.setResult(computeConversion({
+    value: val, fromUnit: a.fromUnit, toUnit: a.toUnit,
+    activeCategory: a.activeCategory, fromPrefix: a.fromPrefix, toPrefix: a.toPrefix,
+  }));
+}
+
+export function useConverterResultEffect(args: UseConverterResultEffectArgs): void {
   useEffect(() => {
-    if (!inputValue || !fromUnit || !toUnit) { setResult(null); return; }
-    const val = parseInput(inputValue, fromUnit, parseNumberWithFormat, parseDMS, parseFtIn);
-    if (isNaN(val)) { setResult(null); return; }
-    setResult(computeConversion({
-      value: val, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-    }));
-  }, [inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix, numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
+    const family = CATEGORY_FAMILIES[args.activeCategory];
+    if (family === 'SYMBOLIC') { runSymbolicBranch(args); return; }
+    runNumericBranch(args);
+  }, [args.inputValue, args.fromUnit, args.toUnit, args.activeCategory,
+      args.fromPrefix, args.toPrefix, args.numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
 }

@@ -55,6 +55,7 @@ export function useConverterController(): UseConverterControllerReturn {
     toPrefix, setToPrefix,
     inputValue, setInputValue,
     result, setResult,
+    symbolicResult, setSymbolicResult,
     precision, setPrecision,
     comparisonMode, setComparisonMode,
   } = converterState;
@@ -135,7 +136,8 @@ export function useConverterController(): UseConverterControllerReturn {
   // Conversion result effect — see useConverterResultEffect.
   useConverterResultEffect({
     inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-    numberFormat, parseNumberWithFormat, parseDMS, parseFtIn, setResult,
+    numberFormat, parseNumberWithFormat, parseDMS, parseFtIn,
+    setResult, setSymbolicResult,
   });
 
   useEffect(() => {
@@ -203,13 +205,13 @@ export function useConverterController(): UseConverterControllerReturn {
 
   return {
     activeCategory, fromUnit, toUnit, fromPrefix, toPrefix,
-    inputValue, result, precision, comparisonMode,
+    inputValue, result, symbolicResult, precision, comparisonMode,
     numberFormat, language, activeTab, directValue, directExponents,
     converterPasteStatus,
     customPasteStatus,
 
     setActiveCategory, setFromUnit, setToUnit, setFromPrefix, setToPrefix,
-    setInputValue, setPrecision, setComparisonMode,
+    setInputValue, setSymbolicResult, setPrecision, setComparisonMode,
     setNumberFormat, setLanguage, setActiveTab, setDirectValue, setDirectExponents,
 
     swapUnits, copyResult, copyFromBaseFactor, copyFromSIBase,
