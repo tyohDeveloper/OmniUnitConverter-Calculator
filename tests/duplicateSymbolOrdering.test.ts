@@ -71,6 +71,13 @@ const EXPECTED_WINNERS: Record<string, string> = {
   'ftm': 'archaic_length',
   'ft³': 'volume',
   'g': 'mass',
+  // 'common' and 'gregorian' calendars both share the polyfill's
+  // gregory backend id as their symbol. 'common' appears first in
+  // date_calendar.json so it wins. Both hits are in the same
+  // category so smart-paste behavior is unaffected — SYMBOLIC
+  // categories are excluded from cross-category dimensional match
+  // via CATEGORY_FAMILIES.
+  'gregory': 'date_calendar',
   'g-force': 'acceleration',
   'gal (US)': 'volume',
   'gal (imp)': 'volume',

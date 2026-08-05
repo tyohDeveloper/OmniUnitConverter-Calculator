@@ -724,5 +724,18 @@
   "Shanghai (China)": "شنغهاي (الصين)",
   "Tokyo": "طوكيو",
   "Sydney": "سيدني",
-  "Auckland": "أوكلاند"
+  "Auckland": "أوكلاند",
+  "Common (CE/BCE)": "Common (CE/BCE)",
+  "Gregorian (AD/BC)": "Gregorian (AD/BC)",
+  "Julian (Eastern Orthodox)": "Julian (Eastern Orthodox)",
+  "Coptic (Oriental Orthodox)": "Coptic (Oriental Orthodox)",
+  "Ethiopic (Ethiopian/Eritrean Orthodox)": "Ethiopic (Ethiopian/Eritrean Orthodox)",
+  "Hebrew": "Hebrew",
+  "Islamic (Umm al-Qura)": "Islamic (Umm al-Qura)",
+  "Persian (Solar Hijri)": "Persian (Solar Hijri)",
+  "Chinese": "Chinese",
+  "Japanese (imperial era)": "Japanese (imperial era)",
+  "Minguo (Republic of China)": "Minguo (Republic of China)",
+  "Buddhist (Thai)": "Buddhist (Thai)",
+  "Indian (Saka)": "Indian (Saka)"
 }

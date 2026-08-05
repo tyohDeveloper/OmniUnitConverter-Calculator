@@ -88,6 +88,7 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
   // Kept in the map for uniformity; filters that only surface
   // dimensional categories skip SYMBOLIC via CATEGORY_FAMILIES.
   timezone: { name: 'Time zone', dimensions: {}, isBase: false },
+  date_calendar: { name: 'Date (calendar)', dimensions: {}, isBase: false },
   unitless: { name: 'Unitless Numbers', dimensions: {}, isBase: false },
 };
 

@@ -66,6 +66,7 @@ import temperatureData from '@/data/conversion/temperature.json';
 import thermalConductivityData from '@/data/conversion/thermal_conductivity.json';
 import timeData from '@/data/conversion/time.json';
 import timezoneData from '@/data/conversion/timezone.json';
+import dateCalendarData from '@/data/conversion/date_calendar.json';
 import torqueData from '@/data/conversion/torque.json';
 import typographyData from '@/data/conversion/typography.json';
 import paperSizesData from '@/data/conversion/paper_sizes.json';
@@ -211,6 +212,7 @@ export const CONVERSION_DATA: CategoryDefinition[] = [
   paperSizesData,
   logarithmicData,
   timezoneData,
+  dateCalendarData,
   unitlessData,
 ].map(asCategoryDefinition);
 

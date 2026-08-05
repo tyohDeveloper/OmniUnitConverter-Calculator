@@ -73,4 +73,5 @@ export type UnitCategory =
   | "paper_sizes"
   | "logarithmic"
   | "timezone"
+  | "date_calendar"
   | "unitless";

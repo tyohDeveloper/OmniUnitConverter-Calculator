@@ -65,7 +65,7 @@ describe('Zod validation of category JSON', () => {
   });
 
   it('all shipped category data passes validation (loaded without throwing)', () => {
-    expect(CONVERSION_DATA.length).toBe(75);
+    expect(CONVERSION_DATA.length).toBe(76);
   });
 });
 
