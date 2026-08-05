@@ -22,6 +22,7 @@ import { useRpnStack } from './useRpnStack';
 import { useCalculatorDisplayFormatters } from './useCalculatorDisplayFormatters';
 import { useCalculatorClipboard } from './useCalculatorClipboard';
 import { useCalculatorRpnOps } from './useCalculatorRpnOps';
+import { useCalculatorRpnPaste } from './useCalculatorRpnPaste';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -253,67 +254,12 @@ export function useCalculatorController(
     parseNumberWithFormat, saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw,
     setRpnSelectedAlternativeRaw, triggerFlashRpnResult, generateSIRepresentations]);
 
-  const pasteToRpnStack = useCallback(async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text) return;
-      const parsed = parseUnitText(text);
-      const dims: DimensionalFormula = {};
-      const dimKeys = ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity', 'angle', 'solid_angle'] as const;
-      for (const key of dimKeys) {
-        if (parsed.dimensions[key]) dims[key] = parsed.dimensions[key];
-      }
-      let sourceCategory: string | undefined;
-      let siUnit: string | undefined;
-      let originalUnit: string | undefined;
-      let unitType: UnitType | undefined;
-      if (parsed.categoryId) {
-        sourceCategory = parsed.categoryId;
-        const categoryDef = CONVERSION_DATA.find(c => c.id === parsed.categoryId);
-        siUnit = categoryDef?.baseSISymbol;
-        if (parsed.unitId && categoryDef) {
-          const unitDef = categoryDef.units.find(u => u.id === parsed.unitId);
-          if (unitDef) {
-            const prefixDef = PREFIXES.find(p => p.id === parsed.prefixId);
-            const prefixSymbol = (unitDef.allowPrefixes && prefixDef && prefixDef.id !== 'none') ? prefixDef.symbol : '';
-            originalUnit = prefixSymbol + unitDef.symbol;
-            unitType = unitDef.unitType;
-          }
-        }
-      }
-      const newEntry: CalcValue = {
-        value: parsed.value,
-        dimensions: dims,
-        prefix: parsed.prefixId || 'none',
-        sourceCategory,
-        siUnit,
-        originalUnit,
-        originalValue: parsed.originalValue,
-        unitType,
-      };
-      saveRpnStackForUndo();
-      setRpnStack(prev => { const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; ns[3] = newEntry; return ns; });
-      let autoAlt = 0;
-      let autoPrefix = 'none';
-      if (parsed.categoryId && parsed.unitId) {
-        const categoryDef = CONVERSION_DATA.find(c => c.id === parsed.categoryId);
-        const unitDef = categoryDef?.units.find(u => u.id === parsed.unitId);
-        if (unitDef) {
-          const siReps = generateSIRepresentations(dims, parsed.categoryId);
-          const matchIdx = siReps.findIndex(rep => rep.displaySymbol === unitDef.symbol);
-          if (matchIdx >= 0) {
-            autoAlt = matchIdx;
-            const prefixDef = PREFIXES.find(p => p.id === parsed.prefixId);
-            autoPrefix = (unitDef.allowPrefixes && prefixDef && prefixDef.id !== 'none') ? prefixDef.id : 'none';
-          }
-        }
-      }
-      setRpnResultPrefixRaw(autoPrefix);
-      setRpnSelectedAlternativeRaw(autoAlt);
-    } catch (err) {
-      console.error('Failed to read clipboard:', err);
-    }
-  }, [saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, generateSIRepresentations]);
+  // RPN paste (clipboard read + parseUnitText + push + auto-select).
+  // See useCalculatorRpnPaste.
+  const { pasteToRpnStack } = useCalculatorRpnPaste({
+    saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw,
+    setRpnSelectedAlternativeRaw, generateSIRepresentations,
+  });
 
   // RPN unary/binary dispatch + canAdd/Sub check. See useCalculatorRpnOps.
   const { applyRpnUnary, canApplyRpnBinary, applyRpnBinary } = useCalculatorRpnOps({
