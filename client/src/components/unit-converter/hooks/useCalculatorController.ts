@@ -3,15 +3,11 @@ import { CONVERSION_DATA } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
-import { UnitType } from '@/lib/units/unitType';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
-import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
-import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
@@ -24,6 +20,7 @@ import { useCalculatorRpnOps } from './useCalculatorRpnOps';
 import { useCalculatorRpnPaste } from './useCalculatorRpnPaste';
 import { useCalculatorRpnStackOps } from './useCalculatorRpnStackOps';
 import { useCalculatorRpnPull } from './useCalculatorRpnPull';
+import { useCalculatorRpnSelection } from './useCalculatorRpnSelection';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -92,46 +89,13 @@ export function useCalculatorController(
     setPreviousRpnStack([...rpnStack]);
   }, [rpnStack, setPreviousRpnStack]);
 
-  const computeOriginMetaForValue = useCallback((val: CalcValue | null, altIndex: number, prefix: string): { originalUnit: string; originalValue: number; unitType: UnitType; sourceCategory: string | undefined } | null => {
-    if (!val) return null;
-    const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
-    const rep = siReps[altIndex];
-    const symbol = rep?.displaySymbol || formatDimensions(val.dimensions);
-    if (!symbol || symbol === '1') return null;
-    const kgResult = applyPrefixToKgUnitLib(symbol, prefix);
-    const displayValue = siToDisplayLib(val.value, symbol, prefix);
-    const prefixData = PREFIXES.find(p => p.id === prefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    const primaryDerivedUnit = rep?.derivedUnits?.[0];
-    const derivedUnitInfo = primaryDerivedUnit ? SI_DERIVED_UNITS.find(u => u.symbol === primaryDerivedUnit) : undefined;
-    const sourceCategory = derivedUnitInfo?.category ?? val.sourceCategory;
-    return { originalUnit: prefixSymbol + kgResult.displaySymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
-  }, [generateSIRepresentations]);
-
-  const setRpnSelectedAlternative = useCallback((altIndex: number) => {
-    setRpnSelectedAlternativeRaw(altIndex);
-    setRpnResultPrefixRaw('none');
-    setRpnStack(prev => {
-      const ns = [...prev];
-      const meta = computeOriginMetaForValue(ns[3], altIndex, 'none');
-      if (ns[3] && meta) {
-        ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
-      }
-      return ns;
-    });
-  }, [setRpnSelectedAlternativeRaw, setRpnResultPrefixRaw, computeOriginMetaForValue, setRpnStack]);
-
-  const setRpnResultPrefix = useCallback((prefix: string) => {
-    setRpnResultPrefixRaw(prefix);
-    setRpnStack(prev => {
-      const ns = [...prev];
-      const meta = computeOriginMetaForValue(ns[3], rpnSelectedAlternative, prefix);
-      if (ns[3] && meta) {
-        ns[3] = { ...ns[3], originalUnit: meta.originalUnit, originalValue: meta.originalValue, unitType: meta.unitType, sourceCategory: meta.sourceCategory };
-      }
-      return ns;
-    });
-  }, [setRpnResultPrefixRaw, computeOriginMetaForValue, rpnSelectedAlternative, setRpnStack]);
+  // RPN result-field selection (setSelectedAlternative + setResult
+  // Prefix). See useCalculatorRpnSelection.
+  const { setRpnSelectedAlternative, setRpnResultPrefix } = useCalculatorRpnSelection({
+    rpnSelectedAlternative,
+    setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw,
+    generateSIRepresentations,
+  });
 
   const clearCalculator = useCallback(() => {
     setCalcValues([null, null, null, null]);
