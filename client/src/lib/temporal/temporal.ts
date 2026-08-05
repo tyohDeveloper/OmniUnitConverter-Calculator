@@ -17,7 +17,16 @@
 // one major-version cycle in each). Migration = change the import
 // below to reference `window.Temporal` instead. Owner: whoever picks
 // up the Temporal work next.
+//
+// Import path: `temporal-polyfill/full` (not the default entry).
+// The default entry ships only `gregory` and `iso8601` calendars;
+// the `/full` subpath adds the exotic calendars (Hebrew, Islamic-
+// Umalqura, Coptic, Ethiopic, Persian, Chinese, Japanese, ROC,
+// Buddhist, Indian, and the Islamic tabular variants) that the Date
+// category needs. Bundle cost of choosing `/full` over default:
+// ~3.5 kB gzipped. See docs/tasks/temporal-date-category.md for the
+// full capability review.
 
-import { Temporal } from 'temporal-polyfill';
+import { Temporal } from 'temporal-polyfill/full';
 
 export { Temporal };
