@@ -113,7 +113,15 @@ function dispatchInputChange(value: string, isSymbolic: boolean, numberFormat: N
 // the value field and the from-zone dropdown. If parsing fails, the
 // raw input stays as-typed and the from-zone dropdown is unchanged.
 // If the zone token is unrecognized, only the value is normalized.
-function dispatchSymbolicBlur(activeCategory: UnitCategory, inputValue: string, setInputValue: (v: string) => void, setFromUnit: (v: string) => void): void {
+//
+// Exported for testability — the tests exercise this function
+// directly with stub setters rather than mounting the React tree.
+export function dispatchSymbolicBlur(
+  activeCategory: UnitCategory,
+  inputValue: string,
+  setInputValue: (v: string) => void,
+  setFromUnit: (v: string) => void,
+): void {
   if (activeCategory !== 'timezone') return;
   const parsed = parseTimeWithZone(inputValue);
   if (parsed.time !== null && parsed.time !== inputValue) setInputValue(parsed.time);
