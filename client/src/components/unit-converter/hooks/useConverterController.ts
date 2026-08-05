@@ -2,14 +2,12 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { CONVERSION_DATA } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { NumberFormat } from '@/lib/units/numberFormat';
-import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/unit-symbols/buildDirectUnitSymbol';
-import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/unit-symbols/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
-import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
 import { useConverterInputHandlers } from './useConverterInputHandlers';
+import { useConverterDirectMode } from './useConverterDirectMode';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
@@ -109,18 +107,12 @@ export function useConverterController(): UseConverterControllerReturn {
 
 
 
-  // Council-08: delegate to the lib implementations. These are
-  // byte-identical to the previous inline versions; keeping the useCallback
-  // wrapper preserves referential stability for downstream memoized effects.
-  const buildDirectUnitSymbol = useCallback(
-    (): string => buildDirectUnitSymbolLib(directExponents),
-    [directExponents],
-  );
-
-  const buildDirectDimensions = useCallback(
-    (): { [key: string]: number } => buildDirectDimensionsLib(directExponents) as { [key: string]: number },
-    [directExponents],
-  );
+  // Direct-mode SI-freehand helpers. See useConverterDirectMode.
+  const {
+    buildDirectUnitSymbol, buildDirectDimensions, handleQuantityClick,
+  } = useConverterDirectMode({
+    directValue, directExponents, setActiveCategory, setInputValue, setActiveTab,
+  });
 
   const refocusInput = useCallback(() => {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
@@ -202,14 +194,6 @@ export function useConverterController(): UseConverterControllerReturn {
   const handleCustomSmartPasteClick = clipboard.handleCustomSmartPasteClick;
 
   const handleDirectCopyAndPushToCalculator = push.pushDirectEntry;
-
-  const handleQuantityClick = useCallback((quantityName: string) => {
-    const categoryKey = getCategoryKeyForQuantityName(quantityName);
-    if (!categoryKey) return;
-    setActiveCategory(categoryKey as UnitCategory);
-    setInputValue(directValue);
-    setActiveTab('converter');
-  }, [directValue, setActiveCategory, setInputValue, setActiveTab]);
 
   return {
     activeCategory, fromUnit, toUnit, fromPrefix, toPrefix,
