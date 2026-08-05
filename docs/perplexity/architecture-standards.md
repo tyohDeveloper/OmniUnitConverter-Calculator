@@ -68,6 +68,8 @@ UI-only structural work — className strings, `motion` prop bags, ARIA-label as
 
 **Verification.** A candidate for extraction can be identified with `git grep` for the operative call (e.g. `applyPrefixToKgUnit`, `formatDimensions`, `siToDisplay`) — three or more call sites that all follow the same 3-5 line prelude before diverging is the signal. Review-time question: "If I fix a bug in this formula, how many files do I have to change?" The answer must be "one."
 
+**Runtime-dependency selection is single-sourced too.** When a third-party library provides a runtime capability that has multiple possible implementations — e.g. a polyfill vs. a native browser API vs. an alternative library — the *choice* of which implementation the app uses is itself a single-source decision. Introduce one file under `lib/` whose only job is to re-export the chosen binding under an app-owned import path. Every consumer imports from that file; no consumer imports the underlying library directly, and no consumer references `window.<X>` for a browser-native equivalent. This makes migrations to a different implementation a one-line change to the source-selection file, and keeps consumers unaware of the runtime backing. Example: `client/src/lib/temporal/temporal.ts` re-exports `Temporal` from `temporal-polyfill`; when native browser Temporal is mature and ubiquitous, that file's implementation switches without any consumer file changing. Source-selection files are the one legitimate use of the re-export pattern that §3.8 forbids for barrels, and require an `// EXCEPTION [architecture-standards §3.8]:` comment naming the migration plan.
+
 ---
 
 ## 2. Mutable state discipline
@@ -138,6 +140,7 @@ Rationale:
 Exceptions:
 
 - A file that re-exports a **single** symbol as a compatibility shim during a migration is permitted, but must carry an `EXCEPTION [architecture-standards §3.8]` comment naming the migration and the date by which the shim will be removed. "During a migration" means "a migration that is actively in progress"; a shim older than the migration that produced it is dead code and must be removed.
+- A file that re-exports a **single** symbol as a runtime-dependency source-selection shim (per §1.6, "runtime-dependency selection is single-sourced too") is permitted, and must carry an `EXCEPTION [architecture-standards §3.8]` comment naming the choice and the migration plan for switching to a different implementation later. Example: `client/src/lib/temporal/temporal.ts` re-exports `Temporal` from `temporal-polyfill`; the migration plan is "switch to native `window.Temporal` when the browser matrix supports it." Source-selection shims have no fixed removal date because the migration is contingent on external browser support, not internal code changes.
 - The public entry-point of a published npm package (`package.json#main`) is a barrel by convention. This codebase is a single-file HTML artifact, not a published package, so this exception does not currently apply here.
 
 **Enforcement.** A custom ESLint rule at `scripts/eslint-rules/no-reexport.js` (registered under the local `omniunit` plugin) enforces this. The rule flags every re-export statement:

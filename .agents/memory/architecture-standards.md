@@ -9,6 +9,7 @@ Key rules to obey in any change:
 - Responsibility-based naming; no `utils`/`helpers`/`common`/`index` shape names (custom ESLint rule `no-shape-named-file`).
 - No barrel files / re-exports (ESLint rule `no-reexport`).
 - **§1.6 — single-sourced computation:** any arithmetic, transformation, or formatting used in 2+ places is a pure function in `lib/`; call sites import it, they do not reimplement it. Intentional divergence requires a §11 exception with a resolution plan.
+- **§1.6 addendum — single-sourced runtime dependency selection:** when a library has multiple possible implementations (polyfill vs. native browser API vs. alternative), the app's choice is captured in ONE file under `lib/` that re-exports the chosen binding. Consumers import from that file, not from the underlying package. Enables one-line migrations. Requires §3.8 exception comment. Example: `lib/temporal/temporal.ts` re-exports `Temporal` from `temporal-polyfill`.
 - Size limits: exported functions ≤20 lines, pure-function files 1 export, components ≤250 lines (enforced by `scripts/lint-size.mjs`).
 - Every interactive element needs a unique `data-testid` (`{role}-{area}-{name}[-{key}]`), checked against `scripts/testid-manifest.json` by `verify-build`.
 - Single-file build must be XHTML/polyglot well-formed and offline self-contained; `verify-build` parses it with sax.
