@@ -52,23 +52,47 @@ Recommendation: option A (additive, orthogonal, easier to migrate).
 
 ## Categories to classify (rough draft)
 
-**human_perception**:
-luminous_flux, illuminance, luminance, phon (within logarithmic),
-EV/stop (within logarithmic)
+**human_perception** (specifically wired to human sensory response):
+luminous_flux, illuminance, luminance (all use the V(λ) photopic
+curve derived from human visual response), phon (within logarithmic,
+auditory loudness with A-weighting or equal-loudness curves), EV/stop
+(within logarithmic, photographic exposure adapted to visual dynamic
+range).
 
-**biological_response**:
-radiation_dose, equivalent_dose, radiation_exposure
+**biological_response** (dose/exposure to biological tissue, not
+specifically human):
+radiation_dose, equivalent_dose, radiation_exposure. Note: these
+apply to biological tissue generally, not just humans — Sv weighting
+factors use human tissue as reference, but the underlying concept
+(absorbed energy / biological damage) applies to any living tissue.
+So `biological_response` is the more accurate framing than a broader
+`human_response` umbrella that lumps these with perception.
 
-**not human-response** (stays plain SI_QUANTITY, no domain):
-sound_pressure (physical), refractive_power (optical property),
-lightbulb (engineering convention)
+**Framework implication**: it may be worth having TWO domains rather
+than collapsing into one. Perception (V(λ) / A-weighting) is
+fundamentally about *how the human sensory system responds to a
+physical stimulus* — the domain is inseparable from human anatomy.
+Dose (Gy/Sv/Coulomb-per-kg) is fundamentally about *how living
+tissue receives ionizing radiation* — humans are the reference but
+not the whole story. Different phenomena, different reference frames,
+different traceable standards.
+
+**not domain-flagged** (stays plain SI_QUANTITY, no domain):
+sound_pressure (physical pressure oscillation, distinct from phon
+which IS the perceptual layer), refractive_power (optical property
+of lens systems), lightbulb (engineering shorthand for equivalent-
+power ratings, not a perceptual quantity per se).
 
 Edge cases:
 
-- `catalytic_activity` — biological, but not response-oriented
-- Perceived temperature ("feels-like") — perceptual but derived, not
-  its own category
-- `photon` energy — physical stimulus, not response
+- `catalytic_activity` — biological rate (mol/s of substrate turnover)
+  but not response-oriented in the perceptual/dose sense. Probably
+  stays plain SI_QUANTITY. Could argue for a `biochemistry_rate`
+  domain in the future if more categories join it.
+- Perceived temperature ("feels-like", wind-chill, heat-index) —
+  perceptual but derived, not its own category yet.
+- `photon` energy — physical stimulus (individual photon carrier
+  energy), not a response quantity. Stays plain SI_QUANTITY.
 
 ## Scope
 
