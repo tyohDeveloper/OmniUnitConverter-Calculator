@@ -8,11 +8,12 @@ import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
 import { composeUnitDisplaySymbol } from '@/lib/units/composeUnitDisplaySymbol';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 
-// §1.6: unit-symbol composition is single-sourced via composeUnit
-// DisplaySymbol. The value transform uses siToDisplay (RPN path,
-// offset-/inverse-aware) rather than the simple divide-by-effective
-// PrefixFactor used by formatCalcValueDisplay. See docs/tasks/
-// calc-display-formula-inconsistency.md.
+// §1.6: unit-symbol composition and value transform are both
+// single-sourced (composeUnitDisplaySymbol + siToDisplay). This
+// hook stores the raw numeric displayValue on val.originalValue,
+// so it uses the two primitives directly rather than the packaged
+// formatCalcValueDisplay (which additionally produces a formatted
+// string that would be unused here).
 
 interface UseCalculatorRpnSelectionArgs {
   rpnSelectedAlternative: number;

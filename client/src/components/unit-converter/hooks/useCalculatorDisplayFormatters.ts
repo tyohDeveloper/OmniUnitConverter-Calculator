@@ -3,16 +3,14 @@ import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
-import { composeUnitDisplaySymbol } from '@/lib/units/composeUnitDisplaySymbol';
 import { formatCalcValueDisplay } from '@/lib/calculator/formatCalcValueDisplay';
 
-// §1.6: calcResultDisplay uses the packaged formatCalcValueDisplay
-// (simple divide-by-effectivePrefixFactor). rpnResultDisplay uses
-// siToDisplay (temperature-offset-, inverse-, and kg-correct) and
-// therefore only reuses the shared composeUnitDisplaySymbol step.
-// The two paths deliberately diverge — see docs/tasks/calc-display-
-// formula-inconsistency.md.
+// §1.6: both simple-mode and RPN result displays route through
+// formatCalcValueDisplay, which uses siToDisplay under the hood
+// (offset-/inverse-/prefixPower-aware).
+// The RPN path has one extra branch: dimensionless intermediate
+// results (symbol '1' or empty) short-circuit to the raw siValue
+// with no unit label, so the display doesn't show a stray '1'.
 
 interface UseCalculatorDisplayFormattersArgs {
   calcValues: Array<CalcValue | null>;
@@ -38,11 +36,10 @@ function rpnResultDisplay(
 ): DisplayFormat {
   const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
   if (currentSymbol === '1' || !currentSymbol) return { formattedValue: formatNumberWithSeparators(val.value, calculatorPrecision), unitSymbol: '' };
-  // §1.6 divergence: RPN path uses siToDisplay (offset-/inverse-aware);
-  // shared step is composeUnitDisplaySymbol.
-  const displayValue = siToDisplayLib(val.value, currentSymbol, rpnResultPrefix);
-  const { unitSymbol } = composeUnitDisplaySymbol(currentSymbol, rpnResultPrefix);
-  return { formattedValue: formatNumberWithSeparators(displayValue, calculatorPrecision), unitSymbol };
+  const { formattedValue, unitSymbol } = formatCalcValueDisplay(
+    val.value, currentSymbol, rpnResultPrefix, calculatorPrecision, formatNumberWithSeparators,
+  );
+  return { formattedValue, unitSymbol };
 }
 
 function calcResultDisplay(

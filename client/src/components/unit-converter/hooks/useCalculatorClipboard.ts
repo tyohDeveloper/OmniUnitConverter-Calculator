@@ -5,11 +5,13 @@ import { formatCalcValueDisplay } from '@/lib/calculator/formatCalcValueDisplay'
 import { fixPrecision } from '@/lib/calculator/fixPrecision';
 import { cleanNumber } from '@/lib/calculator/cleanNumber';
 
-// §1.6: unitSymbol + displayValue are computed by formatCalcValue
-// Display (which itself uses composeUnitDisplaySymbol). Simple-mode
-// field copy uses cleanNumber(fixPrecision(displayValue), ...) for
-// a trailing-zero-trimmed, separator-free output; RPN field copy
-// uses the locale-aware formattedValue with commas stripped.
+// §1.6: unitSymbol + displayValue come from formatCalcValueDisplay
+// (which routes through siToDisplay, so temperature offsets, inverse
+// units, and powered prefixes are all handled). The two copy variants
+// differ only in how they format the number: simple-mode uses
+// cleanNumber(fixPrecision(displayValue), ...) for a trailing-zero-
+// trimmed, separator-free output; RPN uses the locale-aware
+// formattedValue with commas stripped.
 
 interface UseCalculatorClipboardArgs {
   calcValues: Array<CalcValue | null>;

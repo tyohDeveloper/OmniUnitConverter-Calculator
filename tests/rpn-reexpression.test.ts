@@ -39,6 +39,26 @@ describe('lookupUnitForSymbol', () => {
   it('returns null for unknown symbols', () => {
     expect(lookupUnitForSymbol('xyz_unknown')).toBeNull();
   });
+
+  it('is idempotent (memoized) — same input returns equal result on repeat calls', () => {
+    // The lookup was changed from a double-loop to a lazily-built Map
+    // on 2026-08-05. Behavior parity is what matters; this test just
+    // pins the invariant that repeat calls return equal values.
+    const a = lookupUnitForSymbol('m');
+    const b = lookupUnitForSymbol('m');
+    expect(a).toEqual(b);
+    expect(a).not.toBeNull();
+  });
+
+  it('first-match-wins for symbols shared across categories', () => {
+    // "m³" appears in volume, beer_wine_volume, and archaic_volume
+    // (in that iteration order in CONVERSION_DATA). The previous
+    // double-loop returned the first match; the memoized Map preserves
+    // that by refusing to overwrite an existing key.
+    const result = lookupUnitForSymbol('m³');
+    expect(result).not.toBeNull();
+    expect(result!.categoryId).toBe('volume');
+  });
 });
 
 describe('displayToSI — SI units', () => {
