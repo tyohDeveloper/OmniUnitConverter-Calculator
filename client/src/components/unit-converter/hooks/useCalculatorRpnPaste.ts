@@ -4,6 +4,7 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { CONVERSION_DATA, parseUnitText } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
+import { canPushToCalculator } from '@/lib/calculator/canPushToCalculator';
 
 interface UseCalculatorRpnPasteArgs {
   saveRpnStackForUndo: () => void;
@@ -65,6 +66,10 @@ async function doPasteToRpnStack(args: UseCalculatorRpnPasteArgs): Promise<void>
     const text = await navigator.clipboard.readText();
     if (!text) return;
     const parsed = parseUnitText(text);
+    // Reject pushes originating from SYMBOLIC categories. The calculator
+    // layer is 100% numeric; SYMBOLIC values can't be represented on the
+    // RPN stack. See lib/calculator/canPushToCalculator.
+    if (!canPushToCalculator(parsed.categoryId ?? undefined)) return;
     const dims = copyDimensions(parsed.dimensions);
     const newEntry = buildPasteEntry(parsed, dims);
     args.saveRpnStackForUndo();
