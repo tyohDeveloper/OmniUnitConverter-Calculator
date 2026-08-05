@@ -5,7 +5,7 @@ import { CalculatorFieldDisplay } from '@/components/unit-converter/components/C
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
 import type {
   UseCalculatorControllerReturn, RpnBinaryOp,
-} from '@/components/unit-converter/hooks/useCalculatorController';
+} from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 
 interface RpnStackRowYProps {
   controller: UseCalculatorControllerReturn;

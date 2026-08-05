@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 import { useRpnXEditField } from '@/components/unit-converter/hooks/useRpnXEditField';
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { RpnXRegisterSelectors } from './RpnXRegisterSelectors';

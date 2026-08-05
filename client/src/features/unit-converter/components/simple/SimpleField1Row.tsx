@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 import { SimpleFieldRow } from './SimpleFieldRow';
 
 interface SimpleField1RowProps {

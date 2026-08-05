@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Copy, ClipboardPaste } from 'lucide-react';
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 
 interface RpnBottomRowProps {
   controller: UseCalculatorControllerReturn;

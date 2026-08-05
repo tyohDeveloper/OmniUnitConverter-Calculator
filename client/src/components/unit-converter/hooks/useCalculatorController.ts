@@ -18,79 +18,16 @@ import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/apply
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import { applyRpnUnary as applyRpnUnaryLib, type RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
-import { applyRpnBinary as applyRpnBinaryLib, type RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
+import { applyRpnUnary as applyRpnUnaryLib } from '@/lib/calculator/applyRpnUnary';
+import { applyRpnBinary as applyRpnBinaryLib } from '@/lib/calculator/applyRpnBinary';
+import type {
+  UseCalculatorControllerReturn,
+  RpnUnaryOp, RpnBinaryOp,
+} from './useCalculatorControllerReturn';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
-
-// Council-02: re-export the lib's op types so any future op added to
-// lib/calculator/rpnOps/* is instantly visible here. Keeps a single
-// source of truth per architecture-standards §10.1.
-export type RpnUnaryOp = RpnUnaryOpLib;
-export type RpnBinaryOp = RpnBinaryOpLib;
-
-export interface UseCalculatorControllerReturn {
-  calculatorMode: 'simple' | 'rpn';
-  shiftActive: boolean;
-  calculatorPrecision: number;
-  calcValues: Array<CalcValue | null>;
-  calcOp1: '+' | '-' | '*' | '/' | null;
-  calcOp2: '+' | '-' | '*' | '/' | null;
-  resultPrefix: string;
-  selectedAlternative: number;
-  preserveSourceUnit: boolean;
-  rpnStack: Array<CalcValue | null>;
-  previousRpnStack: Array<CalcValue | null>;
-  rpnResultPrefix: string;
-  rpnSelectedAlternative: number;
-  rpnXEditing: boolean;
-  rpnXEditValue: string;
-
-  setShiftActive: (v: boolean) => void;
-  setCalculatorPrecision: (v: number) => void;
-  setCalcOp1: (v: '+' | '-' | '*' | '/' | null) => void;
-  setCalcOp2: (v: '+' | '-' | '*' | '/' | null) => void;
-  setResultPrefix: (v: string) => void;
-  setSelectedAlternative: (v: number) => void;
-  togglePreserveSourceUnit: () => void;
-  setRpnStack: (v: Array<CalcValue | null> | ((prev: Array<CalcValue | null>) => Array<CalcValue | null>)) => void;
-  setRpnXEditing: (v: boolean) => void;
-  setRpnXEditValue: (v: string) => void;
-
-  clearCalculator: () => void;
-  clearField1: () => void;
-  clearField2: () => void;
-  clearField3: () => void;
-  clearRpnStack: () => void;
-  copyCalcField: (index: number) => void;
-  copyCalcResult: () => void;
-  copyRpnField: (index: number) => void;
-  copyRpnResult: () => void;
-  switchToRpn: () => void;
-  switchToSimple: () => void;
-  applyRpnUnary: (op: RpnUnaryOp) => void;
-  applyRpnBinary: (op: RpnBinaryOp) => void;
-  canApplyRpnBinary: (op: RpnBinaryOp) => boolean;
-  pushToRpnStack: () => void;
-  dropRpnStack: () => void;
-  undoRpnStack: () => void;
-  pullFromPane: () => void;
-  pasteToRpnStack: () => Promise<void>;
-  swapRpnXY: () => void;
-  recallLastX: () => void;
-  pushRpnConstant: (value: number) => void;
-  saveRpnStackForUndo: () => void;
-  setRpnResultPrefix: (v: string) => void;
-  setRpnSelectedAlternative: (v: number) => void;
-  getRpnResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
-  getCalcResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
-  generateSIRepresentations: (dimensions: DimensionalFormula, sourceCategory?: string) => SIRepresentation[];
-  applyPrefixToKgUnit: typeof applyPrefixToKgUnitLib;
-  formatNumberWithSeparators: (num: number, precision: number) => string;
-  t: (key: string) => string;
-}
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,

@@ -1,4 +1,4 @@
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 import { SimpleCalculatorPane } from './SimpleCalculatorPane';
 import { RpnCalculatorPane } from './RpnCalculatorPane';
 
