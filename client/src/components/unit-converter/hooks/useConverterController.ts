@@ -25,6 +25,24 @@ import * as converterActions from '../state/actions/converterActions';
 // also retired in a later commit; parseUnitText's dimensions field
 // now reads from the canonical map via getCategoryDimensionsForParse.
 
+// File-length note: this controller is a wiring hub. Its length is
+// dominated by coordination width, not logic:
+//   - ~40 lines of state-slice destructuring (5 state hooks feed
+//     20+ named getters/setters into local scope)
+//   - ~13 lines of flash-trigger remapping (rename flash.x[1] ->
+//     triggerFlashX; consumed by clipboard/push wiring below)
+//   - ~20 lines of clipboard + push subhook wiring (long arg lists)
+//   - ~27 lines of the return statement (this hook's public surface
+//     has ~50 named fields; each returned by name)
+//
+// Five domain sub-hooks have already been extracted (Input, Direct,
+// ResultEffect, plus pre-existing Clipboard, PushToCalculator).
+// Further extraction would move coordination into a barrel-hook
+// whose only job is to call other hooks and re-expose their fields
+// — exactly the pattern §3.8 prohibits. The exception in lint-size
+// captures this: the file is over cap by coordination width, not by
+// missing decomposition.
+
 export function useConverterController(): UseConverterControllerReturn {
   const { state, dispatch, flash, inputRef } = useConverterContext();
   const converterState = useConverterState();
