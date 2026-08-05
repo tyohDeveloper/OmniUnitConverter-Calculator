@@ -7,7 +7,7 @@ import {
   formatNumberWithFormat as formatNumberWithSpecificFormat,
 } from '@/lib/formatting';
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
-import { CATEGORY_NAVIGATION_ORDER } from './categoryNavigationOrder';
+import { CATEGORY_GROUPS } from '@/features/unit-converter/categoryGroups';
 
 interface UseConverterInputHandlersArgs {
   inputValue: string;
@@ -59,7 +59,7 @@ function stepCategoryOnArrowKey(
 ): void {
   if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
   e.preventDefault();
-  const allCategories = CATEGORY_NAVIGATION_ORDER.flatMap(g => g.categories);
+  const allCategories = CATEGORY_GROUPS.flatMap(g => g.categories);
   const currentIndex = allCategories.indexOf(activeCategory);
   if (currentIndex === -1) return;
   const newIndex = e.key === 'ArrowUp'
