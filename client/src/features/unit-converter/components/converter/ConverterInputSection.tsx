@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { PREFIXES, ALL_PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
+import { KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -38,7 +38,7 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
     copyFromBaseFactor, copyFromSIBase,
     handleInputChange, handleInputKeyDown, handleInputBlur,
     refocusInput,
-    normalizeMassUnit, t, translateUnitName,
+    t, translateUnitName,
     formatFactor,
     getPlaceholder, getCategoryDimensions,
   } = controller;

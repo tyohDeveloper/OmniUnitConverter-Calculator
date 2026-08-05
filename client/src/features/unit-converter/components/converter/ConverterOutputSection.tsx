@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { PREFIXES, ALL_PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
-import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
+import { KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
@@ -34,7 +34,7 @@ export function ConverterOutputSection({
     result, precision,
     copyResult,
     copyToBaseFactor, copyToSIBase,
-    normalizeMassUnit, t, translateUnitName,
+    t, translateUnitName,
     formatFactor, formatResultValue,
     formatDMS, formatFtIn,
     getCategoryDimensions,
