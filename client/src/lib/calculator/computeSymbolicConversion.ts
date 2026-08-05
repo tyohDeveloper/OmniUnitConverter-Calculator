@@ -1,5 +1,6 @@
 import { CATEGORY_FAMILIES } from '../units/categoryFamilies';
 import type { UnitCategory } from '../units/unitCategory';
+import { computeTimeConversion } from './computeTimeConversion';
 
 /**
  * Pure conversion calculation for SYMBOLIC-family categories.
@@ -17,11 +18,9 @@ import type { UnitCategory } from '../units/unitCategory';
  *   numeric:  (value: number, ...) => number | null
  *   symbolic: (value: string, ...) => string | null
  *
- * This file currently implements the framework skeleton only. Each
- * SYMBOLIC category (Time in step 4, Date later) will register its
- * own conversion in this file (or its own module dispatched from
- * here) as it lands. Until then this function returns null so no
- * user-visible behavior is affected.
+ * Per-category dispatch is by activeCategory id. Adding a new
+ * SYMBOLIC category = register it in CONVERSION_DATA + wire its
+ * per-category conversion function into the switch below.
  */
 export function computeSymbolicConversion(input: {
   value: string;
@@ -31,9 +30,12 @@ export function computeSymbolicConversion(input: {
 }): string | null {
   const family = CATEGORY_FAMILIES[input.activeCategory];
   if (family !== 'SYMBOLIC') return null;
-  // Per-category dispatch will be added in step 4 when the Time
-  // category becomes the first consumer. For now no SYMBOLIC
-  // categories are registered, so this branch is dead code — but
-  // the pipeline is wired so adding a category is a one-file change.
-  return null;
+  switch (input.activeCategory) {
+    case 'timezone':
+      return computeTimeConversion({
+        value: input.value, fromUnit: input.fromUnit, toUnit: input.toUnit,
+      });
+    default:
+      return null;
+  }
 }
