@@ -2,12 +2,12 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { CONVERSION_DATA } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { NumberFormat } from '@/lib/units/numberFormat';
-import { computeConversion } from '@/lib/calculator/computeConversion';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
 import { useConverterInputHandlers } from './useConverterInputHandlers';
 import { useConverterDirectMode } from './useConverterDirectMode';
+import { useConverterResultEffect } from './useConverterResultEffect';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
@@ -118,19 +118,11 @@ export function useConverterController(): UseConverterControllerReturn {
     setTimeout(() => { inputRef.current?.focus(); }, 100);
   }, [inputRef]);
 
-  useEffect(() => {
-    if (!inputValue || !fromUnit || !toUnit) { setResult(null); return; }
-    // Council-08c: parse input, then delegate to lib/calculator/computeConversion.
-    let val: number;
-    if (fromUnit === 'deg_dms') val = parseDMS(inputValue);
-    else if (fromUnit === 'ft_in') val = parseFtIn(inputValue);
-    else val = parseNumberWithFormat(inputValue);
-    if (isNaN(val)) { setResult(null); return; }
-    const res = computeConversion({
-      value: val, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-    });
-    setResult(res);
-  }, [inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix, numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Conversion result effect — see useConverterResultEffect.
+  useConverterResultEffect({
+    inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
+    numberFormat, parseNumberWithFormat, parseDMS, parseFtIn, setResult,
+  });
 
   useEffect(() => {
     return () => {
