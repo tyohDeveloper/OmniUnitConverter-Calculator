@@ -2,8 +2,6 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { CONVERSION_DATA } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { NumberFormat } from '@/lib/units/numberFormat';
-import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
 import { useConverterInputHandlers } from './useConverterInputHandlers';
 import { useConverterDirectMode } from './useConverterDirectMode';
@@ -106,8 +104,6 @@ export function useConverterController(): UseConverterControllerReturn {
     triggerFlashRpnResult: flash.rpnResult[1],
     triggerFlashDirectCopy: flash.directCopy[1],
   };
-
-  const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
 
   // Locale-dependent helpers (translators, formatters, parsers,
   // dimensional metadata) live in useLocaleHelpers. Everything there
@@ -223,10 +219,10 @@ export function useConverterController(): UseConverterControllerReturn {
     handleDirectCopyAndPushToCalculator, handleQuantityClick,
     refocusInput, reformatInputValue,
 
-    normalizeMassUnit, parseNumberWithFormat, t, translateUnitName, formatFactor, formatResultValue,
+    parseNumberWithFormat, t, translateUnitName, formatFactor, formatResultValue,
     formatDMS, formatFtIn, formatForClipboard, formatNumberWithSeparators,
     getPlaceholder, getCategoryDimensions, buildDirectUnitSymbol, buildDirectDimensions,
-    generateSIRepresentations, applyPrefixToKgUnit,
+    generateSIRepresentations,
 
     inputRef,
     pendingPasteUnit,

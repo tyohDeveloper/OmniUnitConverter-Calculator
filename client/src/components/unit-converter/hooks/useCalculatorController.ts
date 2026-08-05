@@ -3,7 +3,6 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
@@ -209,7 +208,7 @@ export function useCalculatorController(
     pasteToRpnStack, swapRpnXY, recallLastX, pushRpnConstant,
     saveRpnStackForUndo,
     getRpnResultDisplay, getCalcResultDisplay,
-    generateSIRepresentations, applyPrefixToKgUnit: applyPrefixToKgUnitLib,
+    generateSIRepresentations,
     formatNumberWithSeparators, t,
   };
 }

@@ -1,7 +1,7 @@
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import type { applyPrefixToKgUnit } from '@/lib/units/applyPrefixToKgUnit';
+
 import type { RpnUnaryOp as RpnUnaryOpLib } from '@/lib/calculator/applyRpnUnary';
 import type { RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBinary';
 
@@ -20,7 +20,7 @@ import type { RpnBinaryOp as RpnBinaryOpLib } from '@/lib/calculator/applyRpnBin
  *   - Mode switching (Simple <-> RPN)
  *   - RPN operations (unary, binary, canApply, stack ops)
  *   - Display formatters (getRpnResultDisplay, getCalcResultDisplay)
- *   - Passthroughs (generateSIRepresentations, applyPrefixToKgUnit,
+ *   - Passthroughs (generateSIRepresentations,
  *     formatNumberWithSeparators, t)
  */
 export type RpnUnaryOp = RpnUnaryOpLib;
@@ -82,7 +82,6 @@ export interface UseCalculatorControllerReturn {
   getRpnResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
   getCalcResultDisplay: () => { formattedValue: string; unitSymbol: string } | null;
   generateSIRepresentations: (dimensions: DimensionalFormula, sourceCategory?: string) => SIRepresentation[];
-  applyPrefixToKgUnit: typeof applyPrefixToKgUnit;
   formatNumberWithSeparators: (num: number, precision: number) => string;
   t: (key: string) => string;
 }

@@ -20,8 +20,6 @@ import { CalculatorPane } from '@/features/unit-converter/components/CalculatorP
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { useConverterController } from '@/components/unit-converter/hooks/useConverterController';
 import { useCalculatorController } from '@/components/unit-converter/hooks/useCalculatorController';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { siToDisplay } from '@/lib/unit-symbols/siToDisplay';
 import { PREFIXES } from '@/lib/units/prefixes';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 
@@ -56,7 +54,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     formatResultValue,
     formatForClipboard, formatNumberWithSeparators,
     buildDirectUnitSymbol, buildDirectDimensions,
-    generateSIRepresentations, applyPrefixToKgUnit,
+
     pendingPasteUnit,
     setPendingPasteUnit,
   } = conv;
@@ -77,10 +75,9 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
   const {
     calculatorMode,
     calcValues,
-    resultPrefix, selectedAlternative,
-    rpnStack, rpnResultPrefix, rpnSelectedAlternative,
-    calculatorPrecision,
+    rpnStack,
     switchToRpn, setRpnXEditing, setRpnXEditValue, getRpnResultDisplay,
+    copyCalcResult, copyRpnResult,
   } = calc;
 
   const categoryData = CONVERSION_DATA.find(c => c.id === activeCategory)!;
@@ -165,35 +162,22 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
       if (activeTagName === 'input' || activeTagName === 'textarea' || activeElement?.isContentEditable) return;
       if (selection && selection.toString().trim()) return;
 
+      // §1.6: delegate to the calc controller's clipboard writers,
+      // which route through formatCalcValueDisplay + siToDisplay.
+      // The previous inline implementation reimplemented the display
+      // formula twice (once with siToDisplay for RPN, once with the
+      // buggy divide-by-effectivePrefixFactor for simple mode), and
+      // the simple-mode branch produced wrong clipboard values for
+      // any CalcValue with a non-'none' prefix (reachable via RPN
+      // paste + RPN→simple mode switch).
       if (calculatorMode === 'rpn' && rpnStack[3]) {
-        const val = rpnStack[3];
-        const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
-        const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
-        const kgResult = applyPrefixToKgUnit(currentSymbol, rpnResultPrefix);
-        const displayValue = siToDisplay(val.value, currentSymbol, rpnResultPrefix);
-        const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-        const cleanValue = formattedValue.replace(/,/g, '');
-        const prefixData = PREFIXES.find(p => p.id === rpnResultPrefix);
-        const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-        const unitSymbol = prefixSymbol + kgResult.displaySymbol;
-        navigator.clipboard.writeText(unitSymbol ? `${cleanValue} ${unitSymbol}` : cleanValue);
-        flash.rpnResult[1]();
+        copyRpnResult();
         e.preventDefault();
         return;
       }
 
       if (calculatorMode === 'simple' && calcValues[3]) {
-        const val = calcValues[3];
-        const siReps = generateSIRepresentations(val.dimensions, val.sourceCategory);
-        const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
-        const kgResult = applyPrefixToKgUnit(currentSymbol, resultPrefix);
-        const displayValue = val.value / kgResult.effectivePrefixFactor;
-        const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-        const prefixData = PREFIXES.find(p => p.id === resultPrefix);
-        const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-        const unitSymbol = prefixSymbol + kgResult.displaySymbol;
-        navigator.clipboard.writeText(unitSymbol ? `${formattedValue} ${unitSymbol}` : formattedValue);
-        flash.copyCalc[1]();
+        copyCalcResult();
         e.preventDefault();
         return;
       }
@@ -214,9 +198,9 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     };
     document.addEventListener('keydown', handleKeyboardCopy);
     return () => document.removeEventListener('keydown', handleKeyboardCopy);
-  }, [calculatorMode, rpnStack, calcValues, rpnResultPrefix, rpnSelectedAlternative, resultPrefix, selectedAlternative,
-    calculatorPrecision, activeTab, result, toUnit, toPrefix, activeCategory, precision, directValue,
-    generateSIRepresentations, applyPrefixToKgUnit, formatNumberWithSeparators, formatForClipboard, categoryData]);
+  }, [calculatorMode, rpnStack, calcValues, copyCalcResult, copyRpnResult,
+    activeTab, result, toUnit, toPrefix, activeCategory, precision, directValue,
+    formatForClipboard, categoryData]);
 
 
   return (
