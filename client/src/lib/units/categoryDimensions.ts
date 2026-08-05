@@ -1,7 +1,4 @@
 import type { DimensionalFormula } from './dimensionalFormula';
-import { CATEGORY_PRIMARIES } from './categoryPrimaries';
-import { CATEGORY_FAMILIES } from './categoryFamilies';
-import { CATEGORY_DIRECT_MATCH_HIDDEN } from './categoryAliases';
 
 export interface CategoryDimensionInfo {
   name: string;
@@ -92,54 +89,13 @@ export const CATEGORY_DIMENSIONS: Record<string, CategoryDimensionInfo> = {
 
 // The three historical exclusion lists have been fully retired.
 // Every reason a category could have been excluded now lives on the
-// category itself as declared metadata:
-//
-//   - archaics and named-standard locals: primaryCategory field
-//   - non-SI conversion flavors: family (DIMENSIONLESS_RATIO,
-//     DATA_QUANTITY, FUEL_ECONOMY, NUMERIC_FUNCTION, SYMBOLIC)
-//   - dimensional aliases with distinct meaning: hideFromDirectMatch
-//     field (radioactivity, radiation_dose, cross_section,
-//     sound_pressure, sound_intensity, acoustic_impedance,
-//     refractive_power)
-//   - ghost/pending categories: undefined family, treated as non-SI
-//
-// The former EXCLUDED_CROSS_DOMAIN_CATEGORIES, EXCLUDED_DOMAIN_ALIAS_
-// CATEGORIES, and ALL_EXCLUDED_CATEGORIES symbols are gone.
+// category itself as declared metadata (family, primaryCategory,
+// hideFromDirectMatch, dimensionalAliasOf). See matchPhysicalQuant
+// ities.ts for the Direct-pane filter that reads all three.
 
 export function getCategoryKeyForQuantityName(name: string): string | null {
   for (const [key, info] of Object.entries(CATEGORY_DIMENSIONS)) {
     if (info.name === name) return key;
   }
   return null;
-}
-
-export function getMatchingPhysicalQuantities(dimensions: DimensionalFormula): string[] {
-  const keys = Object.keys(dimensions) as (keyof DimensionalFormula)[];
-  const hasNonZero = keys.some(k => (dimensions[k] ?? 0) !== 0);
-  if (!hasNonZero) return [];
-
-  const results: string[] = [];
-  for (const [categoryKey, info] of Object.entries(CATEGORY_DIMENSIONS)) {
-    if (CATEGORY_FAMILIES[categoryKey] !== 'SI_QUANTITY') continue;
-    if (CATEGORY_DIRECT_MATCH_HIDDEN.has(categoryKey)) continue;
-    if (!dimensionsMatchLocal(dimensions, info.dimensions)) continue;
-    const primaryId = CATEGORY_PRIMARIES[categoryKey];
-    if (primaryId) {
-      const primaryDims = CATEGORY_DIMENSIONS[primaryId]?.dimensions;
-      if (primaryDims && dimensionsMatchLocal(dimensions, primaryDims)) continue;
-    }
-    results.push(info.name);
-  }
-
-  return results;
-}
-
-// Local dimensional-equality; kept in-file to avoid cross-module
-// dependency for a trivial check.
-function dimensionsMatchLocal(a: DimensionalFormula, b: DimensionalFormula): boolean {
-  const keys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)])) as (keyof DimensionalFormula)[];
-  for (const k of keys) {
-    if ((a[k] ?? 0) !== (b[k] ?? 0)) return false;
-  }
-  return true;
 }

@@ -114,6 +114,9 @@ const CATEGORY_GROUPS_ALL = [
 
 // Council-03: local CATEGORY_DIMENSION_MAP replaced by the canonical
 // CATEGORY_DIMENSIONS catalog in lib/units/categoryDimensions.ts.
+// The duplicated CATEGORY_DIMENSION_MAP in conversion-data.ts was
+// also retired in a later commit; parseUnitText's dimensions field
+// now reads from the canonical map via getCategoryDimensionsForParse.
 
 export function useConverterController(): UseConverterControllerReturn {
   const { state, dispatch, flash, inputRef } = useConverterContext();
