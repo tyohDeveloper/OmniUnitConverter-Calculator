@@ -7,16 +7,14 @@ import {
 } from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/units/numberFormat';
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
-import type { SupportedLanguage } from '@/lib/localization';
-import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { buildDirectUnitSymbol as buildDirectUnitSymbolLib } from '@/lib/unit-symbols/buildDirectUnitSymbol';
 import { buildDirectDimensions as buildDirectDimensionsLib } from '@/lib/unit-symbols/buildDirectDimensions';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { sanitizeInput } from '@/lib/parsing/sanitizeInput';
-import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import { getCategoryKeyForQuantityName } from '@/lib/units/categoryDimensions';
+import type { UseConverterControllerReturn } from './useConverterControllerReturn';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useConverterState } from './useConverterState';
@@ -27,79 +25,6 @@ import { useUiPrefsState } from './useUiPrefsState';
 import { useConverterClipboard } from './useConverterClipboard';
 import { useConverterPushToCalculator } from './useConverterPushToCalculator';
 import * as converterActions from '../state/actions/converterActions';
-
-export interface UseConverterControllerReturn {
-  activeCategory: UnitCategory;
-  fromUnit: string;
-  toUnit: string;
-  fromPrefix: string;
-  toPrefix: string;
-  inputValue: string;
-  result: number | null;
-  precision: number;
-  comparisonMode: boolean;
-  numberFormat: NumberFormat;
-  language: SupportedLanguage;
-  activeTab: string;
-  directValue: string;
-  directExponents: Record<string, number>;
-  converterPasteStatus: 'idle' | 'unrecognised' | 'unavailable';
-  customPasteStatus: 'idle' | 'unrecognised' | 'unavailable';
-
-  setActiveCategory: (v: UnitCategory) => void;
-  setFromUnit: (v: string) => void;
-  setToUnit: (v: string) => void;
-  setFromPrefix: (v: string) => void;
-  setToPrefix: (v: string) => void;
-  setInputValue: (v: string) => void;
-  setPrecision: (v: number) => void;
-  setComparisonMode: (v: boolean) => void;
-  setNumberFormat: (v: NumberFormat) => void;
-  setLanguage: (v: SupportedLanguage) => void;
-  setActiveTab: (v: string) => void;
-  setDirectValue: (v: string) => void;
-  setDirectExponents: (v: Record<string, number>) => void;
-
-  swapUnits: () => void;
-  copyResult: () => void;
-  copyFromBaseFactor: () => void;
-  copyFromSIBase: () => void;
-  copyToBaseFactor: () => void;
-  copyToSIBase: () => void;
-  copyConversionRatio: () => void;
-  handleInputChange: (v: string) => void;
-  handleInputKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleInputBlur: () => void;
-  handleConverterSmartPasteClick: () => Promise<void>;
-  handleCustomSmartPasteClick: () => Promise<void>;
-  handleDirectCopyAndPushToCalculator: (value: number, dims: Record<string, number>) => void;
-  handleQuantityClick: (quantityName: string) => void;
-  refocusInput: () => void;
-  reformatInputValue: (oldFormat: NumberFormat, newFormat: NumberFormat) => void;
-
-  normalizeMassUnit: (unit: string, prefix: string) => { unit: string; prefix: string };
-  parseNumberWithFormat: (str: string) => number;
-  t: (key: string) => string;
-  translateUnitName: (name: string) => string;
-  formatFactor: (f: number) => string;
-  formatResultValue: (num: number, precision: number) => string;
-  formatDMS: (decimal: number) => string;
-  formatFtIn: (decimalFeet: number) => string;
-  formatForClipboard: (num: number, precision: number) => string;
-  formatNumberWithSeparators: (num: number, precision: number) => string;
-  getPlaceholder: () => string;
-  getCategoryDimensions: (category: UnitCategory) => { [key: string]: number };
-  buildDirectUnitSymbol: () => string;
-  buildDirectDimensions: () => Record<string, number>;
-  generateSIRepresentations: (dims: DimensionalFormula, sourceCategory?: string) => SIRepresentation[];
-  applyPrefixToKgUnit: typeof applyPrefixToKgUnitLib;
-
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  // Council-11: replaces pendingPasteUnitRef. The value now lives in
-  // uiPrefs reducer state; consumers dispatch setPendingPasteUnit to update.
-  pendingPasteUnit: { fromUnit: string; prefixId: string } | null;
-  setPendingPasteUnit: (v: { fromUnit: string; prefixId: string } | null) => void;
-}
 
 const CATEGORY_GROUPS_ALL = [
   { categories: ['length', 'mass', 'time', 'current', 'temperature', 'amount', 'intensity'] },

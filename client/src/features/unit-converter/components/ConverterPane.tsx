@@ -2,7 +2,7 @@ import { CONVERSION_DATA, getFilteredSortedUnits } from '@/lib/conversion-data';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRightLeft } from 'lucide-react';
-import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 import { ConverterInputSection } from './converter/ConverterInputSection';
 import { ConverterOutputHeader } from './converter/ConverterOutputHeader';
 import { ConverterOutputSection } from './converter/ConverterOutputSection';

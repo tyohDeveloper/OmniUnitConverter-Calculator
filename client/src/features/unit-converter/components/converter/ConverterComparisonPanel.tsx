@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getComparisonUnits } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
 import { buildComparisonRows } from '@/lib/calculator/buildComparisonRows';
-import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 import type { CategoryDefinition } from '@/lib/units/unitDefinition';
 
 interface ConverterComparisonPanelProps {

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CommonFieldWidth } from '@/components/unit-converter/constants';
-import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 
 interface ConverterOutputHeaderProps {
   controller: UseConverterControllerReturn;

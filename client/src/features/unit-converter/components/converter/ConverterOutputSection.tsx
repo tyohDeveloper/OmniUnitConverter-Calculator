@@ -5,7 +5,7 @@ import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 import type { CategoryDefinition } from '@/lib/units/unitDefinition';
 import type { UnitDefinition } from '@/lib/units/unitDefinition';
 import type { ConverterFlash } from '../ConverterPane';

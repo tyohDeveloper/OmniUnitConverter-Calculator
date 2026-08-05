@@ -4,7 +4,7 @@ import { PREFIXES } from '@/lib/units/prefixes';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
 import { Button } from '@/components/ui/button';
 import { Copy, Info } from 'lucide-react';
-import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterController';
+import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 import type { CategoryDefinition } from '@/lib/units/unitDefinition';
 import type { ConverterFlash } from '../ConverterPane';
 
