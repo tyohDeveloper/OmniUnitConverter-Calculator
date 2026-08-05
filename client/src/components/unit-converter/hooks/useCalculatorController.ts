@@ -21,6 +21,33 @@ import { useCalculatorClearOps } from './useCalculatorClearOps';
 import { useCalculatorModeSwitch } from './useCalculatorModeSwitch';
 import { useCalculatorRecalcEffect } from './useCalculatorRecalcEffect';
 
+/*
+ * §3.5/3.7 file-length exception: this file is in HOOK_FILE_LENGTH_
+ * EXCLUDES because the residual length (~190 lines) is composition
+ * plumbing, not logic. After the 10 domain hooks were extracted
+ * (clear ops, mode switch, recalc effect, RPN stack ops, RPN pull,
+ * RPN paste, RPN unary/binary, RPN result selection, display
+ * formatters, clipboard), the controller body contains zero
+ * function-length-cap-violating bodies. It is now:
+ *
+ *   - destructures of useCalculatorState + useRpnStack + flash
+ *     triggers (~40 lines): pure interface adaptation for the sub-
+ *     hooks that follow, no logic.
+ *   - two one-line useCallbacks (generateSIRepresentations,
+ *     saveRpnStackForUndo).
+ *   - 10 sub-hook composition calls (~60 lines): each names the
+ *     domain and passes state through.
+ *   - a return statement enumerating the full UseCalculatorController
+ *     Return contract (~24 lines).
+ *
+ * Splitting the controller further would either duplicate the
+ * destructure pattern in every child hook (making the code MORE
+ * verbose and coupling every child to the state hooks) or invent
+ * an arbitrary internal composition layer with no domain meaning.
+ * The residual length here is the cost of expressing the complete
+ * contract; the aspirational 150-line cap is not appropriate for
+ * this specific composition role.
+ */
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
   t: (key: string) => string,
