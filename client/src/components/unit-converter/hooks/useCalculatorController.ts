@@ -1,8 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { CONVERSION_DATA, parseUnitText } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
-import { toFixedBanker } from '@/lib/formatting';
-import { fixPrecision as fixPrecisionLib } from '@/lib/calculator/fixPrecision';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { UnitType } from '@/lib/units/unitType';
@@ -29,6 +27,7 @@ import { useConverterContext } from '../context/ConverterContext';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
 import { useCalculatorDisplayFormatters } from './useCalculatorDisplayFormatters';
+import { useCalculatorClipboard } from './useCalculatorClipboard';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -92,23 +91,6 @@ export function useCalculatorController(
   }, []);
 
   const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
-
-  const fixPrecision = (num: number): number => {
-    if (num === 0) return 0;
-    if (!isFinite(num)) return num;
-    return parseFloat(num.toPrecision(17));
-  };
-
-  const cleanNumber = (num: number, precision: number): string => {
-    const fixed = fixPrecision(num);
-    let effectivePrecision = precision;
-    const absNum = Math.abs(fixed);
-    if (absNum > 0 && absNum < 1) {
-      effectivePrecision = Math.min(Math.abs(Math.floor(Math.log10(absNum))) + precision, 12);
-    }
-    const formatted = toFixedBanker(fixed, effectivePrecision);
-    return formatted.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.0+$/, '');
-  };
 
   const saveRpnStackForUndo = useCallback(() => {
     setPreviousRpnStack([...rpnStack]);
@@ -400,53 +382,14 @@ export function useCalculatorController(
     generateSIRepresentations, formatNumberWithSeparators,
   });
 
-  const copyCalcResult = useCallback(() => {
-    const display = getCalcResultDisplay();
-    if (!display) return;
-    navigator.clipboard.writeText(display.unitSymbol ? `${display.formattedValue} ${display.unitSymbol}` : display.formattedValue);
-    triggerFlashCopyCalc();
-  }, [getCalcResultDisplay, triggerFlashCopyCalc]);
-
-  const copyCalcField = useCallback((fieldIndex: number) => {
-    const val = calcValues[fieldIndex];
-    if (!val) return;
-    const baseUnitSymbol = formatDimensions(val.dimensions);
-    const kgResult = applyPrefixToKgUnit(baseUnitSymbol, val.prefix);
-    const displayValue = fixPrecision(val.value / kgResult.effectivePrefixFactor);
-    const prefixData = PREFIXES.find(p => p.id === val.prefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    const unitSymbol = prefixSymbol + kgResult.displaySymbol;
-    const valueStr = cleanNumber(displayValue, calculatorPrecision);
-    navigator.clipboard.writeText(unitSymbol ? `${valueStr} ${unitSymbol}` : valueStr);
-    if (fieldIndex === 0) triggerFlashCalcField1();
-    else if (fieldIndex === 1) triggerFlashCalcField2();
-    else if (fieldIndex === 2) triggerFlashCalcField3();
-  }, [calcValues, calculatorPrecision, triggerFlashCalcField1, triggerFlashCalcField2, triggerFlashCalcField3]);
-
-  const copyRpnResult = useCallback(() => {
-    const display = getRpnResultDisplay();
-    if (!display) return;
-    const cleanValue = display.formattedValue.replace(/,/g, '');
-    navigator.clipboard.writeText(display.unitSymbol ? `${cleanValue} ${display.unitSymbol}` : cleanValue);
-    triggerFlashRpnResult();
-  }, [getRpnResultDisplay, triggerFlashRpnResult]);
-
-  const copyRpnField = useCallback((index: number) => {
-    const val = rpnStack[index];
-    if (!val) return;
-    const baseUnitSymbol = formatDimensions(val.dimensions);
-    const kgResult = applyPrefixToKgUnit(baseUnitSymbol, val.prefix);
-    const displayValue = val.value / kgResult.effectivePrefixFactor;
-    const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-    const cleanValue = formattedValue.replace(/,/g, '');
-    const prefixData = PREFIXES.find(p => p.id === val.prefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    const unitSymbol = prefixSymbol + kgResult.displaySymbol;
-    navigator.clipboard.writeText(unitSymbol ? `${cleanValue} ${unitSymbol}` : cleanValue);
-    if (index === 0) triggerFlashRpnField1();
-    else if (index === 1) triggerFlashRpnField2();
-    else if (index === 2) triggerFlashRpnField3();
-  }, [rpnStack, calculatorPrecision, formatNumberWithSeparators, triggerFlashRpnField1, triggerFlashRpnField2, triggerFlashRpnField3]);
+  // Clipboard writers for calculator field and result values.
+  // See useCalculatorClipboard.
+  const { copyCalcResult, copyCalcField, copyRpnResult, copyRpnField } = useCalculatorClipboard({
+    calcValues, rpnStack, calculatorPrecision, formatNumberWithSeparators,
+    getCalcResultDisplay, getRpnResultDisplay,
+    triggerFlashCopyCalc, triggerFlashCalcField1, triggerFlashCalcField2, triggerFlashCalcField3,
+    triggerFlashRpnResult, triggerFlashRpnField1, triggerFlashRpnField2, triggerFlashRpnField3,
+  });
 
   const switchToRpn = useCallback(() => {
     saveRpnStackForUndo();
