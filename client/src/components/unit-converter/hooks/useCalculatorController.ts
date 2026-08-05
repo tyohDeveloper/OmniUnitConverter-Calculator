@@ -5,8 +5,6 @@ import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { CalcValue } from '@/lib/units/calcValue';
 import { UnitType } from '@/lib/units/unitType';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { isDimensionless } from '@/lib/dimensions/isDimensionless';
-import { dimensionsEqual } from '@/lib/dimensions/dimensionsEqual';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
@@ -16,18 +14,14 @@ import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/apply
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
 import { CATEGORY_DIMENSIONS } from '@/lib/units/categoryDimensions';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import { applyRpnUnary as applyRpnUnaryLib } from '@/lib/calculator/applyRpnUnary';
-import { applyRpnBinary as applyRpnBinaryLib } from '@/lib/calculator/applyRpnBinary';
-import type {
-  UseCalculatorControllerReturn,
-  RpnUnaryOp, RpnBinaryOp,
-} from './useCalculatorControllerReturn';
+import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
 import { useConverterContext } from '../context/ConverterContext';
 import { useCalculatorState } from './useCalculatorState';
 import { useRpnStack } from './useRpnStack';
 import { useCalculatorDisplayFormatters } from './useCalculatorDisplayFormatters';
 import { useCalculatorClipboard } from './useCalculatorClipboard';
+import { useCalculatorRpnOps } from './useCalculatorRpnOps';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -321,59 +315,11 @@ export function useCalculatorController(
     }
   }, [saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, generateSIRepresentations]);
 
-  // Council-02: RPN unary dispatch delegates to lib/calculator/applyRpnUnary
-  // (single source of truth). The controller's only remaining
-  // responsibilities are stack orchestration, undo capture, and adding the
-  // app-wide CalcValue.prefix field that the lib intentionally omits.
-  // Undo capture and lastX are set BEFORE the guard result is checked to
-  // preserve exact prior behavior of the inline switch (which called
-  // saveRpnStackForUndo/setLastX before any early return).
-  const applyRpnUnary = useCallback((op: RpnUnaryOp) => {
-    const x = rpnStack[3];
-    if (!x) return;
-    saveRpnStackForUndo();
-    setLastX(x);
-    const result = applyRpnUnaryLib(x, op, calculatorPrecision);
-    if (!result) return;
-    const newEntry: CalcValue = { ...result, prefix: 'none' };
-    setRpnStack(prev => { const ns = [...prev]; ns[3] = newEntry; return ns; });
-    setRpnResultPrefixRaw('none');
-    setRpnSelectedAlternativeRaw(0);
-    triggerFlashRpnResult();
-  }, [rpnStack, calculatorPrecision, saveRpnStackForUndo, setLastX, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult]);
-
-  const canApplyRpnBinary = useCallback((op: RpnBinaryOp): boolean => {
-    if (!rpnStack[2] || !rpnStack[3]) return false;
-    if (op === 'addUnit' || op === 'subUnit') {
-      const y = rpnStack[2]; const x = rpnStack[3];
-      return dimensionsEqual(y.dimensions, x.dimensions) || isDimensionless(y.dimensions) || isDimensionless(x.dimensions);
-    }
-    return true;
-  }, [rpnStack]);
-
-  // Council-02: RPN binary dispatch delegates to lib/calculator/applyRpnBinary.
-  // Undo capture and lastX are set BEFORE the guard result is checked to
-  // preserve exact prior behavior of the inline switch.
-  const applyRpnBinary = useCallback((op: RpnBinaryOp) => {
-    const y = rpnStack[2]; const x = rpnStack[3];
-    if (!y || !x) return;
-    saveRpnStackForUndo();
-    setLastX(x);
-    const result = applyRpnBinaryLib(y, x, op);
-    if (!result) return;
-    const newEntry: CalcValue = { ...result, prefix: 'none' };
-    setRpnStack(prev => {
-      const ns = [...prev];
-      ns[3] = newEntry;
-      ns[2] = prev[1];
-      ns[1] = prev[0];
-      ns[0] = null;
-      return ns;
-    });
-    setRpnResultPrefixRaw('none');
-    setRpnSelectedAlternativeRaw(0);
-    triggerFlashRpnResult();
-  }, [rpnStack, saveRpnStackForUndo, setLastX, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult]);
+  // RPN unary/binary dispatch + canAdd/Sub check. See useCalculatorRpnOps.
+  const { applyRpnUnary, canApplyRpnBinary, applyRpnBinary } = useCalculatorRpnOps({
+    rpnStack, calculatorPrecision, saveRpnStackForUndo, setLastX,
+    setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, triggerFlashRpnResult,
+  });
 
   // Display formatters. See useCalculatorDisplayFormatters.
   const { getRpnResultDisplay, getCalcResultDisplay } = useCalculatorDisplayFormatters({
