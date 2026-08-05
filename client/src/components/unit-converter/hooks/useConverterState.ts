@@ -19,6 +19,8 @@ export interface UseConverterStateReturn {
   setInputValue: (value: string) => void;
   result: number | null;
   setResult: (value: number | null) => void;
+  symbolicResult: string | null;
+  setSymbolicResult: (value: string | null) => void;
   precision: number;
   setPrecision: (value: number) => void;
   comparisonMode: boolean;
@@ -45,6 +47,8 @@ export function useConverterState(): UseConverterStateReturn {
     setInputValue: (v) => dispatch({ domain: 'converter', ...actions.setInputValue(v) }),
     result: s.result,
     setResult: (v) => dispatch({ domain: 'converter', ...actions.setResult(v) }),
+    symbolicResult: s.symbolicResult,
+    setSymbolicResult: (v) => dispatch({ domain: 'converter', ...actions.setSymbolicResult(v) }),
     precision: s.precision,
     setPrecision: (v) => dispatch({ domain: 'converter', ...actions.setPrecision(v) }),
     comparisonMode: s.comparisonMode,

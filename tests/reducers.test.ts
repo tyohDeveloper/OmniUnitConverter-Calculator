@@ -114,6 +114,35 @@ describe('converterReducer', () => {
     expect(next.result).toBeNull();
   });
 
+  it('SET_SYMBOLIC_RESULT updates symbolicResult', () => {
+    const next = converterReducer(converterInitialState, { type: 'SET_SYMBOLIC_RESULT', payload: '12:00 UTC' });
+    expect(next.symbolicResult).toBe('12:00 UTC');
+  });
+
+  it('SET_SYMBOLIC_RESULT allows null', () => {
+    const withSym: ConverterState = { ...converterInitialState, symbolicResult: '12:00 UTC' };
+    const next = converterReducer(withSym, { type: 'SET_SYMBOLIC_RESULT', payload: null });
+    expect(next.symbolicResult).toBeNull();
+  });
+
+  it('initial state has null symbolicResult', () => {
+    expect(converterInitialState.symbolicResult).toBeNull();
+  });
+
+  it('SET_SYMBOLIC_RESULT does not clobber result', () => {
+    const withBoth: ConverterState = { ...converterInitialState, result: 42, symbolicResult: 'x' };
+    const next = converterReducer(withBoth, { type: 'SET_SYMBOLIC_RESULT', payload: 'y' });
+    expect(next.result).toBe(42);
+    expect(next.symbolicResult).toBe('y');
+  });
+
+  it('SET_RESULT does not clobber symbolicResult', () => {
+    const withBoth: ConverterState = { ...converterInitialState, result: 42, symbolicResult: 'x' };
+    const next = converterReducer(withBoth, { type: 'SET_RESULT', payload: 99 });
+    expect(next.result).toBe(99);
+    expect(next.symbolicResult).toBe('x');
+  });
+
   it('SET_PRECISION updates precision', () => {
     const next = converterReducer(converterInitialState, { type: 'SET_PRECISION', payload: 8 });
     expect(next.precision).toBe(8);
