@@ -9,6 +9,7 @@ import {
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import { CATEGORY_GROUPS } from '@/features/unit-converter/categoryGroups';
 import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
+import { parseTimeWithZone } from '@/lib/calculator/parseTimeWithZone';
 
 interface UseConverterInputHandlersArgs {
   inputValue: string;
@@ -18,6 +19,7 @@ interface UseConverterInputHandlersArgs {
   parseNumberWithFormat: (s: string) => number;
   setInputValue: (v: string) => void;
   setActiveCategory: (v: UnitCategory) => void;
+  setFromUnit: (v: string) => void;
 }
 
 const isCompoundUnit = (u: string): boolean => u === 'deg_dms' || u === 'ft_in';
@@ -56,12 +58,23 @@ function blurReformat(
   }
 }
 
+// For SYMBOLIC categories, Enter commits by blurring — that triggers
+// the blur handler and its parseTimeWithZone dispatch. For numeric
+// categories, Enter is left as-is to preserve existing behavior.
+function handleEnterKey(e: React.KeyboardEvent<HTMLInputElement>, activeCategory: UnitCategory): boolean {
+  if (e.key !== 'Enter') return false;
+  if (CATEGORY_FAMILIES[activeCategory] !== 'SYMBOLIC') return false;
+  (e.currentTarget as HTMLInputElement).blur();
+  return true;
+}
+
 function stepCategoryOnArrowKey(
   e: React.KeyboardEvent<HTMLInputElement>,
   activeCategory: UnitCategory,
   setActiveCategory: (v: UnitCategory) => void,
   setInputValue: (v: string) => void,
 ): void {
+  if (handleEnterKey(e, activeCategory)) return;
   if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
   e.preventDefault();
   const allCategories = CATEGORY_GROUPS.flatMap(g => g.categories);
@@ -95,8 +108,20 @@ function dispatchInputChange(value: string, isSymbolic: boolean, numberFormat: N
   setInputValue(sanitizeInput({ value, format: numberFormat, isCompound: isCompoundUnit(fromUnit) }));
 }
 
-function dispatchInputBlur(isSymbolic: boolean, inputValue: string, fromUnit: string, numberFormat: NumberFormat, parseNumberWithFormat: (s: string) => number, setInputValue: (v: string) => void): void {
-  if (isSymbolic) return;
+// On blur for a SYMBOLIC timezone input: run the extended parser to
+// pick out a trailing zone tag ('HH:MM UTC' etc.) and update both
+// the value field and the from-zone dropdown. If parsing fails, the
+// raw input stays as-typed and the from-zone dropdown is unchanged.
+// If the zone token is unrecognized, only the value is normalized.
+function dispatchSymbolicBlur(activeCategory: UnitCategory, inputValue: string, setInputValue: (v: string) => void, setFromUnit: (v: string) => void): void {
+  if (activeCategory !== 'timezone') return;
+  const parsed = parseTimeWithZone(inputValue);
+  if (parsed.time !== null && parsed.time !== inputValue) setInputValue(parsed.time);
+  if (parsed.zoneUnitId !== null) setFromUnit(parsed.zoneUnitId);
+}
+
+function dispatchInputBlur(isSymbolic: boolean, activeCategory: UnitCategory, inputValue: string, fromUnit: string, numberFormat: NumberFormat, parseNumberWithFormat: (s: string) => number, setInputValue: (v: string) => void, setFromUnit: (v: string) => void): void {
+  if (isSymbolic) { dispatchSymbolicBlur(activeCategory, inputValue, setInputValue, setFromUnit); return; }
   blurReformat(inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue);
 }
 
@@ -107,7 +132,7 @@ function dispatchReformat(isSymbolic: boolean, inputValue: string, fromUnit: str
 
 export function useConverterInputHandlers(args: UseConverterInputHandlersArgs) {
   const { inputValue, fromUnit, activeCategory, numberFormat,
-          parseNumberWithFormat, setInputValue, setActiveCategory } = args;
+          parseNumberWithFormat, setInputValue, setActiveCategory, setFromUnit } = args;
   const isSymbolic = CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC';
   const getPlaceholder = useCallback(() => computePlaceholder(fromUnit, activeCategory), [fromUnit, activeCategory]);
   const reformatInputValue = useCallback(
@@ -117,8 +142,8 @@ export function useConverterInputHandlers(args: UseConverterInputHandlersArgs) {
     (value: string) => dispatchInputChange(value, isSymbolic, numberFormat, fromUnit, setInputValue),
     [isSymbolic, numberFormat, fromUnit, setInputValue]);
   const handleInputBlur = useCallback(
-    () => dispatchInputBlur(isSymbolic, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue),
-    [isSymbolic, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue]);
+    () => dispatchInputBlur(isSymbolic, activeCategory, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue, setFromUnit),
+    [isSymbolic, activeCategory, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue, setFromUnit]);
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => stepCategoryOnArrowKey(e, activeCategory, setActiveCategory, setInputValue),
     [activeCategory, setActiveCategory, setInputValue]);

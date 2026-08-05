@@ -158,7 +158,7 @@ export function useConverterController(): UseConverterControllerReturn {
     handleInputChange, handleInputBlur, handleInputKeyDown,
   } = useConverterInputHandlers({
     inputValue, fromUnit, activeCategory, numberFormat,
-    parseNumberWithFormat, setInputValue, setActiveCategory,
+    parseNumberWithFormat, setInputValue, setActiveCategory, setFromUnit,
   });
 
   // Clipboard read/write surface. See useConverterClipboard.ts.
