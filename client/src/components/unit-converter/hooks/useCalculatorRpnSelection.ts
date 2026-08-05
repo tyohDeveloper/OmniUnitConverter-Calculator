@@ -2,12 +2,17 @@ import { useCallback } from 'react';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import { PREFIXES } from '@/lib/units/prefixes';
 import { UnitType } from '@/lib/units/unitType';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { composeUnitDisplaySymbol } from '@/lib/units/composeUnitDisplaySymbol';
 import { SI_DERIVED_UNITS } from '@/lib/units/siDerivedUnitsCatalog';
+
+// §1.6: unit-symbol composition is single-sourced via composeUnit
+// DisplaySymbol. The value transform uses siToDisplay (RPN path,
+// offset-/inverse-aware) rather than the simple divide-by-effective
+// PrefixFactor used by formatCalcValueDisplay. See docs/tasks/
+// calc-display-formula-inconsistency.md.
 
 interface UseCalculatorRpnSelectionArgs {
   rpnSelectedAlternative: number;
@@ -42,14 +47,12 @@ export function computeOriginMetaForValue(
   const rep = siReps[altIndex];
   const symbol = rep?.displaySymbol || formatDimensions(val.dimensions);
   if (!symbol || symbol === '1') return null;
-  const kgResult = applyPrefixToKgUnitLib(symbol, prefix);
+  const { unitSymbol } = composeUnitDisplaySymbol(symbol, prefix);
   const displayValue = siToDisplayLib(val.value, symbol, prefix);
-  const prefixData = PREFIXES.find(p => p.id === prefix);
-  const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
   const primaryDerivedUnit = rep?.derivedUnits?.[0];
   const derivedUnitInfo = primaryDerivedUnit ? SI_DERIVED_UNITS.find(u => u.symbol === primaryDerivedUnit) : undefined;
   const sourceCategory = derivedUnitInfo?.category ?? val.sourceCategory;
-  return { originalUnit: prefixSymbol + kgResult.displaySymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
+  return { originalUnit: unitSymbol, originalValue: displayValue, unitType: UnitType.SI_BASE, sourceCategory };
 }
 
 function applyOriginMetaToTop(

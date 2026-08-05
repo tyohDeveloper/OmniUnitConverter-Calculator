@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
 import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
@@ -27,7 +26,7 @@ const opBtnClass = (highlighted: boolean) =>
 export function SimpleField3Row({ controller, isFlashing }: SimpleField3RowProps) {
   const {
     calcValues, calculatorPrecision, preserveSourceUnit,
-    copyCalcField, applyPrefixToKgUnit,
+    copyCalcField,
     formatNumberWithSeparators, t,
     calcOp2, setCalcOp2, clearField3,
   } = controller;
@@ -42,8 +41,6 @@ export function SimpleField3Row({ controller, isFlashing }: SimpleField3RowProps
           value={calcValues[2]}
           onClick={() => copyCalcField(2)}
           isFlashing={isFlashing}
-          formatDimensions={formatDimensions}
-          applyPrefixToKgUnit={applyPrefixToKgUnit}
           formatNumberWithSeparators={formatNumberWithSeparators}
           precision={calculatorPrecision}
           testId="calc-field-3"

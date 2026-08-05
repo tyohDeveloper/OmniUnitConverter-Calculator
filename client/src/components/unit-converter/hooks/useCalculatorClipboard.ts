@@ -1,10 +1,15 @@
 import { useCallback } from 'react';
 import type { CalcValue } from '@/lib/units/calcValue';
-import { PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { formatCalcValueDisplay } from '@/lib/calculator/formatCalcValueDisplay';
 import { fixPrecision } from '@/lib/calculator/fixPrecision';
 import { cleanNumber } from '@/lib/calculator/cleanNumber';
+
+// §1.6: unitSymbol + displayValue are computed by formatCalcValue
+// Display (which itself uses composeUnitDisplaySymbol). Simple-mode
+// field copy uses cleanNumber(fixPrecision(displayValue), ...) for
+// a trailing-zero-trimmed, separator-free output; RPN field copy
+// uses the locale-aware formattedValue with commas stripped.
 
 interface UseCalculatorClipboardArgs {
   calcValues: Array<CalcValue | null>;
@@ -23,25 +28,19 @@ interface UseCalculatorClipboardArgs {
   triggerFlashRpnField3: () => void;
 }
 
-function fieldValueSymbol(val: CalcValue): { unitSymbol: string; displayValue: number } {
-  const baseUnitSymbol = formatDimensions(val.dimensions);
-  const kgResult = applyPrefixToKgUnitLib(baseUnitSymbol, val.prefix);
-  const displayValue = val.value / kgResult.effectivePrefixFactor;
-  const prefixData = PREFIXES.find(p => p.id === val.prefix);
-  const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-  return { unitSymbol: prefixSymbol + kgResult.displaySymbol, displayValue };
-}
-
 function writeClipboardText(value: string, unit: string): void {
   navigator.clipboard.writeText(unit ? `${value} ${unit}` : value);
 }
 
 function doCopyCalcField(
   val: CalcValue, calculatorPrecision: number,
+  formatNumberWithSeparators: (n: number, p: number) => string,
   fieldIndex: number,
   flashers: [() => void, () => void, () => void],
 ): void {
-  const { unitSymbol, displayValue } = fieldValueSymbol(val);
+  const { unitSymbol, displayValue } = formatCalcValueDisplay(
+    val.value, formatDimensions(val.dimensions), val.prefix, calculatorPrecision, formatNumberWithSeparators,
+  );
   writeClipboardText(cleanNumber(fixPrecision(displayValue), calculatorPrecision), unitSymbol);
   flashers[fieldIndex]?.();
 }
@@ -52,9 +51,10 @@ function doCopyRpnField(
   index: number,
   flashers: [() => void, () => void, () => void],
 ): void {
-  const { unitSymbol, displayValue } = fieldValueSymbol(val);
-  const cleanValue = formatNumberWithSeparators(displayValue, calculatorPrecision).replace(/,/g, '');
-  writeClipboardText(cleanValue, unitSymbol);
+  const { unitSymbol, formattedValue } = formatCalcValueDisplay(
+    val.value, formatDimensions(val.dimensions), val.prefix, calculatorPrecision, formatNumberWithSeparators,
+  );
+  writeClipboardText(formattedValue.replace(/,/g, ''), unitSymbol);
   flashers[index]?.();
 }
 
@@ -73,8 +73,8 @@ export function useCalculatorClipboard(args: UseCalculatorClipboardArgs) {
     writeClipboardText(d.formattedValue, d.unitSymbol); a.triggerFlashCopyCalc();
   }, [a.getCalcResultDisplay, a.triggerFlashCopyCalc]);
   const copyCalcField = useCallback((i: number) => {
-    const val = a.calcValues[i]; if (val) doCopyCalcField(val, a.calculatorPrecision, i, calcFlashers);
-  }, [a.calcValues, a.calculatorPrecision, calcFlashers]);
+    const val = a.calcValues[i]; if (val) doCopyCalcField(val, a.calculatorPrecision, a.formatNumberWithSeparators, i, calcFlashers);
+  }, [a.calcValues, a.calculatorPrecision, a.formatNumberWithSeparators, calcFlashers]);
   const copyRpnResult = useCallback(() => {
     const d = a.getRpnResultDisplay(); if (!d) return;
     writeClipboardText(d.formattedValue.replace(/,/g, ''), d.unitSymbol); a.triggerFlashRpnResult();

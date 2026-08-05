@@ -2,10 +2,17 @@ import { useCallback } from 'react';
 import type { CalcValue } from '@/lib/units/calcValue';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import { PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { siToDisplay as siToDisplayLib } from '@/lib/unit-symbols/siToDisplay';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
+import { composeUnitDisplaySymbol } from '@/lib/units/composeUnitDisplaySymbol';
+import { formatCalcValueDisplay } from '@/lib/calculator/formatCalcValueDisplay';
+
+// §1.6: calcResultDisplay uses the packaged formatCalcValueDisplay
+// (simple divide-by-effectivePrefixFactor). rpnResultDisplay uses
+// siToDisplay (temperature-offset-, inverse-, and kg-correct) and
+// therefore only reuses the shared composeUnitDisplaySymbol step.
+// The two paths deliberately diverge — see docs/tasks/calc-display-
+// formula-inconsistency.md.
 
 interface UseCalculatorDisplayFormattersArgs {
   calcValues: Array<CalcValue | null>;
@@ -21,21 +28,6 @@ interface UseCalculatorDisplayFormattersArgs {
 
 interface DisplayFormat { formattedValue: string; unitSymbol: string; }
 
-function formatDisplay(
-  val: CalcValue,
-  symbol: string,
-  displayValue: number,
-  prefix: string,
-  calculatorPrecision: number,
-  formatNumberWithSeparators: (n: number, p: number) => string,
-): DisplayFormat {
-  const kgResult = applyPrefixToKgUnitLib(symbol, prefix);
-  const formattedValue = formatNumberWithSeparators(displayValue, calculatorPrecision);
-  const prefixData = PREFIXES.find(p => p.id === prefix);
-  const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-  return { formattedValue, unitSymbol: prefixSymbol + kgResult.displaySymbol };
-}
-
 function rpnResultDisplay(
   val: CalcValue,
   siReps: SIRepresentation[],
@@ -46,8 +38,11 @@ function rpnResultDisplay(
 ): DisplayFormat {
   const currentSymbol = siReps[rpnSelectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
   if (currentSymbol === '1' || !currentSymbol) return { formattedValue: formatNumberWithSeparators(val.value, calculatorPrecision), unitSymbol: '' };
+  // §1.6 divergence: RPN path uses siToDisplay (offset-/inverse-aware);
+  // shared step is composeUnitDisplaySymbol.
   const displayValue = siToDisplayLib(val.value, currentSymbol, rpnResultPrefix);
-  return formatDisplay(val, currentSymbol, displayValue, rpnResultPrefix, calculatorPrecision, formatNumberWithSeparators);
+  const { unitSymbol } = composeUnitDisplaySymbol(currentSymbol, rpnResultPrefix);
+  return { formattedValue: formatNumberWithSeparators(displayValue, calculatorPrecision), unitSymbol };
 }
 
 function calcResultDisplay(
@@ -59,9 +54,10 @@ function calcResultDisplay(
   formatNumberWithSeparators: (n: number, p: number) => string,
 ): DisplayFormat {
   const currentSymbol = siReps[selectedAlternative]?.displaySymbol || formatDimensions(val.dimensions);
-  const kgResult = applyPrefixToKgUnitLib(currentSymbol, resultPrefix);
-  const displayValue = val.value / kgResult.effectivePrefixFactor;
-  return formatDisplay(val, currentSymbol, displayValue, resultPrefix, calculatorPrecision, formatNumberWithSeparators);
+  const { formattedValue, unitSymbol } = formatCalcValueDisplay(
+    val.value, currentSymbol, resultPrefix, calculatorPrecision, formatNumberWithSeparators,
+  );
+  return { formattedValue, unitSymbol };
 }
 
 /**

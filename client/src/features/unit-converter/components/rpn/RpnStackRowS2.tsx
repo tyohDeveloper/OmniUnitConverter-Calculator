@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
 import type {
@@ -26,7 +25,6 @@ export function RpnStackRowS2({ controller, flashRpnField2 }: RpnStackRowS2Props
     copyRpnField,
     applyRpnUnary,
     pushRpnConstant,
-    applyPrefixToKgUnit,
     formatNumberWithSeparators,
   } = controller;
 
@@ -54,8 +52,6 @@ export function RpnStackRowS2({ controller, flashRpnField2 }: RpnStackRowS2Props
         value={rpnStack[1]}
         onClick={() => copyRpnField(1)}
         isFlashing={flashRpnField2}
-        formatDimensions={formatDimensions}
-        applyPrefixToKgUnit={applyPrefixToKgUnit}
         formatNumberWithSeparators={formatNumberWithSeparators}
         precision={calculatorPrecision}
         testId="rpn-field-s2"

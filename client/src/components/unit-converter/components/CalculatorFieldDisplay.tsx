@@ -1,9 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import type { CalcValue } from '@/lib/units/calcValue';
-import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import { PREFIXES } from '@/lib/units/prefixes';
+import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
+import { formatCalcValueDisplay } from '@/lib/calculator/formatCalcValueDisplay';
 import { FIELD_HEIGHT } from '../constants';
+
+// §1.6: the display formula is single-sourced in
+// lib/calculator/formatCalcValueDisplay, which uses composeUnit
+// DisplaySymbol under the hood. The previous version accepted
+// formatDimensions and applyPrefixToKgUnit as props (prop-drilled
+// from every caller); those are pure lib fns and belong to the
+// view's own imports, not the caller's prop bag.
 
 interface CalculatorFieldDisplayProps {
   value: CalcValue | null;
@@ -11,12 +18,6 @@ interface CalculatorFieldDisplayProps {
   ariaLabel?: string;
   isFlashing?: boolean;
   isResult?: boolean;
-  formatDimensions: (dimensions: DimensionalFormula) => string;
-  applyPrefixToKgUnit: (symbol: string, prefixId: string) => {
-    displaySymbol: string;
-    showPrefix: boolean;
-    effectivePrefixFactor: number;
-  };
   formatNumberWithSeparators: (value: number, precision: number) => string;
   precision: number;
   width?: string;
@@ -31,8 +32,6 @@ export function CalculatorFieldDisplay({
   ariaLabel,
   isFlashing = false,
   isResult = false,
-  formatDimensions,
-  applyPrefixToKgUnit,
   formatNumberWithSeparators,
   precision,
   width,
@@ -52,23 +51,14 @@ export function CalculatorFieldDisplay({
 
   const useSourceDisplay = preserveSourceUnit && value?.originalUnit != null && value?.originalValue != null;
 
-  const displayData = value ? (() => {
-    if (useSourceDisplay) {
-      return {
-        formattedValue: formatNumberWithSeparators(value.originalValue!, precision),
-        unitSymbol: value.originalUnit!,
-      };
-    }
-    const baseUnitSymbol = formatDimensions(value.dimensions);
-    const kgResult = applyPrefixToKgUnit(baseUnitSymbol, value.prefix);
-    const displayValue = value.value / kgResult.effectivePrefixFactor;
-    const prefixData = PREFIXES.find(p => p.id === value.prefix);
-    const prefixSymbol = kgResult.showPrefix && prefixData ? prefixData.symbol : '';
-    return {
-      formattedValue: formatNumberWithSeparators(displayValue, precision),
-      unitSymbol: prefixSymbol + kgResult.displaySymbol,
-    };
-  })() : null;
+  const displayData = value
+    ? useSourceDisplay
+      ? {
+          formattedValue: formatNumberWithSeparators(value.originalValue!, precision),
+          unitSymbol: value.originalUnit!,
+        }
+      : formatCalcValueDisplay(value.value, formatDimensions(value.dimensions), value.prefix, precision, formatNumberWithSeparators)
+    : null;
 
   const content = (
     <>
