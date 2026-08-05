@@ -1,40 +1,85 @@
 # Temporal + Calendar + Timezone: Design Brief
 
-> **Scope note (2026-08-04):** This brief originally described a
-> standalone single-file XHTML tool. It has been re-scoped as the
-> shared design foundation for two new categories inside
-> OmniUnitConverter under the 'Other' group:
+> **Status update (2026-08-05):** The SYMBOLIC-family framework is
+> live in OmniUnitConverter, and the Time zone pilot has landed in a
+> series of commits from `4f82004` through `afd2ee5`. This section
+> summarizes what changed since the original 2026-08-04 scope note
+> and updates a few decisions that turned out differently in
+> practice than the brief anticipated. The design-brief body below
+> is preserved as the reference for calendar registry, era labeling,
+> Julian JDN converters, and localization architecture; the Date
+> category work will build on it directly.
 >
->   - **Time** category (timezone-based, 'now' as implicit value)
->   - **Date/Datetime** category (calendar-system based)
+> **What's landed:**
 >
-> Both categories belong to the SYMBOLIC family (added as a
-> placeholder in commit b111ef8 anticipating this work). Symbols
-> are Temporal calendar tags and IANA timezone identifiers; unit
-> labels are localized.
+> - `temporal-polyfill` (FullCalendar) inlined via a source-selection
+>   shim at `client/src/lib/temporal/temporal.ts`. Bundle cost:
+>   ~20.8 kB gzipped, matching the brief's forecast. Migration to
+>   native `Temporal` is a one-line change to that file.
+> - SYMBOLIC family threaded through the converter pipeline:
+>   parallel `symbolicResult: string | null` state field,
+>   family-dispatched `computeConversion` → `computeSymbolicConversion`,
+>   family-aware input/output widgets. The calculator layer stays
+>   100% numeric via a centralized `canPushToCalculator` gate that
+>   rejects SYMBOLIC pushes silently.
+> - Time zone category with 19 zones covering all inhabited
+>   continents, English + 10 non-English locales (es fr de it pt ru
+>   ja ko zh ar), Temporal-backed conversion with day-shift
+>   annotations (`+1d` / `-1d`), and an extended parser that reads
+>   `HH:MM ZONE` inputs and updates both fields on blur or Enter.
+> - 2074 tests total (up from 1963 at the start of the arc), of
+>   which 111 pin SYMBOLIC-framework and Time-category behavior.
 >
-> See these companion task docs:
+> **Decisions that landed differently than the brief anticipated:**
+>
+> - **File format.** The brief locked "XHTML strict, CDATA-wrapped
+>   script blocks." OmniUnitConverter's single-file build is HTML5
+>   via Vite — no CDATA wrapping needed. The corresponding section
+>   in this brief ("Single-file XHTML build considerations") is
+>   obsolete for this codebase and can be ignored.
+> - **Locale count.** The brief assumed 8 supported languages;
+>   OmniUnitConverter ships 11 (`ar de en en-us es fr it ja ko pt ru
+>   zh`). Translation authoring for Date should target all 11.
+>   `en-us` shares `en` for name strings (differs only on
+>   orthography like meter/metre); no separate authoring needed.
+> - **Custom Julian module path.** The brief describes it as a
+>   separate `<script>` block in the single-file build. In
+>   OmniUnitConverter it will be a normal module under
+>   `client/src/lib/temporal/julianJdn.ts`, imported by the Date
+>   category's per-calendar dispatch.
+>
+> **Decisions previously open, now firmed up (see the Date-category
+> doc for the full reasoning):**
+>
+> - Numeral system control — **deferred indefinitely.** Rely on Intl
+>   locale-default. App-wide `numberFormat` already handles the
+>   analogous numeric case; adding a per-calendar numeral picker
+>   would be inconsistent.
+> - Year-zero / negative-year input in Common — **reject with
+>   helpful inline error.** The error text is printed in the result
+>   field slot rather than a toast, since the SYMBOLIC framework
+>   currently has no error-message plumbing.
+> - Just date or datetime — **date-only for MVP.** Datetime is a
+>   possible future extension.
+> - Primary + variants split — **one category with visual grouping
+>   inside the calendar dropdown**, not two top-level categories.
+>   The brief's own `<optgroup>` guidance supports this.
+>
+> **Companion docs:**
 >
 >   - [symbolic-family-framework.md](./symbolic-family-framework.md)
->     — the framework-widening prerequisite: string/symbol values
->     through the converter pipeline, per-family input/output widget
->     dispatch, SYMBOLIC in computeConversion.
+>     — the framework-widening prerequisite. Now implemented; kept
+>     as historical scope reference.
 >   - [temporal-time-category.md](./temporal-time-category.md) — the
->     timezone converter. Smaller scope; possible first pilot of
->     SYMBOLIC-family wiring.
+>     timezone pilot. Now implemented; kept as historical scope
+>     reference.
 >   - [temporal-date-category.md](./temporal-date-category.md) — the
->     calendar converter. Assumes the framework work and the time
->     category have landed first.
->
-> This brief itself is preserved verbatim below as the shared
-> reference for library choice, calendar registry, era labeling,
-> Julian JDN converters, and localization architecture. The two open
-> decisions at the end (numeral system control, year-zero handling in
-> Common calendar) remain open.
+>     calendar converter. Actionable next-work document; has its own
+>     status header with pilot-informed sequencing.
 
 ---
 
-Design decisions and rationale for a browser-only, offline, single-file XHTML tool that handles dates (CE/BCE + multiple calendar systems), times (timezone-aware), and optional datetimes.
+Design decisions and rationale for a browser-only, offline calendar/timezone tool. Originally scoped to a standalone single-file XHTML build; the calendar/time architectural decisions below apply unchanged to OmniUnitConverter, which is the actual carrier.
 
 ## Deployment constraints
 
@@ -364,6 +409,15 @@ meeting.withTimeZone('America/Chicago');  // DST-correct
 
 ## Single-file XHTML build considerations
 
+> **Obsolete for OmniUnitConverter.** This section applied to the
+> original standalone-XHTML scope. OmniUnitConverter uses an HTML5
+> single-file build via Vite, which handles inlining and script
+> encoding automatically — no CDATA wrapping, no separate inline
+> script blocks. The polyfill import at
+> `client/src/lib/temporal/temporal.ts` is a normal module import;
+> Vite bundles it into the app's main script. Retained below for
+> historical reference only.
+
 ### XHTML strict script wrapping
 
 XHTML parses `<script>` content as XML by default, so `<`, `>`, `&` in JavaScript will break parsing. Wrap script contents in CDATA using the JS-comment guard pattern:
@@ -425,9 +479,13 @@ Total inlined size estimate:
 
 ## Remaining open decisions
 
-1. **Numeral system control**: currently defaults to the language's canonical numeral system (e.g. `ar` → Arabic-Indic digits). Open question: expose Unicode `-u-nu-` numbering as an independent user-selectable option (letting an Arabic-locale user pick Western `1234` if preferred, or a Persian-locale user pick Western over Persian digits)? Deferred as a possible enhancement.
+> **Both resolved as of 2026-08-05.** Original text preserved for
+> historical reference; see the top-of-file status update for the
+> resolutions and the Date-category doc for the full reasoning.
 
-2. **Handling year-zero or negative-year input in Common**: if a user types "0" or "-212" while Common is the selected calendar, what happens? The Common calendar uses traditional era-labeled numbering (no year zero, positive integers only). Options:
+1. **Numeral system control** (RESOLVED: deferred indefinitely; rely on Intl locale-default): currently defaults to the language's canonical numeral system (e.g. `ar` → Arabic-Indic digits). Open question: expose Unicode `-u-nu-` numbering as an independent user-selectable option (letting an Arabic-locale user pick Western `1234` if preferred, or a Persian-locale user pick Western over Persian digits)? Deferred as a possible enhancement.
+
+2. **Handling year-zero or negative-year input in Common** (RESOLVED: reject with helpful inline error, printed in the result-field slot): if a user types "0" or "-212" while Common is the selected calendar, what happens? The Common calendar uses traditional era-labeled numbering (no year zero, positive integers only). Options:
    - **Reject as invalid** with an error like *"For BCE dates use '212 BCE', or select ISO 8601 to enter signed years."* — safest, routes users to the correct calendar.
    - **Interpret literally as astronomical** — matches what the user typed but silently produces off-by-one from what casual users likely intended.
    - **Interpret as traditional BCE** (drop the minus, add BCE) — most forgiving but hides the year-zero distinction and can miscommunicate historical dates.
