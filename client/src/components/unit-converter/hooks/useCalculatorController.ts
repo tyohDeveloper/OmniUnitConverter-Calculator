@@ -1,9 +1,5 @@
-import { useCallback, useEffect } from 'react';
-import { CONVERSION_DATA } from '@/lib/conversion-data';
-import { PREFIXES } from '@/lib/units/prefixes';
+import { useCallback } from 'react';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
-import type { CalcValue } from '@/lib/units/calcValue';
-import { canAddSubtract } from '@/lib/calculator/canAddSubtract';
 import { generateSIRepresentations as generateSIRepresentationsLib } from '@/lib/si-representations/generateSIRepresentations';
 import { getDimensionSignature } from '@/lib/units/getDimensionSignature';
 import { PREFERRED_REPRESENTATIONS } from '@/lib/units/preferredRepresentations';
@@ -21,6 +17,9 @@ import { useCalculatorRpnPaste } from './useCalculatorRpnPaste';
 import { useCalculatorRpnStackOps } from './useCalculatorRpnStackOps';
 import { useCalculatorRpnPull } from './useCalculatorRpnPull';
 import { useCalculatorRpnSelection } from './useCalculatorRpnSelection';
+import { useCalculatorClearOps } from './useCalculatorClearOps';
+import { useCalculatorModeSwitch } from './useCalculatorModeSwitch';
+import { useCalculatorRecalcEffect } from './useCalculatorRecalcEffect';
 
 export function useCalculatorController(
   formatNumberWithSeparators: (num: number, precision: number) => string,
@@ -97,25 +96,10 @@ export function useCalculatorController(
     generateSIRepresentations,
   });
 
-  const clearCalculator = useCallback(() => {
-    setCalcValues([null, null, null, null]);
-    setCalcOp1(null); setCalcOp2(null);
-    setResultUnit(null); setResultCategory(null); setResultPrefix('none');
-  }, [setCalcValues, setCalcOp1, setCalcOp2, setResultUnit, setResultCategory, setResultPrefix]);
-
-  const clearField1 = useCallback(() => {
-    setCalcValues(prev => { const nv = [...prev]; nv[0] = null; return nv; });
-    setCalcOp1(null);
-  }, [setCalcValues, setCalcOp1]);
-
-  const clearField2 = useCallback(() => {
-    setCalcValues(prev => { const nv = [...prev]; nv[1] = null; return nv; });
-    setCalcOp2(null);
-  }, [setCalcValues, setCalcOp2]);
-
-  const clearField3 = useCallback(() => {
-    setCalcValues(prev => { const nv = [...prev]; nv[2] = null; return nv; });
-  }, [setCalcValues]);
+  // Simple-mode clear ops. See useCalculatorClearOps.
+  const { clearCalculator, clearField1, clearField2, clearField3 } = useCalculatorClearOps({
+    setCalcValues, setCalcOp1, setCalcOp2, setResultUnit, setResultCategory, setResultPrefix,
+  });
 
   // Basic RPN stack manipulation ops. See useCalculatorRpnStackOps.
   const { clearRpnStack, pushToRpnStack, dropRpnStack, undoRpnStack, swapRpnXY, recallLastX, pushRpnConstant } = useCalculatorRpnStackOps({
@@ -162,43 +146,20 @@ export function useCalculatorController(
     triggerFlashRpnResult, triggerFlashRpnField1, triggerFlashRpnField2, triggerFlashRpnField3,
   });
 
-  const switchToRpn = useCallback(() => {
-    saveRpnStackForUndo();
-    setRpnStack([null, null, null, calcValues[3]]);
-    setRpnResultPrefixRaw('none');
-    setRpnSelectedAlternativeRaw(0);
-    setCalculatorMode('rpn');
-  }, [calcValues, saveRpnStackForUndo, setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw, setCalculatorMode]);
+  // Mode switch (simple <-> rpn). See useCalculatorModeSwitch.
+  const { switchToRpn, switchToSimple } = useCalculatorModeSwitch({
+    calcValues, rpnStack, saveRpnStackForUndo,
+    setRpnStack, setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw,
+    setCalcValues, setCalcOp1, setCalcOp2, setResultPrefix, setSelectedAlternative,
+    setCalculatorMode,
+  });
 
-  const switchToSimple = useCallback(() => {
-    setCalcValues([rpnStack[3], null, null, null]);
-    setCalcOp1(null); setCalcOp2(null);
-    setResultPrefix('none'); setSelectedAlternative(0);
-    setCalculatorMode('simple');
-  }, [rpnStack, setCalcValues, setCalcOp1, setCalcOp2, setResultPrefix, setSelectedAlternative, setCalculatorMode]);
-
-  // Council-10: computeCalcResult now lives at
-  // client/src/lib/calculator/computeCalcResult.ts, and the recalc itself
-  // is a single atomic reducer action. The controller-local inputs-ref
-  // dedup is gone: the reducer only mutates state when it produces a new
-  // result, and calcValues[3] is not in this effect's dep array, so the
-  // effect fires exactly when inputs actually change.
-  useEffect(() => {
-    const v0 = calcValues[0]; const v1 = calcValues[1]; const v2 = calcValues[2];
-
-    if (v0 && v1 && !calcOp1) { setCalcOp1('*'); return; }
-    if (v1 && v2 && !calcOp2) { setCalcOp2('*'); return; }
-    if (v0 && v1 && (calcOp1 === '+' || calcOp1 === '-') && !canAddSubtract(v0, v1)) { setCalcOp1(null); return; }
-    if (v1 && v2 && (calcOp2 === '+' || calcOp2 === '-') && !canAddSubtract(v1, v2)) { setCalcOp2(null); return; }
-
-    if (!v0) {
-      setCalcValues(prev => { if (prev[3] === null) return prev; const nv = [...prev]; nv[3] = null; return nv; });
-      setResultCategory(null); setResultUnit(null);
-      return;
-    }
-
-    recalculateSimple();
-  }, [calcValues[0], calcValues[1], calcValues[2], calcOp1, calcOp2]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Simple-mode recalc effect. See useCalculatorRecalcEffect.
+  useCalculatorRecalcEffect({
+    calcValues, calcOp1, calcOp2,
+    setCalcValues, setCalcOp1, setCalcOp2,
+    setResultCategory, setResultUnit, recalculateSimple,
+  });
 
   return {
     calculatorMode, shiftActive, calculatorPrecision,
