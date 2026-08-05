@@ -8,6 +8,7 @@ import {
 } from '@/lib/formatting';
 import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/parsing/parseNumber';
 import { CATEGORY_GROUPS } from '@/features/unit-converter/categoryGroups';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 
 interface UseConverterInputHandlersArgs {
   inputValue: string;
@@ -21,7 +22,11 @@ interface UseConverterInputHandlersArgs {
 
 const isCompoundUnit = (u: string): boolean => u === 'deg_dms' || u === 'ft_in';
 
-function computePlaceholder(fromUnit: string): string {
+function computePlaceholder(fromUnit: string, activeCategory: UnitCategory): string {
+  if (CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC') {
+    if (activeCategory === 'timezone') return 'HH:MM (empty = now)';
+    return '';
+  }
   if (fromUnit === 'deg_dms') return 'dd:mm:ss';
   if (fromUnit === 'ft_in') return "ft'in\"";
   return '0';
@@ -65,8 +70,10 @@ function stepCategoryOnArrowKey(
   const newIndex = e.key === 'ArrowUp'
     ? (currentIndex > 0 ? currentIndex - 1 : allCategories.length - 1)
     : (currentIndex < allCategories.length - 1 ? currentIndex + 1 : 0);
-  setActiveCategory(allCategories[newIndex] as UnitCategory);
-  setInputValue('1');
+  const nextCat = allCategories[newIndex] as UnitCategory;
+  setActiveCategory(nextCat);
+  // SYMBOLIC categories default to empty ("now"); numeric to "1".
+  setInputValue(CATEGORY_FAMILIES[nextCat] === 'SYMBOLIC' ? '' : '1');
 }
 
 /**
@@ -80,19 +87,38 @@ function stepCategoryOnArrowKey(
  * Compound units (deg_dms, ft_in) short-circuit numeric paths since
  * their string form isn't numerically roundtrippable.
  */
+// SYMBOLIC branches skip numeric sanitization / blur reformat /
+// number-format reformat pass; extracted so the exported hook body
+// stays within the 20-line limit.
+function dispatchInputChange(value: string, isSymbolic: boolean, numberFormat: NumberFormat, fromUnit: string, setInputValue: (v: string) => void): void {
+  if (isSymbolic) { setInputValue(value); return; }
+  setInputValue(sanitizeInput({ value, format: numberFormat, isCompound: isCompoundUnit(fromUnit) }));
+}
+
+function dispatchInputBlur(isSymbolic: boolean, inputValue: string, fromUnit: string, numberFormat: NumberFormat, parseNumberWithFormat: (s: string) => number, setInputValue: (v: string) => void): void {
+  if (isSymbolic) return;
+  blurReformat(inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue);
+}
+
+function dispatchReformat(isSymbolic: boolean, inputValue: string, fromUnit: string, o: NumberFormat, n: NumberFormat, setInputValue: (v: string) => void): void {
+  if (isSymbolic) return;
+  reformatValue(inputValue, fromUnit, o, n, setInputValue);
+}
+
 export function useConverterInputHandlers(args: UseConverterInputHandlersArgs) {
   const { inputValue, fromUnit, activeCategory, numberFormat,
           parseNumberWithFormat, setInputValue, setActiveCategory } = args;
-  const getPlaceholder = useCallback(() => computePlaceholder(fromUnit), [fromUnit]);
+  const isSymbolic = CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC';
+  const getPlaceholder = useCallback(() => computePlaceholder(fromUnit, activeCategory), [fromUnit, activeCategory]);
   const reformatInputValue = useCallback(
-    (o: NumberFormat, n: NumberFormat) => reformatValue(inputValue, fromUnit, o, n, setInputValue),
-    [inputValue, fromUnit, setInputValue]);
-  const handleInputChange = useCallback((value: string) => {
-    setInputValue(sanitizeInput({ value, format: numberFormat, isCompound: isCompoundUnit(fromUnit) }));
-  }, [numberFormat, fromUnit, setInputValue]);
+    (o: NumberFormat, n: NumberFormat) => dispatchReformat(isSymbolic, inputValue, fromUnit, o, n, setInputValue),
+    [isSymbolic, inputValue, fromUnit, setInputValue]);
+  const handleInputChange = useCallback(
+    (value: string) => dispatchInputChange(value, isSymbolic, numberFormat, fromUnit, setInputValue),
+    [isSymbolic, numberFormat, fromUnit, setInputValue]);
   const handleInputBlur = useCallback(
-    () => blurReformat(inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue),
-    [inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue]);
+    () => dispatchInputBlur(isSymbolic, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue),
+    [isSymbolic, inputValue, fromUnit, numberFormat, parseNumberWithFormat, setInputValue]);
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => stepCategoryOnArrowKey(e, activeCategory, setActiveCategory, setInputValue),
     [activeCategory, setActiveCategory, setInputValue]);

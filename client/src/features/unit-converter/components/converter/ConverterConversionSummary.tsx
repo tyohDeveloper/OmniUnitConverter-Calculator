@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { convert } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
 import { prefixPowerFactor } from '@/lib/units/prefixPowerFactor';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { Button } from '@/components/ui/button';
 import { Copy, Info } from 'lucide-react';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
@@ -65,7 +66,7 @@ export function ConverterConversionSummary({
             <Info className="w-3 h-3" /> {toUnitData.description}
           </p>
         )}
-        {result !== null && fromUnitData && toUnitData && (
+        {result !== null && fromUnitData && toUnitData && CATEGORY_FAMILIES[activeCategory] !== 'SYMBOLIC' && (
           <motion.button
             type="button"
             aria-label={t('Copy conversion ratio')}

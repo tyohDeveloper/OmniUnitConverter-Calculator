@@ -163,7 +163,8 @@ export function useConverterController(): UseConverterControllerReturn {
 
   // Clipboard read/write surface. See useConverterClipboard.ts.
   const clipboard = useConverterClipboard({
-    activeCategory, fromUnit, toUnit, fromPrefix, toPrefix, result, precision,
+    activeCategory, fromUnit, toUnit, fromPrefix, toPrefix,
+    result, symbolicResult, precision,
     formatDMS, formatFtIn, formatForClipboard,
     getCategoryDimensions,
     triggerFlashCopyResult, triggerFlashFromBaseFactor, triggerFlashFromSIBase,

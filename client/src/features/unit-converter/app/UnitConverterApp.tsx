@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, getFilteredSortedUnits, parseUnitText } from '@/lib/conversion-data';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { toTitleCase } from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { SupportedLanguage } from '@/lib/localization';
@@ -40,7 +41,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     activeCategory, setActiveCategory,
     fromUnit, toUnit, fromPrefix, toPrefix,
     inputValue, setInputValue,
-    result, precision,
+    result, symbolicResult, precision,
     numberFormat, language, activeTab, setActiveTab,
     directValue, directExponents,
     setDirectValue, setDirectExponents,
@@ -182,6 +183,18 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
         return;
       }
 
+      // SYMBOLIC branch: keyboard-copy for the converter tab. Reads
+      // symbolicResult (a pre-formatted string) instead of running the
+      // numeric formatForClipboard path. Skip when null (no result yet).
+      if (activeTab === 'converter' && CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC') {
+        if (symbolicResult !== null) {
+          navigator.clipboard.writeText(symbolicResult);
+          flash.copyResult[1]();
+          e.preventDefault();
+        }
+        return;
+      }
+
       if (activeTab === 'converter' && result !== null && toUnitData) {
         const unitSymbol = toUnitData.symbol || '';
         const prefixSymbol = (toUnitData.allowPrefixes && toPrefixData?.id !== 'none') ? toPrefixData.symbol : '';
@@ -199,7 +212,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
     document.addEventListener('keydown', handleKeyboardCopy);
     return () => document.removeEventListener('keydown', handleKeyboardCopy);
   }, [calculatorMode, rpnStack, calcValues, copyCalcResult, copyRpnResult,
-    activeTab, result, toUnit, toPrefix, activeCategory, precision, directValue,
+    activeTab, result, symbolicResult, toUnit, toPrefix, activeCategory, precision, directValue,
     formatForClipboard, categoryData]);
 
 
@@ -217,7 +230,12 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => { setActiveCategory(cat.id as UnitCategory); setInputValue('1'); }}
+                    onClick={() => {
+                      setActiveCategory(cat.id as UnitCategory);
+                      // SYMBOLIC categories use an empty default ("now" for
+                      // timezone); numeric categories use "1".
+                      setInputValue(CATEGORY_FAMILIES[cat.id as UnitCategory] === 'SYMBOLIC' ? '' : '1');
+                    }}
                     disabled={activeTab !== 'converter'}
                     data-testid={`display-category-${cat.id}`}
                     data-category-id={cat.id}

@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { CONVERSION_DATA, convert, parseUnitText } from '@/lib/conversion-data';
 import { PREFIXES } from '@/lib/units/prefixes';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
@@ -21,6 +22,7 @@ export interface UseConverterClipboardInput {
   fromPrefix: string;
   toPrefix: string;
   result: number | null;
+  symbolicResult: string | null;
   precision: number;
   formatDMS: (v: number) => string;
   formatFtIn: (v: number) => string;
@@ -164,6 +166,16 @@ function depsForCopyResult(i: UseConverterClipboardInput): readonly unknown[] {
 }
 
 function copyResultImpl(i: UseConverterClipboardInput): CopyResultOutcome | null {
+  // SYMBOLIC branch: copy the string verbatim, no push payload.
+  // The canPushToCalculator gate would reject a push anyway, but
+  // returning null here saves the caller a check and makes the
+  // "no push" semantics explicit at the source.
+  if (CATEGORY_FAMILIES[i.activeCategory] === 'SYMBOLIC') {
+    if (i.symbolicResult === null) return null;
+    navigator.clipboard.writeText(i.symbolicResult);
+    i.triggerFlashCopyResult();
+    return null;
+  }
   if (i.result === null) return null;
   const catData = CONVERSION_DATA.find(c => c.id === i.activeCategory);
   const toUnitData = catData?.units.find(u => u.id === i.toUnit);

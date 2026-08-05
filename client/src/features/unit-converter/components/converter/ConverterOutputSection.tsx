@@ -3,6 +3,7 @@ import { PREFIXES, ALL_PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
@@ -31,7 +32,7 @@ export function ConverterOutputSection({
     activeCategory,
     toUnit, setToUnit,
     toPrefix, setToPrefix,
-    result, precision,
+    result, symbolicResult, precision,
     copyResult,
     copyToBaseFactor, copyToSIBase,
     t, translateUnitName,
@@ -40,17 +41,24 @@ export function ConverterOutputSection({
     getCategoryDimensions,
   } = controller;
 
+  const isSymbolic = CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC';
   const toUnitData = categoryData.units.find(u => u.id === toUnit);
   const toPrefixData = PREFIXES.find(p => p.id === toPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
   const resultSuffix = activeCategory === 'unitless' ? regionalCountingSuffix(toUnit) : '';
 
-  const formattedResultText = result !== null
-    ? (toUnit === 'deg_dms'
-        ? formatDMS(result)
-        : toUnit === 'ft_in'
-          ? formatFtIn(result)
-          : formatResultValue(result, precision) + resultSuffix)
-    : '';
+  // SYMBOLIC categories carry their result as a string in
+  // symbolicResult; numeric categories carry a number in result.
+  // One field is meaningful per family; the other is null.
+  const hasResult = isSymbolic ? symbolicResult !== null : result !== null;
+  const formattedResultText = isSymbolic
+    ? (symbolicResult ?? '')
+    : (result !== null
+        ? (toUnit === 'deg_dms'
+            ? formatDMS(result)
+            : toUnit === 'ft_in'
+              ? formatFtIn(result)
+              : formatResultValue(result, precision) + resultSuffix)
+        : '');
 
   return (
     <div className="flex flex-col gap-2">
@@ -68,11 +76,11 @@ export function ConverterOutputSection({
         <motion.button
           type="button"
           aria-label={t('Copy result')}
-          className={`px-4 bg-background/50 border border-border rounded-md flex items-center overflow-x-auto text-start justify-start ${result !== null ? 'cursor-pointer hover:bg-background/70 active:bg-background/90' : 'cursor-default'}`}
+          className={`px-4 bg-background/50 border border-border rounded-md flex items-center overflow-x-auto text-start justify-start ${hasResult ? 'cursor-pointer hover:bg-background/70 active:bg-background/90' : 'cursor-default'}`}
           style={{ height: FIELD_HEIGHT, width: CommonFieldWidth }}
-          onClick={() => result !== null && copyResult()}
+          onClick={() => hasResult && copyResult()}
           data-testid="display-result"
-          disabled={result === null}
+          disabled={!hasResult}
           animate={{
             opacity: flash.copyResult ? [1, 0.3, 1] : 1,
             scale: flash.copyResult ? [1, 1.02, 1] : 1
@@ -80,30 +88,32 @@ export function ConverterOutputSection({
           transition={{ duration: 0.3 }}
         >
           <span className="font-mono text-primary whitespace-nowrap" style={{ fontSize: '0.875rem' }}>
-            {result !== null ? formattedResultText : '...'}
+            {hasResult ? formattedResultText : '...'}
           </span>
         </motion.button>
 
-        <Select
-          value={toPrefix}
-          onValueChange={(val) => {
-            const normalized = normalizeMassUnit(toUnit, val);
-            setToUnit(normalized.unit);
-            setToPrefix(normalized.prefix);
-          }}
-          disabled={!toUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[toUnit]}
-        >
-          <SelectTrigger data-testid="select-to-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
-            <SelectValue placeholder={t('Prefix')} />
-          </SelectTrigger>
-          <SelectContent position="item-aligned" className="max-h-[50vh]">
-            {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
-              <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
-                {p.symbol || '-'}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {!isSymbolic && (
+          <Select
+            value={toPrefix}
+            onValueChange={(val) => {
+              const normalized = normalizeMassUnit(toUnit, val);
+              setToUnit(normalized.unit);
+              setToPrefix(normalized.prefix);
+            }}
+            disabled={!toUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[toUnit]}
+          >
+            <SelectTrigger data-testid="select-to-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
+              <SelectValue placeholder={t('Prefix')} />
+            </SelectTrigger>
+            <SelectContent position="item-aligned" className="max-h-[50vh]">
+              {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
+                <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
+                  {p.symbol || '-'}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
 
         <Select value={toUnit} onValueChange={(val) => { setToUnit(val); setToPrefix('none'); }}>
           <SelectTrigger data-testid="select-to-unit" className="flex-1 min-w-0 bg-background/30 border-border font-medium" style={{ height: FIELD_HEIGHT }}>
@@ -126,7 +136,8 @@ export function ConverterOutputSection({
         </Select>
       </div>
 
-      {/* Row 2: Base Factor, Spacer, SI Base Units */}
+      {/* Row 2: Base Factor, Spacer, SI Base Units — numeric only */}
+      {!isSymbolic && (
       <div className="flex gap-2">
         <motion.button
           type="button"
@@ -166,6 +177,7 @@ export function ConverterOutputSection({
           </div>
         </motion.button>
       </div>
+      )}
     </div>
   );
 }
