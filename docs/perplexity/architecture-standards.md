@@ -49,6 +49,25 @@ The application is split into exactly four layers with a strict dependency direc
 
 **Rule 1.5.** All application data — conversion factors, category groupings, dimensional formulas per category, default units per category, unit translations, UI strings — lives in `client/src/data/**` as JSON. If a table has more than five entries or is likely to change independently of code, it is data and belongs in JSON.
 
+**Rule 1.6 — Pure computation is single-sourced in `lib/`.** Any calculation, transformation, or formatting operation is a pure function in `client/src/lib/**`. Views, controllers, reducers, and other pure helpers all reach the same result by calling the same function; they do not reimplement it.
+
+This rule is the operational consequence of §1.1, §1.2, and §1.4 at the grain of a single computation. Those higher rules say *where* computation may not live (JSX bodies, controller hooks, effect callbacks); this rule says *how* to satisfy them when the same computation is needed in more than one place: lift it, name it, and import it.
+
+A "computation" for this rule includes any of:
+
+- arithmetic on numeric values (unit conversion, prefix adjustment, dimensional reduction)
+- symbol / string composition driven by domain rules (unit-symbol assembly, dimensional-formula rendering, locale-aware number formatting)
+- classification or lookup against domain tables (category resolution, prefix eligibility, canonical-unit selection)
+- structural transforms on domain objects (composing display records, normalizing calc values, mapping dimensional formulas)
+
+UI-only structural work — className strings, `motion` prop bags, ARIA-label assembly, JSX composition — is not a "computation" and stays in the view.
+
+**When a computation appears in two or more places** — whether across layers (component + hook), across sibling files at the same layer (two hooks, two components), or across call sites within one file — it is a duplication and must be extracted to `lib/`. The extracted function is imported by every call site; no call site reimplements the formula. The single exception is when two call sites *intentionally* implement different formulas for the same domain concept (e.g. the simple-mode field display currently uses `siValue / kgResult.effectivePrefixFactor` while the RPN result display uses `siToDisplay` for the same conceptual step); in that case the *shared* portion of the formula is still extracted, the *divergent* portion is called out in comments at both sites, and the divergence itself is a §11 exception with an owner and a resolution plan.
+
+**When a formula is used exactly once today** but would be a candidate for reuse under a plausible near-term change (e.g. a new mode, a new pane, or a new export target), extraction is still preferred — the naming discipline of §3.7 is worth more than the one indirection saved. Extraction is only skipped when the computation is truly view-local and cannot recur elsewhere (e.g. "compute the CSS class string for this button's flash state").
+
+**Verification.** A candidate for extraction can be identified with `git grep` for the operative call (e.g. `applyPrefixToKgUnit`, `formatDimensions`, `siToDisplay`) — three or more call sites that all follow the same 3-5 line prelude before diverging is the signal. Review-time question: "If I fix a bug in this formula, how many files do I have to change?" The answer must be "one."
+
 ---
 
 ## 2. Mutable state discipline
@@ -434,6 +453,7 @@ Unit display names are **global** — the same key resolves to the same translat
 | Rule | Enforced by |
 |---|---|
 | §1.1–§1.5 (layer boundaries) | ESLint `no-restricted-imports` + custom rule scanning for `document`/`window` in `lib/`; code review |
+| §1.6 (single-sourced computation) | Code review; `git grep` for repeated operative calls with the same prelude; §11 exception required for intentional divergence |
 | §2.1–§2.3 (state discipline) | ESLint `no-restricted-syntax` for `useState` in `UnitConverterApp.tsx`; code review |
 | §3.1–§3.5 (function/file length) | ESLint (`max-lines-per-function`, `max-lines`) via `typescript-eslint`; interim: `scripts/lint-size.mjs` |
 | §3.6 (exception rationale) | ESLint `overrides` require a companion `// EXCEPTION [architecture-standards §<n>]:` comment; scanned by a small custom rule |
