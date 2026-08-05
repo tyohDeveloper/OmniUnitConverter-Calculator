@@ -46,6 +46,129 @@ Reasoning: Datetime is a substantial additional widget (time-of-day field, Plain
 - Input `"-212"` with Common selected → `"For BCE dates use '212 BCE', or select ISO 8601 to enter signed years."`
 - Input `"212 BCE"` with ISO 8601 selected → `"ISO 8601 uses signed years. Try '-211'."`
 
+## Polyfill capability verified (2026-08-05)
+
+Before starting 7a, `temporal-polyfill@1.0.3` was probed to confirm
+which calendar backends it actually supports. Findings below.
+
+**Polyfill entry point.** The default `import { Temporal } from
+'temporal-polyfill'` ships only `gregory` and `iso8601`. The full
+calendar set (Hebrew, Islamic, Coptic, etc.) requires the `/full`
+subpath: `import { Temporal } from 'temporal-polyfill/full'`.
+
+Bundle cost of switching to `/full`: **+3.5 kB gzipped** (measured
+486.7 → 490.2 kB with the switch alone, no consumers). Well under
+the 510.8 kB ceiling. Switch will land as its own preamble commit
+before 7a so its bundle impact is separately attributable.
+
+**Registry: 19 calendars, not 21.**
+
+The brief lists 5 Islamic variants (`islamic-umalqura`, `islamic-
+civil`, `islamic-tbla`, `islamic` astronomical, `islamic-rgsa` Saudi
+sighting). The polyfill supports only the first three. The other
+two are dropped:
+
+- **`islamic` (astronomical)** requires live astronomical new-moon
+  calculation. Beyond scope for an offline calendar converter.
+- **`islamic-rgsa` (Saudi sighting)** is genuinely variable — depends
+  on actual sighting data published by religious authorities.
+  Impossible to bundle statically.
+
+Final registry (13 primary + 6 variants = 19):
+
+**Primary (13):** `common`, `gregorian`, `julian`, `coptic`,
+`ethiopic`, `hebrew`, `islamic`, `persian`, `chinese`, `japanese`,
+`roc`, `buddhist`, `indian`.
+
+**Variants (6):** `revised-julian`, `islamic-civil`, `islamic-tbla`,
+`ethiopic-alem`, `dangi`, `iso8601`.
+
+**Polyfill era codes (source of truth, not the brief's `eraStyle`).**
+
+Pin the actual polyfill era-field values as our lookup keys, since
+the brief's abstract `eraStyle` names don't always match:
+
+| Calendar | Polyfill backend | `era` value | `eraYear` | Our label |
+|---|---|---|---|---|
+| `common` | `gregory` | `ce` / `bce` | ✓ | "CE" / "BCE" |
+| `gregorian` | `gregory` | `ce` / `bce` | ✓ | "AD" / "BC" |
+| `julian` | (custom-jdn) | (assembled) | ✓ | "AD" / "BC" |
+| `coptic` | `coptic` | `am` | ✓ | "AM" |
+| `ethiopic` | `ethiopic` | `am` | ✓ | "AM (Mihret)" |
+| `ethiopic-alem` | `ethioaa` | `aa` | ✓ | "AM (Alem)" |
+| `hebrew` | `hebrew` | `am` | ✓ | "AM" |
+| `islamic` | `islamic-umalqura` | `ah` | ✓ | "AH" |
+| `islamic-civil` | `islamic-civil` | `ah` | ✓ | "AH" |
+| `islamic-tbla` | `islamic-tbla` | `ah` | ✓ | "AH" |
+| `persian` | `persian` | `ap` | ✓ | "AP" |
+| `chinese` | `chinese` | `undefined` | (uses `year`) | (see below) |
+| `dangi` | `dangi` | `undefined` | (uses `year`) | (see below) |
+| `japanese` | `japanese` | `reiwa`/`heisei`/... | ✓ | localized era name |
+| `roc` | `roc` | `roc` | ✓ | "民國" / "Minguo" |
+| `buddhist` | `buddhist` | `be` | ✓ | "BE" |
+| `indian` | `indian` | `shaka` | ✓ | "Shaka" (not Saka; matches polyfill) |
+| `revised-julian` | (custom-jdn) | (assembled) | ✓ | "AD" / "BC" |
+| `iso8601` | `iso8601` | `undefined` | (uses `year`) | (no era; signed year) |
+
+Note that Coptic, Ethiopic (both variants), and Hebrew all return
+the same era code `am` (Anno Martyrum / Mihret / Mundi), but the
+labels are distinct because they're keyed off the calendar id, not
+the era code alone. Ethiopic-Alem correctly returns `aa` from the
+`ethioaa` backend, giving us a natural distinction.
+
+**Chinese and Dangi rendering.**
+
+These calendars don't have a linear era — they use a 60-year
+sexagenary stem-branch cycle. `Intl.DateTimeFormat` returns
+additional fields `relatedYear` and `yearName` (e.g. `2026` and
+`bing-wu`). Display convention: **render both, with stem-branch in
+parentheses.** Rationale: the numeric year alone is ambiguous (any
+2026 could be any of infinitely many years in the 60-year cycle);
+the stem-branch alone requires cultural context. Both together is
+unambiguous for correspondence use.
+
+Example output for 2026 CE:
+- Chinese: `2026 (丙午)` (in `zh` locale) or `2026 (bing-wu)` (in
+  romanized locales like `en`)
+- Dangi: `2026 (병오)` (in `ko`) or `2026 (byeong-o)` (romanized)
+
+**ISO 8601 output shape.**
+
+For `iso8601` calendar, render as full **`YYYY-MM-DD`** date, using
+signed years for BCE dates (e.g. `-0321-01-15` for 322 BCE). This
+preserves ISO 8601's unambiguous exchange-format role. Year alone
+would lose the day-level precision that other calendars display.
+
+**JSON schema for the registry.**
+
+Flat structure matching existing categories. The dispatch code keys
+off the calendar id to detect custom-module cases:
+
+```json
+{
+  "id": "hebrew",
+  "name": "Hebrew",
+  "symbol": "hebrew",
+  "factor": 1
+}
+```
+
+The `symbol` field carries the polyfill backend ID for calendars
+that use one; for `julian` and `revised-julian` the symbol is our
+logical id and dispatch routes through the custom JDN module. The
+`factor: 1` is dead data (same as timezone units) since SYMBOLIC
+categories don't do arithmetic. `unitType` and `measurementSystem`
+follow the timezone pattern (`SI_BASE`, `SI`) as placeholders.
+
+**What's NOT yet probed** (relevant for later sub-steps, not 7a):
+
+- Month-name variability across calendars (Hebrew's intercalary
+  Adar, Chinese leap months). Affects the formatter.
+- Date arithmetic (`.add({ days: 365 })`) across all calendars.
+  Not needed for pure conversion display.
+- Julian ↔ Gregorian 1582 gap semantics. Custom JDN module handles
+  this trivially since JDN is a monotonic count.
+
 ## What & Why
 
 A new category in the "Other" group of the converter UI, using
@@ -186,16 +309,24 @@ separate primary from variants. Not two top-level categories.
 Much bigger surface than the Time pilot; realistically 2–4 sessions
 of work. Fine-grained decomposition below gives checkpointing.
 
+**7-preamble. Switch polyfill import to `/full`.** One-line change
+to `client/src/lib/temporal/temporal.ts` swapping `temporal-
+polyfill` for `temporal-polyfill/full`. Bundle +3.5 kB gzip.
+Baseline stays put (still under ceiling). Isolated from the Date
+category work so the bundle cost is separately attributable.
+
 **7a. Category registration — primary calendars only.** Add
 `date_calendar` category as SYMBOLIC with 13 primary calendar
 "units." All English labels; applied to all 11 locales as fallback.
 Slot into the 'Other' group. No conversion behavior yet.
 
-**7b. Visual grouping inside the calendar dropdown.** Assess
-shadcn/ui `<Select>` capability for section separators; either
-extend the component or render section-label divs inside
-`<SelectContent>`. Small commit if the pattern is easy; may fold
-into 7a if it turns out trivial.
+**7b. Visual grouping inside the calendar dropdown.** Render two
+section-label divs ("Primary" and "Variants") as non-interactive
+headers inside `<SelectContent>`, above their respective groups.
+No `<optgroup>` semantics needed — with 19 units this is small
+enough that a flat list with visual dividers works fine. Simplest
+implementation; folds into 7h when the variants group first has
+content, since 7a ships primary calendars only.
 
 **7c. Basic Temporal-backed conversion.** Wire
 `computeSymbolicConversion` to dispatch on `activeCategory ===
@@ -232,16 +363,22 @@ authored labels. Fixed word-order template initially
 (`{eraYear} {eraLabel}` or `{eraLabel} {eraYear}`); per-locale
 template variations only if needed.
 
-**7h. Variant calendars.** Add the 8 variant calendars
-(`revised-julian`, `islamic-civil`, `islamic-tbla`, `islamic-astro`,
-`islamic-rgsa`, `ethiopic-alem`, `dangi`, `iso8601`) into the
-registry and dropdown grouping. Some route to existing Temporal
-backends; ISO 8601 uses its own parser that accepts signed years.
+**7h. Variant calendars.** Add the 6 variant calendars
+(`revised-julian`, `islamic-civil`, `islamic-tbla`, `ethiopic-alem`,
+`dangi`, `iso8601`) into the registry and dropdown grouping. Some
+route to existing Temporal backends; ISO 8601 uses its own parser
+that accepts signed years. `islamic` (astronomical) and
+`islamic-rgsa` (Saudi sighting) are dropped from the brief's list
+per the polyfill capability review — they can't be supported
+offline without astronomical or sighting-data resources.
 
-**7i. Localize calendar names + era labels.** 11 locales, ~275
-strings total (calendar names: 21 × 11 = 231; era labels for the
-authored styles: ~44). Analogous to Step 6 for timezones. Similar
-localization script pattern.
+**7i. Localize calendar names + era labels.** 11 locales. Calendar
+names: 19 × 11 = 209 strings. Era labels for the authored styles
+(`ce-bce`, `ad-bc`, `am`, `am-mihret`, `am-alem`, `ah`, `ap`, `be`,
+`shaka`, `roc`) across 11 locales: ~50–80 strings depending on
+how many need authoring vs. how many CLDR provides via Intl.
+Analogous to Step 6 for timezones. Similar localization script
+pattern.
 
 **7j. Localize per-calendar error messages.** The parser errors
 from 7e are English initially; translate to the other 10 locales in
@@ -249,30 +386,31 @@ a separate pass.
 
 **Rough magnitude:** the Time pilot was 11 commits and ~500 lines
 of production code. Date is realistically 2–3× that: 15–25 commits
-and 1200–1500 lines, plus a similar volume of tests.
+and 1200–1500 lines, plus a similar volume of tests. The reduced
+registry (19 vs 21 calendars) trims translation work modestly but
+doesn't materially shrink implementation.
 
 ## Localization scope details
 
-**Rely on `Intl.DateTimeFormat` for month names** in the 11
-Temporal-supported calendars. Trust CLDR here — month-name authoring
-for 21 calendars × 12 months × 11 locales would be ~2800 strings,
-most of which CLDR already ships correctly.
+**Rely on `Intl.DateTimeFormat` for month names** in the polyfill-
+supported calendars. Trust CLDR here — month-name authoring for 19
+calendars × 12 months × 11 locales would be ~2500 strings, most of
+which CLDR already ships correctly.
 
 **For Julian + Revised Julian, reuse Gregorian month names.** Both
 use the same 12 Roman months (January through December), so
 `gregory`'s CLDR month names apply unchanged.
 
 **Author manually:**
-- Calendar names (21 × 11 = 231 strings)
-- Era labels for authored styles: `ce-bce` in all 11 locales (2
-  labels × 11 = 22), plus `am`, `ah`, `ap`, `be`, `saka`, `minguo`,
-  `am-mihret`, `am-alem` where CLDR doesn't cover them (est. another
-  20–30 strings)
+- Calendar names (19 × 11 = 209 strings)
+- Era labels for authored styles where CLDR doesn't cover them
+  well: `ce-bce` (2 × 11 = 22), plus per-need for `am`, `am-mihret`,
+  `am-alem`, `ah`, `ap`, `be`, `shaka`, `roc` (est. 30–60 more)
 - Per-calendar parser error messages (est. 10–15 unique messages ×
   11 locales = 110–165 strings)
 
-Total authored: ~400 strings. 2× the Time-category localization work;
-feasible but not trivial.
+Total authored: ~350–450 strings. Similar order of magnitude to 2×
+the Time-category localization work; feasible but not trivial.
 
 **Word-order templates.** Some languages place the era before the
 year ("CE 2026" style) and others after ("2026 CE" style). MVP: use
