@@ -206,6 +206,15 @@
       "sourceUrl": "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"
     },
     {
+      "id": "football_field_us",
+      "name": "Football Field Area (US)",
+      "symbol": "ftbl fld",
+      "factor": 5351.215104,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://en.wikipedia.org/wiki/American_football_field"
+    },
+    {
       "id": "arpent",
       "name": "Arpent (French)",
       "symbol": "arpent",
