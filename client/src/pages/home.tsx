@@ -2,7 +2,7 @@ import { useState } from 'react';
 import UnitConverterApp from '@/features/unit-converter/app/UnitConverterApp';
 import { ConverterProvider } from '@/components/unit-converter/context/ConverterContext';
 
-const APP_VERSION = '4.0.0.1';
+const APP_VERSION = '5.0.0.0';
 
 export default function Home() {
   const [helpOpen, setHelpOpenRaw] = useState(false);
