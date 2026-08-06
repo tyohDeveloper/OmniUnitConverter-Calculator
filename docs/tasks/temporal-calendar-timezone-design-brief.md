@@ -4,10 +4,12 @@
 > categories in the design brief have shipped. Time zone landed as a
 > pilot in `4f82004`–`afd2ee5`, and Date/calendar landed as a MVP in
 > `24f1981`–`0456ccb` with 19 functional calendars (13 primary + 6
-> variants). The complex per-calendar natural-format parser (7e) and
-> its localized error messages (7j) were consciously deferred; the
-> Date MVP accepts a single normalized `YYYY-MM-DD` input shape in
-> the from-calendar's own year/month/day scheme. See
+> variants), followed by post-MVP hardening for browser CLDR era-
+> placeholder rendering in `0cbb899`–`89db003`. The complex per-
+> calendar natural-format parser (7e) and its localized error
+> messages (7j) were consciously deferred; the Date MVP accepts a
+> single normalized `YYYY-MM-DD` input shape in the from-calendar's
+> own year/month/day scheme. See
 > [temporal-date-category.md](./temporal-date-category.md) for the
 > full Step 7 landing summary. The design-brief body below is
 > preserved as the reference record for the calendar registry, era

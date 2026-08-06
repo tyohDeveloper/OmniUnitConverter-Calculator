@@ -97,12 +97,42 @@
 > - **7j — localized parser error messages.** Depends on 7e; skipped
 >   with it.
 >
-> **Final metrics (main HEAD `0456ccb`):**
+> **Post-MVP hardening (0cbb899, 89db003):**
 >
-> - **Tests:** 2143 (was 2118 at start of Step 7 arc; +25 net across
->   7a/7c/7d/7f/7g/7h; unchanged in 7i).
-> - **Bundle:** 498.7 kB gzip (was 493.9 kB after 7d, +4.8 kB across
->   7f/7g/7h/7i). Under the 510.8 kB ceiling with ~12 kB headroom.
+> - **Coptic/Ethiopic ERA1/ERA0 placeholder substitution** — Replit
+>   noticed some browser CLDR builds render the literal placeholders
+>   `ERA1` (post-epoch) or `ERA0` (pre-epoch) for the Coptic and
+>   Ethiopic calendars when their era names aren't localized in the
+>   bundled CLDR data. New file
+>   `client/src/lib/calculator/applyFallbackEraLabels.ts` intercepts
+>   these placeholders and substitutes conventional academic labels
+>   (Coptic: `AM`/`BD`; Ethiopic: `AM`/`AA`; ethioaa single-era: `AA`
+>   for both). Labels are Latin-script romanizations used across all
+>   locales per the design brief's label-authorship policy for
+>   calendars CLDR leaves untranslated. Node's current CLDR renders
+>   these natively, so the module is defensive against older browser
+>   Intl runtimes rather than fixing an observable bug in the test
+>   environment. (`0cbb899`)
+> - **Test coverage + two label corrections** for the fallback module.
+>   13 new tests exercise the substitution mechanism via synthetic
+>   `ERA1`/`ERA0` inputs (independent of whichever CLDR the test
+>   runner bundles), covering no-op behavior for unrecognized
+>   calendars, per-calendar substitutions, and locale-agnostic
+>   application to CJK and Arabic RTL text. Also fixed two label
+>   choices while auditing: Coptic ERA0 changed from `before AM`
+>   (not a recognized academic convention) to `BD` (Before
+>   Diocletian, the standard abbreviation); ethioaa ERA1 changed
+>   from `AM` to `AA` (ethioaa is single-era Amätä Aläm, so both
+>   ERA1 and ERA0 should map to `AA`, not to the ethiopic
+>   incarnation-era label). (`89db003`)
+>
+> **Final metrics (main HEAD `89db003`):**
+>
+> - **Tests:** 2156 (was 2118 at start of Step 7 arc; +25 net across
+>   7a/7c/7d/7f/7g/7h and +13 in post-MVP hardening).
+> - **Bundle:** 498.8 kB gzip (was 493.9 kB after 7d, +4.9 kB across
+>   7f/7g/7h/7i and post-MVP hardening). Under the 510.8 kB ceiling
+>   with ~12 kB headroom.
 > - **Categories:** 76 total (added `date_calendar`; kept the
 >   19-zone `timezone` category from the Time pilot).
 > - **Calendars:** 19 functional (13 primary + 6 variants).
