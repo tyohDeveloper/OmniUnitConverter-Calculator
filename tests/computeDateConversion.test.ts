@@ -221,13 +221,43 @@ describe('computeDateConversion: invalid inputs return null', () => {
   });
 });
 
-describe('computeDateConversion: deferred calendars return null', () => {
-  it('julian as source returns null (JDN module in step 7f)', () => {
-    expect(computeDateConversion({ value: '2026-08-05', fromUnit: 'julian', toUnit: 'common', language: EN })).toBeNull();
+describe('computeDateConversion: Julian calendar (via JDN module)', () => {
+  it('Common 2026-08-05 → Julian: 13-day lag = July 23, 2026 AD', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'julian', language: EN });
+    expect(result).toBe('July 23, 2026 AD');
   });
 
-  it('julian as target returns null', () => {
-    expect(computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'julian', language: EN })).toBeNull();
+  it('Julian 2026-07-23 → Common: August 5, 2026 CE', () => {
+    const result = computeDateConversion({ value: '2026-07-23', fromUnit: 'julian', toUnit: 'common', language: EN });
+    expect(result).toBe('August 5, 2026 CE');
+  });
+
+  it('Common 2000-01-01 → Julian: December 19, 1999 AD (Y2K pivot)', () => {
+    const result = computeDateConversion({ value: '2000-01-01', fromUnit: 'common', toUnit: 'julian', language: EN });
+    expect(result).toBe('December 19, 1999 AD');
+  });
+
+  it('Julian 1582-10-05 → Common 1582-10-15 (the Gregorian introduction gap)', () => {
+    const result = computeDateConversion({ value: '1582-10-05', fromUnit: 'julian', toUnit: 'common', language: EN });
+    expect(result).toBe('October 15, 1582 CE');
+  });
+
+  it('Julian round-trip: 2026-07-23 → Common → Julian recovers July 23', () => {
+    const toCommon = computeDateConversion({ value: '2026-07-23', fromUnit: 'julian', toUnit: 'common', language: EN });
+    expect(toCommon).toBe('August 5, 2026 CE');
+    const backToJulian = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'julian', language: EN });
+    expect(backToJulian).toBe('July 23, 2026 AD');
+  });
+});
+
+describe('computeDateConversion: Revised Julian (not yet registered)', () => {
+  // The 'revised-julian' unit is registered in step 7h with the
+  // other variant calendars. The dispatch code (parse+format
+  // routing through the equivalence-window check) is already in
+  // place; behavior tests land alongside 7h.
+  it('revised-julian is not resolvable until 7h', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'revised-julian', language: EN });
+    expect(result).toBeNull();
   });
 });
 

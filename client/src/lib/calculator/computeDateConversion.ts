@@ -1,6 +1,11 @@
 import { Temporal } from '@/lib/temporal/temporal';
 import { CONVERSION_DATA } from '../conversion-data';
 import type { SupportedLanguage } from '../localization';
+import type { JulianDate } from '@/lib/temporal/julianJdn';
+import {
+  parseJulianYMD, parseRevisedJulianYMD,
+  formatAsJulian, formatAsRevisedJulian,
+} from './computeJulianConversion';
 
 /**
  * Convert a date from one calendar system to another (MVP).
@@ -10,14 +15,13 @@ import type { SupportedLanguage } from '../localization';
  * Hebrew year 5786, month 11, day 22). Empty string = today.
  * Anything else → null.
  *
- * Deferred: julian + revised-julian need the custom JDN module
- * (step 7f); iso8601 lives in the variants group (step 7h). Returns
- * null when any of those is the source or target.
+ * Julian and Revised Julian route through the Fliegel-Van Flandern
+ * JDN converters (see computeJulianConversion.ts). iso8601 lives in
+ * the variants group (step 7h) and returns null until then.
  *
  * Output via Intl.DateTimeFormat with the app's `language` value
- * (which is really a BCP-47 locale code per SupportedLanguage's
- * misnomer). CLDR handles month names, era labels, and stem-branch
- * year names for Chinese/Dangi automatically.
+ * (which is really a BCP-47 locale code). CLDR handles month names,
+ * era labels, and stem-branch year names automatically.
  */
 export function computeDateConversion(input: {
   value: string;
@@ -27,10 +31,10 @@ export function computeDateConversion(input: {
 }): string | null {
   const symbols = resolveCalendarSymbols(input.fromUnit, input.toUnit);
   if (!symbols) return null;
-  if (isDeferredCalendar(symbols.from) || isDeferredCalendar(symbols.to)) return null;
-  const parsed = parseDateInput(input.value.trim(), symbols.from);
+  if (symbols.from === 'iso8601' || symbols.to === 'iso8601') return null;
+  const parsed = parseDateInAnyCalendar(input.value.trim(), symbols.from);
   if (!parsed) return null;
-  const formatted = formatDateInCalendar(parsed, symbols.to, input.language);
+  const formatted = formatDateInAnyCalendar(parsed, symbols.to, input.language);
   if (formatted === null) return null;
   return applyCommonEraLabels(formatted, input.toUnit, input.language);
 }
@@ -45,13 +49,6 @@ function applyCommonEraLabels(text: string, toUnit: string, language: SupportedL
 
 // ─── Local helpers ───
 
-// Calendars deferred to later sub-steps of the Date category work.
-// julian + revised-julian need the JDN module (7f); iso8601 lives
-// in the variants group (7h) and needs signed-year parsing.
-function isDeferredCalendar(symbol: string): boolean {
-  return symbol === 'julian' || symbol === 'revised-julian' || symbol === 'iso8601';
-}
-
 function resolveCalendarSymbols(fromUnitId: string, toUnitId: string): { from: string; to: string } | null {
   const cat = CONVERSION_DATA.find(c => c.id === 'date_calendar');
   if (!cat) return null;
@@ -61,36 +58,39 @@ function resolveCalendarSymbols(fromUnitId: string, toUnitId: string): { from: s
   return { from: fromUnit.symbol, to: toUnit.symbol };
 }
 
-// Empty input → today. Non-empty must match YYYY-MM-DD in the from-
-// calendar's own scheme. Returns a PlainDate in fromSymbol's calendar.
-function parseDateInput(value: string, fromSymbol: string): Temporal.PlainDate | null {
+function parseDateInAnyCalendar(value: string, fromSymbol: string): Temporal.PlainDate | null {
+  const ymd = parseYMD(value);
+  if (!ymd) return null;
+  if (fromSymbol === 'julian') return parseJulianYMD(ymd);
+  if (fromSymbol === 'revised-julian') return parseRevisedJulianYMD(ymd);
   try {
-    if (value === '') return Temporal.Now.plainDateISO();
-    const match = /^(-?\d{1,6})-(\d{1,2})-(\d{1,2})$/.exec(value);
-    if (!match) return null;
-    const year = Number(match[1]);
-    const month = Number(match[2]);
-    const day = Number(match[3]);
-    if (month < 1 || month > 13 || day < 1 || day > 31) return null;
-    return Temporal.PlainDate.from({ year, month, day, calendar: fromSymbol });
+    return Temporal.PlainDate.from({ year: ymd.year, month: ymd.month, day: ymd.day, calendar: fromSymbol });
   } catch { return null; }
 }
 
-// Formats via Intl.DateTimeFormat with era short (calendars that don't
-// support era get an empty era slot, filtered out here). Chinese and
-// Dangi use relatedYear + yearName parts automatically.
-function formatDateInCalendar(from: Temporal.PlainDate, toSymbol: string, language: SupportedLanguage): string | null {
+function parseYMD(value: string): JulianDate | null {
+  if (value === '') {
+    const t = Temporal.Now.plainDateISO();
+    return { year: t.year, month: t.month, day: t.day };
+  }
+  const match = /^(-?\d{1,6})-(\d{1,2})-(\d{1,2})$/.exec(value);
+  if (!match) return null;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  if (month < 1 || month > 13 || day < 1 || day > 31) return null;
+  return { year, month, day };
+}
+
+function formatDateInAnyCalendar(from: Temporal.PlainDate, toSymbol: string, language: SupportedLanguage): string | null {
+  if (toSymbol === 'julian') return formatAsJulian(from, language);
+  if (toSymbol === 'revised-julian') return formatAsRevisedJulian(from, language);
   try {
     const projected = from.withCalendar(toSymbol);
     const fmt = new Intl.DateTimeFormat(language, {
       calendar: toSymbol, year: 'numeric', month: 'long', day: 'numeric', era: 'short',
     });
-    // toPlainDateTime + ISO string via Temporal is finicky; use the
-    // legacy Date bridge via epochMilliseconds. The specific instant
-    // doesn't matter because we only render the date part.
     const jsDate = new Date(projected.toZonedDateTime('UTC').epochMilliseconds);
     return fmt.format(jsDate);
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }

@@ -66,6 +66,13 @@ const EXPORT_COUNT_RULE_DIRS = [
  * - languageTypes.ts:           exports constant + derived type (co-located by design)
  * - unitDefinition.ts:          type definitions only (UnitDefinition + CategoryDefinition are coupled)
  * - measurementSystem.ts:       data-only const object + derived type (co-located by design)
+ * - julianJdn.ts:               tightly-coupled Fliegel-Van Flandern JDN converters
+ *                               (gregorianToJDN/julianToJDN/jdnToJulian/jdnToGregorian +
+ *                               Revised Julian helpers). Always used together in per-
+ *                               calendar dispatch; splitting into 6 single-export files
+ *                               would fragment the algorithm across the module.
+ * - computeJulianConversion.ts: parse+format helpers for Julian and Revised Julian
+ *                               (4 functions dispatched together from computeDateConversion).
  */
 const EXPORT_RULE_EXCLUDES = new Set([
   'index.ts', 'shared-types.ts', 'siDerivedUnits.ts', 'categoryDimensions.ts',
@@ -77,7 +84,7 @@ const EXPORT_RULE_EXCLUDES = new Set([
   'queryClient.ts', 'test-utils.ts', 'translateUi.ts', 'translateUnit.ts',
   'siBaseUnits.ts', 'siDerivedUnitsCatalog.ts', 'nonSiUnitsCatalog.ts',
   'preferredRepresentations.ts', 'languageTypes.ts', 'unitDefinition.ts',
-  'measurementSystem.ts',
+  'measurementSystem.ts', 'julianJdn.ts', 'computeJulianConversion.ts',
 ]);
 
 /**
