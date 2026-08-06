@@ -121,6 +121,60 @@
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
       "sourceUrl": "https://en.wikipedia.org/wiki/Indian_national_calendar"
+    },
+    {
+      "id": "revised-julian",
+      "name": "Revised Julian",
+      "symbol": "revised-julian",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Revised_Julian_calendar"
+    },
+    {
+      "id": "islamic-civil",
+      "name": "Islamic (tabular civil)",
+      "symbol": "islamic-civil",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tabular_Islamic_calendar"
+    },
+    {
+      "id": "islamic-tbla",
+      "name": "Islamic (tabular astronomical)",
+      "symbol": "islamic-tbla",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tabular_Islamic_calendar"
+    },
+    {
+      "id": "ethiopic-alem",
+      "name": "Ethiopic (Amete Alem)",
+      "symbol": "ethioaa",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ethiopian_calendar"
+    },
+    {
+      "id": "dangi",
+      "name": "Korean (Dangi)",
+      "symbol": "dangi",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Korean_calendar"
+    },
+    {
+      "id": "iso8601",
+      "name": "ISO 8601 (astronomical years)",
+      "symbol": "iso8601",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/ISO_8601"
     }
   ]
 }

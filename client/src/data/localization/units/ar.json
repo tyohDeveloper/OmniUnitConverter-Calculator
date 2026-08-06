@@ -737,5 +737,11 @@
   "Buddhist (Thai)": "Buddhist (Thai)",
   "Indian (Saka)": "Indian (Saka)",
   "Common": "Common",
-  "Gregorian": "Gregorian"
+  "Gregorian": "Gregorian",
+  "Revised Julian": "Revised Julian",
+  "Islamic (tabular civil)": "Islamic (tabular civil)",
+  "Islamic (tabular astronomical)": "Islamic (tabular astronomical)",
+  "Ethiopic (Amete Alem)": "Ethiopic (Amete Alem)",
+  "Korean (Dangi)": "Korean (Dangi)",
+  "ISO 8601 (astronomical years)": "ISO 8601 (astronomical years)"
 }

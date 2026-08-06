@@ -139,5 +139,7 @@
   "Unitless Numbers": "Einheitenlose Zahlen",
   "Logarithmic Scales": "Logarithmische Skalen",
   "Sources": "Quellen",
-  "sources-note": "Umrechnungsfaktoren und Definitionsbeziehungen für jede Einheit, mit einem Referenzlink zu jeder. Links öffnen sich in einem neuen Tab."
+  "sources-note": "Umrechnungsfaktoren und Definitionsbeziehungen für jede Einheit, mit einem Referenzlink zu jeder. Links öffnen sich in einem neuen Tab.",
+  "Primary": "Primär",
+  "Variants": "Varianten"
 }

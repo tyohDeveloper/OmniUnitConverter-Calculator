@@ -139,5 +139,7 @@
   "Unitless Numbers": "Unitless Numbers",
   "Logarithmic Scales": "Logarithmic Scales",
   "Sources": "Sources",
-  "sources-note": "Conversion factors and defining relations for every unit, with a reference link for each. Links open in a new tab."
+  "sources-note": "Conversion factors and defining relations for every unit, with a reference link for each. Links open in a new tab.",
+  "Primary": "Primary",
+  "Variants": "Variants"
 }

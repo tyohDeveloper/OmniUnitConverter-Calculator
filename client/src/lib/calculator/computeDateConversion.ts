@@ -6,6 +6,7 @@ import {
   parseJulianYMD, parseRevisedJulianYMD,
   formatAsJulian, formatAsRevisedJulian,
 } from './computeJulianConversion';
+import { formatAsIso8601 } from './computeIso8601Conversion';
 import { applyCommonEraLabels } from './applyCommonEraLabels';
 
 /**
@@ -17,8 +18,8 @@ import { applyCommonEraLabels } from './applyCommonEraLabels';
  * Anything else → null.
  *
  * Julian and Revised Julian route through the Fliegel-Van Flandern
- * JDN converters (see computeJulianConversion.ts). iso8601 lives in
- * the variants group (step 7h) and returns null until then.
+ * JDN converters (see computeJulianConversion.ts). All 19 calendars
+ * from the registry are supported.
  *
  * Output via Intl.DateTimeFormat with the app's `language` value
  * (which is really a BCP-47 locale code). CLDR handles month names,
@@ -32,7 +33,6 @@ export function computeDateConversion(input: {
 }): string | null {
   const symbols = resolveCalendarSymbols(input.fromUnit, input.toUnit);
   if (!symbols) return null;
-  if (symbols.from === 'iso8601' || symbols.to === 'iso8601') return null;
   const parsed = parseDateInAnyCalendar(input.value.trim(), symbols.from);
   if (!parsed) return null;
   const formatted = formatDateInAnyCalendar(parsed, symbols.to, input.language);
@@ -78,6 +78,7 @@ function parseYMD(value: string): JulianDate | null {
 function formatDateInAnyCalendar(from: Temporal.PlainDate, toSymbol: string, language: SupportedLanguage): string | null {
   if (toSymbol === 'julian') return formatAsJulian(from, language);
   if (toSymbol === 'revised-julian') return formatAsRevisedJulian(from, language);
+  if (toSymbol === 'iso8601') return formatAsIso8601(from);
   try {
     const projected = from.withCalendar(toSymbol);
     const fmt = new Intl.DateTimeFormat(language, {

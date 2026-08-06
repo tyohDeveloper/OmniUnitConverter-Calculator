@@ -139,5 +139,7 @@
   "Unitless Numbers": "무차원 수",
   "Logarithmic Scales": "로그 스케일",
   "Sources": "출처",
-  "sources-note": "모든 단위의 환산 계수와 정의 관계를 각 단위별 참조 링크와 함께 제공합니다. 링크는 새 탭에서 열립니다."
+  "sources-note": "모든 단위의 환산 계수와 정의 관계를 각 단위별 참조 링크와 함께 제공합니다. 링크는 새 탭에서 열립니다.",
+  "Primary": "주요",
+  "Variants": "변형"
 }

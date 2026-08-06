@@ -319,14 +319,74 @@ describe('computeDateConversion: Julian calendar (via JDN module)', () => {
   });
 });
 
-describe('computeDateConversion: Revised Julian (not yet registered)', () => {
-  // The 'revised-julian' unit is registered in step 7h with the
-  // other variant calendars. The dispatch code (parse+format
-  // routing through the equivalence-window check) is already in
-  // place; behavior tests land alongside 7h.
-  it('revised-julian is not resolvable until 7h', () => {
+describe('computeDateConversion: Revised Julian (Gregorian-equivalent window)', () => {
+  it('Common 2026-08-05 → Revised Julian: identical to Gregorian in-window', () => {
     const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'revised-julian', language: EN });
+    expect(result).toBe('August 5, 2026 AD');
+  });
+
+  it('Revised Julian 2026-08-05 → Common', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'revised-julian', toUnit: 'common', language: EN });
+    expect(result).toBe('August 5, 2026 CE');
+  });
+
+  it('Revised Julian date pre-1600 returns null (outside equivalence window)', () => {
+    const result = computeDateConversion({ value: '1500-06-15', fromUnit: 'revised-julian', toUnit: 'common', language: EN });
     expect(result).toBeNull();
+  });
+
+  it('Common date pre-1600 → Revised Julian returns null', () => {
+    const result = computeDateConversion({ value: '1500-06-15', fromUnit: 'common', toUnit: 'revised-julian', language: EN });
+    expect(result).toBeNull();
+  });
+});
+
+describe('computeDateConversion: variant calendars', () => {
+  it('Common → Islamic tabular civil: uses -civil epoch (1 day different from Umm al-Qura)', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'islamic-civil', language: EN });
+    expect(result).toBe('Safar 20, 1448 AH');
+  });
+
+  it('Common → Islamic tabular astronomical: uses -tbla epoch', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'islamic-tbla', language: EN });
+    expect(result).toBe('Safar 21, 1448 AH');
+  });
+
+  it('Common → Ethiopic Amete Alem: different era (aa) than plain ethiopic', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'ethiopic-alem', language: EN });
+    expect(result).toContain('7518');
+  });
+
+  it('Common → Dangi: Korean lunar calendar, no era, stem-branch year name', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'dangi', language: EN });
+    expect(result).toContain('2026');
+    expect(result).toContain('bing-wu');
+  });
+
+  it('Common 2026-08-05 → ISO 8601: 2026-08-05 (format-locked YYYY-MM-DD)', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'iso8601', language: EN });
+    expect(result).toBe('2026-08-05');
+  });
+
+  it('ISO 8601 -322-04-15 → Common: 323 BCE (astronomical -322 → traditional 323 BCE)', () => {
+    const result = computeDateConversion({ value: '-322-04-15', fromUnit: 'iso8601', toUnit: 'common', language: EN });
+    expect(result).toBe('April 15, 323 BCE');
+  });
+
+  it('Common -322-04-15 → ISO 8601: -0322-04-15 (signed 4-digit year)', () => {
+    // Note: signing the Common input as -322 with gregory calendar
+    // means "astronomical year -322", not "year 322 BCE". This is the
+    // polyfill's convention for negative years in the gregory calendar.
+    const result = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'iso8601', language: EN });
+    expect(result).toBe('-0322-04-15');
+  });
+
+  it('ISO 8601 output is not localized (format-locked)', () => {
+    // Same value regardless of language.
+    const en = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'iso8601', language: EN });
+    const ja = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'iso8601', language: JA });
+    expect(en).toBe('2026-08-05');
+    expect(ja).toBe('2026-08-05');
   });
 });
 

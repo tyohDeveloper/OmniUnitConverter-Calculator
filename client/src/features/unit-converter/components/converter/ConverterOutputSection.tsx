@@ -5,6 +5,7 @@ import { regionalCountingSuffix } from '@/lib/units/regionalCountingSuffix';
 import { KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { renderCalendarGroupedItems } from './renderCalendarGroupedItems';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import type { UseConverterControllerReturn } from '@/components/unit-converter/hooks/useConverterControllerReturn';
 import type { CategoryDefinition } from '@/lib/units/unitDefinition';
@@ -120,22 +121,20 @@ export function ConverterOutputSection({
             <span data-testid="display-to-unit-name" className="truncate"><SelectValue placeholder={t('Unit')} /></span>
           </SelectTrigger>
           <SelectContent position="item-aligned" className="max-h-[50vh]">
-            {toFilteredUnits.map((u) => (
-              <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
-                {activeCategory === 'date_calendar' ? (
-                  // Calendar units' symbol field is the polyfill
-                  // backend id (implementation detail) — skip it.
-                  <span className="font-bold">{translateUnitName(u.name)}</span>
-                ) : u.symbol === u.name ? (
-                  <span className="font-bold">{u.symbol}</span>
-                ) : (
-                  <>
-                    <span className="font-bold me-2">{u.symbol}</span>
-                    <span className="opacity-70">{translateUnitName(u.name)}</span>
-                  </>
-                )}
-              </SelectItem>
-            ))}
+            {activeCategory === 'date_calendar'
+              ? renderCalendarGroupedItems(toFilteredUnits, translateUnitName, t)
+              : toFilteredUnits.map((u) => (
+                  <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
+                    {u.symbol === u.name ? (
+                      <span className="font-bold">{u.symbol}</span>
+                    ) : (
+                      <>
+                        <span className="font-bold me-2">{u.symbol}</span>
+                        <span className="opacity-70">{translateUnitName(u.name)}</span>
+                      </>
+                    )}
+                  </SelectItem>
+                ))}
           </SelectContent>
         </Select>
       </div>

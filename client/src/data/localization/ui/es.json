@@ -139,5 +139,7 @@
   "Unitless Numbers": "Números Adimensionales",
   "Logarithmic Scales": "Escalas logarítmicas",
   "Sources": "Fuentes",
-  "sources-note": "Factores de conversión y relaciones de definición de cada unidad, con un enlace de referencia para cada una. Los enlaces se abren en una pestaña nueva."
+  "sources-note": "Factores de conversión y relaciones de definición de cada unidad, con un enlace de referencia para cada una. Los enlaces se abren en una pestaña nueva.",
+  "Primary": "Principales",
+  "Variants": "Variantes"
 }
