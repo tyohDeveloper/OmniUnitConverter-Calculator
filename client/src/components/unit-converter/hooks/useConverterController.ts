@@ -136,7 +136,7 @@ export function useConverterController(): UseConverterControllerReturn {
   // Conversion result effect — see useConverterResultEffect.
   useConverterResultEffect({
     inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-    numberFormat, parseNumberWithFormat, parseDMS, parseFtIn,
+    numberFormat, language, parseNumberWithFormat, parseDMS, parseFtIn,
     setResult, setSymbolicResult,
   });
 

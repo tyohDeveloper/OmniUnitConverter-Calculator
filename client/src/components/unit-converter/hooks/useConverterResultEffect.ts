@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { UnitCategory } from '@/lib/units/unitCategory';
+import type { SupportedLanguage } from '@/lib/localization';
 import { computeConversion } from '@/lib/calculator/computeConversion';
 import { computeSymbolicConversion } from '@/lib/calculator/computeSymbolicConversion';
 import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
@@ -12,6 +13,7 @@ interface UseConverterResultEffectArgs {
   fromPrefix: string;
   toPrefix: string;
   numberFormat: string;
+  language: SupportedLanguage;
   parseNumberWithFormat: (s: string) => number;
   parseDMS: (s: string) => number;
   parseFtIn: (s: string) => number;
@@ -46,7 +48,7 @@ function runSymbolicBranch(a: UseConverterResultEffectArgs): void {
   if (!a.fromUnit || !a.toUnit) { a.setSymbolicResult(null); return; }
   a.setSymbolicResult(computeSymbolicConversion({
     value: a.inputValue, fromUnit: a.fromUnit, toUnit: a.toUnit,
-    activeCategory: a.activeCategory,
+    activeCategory: a.activeCategory, language: a.language,
   }));
 }
 
@@ -67,5 +69,5 @@ export function useConverterResultEffect(args: UseConverterResultEffectArgs): vo
     if (family === 'SYMBOLIC') { runSymbolicBranch(args); return; }
     runNumericBranch(args);
   }, [args.inputValue, args.fromUnit, args.toUnit, args.activeCategory,
-      args.fromPrefix, args.toPrefix, args.numberFormat]); // eslint-disable-line react-hooks/exhaustive-deps
+      args.fromPrefix, args.toPrefix, args.numberFormat, args.language]); // eslint-disable-line react-hooks/exhaustive-deps
 }

@@ -1,6 +1,8 @@
 import { CATEGORY_FAMILIES } from '../units/categoryFamilies';
 import type { UnitCategory } from '../units/unitCategory';
+import type { SupportedLanguage } from '../localization';
 import { computeTimeConversion } from './computeTimeConversion';
+import { computeDateConversion } from './computeDateConversion';
 
 /**
  * Pure conversion calculation for SYMBOLIC-family categories.
@@ -22,20 +24,34 @@ import { computeTimeConversion } from './computeTimeConversion';
  * SYMBOLIC category = register it in CONVERSION_DATA + wire its
  * per-category conversion function into the switch below.
  */
-export function computeSymbolicConversion(input: {
-  value: string;
-  fromUnit: string;
-  toUnit: string;
-  activeCategory: UnitCategory;
-}): string | null {
-  const family = CATEGORY_FAMILIES[input.activeCategory];
-  if (family !== 'SYMBOLIC') return null;
+// Per-category dispatch, extracted so the exported function stays
+// short as more SYMBOLIC categories are added.
+function dispatchByCategory(input: SymbolicConversionInput): string | null {
   switch (input.activeCategory) {
     case 'timezone':
       return computeTimeConversion({
         value: input.value, fromUnit: input.fromUnit, toUnit: input.toUnit,
       });
+    case 'date_calendar':
+      return computeDateConversion({
+        value: input.value, fromUnit: input.fromUnit, toUnit: input.toUnit,
+        language: input.language,
+      });
     default:
       return null;
   }
+}
+
+interface SymbolicConversionInput {
+  value: string;
+  fromUnit: string;
+  toUnit: string;
+  activeCategory: UnitCategory;
+  language: SupportedLanguage;
+}
+
+export function computeSymbolicConversion(input: SymbolicConversionInput): string | null {
+  const family = CATEGORY_FAMILIES[input.activeCategory];
+  if (family !== 'SYMBOLIC') return null;
+  return dispatchByCategory(input);
 }
