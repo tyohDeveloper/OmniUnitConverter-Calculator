@@ -1,0 +1,126 @@
+{
+  "id": "date_calendar",
+  "name": "Date (calendar)",
+  "baseUnit": "common",
+  "baseSISymbol": "CE",
+  "family": "SYMBOLIC",
+  "units": [
+    {
+      "id": "common",
+      "name": "Common (CE/BCE)",
+      "symbol": "gregory",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Common_Era"
+    },
+    {
+      "id": "gregorian",
+      "name": "Gregorian (AD/BC)",
+      "symbol": "gregory",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gregorian_calendar"
+    },
+    {
+      "id": "julian",
+      "name": "Julian (Eastern Orthodox)",
+      "symbol": "julian",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Julian_calendar"
+    },
+    {
+      "id": "coptic",
+      "name": "Coptic (Oriental Orthodox)",
+      "symbol": "coptic",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Coptic_calendar"
+    },
+    {
+      "id": "ethiopic",
+      "name": "Ethiopic (Ethiopian/Eritrean Orthodox)",
+      "symbol": "ethiopic",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ethiopian_calendar"
+    },
+    {
+      "id": "hebrew",
+      "name": "Hebrew",
+      "symbol": "hebrew",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Hebrew_calendar"
+    },
+    {
+      "id": "islamic",
+      "name": "Islamic (Umm al-Qura)",
+      "symbol": "islamic-umalqura",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Islamic_calendar"
+    },
+    {
+      "id": "persian",
+      "name": "Persian (Solar Hijri)",
+      "symbol": "persian",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Solar_Hijri_calendar"
+    },
+    {
+      "id": "chinese",
+      "name": "Chinese",
+      "symbol": "chinese",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_calendar"
+    },
+    {
+      "id": "japanese",
+      "name": "Japanese (imperial era)",
+      "symbol": "japanese",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_calendar"
+    },
+    {
+      "id": "roc",
+      "name": "Minguo (Republic of China)",
+      "symbol": "roc",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Republic_of_China_calendar"
+    },
+    {
+      "id": "buddhist",
+      "name": "Buddhist (Thai)",
+      "symbol": "buddhist",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Buddhist_calendar"
+    },
+    {
+      "id": "indian",
+      "name": "Indian (Saka)",
+      "symbol": "indian",
+      "factor": 1,
+      "unitType": "SI_BASE",
+      "measurementSystem": "SI",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_national_calendar"
+    }
+  ]
+}

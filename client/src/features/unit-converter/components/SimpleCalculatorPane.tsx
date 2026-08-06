@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { CALC_CONTENT_HEIGHT } from '@/components/unit-converter/constants';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 import type { CalculatorFlash } from './CalculatorPane';
 import { SimpleHeader } from './simple/SimpleHeader';
 import { SimpleField1Row } from './simple/SimpleField1Row';

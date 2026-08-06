@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { PREFIXES } from '@/lib/units/prefixes';
 import { parseRpnXInput } from '@/lib/calculator/parseRpnXInput';
 import { reexpressRpnEntry } from '@/lib/calculator/reexpressRpnEntry';
-import type { UseCalculatorControllerReturn } from './useCalculatorController';
+import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
 export interface UseRpnXEditFieldReturn {

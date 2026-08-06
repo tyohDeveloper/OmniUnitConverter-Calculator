@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 import { SimpleResultSelectors } from './SimpleResultSelectors';
 
 interface SimpleResultFieldProps {

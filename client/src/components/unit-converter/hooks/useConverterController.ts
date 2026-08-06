@@ -2,8 +2,6 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { CONVERSION_DATA } from '@/lib/conversion-data';
 import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { NumberFormat } from '@/lib/units/numberFormat';
-import { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
-import { applyPrefixToKgUnit as applyPrefixToKgUnitLib } from '@/lib/units/applyPrefixToKgUnit';
 import type { UseConverterControllerReturn } from './useConverterControllerReturn';
 import { useConverterInputHandlers } from './useConverterInputHandlers';
 import { useConverterDirectMode } from './useConverterDirectMode';
@@ -57,6 +55,7 @@ export function useConverterController(): UseConverterControllerReturn {
     toPrefix, setToPrefix,
     inputValue, setInputValue,
     result, setResult,
+    symbolicResult, setSymbolicResult,
     precision, setPrecision,
     comparisonMode, setComparisonMode,
   } = converterState;
@@ -107,8 +106,6 @@ export function useConverterController(): UseConverterControllerReturn {
     triggerFlashDirectCopy: flash.directCopy[1],
   };
 
-  const applyPrefixToKgUnit = applyPrefixToKgUnitLib;
-
   // Locale-dependent helpers (translators, formatters, parsers,
   // dimensional metadata) live in useLocaleHelpers. Everything there
   // depends only on numberFormat/language/precision — no state, no
@@ -139,7 +136,8 @@ export function useConverterController(): UseConverterControllerReturn {
   // Conversion result effect — see useConverterResultEffect.
   useConverterResultEffect({
     inputValue, fromUnit, toUnit, activeCategory, fromPrefix, toPrefix,
-    numberFormat, parseNumberWithFormat, parseDMS, parseFtIn, setResult,
+    numberFormat, language, parseNumberWithFormat, parseDMS, parseFtIn,
+    setResult, setSymbolicResult,
   });
 
   useEffect(() => {
@@ -160,12 +158,13 @@ export function useConverterController(): UseConverterControllerReturn {
     handleInputChange, handleInputBlur, handleInputKeyDown,
   } = useConverterInputHandlers({
     inputValue, fromUnit, activeCategory, numberFormat,
-    parseNumberWithFormat, setInputValue, setActiveCategory,
+    parseNumberWithFormat, setInputValue, setActiveCategory, setFromUnit,
   });
 
   // Clipboard read/write surface. See useConverterClipboard.ts.
   const clipboard = useConverterClipboard({
-    activeCategory, fromUnit, toUnit, fromPrefix, toPrefix, result, precision,
+    activeCategory, fromUnit, toUnit, fromPrefix, toPrefix,
+    result, symbolicResult, precision,
     formatDMS, formatFtIn, formatForClipboard,
     getCategoryDimensions,
     triggerFlashCopyResult, triggerFlashFromBaseFactor, triggerFlashFromSIBase,
@@ -207,13 +206,13 @@ export function useConverterController(): UseConverterControllerReturn {
 
   return {
     activeCategory, fromUnit, toUnit, fromPrefix, toPrefix,
-    inputValue, result, precision, comparisonMode,
+    inputValue, result, symbolicResult, precision, comparisonMode,
     numberFormat, language, activeTab, directValue, directExponents,
     converterPasteStatus,
     customPasteStatus,
 
     setActiveCategory, setFromUnit, setToUnit, setFromPrefix, setToPrefix,
-    setInputValue, setPrecision, setComparisonMode,
+    setInputValue, setSymbolicResult, setPrecision, setComparisonMode,
     setNumberFormat, setLanguage, setActiveTab, setDirectValue, setDirectExponents,
 
     swapUnits, copyResult, copyFromBaseFactor, copyFromSIBase,
@@ -223,10 +222,10 @@ export function useConverterController(): UseConverterControllerReturn {
     handleDirectCopyAndPushToCalculator, handleQuantityClick,
     refocusInput, reformatInputValue,
 
-    normalizeMassUnit, parseNumberWithFormat, t, translateUnitName, formatFactor, formatResultValue,
+    parseNumberWithFormat, t, translateUnitName, formatFactor, formatResultValue,
     formatDMS, formatFtIn, formatForClipboard, formatNumberWithSeparators,
     getPlaceholder, getCategoryDimensions, buildDirectUnitSymbol, buildDirectDimensions,
-    generateSIRepresentations, applyPrefixToKgUnit,
+    generateSIRepresentations,
 
     inputRef,
     pendingPasteUnit,

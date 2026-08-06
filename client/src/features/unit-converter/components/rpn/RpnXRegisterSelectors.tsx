@@ -3,7 +3,7 @@ import { PREFIXES } from '@/lib/units/prefixes';
 import { isSymbolSI } from '@/lib/unit-symbols/isSymbolSI';
 import { isDimensionEmpty } from '@/lib/dimensions/isDimensionEmpty';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorController';
+import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 
 interface RpnXRegisterSelectorsProps {
   controller: UseCalculatorControllerReturn;

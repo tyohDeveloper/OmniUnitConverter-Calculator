@@ -22,6 +22,9 @@ export const setInputValue = (v: string): ConverterAction =>
 export const setResult = (v: number | null): ConverterAction =>
   ({ type: 'SET_RESULT', payload: v });
 
+export const setSymbolicResult = (v: string | null): ConverterAction =>
+  ({ type: 'SET_SYMBOLIC_RESULT', payload: v });
+
 export const setPrecision = (v: number): ConverterAction =>
   ({ type: 'SET_PRECISION', payload: v });
 

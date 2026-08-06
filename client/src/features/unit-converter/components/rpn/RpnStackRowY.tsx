@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
 import type {
   UseCalculatorControllerReturn, RpnBinaryOp,
-} from '@/components/unit-converter/hooks/useCalculatorController';
+} from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 
 interface RpnStackRowYProps {
   controller: UseCalculatorControllerReturn;
@@ -28,7 +27,6 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
     applyRpnBinary, canApplyRpnBinary,
     pushToRpnStack, dropRpnStack, undoRpnStack, pullFromPane,
     swapRpnXY, recallLastX,
-    applyPrefixToKgUnit,
     formatNumberWithSeparators, t,
   } = controller;
 
@@ -48,8 +46,6 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
         value={rpnStack[2]}
         onClick={() => copyRpnField(2)}
         isFlashing={flashRpnField3}
-        formatDimensions={formatDimensions}
-        applyPrefixToKgUnit={applyPrefixToKgUnit}
         formatNumberWithSeparators={formatNumberWithSeparators}
         precision={calculatorPrecision}
         testId="rpn-field-y"

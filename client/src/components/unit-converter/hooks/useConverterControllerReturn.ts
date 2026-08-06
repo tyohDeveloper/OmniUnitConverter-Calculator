@@ -3,8 +3,6 @@ import type { NumberFormat } from '@/lib/units/numberFormat';
 import type { SupportedLanguage } from '@/lib/localization';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
-import type { applyPrefixToKgUnit } from '@/lib/units/applyPrefixToKgUnit';
-import type { normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
 
 /**
  * Public surface of useConverterController. Extracted from the hook
@@ -27,6 +25,7 @@ export interface UseConverterControllerReturn {
   toPrefix: string;
   inputValue: string;
   result: number | null;
+  symbolicResult: string | null;
   precision: number;
   comparisonMode: boolean;
   numberFormat: NumberFormat;
@@ -43,6 +42,7 @@ export interface UseConverterControllerReturn {
   setFromPrefix: (v: string) => void;
   setToPrefix: (v: string) => void;
   setInputValue: (v: string) => void;
+  setSymbolicResult: (v: string | null) => void;
   setPrecision: (v: number) => void;
   setComparisonMode: (v: boolean) => void;
   setNumberFormat: (v: NumberFormat) => void;
@@ -68,7 +68,6 @@ export interface UseConverterControllerReturn {
   refocusInput: () => void;
   reformatInputValue: (oldFormat: NumberFormat, newFormat: NumberFormat) => void;
 
-  normalizeMassUnit: typeof normalizeMassUnit;
   parseNumberWithFormat: (str: string) => number;
   t: (key: string) => string;
   translateUnitName: (name: string) => string;
@@ -83,7 +82,6 @@ export interface UseConverterControllerReturn {
   buildDirectUnitSymbol: () => string;
   buildDirectDimensions: () => Record<string, number>;
   generateSIRepresentations: (dims: DimensionalFormula, sourceCategory?: string) => SIRepresentation[];
-  applyPrefixToKgUnit: typeof applyPrefixToKgUnit;
 
   inputRef: React.RefObject<HTMLInputElement | null>;
   // Council-11: replaces pendingPasteUnitRef. The value now lives in

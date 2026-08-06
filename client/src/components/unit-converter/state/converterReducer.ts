@@ -9,6 +9,12 @@ export interface ConverterState {
   toPrefix: string;
   inputValue: string;
   result: number | null;
+  // Parallel to `result`, populated for SYMBOLIC-family categories
+  // (Time, Date). One of `result` / `symbolicResult` is meaningful at
+  // a time, dispatched by CATEGORY_FAMILIES[activeCategory]. Both
+  // fields exist so consumers that only handle one case don't have to
+  // pattern-match a union.
+  symbolicResult: string | null;
   precision: number;
   comparisonMode: boolean;
 }
@@ -21,6 +27,7 @@ export const converterInitialState: ConverterState = {
   toPrefix: 'none',
   inputValue: '1',
   result: null,
+  symbolicResult: null,
   precision: DEFAULT_PRECISION,
   comparisonMode: false,
 };
@@ -33,6 +40,7 @@ export type ConverterAction =
   | { type: 'SET_TO_PREFIX'; payload: string }
   | { type: 'SET_INPUT_VALUE'; payload: string }
   | { type: 'SET_RESULT'; payload: number | null }
+  | { type: 'SET_SYMBOLIC_RESULT'; payload: string | null }
   | { type: 'SET_PRECISION'; payload: number }
   | { type: 'SET_COMPARISON_MODE'; payload: boolean }
   | { type: 'SWAP_UNITS' };
@@ -53,6 +61,8 @@ export function converterReducer(state: ConverterState, action: ConverterAction)
       return { ...state, inputValue: action.payload };
     case 'SET_RESULT':
       return { ...state, result: action.payload };
+    case 'SET_SYMBOLIC_RESULT':
+      return { ...state, symbolicResult: action.payload };
     case 'SET_PRECISION':
       return { ...state, precision: action.payload };
     case 'SET_COMPARISON_MODE':

@@ -4,6 +4,7 @@ import type { UnitCategory } from '@/lib/units/unitCategory';
 import type { DimensionalFormula } from '@/lib/units/dimensionalFormula';
 import type { SIRepresentation } from '@/lib/si-representations/siRepresentation';
 import { buildPushFromConverter } from '@/lib/calculator/buildPushFromConverter';
+import { canPushToCalculator } from '@/lib/calculator/canPushToCalculator';
 import type { CopyResultOutcome } from './useConverterClipboard';
 
 // EXCEPTION [architecture-standards §3.2]: type-and-function co-location.
@@ -53,6 +54,7 @@ export function useConverterPushToCalculator(
   i: UseConverterPushToCalculatorInput,
 ): UseConverterPushToCalculatorReturn {
   const pushCopyOutcome = useCallback((outcome: CopyResultOutcome, activeCategory: UnitCategory) => {
+    if (!canPushToCalculator(activeCategory)) return;
     const newEntry: CalcValue = outcome.newEntry;
     if (i.calculatorMode === 'rpn') {
       i.setPreviousRpnStack([...i.rpnStack]);

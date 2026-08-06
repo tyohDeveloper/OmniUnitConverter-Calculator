@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { PREFIXES, ALL_PREFIXES } from '@/lib/units/prefixes';
 import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
-import { KG_TO_GRAM_UNIT_PAIRS } from '@/lib/units/normalizeMassUnit';
+import { KG_TO_GRAM_UNIT_PAIRS, normalizeMassUnit } from '@/lib/units/normalizeMassUnit';
+import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -38,13 +39,14 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
     copyFromBaseFactor, copyFromSIBase,
     handleInputChange, handleInputKeyDown, handleInputBlur,
     refocusInput,
-    normalizeMassUnit, t, translateUnitName,
+    t, translateUnitName,
     formatFactor,
     getPlaceholder, getCategoryDimensions,
   } = controller;
 
   const fromUnitData = categoryData.units.find(u => u.id === fromUnit);
   const fromPrefixData = PREFIXES.find(p => p.id === fromPrefix) || PREFIXES.find(p => p.id === 'none') || PREFIXES[0];
+  const isSymbolic = CATEGORY_FAMILIES[activeCategory] === 'SYMBOLIC';
 
   return (
     <div className="grid gap-2">
@@ -55,7 +57,7 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
           <Input
             ref={inputRef}
             type="text"
-            inputMode="decimal"
+            inputMode={isSymbolic ? 'text' : 'decimal'}
             value={inputValue}
             onChange={(e) => handleInputChange(e.target.value)}
             onKeyDown={handleInputKeyDown}
@@ -66,28 +68,30 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
             {...testId('input-value')}
           />
 
-          <Select
-            value={fromPrefix}
-            onValueChange={(val) => {
-              const normalized = normalizeMassUnit(fromUnit, val);
-              setFromUnit(normalized.unit);
-              setFromPrefix(normalized.prefix);
-              refocusInput();
-            }}
-            onOpenChange={(open) => { if (!open) refocusInput(); }}
-            disabled={!fromUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[fromUnit]}
-          >
-            <SelectTrigger data-testid="select-from-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
-              <SelectValue placeholder={t('Prefix')} />
-            </SelectTrigger>
-            <SelectContent position="item-aligned" className="max-h-[50vh]">
-              {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
-                <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
-                  {p.symbol || '-'}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {!isSymbolic && (
+            <Select
+              value={fromPrefix}
+              onValueChange={(val) => {
+                const normalized = normalizeMassUnit(fromUnit, val);
+                setFromUnit(normalized.unit);
+                setFromPrefix(normalized.prefix);
+                refocusInput();
+              }}
+              onOpenChange={(open) => { if (!open) refocusInput(); }}
+              disabled={!fromUnitData?.allowPrefixes && !KG_TO_GRAM_UNIT_PAIRS[fromUnit]}
+            >
+              <SelectTrigger data-testid="select-from-prefix" className="w-[50px] bg-background/30 border-border font-medium disabled:opacity-50 disabled:cursor-not-allowed shrink-0" style={{ height: FIELD_HEIGHT }}>
+                <SelectValue placeholder={t('Prefix')} />
+              </SelectTrigger>
+              <SelectContent position="item-aligned" className="max-h-[50vh]">
+                {(activeCategory === 'data' ? ALL_PREFIXES : PREFIXES).map((p) => (
+                  <SelectItem key={p.id} value={p.id} className="font-mono text-sm">
+                    {p.symbol || '-'}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
 
           <Select
             value={fromUnit}
@@ -114,7 +118,8 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
           </Select>
         </div>
 
-        {/* Row 2: Base Factor, Spacer, SI Base Units */}
+        {/* Row 2: Base Factor, Spacer, SI Base Units — numeric only */}
+        {!isSymbolic && (
         <div className="flex gap-2">
           <motion.button
             type="button"
@@ -154,6 +159,7 @@ export function ConverterInputSection({ controller, flash, categoryData, filtere
             </div>
           </motion.button>
         </div>
+        )}
       </div>
 
       {fromUnitData?.description && (

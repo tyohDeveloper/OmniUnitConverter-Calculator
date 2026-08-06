@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { formatDimensions } from '@/lib/unit-symbols/formatDimensions';
 import { CalculatorFieldDisplay } from '@/components/unit-converter/components/CalculatorFieldDisplay';
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
 import type {
   UseCalculatorControllerReturn, RpnUnaryOp, RpnBinaryOp,
-} from '@/components/unit-converter/hooks/useCalculatorController';
+} from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
 
 interface RpnStackRowS3Props {
   controller: UseCalculatorControllerReturn;
@@ -28,7 +27,6 @@ export function RpnStackRowS3({ controller, flashRpnField1 }: RpnStackRowS3Props
     copyRpnField,
     applyRpnUnary, applyRpnBinary, canApplyRpnBinary,
     pushRpnConstant,
-    applyPrefixToKgUnit,
     formatNumberWithSeparators, t,
   } = controller;
 
@@ -56,8 +54,6 @@ export function RpnStackRowS3({ controller, flashRpnField1 }: RpnStackRowS3Props
         value={rpnStack[0]}
         onClick={() => copyRpnField(0)}
         isFlashing={flashRpnField1}
-        formatDimensions={formatDimensions}
-        applyPrefixToKgUnit={applyPrefixToKgUnit}
         formatNumberWithSeparators={formatNumberWithSeparators}
         precision={calculatorPrecision}
         testId="rpn-field-s3"

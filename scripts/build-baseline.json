@@ -1,6 +1,6 @@
 {
-  "rawBytes": 1389249,
-  "gzipBytes": 471370,
-  "recordedAt": "2026-07-20",
-  "note": "Task 116 re-baseline at 460.3 kB gzip; ceiling (x1.05) gives ~23 kB headroom. Task 118 audit (2026-07-20) confirmed the ~26 kB growth over the 434.3 kB baseline is legitimate: the translation backfill added ~24.6 kB of gzipped post-prune unit-name data across the 10 non-English locales (~1.4-1.7 kB each), Task 116's dead-key removal then clawed back ~9 kB. No orphan keys, no duplicated payload, no unpruned assets found; only ~25 case-only entries survive pruning and those reflect intentional language capitalization style (German noun caps, French lowercase). Nothing trimmable."
+  "rawBytes": 1467648,
+  "gzipBytes": 498176,
+  "recordedAt": "2026-08-05",
+  "note": "Post-Temporal re-baseline at ~486.5 kB gzip. temporal-polyfill entered the bundle when computeTimeConversion was wired to the new timezone SYMBOLIC category (step 4b of the SYMBOLIC-framework arc). Growth of ~20.8 kB gzip matches the design-brief estimate for the polyfill's baseline cost. Previous baseline was 460.3 kB (2026-07-20, Task 116). New ceiling (x1.05) = ~510 kB, restoring ~24 kB of headroom for future SYMBOLIC categories (Date via calendar-registry code + JDN converters is the next expected addition)."
 }
