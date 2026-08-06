@@ -332,6 +332,15 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Roman_mile"
     },
     {
+      "id": "football_field",
+      "name": "Football field",
+      "symbol": "football field",
+      "factor": 91.44,
+      "unitType": "US_COMMON",
+      "measurementSystem": "US_CUSTOMARY",
+      "sourceUrl": "https://operations.nfl.com/the-rules/2024-nfl-rulebook/"
+    },
+    {
       "id": "barleycorn",
       "name": "Barleycorn",
       "symbol": "barleycorn",
