@@ -36,6 +36,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `dunam` | Dunam (Israel) | Archaic & Regional Area | m² | 1000 |
 | `edoma` | Edoma/Kantō-ma (Japan) | Archaic & Regional Area | m² | 1.5488 |
 | `feddan` | Feddan (Egypt) | Archaic & Regional Area | m² | 4200.833 |
+| `ftbl fld` | Football Field Area (US) | Archaic & Regional Area | m² | 5351.215104 |
 | `hide` | Hide (English) | Archaic & Regional Area | m² | 485623 |
 | `jerib` | Jerib (Middle East) | Archaic & Regional Area | m² | 2000 |
 | `jo` | Jō/Tatami 畳 (Japan) | Archaic & Regional Area | m² | 1.62 |

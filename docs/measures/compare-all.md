@@ -87,6 +87,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `desyatina` | Desyatina (Russia) | 10925 m² |
 | `section` | Section (US) | 2589988 m² |
 | `twp` | Township (US) | 93239571 m² |
+| `ftbl fld` | Football Field Area (US) | 5351.215104 m² |
 | `arpent` | Arpent (French) | 3418.89 m² |
 | `rai` | Rai (Thailand) | 1600 m² |
 | `hide` | Hide (English) | 485623 m² |

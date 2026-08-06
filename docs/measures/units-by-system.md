@@ -346,6 +346,7 @@ One section per measurement system or tradition.
 | `oz⋅in²⋅s⁻¹` | oz⋅in²/s | 1.829e-5 kg⋅m²⋅s⁻¹ |
 | `lb⋅ft²⋅s⁻¹` | lb⋅ft²/s | 0.0421401 kg⋅m²⋅s⁻¹ |
 | `slug⋅ft²⋅s⁻¹` | slug⋅ft²/s | 1.35582 kg⋅m²⋅s⁻¹ |
+| `ftbl fld` | Football Field Area (US) | 5351.215104 m² |
 | `ft⋅lbf` | Foot-pound Force | 1.3558179483 kg⋅m²⋅s⁻² |
 | `quad` | Quad | 1.055e+18 kg⋅m²⋅s⁻² |
 | `lea` | League | 4828.032 m |
