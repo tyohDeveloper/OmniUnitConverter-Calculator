@@ -5,11 +5,12 @@
 > pilot in `4f82004`–`afd2ee5`, and Date/calendar landed as a MVP in
 > `24f1981`–`0456ccb` with 19 functional calendars (13 primary + 6
 > variants), followed by post-MVP hardening for browser CLDR era-
-> placeholder rendering in `0cbb899`–`89db003`. The complex per-
-> calendar natural-format parser (7e) and its localized error
-> messages (7j) were consciously deferred; the Date MVP accepts a
-> single normalized `YYYY-MM-DD` input shape in the from-calendar's
-> own year/month/day scheme. See
+> placeholder rendering (`0cbb899`–`89db003`) and a data-hygiene
+> cycle covering source-URL primary sources plus a full URL audit
+> (`59596d3`–`c57d1f6`). The complex per-calendar natural-format
+> parser (7e) and its localized error messages (7j) were consciously
+> deferred; the Date MVP accepts a single normalized `YYYY-MM-DD`
+> input shape in the from-calendar's own year/month/day scheme. See
 > [temporal-date-category.md](./temporal-date-category.md) for the
 > full Step 7 landing summary. The design-brief body below is
 > preserved as the reference record for the calendar registry, era
@@ -43,8 +44,11 @@
 >   ja ko zh ar), Temporal-backed conversion with day-shift
 >   annotations (`+1d` / `-1d`), and an extended parser that reads
 >   `HH:MM ZONE` inputs and updates both fields on blur or Enter.
-> - 2074 tests total (up from 1963 at the start of the arc), of
->   which 111 pin SYMBOLIC-framework and Time-category behavior.
+> - As of the Time-pilot landing: 2074 tests (up from 1963 at the
+>   start of the arc), of which 111 pinned SYMBOLIC-framework and
+>   Time-category behavior. **Current count after Date category +
+>   post-MVP hardening: 2156 tests** (see the Date-category doc's
+>   final-metrics block for the running total).
 >
 > **Decisions that landed differently than the brief anticipated:**
 >
@@ -54,10 +58,10 @@
 >   in this brief ("Single-file XHTML build considerations") is
 >   obsolete for this codebase and can be ignored.
 > - **Locale count.** The brief assumed 8 supported languages;
->   OmniUnitConverter ships 11 (`ar de en en-us es fr it ja ko pt ru
->   zh`). Translation authoring for Date should target all 11.
->   `en-us` shares `en` for name strings (differs only on
->   orthography like meter/metre); no separate authoring needed.
+>   OmniUnitConverter ships 12 (`ar de en en-us es fr it ja ko pt ru
+>   zh`). Translation authoring for Date targeted all 12, with
+>   English fallbacks covering en/en-us. Non-English authoring
+>   covered 10 locales (190 calendar-name strings in step 7i).
 > - **Custom Julian module path.** The brief describes it as a
 >   separate `<script>` block in the single-file build. In
 >   OmniUnitConverter it will be a normal module under
@@ -90,8 +94,9 @@
 >     timezone pilot. Now implemented; kept as historical scope
 >     reference.
 >   - [temporal-date-category.md](./temporal-date-category.md) — the
->     calendar converter. Actionable next-work document; has its own
->     status header with pilot-informed sequencing.
+>     calendar converter. Now shipped through step 7i plus post-MVP
+>     hardening; retained as the Step 7 landing record and the
+>     source of truth for deferred-scope + follow-up items.
 
 ---
 

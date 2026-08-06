@@ -9,7 +9,7 @@
 > year/month/day scheme, which covers the primary use case and keeps
 > the parser surface small enough to defer safely.
 >
-> **What landed across commits `24f1981` through `0456ccb`:**
+> **What landed across commits `24f1981` through `0456ccb`** (see Post-MVP sections below for further work through `c57d1f6`):
 >
 > - **7-preamble.** Switched polyfill import to `temporal-polyfill/full`.
 >   Bundle 489.9 → 493.4 kB gzip (+3.5 kB). (`24f1981`)
@@ -171,20 +171,20 @@
 >   ERA1 and ERA0 should map to `AA`, not to the ethiopic
 >   incarnation-era label). (`89db003`)
 >
-> **Post-MVP data hygiene (59596d3, this commit):**
+> **Post-MVP data hygiene (59596d3, c57d1f6):**
 >
-> - **Source-URL policy for temporal categories.** `59596d3` swapped
->   all 19 timezone `sourceUrl` values to `https://www.iana.org/time-zones`
->   (the tz database is the genuine primary source; per-zone
->   Wikipedia articles describe local usage but the app's conversion
->   behavior comes from tz data), and ISO 8601 to
->   `https://www.w3.org/TR/NOTE-datetime` (W3C's free profile of the
->   ISO standard). The other 18 calendars keep per-calendar Wikipedia
->   URLs because those articles are the best available consolidated
->   references. Added `IANA` and `W3C` short labels to the `linkLabel`
->   helper in `sources-section.tsx`.
+> - **Source-URL policy for temporal categories** (`59596d3`).
+>   Swapped all 19 timezone `sourceUrl` values to
+>   `https://www.iana.org/time-zones` (the tz database is the
+>   genuine primary source; per-zone Wikipedia articles describe
+>   local usage but the app's conversion behavior comes from tz
+>   data), and ISO 8601 to `https://www.w3.org/TR/NOTE-datetime`
+>   (W3C's free profile of the ISO standard). The other 18 calendars
+>   keep per-calendar Wikipedia URLs because those articles are the
+>   best available consolidated references. Added `IANA` and `W3C`
+>   short labels to the `linkLabel` helper in `sources-section.tsx`.
 >
-> - **Full sourceUrl audit.** This commit ran an HTTP-200 verification
+> - **Full sourceUrl audit** (`c57d1f6`). Ran an HTTP-200 verification
 >   pass over all 264 distinct `sourceUrl` values across all 76
 >   categories. Found and fixed two 404s that had accumulated from
 >   earlier work:
@@ -264,7 +264,7 @@
 >   preferences). Not a bug — CLDR upgrades are expected — but tests
 >   will need review. Trigger: next polyfill upgrade.
 >
-> **Final metrics (main HEAD after this cycle):**
+> **Final metrics (main HEAD `c57d1f6`):**
 >
 > - **Tests:** 2156 (was 2118 at start of Step 7 arc; +25 net across
 >   7a/7c/7d/7f/7g/7h, +13 in post-MVP hardening, unchanged in the
@@ -282,12 +282,13 @@
 > what was decided and why, and to document the deferred parser
 > scope.
 
-> **Status (2026-08-05, morning):** Ready to begin. Both prerequisites
-> have landed: the SYMBOLIC-family framework and the Time zone pilot
-> are live (commits `4f82004` through `afd2ee5`). This doc has been
-> revised to reflect what was learned from the Time pilot and to
-> firm up the previously-open questions. Design decisions preserved
-> from the shared design brief; sequencing and scope firmed up here.
+> **Historical status header (2026-08-05, morning — preserved for
+> context):** Ready to begin. Both prerequisites have landed: the
+> SYMBOLIC-family framework and the Time zone pilot are live
+> (commits `4f82004` through `afd2ee5`). This doc has been revised
+> to reflect what was learned from the Time pilot and to firm up
+> the previously-open questions. Design decisions preserved from
+> the shared design brief; sequencing and scope firmed up here.
 
 ## Open questions from earlier drafts — now resolved
 
@@ -388,7 +389,7 @@ the brief's abstract `eraStyle` names don't always match:
 | `japanese` | `japanese` | `reiwa`/`heisei`/... | ✓ | localized era name |
 | `roc` | `roc` | `roc` | ✓ | "民國" / "Minguo" |
 | `buddhist` | `buddhist` | `be` | ✓ | "BE" |
-| `indian` | `indian` | `shaka` | ✓ | "Shaka" (not Saka; matches polyfill) |
+| `indian` | `indian` | `shaka` | ✓ | "Śaka" (CLDR renders the diacritic; not "Shaka") |
 | `revised-julian` | (custom-jdn) | (assembled) | ✓ | "AD" / "BC" |
 | `iso8601` | `iso8601` | `undefined` | (uses `year`) | (no era; signed year) |
 
@@ -474,16 +475,22 @@ of the initial pilot.
 
 ## Unit registry
 
-The 13-entry primary + 8-entry variant calendar registry from the
-design brief. Copied here for reference; see brief for rationale:
+> **Status: SHIPPED as 13 primary + 6 variants (19 total).** Two
+> Islamic variants (`islamic-astro` / `islamic-rgsa`) were dropped
+> during the 2026-08-05 polyfill capability review (see "Polyfill
+> capability verified" section above). Kept below for the pre-Step-7
+> planning record.
 
-**Primary:**
+The 13-entry primary + 6-entry variant calendar registry. Copied
+here for reference; see brief for rationale:
+
+**Primary (13):**
 common, gregorian, julian, coptic, ethiopic, hebrew, islamic,
 persian, chinese, japanese, roc, buddhist, indian.
 
-**Variants:**
-revised-julian, islamic-civil, islamic-tbla, islamic-astro,
-islamic-rgsa, ethiopic-alem, dangi, iso8601.
+**Variants (6):**
+revised-julian, islamic-civil, islamic-tbla, ethiopic-alem, dangi,
+iso8601.
 
 Symbols use Temporal's calendar tag conventions (`common`,
 `gregory`, `hebrew`, `islamic-umalqura`, etc.). Labels are
@@ -537,6 +544,13 @@ See the design brief for the Fliegel-Van Flandern converters.
 
 ## Localization
 
+> **Status: SHIPPED as 12 locales × 19 calendars = 228 name strings
+> (190 non-English authored in step 7i).** Word-order templates
+> weren't needed in practice — CLDR provides idiomatic ordering for
+> supported calendars, and per-locale era-label substitution is
+> post-hoc string replacement. Kept below for the pre-Step-7
+> planning record.
+
 Follow the design brief's ERA_LABELS + CALENDAR_LABELS tables. 8
 languages × 21 calendars ≈ 168 label strings plus era labels.
 Authoring is manageable and gives consistency guarantees Intl
@@ -560,16 +574,24 @@ for fully idiomatic era-year output.
 
 ## Category metadata
 
+> **Status: SHIPPED with slightly different names.** The three UX
+> fixes commit (`cd8faa8`) shortened `Common (CE/BCE)` → `Common`
+> and `Gregorian (AD/BC)` → `Gregorian` since the era style is now
+> signaled via the parenthetical in each locale's `Common` name
+> (e.g. `西暦（CE/BCE）`, `Zeitrechnung (u. Z./v. u. Z.)`). Julian is
+> named `Julian (Eastern Orthodox)`. Also `baseSISymbol` was added
+> as a placeholder alongside `baseUnit`.
+
 ```json
 {
   "id": "date_calendar",
-  "name": "Date (Calendar)",
+  "name": "Date (calendar)",
   "baseUnit": "common",
   "family": "SYMBOLIC",
   "units": [
-    { "id": "common",    "name": "Common (CE/BCE)",        "symbol": "common" },
-    { "id": "gregorian", "name": "Gregorian (AD/BC)",       "symbol": "gregory" },
-    { "id": "julian",    "name": "Julian (E. Orthodox)",    "symbol": "julian" },
+    { "id": "common",    "name": "Common",                  "symbol": "common" },
+    { "id": "gregorian", "name": "Gregorian",               "symbol": "gregory" },
+    { "id": "julian",    "name": "Julian (Eastern Orthodox)", "symbol": "julian" },
     ...
   ]
 }
@@ -582,11 +604,19 @@ SYMBOLIC-family branch in computeConversion, dispatched by
 datetime is scoped in).
 
 Per resolution #1 in the top-of-file questions section: one
-category `date_calendar` covering all 21 calendars (13 primary + 8
+category `date_calendar` covering all 19 calendars (13 primary + 6
 variants), with visual grouping inside the calendar dropdown to
 separate primary from variants. Not two top-level categories.
 
 ## Sub-commit sequencing plan
+
+> **Status: SHIPPED across `24f1981` → `0456ccb` (MVP) and
+> `0cbb899` → `c57d1f6` (post-MVP hardening + data hygiene).** Steps
+> 7e and 7j were consciously deferred (see "Deferred" section at
+> top of file). Steps 7b and 7h were merged into a single commit
+> (`fda5ab8`) since the visual grouping needs the variants group to
+> actually have content. Kept the original sequencing plan below
+> for the pre-Step-7 planning record.
 
 Much bigger surface than the Time pilot; realistically 2–4 sessions
 of work. Fine-grained decomposition below gives checkpointing.
@@ -599,7 +629,7 @@ category work so the bundle cost is separately attributable.
 
 **7a. Category registration — primary calendars only.** Add
 `date_calendar` category as SYMBOLIC with 13 primary calendar
-"units." All English labels; applied to all 11 locales as fallback.
+"units." All English labels; applied to all 12 locales as fallback.
 Slot into the 'Other' group. No conversion behavior yet.
 
 **7b. Visual grouping inside the calendar dropdown.** Render two
@@ -654,13 +684,13 @@ that accepts signed years. `islamic` (astronomical) and
 per the polyfill capability review — they can't be supported
 offline without astronomical or sighting-data resources.
 
-**7i. Localize calendar names + era labels.** 11 locales. Calendar
-names: 19 × 11 = 209 strings. Era labels for the authored styles
-(`ce-bce`, `ad-bc`, `am`, `am-mihret`, `am-alem`, `ah`, `ap`, `be`,
-`shaka`, `roc`) across 11 locales: ~50–80 strings depending on
-how many need authoring vs. how many CLDR provides via Intl.
-Analogous to Step 6 for timezones. Similar localization script
-pattern.
+**7i. Localize calendar names + era labels.** 12 locales (10
+non-English + en/en-us fallback). Calendar names: 19 × 10 = 190
+non-English strings. Era labels for `common` target (CE/BCE-
+equivalent) authored per-locale in the `applyCommonEraLabels`
+substitution table. Other era labels come from CLDR via
+`Intl.DateTimeFormat`. Analogous to Step 6 for timezones. Similar
+localization script pattern.
 
 **7j. Localize per-calendar error messages.** The parser errors
 from 7e are English initially; translate to the other 10 locales in
@@ -672,7 +702,25 @@ and 1200–1500 lines, plus a similar volume of tests. The reduced
 registry (19 vs 21 calendars) trims translation work modestly but
 doesn't materially shrink implementation.
 
+**Actual outcome:** the shipped MVP arc was 11 commits (7-preamble,
+7a, 7c, three UX fixes, 7d, 7f, 7g, 7h, 7i) plus 4 post-MVP
+commits (Coptic/Ethiopic era placeholder fix, tests + label
+corrections, source-URL primary-sources swap, URL audit + follow-
+ups doc). Roughly ~600 lines of production code plus tests —
+smaller than estimated because per-calendar natural-format parsers
+(7e) were deferred, and CLDR handled more of the localization
+surface than the estimate assumed.
+
 ## Localization scope details
+
+> **Status: SHIPPED at 12 locales, not 11.** Actual counts: 190
+> non-English calendar name strings (7i), plus per-locale CE/BCE
+> substitution table for 8 locales (7g: en, en-us, ko, de, es, fr,
+> it, pt; ja/zh/ru/ar use CLDR's native neutral labels). Word-order
+> templates weren't authored because CLDR handles ordering natively
+> and the era-label substitution is a post-hoc string replace.
+> Parser error messages (7j) were deferred. Kept below for the
+> pre-Step-7 planning record.
 
 **Rely on `Intl.DateTimeFormat` for month names** in the polyfill-
 supported calendars. Trust CLDR here — month-name authoring for 19
