@@ -8,6 +8,7 @@ import {
 } from './computeJulianConversion';
 import { formatAsIso8601 } from './computeIso8601Conversion';
 import { applyCommonEraLabels } from './applyCommonEraLabels';
+import { applyFallbackEraLabels } from './applyFallbackEraLabels';
 
 /**
  * Convert a date from one calendar system to another (MVP).
@@ -37,7 +38,8 @@ export function computeDateConversion(input: {
   if (!parsed) return null;
   const formatted = formatDateInAnyCalendar(parsed, symbols.to, input.language);
   if (formatted === null) return null;
-  return applyCommonEraLabels(formatted, input.toUnit, input.language);
+  const withFallbackEras = applyFallbackEraLabels(formatted, symbols.to);
+  return applyCommonEraLabels(withFallbackEras, input.toUnit, input.language);
 }
 
 // ─── Local helpers ───
