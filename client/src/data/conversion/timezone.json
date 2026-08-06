@@ -12,7 +12,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Coordinated_Universal_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_new_york",
@@ -21,7 +21,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_New_York"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_chicago",
@@ -30,7 +30,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Central_Time_Zone"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_denver",
@@ -39,7 +39,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Mountain_Time_Zone"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_los_angeles",
@@ -48,7 +48,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Pacific_Time_Zone"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_anchorage",
@@ -57,7 +57,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Alaska_Time_Zone"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "pacific_honolulu",
@@ -66,16 +66,16 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Hawaii\u2013Aleutian_Time_Zone"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "america_sao_paulo",
-      "name": "S\u00e3o Paulo",
+      "name": "São Paulo",
       "symbol": "America/Sao_Paulo",
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Brazil"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "europe_london",
@@ -84,7 +84,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_the_United_Kingdom"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "europe_paris",
@@ -93,7 +93,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Central_European_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "europe_berlin",
@@ -102,7 +102,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Germany"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "europe_moscow",
@@ -111,7 +111,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Moscow_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "africa_johannesburg",
@@ -120,7 +120,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/South_African_Standard_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "asia_dubai",
@@ -129,7 +129,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_the_United_Arab_Emirates"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "asia_kolkata",
@@ -138,7 +138,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Indian_Standard_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "asia_shanghai",
@@ -147,7 +147,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_China"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "asia_tokyo",
@@ -156,7 +156,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Japan_Standard_Time"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "australia_sydney",
@@ -165,7 +165,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_Australia"
+      "sourceUrl": "https://www.iana.org/time-zones"
     },
     {
       "id": "pacific_auckland",
@@ -174,7 +174,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Time_in_New_Zealand"
+      "sourceUrl": "https://www.iana.org/time-zones"
     }
   ]
 }

@@ -174,7 +174,7 @@
       "factor": 1,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/ISO_8601"
+      "sourceUrl": "https://www.w3.org/TR/NOTE-datetime"
     }
   ]
 }

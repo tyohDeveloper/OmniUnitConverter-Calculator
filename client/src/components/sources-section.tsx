@@ -14,6 +14,8 @@ interface SourcesSectionProps {
 function linkLabel(url: string): string {
   if (url.includes("bipm.org")) return "BIPM";
   if (url.includes("nist.gov")) return "NIST";
+  if (url.includes("iana.org")) return "IANA";
+  if (url.includes("w3.org")) return "W3C";
   if (url.includes("legislation.gov.uk")) return "UK Legislation";
   if (url.includes("laws.e-gov.go.jp")) return "Japan e-Gov";
   if (url.includes("elegislation.gov.hk")) return "HK Legislation";
