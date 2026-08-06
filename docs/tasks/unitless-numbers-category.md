@@ -61,7 +61,7 @@ The request explicitly asks that symbols be correct and unique. Symbols must be 
 - The base unit symbol `1` is a placeholder — if it conflicts or renders poorly, choose a clear distinct alternative (e.g. `×1` or `num`) consistent with the app's display conventions.
 
 ## Steps
-1. **Create the category data file** — Add `client/src/data/conversion/unitless.json` mirroring the structure of an existing dimensionless category (e.g. `data.json`): `id: "unitless"`, `name: "Unitless Numbers"`, `baseUnit: "Number"`, and the `units` array above. These are NOT SI: do not use `unitType: "SI_BASE"`, do not set `allowPrefixes: true`, and set `measurementSystem` to a non-SI value (e.g. `"DIMENSIONLESS"`, or omit it). Order entries: base unit first, then all others ascending by factor.
+1. **Create the category data file** — Add `client/src/data/conversion/unitless.json` mirroring the structure of an existing dimensionless category (e.g. `math.json`/`data.json`): `id: "unitless"`, `name: "Unitless Numbers"`, `baseUnit: "Number"`, and the `units` array above. These are NOT SI: do not use `unitType: "SI_BASE"`, do not set `allowPrefixes: true`, and set `measurementSystem` to a non-SI value (e.g. `"DIMENSIONLESS"`, or omit it). Order entries: base unit first, then all others ascending by factor.
 
 2. **Register the category** — In `client/src/lib/conversion-data.ts`: import the JSON, add `'unitless'` to the `UnitCategory` union type, add the imported object to the `CONVERSION_DATA` array, and add `unitless: {}` (dimensionless) to `CATEGORY_DIMENSION_MAP`.
 
@@ -78,7 +78,7 @@ The request explicitly asks that symbols be correct and unique. Symbols must be 
 8. **Validate** — Run typecheck, lint-size, tests, and verify-build; fix any failures.
 
 ## Relevant files
-- `client/src/data/conversion/data.json`
+- `client/src/data/conversion/math.json`
 - `client/src/data/conversion/cooking.json`
 - `client/src/lib/conversion-data.ts:72-145,286-357,459-507`
 - `client/src/features/unit-converter/app/UnitConverterApp.tsx:26-35`

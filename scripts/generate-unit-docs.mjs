@@ -48,6 +48,7 @@ function loadAllUnits() {
 
   for (const file of files) {
     const cat = JSON.parse(fs.readFileSync(path.join(CONVERSION_DIR, file), 'utf8'));
+    if (!Array.isArray(cat.units)) continue; // non-category data files (e.g. category-defaults.json)
     for (const unit of cat.units) {
       const enName = en[unit.name] || unit.name;
       allUnits.push({

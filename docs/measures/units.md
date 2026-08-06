@@ -252,6 +252,25 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `Hart` | Hartley | Data/Information | B | 0.4152410118609203 |
 | `nat` | Nat | Data/Information | B | 0.18033688011112042 |
 | `Sh` | Shannon | Data/Information | B | 0.125 |
+| `buddhist` | Buddhist (Thai) | Date (calendar) | CE | 1 |
+| `chinese` | Chinese | Date (calendar) | CE | 1 |
+| `coptic` | Coptic (Oriental Orthodox) | Date (calendar) | CE | 1 |
+| `dangi` | Korean (Dangi) | Date (calendar) | CE | 1 |
+| `ethioaa` | Ethiopic (Amete Alem) | Date (calendar) | CE | 1 |
+| `ethiopic` | Ethiopic (Ethiopian/Eritrean Orthodox) | Date (calendar) | CE | 1 |
+| `gregory` | Common | Date (calendar) | CE | 1 |
+| `gregory` | Gregorian | Date (calendar) | CE | 1 |
+| `hebrew` | Hebrew | Date (calendar) | CE | 1 |
+| `indian` | Indian (Saka) | Date (calendar) | CE | 1 |
+| `islamic-civil` | Islamic (tabular civil) | Date (calendar) | CE | 1 |
+| `islamic-tbla` | Islamic (tabular astronomical) | Date (calendar) | CE | 1 |
+| `islamic-umalqura` | Islamic (Umm al-Qura) | Date (calendar) | CE | 1 |
+| `iso8601` | ISO 8601 (astronomical years) | Date (calendar) | CE | 1 |
+| `japanese` | Japanese (imperial era) | Date (calendar) | CE | 1 |
+| `julian` | Julian (Eastern Orthodox) | Date (calendar) | CE | 1 |
+| `persian` | Persian (Solar Hijri) | Date (calendar) | CE | 1 |
+| `revised-julian` | Revised Julian | Date (calendar) | CE | 1 |
+| `roc` | Minguo (Republic of China) | Date (calendar) | CE | 1 |
 | `g⋅cm⁻³` | g/cm³ | Density | kg⋅m⁻³ | 1000 |
 | `g⋅m⁻³` | g/m³ | Density | kg⋅m⁻³ | 0.001 |
 | `kg⋅L⁻¹` | kg/L | Density | kg⋅m⁻³ | 1000 |
@@ -636,6 +655,25 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `shake` | Shake | Time | s | 1e-8 |
 | `wk` | Week | Time | s | 604800 |
 | `yr` | Year | Time | s | 31540000 |
+| `Africa/Johannesburg` | Johannesburg | Time zone | UTC | 1 |
+| `America/Anchorage` | Anchorage (Alaska Time) | Time zone | UTC | 1 |
+| `America/Chicago` | Chicago (Central Time) | Time zone | UTC | 1 |
+| `America/Denver` | Denver (Mountain Time) | Time zone | UTC | 1 |
+| `America/Los_Angeles` | Los Angeles (Pacific Time) | Time zone | UTC | 1 |
+| `America/New_York` | New York (Eastern Time) | Time zone | UTC | 1 |
+| `America/Sao_Paulo` | São Paulo | Time zone | UTC | 1 |
+| `Asia/Dubai` | Dubai | Time zone | UTC | 1 |
+| `Asia/Kolkata` | Kolkata (India) | Time zone | UTC | 1 |
+| `Asia/Shanghai` | Shanghai (China) | Time zone | UTC | 1 |
+| `Asia/Tokyo` | Tokyo | Time zone | UTC | 1 |
+| `Australia/Sydney` | Sydney | Time zone | UTC | 1 |
+| `Europe/Berlin` | Berlin | Time zone | UTC | 1 |
+| `Europe/London` | London | Time zone | UTC | 1 |
+| `Europe/Moscow` | Moscow | Time zone | UTC | 1 |
+| `Europe/Paris` | Paris (Central European) | Time zone | UTC | 1 |
+| `Pacific/Auckland` | Auckland | Time zone | UTC | 1 |
+| `Pacific/Honolulu` | Honolulu (Hawaii Time) | Time zone | UTC | 1 |
+| `UTC` | Coordinated Universal Time | Time zone | UTC | 1 |
 | `dyn⋅cm` | Dyne-centimeter | Torque | kg⋅m²⋅s⁻² | 1e-7 |
 | `ft⋅lb` | Foot-pound | Torque | kg⋅m²⋅s⁻² | 1.35582 |
 | `in⋅lb` | Inch-pound | Torque | kg⋅m²⋅s⁻² | 0.112985 |
@@ -666,7 +704,6 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `bakers-doz` | Baker's Dozen | Unitless Numbers | 1 | 13 |
 | `bp` | Basis Point | Unitless Numbers | 1 | 1e-4 |
 | `brace` | Brace | Unitless Numbers | 1 | 2 |
-| `caret` | Karat | Unitless Numbers | 1 | 0.0416666667 |
 | `couple` | Couple | Unitless Numbers | 1 | 2 |
 | `doz` | Dozen | Unitless Numbers | 1 | 12 |
 | `𝑒` | Euler's Number | Unitless Numbers | 1 | 2.7182818285 |
@@ -675,6 +712,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `gross` | Gross | Unitless Numbers | 1 | 144 |
 | `half-doz` | Half Dozen | Unitless Numbers | 1 | 6 |
 | `hat-trick` | Hat-Trick | Unitless Numbers | 1 | 3 |
+| `karat` | Karat | Unitless Numbers | 1 | 0.0416666667 |
 | `long-hundred` | Long Hundred | Unitless Numbers | 1 | 120 |
 | `mole` | Mole | Unitless Numbers | 1 | 6.02214076e+23 |
 | `myriad` | Myriad | Unitless Numbers | 1 | 10000 |

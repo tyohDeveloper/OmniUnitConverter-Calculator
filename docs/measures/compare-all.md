@@ -381,6 +381,30 @@ One section per measurement category. Each row shows how many base SI units one 
 | `Hart` | Hartley | 0.4152410118609203 B |
 | `dit` | Dit | 0.4152410118609203 B |
 
+### Date (calendar)
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `gregory` | Common | 1 CE |
+| `gregory` | Gregorian | 1 CE |
+| `julian` | Julian (Eastern Orthodox) | 1 CE |
+| `coptic` | Coptic (Oriental Orthodox) | 1 CE |
+| `ethiopic` | Ethiopic (Ethiopian/Eritrean Orthodox) | 1 CE |
+| `hebrew` | Hebrew | 1 CE |
+| `islamic-umalqura` | Islamic (Umm al-Qura) | 1 CE |
+| `persian` | Persian (Solar Hijri) | 1 CE |
+| `chinese` | Chinese | 1 CE |
+| `japanese` | Japanese (imperial era) | 1 CE |
+| `roc` | Minguo (Republic of China) | 1 CE |
+| `buddhist` | Buddhist (Thai) | 1 CE |
+| `indian` | Indian (Saka) | 1 CE |
+| `revised-julian` | Revised Julian | 1 CE |
+| `islamic-civil` | Islamic (tabular civil) | 1 CE |
+| `islamic-tbla` | Islamic (tabular astronomical) | 1 CE |
+| `ethioaa` | Ethiopic (Amete Alem) | 1 CE |
+| `dangi` | Korean (Dangi) | 1 CE |
+| `iso8601` | ISO 8601 (astronomical years) | 1 CE |
+
 ### Density
 
 | Symbol | English Name | 1 unit = (base SI) |
@@ -979,6 +1003,30 @@ One section per measurement category. Each row shows how many base SI units one 
 | `kyr` | Millennium | 3.154e+10 s |
 | `eon` | Eon | 3.154e+16 s |
 
+### Time zone
+
+| Symbol | English Name | 1 unit = (base SI) |
+|--------|-------------|-------------------|
+| `UTC` | Coordinated Universal Time | 1 UTC |
+| `America/New_York` | New York (Eastern Time) | 1 UTC |
+| `America/Chicago` | Chicago (Central Time) | 1 UTC |
+| `America/Denver` | Denver (Mountain Time) | 1 UTC |
+| `America/Los_Angeles` | Los Angeles (Pacific Time) | 1 UTC |
+| `America/Anchorage` | Anchorage (Alaska Time) | 1 UTC |
+| `Pacific/Honolulu` | Honolulu (Hawaii Time) | 1 UTC |
+| `America/Sao_Paulo` | São Paulo | 1 UTC |
+| `Europe/London` | London | 1 UTC |
+| `Europe/Paris` | Paris (Central European) | 1 UTC |
+| `Europe/Berlin` | Berlin | 1 UTC |
+| `Europe/Moscow` | Moscow | 1 UTC |
+| `Africa/Johannesburg` | Johannesburg | 1 UTC |
+| `Asia/Dubai` | Dubai | 1 UTC |
+| `Asia/Kolkata` | Kolkata (India) | 1 UTC |
+| `Asia/Shanghai` | Shanghai (China) | 1 UTC |
+| `Asia/Tokyo` | Tokyo | 1 UTC |
+| `Australia/Sydney` | Sydney | 1 UTC |
+| `Pacific/Auckland` | Auckland | 1 UTC |
+
 ### Torque
 
 | Symbol | English Name | 1 unit = (base SI) |
@@ -1026,7 +1074,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `proof (imp)` | Proof (Imperial) | 0.005715 1 |
 | `%` | Percent | 0.01 1 |
 | `abv` | Alcohol by Volume | 0.01 1 |
-| `caret` | Karat | 0.0416666667 1 |
+| `karat` | Karat | 0.0416666667 1 |
 | `fold` | Fold | 1 1 |
 | `φ` | Golden Ratio | 1.6180339887 1 |
 | `pair` | Pair | 2 1 |
