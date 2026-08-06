@@ -349,6 +349,7 @@ One section per measurement system or tradition.
 | `ft⋅lbf` | Foot-pound Force | 1.3558179483 kg⋅m²⋅s⁻² |
 | `quad` | Quad | 1.055e+18 kg⋅m²⋅s⁻² |
 | `lea` | League | 4828.032 m |
+| `football field` | Football field | 91.44 m |
 | `dr` | Dram (Avoirdupois, US) | 0.001771845 kg |
 | `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | 1.3558179483 kg⋅m²⋅s⁻³ |
 | `hp (boiler)` | Boiler Horsepower | 9810.55 kg⋅m²⋅s⁻³ |

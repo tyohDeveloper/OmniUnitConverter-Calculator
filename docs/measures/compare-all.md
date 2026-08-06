@@ -141,6 +141,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `sazhen` | Sazhen (Russia) | 2.1336 m |
 | `toise` | Toise (French) | 1.949 m |
 | `mi (Rom)` | Roman Mile | 1480 m |
+| `football field` | Football field | 91.44 m |
 | `barleycorn` | Barleycorn | 0.008466666666666667 m |
 
 ### Archaic Mass
