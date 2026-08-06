@@ -6,6 +6,7 @@ import {
   parseJulianYMD, parseRevisedJulianYMD,
   formatAsJulian, formatAsRevisedJulian,
 } from './computeJulianConversion';
+import { applyCommonEraLabels } from './applyCommonEraLabels';
 
 /**
  * Convert a date from one calendar system to another (MVP).
@@ -37,14 +38,6 @@ export function computeDateConversion(input: {
   const formatted = formatDateInAnyCalendar(parsed, symbols.to, input.language);
   if (formatted === null) return null;
   return applyCommonEraLabels(formatted, input.toUnit, input.language);
-}
-
-// MVP English-only Common CE/BCE substitution. Full per-locale
-// authored labels for the 'ce-bce' era style land in step 7g.
-function applyCommonEraLabels(text: string, toUnit: string, language: SupportedLanguage): string {
-  if (toUnit !== 'common') return text;
-  if (language !== 'en' && language !== 'en-us') return text;
-  return text.replace(/\bAD\b/g, 'CE').replace(/\bBC\b/g, 'BCE');
 }
 
 // ─── Local helpers ───

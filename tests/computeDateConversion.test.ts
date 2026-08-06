@@ -158,14 +158,83 @@ describe('computeDateConversion: locale flow', () => {
     expect(result).toContain('2026');
   });
 
-  it('non-English locale does NOT get CE/BCE swap for Common', () => {
-    // The label-swap only fires for English/en-us; other locales
-    // render whatever CLDR provides (may still be AD/BC-equivalent).
+  it('Japanese Common: no substitution (CLDR already religiously-neutral)', () => {
+    // Japanese renders 西暦 (Western calendar) which is already the
+    // secular convention; no substitution needed.
     const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: JA });
-    // The output should NOT contain the English CE/BCE strings
-    // (since those are English-only substitutions).
-    expect(result).not.toContain('CE');
-    expect(result).not.toContain('BCE');
+    expect(result).toBe('西暦2026年8月5日');
+  });
+});
+
+describe('computeDateConversion: Common era-label substitutions per locale', () => {
+  // For each locale that renders Christian-era abbreviations in
+  // CLDR (AD/BC-equivalents), 'common' target substitutes the
+  // religiously-neutral CE/BCE-equivalent from academic convention.
+
+  it('German substitutes n. Chr. → u. Z. and v. Chr. → v. u. Z.', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'de' });
+    expect(ce).toBe('5. August 2026 u. Z.');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'de' });
+    expect(bce).toBe('15. April 323 v. u. Z.');
+  });
+
+  it('Spanish substitutes d. C. → e. c. and a. C. → a. e. c.', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'es' });
+    expect(ce).toBe('5 de agosto de 2026 e. c.');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'es' });
+    expect(bce).toBe('15 de abril de 323 a. e. c.');
+  });
+
+  it('French substitutes ap. J.-C. → EC and av. J.-C. → AEC', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'fr' });
+    expect(ce).toBe('5 août 2026 EC');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'fr' });
+    expect(bce).toBe('15 avril 323 AEC');
+  });
+
+  it('Italian substitutes d.C. → E.V. and a.C. → A.E.V.', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'it' });
+    expect(ce).toBe('5 agosto 2026 E.V.');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'it' });
+    expect(bce).toBe('15 aprile 323 A.E.V.');
+  });
+
+  it('Portuguese substitutes d.C. → E.C. and a.C. → A.E.C.', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'pt' });
+    expect(ce).toBe('5 de agosto de 2026 E.C.');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'pt' });
+    expect(bce).toBe('15 de abril de 323 A.E.C.');
+  });
+
+  it('Korean substitutes AD → CE and BC → BCE (Korean uses English abbreviations)', () => {
+    const ce = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'ko' });
+    expect(ce).toBe('CE 2026년 8월 5일');
+    const bce = computeDateConversion({ value: '-322-04-15', fromUnit: 'common', toUnit: 'common', language: 'ko' });
+    expect(bce).toBe('BCE 323년 4월 15일');
+  });
+
+  it('Russian: no substitution (CLDR renders н.э., already religiously-neutral)', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'ru' });
+    expect(result).toBe('5 августа 2026 г. н. э.');
+  });
+
+  it('Chinese: no substitution (CLDR renders 公元, already religiously-neutral)', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'zh' });
+    expect(result).toBe('公元2026年8月5日');
+  });
+
+  it('Arabic: no substitution (CLDR renders م, sufficiently neutral)', () => {
+    const result = computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'common', language: 'ar' });
+    expect(result).toBe('5 أغسطس 2026 م');
+  });
+
+  it('Gregorian target is NOT substituted in any locale (only Common is)', () => {
+    // Gregorian target renders AD/BC-equivalent per each locale's
+    // CLDR default — no substitution applied.
+    expect(computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'gregorian', language: 'de' }))
+      .toBe('5. August 2026 n. Chr.');
+    expect(computeDateConversion({ value: '2026-08-05', fromUnit: 'common', toUnit: 'gregorian', language: 'fr' }))
+      .toBe('5 août 2026 ap. J.-C.');
   });
 });
 
