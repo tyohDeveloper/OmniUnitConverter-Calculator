@@ -1,6 +1,6 @@
 {
   "id": "archaic_power",
-  "name": "Archaic Power",
+  "name": "Archaic & Regional Power",
   "baseUnit": "watt",
   "baseSISymbol": "kg⋅m²⋅s⁻³",
   "family": "SI_QUANTITY",

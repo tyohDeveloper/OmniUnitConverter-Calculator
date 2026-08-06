@@ -143,12 +143,12 @@ describe('Language Localization', () => {
     });
 
     it('should translate archaic categories for all languages', () => {
-      expect(translate('Archaic Length', 'ja', UI_TRANSLATIONS)).toBe('古代の長さ');
-      expect(translate('Archaic Mass', 'zh', UI_TRANSLATIONS)).toBe('古代质量');
-      expect(translate('Archaic Volume', 'ko', UI_TRANSLATIONS)).toBe('고대 부피');
-      expect(translate('Archaic Area', 'ru', UI_TRANSLATIONS)).toBe('Архаичные Площади');
-      expect(translate('Archaic Energy', 'fr', UI_TRANSLATIONS)).toBe('Énergie Archaïque');
-      expect(translate('Archaic Power', 'de', UI_TRANSLATIONS)).toBe('Archaische Leistung');
+      expect(translate('Archaic & Regional Length', 'ja', UI_TRANSLATIONS)).toBe('古代・地域の長さ');
+      expect(translate('Archaic & Regional Mass', 'zh', UI_TRANSLATIONS)).toBe('古代与地区质量');
+      expect(translate('Archaic & Regional Volume', 'ko', UI_TRANSLATIONS)).toBe('고대·지역 부피');
+      expect(translate('Archaic & Regional Area', 'ru', UI_TRANSLATIONS)).toBe('Архаичные и Региональные Площади');
+      expect(translate('Archaic & Regional Energy', 'fr', UI_TRANSLATIONS)).toBe('Énergie Archaïque et Régionale');
+      expect(translate('Archaic & Regional Power', 'de', UI_TRANSLATIONS)).toBe('Archaische & Regionale Leistung');
     });
 
     it('should translate cooking and typography categories', () => {
