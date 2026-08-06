@@ -1146,4 +1146,5 @@ One section per measurement category. Each row shows how many base SI units one 
 | `mi³` | Cubic Mile | 4.16818e+9 m³ |
 
 
+
 † Non-linear conversion (uses an offset or math function); "1 unit = factor × base" is not the full formula.

@@ -896,4 +896,5 @@ One section per measurement system or tradition.
 | `statΩ` | Statohm | 8.98755178737e+11 kg⋅m²⋅s⁻³⋅A⁻² |
 
 
+
 † Non-linear conversion (uses an offset or math function); "1 unit = factor × base" is not the full formula.
