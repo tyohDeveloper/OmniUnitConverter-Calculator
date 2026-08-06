@@ -1,8 +1,119 @@
 # Temporal-based Date/Datetime (calendar-system) category
 
-> **Status (2026-08-05):** Ready to begin. Both prerequisites have
-> landed: the SYMBOLIC-family framework and the Time zone pilot are
-> live (commits `4f82004` through `afd2ee5`). This doc has been
+> **Status (2026-08-05, evening — Step 7 MVP complete):** All 19
+> registered calendars are functional in production. The Date category
+> ships alongside Time as a second SYMBOLIC category. The complex
+> per-calendar natural-format parser (7e) and its localized error
+> messages (7j) were consciously deferred — the MVP accepts a single
+> normalized input shape (`YYYY-MM-DD`) in the from-calendar's own
+> year/month/day scheme, which covers the primary use case and keeps
+> the parser surface small enough to defer safely.
+>
+> **What landed across commits `24f1981` through `0456ccb`:**
+>
+> - **7-preamble.** Switched polyfill import to `temporal-polyfill/full`.
+>   Bundle 489.9 → 493.4 kB gzip (+3.5 kB). (`24f1981`)
+> - **7a.** Registered `date_calendar` category with 13 primary
+>   calendars. English fallbacks in all 12 locale files. Slotted into
+>   the 'Other' group. Bumped `json-integrity` and `conversion-functions`
+>   test category counts from 75 to 76. (`f355cfc`)
+> - **7c.** Basic Temporal-backed conversion. `computeDateConversion`
+>   dispatches through `Temporal.PlainDate.withCalendar` + `Intl.DateTimeFormat`.
+>   Threaded `language` (a BCP-47 locale code, not just a language)
+>   through `useConverterResultEffect` and `useConverterController`.
+>   Empty input → today. (`7bc255c`)
+> - **Three UX fixes.** Pre-populate `YYYY-MM-DD` on category switch,
+>   hide the `symbol` prefix in the dropdown for `date_calendar` since
+>   the symbol is the polyfill backend id (implementation detail), and
+>   substitute CE/BCE for AD/BC in English Common output.
+>   Shortened `Common (CE/BCE)` → `Common` and `Gregorian (AD/BC)` →
+>   `Gregorian`. (`cd8faa8`)
+> - **7d.** 40 behavior tests covering Common → 11 calendars at
+>   `2026-08-05` with exact pinned strings (`22 Av 5786 AM`,
+>   `Safar 22, 1448 AH`, `Mordad 14, 1405 AP`, `令和8年8月5日`,
+>   `Sixth Month 23, 2026(bing-wu)`, etc.), reverse direction, BCE
+>   dates, locale flow, unknown units, round-trips via Common. Also
+>   discovered `Ś` in Śaka and that `Feb 31` clamps rather than throws
+>   (polyfill uses `overflow: 'constrain'` by default). (`b98fea1`)
+> - **7f.** Julian + Revised Julian JDN module
+>   (`client/src/lib/temporal/julianJdn.ts`, 87 lines) implementing
+>   Fliegel–Van Flandern converters, plus a companion parse+format
+>   helper file (`computeJulianConversion.ts`, 74 lines). Revised
+>   Julian is treated as Gregorian-equivalent within the
+>   1600-03-01 to 2800-02-28 window and returns null outside.
+>   Verified pivots: Common 2026-08-05 ↔ Julian 2026-07-23 (13-day
+>   lag), Common 1582-10-15 ↔ Julian 1582-10-05, Common 2000-01-01 →
+>   Julian 1999-12-19. Both new files added to `EXPORT_RULE_EXCLUDES`
+>   in `scripts/lint-size.mjs` with documented rationale for the
+>   multi-export exemption. (`472b356`)
+> - **7g.** Per-locale CE/BCE substitution extracted to its own file
+>   (`applyCommonEraLabels.ts`). Substitutes CLDR's Christian-era
+>   abbreviations for religiously-neutral academic-convention labels
+>   in en/en-us/ko (AD→CE/BC→BCE), de (n. Chr.→u. Z. / v. Chr.→v. u. Z.),
+>   es (d. C.→e. c. / a. C.→a. e. c.), fr (ap. J.-C.→EC / av. J.-C.→AEC),
+>   it (d.C.→E.V. / a.C.→A.E.V.), pt (d.C.→E.C. / a.C.→A.E.C.). No
+>   substitution for ja/zh/ru/ar — CLDR already renders religiously-
+>   neutral terms (西暦/紀元前, 公元/公元前, н. э./до н. э., م/ق.م).
+>   Only fires when the target unit is `common`; Gregorian target
+>   keeps CLDR's Christian-era labels unchanged, preserving the
+>   Common vs. Gregorian distinction. (`48ff4ab`)
+> - **7h.** Added the 6 variant calendars (`revised-julian`,
+>   `islamic-civil`, `islamic-tbla`, `ethiopic-alem`, `dangi`,
+>   `iso8601`). ISO 8601 gets its own formatter
+>   (`computeIso8601Conversion.ts`) because Intl.DateTimeFormat cannot
+>   format `iso8601` usefully — CLDR does not provide month or era
+>   names for the iso8601 calendar, so Intl returns empty or garbled
+>   strings. Direct formatting from the polyfill's year/month/day
+>   fields produces a format-locked `YYYY-MM-DD` with signed years
+>   for negative dates. Dropdown grouping via shadcn `SelectGroup` +
+>   `SelectLabel` renders "Primary" and "Variants" section headers,
+>   with the split determined by unit-id membership in a
+>   `VARIANT_CALENDAR_IDS` set. Shared between input and output
+>   selects via `renderCalendarGroupedItems.tsx`. UI translations for
+>   "Primary" and "Variants" added to all 12 locale UI files. (`fda5ab8`)
+> - **7i.** Localized all 19 calendar names into the 10 non-English
+>   locales (`ar de es fr it ja ko pt ru zh`). 190 translations total.
+>   Approach for each locale: use the established academic or CLDR
+>   convention when available, keep the qualifying parenthetical in
+>   the same shape as the registry key, and follow the target
+>   language's calendar-naming tradition. The `Common` name includes
+>   each locale's CE/BCE-equivalent abbreviation in parens (e.g.
+>   `Zeitrechnung (u. Z./v. u. Z.)`, `Ère commune (EC/AEC)`,
+>   `西暦（CE/BCE）`) to signal what era-label style users will see.
+>   Also removed 6 stale short-form keys (`Julian`, `Coptic`, etc.)
+>   accidentally added as identity-mapping fallbacks in step 7h
+>   before the registry key shape was fully understood. (`0456ccb`)
+>
+> **Deferred (7e, 7j):**
+>
+> - **7e — complex natural-format parser.** Common would accept
+>   `"323 BCE"`, Gregorian `"323 BC"`, ISO 8601 `"-322"`, Hebrew
+>   `"5786 Av 21"`, Japanese `"令和8年8月5日"`, etc. The MVP's
+>   `YYYY-MM-DD` normalized input is functional for the primary use
+>   case ("what is today's date in the Hebrew calendar?" — user types
+>   `2026-08-05` with Common as from, picks Hebrew as to, sees
+>   `22 Av 5786 AM`). Complex per-calendar parsers can land as a
+>   focused follow-up when the demand signal is clearer.
+> - **7j — localized parser error messages.** Depends on 7e; skipped
+>   with it.
+>
+> **Final metrics (main HEAD `0456ccb`):**
+>
+> - **Tests:** 2143 (was 2118 at start of Step 7 arc; +25 net across
+>   7a/7c/7d/7f/7g/7h; unchanged in 7i).
+> - **Bundle:** 498.7 kB gzip (was 493.9 kB after 7d, +4.8 kB across
+>   7f/7g/7h/7i). Under the 510.8 kB ceiling with ~12 kB headroom.
+> - **Categories:** 76 total (added `date_calendar`; kept the
+>   19-zone `timezone` category from the Time pilot).
+> - **Calendars:** 19 functional (13 primary + 6 variants).
+>
+> The rest of this document is preserved as the design record for
+> what was decided and why, and to document the deferred parser
+> scope.
+
+> **Status (2026-08-05, morning):** Ready to begin. Both prerequisites
+> have landed: the SYMBOLIC-family framework and the Time zone pilot
+> are live (commits `4f82004` through `afd2ee5`). This doc has been
 > revised to reflect what was learned from the Time pilot and to
 > firm up the previously-open questions. Design decisions preserved
 > from the shared design brief; sequencing and scope firmed up here.

@@ -1,14 +1,28 @@
 # Temporal + Calendar + Timezone: Design Brief
 
-> **Status update (2026-08-05):** The SYMBOLIC-family framework is
-> live in OmniUnitConverter, and the Time zone pilot has landed in a
-> series of commits from `4f82004` through `afd2ee5`. This section
-> summarizes what changed since the original 2026-08-04 scope note
-> and updates a few decisions that turned out differently in
+> **Status update (2026-08-05, evening — Date category live):** Both
+> categories in the design brief have shipped. Time zone landed as a
+> pilot in `4f82004`–`afd2ee5`, and Date/calendar landed as a MVP in
+> `24f1981`–`0456ccb` with 19 functional calendars (13 primary + 6
+> variants). The complex per-calendar natural-format parser (7e) and
+> its localized error messages (7j) were consciously deferred; the
+> Date MVP accepts a single normalized `YYYY-MM-DD` input shape in
+> the from-calendar's own year/month/day scheme. See
+> [temporal-date-category.md](./temporal-date-category.md) for the
+> full Step 7 landing summary. The design-brief body below is
+> preserved as the reference record for the calendar registry, era
+> labeling scheme, Julian JDN converters, and localization
+> architecture; both categories built directly on it.
+>
+> **Earlier status (2026-08-05 morning):** The SYMBOLIC-family
+> framework was live in OmniUnitConverter, and the Time zone pilot
+> had landed. The Date category was ready to begin. This section
+> summarized what had changed since the original 2026-08-04 scope
+> note and updated a few decisions that turned out differently in
 > practice than the brief anticipated. The design-brief body below
 > is preserved as the reference for calendar registry, era labeling,
 > Julian JDN converters, and localization architecture; the Date
-> category work will build on it directly.
+> category work built on it directly.
 >
 > **What's landed:**
 >
