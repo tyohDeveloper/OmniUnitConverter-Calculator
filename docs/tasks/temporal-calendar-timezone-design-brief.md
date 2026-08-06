@@ -187,6 +187,23 @@ For a user-facing app with CE/BCE as a first-class concept, use `gregory` — yo
 
 ### Full calendar registry
 
+> **Status: SHIPPED as 13 primary + 6 variants (19 total).** Two
+> Islamic variants were dropped during the 2026-08-05 polyfill
+> capability review (see the Date-category doc's "Polyfill
+> capability verified" section):
+> - `islamic-astro` (astronomical) requires live new-moon
+>   calculation — beyond scope for an offline app.
+> - `islamic-rgsa` (Saudi sighting) depends on externally-published
+>   sighting data — impossible to bundle statically.
+>
+> Also, the shipped `symbol` field uses the polyfill's own calendar
+> ID (e.g. `gregory`, `islamic-umalqura`), not the abstract
+> `backend` names in the pseudo-registry below (`custom-julian`,
+> `custom-rjulian`). For Julian and Revised Julian the shipped
+> symbols are `julian` and `revised-julian` respectively, and
+> dispatch routes through `julianJdn.ts`. Original registry below
+> is kept as the design record.
+
 ```js
 const CALENDARS = [
   // Primary
@@ -208,8 +225,8 @@ const CALENDARS = [
   { id: 'revised-julian', backend: 'custom-rjulian', eraStyle: 'ad-bc',   group: 'variant' },
   { id: 'islamic-civil',  backend: 'islamic-civil',  eraStyle: 'ah',      group: 'variant' },
   { id: 'islamic-tbla',   backend: 'islamic-tbla',   eraStyle: 'ah',      group: 'variant' },
-  { id: 'islamic-astro',  backend: 'islamic',        eraStyle: 'ah',      group: 'variant' },
-  { id: 'islamic-rgsa',   backend: 'islamic-rgsa',   eraStyle: 'ah',      group: 'variant' },
+  { id: 'islamic-astro',  backend: 'islamic',        eraStyle: 'ah',      group: 'variant' },  // DROPPED
+  { id: 'islamic-rgsa',   backend: 'islamic-rgsa',   eraStyle: 'ah',      group: 'variant' },  // DROPPED
   { id: 'ethiopic-alem',  backend: 'ethioaa',        eraStyle: 'am-alem', group: 'variant' },
   { id: 'dangi',          backend: 'dangi',          eraStyle: null,      group: 'variant' },
   { id: 'iso8601',        backend: 'iso8601',        eraStyle: null,      group: 'variant' },
@@ -224,7 +241,7 @@ const CALENDARS = [
 - **"Coptic (Oriental Orthodox)"** — Coptic Orthodox and Coptic Catholic. Do NOT label just "Orthodox" — Coptic is Oriental Orthodox, not Eastern.
 - **"Ethiopic (Ethiopian/Eritrean Orthodox)"** — shared calendar for both Ethiopian and Eritrean Tewahedo churches. Do NOT label just "Tewahedo" (means "unity," identifies theology not calendar).
 - **"Islamic (Umm al-Qura)"** — Saudi official, most common Islamic default.
-- **Islamic variants** (`islamic-civil`, `islamic-tbla`, `islamic`, `islamic-rgsa`) — advanced/scholarly. Put in variants group.
+- **Islamic variants** (`islamic-civil`, `islamic-tbla`, `islamic`, `islamic-rgsa`) — advanced/scholarly. Put in variants group. *(SHIPPED: only `islamic-civil` and `islamic-tbla`; the other two dropped as noted in the registry above.)*
 
 ### Orthodox calendar landscape (why the specific choices)
 
@@ -472,6 +489,16 @@ Total inlined size estimate:
 
 ## Summary of concrete decisions
 
+> **Status: several rows updated by the OmniUnitConverter carrier.**
+> Localization axes shipped as 12 locales, not 8. File format is
+> HTML5 via Vite, not XHTML strict — CDATA wrapping is unnecessary
+> and the "Committed requirement" note applies only to the original
+> standalone-app scope. Custom calendar module ships as a normal ES
+> module (`julianJdn.ts`) rather than a separate inline `<script>`.
+> The dropdown pattern shipped as shadcn `SelectGroup` +
+> `SelectLabel` (an equivalent React idiom for the `<optgroup>`
+> guidance). All other rows carry over.
+
 | Decision | Choice | Reason |
 |---|---|---|
 | Date/time library | Temporal via `temporal-polyfill` (FullCalendar) | Standards-aligned, smaller than reference polyfill |
@@ -492,11 +519,14 @@ Total inlined size estimate:
 
 ## Locked decisions (previously open)
 
-- **File format**: XHTML strict. Wrap all script contents in CDATA using the JS-comment guard pattern shown above.
-- **Custom calendar module location**: separate `<script>` block, cleanly isolated from main app script.
-- **Input parsing per calendar**: the dropdown selection determines the parser. Common / Gregorian / Julian accept traditional year numbers with era labels. ISO 8601 is a separate dropdown entry that accepts signed astronomical years. This eliminates ambiguity: the calendar choice IS the parsing convention choice.
-- **Islamic variants**: only `islamic-umalqura` in the primary group; `islamic-civil`, `islamic-tbla`, `islamic`, `islamic-rgsa` in the variants group. Revised Julian also in variants.
-- **Era labeling per language**: `Intl.DateTimeFormat` produces correct localized AD/BC labels automatically for every language — no authoring needed for the Gregorian calendar. For Common (CE/BCE), CLDR does not expose CE/BCE variants through `Intl.DateTimeFormat` options in most locales, so era labels must be authored in the `ERA_LABELS['ce-bce']` table for all 8 languages. The formatter for Common assembles the string manually using Temporal's `.era` and `.eraYear` fields plus the authored era label. Per-locale word-order templates may be needed (~8 short templates) for fully idiomatic output, since some languages place the era before the year and others after.
+> **Status: several superseded by the OmniUnitConverter carrier.**
+> Annotations inline below.
+
+- **File format**: XHTML strict. Wrap all script contents in CDATA using the JS-comment guard pattern shown above. *(SUPERSEDED: HTML5 via Vite; no CDATA. See "Single-file XHTML build considerations" banner.)*
+- **Custom calendar module location**: separate `<script>` block, cleanly isolated from main app script. *(SUPERSEDED: normal ES module at `client/src/lib/temporal/julianJdn.ts` imported by `computeJulianConversion.ts`.)*
+- **Input parsing per calendar**: the dropdown selection determines the parser. Common / Gregorian / Julian accept traditional year numbers with era labels. ISO 8601 is a separate dropdown entry that accepts signed astronomical years. This eliminates ambiguity: the calendar choice IS the parsing convention choice. *(PARTIALLY SHIPPED: the MVP accepts only `YYYY-MM-DD` shape; per-calendar traditional-year parsing lands with the deferred 7e.)*
+- **Islamic variants**: only `islamic-umalqura` in the primary group; `islamic-civil`, `islamic-tbla`, `islamic`, `islamic-rgsa` in the variants group. Revised Julian also in variants. *(SHIPPED without `islamic` astronomical or `islamic-rgsa`; see registry SHIPPED banner above.)*
+- **Era labeling per language**: `Intl.DateTimeFormat` produces correct localized AD/BC labels automatically for every language — no authoring needed for the Gregorian calendar. For Common (CE/BCE), CLDR does not expose CE/BCE variants through `Intl.DateTimeFormat` options in most locales, so era labels must be authored in the `ERA_LABELS['ce-bce']` table for all 8 languages. The formatter for Common assembles the string manually using Temporal's `.era` and `.eraYear` fields plus the authored era label. Per-locale word-order templates may be needed (~8 short templates) for fully idiomatic output, since some languages place the era before the year and others after. *(SHIPPED as per-locale from→to substitution in `applyCommonEraLabels.ts` for 8 locales that CLDR renders with Christian-era abbreviations; ja/zh/ru/ar keep CLDR's native neutral labels. Word-order templates were unnecessary because CLDR handles ordering natively and the substitution is post-hoc string replace.)*
 
 ## Remaining open decisions
 

@@ -306,6 +306,13 @@ Reasoning: The Time pilot slotted 19 zones into one category with a single flat 
 
 → **Inline in the result slot** (option C from the pilot review).
 
+> **Status: PARTIALLY SHIPPED (silent-drop only).** The inline-error
+> plumbing (parser returning `{ date, errorMessage }`) depends on
+> the natural-format parser in 7e, which was consciously deferred.
+> As shipped, unparseable input causes the result field to go
+> blank — silent-drop like the Time pilot. When 7e revives, the
+> inline-error architecture below is the intended target.
+
 Reasoning: Date parsing has a much larger error surface than time parsing — users can type malformed input in many more ways, and "why is the result empty?" becomes mystifying. But adding a framework-level error field to SYMBOLIC categories is out of scope for the Date category itself. The middle path: when the parser returns null with a known error, print the error string as the result. Example: user has Common selected and types "-212", result field shows `"For BCE dates use '212 BCE', or select ISO 8601"` instead of just going blank.
 
 **Cost:** trivial — the parser returns `{ date: null, errorMessage: string | null }` instead of just `null`, and `computeSymbolicConversion`'s Date branch returns the error message string when applicable. The output renderer already treats `symbolicResult` as a free-form string; no widget changes.
@@ -328,6 +335,17 @@ Reasoning: Datetime is a substantial additional widget (time-of-day field, Plain
 - Input `"0"` with Common selected → `"Year 0 doesn't exist in Common. Use 1 BCE or 1 CE, or select ISO 8601 for astronomical years."`
 - Input `"-212"` with Common selected → `"For BCE dates use '212 BCE', or select ISO 8601 to enter signed years."`
 - Input `"212 BCE"` with ISO 8601 selected → `"ISO 8601 uses signed years. Try '-211'."`
+
+> **Status: NOT SHIPPED (depends on 7e).** As shipped, the MVP
+> accepts only `YYYY-MM-DD` shaped input, so the natural-format
+> phrases in the error examples above ("212 BCE", "0") never reach
+> the parser — they fail the YMD regex first and the result goes
+> blank. Signed years like `-212-04-15` in Common are accepted by
+> the polyfill as astronomical year `-212` (which the polyfill
+> then labels as `bce` eraYear=213, i.e. "213 BCE"). Input `0-01-01`
+> in Common is accepted as astronomical year 0 (labeled `bce`
+> eraYear=1, i.e. "1 BCE"). The intended reject-with-helpful-error
+> behavior lands with 7e.
 
 ## Polyfill capability verified (2026-08-05)
 
@@ -457,14 +475,24 @@ follow the timezone pattern (`SI_BASE`, `SI`) as placeholders.
 A new category in the "Other" group of the converter UI, using
 Temporal calendar tags as its "units." Users enter a date in the
 from-calendar's convention and see it re-expressed in the
-to-calendar. Common example: "2026-08-04 (Common) → 5786 Av 21
-(Hebrew) → 1448 Safar 20 (Islamic)."
+to-calendar. Common example (shipped output format): user types
+`2026-08-05` with Common selected, picks Hebrew, sees
+`22 Av 5786 AM`; picks Islamic (Umm al-Qura), sees
+`Safar 22, 1448 AH`.
 
 Scope resolved (see resolution #3 above): date-only for MVP.
 Datetime with time-of-day is a possible future extension, not part
 of the initial pilot.
 
 ## User model
+
+> **Status: SHIPPED with a narrower input surface.** The MVP accepts
+> only the normalized `YYYY-MM-DD` shape in the from-calendar's own
+> year/month/day scheme (e.g. `5786-11-22` with Hebrew selected =
+> Hebrew year 5786, month 11 (Av), day 22). Natural-format inputs
+> like `"323 BCE"` or `"5786 Av 21"` land with the deferred 7e
+> parser. See the top-of-file Deferred section for the concrete
+> per-calendar accepted-format table.
 
 - User picks a from-calendar and a to-calendar.
 - User types a date in the from-calendar's expected format
