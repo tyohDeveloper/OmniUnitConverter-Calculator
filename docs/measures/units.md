@@ -69,7 +69,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `cun` | Cun (China) | Archaic & Regional Length | m | 0.03333 |
 | `digit` | Digit (Egyptian) | Archaic & Regional Length | m | 0.01875 |
 | `ell` | Ell (English) | Archaic & Regional Length | m | 1.143 |
-| `football field` | Football field | Archaic & Regional Length | m | 91.44 |
+| `football field` | Football Field (US) | Archaic & Regional Length | m | 91.44 |
 | `ftm` | Fathom | Archaic & Regional Length | m | 1.8288 |
 | `fur` | Furlong | Archaic & Regional Length | m | 201.168 |
 | `gaj` | Gaj (India) | Archaic & Regional Length | m | 0.9144 |

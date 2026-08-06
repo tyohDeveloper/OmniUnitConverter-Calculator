@@ -350,7 +350,7 @@ One section per measurement system or tradition.
 | `ft⋅lbf` | Foot-pound Force | 1.3558179483 kg⋅m²⋅s⁻² |
 | `quad` | Quad | 1.055e+18 kg⋅m²⋅s⁻² |
 | `lea` | League | 4828.032 m |
-| `football field` | Football field | 91.44 m |
+| `football field` | Football Field (US) | 91.44 m |
 | `dr` | Dram (Avoirdupois, US) | 0.001771845 kg |
 | `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | 1.3558179483 kg⋅m²⋅s⁻³ |
 | `hp (boiler)` | Boiler Horsepower | 9810.55 kg⋅m²⋅s⁻³ |
@@ -894,7 +894,6 @@ One section per measurement system or tradition.
 | `γ` | Gamma | 1e-9 kg⋅s⁻²⋅A⁻¹ |
 | `abΩ` | Abohm | 1e-9 kg⋅m²⋅s⁻³⋅A⁻² |
 | `statΩ` | Statohm | 8.98755178737e+11 kg⋅m²⋅s⁻³⋅A⁻² |
-
 
 
 † Non-linear conversion (uses an offset or math function); "1 unit = factor × base" is not the full formula.

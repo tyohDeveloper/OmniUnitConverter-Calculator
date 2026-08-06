@@ -143,7 +143,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `sazhen` | Sazhen (Russia) | 2.1336 m |
 | `toise` | Toise (French) | 1.949 m |
 | `mi (Rom)` | Roman Mile | 1480 m |
-| `football field` | Football field | 91.44 m |
+| `football field` | Football Field (US) | 91.44 m |
 | `barleycorn` | Barleycorn | 0.008466666666666667 m |
 
 ### Archaic & Regional Mass
@@ -1144,7 +1144,6 @@ One section per measurement category. Each row shows how many base SI units one 
 | `yd³` | Cubic Yard | 0.764555 m³ |
 | `ac⋅ft` | Acre-foot | 1233.48184 m³ |
 | `mi³` | Cubic Mile | 4.16818e+9 m³ |
-
 
 
 † Non-linear conversion (uses an offset or math function); "1 unit = factor × base" is not the full formula.
