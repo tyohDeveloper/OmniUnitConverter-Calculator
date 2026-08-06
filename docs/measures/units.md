@@ -27,148 +27,148 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `rad⋅s⁻¹` | Radian/Second | Angular Velocity | rad⋅s⁻¹ | 1 |
 | `rpm` | Revolutions/Minute | Angular Velocity | rad⋅s⁻¹ | 0.10471975511965977 |
 | `rps` | Revolutions/Second | Angular Velocity | rad⋅s⁻¹ | 6.283185307179586 |
-| `arpent` | Arpent (French) | Archaic Area | m² | 3418.89 |
-| `bigha` | Bigha (South Asia) | Archaic Area | m² | 2529 |
-| `cho` | Chō/Chōbu 町歩 (Japan) | Archaic Area | m² | 9917.36 |
-| `chukyoma` | Chūkyō-ma (Japan) | Archaic Area | m² | 1.6562 |
-| `danchi` | Danchi-ma (Japan) | Archaic Area | m² | 1.445 |
-| `desyatina` | Desyatina (Russia) | Archaic Area | m² | 10925 |
-| `dunam` | Dunam (Israel) | Archaic Area | m² | 1000 |
-| `edoma` | Edoma/Kantō-ma (Japan) | Archaic Area | m² | 1.5488 |
-| `feddan` | Feddan (Egypt) | Archaic Area | m² | 4200.833 |
-| `hide` | Hide (English) | Archaic Area | m² | 485623 |
-| `jerib` | Jerib (Middle East) | Archaic Area | m² | 2000 |
-| `jo` | Jō/Tatami 畳 (Japan) | Archaic Area | m² | 1.62 |
-| `kyoma` | Kyōma (Japan) | Archaic Area | m² | 1.8241 |
-| `m²` | Square Metre | Archaic Area | m² | 1 |
-| `morgen` | Morgen (German) | Archaic Area | m² | 2500 |
-| `mu` | Mu (China) | Archaic Area | m² | 666.67 |
-| `pyeong` | Pyeong (Korea) | Archaic Area | m² | 3.3058 |
-| `qing` | Qing (China) | Archaic Area | m² | 66666.67 |
-| `qirat` | Qirat (Egypt) | Archaic Area | m² | 175.03 |
-| `rai` | Rai (Thailand) | Archaic Area | m² | 1600 |
-| `se` | Se (Korea) | Archaic Area | m² | 99.174 |
-| `section` | Section (US) | Archaic Area | m² | 2589988 |
-| `tan` | Tan (Japan) | Archaic Area | m² | 991.7 |
-| `tsubo` | Tsubo (Japan) | Archaic Area | m² | 3.306 |
-| `twp` | Township (US) | Archaic Area | m² | 93239571 |
-| `erg` | Erg (CGS) | Archaic Energy | kg⋅m²⋅s⁻² | 1e-7 |
-| `ft⋅lbf` | Foot-pound Force | Archaic Energy | kg⋅m²⋅s⁻² | 1.3558179483 |
-| `J` | Joule | Archaic Energy | kg⋅m²⋅s⁻² | 1 |
-| `quad` | Quad | Archaic Energy | kg⋅m²⋅s⁻² | 1.055e+18 |
-| `th` | Thermie | Archaic Energy | kg⋅m²⋅s⁻² | 4186800 |
-| `arshin` | Arshin (Russia) | Archaic Length | m | 0.7112 |
-| `barleycorn` | Barleycorn | Archaic Length | m | 0.008466666666666667 |
-| `ch` | Chain (Gunter) | Archaic Length | m | 20.1168 |
-| `chek` | Chek (Hong Kong) | Archaic Length | m | 0.371 |
-| `chi` | Chi (China) | Archaic Length | m | 0.3333 |
-| `cho (len)` | Chō 町 (Japan) | Archaic Length | m | 109.0909090909091 |
-| `cubit` | Cubit (Common) | Archaic Length | m | 0.4572 |
-| `cubit-R` | Cubit (Egyptian Royal) | Archaic Length | m | 0.524 |
-| `cun` | Cun (China) | Archaic Length | m | 0.03333 |
-| `digit` | Digit (Egyptian) | Archaic Length | m | 0.01875 |
-| `ell` | Ell (English) | Archaic Length | m | 1.143 |
-| `football field` | Football field | Archaic Length | m | 91.44 |
-| `ftm` | Fathom | Archaic Length | m | 1.8288 |
-| `fur` | Furlong | Archaic Length | m | 201.168 |
-| `gaj` | Gaj (India) | Archaic Length | m | 0.9144 |
-| `hath` | Hath (India) | Archaic Length | m | 0.46 |
-| `hh` | Hand | Archaic Length | m | 0.1016 |
-| `ja` | Ja (Korea) | Archaic Length | m | 0.30303 |
-| `jo (len)` | Jō 丈 (Japan) | Archaic Length | m | 3.0303030303030303 |
-| `ken` | Ken (Japan) | Archaic Length | m | 1.8181818181818181 |
-| `lea` | League | Archaic Length | m | 4828.032 |
-| `li` | Link (Gunter) | Archaic Length | m | 0.201168 |
-| `li-cn` | Li (China) | Archaic Length | m | 500 |
-| `m` | Metre | Archaic Length | m | 1 |
-| `mi (Rom)` | Roman Mile | Archaic Length | m | 1480 |
-| `pace` | Pace (Roman) | Archaic Length | m | 1.48 |
-| `palm` | Palm (Ancient) | Archaic Length | m | 0.075 |
-| `rd` | Rod/Pole/Perch | Archaic Length | m | 5.0292 |
-| `ri-jp` | Ri (Japan) | Archaic Length | m | 3927.2727272727275 |
-| `ri-kr` | Ri (Korea) | Archaic Length | m | 392.727 |
-| `sazhen` | Sazhen (Russia) | Archaic Length | m | 2.1336 |
-| `shaku` | Shaku (Japan) | Archaic Length | m | 0.30303030303030304 |
-| `span` | Span (Ancient) | Archaic Length | m | 0.2286 |
-| `stade` | Stade (Greek) | Archaic Length | m | 185 |
-| `sun` | Sun (Japan) | Archaic Length | m | 0.030303030303030304 |
-| `toise` | Toise (French) | Archaic Length | m | 1.949 |
-| `vara` | Vara (Spain) | Archaic Length | m | 0.8359 |
-| `verst` | Verst (Russia) | Archaic Length | m | 1066.8 |
-| `zhang` | Zhang (China) | Archaic Length | m | 3.333 |
-| `baht` | Baht (Thailand) | Archaic Mass | kg | 0.015244 |
-| `catty` | Catty (HK/Traditional) | Archaic Mass | kg | 0.60478982 |
-| `ct` | Carat (Metric) | Archaic Mass | kg | 2e-4 |
-| `dan` | Dan (China) | Archaic Mass | kg | 50 |
-| `don` | Don (Korea) | Archaic Mass | kg | 0.00375 |
-| `dr` | Dram (Avoirdupois, US) | Archaic Mass | kg | 0.001771845 |
-| `dr ap` | Dram (Apothecaries') | Archaic Mass | kg | 0.0038879346 |
-| `dwt` | Pennyweight | Archaic Mass | kg | 0.00155517 |
-| `fun` | Fun (Japan) | Archaic Mass | kg | 3.75e-4 |
-| `g` | Gram | Archaic Mass | kg | 0.001 |
-| `geun` | Geun (Korea) | Archaic Mass | kg | 0.6 |
-| `gr` | Grain | Archaic Mass | kg | 6.479891e-5 |
-| `jin` | Jin (China) | Archaic Mass | kg | 0.5 |
-| `kan` | Kan (Japan) | Archaic Mass | kg | 3.75 |
-| `kg` | Kilogram | Archaic Mass | kg | 1 |
-| `livre` | Livre (French) | Archaic Mass | kg | 0.4895 |
-| `mace` | Mace (China) | Archaic Mass | kg | 0.005 |
-| `maund` | Maund (South Asia) | Archaic Mass | kg | 37.324 |
-| `mina` | Mina (Biblical) | Archaic Mass | kg | 0.571 |
-| `momme` | Momme (Japan) | Archaic Mass | kg | 0.00375 |
-| `pfund` | Pfund (German) | Archaic Mass | kg | 0.4677 |
-| `picul` | Picul (HK/Traditional) | Archaic Mass | kg | 60.478982 |
-| `pood` | Pood (Russia) | Archaic Mass | kg | 16.3807 |
-| `quintal` | Quintal (Metric) | Archaic Mass | kg | 100 |
-| `ratti` | Ratti (South Asia) | Archaic Mass | kg | 1.215e-4 |
-| `ryo` | Ryō (Japan) | Archaic Mass | kg | 0.0375 |
-| `s ap` | Scruple (Apothecaries') | Archaic Mass | kg | 0.001296 |
-| `seer` | Seer (South Asia) | Archaic Mass | kg | 0.9331 |
-| `shekel` | Shekel (Biblical) | Archaic Mass | kg | 0.0114 |
-| `tael` | Tael (China) | Archaic Mass | kg | 0.05 |
-| `talent` | Talent (Biblical) | Archaic Mass | kg | 34.2 |
-| `tola` | Tola (South Asia) | Archaic Mass | kg | 0.0116638 |
-| `zolotnik` | Zolotnik (Russia) | Archaic Mass | kg | 0.0042658 |
-| `erg⋅s⁻¹` | Erg per Second | Archaic Power | kg⋅m²⋅s⁻³ | 1e-7 |
-| `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | Archaic Power | kg⋅m²⋅s⁻³ | 1.3558179483 |
-| `hp (boiler)` | Boiler Horsepower | Archaic Power | kg⋅m²⋅s⁻³ | 9810.55 |
-| `W` | Watt | Archaic Power | kg⋅m²⋅s⁻³ | 1 |
-| `amphora` | Amphora (Greek) | Archaic Volume | L | 26.026 |
-| `bu` | Bushel | Archaic Volume | L | 35.2391 |
-| `butt` | Butt (Pipe) | Archaic Volume | L | 476.96 |
-| `chaldron` | Chaldron | Archaic Volume | L | 1309.27 |
-| `congius` | Congius (Roman) | Archaic Volume | L | 3.275 |
-| `cord` | Cord | Archaic Volume | L | 3624.56 |
-| `cp (US)` | Cup (US) | Archaic Volume | L | 0.236588 |
-| `dan-v` | Dan (China, Volume) | Archaic Volume | L | 103.55 |
-| `doe` | Doe (Korea) | Archaic Volume | L | 1.8039 |
-| `dou` | Dou (China) | Archaic Volume | L | 10.355 |
-| `firkin` | Firkin (Imperial) | Archaic Volume | L | 40.9148 |
-| `fl dr` | Fluid Dram (US) | Archaic Volume | L | 0.00369669 |
-| `fl oz ap` | Fluid Ounce (Apothecaries') | Archaic Volume | L | 0.0295735 |
-| `fl s` | Fluid Scruple (Apothecaries') | Archaic Volume | L | 0.00123223 |
-| `gi` | Gill (US) | Archaic Volume | L | 0.118294 |
-| `gi Imp` | Gill (Imperial) | Archaic Volume | L | 0.142065 |
-| `go` | Go (Japan) | Archaic Volume | L | 0.18039 |
-| `hhd` | Hogshead (US) | Archaic Volume | L | 238.481 |
-| `hop` | Hop (Korea) | Archaic Volume | L | 0.18039 |
-| `jigger` | Jigger (US) | Archaic Volume | L | 0.044355 |
-| `kilderkin` | Kilderkin | Archaic Volume | L | 81.8296 |
-| `koku` | Koku (Japan) | Archaic Volume | L | 180.39 |
-| `L` | Litre | Archaic Volume | L | 1 |
-| `m³` | Cubic Metre | Archaic Volume | L | 1000 |
-| `mal` | Mal (Korea) | Archaic Volume | L | 18.039 |
-| `minim` | Minim (US) | Archaic Volume | L | 6.16115e-5 |
-| `mL` | Millilitre | Archaic Volume | L | 0.001 |
-| `pk` | Peck | Archaic Volume | L | 8.80977 |
-| `pottle` | Pottle | Archaic Volume | L | 2.273045 |
-| `sextarius` | Sextarius (Roman) | Archaic Volume | L | 0.546 |
-| `sheng` | Sheng (China) | Archaic Volume | L | 1.0355 |
-| `sho` | Shō (Japan) | Archaic Volume | L | 1.8039 |
-| `tbsp (US)` | Tablespoon (US) | Archaic Volume | L | 0.0147868 |
-| `to` | To (Japan) | Archaic Volume | L | 18.039 |
-| `tsp (US)` | Teaspoon (US) | Archaic Volume | L | 0.00492892 |
-| `tun` | Tun | Archaic Volume | L | 953.92 |
+| `arpent` | Arpent (French) | Archaic & Regional Area | m² | 3418.89 |
+| `bigha` | Bigha (South Asia) | Archaic & Regional Area | m² | 2529 |
+| `cho` | Chō/Chōbu 町歩 (Japan) | Archaic & Regional Area | m² | 9917.36 |
+| `chukyoma` | Chūkyō-ma (Japan) | Archaic & Regional Area | m² | 1.6562 |
+| `danchi` | Danchi-ma (Japan) | Archaic & Regional Area | m² | 1.445 |
+| `desyatina` | Desyatina (Russia) | Archaic & Regional Area | m² | 10925 |
+| `dunam` | Dunam (Israel) | Archaic & Regional Area | m² | 1000 |
+| `edoma` | Edoma/Kantō-ma (Japan) | Archaic & Regional Area | m² | 1.5488 |
+| `feddan` | Feddan (Egypt) | Archaic & Regional Area | m² | 4200.833 |
+| `hide` | Hide (English) | Archaic & Regional Area | m² | 485623 |
+| `jerib` | Jerib (Middle East) | Archaic & Regional Area | m² | 2000 |
+| `jo` | Jō/Tatami 畳 (Japan) | Archaic & Regional Area | m² | 1.62 |
+| `kyoma` | Kyōma (Japan) | Archaic & Regional Area | m² | 1.8241 |
+| `m²` | Square Metre | Archaic & Regional Area | m² | 1 |
+| `morgen` | Morgen (German) | Archaic & Regional Area | m² | 2500 |
+| `mu` | Mu (China) | Archaic & Regional Area | m² | 666.67 |
+| `pyeong` | Pyeong (Korea) | Archaic & Regional Area | m² | 3.3058 |
+| `qing` | Qing (China) | Archaic & Regional Area | m² | 66666.67 |
+| `qirat` | Qirat (Egypt) | Archaic & Regional Area | m² | 175.03 |
+| `rai` | Rai (Thailand) | Archaic & Regional Area | m² | 1600 |
+| `se` | Se (Korea) | Archaic & Regional Area | m² | 99.174 |
+| `section` | Section (US) | Archaic & Regional Area | m² | 2589988 |
+| `tan` | Tan (Japan) | Archaic & Regional Area | m² | 991.7 |
+| `tsubo` | Tsubo (Japan) | Archaic & Regional Area | m² | 3.306 |
+| `twp` | Township (US) | Archaic & Regional Area | m² | 93239571 |
+| `erg` | Erg (CGS) | Archaic & Regional Energy | kg⋅m²⋅s⁻² | 1e-7 |
+| `ft⋅lbf` | Foot-pound Force | Archaic & Regional Energy | kg⋅m²⋅s⁻² | 1.3558179483 |
+| `J` | Joule | Archaic & Regional Energy | kg⋅m²⋅s⁻² | 1 |
+| `quad` | Quad | Archaic & Regional Energy | kg⋅m²⋅s⁻² | 1.055e+18 |
+| `th` | Thermie | Archaic & Regional Energy | kg⋅m²⋅s⁻² | 4186800 |
+| `arshin` | Arshin (Russia) | Archaic & Regional Length | m | 0.7112 |
+| `barleycorn` | Barleycorn | Archaic & Regional Length | m | 0.008466666666666667 |
+| `ch` | Chain (Gunter) | Archaic & Regional Length | m | 20.1168 |
+| `chek` | Chek (Hong Kong) | Archaic & Regional Length | m | 0.371 |
+| `chi` | Chi (China) | Archaic & Regional Length | m | 0.3333 |
+| `cho (len)` | Chō 町 (Japan) | Archaic & Regional Length | m | 109.0909090909091 |
+| `cubit` | Cubit (Common) | Archaic & Regional Length | m | 0.4572 |
+| `cubit-R` | Cubit (Egyptian Royal) | Archaic & Regional Length | m | 0.524 |
+| `cun` | Cun (China) | Archaic & Regional Length | m | 0.03333 |
+| `digit` | Digit (Egyptian) | Archaic & Regional Length | m | 0.01875 |
+| `ell` | Ell (English) | Archaic & Regional Length | m | 1.143 |
+| `football field` | Football field | Archaic & Regional Length | m | 91.44 |
+| `ftm` | Fathom | Archaic & Regional Length | m | 1.8288 |
+| `fur` | Furlong | Archaic & Regional Length | m | 201.168 |
+| `gaj` | Gaj (India) | Archaic & Regional Length | m | 0.9144 |
+| `hath` | Hath (India) | Archaic & Regional Length | m | 0.46 |
+| `hh` | Hand | Archaic & Regional Length | m | 0.1016 |
+| `ja` | Ja (Korea) | Archaic & Regional Length | m | 0.30303 |
+| `jo (len)` | Jō 丈 (Japan) | Archaic & Regional Length | m | 3.0303030303030303 |
+| `ken` | Ken (Japan) | Archaic & Regional Length | m | 1.8181818181818181 |
+| `lea` | League | Archaic & Regional Length | m | 4828.032 |
+| `li` | Link (Gunter) | Archaic & Regional Length | m | 0.201168 |
+| `li-cn` | Li (China) | Archaic & Regional Length | m | 500 |
+| `m` | Metre | Archaic & Regional Length | m | 1 |
+| `mi (Rom)` | Roman Mile | Archaic & Regional Length | m | 1480 |
+| `pace` | Pace (Roman) | Archaic & Regional Length | m | 1.48 |
+| `palm` | Palm (Ancient) | Archaic & Regional Length | m | 0.075 |
+| `rd` | Rod/Pole/Perch | Archaic & Regional Length | m | 5.0292 |
+| `ri-jp` | Ri (Japan) | Archaic & Regional Length | m | 3927.2727272727275 |
+| `ri-kr` | Ri (Korea) | Archaic & Regional Length | m | 392.727 |
+| `sazhen` | Sazhen (Russia) | Archaic & Regional Length | m | 2.1336 |
+| `shaku` | Shaku (Japan) | Archaic & Regional Length | m | 0.30303030303030304 |
+| `span` | Span (Ancient) | Archaic & Regional Length | m | 0.2286 |
+| `stade` | Stade (Greek) | Archaic & Regional Length | m | 185 |
+| `sun` | Sun (Japan) | Archaic & Regional Length | m | 0.030303030303030304 |
+| `toise` | Toise (French) | Archaic & Regional Length | m | 1.949 |
+| `vara` | Vara (Spain) | Archaic & Regional Length | m | 0.8359 |
+| `verst` | Verst (Russia) | Archaic & Regional Length | m | 1066.8 |
+| `zhang` | Zhang (China) | Archaic & Regional Length | m | 3.333 |
+| `baht` | Baht (Thailand) | Archaic & Regional Mass | kg | 0.015244 |
+| `catty` | Catty (HK/Traditional) | Archaic & Regional Mass | kg | 0.60478982 |
+| `ct` | Carat (Metric) | Archaic & Regional Mass | kg | 2e-4 |
+| `dan` | Dan (China) | Archaic & Regional Mass | kg | 50 |
+| `don` | Don (Korea) | Archaic & Regional Mass | kg | 0.00375 |
+| `dr` | Dram (Avoirdupois, US) | Archaic & Regional Mass | kg | 0.001771845 |
+| `dr ap` | Dram (Apothecaries') | Archaic & Regional Mass | kg | 0.0038879346 |
+| `dwt` | Pennyweight | Archaic & Regional Mass | kg | 0.00155517 |
+| `fun` | Fun (Japan) | Archaic & Regional Mass | kg | 3.75e-4 |
+| `g` | Gram | Archaic & Regional Mass | kg | 0.001 |
+| `geun` | Geun (Korea) | Archaic & Regional Mass | kg | 0.6 |
+| `gr` | Grain | Archaic & Regional Mass | kg | 6.479891e-5 |
+| `jin` | Jin (China) | Archaic & Regional Mass | kg | 0.5 |
+| `kan` | Kan (Japan) | Archaic & Regional Mass | kg | 3.75 |
+| `kg` | Kilogram | Archaic & Regional Mass | kg | 1 |
+| `livre` | Livre (French) | Archaic & Regional Mass | kg | 0.4895 |
+| `mace` | Mace (China) | Archaic & Regional Mass | kg | 0.005 |
+| `maund` | Maund (South Asia) | Archaic & Regional Mass | kg | 37.324 |
+| `mina` | Mina (Biblical) | Archaic & Regional Mass | kg | 0.571 |
+| `momme` | Momme (Japan) | Archaic & Regional Mass | kg | 0.00375 |
+| `pfund` | Pfund (German) | Archaic & Regional Mass | kg | 0.4677 |
+| `picul` | Picul (HK/Traditional) | Archaic & Regional Mass | kg | 60.478982 |
+| `pood` | Pood (Russia) | Archaic & Regional Mass | kg | 16.3807 |
+| `quintal` | Quintal (Metric) | Archaic & Regional Mass | kg | 100 |
+| `ratti` | Ratti (South Asia) | Archaic & Regional Mass | kg | 1.215e-4 |
+| `ryo` | Ryō (Japan) | Archaic & Regional Mass | kg | 0.0375 |
+| `s ap` | Scruple (Apothecaries') | Archaic & Regional Mass | kg | 0.001296 |
+| `seer` | Seer (South Asia) | Archaic & Regional Mass | kg | 0.9331 |
+| `shekel` | Shekel (Biblical) | Archaic & Regional Mass | kg | 0.0114 |
+| `tael` | Tael (China) | Archaic & Regional Mass | kg | 0.05 |
+| `talent` | Talent (Biblical) | Archaic & Regional Mass | kg | 34.2 |
+| `tola` | Tola (South Asia) | Archaic & Regional Mass | kg | 0.0116638 |
+| `zolotnik` | Zolotnik (Russia) | Archaic & Regional Mass | kg | 0.0042658 |
+| `erg⋅s⁻¹` | Erg per Second | Archaic & Regional Power | kg⋅m²⋅s⁻³ | 1e-7 |
+| `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | Archaic & Regional Power | kg⋅m²⋅s⁻³ | 1.3558179483 |
+| `hp (boiler)` | Boiler Horsepower | Archaic & Regional Power | kg⋅m²⋅s⁻³ | 9810.55 |
+| `W` | Watt | Archaic & Regional Power | kg⋅m²⋅s⁻³ | 1 |
+| `amphora` | Amphora (Greek) | Archaic & Regional Volume | L | 26.026 |
+| `bu` | Bushel | Archaic & Regional Volume | L | 35.2391 |
+| `butt` | Butt (Pipe) | Archaic & Regional Volume | L | 476.96 |
+| `chaldron` | Chaldron | Archaic & Regional Volume | L | 1309.27 |
+| `congius` | Congius (Roman) | Archaic & Regional Volume | L | 3.275 |
+| `cord` | Cord | Archaic & Regional Volume | L | 3624.56 |
+| `cp (US)` | Cup (US) | Archaic & Regional Volume | L | 0.236588 |
+| `dan-v` | Dan (China, Volume) | Archaic & Regional Volume | L | 103.55 |
+| `doe` | Doe (Korea) | Archaic & Regional Volume | L | 1.8039 |
+| `dou` | Dou (China) | Archaic & Regional Volume | L | 10.355 |
+| `firkin` | Firkin (Imperial) | Archaic & Regional Volume | L | 40.9148 |
+| `fl dr` | Fluid Dram (US) | Archaic & Regional Volume | L | 0.00369669 |
+| `fl oz ap` | Fluid Ounce (Apothecaries') | Archaic & Regional Volume | L | 0.0295735 |
+| `fl s` | Fluid Scruple (Apothecaries') | Archaic & Regional Volume | L | 0.00123223 |
+| `gi` | Gill (US) | Archaic & Regional Volume | L | 0.118294 |
+| `gi Imp` | Gill (Imperial) | Archaic & Regional Volume | L | 0.142065 |
+| `go` | Go (Japan) | Archaic & Regional Volume | L | 0.18039 |
+| `hhd` | Hogshead (US) | Archaic & Regional Volume | L | 238.481 |
+| `hop` | Hop (Korea) | Archaic & Regional Volume | L | 0.18039 |
+| `jigger` | Jigger (US) | Archaic & Regional Volume | L | 0.044355 |
+| `kilderkin` | Kilderkin | Archaic & Regional Volume | L | 81.8296 |
+| `koku` | Koku (Japan) | Archaic & Regional Volume | L | 180.39 |
+| `L` | Litre | Archaic & Regional Volume | L | 1 |
+| `m³` | Cubic Metre | Archaic & Regional Volume | L | 1000 |
+| `mal` | Mal (Korea) | Archaic & Regional Volume | L | 18.039 |
+| `minim` | Minim (US) | Archaic & Regional Volume | L | 6.16115e-5 |
+| `mL` | Millilitre | Archaic & Regional Volume | L | 0.001 |
+| `pk` | Peck | Archaic & Regional Volume | L | 8.80977 |
+| `pottle` | Pottle | Archaic & Regional Volume | L | 2.273045 |
+| `sextarius` | Sextarius (Roman) | Archaic & Regional Volume | L | 0.546 |
+| `sheng` | Sheng (China) | Archaic & Regional Volume | L | 1.0355 |
+| `sho` | Shō (Japan) | Archaic & Regional Volume | L | 1.8039 |
+| `tbsp (US)` | Tablespoon (US) | Archaic & Regional Volume | L | 0.0147868 |
+| `to` | To (Japan) | Archaic & Regional Volume | L | 18.039 |
+| `tsp (US)` | Teaspoon (US) | Archaic & Regional Volume | L | 0.00492892 |
+| `tun` | Tun | Archaic & Regional Volume | L | 953.92 |
 | `ac` | Acre | Area | m² | 4046.86 |
 | `are` | Are | Area | m² | 100 |
 | `b` | Barn | Area | m² | 1e-28 |

@@ -61,7 +61,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `rpm` | Revolutions/Minute | 0.10471975511965977 rad⋅s⁻¹ |
 | `rps` | Revolutions/Second | 6.283185307179586 rad⋅s⁻¹ |
 
-### Archaic Area
+### Archaic & Regional Area
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
@@ -91,7 +91,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `rai` | Rai (Thailand) | 1600 m² |
 | `hide` | Hide (English) | 485623 m² |
 
-### Archaic Energy
+### Archaic & Regional Energy
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
@@ -101,7 +101,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `th` | Thermie | 4186800 kg⋅m²⋅s⁻² |
 | `quad` | Quad | 1.055e+18 kg⋅m²⋅s⁻² |
 
-### Archaic Length
+### Archaic & Regional Length
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
@@ -145,7 +145,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `football field` | Football field | 91.44 m |
 | `barleycorn` | Barleycorn | 0.008466666666666667 m |
 
-### Archaic Mass
+### Archaic & Regional Mass
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
@@ -183,7 +183,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `talent` | Talent (Biblical) | 34.2 kg |
 | `quintal` | Quintal (Metric) | 100 kg |
 
-### Archaic Power
+### Archaic & Regional Power
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
@@ -192,7 +192,7 @@ One section per measurement category. Each row shows how many base SI units one 
 | `ft⋅lbf⋅s⁻¹` | Foot-pound per Second | 1.3558179483 kg⋅m²⋅s⁻³ |
 | `hp (boiler)` | Boiler Horsepower | 9810.55 kg⋅m²⋅s⁻³ |
 
-### Archaic Volume
+### Archaic & Regional Volume
 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
