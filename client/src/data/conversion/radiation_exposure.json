@@ -14,7 +14,7 @@
       "allowPrefixes": true,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Coulomb_per_kilogram"
+      "sourceUrl": "https://en.wikipedia.org/wiki/Radiation_exposure"
     },
     {
       "id": "roentgen",

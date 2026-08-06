@@ -84,18 +84,63 @@
 >   accidentally added as identity-mapping fallbacks in step 7h
 >   before the registry key shape was fully understood. (`0456ccb`)
 >
-> **Deferred (7e, 7j):**
+> **Deferred (7e, 7j) — concrete scope for future revival:**
 >
-> - **7e — complex natural-format parser.** Common would accept
->   `"323 BCE"`, Gregorian `"323 BC"`, ISO 8601 `"-322"`, Hebrew
->   `"5786 Av 21"`, Japanese `"令和8年8月5日"`, etc. The MVP's
->   `YYYY-MM-DD` normalized input is functional for the primary use
->   case ("what is today's date in the Hebrew calendar?" — user types
+> - **7e — complex natural-format parser.** The MVP's `YYYY-MM-DD`
+>   normalized input is functional for the primary use case ("what
+>   is today's date in the Hebrew calendar?" — user types
 >   `2026-08-05` with Common as from, picks Hebrew as to, sees
->   `22 Av 5786 AM`). Complex per-calendar parsers can land as a
->   focused follow-up when the demand signal is clearer.
-> - **7j — localized parser error messages.** Depends on 7e; skipped
->   with it.
+>   `22 Av 5786 AM`). A full natural-format parser would additionally
+>   accept per-calendar idiomatic strings:
+>
+>   | Calendar | Accepted natural formats (minimum) |
+>   |---|---|
+>   | Common | `2026-08-05`, `August 5, 2026`, `Aug 5, 2026`, `323 BCE`, `5 August 2026` |
+>   | Gregorian | Same as Common, plus `AD 2026`, `323 BC` |
+>   | Julian | `2026-07-23`, `July 23, 2026 (OS)`, `23 July 2026 Julian` |
+>   | ISO 8601 | `-322-04-15`, `2026-08-05`, `+2026-08-05` (extended) |
+>   | Hebrew | `22 Av 5786`, `Av 22, 5786`, `5786-11-22` |
+>   | Islamic-Umalqura | `22 Safar 1448`, `1448-02-22`, `Safar 22, 1448 AH` |
+>   | Persian | `14 Mordad 1405`, `1405-05-14` |
+>   | Chinese | `丙午年六月23日`, `2026-06-23` |
+>   | Japanese | `令和8年8月5日`, `Reiwa 8/8/5`, `2026-08-05` |
+>   | ROC | `民國115年8月5日`, `115-08-05` |
+>   | Buddhist | `2569-08-05` |
+>   | Indian | `1948-05-14` |
+>
+>   **Implementation shape.** Add a per-calendar parser table in a new
+>   module `client/src/lib/calculator/parseCalendarInput.ts`. Each
+>   parser is a small function `(input: string) => { date: PlainDate
+>   | null, errorMessage: string | null }`. The `YYYY-MM-DD` shape
+>   would remain the shared canonical fallback. Return type change
+>   requires a matching `computeDateConversion` signature update to
+>   propagate `errorMessage` through the result pipeline. The output
+>   renderer already treats `symbolicResult` as a free-form string,
+>   so no widget changes are needed — the error message just goes in
+>   the result slot when the input can't parse (per resolution #2 in
+>   the design decisions above).
+>
+>   **Estimated scope.** ~11 parsers × 30-50 lines each = 400-600 lines
+>   of production code. Test file mirrors: ~200 assertions covering
+>   accepted inputs, near-miss rejections, and locale variance. Total
+>   commit arc probably 3-5 sub-commits (parser core, calendar-family
+>   parsers, integration + error propagation, tests, error-message
+>   authoring).
+>
+>   **Trigger to revive.** If a user files a bug like "I typed
+>   'August 5, 2026' and got nothing," or if we hear from the
+>   accessibility side that keyboard-typing full dates is materially
+>   easier than the `YYYY-MM-DD` shape for a specific audience. Until
+>   then the normalized shape covers the primary flow.
+>
+> - **7j — localized parser error messages.** Depends on 7e. The
+>   error strings from 7e's parsers are English initially; translation
+>   to the other 10 locales is a separate authoring pass. Approach
+>   mirrors Step 6 timezone localization: identify the ~15-25 error
+>   phrases, add them to the 10 non-English `client/src/data/localization/ui/`
+>   files with authored translations, thread `language` through the
+>   parser return path. Estimated scope: 150-250 translation strings
+>   across all locales.
 >
 > **Post-MVP hardening (0cbb899, 89db003):**
 >
@@ -126,16 +171,112 @@
 >   ERA1 and ERA0 should map to `AA`, not to the ethiopic
 >   incarnation-era label). (`89db003`)
 >
-> **Final metrics (main HEAD `89db003`):**
+> **Post-MVP data hygiene (59596d3, this commit):**
+>
+> - **Source-URL policy for temporal categories.** `59596d3` swapped
+>   all 19 timezone `sourceUrl` values to `https://www.iana.org/time-zones`
+>   (the tz database is the genuine primary source; per-zone
+>   Wikipedia articles describe local usage but the app's conversion
+>   behavior comes from tz data), and ISO 8601 to
+>   `https://www.w3.org/TR/NOTE-datetime` (W3C's free profile of the
+>   ISO standard). The other 18 calendars keep per-calendar Wikipedia
+>   URLs because those articles are the best available consolidated
+>   references. Added `IANA` and `W3C` short labels to the `linkLabel`
+>   helper in `sources-section.tsx`.
+>
+> - **Full sourceUrl audit.** This commit ran an HTTP-200 verification
+>   pass over all 264 distinct `sourceUrl` values across all 76
+>   categories. Found and fixed two 404s that had accumulated from
+>   earlier work:
+>
+>   | Category:Unit | Old (404) | New |
+>   |---|---|---|
+>   | `concentration:g_l` | `.../Gram_per_litre` | `.../Mass_concentration_(chemistry)` |
+>   | `radiation_exposure:c_per_kg` | `.../Coulomb_per_kilogram` | `.../Radiation_exposure` |
+>
+>   Both replacements match the reference-style pattern used by
+>   sibling units in each category (`mg_dl` also uses
+>   `Mass_concentration_(chemistry)`; `roentgen` uses a category-level
+>   Wikipedia article). One known redirect remains:
+>   `elegislation.gov.hk/hk/cap68` bounces through a client-JS check
+>   page before serving the real content; this is intentional site
+>   behavior and human users see the correct page.
+>
+> **Follow-ups tracked for later:**
+>
+> These are small polish items surfaced during Step 7 that were
+> consciously not done in this cycle. None are blocking; each has a
+> clear trigger for when to revive it.
+>
+> - [ ] **Per-locale authoring for the Coptic/Ethiopic era fallback
+>   labels** (currently Latin-script `AM`/`BD`/`AA` across all
+>   locales in `applyFallbackEraLabels.ts`). The current approach
+>   follows the design brief's policy for calendars CLDR leaves
+>   untranslated, but Arabic and CJK users seeing `AM` alongside
+>   `أبيب` or `科普特历` is jarring. Revive if a user complains,
+>   or if a Coptic/Ethiopic reader asks for locale-authored era
+>   labels.
+> - [ ] **Datetime (date + time-of-day) as a possible category
+>   extension.** The Date MVP is date-only. Datetime would need a
+>   time-of-day widget, `PlainDateTime` instead of `PlainDate`
+>   throughout the pipeline, and potentially a zone-integration story
+>   (does 2026-08-05 12:00 in Tokyo = 2026-08-04 23:00 in Chicago?).
+>   Not scoped in Step 7. Revive if a user asks for time-in-calendar
+>   conversions.
+> - [ ] **Numeral system control** (per-calendar `-u-nu-` extension
+>   exposed as user option). Currently rely on `Intl.DateTimeFormat`'s
+>   locale-default. Consistent with the app-wide `numberFormat` model.
+>   Not painting into a corner: adding it later is a state addition.
+> - [ ] **Islamic astronomical + Saudi-sighting variants**
+>   (`islamic` and `islamic-rgsa` calendar codes) were deliberately
+>   dropped from the registry in Step 7 because they require live
+>   astronomical calculation or externally-published sighting data.
+>   If we ever add live-data sources or accept an astronomical
+>   library dependency, these could be revived. Bundle cost is the
+>   main gate.
+> - [ ] **CLDR-driven vs. authored calendar names.** Currently
+>   authored per-locale (see `client/src/data/localization/units/*.json`).
+>   CLDR ships localized calendar-name displaynames via
+>   `Intl.DisplayNames({ type: 'calendar' })` that could be used as
+>   the source of truth instead. Trade-off: authored gives us stable
+>   labels the app owns; CLDR gives us free coverage of the ~700
+>   locales we don't ship. Not urgent since we only support 12
+>   locales and the authored names have been reviewed.
+> - [ ] **Julian JDN algorithm precision test.** The Fliegel-Van
+>   Flandern implementation in `julianJdn.ts` is verified against 5
+>   hand-computed pivots. A more rigorous test would generate ~1000
+>   random gregory dates in `[-4700, +4700]`, compute JDN via the
+>   algorithm, and verify round-trip preservation. Low priority —
+>   the current pivots cover the edge cases (Gregorian reform, Julian
+>   drift, ancient BCE, Y2K).
+> - [ ] **Revised Julian outside the Gregorian-equivalence window.**
+>   Currently returns null for dates before 1600-03-01 or after
+>   2800-02-28 (per the design brief). A proper implementation would
+>   apply the Milanković leap rule (year divisible by 400 with
+>   remainder 200 or 600 when divided by 900). Low priority: outside
+>   the window RJ agrees with the Gregorian calendar for 100% of
+>   practical use.
+> - [ ] **Test hardening: verify `Intl.DateTimeFormat` output
+>   stability across polyfill upgrades.** The 40 pinned-string tests
+>   in 7d are tightly coupled to the CLDR data version in
+>   `temporal-polyfill/full`. When we upgrade the polyfill, some may
+>   drift (e.g., `六月` vs `Sixth Month`, `令和` vs `Reiwa`
+>   preferences). Not a bug — CLDR upgrades are expected — but tests
+>   will need review. Trigger: next polyfill upgrade.
+>
+> **Final metrics (main HEAD after this cycle):**
 >
 > - **Tests:** 2156 (was 2118 at start of Step 7 arc; +25 net across
->   7a/7c/7d/7f/7g/7h and +13 in post-MVP hardening).
-> - **Bundle:** 498.8 kB gzip (was 493.9 kB after 7d, +4.9 kB across
->   7f/7g/7h/7i and post-MVP hardening). Under the 510.8 kB ceiling
->   with ~12 kB headroom.
+>   7a/7c/7d/7f/7g/7h, +13 in post-MVP hardening, unchanged in the
+>   URL/docs cycle).
+> - **Bundle:** 498.6 kB gzip (was 493.9 kB after 7d, +4.7 kB across
+>   7f/7g/7h/7i, post-MVP hardening, and URL swaps). Under the
+>   510.8 kB ceiling with ~12 kB headroom.
 > - **Categories:** 76 total (added `date_calendar`; kept the
 >   19-zone `timezone` category from the Time pilot).
 > - **Calendars:** 19 functional (13 primary + 6 variants).
+> - **Source URL health:** 264/264 distinct URLs return 200 OK
+>   (verified by audit).
 >
 > The rest of this document is preserved as the design record for
 > what was decided and why, and to document the deferred parser

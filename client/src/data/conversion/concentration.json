@@ -76,7 +76,7 @@
       "factor": 0.001,
       "unitType": "SI_BASE",
       "measurementSystem": "SI",
-      "sourceUrl": "https://en.wikipedia.org/wiki/Gram_per_litre"
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mass_concentration_(chemistry)"
     },
     {
       "id": "percent",
