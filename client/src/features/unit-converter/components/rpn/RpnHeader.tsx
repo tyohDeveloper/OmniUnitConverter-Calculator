@@ -4,10 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { CommonFieldWidth, RpnBtnWidth } from '@/components/unit-converter/constants';
 import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
+import type { UseRpnXEditFieldReturn } from '@/components/unit-converter/hooks/useRpnXEditField';
 
 interface RpnHeaderProps {
   controller: UseCalculatorControllerReturn;
   lockRpnMode: boolean;
+  // Shared X-register focus preservation (see useRpnXEditField).
+  xEdit: UseRpnXEditFieldReturn;
 }
 
 /**
@@ -15,13 +18,15 @@ interface RpnHeaderProps {
  * Simple unless lockRpnMode), precision selector, clear button, and the
  * preserve-source-unit switch.
  */
-export function RpnHeader({ controller, lockRpnMode }: RpnHeaderProps) {
+export function RpnHeader({ controller, lockRpnMode, xEdit }: RpnHeaderProps) {
   const {
     calculatorPrecision, setCalculatorPrecision,
     preserveSourceUnit, togglePreserveSourceUnit,
     clearRpnStack, switchToSimple,
+    rpnXEditing,
     t,
   } = controller;
+  const { handleRpnButtonMouseDown, restoreRpnXFocus, suppressXBlurRef } = xEdit;
 
   return (
     <div
@@ -40,12 +45,32 @@ export function RpnHeader({ controller, lockRpnMode }: RpnHeaderProps) {
           <Label className="text-xs text-foreground">{t('Precision')}</Label>
           <Select
             value={calculatorPrecision.toString()}
-            onValueChange={(val) => setCalculatorPrecision(parseInt(val))}
+            onValueChange={(val) => {
+              setCalculatorPrecision(parseInt(val));
+              if (lockRpnMode && rpnXEditing) restoreRpnXFocus();
+            }}
           >
-            <SelectTrigger data-testid="select-rpn-precision" className="h-8 w-[50px] text-xs">
+            <SelectTrigger
+              data-testid="select-rpn-precision"
+              className="h-8 w-[50px] text-xs"
+              onMouseDown={(e) => {
+                if (lockRpnMode && rpnXEditing) {
+                  e.preventDefault();
+                  suppressXBlurRef.current = true;
+                }
+              }}
+            >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent align="end">
+            <SelectContent
+              align="end"
+              onCloseAutoFocus={(e) => {
+                if (lockRpnMode && rpnXEditing) {
+                  e.preventDefault();
+                  restoreRpnXFocus();
+                }
+              }}
+            >
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(p => (
                 <SelectItem key={p} value={p.toString()} className="text-xs">
                   {p}
@@ -58,6 +83,7 @@ export function RpnHeader({ controller, lockRpnMode }: RpnHeaderProps) {
       <Button
         variant="ghost"
         size="sm"
+        onMouseDown={handleRpnButtonMouseDown}
         onClick={clearRpnStack}
         data-testid="button-clear-rpn"
         className="text-xs text-foreground hover:text-accent border !border-border/30"
@@ -73,7 +99,11 @@ export function RpnHeader({ controller, lockRpnMode }: RpnHeaderProps) {
           id="rpn-preserve-source-unit"
           data-testid="button-rpn-preserve-source-unit"
           checked={preserveSourceUnit}
-          onCheckedChange={() => togglePreserveSourceUnit()}
+          onMouseDown={handleRpnButtonMouseDown}
+          onCheckedChange={() => {
+            togglePreserveSourceUnit();
+            if (lockRpnMode && rpnXEditing) restoreRpnXFocus();
+          }}
         />
         <label
           htmlFor="rpn-preserve-source-unit"

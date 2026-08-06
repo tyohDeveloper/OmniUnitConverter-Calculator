@@ -199,6 +199,7 @@ export function useCalculatorController(
     setResultPrefix, setSelectedAlternative, togglePreserveSourceUnit,
     setRpnStack, setRpnXEditing, setRpnXEditValue,
     setRpnResultPrefix, setRpnSelectedAlternative,
+    setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw,
 
     clearCalculator, clearField1, clearField2, clearField3, clearRpnStack,
     copyCalcField, copyCalcResult, copyRpnField, copyRpnResult,

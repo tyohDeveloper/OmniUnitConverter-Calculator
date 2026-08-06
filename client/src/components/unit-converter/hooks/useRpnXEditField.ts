@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { PREFIXES } from '@/lib/units/prefixes';
-import { parseRpnXInput } from '@/lib/calculator/parseRpnXInput';
+import { buildRpnEntryFromText } from '@/lib/calculator/buildRpnEntryFromText';
 import { reexpressRpnEntry } from '@/lib/calculator/reexpressRpnEntry';
 import type { UseCalculatorControllerReturn } from './useCalculatorControllerReturn';
 
@@ -19,7 +19,18 @@ export interface UseRpnXEditFieldReturn {
   // iOS WebKit's Done key) fires a blur right after, we must NOT exit edit
   // mode — the input needs to stay mounted so focus can be restored.
   enterCommitKeepFocusRef: React.MutableRefObject<boolean>;
+  // Set when an RPN operation button was pressed while editing: the next
+  // rpnStack change refreshes the edit text from the new X value (selected,
+  // ready for a fresh entry). Cleared when the user types/escapes/blurs.
+  freshEntryPendingRef: React.MutableRefObject<boolean>;
   commitRpnXValue: () => boolean;
+  // Shared onMouseDown for every RPN operation button: keeps focus in the X
+  // input (preventDefault), commits any pending typed text before the
+  // button's click action runs, and schedules a refocus + select-all so the
+  // next keystrokes start a fresh entry. No-op outside locked-RPN editing.
+  handleRpnButtonMouseDown: (e: { preventDefault: () => void }) => void;
+  // Restore focus to the X input (next frame) with the text selected.
+  restoreRpnXFocus: () => void;
 }
 
 /**
@@ -31,38 +42,85 @@ export interface UseRpnXEditFieldReturn {
  * (including the iOS WebKit Done-key workaround documented on
  * enterCommitKeepFocusRef).
  */
-export function useRpnXEditField(controller: UseCalculatorControllerReturn): UseRpnXEditFieldReturn {
+export function useRpnXEditField(controller: UseCalculatorControllerReturn, lockRpnMode = false): UseRpnXEditFieldReturn {
   const {
     rpnStack, setRpnStack,
-    rpnResultPrefix, setRpnResultPrefix,
-    rpnSelectedAlternative, setRpnSelectedAlternative,
+    rpnResultPrefix,
+    rpnSelectedAlternative,
     rpnXEditing, rpnXEditValue, setRpnXEditValue,
     saveRpnStackForUndo,
     generateSIRepresentations,
+    getRpnResultDisplay,
+    setRpnResultPrefixRaw, setRpnSelectedAlternativeRaw,
   } = controller;
 
   const rpnXInputRef = useRef<HTMLInputElement>(null);
   const suppressXBlurRef = useRef(false);
   const committedXTextRef = useRef<string | null>(null);
   const enterCommitKeepFocusRef = useRef(false);
+  const freshEntryPendingRef = useRef(false);
   const prevRpnDisplayRef = useRef<{ prefix: string; alt: number } | null>(null);
 
+  const restoreRpnXFocus = () => {
+    requestAnimationFrame(() => {
+      suppressXBlurRef.current = false;
+      const input = rpnXInputRef.current;
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    });
+  };
+
+  // Shared mousedown for RPN operation buttons (same pattern as the
+  // prefix/SI selectors: preventDefault so the input never blurs, plus
+  // suppress-blur as a safety net, plus a scheduled refocus). Committing
+  // here (mousedown) means the click handler's operation runs against the
+  // freshly committed X value — React flushes the dispatch between the
+  // mousedown and click events.
+  const handleRpnButtonMouseDown = (e: { preventDefault: () => void }) => {
+    if (!lockRpnMode || !rpnXEditing) return;
+    e.preventDefault();
+    suppressXBlurRef.current = true;
+    if (rpnXEditValue.trim() && rpnXEditValue !== committedXTextRef.current) {
+      if (commitRpnXValue()) committedXTextRef.current = rpnXEditValue;
+    }
+    freshEntryPendingRef.current = true;
+    restoreRpnXFocus();
+  };
+
+  // After an operation button changed the stack, refresh the edit text from
+  // the new X value and select it so typing starts a fresh entry. The flag
+  // stays set (not consumed) because a single button press can change the
+  // stack twice: once for the mousedown commit, once for the click's op.
+  // It is cleared when the user types, escapes, or blurs away.
+  useEffect(() => {
+    if (!freshEntryPendingRef.current || !rpnXEditing) return;
+    const display = getRpnResultDisplay();
+    const text = display ? `${display.formattedValue}${display.unitSymbol ? ' ' + display.unitSymbol : ''}` : '';
+    setRpnXEditValue(text);
+    committedXTextRef.current = text;
+    restoreRpnXFocus();
+  }, [rpnStack]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Commit the current X edit value into the X register. Returns true if a
-  // commit happened. Metadata is computed from the freshly parsed text (not
-  // from stale closure state) and applied inside the functional updater.
-  // Council-07: parsing lives in lib/calculator/parseRpnXInput. The hook
-  // orchestrates the stack update and prefix/alt reset.
+  // commit happened. Entry construction is shared with Smart Paste
+  // (lib/calculator/buildRpnEntryFromText), so typed text like "101.3J"
+  // gets the same parse, origin metadata, and SI representation/prefix
+  // auto-selection as pasted text. The RAW prefix/alt setters are used so
+  // the entry's freshly parsed metadata is not re-stamped from stale state
+  // (see the wrapped setters in useCalculatorRpnSelection).
   const commitRpnXValue = (): boolean => {
-    const newEntry = parseRpnXInput(rpnXEditValue);
-    if (!newEntry) return false;
+    const built = buildRpnEntryFromText(rpnXEditValue, generateSIRepresentations);
+    if (!built) return false;
     saveRpnStackForUndo();
     setRpnStack(prev => {
       const newStack = [...prev];
-      newStack[3] = newEntry;
+      newStack[3] = built.entry;
       return newStack;
     });
-    setRpnResultPrefix('none');
-    setRpnSelectedAlternative(0);
+    setRpnResultPrefixRaw(built.autoPrefix);
+    setRpnSelectedAlternativeRaw(built.autoAlt);
     return true;
   };
 
@@ -110,5 +168,8 @@ export function useRpnXEditField(controller: UseCalculatorControllerReturn): Use
     setRpnXEditValue(result.newUnitSymbol ? `${result.newNumber} ${result.newUnitSymbol}` : String(result.newNumber));
   }, [rpnResultPrefix, rpnSelectedAlternative]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { rpnXInputRef, suppressXBlurRef, committedXTextRef, enterCommitKeepFocusRef, commitRpnXValue };
+  return {
+    rpnXInputRef, suppressXBlurRef, committedXTextRef, enterCommitKeepFocusRef,
+    freshEntryPendingRef, commitRpnXValue, handleRpnButtonMouseDown, restoreRpnXFocus,
+  };
 }

@@ -15,6 +15,7 @@ import { FIELD_HEIGHT } from '../constants';
 interface CalculatorFieldDisplayProps {
   value: CalcValue | null;
   onClick?: () => void;
+  onMouseDown?: (e: React.MouseEvent) => void;
   ariaLabel?: string;
   isFlashing?: boolean;
   isResult?: boolean;
@@ -29,6 +30,7 @@ interface CalculatorFieldDisplayProps {
 export function CalculatorFieldDisplay({
   value,
   onClick,
+  onMouseDown,
   ariaLabel,
   isFlashing = false,
   isResult = false,
@@ -87,6 +89,7 @@ export function CalculatorFieldDisplay({
       <motion.button
         type="button"
         aria-label={ariaLabel}
+        onMouseDown={onMouseDown}
         onClick={onClick}
         {...motionProps}
       >

@@ -10,6 +10,8 @@ import type {
 interface RpnStackRowS3Props {
   controller: UseCalculatorControllerReturn;
   flashRpnField1: boolean;
+  // Shared X-register focus-preservation mousedown (see useRpnXEditField).
+  onOpButtonMouseDown: (e: React.MouseEvent) => void;
 }
 
 /**
@@ -18,7 +20,7 @@ interface RpnStackRowS3Props {
  * state. Includes math primitives (x², 1/x, +/−, eˣ, 10ˣ, 2ˣ, rnd) and
  * one constant (π / π⁻¹).
  */
-export function RpnStackRowS3({ controller, flashRpnField1 }: RpnStackRowS3Props) {
+export function RpnStackRowS3({ controller, flashRpnField1, onOpButtonMouseDown }: RpnStackRowS3Props) {
   const {
     shiftActive, setShiftActive,
     calculatorPrecision,
@@ -52,6 +54,7 @@ export function RpnStackRowS3({ controller, flashRpnField1 }: RpnStackRowS3Props
     >
       <CalculatorFieldDisplay
         value={rpnStack[0]}
+        onMouseDown={onOpButtonMouseDown}
         onClick={() => copyRpnField(0)}
         isFlashing={flashRpnField1}
         formatNumberWithSeparators={formatNumberWithSeparators}
@@ -77,6 +80,7 @@ export function RpnStackRowS3({ controller, flashRpnField1 }: RpnStackRowS3Props
             size="sm"
             data-testid={`button-rpn-${activeId}`}
             className={`text-xs font-mono w-full border !border-border/30 ${isDisabled ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => {
               if (isConstant && 'value' in btn) {
                 if (shiftActive && 'shiftValue' in btn) {

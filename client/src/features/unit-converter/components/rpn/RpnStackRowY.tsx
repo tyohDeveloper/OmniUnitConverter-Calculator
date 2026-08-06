@@ -9,6 +9,8 @@ import type {
 interface RpnStackRowYProps {
   controller: UseCalculatorControllerReturn;
   flashRpnField3: boolean;
+  // Shared X-register focus-preservation mousedown (see useRpnXEditField).
+  onOpButtonMouseDown: (e: React.MouseEvent) => void;
 }
 
 /**
@@ -17,7 +19,7 @@ interface RpnStackRowYProps {
  * binary operators (× ÷ + −, or their unit-preserving variants with
  * SHIFT), and LASTx/SWAP.
  */
-export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) {
+export function RpnStackRowY({ controller, flashRpnField3, onOpButtonMouseDown }: RpnStackRowYProps) {
   const {
     shiftActive, setShiftActive,
     calculatorPrecision,
@@ -44,6 +46,7 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
     >
       <CalculatorFieldDisplay
         value={rpnStack[2]}
+        onMouseDown={onOpButtonMouseDown}
         onClick={() => copyRpnField(2)}
         isFlashing={flashRpnField3}
         formatNumberWithSeparators={formatNumberWithSeparators}
@@ -60,6 +63,7 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
             className={`text-xs font-mono w-full border !border-border/30 ${shiftActive && !rpnStack[3] ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
             style={{ gridColumn: 'span 2' }}
             disabled={shiftActive && !rpnStack[3]}
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => { shiftActive ? dropRpnStack() : pushToRpnStack(); setShiftActive(false); }}
           >
             {shiftActive ? 'DROP' : 'ENTER'}
@@ -75,6 +79,7 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
             data-testid={shiftActive ? 'button-rpn-pull' : 'button-rpn-undo'}
             className={`text-xs font-mono w-full border !border-border/30 ${shiftActive ? 'text-foreground hover:text-accent' : (!previousRpnStack.some(v => v !== null) ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent')}`}
             disabled={!shiftActive && !previousRpnStack.some(v => v !== null)}
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => { shiftActive ? pullFromPane() : undoRpnStack(); setShiftActive(false); }}
           >
             {shiftActive ? 'PULL' : 'UNDO'}
@@ -92,6 +97,7 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
             size="sm"
             data-testid={`button-rpn-${btn.id}`}
             className={`text-xs font-mono w-full border !border-border/30 ${isDisabled ? 'text-muted-foreground/50' : 'text-foreground hover:text-accent'}`}
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => { applyRpnBinary(currentOp); setShiftActive(false); }}
             disabled={isDisabled}
           >
@@ -106,6 +112,7 @@ export function RpnStackRowY({ controller, flashRpnField3 }: RpnStackRowYProps) 
             size="sm"
             data-testid={shiftActive ? 'button-rpn-swap' : 'button-rpn-lastx'}
             className="text-xs font-mono w-full border !border-border/30 text-foreground hover:text-accent"
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => { shiftActive ? swapRpnXY() : recallLastX(); setShiftActive(false); }}
           >
             {shiftActive ? 'SWAP' : 'LASTx'}

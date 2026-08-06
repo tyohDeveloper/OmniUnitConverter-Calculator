@@ -53,6 +53,12 @@ export interface UseCalculatorControllerReturn {
   setRpnStack: (v: Array<CalcValue | null> | ((prev: Array<CalcValue | null>) => Array<CalcValue | null>)) => void;
   setRpnXEditing: (v: boolean) => void;
   setRpnXEditValue: (v: string) => void;
+  // Raw prefix/alt setters: write state only, WITHOUT re-stamping origin
+  // metadata on the X entry (unlike setRpnResultPrefix/setRpnSelected
+  // Alternative). Use when the entry already carries its own metadata,
+  // e.g. paste and X-register commit.
+  setRpnResultPrefixRaw: (v: string) => void;
+  setRpnSelectedAlternativeRaw: (v: number) => void;
 
   clearCalculator: () => void;
   clearField1: () => void;

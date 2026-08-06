@@ -6,6 +6,8 @@ import type { UseCalculatorControllerReturn } from '@/components/unit-converter/
 
 interface RpnBottomRowProps {
   controller: UseCalculatorControllerReturn;
+  // Shared X-register focus-preservation mousedown (see useRpnXEditField).
+  onOpButtonMouseDown: (e: React.MouseEvent) => void;
 }
 
 /**
@@ -13,7 +15,7 @@ interface RpnBottomRowProps {
  * current X register), the SHIFT modifier toggle, and the Smart Paste
  * and Copy buttons.
  */
-export function RpnBottomRow({ controller }: RpnBottomRowProps) {
+export function RpnBottomRow({ controller, onOpButtonMouseDown }: RpnBottomRowProps) {
   const {
     shiftActive, setShiftActive,
     rpnStack, setRpnStack,
@@ -33,6 +35,7 @@ export function RpnBottomRow({ controller }: RpnBottomRowProps) {
           variant="ghost"
           size="sm"
           data-testid="button-rpn-clear-x"
+          onMouseDown={onOpButtonMouseDown}
           onClick={() => {
             if (!rpnStack[3]) return;
             saveRpnStackForUndo();
@@ -51,6 +54,7 @@ export function RpnBottomRow({ controller }: RpnBottomRowProps) {
           variant="ghost"
           size="sm"
           data-testid="button-rpn-clear-unit"
+          onMouseDown={onOpButtonMouseDown}
           onClick={() => {
             if (!rpnStack[3]) return;
             saveRpnStackForUndo();
@@ -73,6 +77,7 @@ export function RpnBottomRow({ controller }: RpnBottomRowProps) {
           <Button
             variant="ghost"
             size="sm"
+            onMouseDown={onOpButtonMouseDown}
             onClick={() => setShiftActive(!shiftActive)}
             className={`text-xs font-mono border !border-border/30 ${shiftActive ? 'bg-accent !text-accent-foreground' : 'text-foreground hover:text-accent'}`}
             data-testid="button-shift"
@@ -88,6 +93,7 @@ export function RpnBottomRow({ controller }: RpnBottomRowProps) {
         variant="ghost"
         size="sm"
         data-testid="button-rpn-paste"
+        onMouseDown={onOpButtonMouseDown}
         onClick={() => { pasteToRpnStack(); setShiftActive(false); }}
         className="text-xs text-foreground hover:text-accent gap-1 border !border-border/30"
         style={{ gridColumn: 'span 2' }}
@@ -99,6 +105,7 @@ export function RpnBottomRow({ controller }: RpnBottomRowProps) {
         variant="ghost"
         size="sm"
         data-testid="button-rpn-copy-result"
+        onMouseDown={onOpButtonMouseDown}
         onClick={copyRpnResult}
         className="text-xs text-foreground hover:text-accent gap-1 border !border-border/30"
       >

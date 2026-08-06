@@ -89,6 +89,88 @@ test.describe('RPN X register focus behavior', () => {
     await expect(page.getByTestId('text-rpn-x-value')).toHaveText('42');
   });
 
+  test('RPN section: typed text uses the smart-paste parser ("101.3J" → joules)', async ({ page }) => {
+    await page.getByTestId('tab-rpn').click();
+    const xInput = page.getByTestId('rpn-x-input');
+    await expect(xInput).toBeFocused();
+
+    // No space between number and unit — same lenient parse as Smart Paste.
+    await xInput.fill('101.3J');
+    await xInput.press('Enter');
+    await expect(xInput).toBeFocused();
+
+    // Commit happened once, with the J representation auto-selected.
+    await expect(page.getByTestId('select-rpn-result-unit')).toContainText('J');
+
+    // Blur to the static display: value + unit are shown as joules.
+    await page.getByRole('heading', { name: 'RPN Calculator' }).click();
+    await expect(page.getByTestId('text-rpn-x-value')).toHaveText('101.3');
+    await expect(page.getByTestId('text-rpn-x-unit')).toHaveText('J');
+  });
+
+  test('RPN section: X input is focused on page load / tab switch', async ({ page }) => {
+    await page.getByTestId('tab-rpn').click();
+    const xInput = page.getByTestId('rpn-x-input');
+    await expect(xInput).toBeVisible();
+    await expect(xInput).toBeFocused();
+    // Typing goes straight into the field, no click needed.
+    await page.keyboard.type('12');
+    await expect(xInput).toHaveValue('12');
+  });
+
+  test('RPN section: operation buttons keep focus and commit pending text', async ({ page }) => {
+    await page.getByTestId('tab-rpn').click();
+    const xInput = page.getByTestId('rpn-x-input');
+    await expect(xInput).toBeFocused();
+
+    // Type 5 and press the ENTER button (not the keyboard): the pending
+    // text commits, the stack pushes, and focus stays in the X input.
+    await xInput.fill('5');
+    await page.getByTestId('button-rpn-enter').click();
+    await expect(xInput).toBeFocused();
+    await expect(xInput).toHaveValue('5');
+
+    // Fresh entry: typing replaces the selected text.
+    await page.keyboard.type('3');
+    await expect(xInput).toHaveValue('3');
+
+    // A binary op button commits the pending 3, then applies: 5 + 3 = 8.
+    await page.getByTestId('button-rpn-add').click();
+    await expect(xInput).toBeFocused();
+    await expect(xInput).toHaveValue('8');
+
+    // A unary op button: 8 squared = 64, focus retained, text refreshed.
+    await page.getByTestId('button-rpn-square').click();
+    await expect(xInput).toBeFocused();
+    await expect(xInput).toHaveValue('64');
+
+    // Fresh entry again after a button press.
+    await page.keyboard.type('2');
+    await expect(xInput).toHaveValue('2');
+  });
+
+  test('RPN section: bottom-row buttons (Clear x, SHIFT) keep focus', async ({ page }) => {
+    await page.getByTestId('tab-rpn').click();
+    const xInput = page.getByTestId('rpn-x-input');
+    await expect(xInput).toBeFocused();
+
+    await xInput.fill('7');
+    await page.getByTestId('button-rpn-clear-x').click();
+    await expect(xInput).toBeFocused();
+    await expect(xInput).toHaveValue('0');
+
+    // SHIFT toggle keeps focus and leaves the text selected for fresh entry.
+    await page.getByTestId('button-shift').click();
+    await expect(xInput).toBeFocused();
+    await page.keyboard.type('9');
+    await expect(xInput).toHaveValue('9');
+
+    // Normal editing still works: arrow keys + insertion at the cursor.
+    await page.keyboard.press('Home');
+    await page.keyboard.type('1');
+    await expect(xInput).toHaveValue('19');
+  });
+
   test('Converter section: X register does not grab focus; FROM field keeps focus', async ({ page }) => {
     await page.getByTestId('tab-converter').click();
     // X register shows as a static display, not an input.

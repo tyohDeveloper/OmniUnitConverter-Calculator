@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { FIELD_HEIGHT, CommonFieldWidth } from '@/components/unit-converter/constants';
 import type { UseCalculatorControllerReturn } from '@/components/unit-converter/hooks/useCalculatorControllerReturn';
-import { useRpnXEditField } from '@/components/unit-converter/hooks/useRpnXEditField';
+import type { UseRpnXEditFieldReturn } from '@/components/unit-converter/hooks/useRpnXEditField';
 import { useConverterContext } from '@/components/unit-converter/context/ConverterContext';
 import { RpnXRegisterSelectors } from './RpnXRegisterSelectors';
 
@@ -9,6 +9,7 @@ interface RpnXRegisterRowProps {
   controller: UseCalculatorControllerReturn;
   flashRpnResult: boolean;
   lockRpnMode: boolean;
+  xEdit: UseRpnXEditFieldReturn;
 }
 
 /**
@@ -19,12 +20,12 @@ interface RpnXRegisterRowProps {
  * off-to-active-pane otherwise) and the iOS WebKit Done-key blur
  * workaround.
  *
- * The useRpnXEditField hook lives here (not in the parent pane) because
- * its state — the edit-mode ref plumbing — is entirely local to this
- * row and its selectors. The selectors receive the two refs they need
- * (rpnXInputRef, suppressXBlurRef) as props.
+ * The useRpnXEditField hook now lives in the parent RpnCalculatorPane
+ * (passed in as xEdit) so that sibling rows' operation buttons can
+ * share the same focus-restoration mechanism. The selectors receive
+ * the two refs they need (rpnXInputRef, suppressXBlurRef) as props.
  */
-export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode }: RpnXRegisterRowProps) {
+export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode, xEdit }: RpnXRegisterRowProps) {
   const {
     calculatorPrecision,
     rpnStack,
@@ -36,8 +37,8 @@ export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode }: Rpn
 
   const {
     rpnXInputRef, suppressXBlurRef, committedXTextRef, enterCommitKeepFocusRef,
-    commitRpnXValue,
-  } = useRpnXEditField(controller);
+    freshEntryPendingRef, commitRpnXValue,
+  } = xEdit;
 
   const { state: appState, inputRef: converterInputRef, customValueInputRef } = useConverterContext();
   const activeTab = appState.uiPrefs.activeTab;
@@ -57,6 +58,7 @@ export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode }: Rpn
           onFocus={(e) => e.target.select()}
           onChange={(e) => {
             committedXTextRef.current = null;
+            freshEntryPendingRef.current = false;
             setRpnXEditValue(e.target.value);
           }}
           onBlur={() => {
@@ -73,6 +75,7 @@ export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode }: Rpn
               commitRpnXValue();
             }
             committedXTextRef.current = null;
+            freshEntryPendingRef.current = false;
             setRpnXEditing(false);
             setRpnXEditValue('');
           }}
@@ -114,6 +117,7 @@ export function RpnXRegisterRow({ controller, flashRpnResult, lockRpnMode }: Rpn
               }
             } else if (e.key === 'Escape') {
               committedXTextRef.current = null;
+              freshEntryPendingRef.current = false;
               setRpnXEditing(false);
               setRpnXEditValue('');
             }
