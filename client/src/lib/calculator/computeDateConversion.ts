@@ -30,7 +30,17 @@ export function computeDateConversion(input: {
   if (isDeferredCalendar(symbols.from) || isDeferredCalendar(symbols.to)) return null;
   const parsed = parseDateInput(input.value.trim(), symbols.from);
   if (!parsed) return null;
-  return formatDateInCalendar(parsed, symbols.to, input.language);
+  const formatted = formatDateInCalendar(parsed, symbols.to, input.language);
+  if (formatted === null) return null;
+  return applyCommonEraLabels(formatted, input.toUnit, input.language);
+}
+
+// MVP English-only Common CE/BCE substitution. Full per-locale
+// authored labels for the 'ce-bce' era style land in step 7g.
+function applyCommonEraLabels(text: string, toUnit: string, language: SupportedLanguage): string {
+  if (toUnit !== 'common') return text;
+  if (language !== 'en' && language !== 'en-us') return text;
+  return text.replace(/\bAD\b/g, 'CE').replace(/\bBC\b/g, 'BCE');
 }
 
 // ─── Local helpers ───
@@ -51,14 +61,11 @@ function resolveCalendarSymbols(fromUnitId: string, toUnitId: string): { from: s
   return { from: fromUnit.symbol, to: toUnit.symbol };
 }
 
-// Empty input → today (in ISO/gregorian; withCalendar re-projects
-// later). Non-empty must match YYYY-MM-DD in the from-calendar's own
-// scheme. Returns a PlainDate whose calendar backend is fromSymbol.
+// Empty input → today. Non-empty must match YYYY-MM-DD in the from-
+// calendar's own scheme. Returns a PlainDate in fromSymbol's calendar.
 function parseDateInput(value: string, fromSymbol: string): Temporal.PlainDate | null {
   try {
-    if (value === '') {
-      return Temporal.Now.plainDateISO();
-    }
+    if (value === '') return Temporal.Now.plainDateISO();
     const match = /^(-?\d{1,6})-(\d{1,2})-(\d{1,2})$/.exec(value);
     if (!match) return null;
     const year = Number(match[1]);
@@ -66,9 +73,7 @@ function parseDateInput(value: string, fromSymbol: string): Temporal.PlainDate |
     const day = Number(match[3]);
     if (month < 1 || month > 13 || day < 1 || day > 31) return null;
     return Temporal.PlainDate.from({ year, month, day, calendar: fromSymbol });
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 // Formats via Intl.DateTimeFormat with era short (calendars that don't

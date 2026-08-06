@@ -122,7 +122,11 @@ export function ConverterOutputSection({
           <SelectContent position="item-aligned" className="max-h-[50vh]">
             {toFilteredUnits.map((u) => (
               <SelectItem key={u.id} value={u.id} className="font-mono text-sm">
-                {u.symbol === u.name ? (
+                {activeCategory === 'date_calendar' ? (
+                  // Calendar units' symbol field is the polyfill
+                  // backend id (implementation detail) — skip it.
+                  <span className="font-bold">{translateUnitName(u.name)}</span>
+                ) : u.symbol === u.name ? (
                   <span className="font-bold">{u.symbol}</span>
                 ) : (
                   <>

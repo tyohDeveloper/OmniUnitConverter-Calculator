@@ -725,8 +725,6 @@
   "Tokyo": "东京",
   "Sydney": "悉尼",
   "Auckland": "奥克兰",
-  "Common (CE/BCE)": "Common (CE/BCE)",
-  "Gregorian (AD/BC)": "Gregorian (AD/BC)",
   "Julian (Eastern Orthodox)": "Julian (Eastern Orthodox)",
   "Coptic (Oriental Orthodox)": "Coptic (Oriental Orthodox)",
   "Ethiopic (Ethiopian/Eritrean Orthodox)": "Ethiopic (Ethiopian/Eritrean Orthodox)",
@@ -737,5 +735,7 @@
   "Japanese (imperial era)": "Japanese (imperial era)",
   "Minguo (Republic of China)": "Minguo (Republic of China)",
   "Buddhist (Thai)": "Buddhist (Thai)",
-  "Indian (Saka)": "Indian (Saka)"
+  "Indian (Saka)": "Indian (Saka)",
+  "Common": "Common",
+  "Gregorian": "Gregorian"
 }

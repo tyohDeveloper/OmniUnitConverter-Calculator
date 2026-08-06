@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONVERSION_DATA, getFilteredSortedUnits, parseUnitText } from '@/lib/conversion-data';
+import { defaultInputValueForCategory } from '@/lib/calculator/defaultInputValueForCategory';
 import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { toTitleCase } from '@/lib/formatting';
 import type { NumberFormat } from '@/lib/units/numberFormat';
@@ -232,9 +233,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
                     key={cat.id}
                     onClick={() => {
                       setActiveCategory(cat.id as UnitCategory);
-                      // SYMBOLIC categories use an empty default ("now" for
-                      // timezone); numeric categories use "1".
-                      setInputValue(CATEGORY_FAMILIES[cat.id as UnitCategory] === 'SYMBOLIC' ? '' : '1');
+                      setInputValue(defaultInputValueForCategory(cat.id as UnitCategory));
                     }}
                     disabled={activeTab !== 'converter'}
                     data-testid={`display-category-${cat.id}`}

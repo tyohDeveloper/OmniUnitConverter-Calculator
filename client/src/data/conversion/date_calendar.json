@@ -7,7 +7,7 @@
   "units": [
     {
       "id": "common",
-      "name": "Common (CE/BCE)",
+      "name": "Common",
       "symbol": "gregory",
       "factor": 1,
       "unitType": "SI_BASE",
@@ -16,7 +16,7 @@
     },
     {
       "id": "gregorian",
-      "name": "Gregorian (AD/BC)",
+      "name": "Gregorian",
       "symbol": "gregory",
       "factor": 1,
       "unitType": "SI_BASE",

@@ -10,6 +10,7 @@ import { parseNumberWithFormat as parseNumberWithSpecificFormat } from '@/lib/pa
 import { CATEGORY_GROUPS } from '@/features/unit-converter/categoryGroups';
 import { CATEGORY_FAMILIES } from '@/lib/units/categoryFamilies';
 import { parseTimeWithZone } from '@/lib/calculator/parseTimeWithZone';
+import { defaultInputValueForCategory } from '@/lib/calculator/defaultInputValueForCategory';
 
 interface UseConverterInputHandlersArgs {
   inputValue: string;
@@ -85,8 +86,7 @@ function stepCategoryOnArrowKey(
     : (currentIndex < allCategories.length - 1 ? currentIndex + 1 : 0);
   const nextCat = allCategories[newIndex] as UnitCategory;
   setActiveCategory(nextCat);
-  // SYMBOLIC categories default to empty ("now"); numeric to "1".
-  setInputValue(CATEGORY_FAMILIES[nextCat] === 'SYMBOLIC' ? '' : '1');
+  setInputValue(defaultInputValueForCategory(nextCat));
 }
 
 /**
