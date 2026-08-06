@@ -20,7 +20,7 @@
       "id": "sun_jp",
       "name": "Sun (Japan)",
       "symbol": "sun",
-      "factor": 0.030303,
+      "factor": 0.030303030303030304,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
@@ -29,7 +29,7 @@
       "id": "shaku_jp",
       "name": "Shaku (Japan)",
       "symbol": "shaku",
-      "factor": 0.30303,
+      "factor": 0.30303030303030304,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
@@ -38,16 +38,25 @@
       "id": "ken_jp",
       "name": "Ken (Japan)",
       "symbol": "ken",
-      "factor": 1.818,
+      "factor": 1.8181818181818181,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
     },
     {
       "id": "jo_jp",
-      "name": "Jō (Japan)",
+      "name": "Jō 丈 (Japan)",
       "symbol": "jo (len)",
-      "factor": 3.03,
+      "factor": 3.0303030303030303,
+      "unitType": "SI_BASE",
+      "measurementSystem": "JAPANESE",
+      "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
+    },
+    {
+      "id": "cho_len_jp",
+      "name": "Chō 町 (Japan)",
+      "symbol": "cho (len)",
+      "factor": 109.0909090909091,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"
@@ -56,7 +65,7 @@
       "id": "ri_jp",
       "name": "Ri (Japan)",
       "symbol": "ri-jp",
-      "factor": 3927.27,
+      "factor": 3927.2727272727275,
       "unitType": "SI_BASE",
       "measurementSystem": "JAPANESE",
       "sourceUrl": "https://laws.e-gov.go.jp/law/404AC0000000051"

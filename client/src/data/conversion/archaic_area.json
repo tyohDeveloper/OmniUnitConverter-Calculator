@@ -36,7 +36,7 @@
     },
     {
       "id": "jo_tatami",
-      "name": "Jō/Tatami (Japan)",
+      "name": "Jō/Tatami 畳 (Japan)",
       "symbol": "jo",
       "factor": 1.62,
       "unitType": "SI_BASE",
@@ -81,7 +81,7 @@
     },
     {
       "id": "cho_jp",
-      "name": "Chō (Japan)",
+      "name": "Chō/Chōbu 町歩 (Japan)",
       "symbol": "cho",
       "factor": 9917.36,
       "unitType": "SI_BASE",

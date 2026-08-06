@@ -68,12 +68,12 @@ One section per measurement category. Each row shows how many base SI units one 
 | `m²` | Square Metre | 1 m² |
 | `danchi` | Danchi-ma (Japan) | 1.445 m² |
 | `edoma` | Edoma/Kantō-ma (Japan) | 1.5488 m² |
-| `jo` | Jō/Tatami (Japan) | 1.62 m² |
+| `jo` | Jō/Tatami 畳 (Japan) | 1.62 m² |
 | `chukyoma` | Chūkyō-ma (Japan) | 1.6562 m² |
 | `kyoma` | Kyōma (Japan) | 1.8241 m² |
 | `tsubo` | Tsubo (Japan) | 3.306 m² |
 | `tan` | Tan (Japan) | 991.7 m² |
-| `cho` | Chō (Japan) | 9917.36 m² |
+| `cho` | Chō/Chōbu 町歩 (Japan) | 9917.36 m² |
 | `pyeong` | Pyeong (Korea) | 3.3058 m² |
 | `se` | Se (Korea) | 99.174 m² |
 | `mu` | Mu (China) | 666.67 m² |
@@ -106,11 +106,12 @@ One section per measurement category. Each row shows how many base SI units one 
 | Symbol | English Name | 1 unit = (base SI) |
 |--------|-------------|-------------------|
 | `m` | Metre | 1 m |
-| `sun` | Sun (Japan) | 0.030303 m |
-| `shaku` | Shaku (Japan) | 0.30303 m |
-| `ken` | Ken (Japan) | 1.818 m |
-| `jo (len)` | Jō (Japan) | 3.03 m |
-| `ri-jp` | Ri (Japan) | 3927.27 m |
+| `sun` | Sun (Japan) | 0.030303030303030304 m |
+| `shaku` | Shaku (Japan) | 0.30303030303030304 m |
+| `ken` | Ken (Japan) | 1.8181818181818181 m |
+| `jo (len)` | Jō 丈 (Japan) | 3.0303030303030303 m |
+| `cho (len)` | Chō 町 (Japan) | 109.0909090909091 m |
+| `ri-jp` | Ri (Japan) | 3927.2727272727275 m |
 | `ja` | Ja (Korea) | 0.30303 m |
 | `ri-kr` | Ri (Korea) | 392.727 m |
 | `cun` | Cun (China) | 0.03333 m |

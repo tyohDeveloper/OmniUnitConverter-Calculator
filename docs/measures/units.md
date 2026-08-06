@@ -29,7 +29,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `rps` | Revolutions/Second | Angular Velocity | rad⋅s⁻¹ | 6.283185307179586 |
 | `arpent` | Arpent (French) | Archaic Area | m² | 3418.89 |
 | `bigha` | Bigha (South Asia) | Archaic Area | m² | 2529 |
-| `cho` | Chō (Japan) | Archaic Area | m² | 9917.36 |
+| `cho` | Chō/Chōbu 町歩 (Japan) | Archaic Area | m² | 9917.36 |
 | `chukyoma` | Chūkyō-ma (Japan) | Archaic Area | m² | 1.6562 |
 | `danchi` | Danchi-ma (Japan) | Archaic Area | m² | 1.445 |
 | `desyatina` | Desyatina (Russia) | Archaic Area | m² | 10925 |
@@ -38,7 +38,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `feddan` | Feddan (Egypt) | Archaic Area | m² | 4200.833 |
 | `hide` | Hide (English) | Archaic Area | m² | 485623 |
 | `jerib` | Jerib (Middle East) | Archaic Area | m² | 2000 |
-| `jo` | Jō/Tatami (Japan) | Archaic Area | m² | 1.62 |
+| `jo` | Jō/Tatami 畳 (Japan) | Archaic Area | m² | 1.62 |
 | `kyoma` | Kyōma (Japan) | Archaic Area | m² | 1.8241 |
 | `m²` | Square Metre | Archaic Area | m² | 1 |
 | `morgen` | Morgen (German) | Archaic Area | m² | 2500 |
@@ -62,6 +62,7 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `ch` | Chain (Gunter) | Archaic Length | m | 20.1168 |
 | `chek` | Chek (Hong Kong) | Archaic Length | m | 0.371 |
 | `chi` | Chi (China) | Archaic Length | m | 0.3333 |
+| `cho (len)` | Chō 町 (Japan) | Archaic Length | m | 109.0909090909091 |
 | `cubit` | Cubit (Common) | Archaic Length | m | 0.4572 |
 | `cubit-R` | Cubit (Egyptian Royal) | Archaic Length | m | 0.524 |
 | `cun` | Cun (China) | Archaic Length | m | 0.03333 |
@@ -74,8 +75,8 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `hath` | Hath (India) | Archaic Length | m | 0.46 |
 | `hh` | Hand | Archaic Length | m | 0.1016 |
 | `ja` | Ja (Korea) | Archaic Length | m | 0.30303 |
-| `jo (len)` | Jō (Japan) | Archaic Length | m | 3.03 |
-| `ken` | Ken (Japan) | Archaic Length | m | 1.818 |
+| `jo (len)` | Jō 丈 (Japan) | Archaic Length | m | 3.0303030303030303 |
+| `ken` | Ken (Japan) | Archaic Length | m | 1.8181818181818181 |
 | `lea` | League | Archaic Length | m | 4828.032 |
 | `li` | Link (Gunter) | Archaic Length | m | 0.201168 |
 | `li-cn` | Li (China) | Archaic Length | m | 500 |
@@ -84,13 +85,13 @@ Every unit in the converter, sorted by category then symbol. Symbols, English na
 | `pace` | Pace (Roman) | Archaic Length | m | 1.48 |
 | `palm` | Palm (Ancient) | Archaic Length | m | 0.075 |
 | `rd` | Rod/Pole/Perch | Archaic Length | m | 5.0292 |
-| `ri-jp` | Ri (Japan) | Archaic Length | m | 3927.27 |
+| `ri-jp` | Ri (Japan) | Archaic Length | m | 3927.2727272727275 |
 | `ri-kr` | Ri (Korea) | Archaic Length | m | 392.727 |
 | `sazhen` | Sazhen (Russia) | Archaic Length | m | 2.1336 |
-| `shaku` | Shaku (Japan) | Archaic Length | m | 0.30303 |
+| `shaku` | Shaku (Japan) | Archaic Length | m | 0.30303030303030304 |
 | `span` | Span (Ancient) | Archaic Length | m | 0.2286 |
 | `stade` | Stade (Greek) | Archaic Length | m | 185 |
-| `sun` | Sun (Japan) | Archaic Length | m | 0.030303 |
+| `sun` | Sun (Japan) | Archaic Length | m | 0.030303030303030304 |
 | `toise` | Toise (French) | Archaic Length | m | 1.949 |
 | `vara` | Vara (Spain) | Archaic Length | m | 0.8359 |
 | `verst` | Verst (Russia) | Archaic Length | m | 1066.8 |
