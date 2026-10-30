@@ -1,23 +1,14 @@
-import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
+// Single page, no routing: the artifact must render from any URL path
+// (file://, a hosted sub-path, or the apex), so nothing depends on location.
 function App() {
   return (
     <TooltipProvider>
       <Toaster />
-      <Router />
+      <Home />
     </TooltipProvider>
   );
 }
