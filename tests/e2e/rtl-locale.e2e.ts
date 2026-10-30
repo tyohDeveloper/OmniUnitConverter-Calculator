@@ -9,7 +9,7 @@ test.describe('RTL locale (ar)', () => {
     await page.goto('/');
     await page.getByTestId('select-language').click();
     await page.getByRole('option', { name: 'ar', exact: true }).click();
-    await expect(page.getByText('الطول')).toBeVisible(); // "Length" in Arabic: locale applied
+    await expect(page.getByText('الطول', { exact: true }).first()).toBeVisible(); // "Length" in Arabic: locale applied
   });
 
   test('layout direction stays LTR while text runs are Arabic', async ({ page }) => {
@@ -22,7 +22,7 @@ test.describe('RTL locale (ar)', () => {
   });
 
   test('numerals are Latin by default and switch only via the numeral preference', async ({ page }) => {
-    await page.getByText('الطول').first().click();
+    await page.getByText('الطول', { exact: true }).first().click();
     const input = page.getByTestId('input-value');
     await input.fill('1234.5');
     await input.press('Tab');
