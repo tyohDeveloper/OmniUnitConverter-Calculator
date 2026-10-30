@@ -56,6 +56,6 @@ npm run e2e     # Playwright end-to-end tests
 
 ## Coding & architecture standards
 
-All code in this repository follows **[`tyohDeveloper/engineering-standards` release 1.0.0.0](https://github.com/tyohDeveloper/engineering-standards/releases/tag/standards-1.0.0.0)**, adopted through [`docs/CODING-STANDARDS.md`](docs/CODING-STANDARDS.md) (role mapping, enforcement matrix, exceptions) and [`STANDARDS-ADOPTION.json`](STANDARDS-ADOPTION.json). Agents read [`AGENTS.md`](AGENTS.md).
+All code in this repository follows **[`tyohDeveloper/engineering-standards` release 1.0.1.0](https://github.com/tyohDeveloper/engineering-standards/releases/tag/standards-1.0.1.0)**, adopted through [`docs/CODING-STANDARDS.md`](docs/CODING-STANDARDS.md) (role mapping, enforcement matrix, exceptions) and [`STANDARDS-ADOPTION.json`](STANDARDS-ADOPTION.json). Agents read [`AGENTS.md`](AGENTS.md).
 
 The predecessor v2.2 portable edition is retained unchanged at `docs/standards/portable-v2.2.md`; the wiki pages it cited are superseded pointers.

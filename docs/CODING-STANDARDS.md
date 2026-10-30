@@ -1,6 +1,6 @@
 # Adopted Coding Standards
 
-> **Source of truth.** `tyohDeveloper/engineering-standards`, release `1.0.0.0` (tag `standards-1.0.0.0`, commit `6adc1add6a2c512c7b81f436f2eb2f0eb8c04c28`). If this copy and the tagged release disagree, the release wins. Do not amend this file to propose a standards change; open a proposal in the hub.
+> **Source of truth.** `tyohDeveloper/engineering-standards`, release `1.0.1.0` (tag `standards-1.0.1.0`, commit `bb876dd97747e1940aa41ea480eac85044b737aa`). If this copy and the tagged release disagree, the release wins. Do not amend this file to propose a standards change; open a proposal in the hub.
 
 Adoption record: [`STANDARDS-ADOPTION.json`](../STANDARDS-ADOPTION.json). Exceptions: [`EXCEPTIONS.md`](EXCEPTIONS.md). Predecessor policy (v2.2 portable edition, superseded): [`standards/portable-v2.2.md`](standards/portable-v2.2.md), retained unchanged for history.
 
@@ -10,7 +10,7 @@ The complete applicable policy is the following documents at tag `standards-1.0.
 
 | Document | Governs here |
 |---|---|
-| `standards/coding-core.md` | Core rules C-1 to C-49; language class `application` |
+| `standards/coding-core.md` | Core rules C-1 to C-49 (1.0.1.0: C-43 clarified, C-19 runner pinning); language class `application` |
 | `standards/bindings/typescript.md` | How each rule is checked in TypeScript; TS-1 to TS-7 |
 | `standards/profiles.md` | Delivery profile rules (§3.1 single-file, §3.7 localization) |
 | `standards/artifact-contract.md` | Single-file artifact shape and verification |
@@ -31,7 +31,7 @@ Role mapping (responsibility-named directories; roles are not directory names):
 | PURE | `client/src/lib/**` |
 | PURE-CORE | `client/src/lib/calculator/**`, `client/src/lib/units/**` |
 | DATA | `client/src/data/**` (conversion categories, `localization/ui/*.json`, `localization/units/*.json`) |
-| PLATFORM-PURE | unmapped (formatting through `Intl` lives in `client/src/lib/formatting.ts`; see E-6) |
+| PLATFORM-PURE | unmapped; `Intl` formatting in `client/src/lib/formatting.ts` takes the locale as a parameter, which 1.0.1.0 C-43 accepts |
 | PLATFORM-AMBIENT, MODEL, REMOTE | unmapped (no ports in this profile) |
 
 Translation domains (C-36): `ui` (interface strings) and `units` (entity display names). Adding a domain amends the adoption record first.
@@ -46,17 +46,17 @@ Commands are the repository's actual scripts. "Automated" runs in CI through `np
 | C-11 function length ≤ 20 | ESLint `max-lines-per-function` on `client/src/**/*.ts` | `npm run lint` | automated |
 | C-12 role file limits | ESLint `max-lines`: `lib/**` 100, hooks and state 150, `*.tsx` 250 | `npm run lint` | automated |
 | C-6, TS-7 one export, no barrels, responsibility names | `omniunit/no-reexport`, `omniunit/no-shape-named-file` | `npm run lint` | automated |
-| C-2 import direction | none yet | | manual-review (E-1) |
-| C-3 no ambient effects in PURE | none yet | | manual-review (E-2) |
+| C-2 import direction | `no-restricted-imports` per role in `eslint.config.js` | `npm run lint` | automated (E-11 residual) |
+| C-3 no ambient effects in PURE | `no-restricted-syntax` for `client/src/lib/**` | `npm run lint` | automated |
 | C-14, C-15 data external, schema-validated | json-integrity suite, unit catalog contract, Zod at load | `npm run test:run` | automated |
 | C-16a zero-indexing | convention | | manual-review |
 | C-18 stable test IDs | `tests/testids-unique.test.ts`, `scripts/testid-manifest.json`, verifier assertion | `npm run test:run`, `npm run verify:build` | automated |
-| C-20 dead code | dead-key guard covers JSON; no code-level tool | | manual-review (E-3) |
+| C-20 dead code | `knip` (files, exports, types, dependencies); dead-key guard for JSON | `npm run lint:dead` | automated |
 | C-21 size budget | `scripts/verify-build.mjs` gzip ≤ baseline × 1.05 | `npm run verify:build` | automated |
 | C-24 dependency policy | review | | manual-review |
-| C-26 license inventory | none yet | | manual-review (E-4) |
+| C-26 license inventory | `THIRD_PARTY_LICENSES.md` via license-checker; fails on GPL/AGPL/LGPL-3.0 | `npm run licenses:check` | automated |
 | C-27 exceptions | `docs/EXCEPTIONS.md` | | manual-review |
-| C-31 no secrets | none yet; profile has no secrets | | manual-review (E-5) |
+| C-31 no secrets | `secretlint` recommended preset | `npm run lint:secrets` | automated |
 | C-32 to C-35 fallback chain, all-files change, delta-only variants, shape-identical keys | json-integrity suite | `npm run test:run` | automated |
 | C-38 global display-name uniqueness | cross-file consistency test | `npm run test:run` | automated |
 | C-39 dead-key guard | json-integrity "orphaned en.json key" test with allowlist | `npm run test:run` | automated |
