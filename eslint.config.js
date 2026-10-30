@@ -293,6 +293,83 @@ export default tseslint.config(
     },
   },
 
+
+  // C-2 import direction (engineering-standards 1.0.1.0, binding row C-2).
+  // Roles are the mapping in docs/CODING-STANDARDS.md; a role may import
+  // only from roles below it: VIEW -> CONTROLLER -> STATE -> PURE -> DATA.
+  // Expressed with no-restricted-imports per role path rather than a
+  // boundaries plugin so no new devDependency is needed (C-24).
+  // Closes exception E-1 when green.
+  {
+    files: ['client/src/lib/**/*.ts'],
+    ignores: ['client/src/lib/test-utils.ts'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [
+          { group: ['@/components/**', '**/components/**'], message: 'C-2: PURE must not import VIEW/CONTROLLER/STATE.' },
+          { group: ['@/features/**', '**/features/**'], message: 'C-2: PURE must not import VIEW.' },
+          { group: ['@/hooks/**', '@/pages/**', '@/App', '@/main'], message: 'C-2: PURE must not import upward.' },
+          { group: ['react', 'react-dom', 'react/*', 'react-dom/*', 'wouter'], message: 'C-2: PURE is framework-free.' },
+        ],
+      }],
+    },
+  },
+  {
+    files: [
+      'client/src/components/unit-converter/state/**/*.{ts,tsx}',
+      'client/src/components/unit-converter/context/**/*.{ts,tsx}',
+    ],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [
+          { group: ['@/features/**', '**/features/**', '@/pages/**'], message: 'C-2: STATE must not import VIEW.' },
+          { group: ['@/components/ui/**', '**/components/ui/**'], message: 'C-2: STATE must not import VIEW components.' },
+          { group: ['@/components/unit-converter/hooks/**', '**/hooks/**'], message: 'C-2: STATE must not import CONTROLLER.' },
+        ],
+      }],
+    },
+  },
+  {
+    files: [
+      'client/src/components/unit-converter/hooks/**/*.{ts,tsx}',
+      'client/src/features/unit-converter/app/**/*.{ts,tsx}',
+    ],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [
+          { group: ['@/pages/**', '@/App', '@/main'], message: 'C-2: CONTROLLER must not import the app shell.' },
+          { group: ['**/*.tsx'], message: 'C-2: CONTROLLER must not import VIEW components.' },
+        ],
+      }],
+    },
+  },
+
+
+  // EXCEPTION E-11 [C-2]: ConverterContext.tsx is mapped STATE but composes
+  // controller hooks (useAllFlashFlags) into the provider. Either the
+  // context directory is remapped to CONTROLLER or the hook composition
+  // moves out of the provider. Owner decision pending; see docs/EXCEPTIONS.md.
+  {
+    files: ['client/src/components/unit-converter/context/ConverterContext.tsx'],
+    rules: { 'no-restricted-imports': 'off' },
+  },
+  // C-3 no ambient effects in PURE (binding row C-3). Deterministic
+  // constructor forms such as `new Date(epochMs)` stay legal; the zero-arg
+  // and clock/random/network/storage forms are not. Closes E-2 when green.
+  {
+    files: ['client/src/lib/**/*.ts'],
+    ignores: ['client/src/lib/test-utils.ts'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        { selector: "NewExpression[callee.name='Date'][arguments.length=0]", message: 'C-3: inject the current time; do not read the clock in PURE.' },
+        { selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']", message: 'C-3: inject the current time.' },
+        { selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']", message: 'C-3: inject randomness.' },
+        { selector: "CallExpression[callee.name='fetch']", message: 'C-3: no network in PURE.' },
+        { selector: "MemberExpression[object.name=/^(localStorage|sessionStorage|navigator|document|window|location|history|performance|crypto)$/]", message: 'C-3: no ambient browser state in PURE; pass values in.' },
+        { selector: "CallExpression[callee.name=/^(setTimeout|setInterval|requestAnimationFrame)$/]", message: 'C-3: no timers in PURE.' },
+      ],
+    },
+  },
   // Turn off @typescript-eslint's recommended rules that we don't need
   // (this config is intentionally scoped to size-only enforcement).
   {
