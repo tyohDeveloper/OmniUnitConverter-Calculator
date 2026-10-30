@@ -27,7 +27,7 @@
  *
  * Exception: a file carrying "EXCEPTION [architecture-standards §3.7]"
  * in its first 30 lines is allowed. Use this for third-party
- * boilerplate (e.g., shadcn/ui's `lib/utils.ts` housing `cn()`).
+ * boilerplate. Each use must also appear in docs/EXCEPTIONS.md (C-27).
  */
 
 // prettier-ignore
