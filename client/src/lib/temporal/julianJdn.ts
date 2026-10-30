@@ -79,7 +79,7 @@ export function isInRevisedJulianEquivalenceWindow(y: number, m: number, d: numb
 
 // Revised Julian leap rule (per design brief); usable for out-of-
 // window conversion when we eventually implement it.
-export function isRevisedJulianLeap(year: number): boolean {
+function isRevisedJulianLeap(year: number): boolean {
   if (year % 4 !== 0) return false;
   if (year % 100 !== 0) return true;
   const r = year % 900;

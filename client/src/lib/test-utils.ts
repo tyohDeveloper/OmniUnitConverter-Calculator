@@ -12,7 +12,7 @@ type TestIdProps = { 'data-testid': string };
  */
 export const testId = (id: string): TestIdProps => ({ 'data-testid': id });
 
-export const devOnly = <T>(value: T): T | undefined => {
+const devOnly = <T>(value: T): T | undefined => {
   if (import.meta.env.DEV) {
     return value;
   }

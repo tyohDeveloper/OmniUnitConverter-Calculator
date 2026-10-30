@@ -1,7 +1,7 @@
 import { PREFIXES } from './prefixes';
 import { applyPrefixToKgUnit } from './applyPrefixToKgUnit';
 
-export interface KgResult {
+interface KgResult {
   displaySymbol: string;
   effectivePrefixFactor: number;
   showPrefix: boolean;

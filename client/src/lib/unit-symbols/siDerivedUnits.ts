@@ -18,7 +18,7 @@ export const SPECIALTY_DERIVED_UNITS = new Set([
   'Gy', 'Sv', 'Bq', 'kat', 'lm', 'lx', 'rad', 'sr', 'ν', 'λ',
 ]);
 
-export const SI_UNITS_BY_COMPLEXITY: DerivedUnitInfo[] = [...SI_DERIVED_UNITS].sort((a, b) => {
+const SI_UNITS_BY_COMPLEXITY: DerivedUnitInfo[] = [...SI_DERIVED_UNITS].sort((a, b) => {
   const aSum = Object.values(a.dimensions).reduce((sum, exp) => sum + Math.abs(exp || 0), 0);
   const bSum = Object.values(b.dimensions).reduce((sum, exp) => sum + Math.abs(exp || 0), 0);
   return bSum - aSum;

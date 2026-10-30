@@ -22,7 +22,7 @@ interface UseCalculatorRpnSelectionArgs {
   generateSIRepresentations: (dimensions: DimensionalFormula, sourceCategory?: string) => SIRepresentation[];
 }
 
-export interface OriginMeta {
+interface OriginMeta {
   originalUnit: string;
   originalValue: number;
   sourceCategory: string | undefined;
@@ -35,7 +35,7 @@ export interface OriginMeta {
  * the source category (derived-unit category takes precedence over
  * the entry's own sourceCategory when present).
  */
-export function computeOriginMetaForValue(
+function computeOriginMetaForValue(
   val: CalcValue | null,
   altIndex: number,
   prefix: string,
