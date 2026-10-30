@@ -55,8 +55,6 @@ OmniUnit is a comprehensive, frontend-only web application built with React and 
 
 ## Coding & architecture standards
 
-All code in this repository follows **[`docs/CODING-STANDARDS.md`](docs/CODING-STANDARDS.md)** — the binding rules for layer boundaries, purity, function and file size limits, naming, data externalization, testing, and dependency budgets. Read it before making changes.
+All code in this repository follows **[`tyohDeveloper/engineering-standards` release 1.0.0.0](https://github.com/tyohDeveloper/engineering-standards/releases/tag/standards-1.0.0.0)**, adopted through [`docs/CODING-STANDARDS.md`](docs/CODING-STANDARDS.md) (role mapping, enforcement matrix, exceptions) and [`STANDARDS-ADOPTION.json`](STANDARDS-ADOPTION.json). Agents read [`AGENTS.md`](AGENTS.md).
 
-Key hard limits: exported function bodies ≤ 20 lines; one export per pure-logic file; pure-core files ≤ 100 lines, other pure/state/controller files ≤ 150, view files ≤ 250 with ≤ 80 lines of markup in the return. §0 of that file maps those layer roles to this repository's actual directories.
-
-The canonical source of truth is the `programming` project knowledge wiki page `concepts/coding-architecture-standards`; the in-repo file is a derived copy. Amend the wiki first, then propagate here.
+The predecessor v2.2 portable edition is retained unchanged at `docs/standards/portable-v2.2.md`; the wiki pages it cited are superseded pointers.
