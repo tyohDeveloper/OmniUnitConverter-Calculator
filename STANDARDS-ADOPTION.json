@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "status": "adopted",
+  "applicationRepository": "tyohDeveloper/OmniUnitConverter-Calculator",
+  "policyVersion": "1.0.0.0",
+  "sourceRepository": "https://github.com/tyohDeveloper/engineering-standards",
+  "sourceTag": "standards-1.0.0.0",
+  "sourceCommit": "6adc1add6a2c512c7b81f436f2eb2f0eb8c04c28",
+  "approvedBy": "David Hoyt",
+  "adoptedOn": "2026-10-30",
+  "roleMappingDocument": "docs/CODING-STANDARDS.md",
+  "standardsDocument": "docs/CODING-STANDARDS.md",
+  "exceptionsDocument": "docs/EXCEPTIONS.md",
+  "profile": {
+    "state": "none",
+    "packaging": "single-file",
+    "store": "none",
+    "identity": "none",
+    "network": "none",
+    "compute": "interactive",
+    "localization": {
+      "scope": ["language", "numeric"],
+      "mode": "dynamic",
+      "domains": ["ui", "units"],
+      "locales": ["en", "en-us", "ar", "de", "es", "fr", "it", "ja", "ko", "pt", "ru", "zh"]
+    },
+    "ports": []
+  },
+  "bindings": [
+    { "language": "typescript", "class": "application" }
+  ],
+  "checks": [
+    { "requirement": "C-19 build gating", "command": "npm run build", "enforcement": "automated" },
+    { "requirement": "C-11 function length (20 lines)", "command": "npm run lint", "enforcement": "automated" },
+    { "requirement": "C-12 role file limits (PURE 100, STATE/CONTROLLER 150, VIEW 250)", "command": "npm run lint", "enforcement": "automated" },
+    { "requirement": "C-6 one export per file; TS-7 no barrels; name for responsibility", "command": "npm run lint", "enforcement": "automated" },
+    { "requirement": "C-2 import direction between roles", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-3 no ambient effects in PURE", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-14, C-15 data external and schema-validated", "command": "npm run test:run -- tests/json-integrity.test.ts tests/unit-catalog-contract.test.ts", "enforcement": "automated" },
+    { "requirement": "C-18 stable test identifiers", "command": "npm run test:run -- tests/testids-unique.test.ts && npm run verify:build", "enforcement": "automated" },
+    { "requirement": "C-20 dead code", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-21 size budget (gzip baseline x1.05)", "command": "npm run verify:build", "enforcement": "automated" },
+    { "requirement": "C-24 dependency policy", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-26 license inventory", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-31 no secrets", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-32 to C-35, C-38, C-39 locale integrity, collisions, dead-key guard", "command": "npm run test:run -- tests/json-integrity.test.ts tests/localization.test.ts", "enforcement": "automated" },
+    { "requirement": "C-40 build-time pruning", "command": "npm run build:bundle && npm run verify:build", "enforcement": "automated" },
+    { "requirement": "C-41 RTL treatment", "command": null, "enforcement": "manual-review" },
+    { "requirement": "C-42, C-43 numeral preference and formatting layer", "command": "npm run test:run -- tests/formatting.test.ts tests/regional-counting-suffix.test.ts", "enforcement": "automated" },
+    { "requirement": "C-45 to C-48 function registry, proven-equal factors, ordering", "command": "npm run test:run -- tests/conversion-functions.test.ts tests/duplicateSymbolOrdering.test.ts", "enforcement": "automated" },
+    { "requirement": "C-49 source citation", "command": "npm run test:run -- tests/sources.test.ts", "enforcement": "automated" },
+    { "requirement": "Artifact contract (single-file)", "command": "npm run minify:artifact && npm run verify:build", "enforcement": "automated" },
+    { "requirement": "C-22 tests through public interfaces; C-23 determinism", "command": "npm run test:run && npm run test:e2e", "enforcement": "automated" },
+    { "requirement": "C-27 exceptions recorded with owner and expiry", "command": null, "enforcement": "manual-review" }
+  ]
+}
