@@ -1,6 +1,8 @@
-# Coding & Architecture Standards
+# Coding & Architecture Standards (v2.2 portable edition, superseded)
 
-**Status:** Normative. **Version:** 2.2 (portable edition). **Owner:** David Hoyt (@tyohDeveloper).
+**Status:** Superseded predecessor, retained unchanged for history. Normative text is `tyohDeveloper/engineering-standards` release 1.0.0.0; see `docs/CODING-STANDARDS.md`. The header below is the original and its wiki-authority clause is void (hub ADR-0004).
+
+**Original status:** Normative. **Version:** 2.2 (portable edition). **Owner:** David Hoyt (@tyohDeveloper).
 
 > **Source of truth.** The canonical statement of these standards is the
 > **`programming` project knowledge wiki**, page
