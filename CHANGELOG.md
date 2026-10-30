@@ -3,6 +3,16 @@
 Versions are four-part, `MAJOR.MAJORFIX.MINORFIX.SPELLING`; each part marks a kind of change and
 the notes say what the change means. Earlier releases are described in their tag messages.
 
+## [5.2.1.0] — 2026-10-30
+
+Third-part fix. The artifact rendered "404 Page Not Found" when opened from any URL path other
+than `/` — a hosted sub-path or `file://` — because a path router guarded the single page.
+
+### Fixed
+
+- The app renders from any path: the router and its not-found page are removed (`wouter`
+  dependency dropped); `Home` mounts directly.
+
 ## [5.2.0.1] — 2026-10-30
 
 No change to conversions, units, calculator behaviour or localization. Fourth-part release:
