@@ -14,7 +14,7 @@ The app is a single, standalone .html file. It references no other files and has
 
 GitHub: <https://github.com/tyohDeveloper/OmniUnitConverter-Calculator>
 
-Use it hosted (bookmark this): <https://tyohdeveloper.github.io/OmniUnitConverter-Calculator/>. Offline: download `index.html` from the latest [release](https://github.com/tyohDeveloper/OmniUnitConverter-Calculator/releases) and open it from disk.
+Use it offline: download `index.html` from the latest [release](https://github.com/tyohDeveloper/OmniUnitConverter-Calculator/releases) and open it from disk.
 
 > Note: I used an AI assistant to build most of this. It has been tested and includes unit tests. To the best of my knowledge the conversions are correct, but your mileage may vary.
 

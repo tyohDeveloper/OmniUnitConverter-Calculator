@@ -6,12 +6,11 @@ the notes say what the change means. Earlier releases are described in their tag
 ## [5.2.0.1] — 2026-10-30
 
 No change to conversions, units, calculator behaviour or localization. Fourth-part release:
-build-gate hardening under the adopted engineering standards and a hosted copy for bookmarking.
+build-gate hardening under the adopted engineering standards. Published to the owner's hosted
+test site.
 
 ### Added
 
-- GitHub Pages deployment on each `v*` tag, serving the single-file build at
-  <https://tyohdeveloper.github.io/OmniUnitConverter-Calculator/>.
 - Build-gate stages: import-direction and ambient-effect lint rules, `lint:dead` (knip),
   `lint:secrets` (secretlint), license inventory check (`THIRD_PARTY_LICENSES.md`).
 
