@@ -1,6 +1,6 @@
 {
   "recordedAt": "2026-08-03",
-  "note": "Built from dist/public/index.html by scripts/build-testid-manifest.mjs. Verifier fails if any id here is missing from the shipped artifact. To retire an id, remove it here in the same PR as the source change (§4.6 rename manifest).",
+  "note": "Built from dist/public/index.html by scripts/build-testid-manifest.mjs. Verifier fails if any id here is missing from the shipped artifact. To retire an id, remove it here in the same PR as the source change (\u00a74.6 rename manifest).",
   "required": [
     "backdrop-help",
     "backdrop-sources",
@@ -51,6 +51,8 @@
     "select-calc-result-unit",
     "select-from-prefix",
     "select-from-unit",
+    "select-language",
+    "select-number-format",
     "select-precision",
     "select-rpn-precision",
     "select-rpn-result-prefix",
