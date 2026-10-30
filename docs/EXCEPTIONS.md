@@ -5,7 +5,6 @@ Policy: `tyohDeveloper/engineering-standards` release 1.0.0.0. Rule C-27: every 
 | ID | Rule | Gap | Reason | Owner | Review by |
 |---|---|---|---|---|---|
 | E-8 | C-11 function length | Reducer switch bodies, controller hook bodies and listed multi-step algorithm files are excluded from `max-lines-per-function` | Rationale recorded inline in `eslint.config.js` (predecessor §3.1 carve-outs); unchanged by adoption | David Hoyt | 2027-04-30 |
-| E-11 | C-2 import direction | `ConverterContext.tsx` (mapped STATE) imports controller hook `useFlashFlag` | Provider composes hooks; resolve by remapping `context/**` to CONTROLLER in `docs/CODING-STANDARDS.md` or by moving hook composition out of the provider. Per-file override in `eslint.config.js` | David Hoyt | 2027-01-31 |
 | E-10 | C-19 CI parity (same build everywhere) | e2e job pinned to `ubuntu-24.04` instead of `ubuntu-latest` | Playwright 1.59.x cannot install chromium on Ubuntu 26.04; review when Playwright supports the latest runner image | David Hoyt | 2027-01-31 |
 | E-9 | C-12 VIEW file limit | One legacy top-level view exceeds 250 lines (per-file override in `eslint.config.js`) | Pre-dates the standards; extraction pass pending | David Hoyt | 2027-04-30 |
 

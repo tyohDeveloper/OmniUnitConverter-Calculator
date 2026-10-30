@@ -315,10 +315,7 @@ export default tseslint.config(
     },
   },
   {
-    files: [
-      'client/src/components/unit-converter/state/**/*.{ts,tsx}',
-      'client/src/components/unit-converter/context/**/*.{ts,tsx}',
-    ],
+    files: ['client/src/components/unit-converter/state/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [
@@ -332,6 +329,7 @@ export default tseslint.config(
   {
     files: [
       'client/src/components/unit-converter/hooks/**/*.{ts,tsx}',
+      'client/src/components/unit-converter/context/**/*.{ts,tsx}',
       'client/src/features/unit-converter/app/**/*.{ts,tsx}',
     ],
     rules: {
@@ -344,15 +342,6 @@ export default tseslint.config(
     },
   },
 
-
-  // EXCEPTION E-11 [C-2]: ConverterContext.tsx is mapped STATE but composes
-  // controller hooks (useAllFlashFlags) into the provider. Either the
-  // context directory is remapped to CONTROLLER or the hook composition
-  // moves out of the provider. Owner decision pending; see docs/EXCEPTIONS.md.
-  {
-    files: ['client/src/components/unit-converter/context/ConverterContext.tsx'],
-    rules: { 'no-restricted-imports': 'off' },
-  },
   // C-3 no ambient effects in PURE (binding row C-3). Deterministic
   // constructor forms such as `new Date(epochMs)` stay legal; the zero-arg
   // and clock/random/network/storage forms are not. Closes E-2 when green.

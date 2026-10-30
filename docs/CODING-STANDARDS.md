@@ -26,8 +26,8 @@ Role mapping (responsibility-named directories; roles are not directory names):
 | Role | Paths |
 |---|---|
 | VIEW | `client/src/features/**/*.tsx`, `client/src/components/**/*.tsx` |
-| CONTROLLER | `client/src/components/unit-converter/hooks/**`, `client/src/features/unit-converter/app/**` |
-| STATE | `client/src/components/unit-converter/state/**`, `client/src/components/unit-converter/context/**` |
+| CONTROLLER | `client/src/components/unit-converter/hooks/**`, `client/src/components/unit-converter/context/**` (providers wiring hooks and dispatch; remapped from STATE 2026-10-30, E-11), `client/src/features/unit-converter/app/**` |
+| STATE | `client/src/components/unit-converter/state/**` (reducers, state shape, selectors) |
 | PURE | `client/src/lib/**` |
 | PURE-CORE | `client/src/lib/calculator/**`, `client/src/lib/units/**` |
 | DATA | `client/src/data/**` (conversion categories, `localization/ui/*.json`, `localization/units/*.json`) |
@@ -46,7 +46,7 @@ Commands are the repository's actual scripts. "Automated" runs in CI through `np
 | C-11 function length ≤ 20 | ESLint `max-lines-per-function` on `client/src/**/*.ts` | `npm run lint` | automated |
 | C-12 role file limits | ESLint `max-lines`: `lib/**` 100, hooks and state 150, `*.tsx` 250 | `npm run lint` | automated |
 | C-6, TS-7 one export, no barrels, responsibility names | `omniunit/no-reexport`, `omniunit/no-shape-named-file` | `npm run lint` | automated |
-| C-2 import direction | `no-restricted-imports` per role in `eslint.config.js` | `npm run lint` | automated (E-11 residual) |
+| C-2 import direction | `no-restricted-imports` per role in `eslint.config.js` | `npm run lint` | automated |
 | C-3 no ambient effects in PURE | `no-restricted-syntax` for `client/src/lib/**` | `npm run lint` | automated |
 | C-14, C-15 data external, schema-validated | json-integrity suite, unit catalog contract, Zod at load | `npm run test:run` | automated |
 | C-16a zero-indexing | convention | | manual-review |
