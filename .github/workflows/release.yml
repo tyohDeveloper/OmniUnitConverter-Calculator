@@ -1,0 +1,43 @@
+# Release assets: on a v* tag (or manual dispatch with the tag), run the
+# composed build and attach the single-file app to the GitHub release for
+# the tag, with the CHANGELOG section as notes.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to release (e.g. v5.2.0.1)
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  assets:
+    runs-on: ubuntu-24.04 # pinned per engineering-standards C-19 (E-10)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Composed build
+        run: npm run build
+      - name: Create or update the GitHub release with the artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          cp dist/public/index.html "OmniUnit-${TAG}.html"
+          notes=$(node -e "const s=require('fs').readFileSync('CHANGELOG.md','utf8');const v=process.env.TAG.replace(/^v/,'');const m=s.split(/^## /m).find(x=>x.startsWith('['+v+']'));process.stdout.write(m?('## '+m):'See CHANGELOG.md')")
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "OmniUnit-${TAG}.html" --clobber
+          else
+            gh release create "$TAG" "OmniUnit-${TAG}.html" --title "OmniUnit $TAG" --notes "$notes"
+          fi
