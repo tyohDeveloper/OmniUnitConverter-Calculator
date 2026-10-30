@@ -14,7 +14,8 @@
     "tests/**/*.ts"
   ],
   "ignoreDependencies": [
-    "tw-animate-css"
+    "tw-animate-css",
+    "@secretlint/secretlint-rule-preset-recommend"
   ],
   "rules": {
     "files": "error",
@@ -26,5 +27,9 @@
     "unresolved": "warn",
     "duplicates": "warn",
     "enumMembers": "off"
+  },
+  "_notes": {
+    "tw-animate-css": "imported from client/src/index.css; knip does not follow CSS imports",
+    "@secretlint/secretlint-rule-preset-recommend": "referenced from .secretlintrc.json, not from code"
   }
 }
