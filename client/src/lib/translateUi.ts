@@ -27,7 +27,7 @@ export const UI_TRANSLATIONS: Record<string, Record<string, string>> = {
   'zh': zhJson as Record<string, string>,
 };
 
-export function translateUi(key: string, language: SupportedLanguage): string {
+function translateUi(key: string, language: SupportedLanguage): string {
   const langMap = UI_TRANSLATIONS[language];
   if (langMap) {
     const val = langMap[key];

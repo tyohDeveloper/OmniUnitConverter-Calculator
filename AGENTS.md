@@ -1,6 +1,6 @@
 # Agent Contract: OmniUnit
 
-Standards: `tyohDeveloper/engineering-standards` release 1.0.0.0 (tag `standards-1.0.0.0`). Read `docs/CODING-STANDARDS.md` first; it maps roles to paths and rules to commands. Do not edit it to change a rule; propose in the hub.
+Standards: `tyohDeveloper/engineering-standards` release 1.0.1.0 (tag `standards-1.0.1.0`). Read `docs/CODING-STANDARDS.md` first; it maps roles to paths and rules to commands. Do not edit it to change a rule; propose in the hub.
 
 ## Delivery profile directives
 
@@ -12,7 +12,7 @@ Standards: `tyohDeveloper/engineering-standards` release 1.0.0.0 (tag `standards
 
 ## Commands
 
-- `npm run build` is the gate: typecheck, size lint, ESLint, Vitest, bundle, minify, verify. Run it before proposing a merge.
+- `npm run build` is the gate: typecheck, size lint, ESLint (size, naming, C-2 import direction, C-3 purity), knip dead code, secretlint, Vitest, bundle, minify, verify. CI also checks `THIRD_PARTY_LICENSES.md` is current (`npm run licenses:check`). Run it before proposing a merge.
 - `npm run test:e2e` for Playwright (NixOS: `PW_CHROMIUM_PATH=$(which chromium)`, see `.agents/memory/`).
 - Locale changes: run `npm run test:run` and expect the json-integrity suite to pass; a new key is an all-locale change (C-33); dead keys fail the guard (C-39).
 - Size: `npm run verify:build` enforces gzip ≤ baseline × 1.05. Re-baselining is a reviewed change with a note in `scripts/build-baseline.json`, never automatic.

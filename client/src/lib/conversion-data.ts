@@ -423,7 +423,7 @@ function getCategoryDimensionsForParse(categoryId: UnitCategory): Record<string,
 // Parse unit text and return parsed result
 // unitText: the text after the number, e.g., "km", "meter", "µg"
 // unitNameLookup: optional Map<lowercaseName, {categoryId, unitId}> for localized name matching
-export function parseUnitSymbol(
+function parseUnitSymbol(
   unitText: string,
   unitNameLookup?: Map<string, { categoryId: UnitCategory; unitId: string }>
 ): { categoryId: UnitCategory | null; unitId: string | null; prefixId: string; factor: number } {
@@ -620,7 +620,7 @@ function parseExponent(term: string): [string, number] {
 
 // Parse a dimensional formula string like "kg²⋅m⁴⋅s⁻⁶" or "kg^2*m^4*s^-6"
 // Returns { dimensions, factor } where factor accounts for any prefix conversions
-export interface ParsedDimensionalFormula {
+interface ParsedDimensionalFormula {
   dimensions: Record<string, number>;
   factor: number;
   isValid: boolean;
@@ -750,7 +750,7 @@ const parseDivisionParts = (text: string): { dimensions: Record<string, number>;
   return { dimensions, factor: factorRef.value, allValid };
 };
 
-export function parseDimensionalFormula(formulaText: string): ParsedDimensionalFormula {
+function parseDimensionalFormula(formulaText: string): ParsedDimensionalFormula {
   const text = formulaText.trim();
   if (!text) return { dimensions: {}, factor: 1, isValid: false };
   const sqDeg = parseSqDeg(text);
@@ -773,7 +773,7 @@ const hasMultipleSIBaseUnits = (trimmed: string): boolean =>
   SI_UNITS_FOR_DIM_CHECK.filter(unit => trimmed.includes(unit)).length >= 2;
 
 // Check if text looks like a dimensional formula (contains SI base units with exponents or separators)
-export function looksLikeDimensionalFormula(text: string): boolean {
+function looksLikeDimensionalFormula(text: string): boolean {
   const trimmed = text.trim();
   if (/[⋅·×*]/.test(trimmed)) return true;
   if (trimmed.includes('/')) return true;

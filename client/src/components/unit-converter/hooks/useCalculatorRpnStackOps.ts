@@ -15,12 +15,12 @@ interface UseCalculatorRpnStackOpsArgs {
 
 // -- Stack transformation helpers (pure) ---------------------------
 // shiftDown: [_, prev[1], prev[2], prev[3]] — used by push + pushEntry.
-export const shiftDown = (prev: Array<CalcValue | null>): Array<CalcValue | null> => {
+const shiftDown = (prev: Array<CalcValue | null>): Array<CalcValue | null> => {
   const ns = [...prev]; ns[0] = prev[1]; ns[1] = prev[2]; ns[2] = prev[3]; return ns;
 };
 
 // shiftUp: [prev[0], prev[0], prev[1], prev[2]] — used by drop.
-export const shiftUp = (prev: Array<CalcValue | null>): Array<CalcValue | null> => {
+const shiftUp = (prev: Array<CalcValue | null>): Array<CalcValue | null> => {
   const ns = [...prev]; ns[1] = prev[0]; ns[2] = prev[1]; ns[3] = prev[2]; return ns;
 };
 

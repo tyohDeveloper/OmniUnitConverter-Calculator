@@ -6,13 +6,13 @@ import { uiPrefsReducer, uiPrefsInitialState, type UiPrefsState, type UiPrefsAct
 import { useAllFlashFlags, type FlashFlags } from '../hooks/useFlashFlag';
 import { FLASH_DURATION_MS } from '../constants';
 
-export type AppAction =
+type AppAction =
   | ({ domain: 'converter' } & ConverterAction)
   | ({ domain: 'calculator' } & CalculatorAction)
   | ({ domain: 'rpn' } & RpnAction)
   | ({ domain: 'uiPrefs' } & UiPrefsAction);
 
-export interface AppState {
+interface AppState {
   converter: ConverterState;
   calculator: CalculatorState;
   rpn: RpnState;
@@ -90,4 +90,4 @@ export function ConverterProvider({ children }: ConverterProviderProps) {
   );
 }
 
-export { ConverterContext };
+;

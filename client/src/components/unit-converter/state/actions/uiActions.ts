@@ -16,7 +16,7 @@ export const setDirectValue = (v: string): UiPrefsAction =>
 export const setDirectExponents = (v: Record<string, number>): UiPrefsAction =>
   ({ type: 'SET_DIRECT_EXPONENTS', payload: v });
 
-export const updateDirectExponents = (
+const updateDirectExponents = (
   updater: (prev: Record<string, number>) => Record<string, number>
 ): UiPrefsAction => ({ type: 'UPDATE_DIRECT_EXPONENTS', payload: updater });
 
