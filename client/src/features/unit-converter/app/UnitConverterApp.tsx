@@ -311,7 +311,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
                 }}
                 onOpenChange={(open) => { if (!open) refocusInput(); }}
               >
-                <SelectTrigger className="h-10 w-[180px] text-xs">
+                <SelectTrigger className="h-10 w-[180px] text-xs" data-testid="select-number-format">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -330,7 +330,7 @@ export default function UnitConverterApp({ helpOpen, setHelpOpen, sourcesOpen, s
                 onValueChange={(val) => { setLanguage(val as SupportedLanguage); refocusInput(); }}
                 onOpenChange={(open) => { if (!open) refocusInput(); }}
               >
-                <SelectTrigger className="h-10 w-[75px] text-xs">
+                <SelectTrigger className="h-10 w-[75px] text-xs" data-testid="select-language">
                   <SelectValue placeholder="" />
                 </SelectTrigger>
                 <SelectContent className="max-h-[50vh]">
